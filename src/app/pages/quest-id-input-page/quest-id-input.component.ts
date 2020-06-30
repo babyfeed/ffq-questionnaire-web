@@ -7,6 +7,7 @@ import {FFQItem} from '../../models/ffqitem';
 import {HttpErrorResponse} from '@angular/common/http';
 import {QuestionnaireResponse} from '../../models/questionnaire-response';
 import {Observable} from 'rxjs';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 
 @Component({
   selector: 'quest-id-input',
@@ -20,7 +21,8 @@ export class QuestIdInputComponent {
   constructor(
     private router: Router,
     private errorDialog: MatDialog,
-    private questService: QuestionnaireValidatorService) {
+    private questService: QuestionnaireValidatorService,
+    private authenticationService: AuthenticationService) {
   }
 
   validateQuestionnaireId(id: string) {
@@ -41,6 +43,11 @@ export class QuestIdInputComponent {
         dialogRef.componentInstance.message = 'Please check the ID and try again or contact the issuer.';
       }
     }, (error: Error) => this.handleQuestionnaireError(error));
+  }
+
+  startQuestionnaire() {
+    const id = this.authenticationService.currentUserId + '-' + Date.now();
+    this.router.navigateByUrl('/parent/questionnaire/' + id);
   }
 
   private handleQuestionnaireError(error: Error) {

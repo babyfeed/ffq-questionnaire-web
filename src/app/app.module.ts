@@ -22,8 +22,8 @@ import { ReactiveFormsModule} from '@angular/forms';
 import { AdminHeaderComponent } from './pages/admin-header/admin-header.component';
 import { QuestResultsComponent } from './pages/quest-results/quest-results.component';
 import { RecommendComponent } from './pages/recommend/recommend.component';
-import { PopupComponent } from "./components/popup/popup.component";
-import { DeletePopupComponent } from "./components/delete-popup/delete-popup.component";
+import { PopupComponent } from './components/popup/popup.component';
+import { DeletePopupComponent } from './components/delete-popup/delete-popup.component';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { Routes, RouterModule } from '@angular/router';
 import { RecommendModalComponent } from './components/recommend-modal/recommend-modal.component';
@@ -32,8 +32,8 @@ import { ClinicalPortalComponent } from './pages/clinical-portal/clinical-portal
 import { ClinicalHeaderComponent } from './pages/clinical-header/clinical-header.component';
 import { ParentalHeaderComponent } from './pages/parental-header/parental-header.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
-//import { JwtInterceptor } from './services/authentication/jwt.interceptor';
-//import { fakeBackendProvider } from './services/authentication/temp-backend';
+// import { JwtInterceptor } from './services/authentication/jwt.interceptor';
+// import { fakeBackendProvider } from './services/authentication/temp-backend';
 import { RecommendParentalComponent } from './pages/recommend-parental/recommend-parental.component';
 import { TrackerPageComponent } from './pages/tracker-page/tracker-page.component';
 import { TrackerBlockComponent } from './components/tracker-block/tracker-block.component';
@@ -62,6 +62,7 @@ import { RecommendedFilterPipe } from './pipes/recommended-filter.pipe';
 import { MatProgressBarModule } from '@angular/material';
 import { LoaderComponent } from './components/loader/loader.component';
 import { LoaderInterceptorService } from './services/loader/loader-interceptor.service';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -135,6 +136,7 @@ import { LoaderInterceptorService } from './services/loader/loader-interceptor.s
     NgbModule.forRoot(),
     FlashMessagesModule.forRoot(),
     MatProgressBarModule,
+    DragDropModule
    ],
 
   bootstrap: [AppComponent],

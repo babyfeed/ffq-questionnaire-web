@@ -30,7 +30,8 @@ export class ResultsService {
             item.ageInMonths,
             item.userChoices,
             item.weeklyTotals,
-            item.dailyAverages
+            item.dailyAverages,
+            item.feedback
           );
         });
       }));
@@ -47,9 +48,17 @@ export class ResultsService {
               item.ageInMonths,
               item.userChoices,
               item.weeklyTotals,
-              item.dailyAverages
+              item.dailyAverages,
+              item.feedback
             );
           });
         }));
+      }
+
+      submitFeedback(id: string, feedback: string): Observable<any> {
+        return this.http.put(this.endpoint + '/update', {
+          questionnaireId: id,
+          feedback: feedback
+        });
       }
   }

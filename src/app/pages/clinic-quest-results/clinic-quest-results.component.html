@@ -17,50 +17,83 @@
           <mat-card-content>
             <!--Labels for questionnaire results-->
             <div class="row">
-              <div class="col-2" style="text-align:center">
+              <div class="col-1" style="text-align:center">
                 <label><strong>Parent Name</strong></label>
               </div>
               <div class="col-2" style="text-align:center">
                 <label><strong>Questionnaire ID</strong></label>
               </div>
-              <div class="col-2" style="text-align:center">
+              <div class="col-1" style="text-align:center">
                 <label><strong>Patient Name</strong></label>
               </div>
-              <div class="col-2" style="text-align:center">
+              <div class="col-1" style="text-align:center">
                 <label><strong>Infant Age (in months)</strong></label>
               </div>
-              <div class="col-2" style="text-align:center">
+              <div class="col-1" style="text-align:center">
                 <label><strong>Parent Access</strong></label>
+              </div>
+              <div class="col-2" style="text-align:center">
+                <label><strong>Nutrient Recommendations</strong></label>
+              </div>
+              <div class="col-2" style="text-align:center">
+                <label><strong>Food Recommendations</strong></label>
               </div>
             </div>
 
             <!--Questionnaire results-->
             <div class="row mb-3">
-              <div class="col-2" style="text-align:center">
+              <div class="col-1" style="text-align:center">
                 {{result.parentName}}
               </div> 
               <div class="col-2" style="text-align:center">
                 {{result.ffqresult.questionnaireId}}
               </div>
-              <div class="col-2" style="text-align:center">
+              <div class="col-1" style="text-align:center">
                 {{result.ffqresult.patientName}}
               </div>
-              <div class="col-2" style="text-align:center">
+              <div class="col-1" style="text-align:center">
                 {{result.ffqresult.ageInMonths}}
               </div>
-              <div class="col-2" style="text-align:center">
+              <div class="col-1" style="text-align:center">
                 <mat-checkbox></mat-checkbox>
               </div>
-              <div class="col-2">
-                <button mat-raised-button [hidden]="result.ffqresult.show" (click)="toggle(i)">
-                  <i class="fa fa-plus-square-o"></i> Results
-                </button>
-                <button mat-raised-button [hidden]="!result.ffqresult.show" (click)="toggle(i)">
-                  <i class="fa fa-minus-square-o"></i> Results
-                </button>
+              <div class="col-2" style="text-align:center">
+                <a (click)="getNutrientsRecommendations(result.ffqresult.questionnaireId)"><i title="nutrients" class="fa fa-flask"></i></a>
               </div>
-            </div>
+              <div class="col-2" style="text-align:center">
+                <a (click)="getFoodRecommendations(result.ffqresult.questionnaireId)"><i title="fooditems" class="fa fa-cutlery"></i></a>
+              </div>
+              </div>
 
+               <div class="row mb-3">
+                <div class="col-12 offset-9">
+                  <button mat-raised-button [hidden]="result.ffqresult.show" (click)="toggle(i)">
+                    <i class="fa fa-plus-square-o"></i> Results
+                  </button>
+                  <button mat-raised-button [hidden]="!result.ffqresult.show" (click)="toggle(i)">
+                    <i class="fa fa-minus-square-o"></i> Results
+                  </button>
+                  <button mat-button color="primary" [hidden]="result.ffqresult.showFeedback" (click)="toggleFeedback(i)">
+                    <i class="fa fa-plus-square-o"></i> Feedback
+                  </button>
+                  <button mat-button color="primary" [hidden]="!result.ffqresult.showFeedback" (click)="toggleFeedback(i)">
+                    <i class="fa fa-minus-square-o"></i> Feedback
+                  </button>
+                </div>
+              </div>
+
+            <!-- Additional Recommendation or Feedback -->
+            <form *ngIf="result.ffqresult.showFeedback" [formGroup]="feedbackForm" (ngSubmit)="submitFeedback(result.ffqresult.questionnaireId)">
+              <div class="form-group">
+                  <textarea type="usertype" formControlName="feedback" placeholder="Additional Recommendations and Feedback" class="form-control" [(ngModel)]="result.ffqresult.feedback"></textarea>
+              </div>
+          
+              <!-- submit button -->
+              <div class="footer">
+                <button mat-raised-button color="primary">Submit</button>
+              </div>
+          
+            </form>
 
             <!--User choice results-->
             <ng-container *ngIf="result.ffqresult.show">

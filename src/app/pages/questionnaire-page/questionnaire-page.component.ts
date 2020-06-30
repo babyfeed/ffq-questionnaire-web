@@ -62,22 +62,6 @@ export class QuestionnairePageComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe(params => {
         this.userId = this.authenticationService.currentUserId;
         this.id = params.get('id');
-        this.questService.getQuestionnaireId(this.id).subscribe((data: QuestionnaireResponse) => {
-          this.questionnaire = data;
-          if (data.exists) {
-            if (data.submitted) {
-              this.router.navigateByUrl('/');
-              const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-              dialogRef.componentInstance.title = 'Questionnaire Already Submitted';
-              dialogRef.componentInstance.message = 'Please check the ID and try again or contact the issuer.';
-            }
-          } else {
-            this.router.navigateByUrl('/');
-            const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-            dialogRef.componentInstance.title = 'Invalid Questionnaire Id';
-            dialogRef.componentInstance.message = 'Please check the ID and try again or contact the issuer.';
-          }
-      }, (error: Error) => this.handleQuestionnaireError(error));
       });
     this.loadFoodItems();
   }
@@ -139,7 +123,7 @@ export class QuestionnairePageComponent implements OnInit {
             console.log('OPENED MODAL');
             */
 
-            this.questService.submitQuestionnaire(this.questionnaire.id).subscribe((data: Questionnaire) => {
+            this.questService.submitQuestionnaire(this.id).subscribe((data: Questionnaire) => {
             this.router.navigateByUrl('/');
             const dialogRef = this.successDialog.open(ErrorDialogPopupComponent);
             dialogRef.componentInstance.title = 'Submitted Successfully';

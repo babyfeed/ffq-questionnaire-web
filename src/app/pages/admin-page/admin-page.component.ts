@@ -18,6 +18,8 @@ import { FFQFoodNutrientsResponse } from 'src/app/models/ffqfoodnutrients-respon
 import { PopupComponent } from 'src/app/components/popup/popup.component';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { FFQFoodItemResponse } from 'src/app/models/ffqfooditem-response';
+import { moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
 
 @Component({
@@ -56,6 +58,8 @@ export class AdminPageComponent implements OnInit {
 
   }
 
+
+
   private handleFoodServiceError(error: HttpErrorResponse) {
     console.error('Error occurred.\n' + error.message);
     const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
@@ -84,9 +88,25 @@ export class AdminPageComponent implements OnInit {
     const modalRef = this.modalService.open(PopupComponent);
     modalRef.componentInstance.id = id;
     modalRef.componentInstance.service = this.foodService;
-    
+
   }
 
+  //added by teriq douglas
+  onDrop(event: CdkDragDrop<string[]>){
+    moveItemInArray(this.foodItems, event.previousIndex, event.currentIndex);
+    var temp = this.foodItems[event.previousIndex].itemPosition;
+        this.foodItems[event.previousIndex].itemPosition = this.foodItems[event.currentIndex].itemPosition
+        this.foodItems[event.currentIndex].itemPosition = temp;
+        //this.foodItems[event.currentIndex].itemPosition = event.currentIndex;
+        //this.foodItems[event.previousIndex].itemPosition = event.previousIndex;
+    console.log(this.foodItems);
+  }
+
+ /* private updateArray(){
+    this.foodService.getAllFoods().subscribe(data => {
+          data.map(response => {
+            this.foodItems.push(response);
+          });*/
 
 }
 

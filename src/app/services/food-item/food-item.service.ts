@@ -6,6 +6,7 @@ import {map, tap} from 'rxjs/operators';
 import {FFQItemCalcRequest} from '../../models/ffqitem-calc-request';
 import { FFQFoodNutrientsResponse } from 'src/app/models/ffqfoodnutrients-response';
 import { FFQFoodItemResponse } from 'src/app/models/ffqfooditem-response';
+import { FFQFoodItem } from 'src/app/models/ffqfooditem'
 import { environment } from 'src/environments/environment';
 //const mongoose = require('mongoose');
 //declare var require: any
@@ -22,26 +23,34 @@ const httOptions ={ headers: new HttpHeaders({'Content-Type':'aplication/json'})
 export class FoodItemService {
 
   endpoint = environment.foodServiceUrl + '/ffq';
-  
 
-  constructor(private http: HttpClient) { } 
+
+  constructor(private http: HttpClient) { }
 
   addFoodNutrients(fooditem : FFQFoodNutrientsResponse): Observable<any> {
-    
+
     return this.http.post(this.endpoint + '/createfoodnutrients', fooditem, {headers : new HttpHeaders({ 'Content-Type': 'application/json' })}).pipe(
-      tap( 
+      tap(
         data => console.log(data),
         error => console.log(error)
       ));
   }
 
   updateFoodNutrients(fooditem : FFQFoodNutrientsResponse): Observable<any> {
-    
+
     return this.http.put(this.endpoint + '/updatefoodnutrients', fooditem, {headers : new HttpHeaders({ 'Content-Type': 'application/json' })}).pipe(
-      tap( 
+      tap(
         data => console.log(data),
         error => console.log(error)
       ));
+  }
+
+  updateItemPosition(fooditem : FFQFoodItem): Observable<any> {
+    return this.http.put(this.endpoint + '/update', fooditem, {headers : new HttpHeaders({ 'Content-Type': 'application/json' })}).pipe(
+          tap(
+            data => console.log(data),
+            error => console.log(error)
+          ));
   }
 
   /* Return a specific food item (by object id) and its list of nutrients*/
@@ -63,7 +72,8 @@ export class FoodItemService {
         return res.map(item => {
           return new FFQFoodItemResponse(
             item.name,
-            item.id
+            item.id,
+            item.itemPosition
           );
         });
     }));
@@ -78,7 +88,8 @@ export class FoodItemService {
             item.primary,
             item.servingsList,
             item.foodTypes,
-            item.sugar
+            item.sugar,
+            item.itemPosition
           );
         });
       }));
@@ -94,8 +105,9 @@ export class FoodItemService {
   /*DELETE: delete food item from the database */
   deleteItem(objectId: string): Observable <any>{
     console.log("here" + objectId);
-    return this.http.delete(this.endpoint + "/delete?id=" + objectId,  { responseType: 'text' })  
+    return this.http.delete(this.endpoint + "/delete?id=" + objectId,  { responseType: 'text' })
   }
+
 
 
 }
