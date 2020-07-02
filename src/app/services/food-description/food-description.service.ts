@@ -13,7 +13,7 @@ const httpOptions = { headers: new HttpHeaders({'Content-Type': 'application/jso
 
 export class FoodDescriptionService {
 
-  endpoint = environment.foodServiceUrl + '/ffq';
+  endpoint = 'https://ffq-food-item-service.azurewebsites.net/ffq'; ///fooddescription/update/
 
   constructor(private http: HttpClient) { }
 
@@ -39,6 +39,22 @@ export class FoodDescriptionService {
         return res.map(item => {
           return new Description(
             item.imageUrl,
+            item.foodItemGroupName,
+            item.firstBracketIntake,
+            item.secondBracketIntake,
+            item.thirdBracketIntake,
+            item.description,
+          );
+        });
+      }));
+  }
+
+  updateFoodItemDescription(_id,payload): Observable<Description[]> {
+    return this.http.put(this.endpoint + '/fooddescription/update/'+_id,payload).pipe(
+      map((res: any) => {
+        return res.map(item => {
+          return new Description(
+            item._id,
             item.foodItemGroupName,
             item.firstBracketIntake,
             item.secondBracketIntake,
