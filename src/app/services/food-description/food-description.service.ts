@@ -14,6 +14,7 @@ const httpOptions = { headers: new HttpHeaders({'Content-Type': 'application/jso
 export class FoodDescriptionService {
 
   endpoint = 'https://ffq-food-item-service.azurewebsites.net/ffq'; ///fooddescription/update/
+  // endpoint = environment.foodServiceUrl;
 
   constructor(private http: HttpClient) { }
 

@@ -43,7 +43,7 @@ export class QuestionnairePageComponent implements OnInit {
   dataLoaded: Promise<boolean>;
 
   foodItems: FFQItem[] = [];
-
+  tmpfoodItems: FFQItem[] = [];
 
 
 
@@ -139,15 +139,52 @@ export class QuestionnairePageComponent implements OnInit {
       this.hideSecondaryItems = !this.hideSecondaryItems;
   }
 
+  // private loadFoodItems() {
+  //   this.foodService.getFoodItems().subscribe(data => {
+  //     data.map(response => {
+  //       this.foodItems.push(FFQItem.foodItemFromResponse(response));
+  //     });
+  //     console.log(this.foodItems.length + ' food items returned from server.');
+  //     this.dataLoaded = Promise.resolve(true);
+  //   }, (error: HttpErrorResponse) => this.handleFoodServiceError(error));
+  // }
+
+
   private loadFoodItems() {
     this.foodService.getFoodItems().subscribe(data => {
       data.map(response => {
-        this.foodItems.push(FFQItem.foodItemFromResponse(response));
+        this.tmpfoodItems.push(FFQItem.foodItemFromResponse(response));
+        // console.log(FFQItem.foodItemFromResponse(response).name);
       });
+
+      ///////// adds FFQItems to fooditems by looking at itemPosition
+      let positionHolder = 1;
+      console.log("positionHolder "+positionHolder);
+
+      while(this.tmpfoodItems.length !== this.foodItems.length){
+        this.foodItems.push(this.getFoodItemByPosition(positionHolder, this.tmpfoodItems));
+        positionHolder++;
+      }
+      /////////
+      console.log(this.tmpfoodItems.length + 'tmp food items returned from server.');
       console.log(this.foodItems.length + ' food items returned from server.');
+
       this.dataLoaded = Promise.resolve(true);
     }, (error: HttpErrorResponse) => this.handleFoodServiceError(error));
   }
+
+// returns a FFQ item with the itemPosition equal to the position param
+private getFoodItemByPosition (position:number, arr:FFQItem[] ): FFQItem{
+  // console.log("in getFoodItemByPosition");
+  let index = 0;
+  while(index < arr.length){
+    
+    if(arr[index].itemPosition === position){
+      return arr[index];
+    }
+    index++;
+  }
+}
 
   private handleFoodServiceError(error: HttpErrorResponse) {
     console.error('Error occurred.\n' + error.message);
