@@ -23,6 +23,7 @@ export class FoodDescriptionService {
     return this.http.get(this.endpoint + '/fooddescription/' + questionnaireId).pipe(
       map(((item: Description) => {
           return new Description(
+            item._id,
             item.imageUrl,
             item.foodItemGroupName,
             item.firstBracketIntake,
@@ -39,6 +40,7 @@ export class FoodDescriptionService {
       map((res: any) => {
         return res.map(item => {
           return new Description(
+            item._id,
             item.imageUrl,
             item.foodItemGroupName,
             item.firstBracketIntake,
@@ -56,6 +58,7 @@ export class FoodDescriptionService {
         return res.map(item => {
           return new Description(
             item._id,
+            item.imageUrl,
             item.foodItemGroupName,
             item.firstBracketIntake,
             item.secondBracketIntake,

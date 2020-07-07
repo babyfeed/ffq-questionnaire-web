@@ -27,3 +27,11 @@ a:hover {
   color: white;
   width: 200px;
 }
+
+.table tbody{
+  cursor: grab;
+}
+
+.cdk-drop-list-dragging {
+  cursor: grabbing;
+}

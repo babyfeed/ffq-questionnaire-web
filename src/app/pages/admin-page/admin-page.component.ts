@@ -20,6 +20,8 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 import { FFQFoodItemResponse } from 'src/app/models/ffqfooditem-response';
 import { moveItemInArray } from '@angular/cdk/drag-drop';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -28,10 +30,16 @@ import { CdkDragDrop } from '@angular/cdk/drag-drop';
   styleUrls: ['./admin-page.component.css']
 })
 
+
+
+
 export class AdminPageComponent implements OnInit {
 
   TITLE = 'FFQR Admin Portal';
 
+
+
+    endpoint = environment.foodServiceUrl + '/ffq';
 
   constructor(public foodService: FoodItemService,
               private activatedRoute: ActivatedRoute,
@@ -42,7 +50,7 @@ export class AdminPageComponent implements OnInit {
               private router: Router,
               private modalService: NgbModal,
               private flashMessage: FlashMessagesService,
-
+              private http: HttpClient
   ) { }
 
 
@@ -94,12 +102,17 @@ export class AdminPageComponent implements OnInit {
   //added by teriq douglas
   onDrop(event: CdkDragDrop<string[]>){
     moveItemInArray(this.foodItems, event.previousIndex, event.currentIndex);
-    var temp = this.foodItems[event.previousIndex].itemPosition;
-        this.foodItems[event.previousIndex].itemPosition = this.foodItems[event.currentIndex].itemPosition
-        this.foodItems[event.currentIndex].itemPosition = temp;
-        //this.foodItems[event.currentIndex].itemPosition = event.currentIndex;
-        //this.foodItems[event.previousIndex].itemPosition = event.previousIndex;
+    let i: any;
+
+    for(i in this.foodItems){
+      this.foodItems[i].itemPosition = ++i;
+    }
+
     console.log(this.foodItems);
+    this.http.put(this.endpoint + '/update/' + this.foodItems[event.currentIndex].id, this.foodItems[event.currentIndex],
+    {headers : new HttpHeaders({ 'Content-Type': 'application/json' })}).subscribe((data) => {
+                    console.log(data);
+                    }, (error) => {console.log(error)});
   }
 
  /* private updateArray(){
