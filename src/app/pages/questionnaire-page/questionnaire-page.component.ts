@@ -157,15 +157,8 @@ export class QuestionnairePageComponent implements OnInit {
         // console.log(FFQItem.foodItemFromResponse(response).name);
       });
 
-      ///////// adds FFQItems to fooditems by looking at itemPosition
-      let positionHolder = 1;
-      console.log("positionHolder "+positionHolder);
+      this.foodItems = this.getFoodItemByPosition(this.tmpfoodItems);
 
-      while(this.tmpfoodItems.length !== this.foodItems.length){
-        this.foodItems.push(this.getFoodItemByPosition(positionHolder, this.tmpfoodItems));
-        positionHolder++;
-      }
-      /////////
       console.log(this.tmpfoodItems.length + 'tmp food items returned from server.');
       console.log(this.foodItems.length + ' food items returned from server.');
 
@@ -174,16 +167,11 @@ export class QuestionnairePageComponent implements OnInit {
   }
 
 // returns a FFQ item with the itemPosition equal to the position param
-private getFoodItemByPosition (position:number, arr:FFQItem[] ): FFQItem{
-  // console.log("in getFoodItemByPosition");
-  let index = 0;
-  while(index < arr.length){
-    
-    if(arr[index].itemPosition === position){
-      return arr[index];
-    }
-    index++;
-  }
+private getFoodItemByPosition (arr:FFQItem[] ): FFQItem[]{
+  var sortedArray = arr.sort(function(a,b){
+    return a.itemPosition >b.itemPosition?1:a.itemPosition <b.itemPosition?-1:0
+   })
+   return sortedArray;
 }
 
   private handleFoodServiceError(error: HttpErrorResponse) {
