@@ -127,12 +127,12 @@ export class TrackerPageComponent implements OnInit {
       this.showItems = true;
       this.age = age;
 
-      if(age <= 12) {
+      if(age <= 6) {
         this.showBracketFirst = true;
         this.showBracketSecond = false;
         this.showBracketThird = false;
       }
-      else if(age >= 6 && age < 12) {
+      else if(age > 6 && age < 12) {
         this.showBracketFirst = false;
         this.showBracketSecond = true;
         this.showBracketThird = false;
