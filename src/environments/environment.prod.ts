@@ -1,8 +1,8 @@
 export const environment = {
   production: true,
-  thisUrl: 'https://ffqquestionnairewestatic.z22.web.core.windows.net',
-  apiUrl: 'https://ffq-auth.azurewebsites.net',
-  foodServiceUrl: 'https://ffq-food-item-service.azurewebsites.net',
-  questionnaireServiceUrl: 'https://ffq-questionnaire-service.azurewebsites.net',
-  userServiceUrl: 'https://ffq-user-service.azurewebsites.net'
+  thisUrl: 'https://babyfeedweb.z13.web.core.windows.net',
+  apiUrl: 'https://ffq-authentication-service.azurewebsites.net',
+  foodServiceUrl: 'http://ffq-fooditemservice.azurewebsites.net',
+  questionnaireServiceUrl: 'https://ffq-questionnaireservice.azurewebsites.net',
+  userServiceUrl: 'https://ffq-userservice.azurewebsites.net'
 };
