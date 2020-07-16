@@ -162,7 +162,7 @@ export class AdminPageComponent implements OnInit {
 
   //added by teriq douglas
   update(i: any){
-    console.log(this.foodItems[i].id);
+
     this.http.put(this.endpoint + '/update/' + this.foodItems[i].id, this.foodItems[i],
                                 {headers : new HttpHeaders({ 'Content-Type': 'application/json' })}).subscribe((data) => {
                                               console.log(data);
