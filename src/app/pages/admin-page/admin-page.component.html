@@ -16,7 +16,7 @@
           </thead>
           <tbody cdkDropList (cdkDropListDropped)="onDrop($event)">
 
-            <tr *ngFor="let item of foodItems; let i=index" cdkDrag cdkDragLockAxis="y">
+            <tr *ngFor="let item of foodItems; let i=index" cdkDrag cdkDragLockAxis="y" >
               <th class="col-xs">
                 <div class="drag-handle">
                   <ng-container [ngTemplateOutlet]="dragHandleTmpl"></ng-container>

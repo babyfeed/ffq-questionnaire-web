@@ -60,10 +60,19 @@ export class AdminPageComponent implements OnInit {
   foodItems: FFQFoodItemResponse[] = [];
 
 
-  ngOnInit() {
-    this.loadFoodsAndNutrients();
-    console.log(this.foodNutrients);
 
+  ngOnInit() {
+
+
+      this.loadFoodsAndNutrients();
+
+
+
+    /*let i: any;
+
+        for(i in this.foodItems){
+          this.foodItems[i].itemPosition = ++i;
+        }*/
   }
 
 
@@ -87,8 +96,16 @@ export class AdminPageComponent implements OnInit {
       });
       console.log(this.foodItems);
       console.log(this.foodNutrients.length + ' foods and its nutrients were returned from server.');
+      this.foodItems = this.orderFoodItems(this.foodItems);
       this.dataLoaded = Promise.resolve(true);
     }, (error: HttpErrorResponse) => this.handleFoodServiceError(error));
+
+
+  }
+  //added by teriq douglas
+  private orderFoodItems(items: FFQFoodItemResponse[]){
+    var orderedItems = items.sort(function(a, b){return a.itemPosition - b.itemPosition});
+    return orderedItems;
   }
 
 
@@ -104,17 +121,54 @@ export class AdminPageComponent implements OnInit {
     moveItemInArray(this.foodItems, event.previousIndex, event.currentIndex);
     let i: any;
 
+    //update each food item with a new itemPosition
     for(i in this.foodItems){
-      this.foodItems[i].itemPosition = ++i;
+              this.foodItems[i].itemPosition = ++i;
+            }
+    //for loop with put calls for each element
+    for(let i = 0; i < this.foodItems.length; i++){
+
+
+      this.update(i);
     }
 
+
+
+
+    //or swap only 2 elements
+    /*var temp = this.foodItems[event.previousIndex].itemPosition;
+            this.foodItems[event.previousIndex].itemPosition = this.foodItems[event.currentIndex].itemPosition
+            this.foodItems[event.currentIndex].itemPosition = temp;*/
+
+    /*this.http.put(this.endpoint + '/update/' + this.foodItems[event.currentIndex].id, this.foodItems[event.currentIndex],
+                      {headers : new HttpHeaders({ 'Content-Type': 'application/json' })}).subscribe((data) => {
+                                    console.log(data);
+                                  }, (error) => {console.log(error)});
+
+    this.http.put(this.endpoint + '/update/' + this.foodItems[event.previousIndex].id, this.foodItems[event.previousIndex],
+                           {headers : new HttpHeaders({ 'Content-Type': 'application/json' })}).subscribe((data) => {
+                                         console.log(data);
+                                       }, (error) => {console.log(error)});*/
+
+
+
+
+
     console.log(this.foodItems);
-    this.http.put(this.endpoint + '/update/' + this.foodItems[event.currentIndex].id, this.foodItems[event.currentIndex],
-    {headers : new HttpHeaders({ 'Content-Type': 'application/json' })}).subscribe((data) => {
-                    console.log(data);
-                    }, (error) => {console.log(error)});
+
+
+
   }
 
+  //added by teriq douglas
+  update(i: any){
+
+    this.http.put(this.endpoint + '/update/' + this.foodItems[i].id, this.foodItems[i],
+                                {headers : new HttpHeaders({ 'Content-Type': 'application/json' })}).subscribe((data) => {
+                                              console.log(data);
+                                            }, (error) => {console.log(error)});
+//console.log(this.foodItems[i].id);
+  }
  /* private updateArray(){
     this.foodService.getAllFoods().subscribe(data => {
           data.map(response => {
