@@ -2,7 +2,8 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-export const environment = {
+/*
+port const environment = {
   production: false,
   thisUrl: 'http://localhost:4200',
   apiUrl: 'http://localhost:4000',
@@ -10,15 +11,16 @@ export const environment = {
   questionnaireServiceUrl: 'http://localhost:9080',
   userServiceUrl: 'http://localhost:9070'
 };
+*/
 
-// export const environment = {
-//   production: true,
-//   thisUrl: 'https://ffqquestionnairewestatic.z22.web.core.windows.net',
-//   apiUrl: 'https://ffq-auth.azurewebsites.net',
-//   foodServiceUrl: 'https://ffq-food-item-service.azurewebsites.net',
-//   questionnaireServiceUrl: 'https://ffq-questionnaire-service.azurewebsites.net',
-//   userServiceUrl: 'https://ffq-user-service.azurewebsites.net'
-// };
+export const environment = {
+  production: true,
+  thisUrl: 'https://babyfeedweb.z13.web.core.windows.net',
+  apiUrl: 'https://ffq-authentication-service.azurewebsites.net',
+  foodServiceUrl: 'https://ffq-fooditemservice.azurewebsites.net',
+  questionnaireServiceUrl: 'https://ffq-questionnaireservice.azurewebsites.net',
+  userServiceUrl: 'https://ffq-userservice.azurewebsites.net'
+};
 
 /*
  * For easier debugging in development mode, you can import the following file

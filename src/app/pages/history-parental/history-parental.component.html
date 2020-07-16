@@ -54,22 +54,22 @@
                 {{buttonName}}
               </button>
 
-              <button mat-raised-button (click)="toggleFeedback(i)">
+              <!-- <button mat-raised-button (click)="toggleFeedback(i)">
                 Feedback
-              </button>
+              </button> -->
             </div>
             
           </div>
 
           <!--Feedback results-->
-          <ng-container *ngIf="result.showFeedback">
+          <!-- <ng-container *ngIf="result.showFeedback"> -->
             <label class="mt-3 mb-0 ml-3"><strong>Additional Recommendations and Feedback</strong> </label>
             <hr>
             <mat-card class="qb-card">
               <p>{{result.feedback}}</p>
             </mat-card>
             <hr />
-          </ng-container>
+          <!-- </ng-container> -->
 
           <!--User choice results-->
           <ng-container *ngIf="result.show">

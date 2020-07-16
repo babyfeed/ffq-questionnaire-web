@@ -31,7 +31,7 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-error *ngIf="(foodItem.isSubmitted || foodItem.isSubmitted == 'null') && foodItem.getErrorState().includes('frequency')">
+      <mat-error *ngIf="(foodItem.isSubmitted || foodItem.isSubmitted === null) && foodItem.getErrorState().includes('frequency')">
         Please enter the number servings per week or per day.
       </mat-error>
       <mat-error *ngIf="foodItem.isSubmitted
