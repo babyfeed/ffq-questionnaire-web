@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   thisUrl: 'http://localhost:4200',
   apiUrl: 'http://localhost:4000',
-  foodServiceUrl: 'http://localhost:9090',
+  foodServiceUrl: 'https://ffq-fooditemservice.azurewebsites.net',
   questionnaireServiceUrl: 'http://localhost:9080',
   userServiceUrl: 'http://localhost:9070'
 };
