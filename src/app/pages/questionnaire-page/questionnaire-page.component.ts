@@ -45,6 +45,8 @@ export class QuestionnairePageComponent implements OnInit {
   foodItems: FFQItem[] = [];
   tmpfoodItems: FFQItem[] = [];
 
+  submitting = false;
+
 
 
   constructor(public foodService: FoodItemService,
@@ -67,6 +69,7 @@ export class QuestionnairePageComponent implements OnInit {
   }
 
   submitQuestionnaire() {
+    this.submitting = true;
 
     let pageHasErrors = false;
     for (const foodItem of this.foodItems) {
@@ -86,6 +89,7 @@ export class QuestionnairePageComponent implements OnInit {
       const  dialogRef  = this.submissionErrorDialog.open(ErrorDialogPopupComponent);
       dialogRef.componentInstance.title = 'Questionnaire Incomplete';
       dialogRef.componentInstance.message = 'Please ensure all required fields are completed.';
+      this.submitting = false;
 
     } else {
 
@@ -128,6 +132,7 @@ export class QuestionnairePageComponent implements OnInit {
             const dialogRef = this.successDialog.open(ErrorDialogPopupComponent);
             dialogRef.componentInstance.title = 'Submitted Successfully';
             dialogRef.componentInstance.message = 'The questionnaire has been sent to the issuer.';
+            this.submitting = false;
             }, (error: HttpErrorResponse) => this.handleSubmissionError(error));
 
         }, (error: HttpErrorResponse) => this.handleSubmissionError(error));
@@ -199,6 +204,7 @@ private getFoodItemByPosition (arr:FFQItem[] ): FFQItem[]{
     const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
     dialogRef.componentInstance.title = 'Error Submitting Questionnaire';
     dialogRef.componentInstance.message = error.message + '. Try again or contact administrator.';
+    this.submitting = false;
   }
 
 }
