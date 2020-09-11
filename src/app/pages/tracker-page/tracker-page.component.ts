@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { formatDate } from '@angular/common';
 import { ErrorDialogPopupComponent } from 'src/app/components/error-dialog-popup/error-dialog-popup.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { TrackerResultsResponse } from 'src/app/models/trackerresultsresponse';
 import { TrackerItems } from 'src/app/models/trackeritems';
 import { TrackerResponseService } from 'src/app/services/tracker-response/tracker-response.service';

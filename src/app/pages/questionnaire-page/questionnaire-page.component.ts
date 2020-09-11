@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import { QuestionnaireValidatorService } from '../../services/questionnaire-validator/questionnaire-validator.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ErrorDialogPopupComponent} from '../../components/error-dialog-popup/error-dialog-popup.component';
-import {MatDialog} from '@angular/material';
 import {FFQItem} from '../../models/ffqitem';
 import {FoodItemService} from '../../services/food-item/food-item.service';
 import {log} from 'util';
@@ -16,6 +15,7 @@ import {FFQResult} from '../../models/FFQResult';
 import {NutrientConstants} from '../../models/NutrientConstants';
 import { Validators, FormControl } from '@angular/forms';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-questionnaire-page',

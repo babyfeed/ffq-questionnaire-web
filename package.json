@@ -26,7 +26,6 @@
     "@angular/router": "~10.1.1",
     "@ng-bootstrap/ng-bootstrap": "~7.0.0",
     "angular-flash-message": "^3.4.0",
-    "angular-font-awesome": "^3.1.2",
     "angular2-flash-messages": "^3.0.1",
     "core-js": "^3.6.5",
     "document-register-element": "^1.14.6",

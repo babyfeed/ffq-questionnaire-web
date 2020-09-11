@@ -1,7 +1,7 @@
 import {Component, OnChanges} from '@angular/core';
 import {QuestionnaireValidatorService} from '../../services/questionnaire-validator/questionnaire-validator.service';
 import {Router} from '@angular/router';
-import {MatDialog} from '@angular/material';
+import {MatDialog} from '@angular/material/dialog';
 import {ErrorDialogPopupComponent} from '../../components/error-dialog-popup/error-dialog-popup.component';
 import {FFQItem} from '../../models/ffqitem';
 import {HttpErrorResponse} from '@angular/common/http';
