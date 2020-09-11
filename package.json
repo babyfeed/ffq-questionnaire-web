@@ -12,18 +12,18 @@
   "private": true,
   "dependencies": {
     "@angular-devkit/build-angular": "~0.803.29",
-    "@angular/animations": "~8.2.14",
+    "@angular/animations": "~9.1.12",
     "@angular/cdk": "^7.3.1",
-    "@angular/common": "^8.2.14",
+    "@angular/common": "^9.1.12",
     "@angular/compiler": "~8.2.14",
-    "@angular/core": "~8.2.14",
+    "@angular/core": "~9.1.12",
     "@angular/elements": "^8.2.14",
     "@angular/fire": "^5.2.1",
-    "@angular/forms": "~8.2.14",
+    "@angular/forms": "~9.1.12",
     "@angular/material": "^7.3.1",
-    "@angular/platform-browser": "~8.2.14",
+    "@angular/platform-browser": "~9.1.12",
     "@angular/platform-browser-dynamic": "~8.2.14",
-    "@angular/router": "~8.2.14",
+    "@angular/router": "~9.1.12",
     "@ng-bootstrap/ng-bootstrap": "~4.1.1",
     "angular-flash-message": "^3.4.0",
     "angular-font-awesome": "^3.1.2",
@@ -40,7 +40,7 @@
     "rxjs-compat": "^6.5.3",
     "terser": "^3.14.1",
     "tslib": "^1.9.0",
-    "zone.js": "~0.9.1"
+    "zone.js": "~0.10.3"
   },
   "devDependencies": {
     "@angular/cli": "~8.3.29",
