@@ -11,7 +11,7 @@ import { ResultsService } from 'src/app/services/results/results';
 import { FFQResultsResponse } from 'src/app/models/ffqresultsresponse';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RecommendModalComponent } from 'src/app/components/recommend-modal/recommend-modal.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { NutrientsRecommendationsService } from 'src/app/services/nutrients-recommendations/nutrients-recommendations.service';
 import { ErrorDialogPopupComponent } from 'src/app/components/error-dialog-popup/error-dialog-popup.component';
 import { Router } from '@angular/router';
@@ -133,7 +133,7 @@ export class ClinicRecommendComponent implements OnInit {
     //Function used to filter the parent list to hold only the parents that are assigned to that specific clinic
   private getParentList(){
     var parentListObervable: Observable<FFQParentResponse[]> = this.parentService.getAllParents();
-  
+
     parentListObervable.subscribe(parentList => {
        parentList.forEach(parent => {
          if(parent.assignedclinic == this.clinicId){
@@ -141,7 +141,7 @@ export class ClinicRecommendComponent implements OnInit {
          }
        })
        this.getResultsList();
-  
+
        console.log(this.parentList);
     });
 
@@ -151,12 +151,12 @@ export class ClinicRecommendComponent implements OnInit {
 private getResultsList(){
   console.log("Parents in Get result");
   console.log(this.parentList);
-  
+
   var allResultsObservable: Observable<FFQResultsResponse[]> = this.resultsService.getAllResults();
   allResultsObservable.subscribe((allResults: FFQResultsResponse[]) => {
    console.log("All REsults in function");
    console.log(allResults);
-     this.parentList.forEach(parent => { 
+     this.parentList.forEach(parent => {
          allResults.forEach(result => {
              if(result.userId == parent.userId){
                this.resultList.push(result);
@@ -174,13 +174,13 @@ private getResultsList(){
 
 }
 
-    //functions used in HTML to display the nutrient recommendation after clicking on the button 
+    //functions used in HTML to display the nutrient recommendation after clicking on the button
   onModalRequest(id: string): void {
     const modalRef = this.errorDialog.open(RecommendModalComponent);
     modalRef.componentInstance.id = id;
   }
 
-    //functions used in HTML to display the food recommendation after clicking on the button 
+    //functions used in HTML to display the food recommendation after clicking on the button
   onModalRequestFood(id: string): void {
     const modalRef = this.errorDialog.open(FoodRecommendModalComponent);
     modalRef.componentInstance.id = id;

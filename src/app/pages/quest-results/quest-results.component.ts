@@ -11,7 +11,7 @@ import { NutrientConstants } from 'src/app/models/NutrientConstants';
 ///////////added imports from recommend.component.ts/////////////////////
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RecommendModalComponent } from 'src/app/components/recommend-modal/recommend-modal.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { NutrientsRecommendationsService } from 'src/app/services/nutrients-recommendations/nutrients-recommendations.service';
 import { FFQNutrientsRecommendations } from 'src/app/models/ffqnutrients-recommendations';
 import { ErrorDialogPopupComponent } from 'src/app/components/error-dialog-popup/error-dialog-popup.component';

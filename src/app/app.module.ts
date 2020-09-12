@@ -4,9 +4,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { QuestIdInputComponent } from './pages/quest-id-input-page/quest-id-input.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCardModule, MatFormFieldModule,
-  MatInputModule, MatDialogModule, MatListModule, MatSelectModule,
-  MatOptionModule, MatRadioModule, MatIconModule } from '@angular/material';
 import { QuestionnairePageComponent } from './pages/questionnaire-page/questionnaire-page.component';
 import { ErrorDialogPopupComponent } from './components/error-dialog-popup/error-dialog-popup.component';
 import { TextCardComponent } from './components/text-card/text-card.component';
@@ -16,7 +13,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ResultsPageComponent } from './pages/results-page/results-page.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
-import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { FooditemComponent } from './pages/fooditem/fooditem.component';
 import { ReactiveFormsModule} from '@angular/forms';
 import { AdminHeaderComponent } from './pages/admin-header/admin-header.component';
@@ -59,10 +55,20 @@ import { ResultsPipe } from './pipes/resultsFilter.pipe';
 import { ClinicTrackerHistoryComponent } from './pages/clinic-tracker-history/clinic-tracker-history.component';
 import { TrackerFilterPipe } from './pipes/tracker-filter.pipe';
 import { RecommendedFilterPipe } from './pipes/recommended-filter.pipe';
-import { MatProgressBarModule } from '@angular/material';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { LoaderComponent } from './components/loader/loader.component';
 import { LoaderInterceptorService } from './services/loader/loader-interceptor.service';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import {MatButtonModule} from "@angular/material/button";
+import {MatCardModule} from "@angular/material/card";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatSelectModule} from "@angular/material/select";
+import {MatOptionModule} from "@angular/material/core";
+import {MatRadioModule} from "@angular/material/radio";
+import {MatIconModule} from "@angular/material/icon";
+import {MatListModule} from "@angular/material/list";
 
 @NgModule({
   declarations: [
@@ -130,10 +136,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     FormsModule,
     HttpClientModule,
     NgbModule,
-    AngularFontAwesomeModule,
     ReactiveFormsModule,
     MatCheckboxModule,
-    NgbModule.forRoot(),
     FlashMessagesModule.forRoot(),
     MatProgressBarModule,
     DragDropModule
