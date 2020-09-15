@@ -174,7 +174,8 @@ local.properties
 **/nbproject/private/
 **/nbproject/Makefile-*.mk
 **/nbproject/Package-*.bash
-**/nbproject/
+**/nbproject/project.properties
+**/nbproject/project.xml
 
 build/
 nbbuild/
