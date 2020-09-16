@@ -24,6 +24,6 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: 'dist/ffq-questionnaire-web'
-    ArtifactName: 'web-app'
+    ArtifactName: 'ffq-questionnaire-web'
     publishLocation: 'Container'
   displayName: 'Publish Artifacts'
