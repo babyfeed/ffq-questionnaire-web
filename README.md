@@ -22,11 +22,7 @@ This section will describe the structure of the "src/app/" directory.
 
 #### Pre reqs
  - Node v12 and npm v6 installed or docker images and container this app.
- - Make sure to run `ng build --production` to create a `./dist` folder to use as the deployable artifact for a static website.
-
-#### Config changes for package.json
- - Update `package.json` `@angular/cli from ~7.3.0 to ~9.0.3` (which is angular 9 LTS)
- - Run `npm install` to add the new angular cli
+ - Make sure to run `ng build --configuration production` to create a `./dist` folder to use as the deployable artifact for a static website.
 
 #### Deploy
  - Run `ng add @azure/ng-deploy` to add the azure deploy tools
