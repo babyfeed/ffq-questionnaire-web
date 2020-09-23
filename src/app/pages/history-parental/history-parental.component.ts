@@ -42,8 +42,7 @@ export class HistoryParentalComponent implements OnInit {
     private modalService: NgbModal,
     private errorDialog: MatDialog,
     private router: Router
-    ) {
-    }
+    ) {}
 
   ngOnInit() {
     this.getResultsByUser(this.authenticationService.currentUserId);
