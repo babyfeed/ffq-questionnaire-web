@@ -113,20 +113,11 @@ export class FooditemComponent implements OnInit {
   }
 
   private addFoodNutrients(){
-<<<<<<< HEAD
-
-    console.log(this.foodNutrientsItem[0]);
-    //this.foodNutrientsItem[0].nutrientList.nutrientListID = this.foodNutrientsItem[0].foodItem.foodTypes[0].nutrientListID;
-    //this.foodNutrientsItem[0].foodItem.nutrientId = this.foodNutrientsItem[0].foodItem.foodTypes[0].nutrientListID;
-    this.foodService.addFoodNutrients(FFQFoodNutrients.foodItemToResponse(this.foodNutrientsItem[0])).subscribe(
-     data => this.router.navigateByUrl('/admin')
-=======
     const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
     this.foodNutrientsItem[0].nutrientList.nutrientListID = this.foodNutrientsItem[0].foodItem.foodTypes[0].nutrientListID;
     this.foodNutrientsItem[0].foodItem.nutrientId = this.foodNutrientsItem[0].foodItem.foodTypes[0].nutrientListID;
     this.foodService.addFoodNutrients(FFQFoodNutrients.foodItemToResponse(this.foodNutrientsItem[0])).subscribe(
       data => {this.router.navigateByUrl('/admin'); dialogRef.componentInstance.title = 'Food item added/updated succesfully!';}
->>>>>>> origin_daykelm
     );
 
   }
