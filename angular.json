@@ -154,5 +154,8 @@
       }
     }
   },
-  "defaultProject": "ffq-questionnaire-web"
+  "defaultProject": "ffq-questionnaire-web",
+  "cli": {
+    "analytics": "73d96eb3-d635-4811-a451-b81f67cb9d14"
+  }
 }

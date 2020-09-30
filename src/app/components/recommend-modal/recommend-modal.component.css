@@ -4,8 +4,8 @@
 
 .container {
   padding: 20px;
-  margin-top: 12% !important;
-  background-position: fixed;
+  z-index: 99999999999999 !important;
+  position: relative;
 }
 
 table {
@@ -28,18 +28,23 @@ tr:nth-child(even) {
 .tableDiv {
   padding: 1px;
 }
+
 .normal {
   color: green;
+  font-weight: bold;
 }
 
 .below {
-  color: rgb(133, 92, 5);
+  color: #ff7f00;
+  font-weight: bold;
 }
 
 .above {
   color: red;
+  font-weight: bold;
 }
 
 .adequate {
   color: green;
+  font-weight: bold;
 }

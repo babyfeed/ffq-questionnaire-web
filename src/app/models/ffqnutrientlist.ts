@@ -1,22 +1,22 @@
-import {FFQItemInput} from './ffqitem-input';
-import {FFQItemResponse, FoodType} from './ffqitem-response';
-import {Serving} from './ffqitem-response';
-import { FFQFoodNutrientsResponse } from './ffqfoodnutrients-response';
+import { FFQItemInput } from "./ffqitem-input";
+import { FFQItemResponse, FoodType } from "./ffqitem-response";
+import { Serving } from "./ffqitem-response";
+import { FFQFoodNutrientsResponse } from "./ffqfoodnutrients-response";
 
-export class FFQNutrientlist {  
+export class FFQNutrientlist {
   id: string;
   nutrientListID: string;
   nutrientMap: any;
 
   constructor(id: string, nutrientMap: any) {
     console.log(nutrientMap);
+    console.log("here");
     this.nutrientListID = id;
     this.nutrientMap = nutrientMap;
   }
 }
 
 export class nutrientMap {
-  
   // only includes the 19 main nutrients used for recomendations
   "Retinol (mcg)" : number;
   "Vitamin D (calciferol) (mcg)" : number;
@@ -38,7 +38,8 @@ export class nutrientMap {
   "Copper (mg)" : number;
   "Potassium (mg)" : number;
 
-  constructor(typeName: string, nutrientListID: string){
+
+  constructor(typeName: string, nutrientListID: string) {
     this["Retinol (mcg)"] = 0;
     this["Vitamin D (calciferol) (mcg)"] = 0;
     this["Vitamin E (Total Alpha-Tocopherol) (mg)"] = 0;
@@ -60,4 +61,3 @@ export class nutrientMap {
     this["Potassium (mg)"] = 0;
   }
 }
-
