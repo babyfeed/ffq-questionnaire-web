@@ -1,5 +1,5 @@
 .dialog-button {
-  width: 20%;
+    width: 20%;
 }
 
 .container {
@@ -9,42 +9,38 @@
 }
 
 table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
 }
 
 td,
 th {
-  border: 1px solid #000000;
-  text-align: left;
-  padding: 5px;
+    border: 1px solid #000000;
+    text-align: left;
+    padding: 5px;
 }
 
 tr:nth-child(even) {
-  background-color: #dddddd;
+    background-color: #dddddd;
 }
 
 .tableDiv {
-  padding: 1px;
+    padding: 1px;
 }
 
 .normal {
-  color: green;
-  font-weight: bold;
+    color: green;
 }
 
 .below {
-  color: #ff7f00;
-  font-weight: bold;
+    color: rgb(133, 92, 5);
 }
 
 .above {
-  color: red;
-  font-weight: bold;
+    color: red;
 }
 
 .adequate {
-  color: green;
-  font-weight: bold;
+    color: green;
 }

@@ -133,10 +133,11 @@ export class NutrientConstants {
     'Iron (mg)',
     'Phenylalanine (g)',
     */
+
 //*******************************************************************************/
 //*######  keeping all nutrient names to use on upcoming research portal  ######*/
 //*******************************************************************************/
-    //"Energy (kcal)",
+    // "Energy (kcal)",
     // "Total Protein (g)",
     // "CHO (g)",
     // "Total Fat (g)",
