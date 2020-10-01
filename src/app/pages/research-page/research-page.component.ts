@@ -1,7 +1,7 @@
 /*
 
   Added by Ver 2.0 group, edited by Javier Romero to make it look more consistent with the rest of the pages.
-  This is the first page of the admin portal (admin/home).
+  This is the first page of the resarch portal (research/home).
   Here you can see a list of all the food items in the database.
   The admin can create, edit or delete food items in this page.
 
