@@ -95,6 +95,10 @@
               <input placeholder="Amount of Parents (1 - 100)" width="25" style="border-color: mediumblue; border-width: 0.05cm" type="text"
                 class="form-control" name="amountToAdd" [(ngModel)]="amountToAdd" required #nameField="ngModel" />-->
               <hr>
+              <label style="font-weight: bold">Select Quantity:</label>
+                <br>
+                <input type="number" id="quantity" name="quantity" min="1" value="1" style="margin-bottom: 10px">
+                <br>
               <label style="font-weight: bold">Choose Clinic to assign to:</label><label style="font-style: italic; font-size: small; margin-left: 10px"> *required </label>
                 <br>
               <mat-form-field>
@@ -103,6 +107,7 @@
                   <mat-option *ngFor="let c of ffqclinicList" [value]="c.clinicId" >{{ c.clinicname }}</mat-option>
                 </mat-select>
               </mat-form-field>
+              
   
             </div>
           </div>
@@ -114,6 +119,10 @@
           <div class="optional_container" *ngIf="createClinician">
             <div class="form-group col-12">
               <hr>
+              <label style="font-weight: bold">Select Quantity:</label>
+                <br>
+                <input type="number" id="quantity" name="quantity" min="1" value="1" style="margin-bottom: 10px">
+                <br>
               <label style="font-weight: bold">Choose Clinic to assign to:</label><label style="font-style: italic; font-size: small; margin-left: 10px"> *required </label>
               <br>
               <mat-form-field>
