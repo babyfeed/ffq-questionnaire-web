@@ -124,9 +124,21 @@ export class UserComponent implements OnInit {
 
   private addUser()
   {
+
+    var input = <HTMLInputElement>document.getElementById("clinician_quantity");
+    var amount : number = parseInt(input.value);
+
      if(this.createClinician == true)
      {
+       if(amount <= 1){
         this.addClinician();
+       }else{
+        //this.addMultipleClinicians();
+        for(let i = 0; i < amount; i++){
+          this.addClinician();
+        }
+       }
+        
      }
      else
      {
@@ -159,6 +171,39 @@ export class UserComponent implements OnInit {
             dialogRef.componentInstance.title = error.error.message;
         });
 
+      });
+  }
+
+  addMultipleClinicians()
+  {
+    //Still work in progress
+
+    var clinicianList: Observable<FFQClinicianResponse[]> = this.clinicianService.getAllClinicians();
+
+    var input = <HTMLInputElement>document.getElementById("clinician_quantity");
+    var amount : number = parseInt(input.value);
+
+      for(let i = 0; i < amount; i++){
+
+        clinicianList.subscribe(data => {
+          var numberOfClinicians = (data.length+1).toString();
+          //console.log("Number of clinicians is: " + numberOfClinicians);
+          var newClincianId = (data.length+1).toString();
+          var newClincianUsername = "clinician"+numberOfClinicians;
+          this.ffqclinician = new FFQClinician(newClincianId, newClincianUsername, newClincianUsername, "clinician", "", "", "", this.selectedClinic, [], true);
+          console.log(this.ffqclinician);
+        });
+
+      }
+
+      this.clinicianService.addClinician(this.ffqclinician).subscribe(data => {
+        this.router.navigateByUrl('/admin/users');
+        const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+        dialogRef.componentInstance.title = amount + ' new clinicians have been added';
+      },
+      error =>{
+        const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+        dialogRef.componentInstance.title = error.error.message;
       });
   }
 
