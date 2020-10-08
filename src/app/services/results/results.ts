@@ -31,8 +31,7 @@ export class ResultsService {
             item.userChoices,
             item.weeklyTotals,
             item.dailyAverages,
-            item.feedback,
-            item.gender
+            item.feedback
           );
         });
       }));
@@ -50,8 +49,7 @@ export class ResultsService {
               item.userChoices,
               item.weeklyTotals,
               item.dailyAverages,
-              item.feedback,
-              item.gender
+              item.feedback
             );
           });
         }));
