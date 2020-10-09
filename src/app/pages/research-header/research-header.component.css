@@ -31,7 +31,7 @@ html {
 
 .tab-link {
     margin-top: 10px;
-    background-color: #b0b02c;
+    background-color: #b39e52;
     color: white;
     float: left;
     border: none;
@@ -44,7 +44,7 @@ html {
 }
 
 .active {
-    background-color: #b39e52;
+    background-color: #b0b02c;
     color: white;
 }
 

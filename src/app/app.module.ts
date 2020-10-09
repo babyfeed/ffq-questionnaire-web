@@ -71,6 +71,7 @@ import { MatRadioModule } from "@angular/material/radio";
 import { MatIconModule } from "@angular/material/icon";
 import { MatListModule } from "@angular/material/list";
 import { ResearchPageComponent } from "./pages/research-page/research-page.component";
+import { ResearchUsersComponent } from './pages/research-users/research-users.component';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import { ResearchPageComponent } from "./pages/research-page/research-page.compo
     FooditemComponent,
     AdminHeaderComponent,
     ResearchHeaderComponent,
+    ResearchUsersComponent,
     ResearchPageComponent,
     QuestResultsComponent,
     RecommendComponent,

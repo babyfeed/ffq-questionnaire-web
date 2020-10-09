@@ -5,6 +5,7 @@ import { QuestionnairePageComponent } from "./pages/questionnaire-page/questionn
 import { QuestIdInputComponent } from "./pages/quest-id-input-page/quest-id-input.component";
 import { AdminPageComponent } from "./pages/admin-page/admin-page.component";
 import { ResearchPageComponent } from "./pages/research-page/research-page.component";
+import { ResearchUsersComponent } from "./pages/research-users/research-users.component";
 import { FooditemComponent } from "./pages/fooditem/fooditem.component";
 import { QuestResultsComponent } from "./pages/quest-results/quest-results.component";
 import { RecommendComponent } from "./pages/recommend/recommend.component";
@@ -170,6 +171,11 @@ const routes: Routes = [
   {
     path: "research/home",
     component: ResearchPageComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "research/users",
+    component: ResearchUsersComponent,
     canActivate: [AuthGuard],
   },
 ];
