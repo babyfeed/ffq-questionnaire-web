@@ -34,8 +34,13 @@ export class AuthGuard implements CanActivate {
         if (urlType != "/clinic") {
           this.router.navigate(["/clinic/home"]);
         }
+<<<<<<< HEAD
       } else if (currentUser[0].usertype == "researcher") {
         if (urlType != "/researcher") {
+=======
+      } else if (currentUser[0].usertype == "research") {
+        if (urlType != "/research") {
+>>>>>>> 89d3f6f... Add routing for research portal
           this.router.navigate(["/research/home"]);
         }
       }
