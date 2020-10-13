@@ -133,7 +133,7 @@ export class UserComponent implements OnInit {
        if(amount <= 1){
         this.addClinician();
        }else{
-        //this.addMultipleClinicians();
+        // this.addMultipleClinicians();
         for(let i = 0; i < amount; i++){
           this.addClinician();
         }
@@ -149,7 +149,7 @@ export class UserComponent implements OnInit {
      }
   }
 
-  addClinician()
+  async addClinician()
   {
     var clinicianList: Observable<FFQClinicianResponse[]> = this.clinicianService.getAllClinicians();
 
@@ -194,17 +194,17 @@ export class UserComponent implements OnInit {
           console.log(this.ffqclinician);
         });
 
+        this.clinicianService.addClinician(this.ffqclinician).subscribe(data => {
+          this.router.navigateByUrl('/admin/users');
+        },
+        error =>{
+          const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+          dialogRef.componentInstance.title = error.error.message;
+        });
       }
 
-      this.clinicianService.addClinician(this.ffqclinician).subscribe(data => {
-        this.router.navigateByUrl('/admin/users');
-        const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-        dialogRef.componentInstance.title = amount + ' new clinicians have been added';
-      },
-      error =>{
-        const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-        dialogRef.componentInstance.title = error.error.message;
-      });
+      const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+      dialogRef.componentInstance.title = amount + ' new clinicians have been added';
   }
 
   addParent()
