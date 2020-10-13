@@ -71,10 +71,7 @@ import { MatRadioModule } from "@angular/material/radio";
 import { MatIconModule } from "@angular/material/icon";
 import { MatListModule } from "@angular/material/list";
 import { ResearchPageComponent } from "./pages/research-page/research-page.component";
-<<<<<<< HEAD
-=======
 import { ResearchUsersComponent } from './pages/research-users/research-users.component';
->>>>>>> 7c73916ea03f1490806e686dd9600d0a58d07aff
 
 @NgModule({
   declarations: [
@@ -89,10 +86,7 @@ import { ResearchUsersComponent } from './pages/research-users/research-users.co
     FooditemComponent,
     AdminHeaderComponent,
     ResearchHeaderComponent,
-<<<<<<< HEAD
-=======
     ResearchUsersComponent,
->>>>>>> 7c73916ea03f1490806e686dd9600d0a58d07aff
     ResearchPageComponent,
     QuestResultsComponent,
     RecommendComponent,
