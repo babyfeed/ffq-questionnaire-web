@@ -172,14 +172,11 @@ const routes: Routes = [
     path: "research/home",
     component: ResearchPageComponent,
     canActivate: [AuthGuard],
-<<<<<<< HEAD
   },
   {
     path: "research/users",
     component: ResearchUsersComponent,
     canActivate: [AuthGuard],
-=======
->>>>>>> 89d3f6f... Add routing for research portal
   },
 ];
 
