@@ -1,6 +1,7 @@
 <research-header></research-header>
-
 <div class="container_page">
+    <!-- Add research user page here. 
+    
     <div class="container mt-3" align="right">
         <button routerLink='/admin/user/new' type="submit" mat-raised-button>New User(s)...</button>
     </div>
@@ -37,10 +38,11 @@
             <tr *ngFor="let u of ffqadminList | searchFilter: search; index as i" [hidden]="!showAdmins">   
                 <td> {{ u.username }} </td>
                 <td> Admin </td>
-                <td> <!--{{ clinicNames[u.assignedclinic] }}--> </td>
+                <td> {{ clinicNames[u.assignedclinic] }} </td>
              
             </tr>
         </table>
        
     </div>
+-->
 </div>
