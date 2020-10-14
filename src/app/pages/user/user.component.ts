@@ -133,10 +133,7 @@ export class UserComponent implements OnInit {
        if(amount <= 1){
         this.addClinician();
        }else{
-        // this.addMultipleClinicians();
-        for(let i = 0; i < amount; i++){
-          this.addClinician();
-        }
+        this.addMultipleClinicians();
        }
         
      }
@@ -185,22 +182,28 @@ export class UserComponent implements OnInit {
 
       for(let i = 0; i < amount; i++){
 
+        var new_clinicians: FFQClinician[];
+
         clinicianList.subscribe(data => {
           var numberOfClinicians = (data.length+1).toString();
           //console.log("Number of clinicians is: " + numberOfClinicians);
           var newClincianId = (data.length+1).toString();
           var newClincianUsername = "clinician"+numberOfClinicians;
-          this.ffqclinician = new FFQClinician(newClincianId, newClincianUsername, newClincianUsername, "clinician", "", "", "", this.selectedClinic, [], true);
-          console.log(this.ffqclinician);
+          new_clinicians.push(new FFQClinician(newClincianId, newClincianUsername, newClincianUsername, "clinician", "", "", "", this.selectedClinic, [], true));
         });
 
-        this.clinicianService.addClinician(this.ffqclinician).subscribe(data => {
+      }
+
+      for(let j = 0; j < amount; j++){
+
+        this.clinicianService.addClinician(new_clinicians[j]).subscribe(data => {
           this.router.navigateByUrl('/admin/users');
         },
         error =>{
           const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
           dialogRef.componentInstance.title = error.error.message;
         });
+
       }
 
       const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
