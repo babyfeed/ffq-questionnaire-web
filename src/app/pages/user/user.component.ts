@@ -133,10 +133,9 @@ export class UserComponent implements OnInit {
        if(amount <= 1){
         this.addClinician();
        }else{
-        //this.addMultipleClinicians();
-        for(let i = 0; i < amount; i++){
-          this.addClinician();
-        }
+        console.log("adding multiple clinicians")
+        this.addMultipleClinicians();
+        
        }
         
      }
@@ -149,7 +148,7 @@ export class UserComponent implements OnInit {
      }
   }
 
-  addClinician()
+  async addClinician()
   {
     var clinicianList: Observable<FFQClinicianResponse[]> = this.clinicianService.getAllClinicians();
 
@@ -183,6 +182,8 @@ export class UserComponent implements OnInit {
     var input = <HTMLInputElement>document.getElementById("clinician_quantity");
     var amount : number = parseInt(input.value);
 
+    var new_clinicians = new Array();
+
       for(let i = 0; i < amount; i++){
 
         clinicianList.subscribe(data => {
@@ -190,21 +191,25 @@ export class UserComponent implements OnInit {
           //console.log("Number of clinicians is: " + numberOfClinicians);
           var newClincianId = (data.length+1).toString();
           var newClincianUsername = "clinician"+numberOfClinicians;
-          this.ffqclinician = new FFQClinician(newClincianId, newClincianUsername, newClincianUsername, "clinician", "", "", "", this.selectedClinic, [], true);
-          console.log(this.ffqclinician);
+          new_clinicians.push(new FFQClinician(newClincianId, newClincianUsername, newClincianUsername, "clinician", "", "", "", this.selectedClinic, [], true));
         });
 
       }
 
-      this.clinicianService.addClinician(this.ffqclinician).subscribe(data => {
-        this.router.navigateByUrl('/admin/users');
-        const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-        dialogRef.componentInstance.title = amount + ' new clinicians have been added';
-      },
-      error =>{
-        const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-        dialogRef.componentInstance.title = error.error.message;
-      });
+      for(let j = 0; j < amount; j++){
+
+        this.clinicianService.addClinician(new_clinicians[j]).subscribe(data => {
+          this.router.navigateByUrl('/admin/users');
+        },
+        error =>{
+          const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+          dialogRef.componentInstance.title = error.error.message;
+        });
+
+      }
+
+      const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+      dialogRef.componentInstance.title = amount + ' new clinicians have been added';
   }
 
   addParent()
