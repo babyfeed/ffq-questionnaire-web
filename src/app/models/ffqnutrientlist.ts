@@ -3,7 +3,7 @@ import {FFQItemResponse, FoodType} from './ffqitem-response';
 import {Serving} from './ffqitem-response';
 import { FFQFoodNutrientsResponse } from './ffqfoodnutrients-response';
 
-export class FFQNutrientlist {  
+export class FFQNutrientlist {
   id: string;
   nutrientListID: string;
   nutrientMap: any;
@@ -16,12 +16,12 @@ export class FFQNutrientlist {
 }
 
 export class nutrientMap {
-  
+
   // only includes the 19 main nutrients used for recomendations
   "Retinol (mcg)" : number;
   "Vitamin D (mcg)" : number;
   "Vitamin E (mg)" : number;
-  "Vitamin K (mcg) " : number;
+  "Vitamin K (mcg)" : number;
   "Vitamin C (Ascorbic acid) (mg)" : number;
   "Vitamin B1 (Thiamin) (mg)" : number;
   "Vitamin B2 (Riboflavin) (mg)" : number;
@@ -42,7 +42,7 @@ export class nutrientMap {
     this["Retinol (mcg)"] = 0;
     this["Vitamin D (mcg)"] = 0;
     this["Vitamin E (mg)"] = 0;
-    this["Vitamin K (mcg) "] = 0;
+    this["Vitamin K (mcg)"] = 0;
     this["Vitamin C (Ascorbic acid) (mg)"] = 0;
     this["Vitamin B1 (Thiamin) (mg)"] = 0;
     this["Vitamin B2 (Riboflavin) (mg)"] = 0;
