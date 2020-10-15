@@ -133,7 +133,9 @@ export class UserComponent implements OnInit {
        if(amount <= 1){
         this.addClinician();
        }else{
+        console.log("adding multiple clinicians")
         this.addMultipleClinicians();
+        
        }
         
      }
@@ -180,9 +182,9 @@ export class UserComponent implements OnInit {
     var input = <HTMLInputElement>document.getElementById("clinician_quantity");
     var amount : number = parseInt(input.value);
 
-      for(let i = 0; i < amount; i++){
+    var new_clinicians: FFQClinician[];
 
-        var new_clinicians: FFQClinician[];
+      for(let i = 0; i < amount; i++){
 
         clinicianList.subscribe(data => {
           var numberOfClinicians = (data.length+1).toString();
