@@ -188,8 +188,7 @@ export class UserComponent implements OnInit {
 
         clinicianList.subscribe(data => {
           var numberOfClinicians = (data.length + 1 + i).toString();
-          //console.log("Number of clinicians is: " + numberOfClinicians);
-          var newClincianId = (data.length+1).toString();
+          var newClincianId = (data.length+ 1 + i).toString();
           var newClincianUsername = "clinician"+numberOfClinicians;
           new_clinicians.push(new FFQClinician(newClincianId, newClincianUsername, newClincianUsername, "clinician", "", "", "", this.selectedClinic, [], true));
         });
