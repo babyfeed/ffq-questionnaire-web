@@ -182,7 +182,7 @@ export class UserComponent implements OnInit {
     var input = <HTMLInputElement>document.getElementById("clinician_quantity");
     var amount : number = parseInt(input.value);
 
-    var new_clinicians: FFQClinician[];
+    var new_clinicians = new Array();
 
       for(let i = 0; i < amount; i++){
 
