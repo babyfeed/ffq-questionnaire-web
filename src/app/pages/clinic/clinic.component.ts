@@ -39,6 +39,7 @@ export class ClinicComponent implements OnInit {
   private isUpdate: boolean;
   showMsg: boolean = false;
   name_of_clinic: string;
+  usersLimit: number;
   location: string;
   allClinicians: FFQClinician[] = [];
   resultObjectList: Object[] = [];
@@ -103,14 +104,14 @@ export class ClinicComponent implements OnInit {
 
     clinicList.subscribe(data => {
       var newClinicId = (data.length+1).toString();
-      this.ffqclinic = new FFQClinic(newClinicId, this.location, "", this.name_of_clinic, "", false);
+      this.ffqclinic = new FFQClinic(newClinicId, this.location, "", this.name_of_clinic, "", false, this.usersLimit);
       console.log(this.ffqclinic);
 
       this.clinicService.addClinic(this.ffqclinic).subscribe(data => {
           console.log("data: " + data);
           this.router.navigateByUrl('/admin/clinics');
           const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-          dialogRef.componentInstance.title = newClinicId + ' was added!';
+          dialogRef.componentInstance.title = 'Clinic with id ' +  newClinicId + ' was added!';
       },
       error =>{
           const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
