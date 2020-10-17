@@ -41,6 +41,7 @@ export class UserComponent implements OnInit {
   private isUpdate: boolean;
   private createParents: boolean;
   private createClinician: boolean;
+  private createResearcher: boolean;
   showMsg: boolean = false;
   selectedClinic: string;
 
@@ -73,6 +74,7 @@ export class UserComponent implements OnInit {
 
     this.createParents = false;
     this.createClinician = false;
+    this.createResearcher = false;
     this.isParent = false;
     this.isClinician = false;
     this.clinicNames.push("");
@@ -114,12 +116,21 @@ export class UserComponent implements OnInit {
   {
     this.createClinician = true;
     this.createParents = false;
+    this.createResearcher = false;
   }
 
   changeToParent($event)
   {
     this.createParents = true;
     this.createClinician = false;
+    this.createResearcher = false;
+  }
+
+  changeToResearcher($event)
+  {
+    this.createParents = false;
+    this.createClinician = false;
+    this.createResearcher = true;
   }
 
   private addUser()
