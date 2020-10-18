@@ -86,7 +86,7 @@
               <br>
               <mat-radio-button value="clinician" (change)="changeToClinician($event)" color="primary">Clinician</mat-radio-button>
               <br>
-              <mat-radio-button value="researcher" (change)="changeToResearcher($event)" color="primary">Researcher (WIP)</mat-radio-button>
+              <mat-radio-button value="researcher" (change)="changeToResearcher($event)" color="primary">Researcher</mat-radio-button>
             </mat-radio-group>
           </div>
 
@@ -149,16 +149,27 @@
               <input placeholder="Amount of Parents (1 - 100)" width="25" style="border-color: mediumblue; border-width: 0.05cm" type="text"
                 class="form-control" name="amountToAdd" [(ngModel)]="amountToAdd" required #nameField="ngModel" />-->
               <hr>
-              <label style="font-weight: bold">Select Quantity:</label>
+              <label style="font-weight: bold">Select Quantity of Researchers:</label>
                 <br>
                 <input type="number" id="research_quantity" name="quantity" min="1" value="1" style="margin-bottom: 10px">
                 <br>
-              <label style="font-weight: bold">Choose Clinic to assign to:</label><label style="font-style: italic; font-size: small; margin-left: 10px"> *required </label>
+              <label style="font-weight: bold">Select Quantity of Parents per Researcher:</label>
+                <br>
+                <input type="number" id="research_quantity" name="quantity" min="1" value="1" style="margin-bottom: 10px">
+                <br>
+              <label style="font-weight: bold" for="fname">Prefix for Researcher:</label>
+                <br>
+                <input type="text" id="prefix" name="prefix">
+                <br>
+            
+              <label style="font-weight: bold">Choose Institution to assign to:</label><label style="font-style: italic; font-size: small; margin-left: 10px"> *required </label>
                 <br>
               <mat-form-field>
-                <mat-label appearance="fill">Choose Clinic...</mat-label>
+                <mat-label appearance="fill">Choose Instition...</mat-label>
                 <mat-select matNativeControl required name="assignedclinic" [(ngModel)]="selectedClinic">
-                  <mat-option *ngFor="let c of ffqclinicList" [value]="c.clinicId" >{{ c.clinicname }}</mat-option>
+                  <mat-option value="FIU">Florida International University</mat-option>
+                  <mat-option value="UF">University of Florida</mat-option>
+                  <mat-option value="FSU">Florida State University</mat-option>
                 </mat-select>
               </mat-form-field>
               

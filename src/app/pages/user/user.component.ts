@@ -149,9 +149,13 @@ export class UserComponent implements OnInit {
         console.log("adding multiple clinicians")
         //this.addMultipleClinicians();
         var i = 0;
-        while(i < amount && this.isProcessing == false){
-          this.addClinician();
-          i++;
+        while(i < amount){
+          if(this.isProcessing == false){
+            this.addClinician()
+            i++;
+          }else{
+            amount++;
+          }
         }
        }
         
