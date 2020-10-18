@@ -161,15 +161,17 @@
                 <br>
                 <input type="text" id="prefix" name="prefix">
                 <br>
-            
-              <label style="font-weight: bold">Choose Institution to assign to:</label><label style="font-style: italic; font-size: small; margin-left: 10px"> *required </label>
+              <label style="font-weight: bold" for="fname">Name of site:</label>
+                <br>
+                <input type="text" id="name" name="name">
+                <br>
+              <label style="font-weight: bold">Type of site:</label><label style="font-style: italic; font-size: small; margin-left: 10px"> *required </label>
                 <br>
               <mat-form-field>
-                <mat-label appearance="fill">Choose Instition...</mat-label>
+                <mat-label appearance="fill">Choose type...</mat-label>
                 <mat-select matNativeControl required name="assignedclinic" [(ngModel)]="selectedClinic">
-                  <mat-option value="FIU">Florida International University</mat-option>
-                  <mat-option value="UF">University of Florida</mat-option>
-                  <mat-option value="FSU">Florida State University</mat-option>
+                  <mat-option value="clinic">Clinic</mat-option>
+                  <mat-option value="institution">Research Institution</mat-option>
                 </mat-select>
               </mat-form-field>
               
