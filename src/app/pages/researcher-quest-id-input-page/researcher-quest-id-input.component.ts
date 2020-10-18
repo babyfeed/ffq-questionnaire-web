@@ -10,7 +10,7 @@ import {Observable} from 'rxjs';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 
 @Component({
-  selector: 'quest-id-input',
+  selector: 'research-quest-id-input',
   templateUrl: './researcher-quest-id-input.component.html',
   styleUrls: ['./researcher-quest-id-input.component.css']
 })
@@ -34,7 +34,7 @@ export class ResearchQuestIdInputComponent {
           dialogRef.componentInstance.message = 'Please check the ID and try again or contact the issuer.';
         } else {
           console.log('Valid questionnaire Id supplied: ' + id);
-          const urlString = '/research/parent/questionnaire/' + id;
+          const urlString = '/researcher_parents/questionnaire/' + id;
           this.router.navigateByUrl(urlString);
         }
       } else {
@@ -45,9 +45,9 @@ export class ResearchQuestIdInputComponent {
     }, (error: Error) => this.handleQuestionnaireError(error));
   }
 
-  startQuestionnaire() {
+  startQuestionnaireResearch() {
     const id = this.authenticationService.currentUserId + '-' + Date.now();
-    this.router.navigateByUrl('/research/parent/questionnaire/' + id);
+    this.router.navigateByUrl('/researcher_parents/questionnaire/' + id);
   }
 
   private handleQuestionnaireError(error: Error) {

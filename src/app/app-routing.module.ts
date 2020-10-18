@@ -3,7 +3,6 @@ import { Routes, RouterModule } from "@angular/router";
 import { AppComponent } from "./app.component";
 import { QuestionnairePageComponent } from "./pages/questionnaire-page/questionnaire-page.component";
 import { QuestIdInputComponent } from "./pages/quest-id-input-page/quest-id-input.component";
-import { ResearchQuestIdInputComponent } from "./pages/researcher-quest-id-input-page/researcher-quest-id-input.component"
 import { AdminPageComponent } from "./pages/admin-page/admin-page.component";
 import { ResearchPageComponent } from "./pages/research-page/research-page.component";
 import { ResearchUsersComponent } from "./pages/research-users/research-users.component";
@@ -31,6 +30,8 @@ import { BrowserModule } from "@angular/platform-browser";
 import { HttpClientModule } from "@angular/common/http";
 import { LogoutComponent } from "./pages/logout/logout.component";
 import { ClinicTrackerHistoryComponent } from "./pages/clinic-tracker-history/clinic-tracker-history.component";
+import { ResearchQuestIdInputComponent } from "./pages/researcher-quest-id-input-page/researcher-quest-id-input.component"
+
 
 const routes: Routes = [
   {
@@ -144,11 +145,10 @@ const routes: Routes = [
     component: QuestIdInputComponent,
     canActivate: [AuthGuard],
   },
-  
   {
     path: "parent/questionnaire/:id",
     component: QuestionnairePageComponent,
-  
+    canActivate: [AuthGuard],
   },
   {
     path: "parent/tracker",
@@ -173,7 +173,7 @@ const routes: Routes = [
   {
     path: "researcher/home",
     component: ResearchPageComponent,
-   
+    canActivate: [AuthGuard],
   },
   {
     path: "researcher/users",
@@ -181,15 +181,15 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: "research/parent/home",
+    path: "researcher_parents/home",
     component: ResearchQuestIdInputComponent,
-  
-  },  
+    canActivate: [AuthGuard],
+  },
   {
-    path: "research/parent/questionnaire/:id",
+    path: "researcher_parents/questionnaire/:id",
     component: QuestionnairePageComponent,
     canActivate: [AuthGuard],
-  }
+  },
 ];
 
 @NgModule({
