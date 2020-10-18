@@ -169,12 +169,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: "research/home",
+    path: "researcher/home",
     component: ResearchPageComponent,
     canActivate: [AuthGuard],
   },
   {
-    path: "research/users",
+    path: "researcher/users",
     component: ResearchUsersComponent,
     canActivate: [AuthGuard],
   },
