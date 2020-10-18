@@ -274,14 +274,14 @@ export class UserComponent implements OnInit {
           var numberOfParents = (data.length + 1 + i).toString();
           var newParentId = (data.length+ 1 + i).toString();
           var newParentUsername = "parent"+numberOfParents;
-          new_parents.push(new FFQClinician(newParentId, newParentUsername, newParentUsername, "parent", "", "", "", this.selectedClinic, [], true));
+          new_parents.push(new FFQParent(newParentId, newParentUsername, newParentUsername, "parent", "", "", "", this.selectedClinic, [], true));
         });
 
       }
 
       for(let j = 0; j < amount; j++){
 
-        this.clinicianService.addClinician(new_parents[j]).subscribe(data => {
+        this.parentService.addParent(new_parents[j]).subscribe(data => {
           this.router.navigateByUrl('/admin/users');
         },
         error =>{
