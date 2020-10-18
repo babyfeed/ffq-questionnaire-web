@@ -64,6 +64,7 @@ export class UserComponent implements OnInit {
   amountToAdd: number;
   isParent: boolean;
   isClinician: boolean;
+  isProcessing: boolean;
 
   public ffqclinicList: FFQClinic[] = [];
   clinicNames: string[] = [];
@@ -72,6 +73,7 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
 
+    this.isProcessing = false;
     this.createParents = false;
     this.createClinician = false;
     this.createResearcher = false;
@@ -145,8 +147,12 @@ export class UserComponent implements OnInit {
         this.addClinician();
        }else{
         console.log("adding multiple clinicians")
-        this.addMultipleClinicians();
-        
+        //this.addMultipleClinicians();
+        var i = 0;
+        while(i < amount && this.isProcessing == false){
+          this.addClinician();
+          i++;
+        }
        }
         
      }
@@ -170,8 +176,9 @@ export class UserComponent implements OnInit {
       }
   }
 
-  async addClinician()
+  addClinician()
   {
+    this.isProcessing = true;
     var clinicianList: Observable<FFQClinicianResponse[]> = this.clinicianService.getAllClinicians();
 
       clinicianList.subscribe(data => {
@@ -193,6 +200,7 @@ export class UserComponent implements OnInit {
         });
 
       });
+      this.isProcessing = false;
   }
 
   addMultipleClinicians()
