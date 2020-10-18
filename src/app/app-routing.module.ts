@@ -3,6 +3,7 @@ import { Routes, RouterModule } from "@angular/router";
 import { AppComponent } from "./app.component";
 import { QuestionnairePageComponent } from "./pages/questionnaire-page/questionnaire-page.component";
 import { QuestIdInputComponent } from "./pages/quest-id-input-page/quest-id-input.component";
+import { ResearchQuestIdInputComponent } from "./pages/researcher-quest-id-input-page/researcher-quest-id-input.component"
 import { AdminPageComponent } from "./pages/admin-page/admin-page.component";
 import { ResearchPageComponent } from "./pages/research-page/research-page.component";
 import { ResearchUsersComponent } from "./pages/research-users/research-users.component";
@@ -143,10 +144,11 @@ const routes: Routes = [
     component: QuestIdInputComponent,
     canActivate: [AuthGuard],
   },
+  
   {
     path: "parent/questionnaire/:id",
     component: QuestionnairePageComponent,
-    canActivate: [AuthGuard],
+  
   },
   {
     path: "parent/tracker",
@@ -171,13 +173,23 @@ const routes: Routes = [
   {
     path: "research/home",
     component: ResearchPageComponent,
-    canActivate: [AuthGuard],
+   
   },
   {
     path: "research/users",
     component: ResearchUsersComponent,
     canActivate: [AuthGuard],
   },
+  {
+    path: "research/parent/home",
+    component: ResearchQuestIdInputComponent,
+  
+  },  
+  {
+    path: "research/parent/questionnaire/:id",
+    component: QuestionnairePageComponent,
+    canActivate: [AuthGuard],
+  }
 ];
 
 @NgModule({
