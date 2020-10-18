@@ -28,6 +28,7 @@ import { FoodRecommendModalComponent } from "./components/food-recommend-modal/f
 import { ClinicalPortalComponent } from "./pages/clinical-portal/clinical-portal.component";
 import { ClinicalHeaderComponent } from "./pages/clinical-header/clinical-header.component";
 import { ParentalHeaderComponent } from "./pages/parental-header/parental-header.component";
+import { ResearchParentalHeaderComponent } from "./pages/research-parental-header/research-parental-header.component";
 import { LoginPageComponent } from "./pages/login-page/login-page.component";
 // import { JwtInterceptor } from './services/authentication/jwt.interceptor';
 // import { fakeBackendProvider } from './services/authentication/temp-backend';
@@ -72,6 +73,8 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatListModule } from "@angular/material/list";
 import { ResearchPageComponent } from "./pages/research-page/research-page.component";
 import { ResearchUsersComponent } from './pages/research-users/research-users.component';
+import { ResearchQuestIdInputComponent } from "./pages/researcher-quest-id-input-page/researcher-quest-id-input.component"
+
 
 @NgModule({
   declarations: [
@@ -88,6 +91,7 @@ import { ResearchUsersComponent } from './pages/research-users/research-users.co
     ResearchHeaderComponent,
     ResearchUsersComponent,
     ResearchPageComponent,
+    ResearchQuestIdInputComponent,
     QuestResultsComponent,
     RecommendComponent,
     PopupComponent,
@@ -96,6 +100,7 @@ import { ResearchUsersComponent } from './pages/research-users/research-users.co
     ClinicalPortalComponent,
     ClinicalHeaderComponent,
     ParentalHeaderComponent,
+    ResearchParentalHeaderComponent,
     LoginPageComponent,
     RecommendParentalComponent,
     TrackerPageComponent,

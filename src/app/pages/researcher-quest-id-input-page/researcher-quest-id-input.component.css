@@ -1,0 +1,26 @@
+.quest-id-container {
+  display: flex;
+  justify-content: center;
+  /* padding-top: 10%; */
+  padding-top: 200px;
+}
+.quest-id-card {
+  width: 60%;
+  display: inline-flex;
+  justify-content: center;
+  align-content: center;
+  padding: 50px;
+  height: 200px;
+}
+.quest-id-input {
+  padding-right: 30px;
+}
+.quest-id-button {
+  padding-left: 30px;
+}
+.quest-id-span {
+  display: inline-flex;
+}
+.quest-id-textfield {
+  font-size: large;
+}

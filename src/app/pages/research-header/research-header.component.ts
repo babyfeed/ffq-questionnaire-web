@@ -1,10 +1,3 @@
-/*
-
-  Added by Version 2.0 group, edited by Javier Romero
-  This serves as the header for the admin portal. All pages in the admin portal have this as their header.
-  Khalid Alamoudi: Added Authentication service components.
-  
-*/
 
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -12,7 +5,7 @@ import { User } from 'src/app/models/user';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 
 @Component({
-  selector: 'research-header',
+  selector: 'app-research-header',
   templateUrl: './research-header.component.html',
   styleUrls: ['./research-header.component.css']
 })
