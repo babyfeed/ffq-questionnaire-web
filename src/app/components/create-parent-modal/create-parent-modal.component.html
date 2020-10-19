@@ -1,0 +1,23 @@
+<div class="modal-header">
+  <h4 class="modal-title">Create parent(s)</h4>
+</div>
+<div class="modal-body">
+
+  <div>Maximun number of parents assigned: 1000</div>
+  <div>Remaining number of parents: 997</div>
+
+  <div>
+    <label for="numberOfParents">Number of parents</label>
+    <div><input type="text"></div>
+
+  </div>
+  <div>
+    <label for="parentsPrefix">Parent's prefix</label>
+    <div><input type="text"></div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-secondary" type="button" (click)="onDismiss('Close click')">Cancel</button>
+  <button class="btn btn-success" type="button" (click)="onDismiss('Close click')">Auto Create Parents</button>
+</div>
+
