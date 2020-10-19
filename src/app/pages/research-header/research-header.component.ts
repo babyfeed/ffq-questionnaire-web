@@ -10,7 +10,6 @@ import { AuthenticationService } from 'src/app/services/authentication/authentic
   styleUrls: ['./research-header.component.css']
 })
 export class ResearchHeaderComponent {
-  
   currentUser: User;
 
   constructor(private router: Router, private authenticationService: AuthenticationService) {
