@@ -35,6 +35,7 @@ export class ClinicalPortalComponent implements OnInit  {
 
   public showClinicians: boolean;
   public showParents: boolean;
+  public showClinics: boolean;
   private hideUnassignedParents: boolean;
   private hideUnassignedClinicians: boolean;
   p_search: string;
@@ -64,6 +65,7 @@ export class ClinicalPortalComponent implements OnInit  {
   private clinicId: string;
   private clinicianList: FFQClinician[] = [];
   private parentList: FFQParent[] = [];
+  private clinicList: FFQClinic[] = [];
   private numberOfPatientz: number[] = [];
   private numberOfChildren: number[] = [];
   public currentClinicName: string;
@@ -73,6 +75,7 @@ export class ClinicalPortalComponent implements OnInit  {
   ngOnInit() {
 
     this.showClinicians = true;
+    this.showClinics = true;
     this.showParents = true;
     this.hideUnassignedParents = false;
     this.hideUnassignedClinicians = false;
@@ -85,6 +88,11 @@ export class ClinicalPortalComponent implements OnInit  {
   toggleClinicians($event)
   {
     this.showClinicians = !this.showClinicians;
+  }
+
+  toggleClinics($event)
+  {
+    this.showClinics = !this.showClinics;
   }
 
   toggleParents($event)
@@ -158,6 +166,7 @@ export class ClinicalPortalComponent implements OnInit  {
 
         this.getNumberOfPatients();
         this.getClinicianNames();
+        this.getClinics();
         });
       });
 
@@ -201,5 +210,24 @@ export class ClinicalPortalComponent implements OnInit  {
       }
     });
   }
+
+  private getClinics(){
+
+    var clinicListObervable: Observable<FFQClinicResponse[]> = this.clinicService.getAllClinics();
+    const loggedInUser = this.authenticationService.currentUserValue;
+    var clinicId: string;
+
+    clinicListObervable.subscribe(clinicList => {
+      clinicList.forEach(clinic => {
+        if(clinic.clinicId == this.clinicId) {
+          this.clinicList.push(clinic)
+        }
+        
+      })
+
+    });
+
+  }
+
 }
 
