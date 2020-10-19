@@ -72,6 +72,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatListModule } from "@angular/material/list";
 import { ResearchPageComponent } from "./pages/research-page/research-page.component";
 import { ResearchUsersComponent } from './pages/research-users/research-users.component';
+import { ResearchHistoryComponent } from "./pages/research-history/research-history.component";
 
 @NgModule({
   declarations: [
@@ -147,7 +148,6 @@ import { ResearchUsersComponent } from './pages/research-users/research-users.co
     MatProgressBarModule,
     DragDropModule,
   ],
-
   bootstrap: [AppComponent],
   entryComponents: [
     ErrorDialogPopupComponent,

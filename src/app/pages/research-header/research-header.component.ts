@@ -17,8 +17,9 @@ import { AuthenticationService } from 'src/app/services/authentication/authentic
   styleUrls: ['./research-header.component.css']
 })
 export class ResearchHeaderComponent {
-  
+  TITLE = 'Research Portal';
   currentUser: User;
+  router: Router;
 
   constructor(private router: Router, private authenticationService: AuthenticationService) {
       this.authenticationService.currentUser.subscribe(x => this.currentUser = x);

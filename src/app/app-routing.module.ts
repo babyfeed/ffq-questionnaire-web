@@ -6,6 +6,7 @@ import { QuestIdInputComponent } from "./pages/quest-id-input-page/quest-id-inpu
 import { AdminPageComponent } from "./pages/admin-page/admin-page.component";
 import { ResearchPageComponent } from "./pages/research-page/research-page.component";
 import { ResearchUsersComponent } from "./pages/research-users/research-users.component";
+import { ResearchHistoryComponent } from "./pages/research-history/research-history.component";
 import { FooditemComponent } from "./pages/fooditem/fooditem.component";
 import { QuestResultsComponent } from "./pages/quest-results/quest-results.component";
 import { RecommendComponent } from "./pages/recommend/recommend.component";
@@ -176,6 +177,11 @@ const routes: Routes = [
   {
     path: "research/users",
     component: ResearchUsersComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "research/history",
+    component: ResearchHistoryComponent,
     canActivate: [AuthGuard],
   },
 ];
