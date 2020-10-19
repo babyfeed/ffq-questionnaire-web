@@ -219,7 +219,10 @@ export class ClinicalPortalComponent implements OnInit  {
 
     clinicListObervable.subscribe(clinicList => {
       clinicList.forEach(clinic => {
-        this.clinicList.push(clinic)
+        if(clinic.clinicId == this.clinicId) {
+          this.clinicList.push(clinic)
+        }
+        
       })
 
     });
