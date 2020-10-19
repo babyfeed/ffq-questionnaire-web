@@ -76,6 +76,7 @@ import { ResearchUsersComponent } from './pages/research-users/research-users.co
 import { ResearchQuestIdInputComponent } from "./pages/researcher-quest-id-input-page/researcher-quest-id-input.component"
 import { CreateParentModalComponent } from './components/create-parent-modal/create-parent-modal.component';
 
+import { ResearchHistoryComponent } from "./pages/research-history/research-history.component";
 
 @NgModule({
   declarations: [
@@ -93,6 +94,7 @@ import { CreateParentModalComponent } from './components/create-parent-modal/cre
     ResearchUsersComponent,
     ResearchPageComponent,
     ResearchQuestIdInputComponent,
+    ResearchHistoryComponent,
     QuestResultsComponent,
     RecommendComponent,
     PopupComponent,
@@ -154,7 +156,6 @@ import { CreateParentModalComponent } from './components/create-parent-modal/cre
     MatProgressBarModule,
     DragDropModule,
   ],
-
   bootstrap: [AppComponent],
   entryComponents: [
     ErrorDialogPopupComponent,
