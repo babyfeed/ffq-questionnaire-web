@@ -5,7 +5,7 @@ import { User } from 'src/app/models/user';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 
 @Component({
-  selector: 'app-research-header',
+  selector: 'research-header',
   templateUrl: './research-header.component.html',
   styleUrls: ['./research-header.component.css']
 })

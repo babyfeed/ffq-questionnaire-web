@@ -172,17 +172,17 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: "researcher/home",
+    path: "research/home",
     component: ResearchPageComponent,
     canActivate: [AuthGuard],
   },
   {
-    path: "researcher/users",
+    path: "research/users",
     component: ResearchUsersComponent,
     canActivate: [AuthGuard],
   },  
   {
-    path: "researcher/history",
+    path: "research/history",
     component: ResearchHistoryComponent,
     canActivate: [AuthGuard],
   },
