@@ -74,7 +74,9 @@ import { MatListModule } from "@angular/material/list";
 import { ResearchPageComponent } from "./pages/research-page/research-page.component";
 import { ResearchUsersComponent } from './pages/research-users/research-users.component';
 import { ResearchQuestIdInputComponent } from "./pages/researcher-quest-id-input-page/researcher-quest-id-input.component"
+import { CreateParentModalComponent } from './components/create-parent-modal/create-parent-modal.component';
 
+import { ResearchHistoryComponent } from "./pages/research-history/research-history.component";
 
 @NgModule({
   declarations: [
@@ -92,6 +94,7 @@ import { ResearchQuestIdInputComponent } from "./pages/researcher-quest-id-input
     ResearchUsersComponent,
     ResearchPageComponent,
     ResearchQuestIdInputComponent,
+    ResearchHistoryComponent,
     QuestResultsComponent,
     RecommendComponent,
     PopupComponent,
@@ -127,6 +130,7 @@ import { ResearchQuestIdInputComponent } from "./pages/researcher-quest-id-input
     TrackerFilterPipe,
     RecommendedFilterPipe,
     LoaderComponent,
+    CreateParentModalComponent
   ],
   imports: [
     BrowserModule,
@@ -152,7 +156,6 @@ import { ResearchQuestIdInputComponent } from "./pages/researcher-quest-id-input
     MatProgressBarModule,
     DragDropModule,
   ],
-
   bootstrap: [AppComponent],
   entryComponents: [
     ErrorDialogPopupComponent,
@@ -161,6 +164,7 @@ import { ResearchQuestIdInputComponent } from "./pages/researcher-quest-id-input
     RecommendModalComponent,
     FoodRecommendModalComponent,
     DeletePopupComponent,
+    CreateParentModalComponent
   ],
   providers: [
     {

@@ -41,6 +41,7 @@ export class UserComponent implements OnInit {
   private isUpdate: boolean;
   private createParents: boolean;
   private createClinician: boolean;
+  private createResearcher: boolean;
   showMsg: boolean = false;
   selectedClinic: string;
 
@@ -63,6 +64,7 @@ export class UserComponent implements OnInit {
   amountToAdd: number;
   isParent: boolean;
   isClinician: boolean;
+  isProcessing: boolean;
 
   public ffqclinicList: FFQClinic[] = [];
   clinicNames: string[] = [];
@@ -71,8 +73,10 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
 
+    this.isProcessing = false;
     this.createParents = false;
     this.createClinician = false;
+    this.createResearcher = false;
     this.isParent = false;
     this.isClinician = false;
     this.clinicNames.push("");
@@ -114,12 +118,21 @@ export class UserComponent implements OnInit {
   {
     this.createClinician = true;
     this.createParents = false;
+    this.createResearcher = false;
   }
 
   changeToParent($event)
   {
     this.createParents = true;
     this.createClinician = false;
+    this.createResearcher = false;
+  }
+
+  changeToResearcher($event)
+  {
+    this.createParents = false;
+    this.createClinician = false;
+    this.createResearcher = true;
   }
 
   private addUser()
@@ -134,22 +147,42 @@ export class UserComponent implements OnInit {
         this.addClinician();
        }else{
         console.log("adding multiple clinicians")
-        this.addMultipleClinicians();
-        
+        //this.addMultipleClinicians();
+        var i = 0;
+        while(i < amount){
+          if(this.isProcessing == false){
+            this.addClinician()
+            i++;
+          }else{
+            amount++;
+          }
+        }
        }
         
      }
-     else
+     else if(this.createParents == true)
      {
-        //for(var count: number = 1; count <= this.amountToAdd; count++)
-        //{
-          this.addParent();
-        //}
-     }
+       if(amount <= 1){
+        this.addParent();
+       }else{
+        console.log("adding multiple clinicians")
+        //this.addMultipleParents();
+       }
+      }
+      else
+      {
+        if(amount <= 1){
+          //this.addResearcher();
+         }else{
+          console.log("adding multiple clinicians")
+          //this.addMultipleResearchers();
+         }
+      }
   }
 
-  async addClinician()
+  addClinician()
   {
+    this.isProcessing = true;
     var clinicianList: Observable<FFQClinicianResponse[]> = this.clinicianService.getAllClinicians();
 
       clinicianList.subscribe(data => {
@@ -171,6 +204,7 @@ export class UserComponent implements OnInit {
         });
 
       });
+      this.isProcessing = false;
   }
 
   addMultipleClinicians()
@@ -233,6 +267,44 @@ export class UserComponent implements OnInit {
         });
 
       });
+  }
+
+  addMultipleParents()
+  {
+    //Still work in progress
+
+    var parentList: Observable<FFQParentResponse[]> = this.parentService.getAllParents();
+
+    var input = <HTMLInputElement>document.getElementById("parent_quantity");
+    var amount : number = parseInt(input.value);
+
+    var new_parents = new Array();
+
+      for(let i = 0; i < amount; i++){
+
+        parentList.subscribe(data => {
+          var numberOfParents = (data.length + 1 + i).toString();
+          var newParentId = (data.length+ 1 + i).toString();
+          var newParentUsername = "parent"+numberOfParents;
+          new_parents.push(new FFQParent(newParentId, newParentUsername, newParentUsername, "parent", "", "", "", this.selectedClinic, [], true));
+        });
+
+      }
+
+      for(let j = 0; j < amount; j++){
+
+        this.parentService.addParent(new_parents[j]).subscribe(data => {
+          this.router.navigateByUrl('/admin/users');
+        },
+        error =>{
+          const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+          dialogRef.componentInstance.title = error.error.message;
+        });
+
+      }
+
+      const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+      dialogRef.componentInstance.title = amount + ' new parents have been added';
   }
 
   getParentByID(id: string)
