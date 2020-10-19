@@ -89,6 +89,7 @@ import { ResearchHistoryComponent } from "./pages/research-history/research-hist
     ResearchHeaderComponent,
     ResearchUsersComponent,
     ResearchPageComponent,
+    ResearchHistoryComponent,
     QuestResultsComponent,
     RecommendComponent,
     PopupComponent,
