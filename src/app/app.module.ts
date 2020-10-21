@@ -72,6 +72,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatListModule } from "@angular/material/list";
 import { ResearchPageComponent } from "./pages/research-page/research-page.component";
 import { ResearchUsersComponent } from './pages/research-users/research-users.component';
+import { ResultRoundPipe } from './pipes/result-round.pipe';
 
 @NgModule({
   declarations: [
@@ -122,6 +123,7 @@ import { ResearchUsersComponent } from './pages/research-users/research-users.co
     TrackerFilterPipe,
     RecommendedFilterPipe,
     LoaderComponent,
+    ResultRoundPipe,
   ],
   imports: [
     BrowserModule,
