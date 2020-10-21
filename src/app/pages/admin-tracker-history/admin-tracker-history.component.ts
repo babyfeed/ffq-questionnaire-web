@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TrackerResultsResponse } from 'src/app/models/trackerResultsResponse';
+import { TrackerResultsResponse } from 'src/app/models/trackerresultsresponse';
 import { TrackerResultsService } from 'src/app/services/tracker-results/tracker-results.service';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { TrackerItems } from 'src/app/models/trackeritems';
