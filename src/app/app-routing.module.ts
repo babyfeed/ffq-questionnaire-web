@@ -30,6 +30,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { HttpClientModule } from "@angular/common/http";
 import { LogoutComponent } from "./pages/logout/logout.component";
 import { ClinicTrackerHistoryComponent } from "./pages/clinic-tracker-history/clinic-tracker-history.component";
+import { AdminTrackerHistoryComponent } from "./pages/admin-tracker-history/admin-tracker-history.component";
 
 const routes: Routes = [
   {
@@ -107,6 +108,9 @@ const routes: Routes = [
     path: "admin/clinic/:id",
     component: ClinicComponent,
     canActivate: [AuthGuard],
+  },
+  {
+    path: "admin/tracker-history", component: AdminTrackerHistoryComponent, canActivate: [AuthGuard]
   },
   {
     path: "clinic/results",
