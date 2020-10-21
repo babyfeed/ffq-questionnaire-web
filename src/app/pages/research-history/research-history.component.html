@@ -1,12 +1,39 @@
 <research-header></research-header>
 
 <div class="container_page">
+
     <div>
         <div class="container">
+            <table class="table table-sm table-hover table-bordered">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Date</th>
+                        <th scope="col">Participant ID</th>
+                        <th scope="col">Questionnaire ID</th>
+                        <th scope="col">Infant Age</th>
+                        <th scope="col">Infant Gender</th>
+                        <th scope="col">Nutrients</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td scope="row">10/20/2020</td>
+                        <td>3</td>
+                        <td>1-313253241</td>
+                        <td>9 Months</td>
+                        <td>Male</td>
+                        <td><a><i title="nutrients" class="fa fa-flask"></i></a></td>
+                    </tr>
+                </tbody>
+            </table>
+
             <mat-card class="quest-id-card">
                 <mat-card-content>
                     <!--Labels for questionnaire results-->
                     <div class="row">
+                        <div class="col-2" style="text-align:center">
+                            <label><strong>Date</strong></label>
+                        </div>
                         <div class="col-2" style="text-align:center">
                             <label><strong>Questionnaire ID</strong></label>
                         </div>
@@ -26,6 +53,9 @@
 
                     <!--Questionnaire results-->
                     <div class="row">
+                        <div class="col-2" style="text-align:center">
+                            result.date
+                        </div>
                         <div class="col-2" style="text-align:center">
                             result.questionnaireId
                         </div>
