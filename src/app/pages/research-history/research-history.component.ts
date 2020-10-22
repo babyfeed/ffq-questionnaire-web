@@ -11,17 +11,16 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { MatDialog } from "@angular/material/dialog";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { FoodItemService } from "../../services/food-item/food-item.service";
-import { HttpErrorResponse } from "@angular/common/http";
-import { ErrorDialogPopupComponent } from "src/app/components/error-dialog-popup/error-dialog-popup.component";
-import { FFQFoodNutrientsResponse } from "src/app/models/ffqfoodnutrients-response";
-import { PopupComponent } from "src/app/components/popup/popup.component";
-import { FlashMessagesService } from "angular2-flash-messages";
-import { FFQFoodItemResponse } from "src/app/models/ffqfooditem-response";
-import { moveItemInArray } from "@angular/cdk/drag-drop";
-import { CdkDragDrop } from "@angular/cdk/drag-drop";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { environment } from "src/environments/environment";
+
+// For getting results
+import { ResultsService } from "src/app/services/results/results";
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import { NutrientsRecommendationsService } from 'src/app/services/nutrients-recommendations/nutrients-recommendations.service';
+import { FFQResultsResponse } from 'src/app/models/ffqresultsresponse';
+import { NutrientConstants } from 'src/app/models/NutrientConstants';
+import { Observable } from 'rxjs';
+
 
 @Component({
   selector: "research-history",
@@ -29,28 +28,57 @@ import { environment } from "src/environments/environment";
   styleUrls: ["./research-history.component.css"],
 })
 export class ResearchHistoryComponent implements OnInit {
-  // TITLE = "FFQR Research Portal";
 
-  endpoint = environment.foodServiceUrl + "/ffq";
+  public show: boolean = false;
+
+  MESSAGE = "No questionnaires have been submitted yet!";
+
+  results: FFQResultsResponse[] = [];
 
   constructor(
-    public foodService: FoodItemService,
-    private activatedRoute: ActivatedRoute,
     private errorDialog: MatDialog,
-    private submissionErrorDialog: MatDialog,
-    private httpErrorDialog: MatDialog,
-    private successDialog: MatDialog,
     private router: Router,
     private modalService: NgbModal,
-    private flashMessage: FlashMessagesService,
-    private http: HttpClient
+    private http: HttpClient,
+    private authenticationService: AuthenticationService,
+    public resultsService: ResultsService
+
   ) {}
 
 
 
   ngOnInit() {
-    
+    this.getResultsByUser(this.authenticationService.currentUserId);
   }
 
+
+  private getResultsByUser(userId: string) {
+    const oldList: Observable<FFQResultsResponse[]> = this.resultsService.getResultsByUser(userId);
+    const reqList: string[] = NutrientConstants.NUTRIENT_NAMES;
+
+    oldList.subscribe(m => {
+
+      m.forEach(element => {
+       const newWeeklyMap = new Map<string, number>();
+       const newDailyMap = new Map<string, number>();
+
+       const weeklyMap = element.weeklyTotals;
+       const dailyMap = element.dailyAverages;
+
+       reqList.forEach(a =>  {
+           newWeeklyMap.set(a, weeklyMap[a]);
+           newDailyMap.set(a, dailyMap[a]);
+       })
+
+       element.weeklyTotals = newWeeklyMap;
+       element.dailyAverages = newDailyMap;
+       })
+
+       console.log(m);
+       this.results = m.reverse();
+    }
+
+   )
+  }
  
 }
