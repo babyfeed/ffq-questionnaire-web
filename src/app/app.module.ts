@@ -125,9 +125,8 @@ import { ResultRoundPipe } from './pipes/result-round.pipe';
     TrackerFilterPipe,
     RecommendedFilterPipe,
     LoaderComponent,
-    AdminTrackerHistoryComponent
+    AdminTrackerHistoryComponent,
     ResultRoundPipe,
-
   ],
   imports: [
     BrowserModule,
