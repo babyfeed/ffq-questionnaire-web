@@ -73,6 +73,8 @@ import { MatListModule } from "@angular/material/list";
 import { ResearchPageComponent } from "./pages/research-page/research-page.component";
 import { ResearchUsersComponent } from './pages/research-users/research-users.component';
 import { AdminTrackerHistoryComponent } from './pages/admin-tracker-history/admin-tracker-history.component';
+import { ResultRoundPipe } from './pipes/result-round.pipe';
+
 
 @NgModule({
   declarations: [
@@ -124,6 +126,7 @@ import { AdminTrackerHistoryComponent } from './pages/admin-tracker-history/admi
     RecommendedFilterPipe,
     LoaderComponent,
     AdminTrackerHistoryComponent
+    ResultRoundPipe,
   ],
   imports: [
     BrowserModule,
