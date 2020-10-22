@@ -29,7 +29,7 @@ import { environment } from "src/environments/environment";
   styleUrls: ["./research-history.component.css"],
 })
 export class ResearchHistoryComponent implements OnInit {
-  TITLE = "FFQR Research Portal";
+  // TITLE = "FFQR Research Portal";
 
   endpoint = environment.foodServiceUrl + "/ffq";
 
