@@ -72,7 +72,11 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatListModule } from "@angular/material/list";
 import { ResearchPageComponent } from "./pages/research-page/research-page.component";
 import { ResearchUsersComponent } from './pages/research-users/research-users.component';
+<<<<<<< HEAD
 import { AdminTrackerHistoryComponent } from './pages/admin-tracker-history/admin-tracker-history.component';
+=======
+import { ResultRoundPipe } from './pipes/result-round.pipe';
+>>>>>>> 3edbc1a1a0a5ee2470ad9793ea04fc5656aa13dd
 
 @NgModule({
   declarations: [
@@ -123,7 +127,11 @@ import { AdminTrackerHistoryComponent } from './pages/admin-tracker-history/admi
     TrackerFilterPipe,
     RecommendedFilterPipe,
     LoaderComponent,
+<<<<<<< HEAD
     AdminTrackerHistoryComponent
+=======
+    ResultRoundPipe,
+>>>>>>> 3edbc1a1a0a5ee2470ad9793ea04fc5656aa13dd
   ],
   imports: [
     BrowserModule,
