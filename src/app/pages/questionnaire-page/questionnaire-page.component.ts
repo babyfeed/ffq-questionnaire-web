@@ -73,6 +73,12 @@ export class QuestionnairePageComponent implements OnInit {
     this.submitting = true;
 
     let pageHasErrors = false;
+
+    if(!this.gender)
+    {
+      pageHasErrors = true;
+    }
+
     for (const foodItem of this.foodItems) {
       if (this.hideSecondaryItems && !foodItem.isPrimary) {
         foodItem.disabled = true;

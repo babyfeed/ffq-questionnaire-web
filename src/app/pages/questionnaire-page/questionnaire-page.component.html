@@ -27,7 +27,7 @@
               <input type="radio" value="female" [(ngModel)]="gender" name="gender" required>
               Female
           </label>
-            <mat-error *ngIf="">
+            <mat-error *ngIf="!gender">
                 Gender is required.
             </mat-error>
         </mat-card>
