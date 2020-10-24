@@ -1,7 +1,11 @@
 <research-header></research-header>
 
 <div class="container_page">
-
+    <div class="container" *ngIf="results.length === 0">
+        <mat-card class="quest-id-card">
+            <h2 matDialogTitle>{{MESSAGE}}</h2>
+        </mat-card>
+    </div>
     <div *ngFor="let result of results; let i = index">
         <div class="container">
             <mat-card class="quest-id-card">
