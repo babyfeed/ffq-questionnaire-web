@@ -2,9 +2,8 @@
 
 <div class="container_page">
 
-    <div>
+    <div *ngFor="let result of results; let i = index">
         <div class="container">
-
             <mat-card class="quest-id-card">
                 <mat-card-content>
                     <!--Labels for questionnaire results-->
@@ -32,19 +31,19 @@
                     <!--Questionnaire results-->
                     <div class="row">
                         <div class="col-2" style="text-align:center">
-                            result.date
+                            {{result.date}}
                         </div>
                         <div class="col-2" style="text-align:center">
-                            result.questionnaireId
+                            {{result.questionnaireId}}
                         </div>
                         <div class="col-2" style="text-align:center">
-                            result.patientName
+                            {{rsult.participantId}}
                         </div>
                         <div class="col-2" style="text-align:center">
-                            result.ageInMonths
+                            {{result.ageInMonths}}
                         </div>
                         <div class="col-2" style="text-align:center">
-                            result.gender
+                            {{result.gender}}
                         </div>
                         <div class="col-2" style="text-align:center; cursor:pointer">
                             <a><i title="nutrients" class="fa fa-flask"></i></a>

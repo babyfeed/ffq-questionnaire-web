@@ -14,10 +14,10 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 // For getting results
-import { ResultsService } from "src/app/services/results/results";
+import { ResearchResultsService } from "src/app/services/researcher-results/researcher-results";
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { NutrientsRecommendationsService } from 'src/app/services/nutrients-recommendations/nutrients-recommendations.service';
-import { FFQResultsResponse } from 'src/app/models/ffqresultsresponse';
+import { FFQResearchResultsResponse } from 'src/app/models/ffqresearchresultsresponse';
 import { NutrientConstants } from 'src/app/models/NutrientConstants';
 import { Observable } from 'rxjs';
 
@@ -33,7 +33,7 @@ export class ResearchHistoryComponent implements OnInit {
 
   MESSAGE = "No questionnaires have been submitted yet!";
 
-  results: FFQResultsResponse[] = [];
+  results: FFQResearchResultsResponse[] = [];
 
   constructor(
     private errorDialog: MatDialog,
@@ -41,7 +41,7 @@ export class ResearchHistoryComponent implements OnInit {
     private modalService: NgbModal,
     private http: HttpClient,
     private authenticationService: AuthenticationService,
-    public resultsService: ResultsService
+    public resultsService: ResearchResultsService
 
   ) {}
 
@@ -53,7 +53,7 @@ export class ResearchHistoryComponent implements OnInit {
 
 
   private getResultsByUser(userId: string) {
-    const oldList: Observable<FFQResultsResponse[]> = this.resultsService.getResultsByUser(userId);
+    const oldList: Observable<FFQResearchResultsResponse[]> = this.resultsService.getResultsByUser(userId);
     const reqList: string[] = NutrientConstants.NUTRIENT_NAMES;
 
     oldList.subscribe(m => {
