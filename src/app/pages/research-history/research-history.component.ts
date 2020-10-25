@@ -20,6 +20,9 @@ import { NutrientsRecommendationsService } from 'src/app/services/nutrients-reco
 import { FFQResearchResultsResponse } from 'src/app/models/ffqresearchresultsresponse';
 import { NutrientConstants } from 'src/app/models/NutrientConstants';
 import { Observable } from 'rxjs';
+import { FoodRecommendationsService } from 'src/app/services/food-recommendation-service/food-recommendations.service';
+import { ErrorDialogPopupComponent } from 'src/app/components/error-dialog-popup/error-dialog-popup.component';
+import { FoodRecommendModalComponent } from 'src/app/components/food-recommend-modal/food-recommend-modal.component';
 
 
 @Component({
@@ -30,6 +33,7 @@ import { Observable } from 'rxjs';
 export class ResearchHistoryComponent implements OnInit {
 
   public show: boolean = false;
+  public buttonName: any = "Results";
 
   MESSAGE = "No questionnaires have been submitted yet!";
 
@@ -41,19 +45,24 @@ export class ResearchHistoryComponent implements OnInit {
     private modalService: NgbModal,
     private http: HttpClient,
     private authenticationService: AuthenticationService,
-    public resultsService: ResearchResultsService
+    public resultsService: ResearchResultsService,
+    public foodRecommendationsService: FoodRecommendationsService
 
   ) {}
 
-
+  toggle(index) {
+    this.results[index].show = !this.results[index].show;
+    if (this.results[index].show) this.buttonName = "Results";
+    else this.buttonName = "Results";
+  }
 
   ngOnInit() {
-    this.getResultsByUser(this.authenticationService.currentUserId);
+    this.getResultsByUser();
   }
 
 
-  private getResultsByUser(userId: string) {
-    const oldList: Observable<FFQResearchResultsResponse[]> = this.resultsService.getResultsByUser(userId);
+  private getResultsByUser() {
+    const oldList: Observable<FFQResearchResultsResponse[]> = this.resultsService.getAllResults();
     const reqList: string[] = NutrientConstants.NUTRIENT_NAMES;
 
     oldList.subscribe(m => {
@@ -79,6 +88,24 @@ export class ResearchHistoryComponent implements OnInit {
     }
 
    )
+  }
+
+  private getFoodRecommendations(questionnaireId: string) {
+    this.foodRecommendationsService.getFoodRecommendationsByQuestionnaireId(questionnaireId).subscribe(
+      data => {
+        this.onModalRequestFood(questionnaireId);
+      },
+      error => {
+        const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+        dialogRef.componentInstance.title = error.error.message;
+        dialogRef.componentInstance.router = this.router;
+      }
+    );
+  }
+
+  onModalRequestFood(id: string): void {
+    const modalRef = this.errorDialog.open(FoodRecommendModalComponent);
+    modalRef.componentInstance.id = id;
   }
  
 }

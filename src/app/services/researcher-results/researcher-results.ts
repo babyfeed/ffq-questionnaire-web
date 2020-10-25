@@ -14,7 +14,7 @@ const httpOptions = { headers: new HttpHeaders({'Content-Type': 'application/jso
   
   export class ResearchResultsService {
   
-    endpoint = environment.foodServiceUrl + '/ffq/research_results'; // CHANGE ME
+    endpoint = environment.foodServiceUrl + '/ffq/research_results'; 
   
     constructor(private http: HttpClient) { }
   
@@ -39,7 +39,7 @@ const httpOptions = { headers: new HttpHeaders({'Content-Type': 'application/jso
       }
   
       getResultsByUser(userId: string): Observable<FFQResearchResultsResponse[]> {
-        return this.http.get(this.endpoint + '/parent/' + userId).pipe(
+        return this.http.get(this.endpoint + '/participant/' + userId).pipe(
           map((res: any) => {
             return res.map(item => {
               return new FFQResearchResultsResponse(

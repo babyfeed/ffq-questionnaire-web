@@ -8,6 +8,7 @@ export class FFQResearchResultsResponse {
     creationDate: string;
     userChoices: any;
     weeklyTotals: any;
+    show: any;
     dailyAverages: any;
     
 
