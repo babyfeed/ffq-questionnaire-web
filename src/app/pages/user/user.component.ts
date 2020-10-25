@@ -26,7 +26,7 @@ import { FFQClinicResponse } from 'src/app/models/ffqclinic-response';
 import { ClinicService } from 'src/app/services/clinic/clinic-service';
 import { FFQClinic } from 'src/app/models/ffqclinic';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DeletePopupComponent } from "src/app/components/delete-popup/delete-popup.component";
+import { DeletePopupComponent } from 'src/app/components/delete-popup/delete-popup.component';
 
 @Component({
   selector: 'app-fooditem',
@@ -41,8 +41,14 @@ export class UserComponent implements OnInit {
   private isUpdate: boolean;
   private createParents: boolean;
   private createClinician: boolean;
-  showMsg: boolean = false;
+  showMsg = false;
   selectedClinic: string;
+  cliniId: string;
+  usersLimits: number;
+  testing: string;
+  numClinician: number;
+  numParent: number;
+  able2Add: number;
 
   constructor(
     public parentService: ParentService,
@@ -65,8 +71,12 @@ export class UserComponent implements OnInit {
   isClinician: boolean;
 
   public ffqclinicList: FFQClinic[] = [];
+  public ffqclinicianList: FFQClinician[] = [];
+  public ffqparentList: FFQParent[] = [];
   clinicNames: string[] = [];
   clinicIds: Map<string, string> = new Map<string, string>();
+  clinicId: string;
+
 
 
   ngOnInit() {
@@ -75,12 +85,12 @@ export class UserComponent implements OnInit {
     this.createClinician = false;
     this.isParent = false;
     this.isClinician = false;
-    this.clinicNames.push("");
+    this.clinicNames.push('');
 
     const UserType = this.route.snapshot.paramMap.get('type');
     const UserID = this.route.snapshot.paramMap.get('id');
 
-    if (UserID == "new")
+    if (UserID === 'new')
     {
       this.isNew = true;
       this.dataLoaded = Promise.resolve(true);
@@ -88,7 +98,7 @@ export class UserComponent implements OnInit {
     else
     {
       this.isUpdate = true;
-      if(UserType == "p")
+      if (UserType === 'p')
       {
         this.getParentByID(UserID);
       }
@@ -98,16 +108,60 @@ export class UserComponent implements OnInit {
       }
     }
 
-    var clinicListObservable: Observable<FFQClinicResponse[]> = this.clinicService.getAllClinics();
+    let clinicListObservable: Observable<FFQClinicResponse[]> = this.clinicService.getAllClinics();
     clinicListObservable.subscribe(clinicList => {
       this.ffqclinicList = clinicList;
       clinicList.forEach(clinic => {
         this.clinicIds.set(clinic.clinicname, clinic.clinicId);
         this.clinicNames.push(clinic.clinicname);
-      })
-
+      });
     });
 
+    const parentList: Observable<FFQParentResponse[]> = this.parentService.getAllParents();
+    parentList.subscribe(a => {
+      this.ffqparentList = a;
+    });
+
+    const clinicianList: Observable<FFQClinicianResponse[]> = this.clinicianService.getAllClinicians();
+    clinicianList.subscribe(a => {
+      this.ffqclinicianList = a;
+    });
+  }
+
+  selectChangeHandler(event: any)
+  {
+    this.numClinician = 0;
+    this.numParent = 0;
+    this.able2Add = 0;
+    this.clinicId = event.value;
+    for (let item of this.ffqclinicList) {
+      if (this.clinicId === item.clinicId)
+      {
+        this.usersLimits = item.usersLimit;
+        this.testing = item.clinicname;
+      }
+    }
+
+    for (let i = 0; i < this.ffqclinicianList.length; i++){
+      if (this.clinicId === this.ffqclinicianList[i].assignedclinic){
+        this.numClinician += 1;
+      }
+    }
+
+    for (let i = 0; i < this.ffqparentList.length; i++){
+      if (this.clinicId === this.ffqparentList[i].assignedclinic){
+        this.numParent += 1;
+      }
+    }
+    if(this.usersLimits === 0){
+      this.able2Add = 0;
+    }
+    else{
+      this.able2Add = this.usersLimits - this.numClinician - this.numParent;
+    }
+
+    console.log(this.usersLimits);
+    // this.usersLimits = this.ffqclinicList.length;
   }
 
   changeToClinician($event)
@@ -125,39 +179,39 @@ export class UserComponent implements OnInit {
   private addUser()
   {
 
-    var input = <HTMLInputElement>document.getElementById("clinician_quantity");
-    var amount : number = parseInt(input.value);
+    let input = document.getElementById('clinician_quantity') as HTMLInputElement;
+    let amount: number = parseInt(input.value);
 
-     if(this.createClinician == true)
+    if (this.createClinician == true)
      {
-       if(amount <= 1){
+       if (amount <= 1){
         this.addClinician();
        }else{
-        console.log("adding multiple clinicians")
+        console.log('adding multiple clinicians');
         this.addMultipleClinicians();
-        
+
        }
-        
+
      }
      else
      {
-        //for(var count: number = 1; count <= this.amountToAdd; count++)
-        //{
+        // for(var count: number = 1; count <= this.amountToAdd; count++)
+        // {
           this.addParent();
-        //}
+        // }
      }
   }
 
   async addClinician()
   {
-    var clinicianList: Observable<FFQClinicianResponse[]> = this.clinicianService.getAllClinicians();
+    let clinicianList: Observable<FFQClinicianResponse[]> = this.clinicianService.getAllClinicians();
 
-      clinicianList.subscribe(data => {
-        var numberOfClinicians = (data.length+1).toString();
-        //console.log("Number of clinicians is: " + numberOfClinicians);
-        var newClincianId = (data.length+1).toString();
-        var newClincianUsername = "clinician"+numberOfClinicians;
-        this.ffqclinician = new FFQClinician(newClincianId, newClincianUsername, newClincianUsername, "clinician", "", "", "", this.selectedClinic, [], true);
+    clinicianList.subscribe(data => {
+        let numberOfClinicians = (data.length + 1).toString();
+        // console.log("Number of clinicians is: " + numberOfClinicians);
+        let newClincianId = (data.length + 1).toString();
+        let newClincianUsername = 'clinician' + numberOfClinicians;
+        this.ffqclinician = new FFQClinician(newClincianId, newClincianUsername, newClincianUsername, 'clinician', '', '', '', this.selectedClinic, [], true);
         console.log(this.ffqclinician);
 
         this.clinicianService.addClinician(this.ffqclinician).subscribe(data => {
@@ -165,7 +219,7 @@ export class UserComponent implements OnInit {
             const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
             dialogRef.componentInstance.title = newClincianUsername + ' was added!';
         },
-        error =>{
+        error => {
             const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
             dialogRef.componentInstance.title = error.error.message;
         });
@@ -175,51 +229,51 @@ export class UserComponent implements OnInit {
 
   addMultipleClinicians()
   {
-    //Still work in progress
+    // Still work in progress
 
-    var clinicianList: Observable<FFQClinicianResponse[]> = this.clinicianService.getAllClinicians();
+    let clinicianList: Observable<FFQClinicianResponse[]> = this.clinicianService.getAllClinicians();
 
-    var input = <HTMLInputElement>document.getElementById("clinician_quantity");
-    var amount : number = parseInt(input.value);
+    let input = document.getElementById('clinician_quantity') as HTMLInputElement;
+    let amount: number = parseInt(input.value);
 
-    var new_clinicians = new Array();
+    let new_clinicians = new Array();
 
-      for(let i = 0; i < amount; i++){
+    for (let i = 0; i < amount; i++){
 
         clinicianList.subscribe(data => {
-          var numberOfClinicians = (data.length + 1 + i).toString();
-          var newClincianId = (data.length+ 1 + i).toString();
-          var newClincianUsername = "clinician"+numberOfClinicians;
-          new_clinicians.push(new FFQClinician(newClincianId, newClincianUsername, newClincianUsername, "clinician", "", "", "", this.selectedClinic, [], true));
+          let numberOfClinicians = (data.length + 1 + i).toString();
+          let newClincianId = (data.length + 1 + i).toString();
+          let newClincianUsername = 'clinician' + numberOfClinicians;
+          new_clinicians.push(new FFQClinician(newClincianId, newClincianUsername, newClincianUsername, 'clinician', '', '', '', this.selectedClinic, [], true));
         });
 
       }
 
-      for(let j = 0; j < amount; j++){
+    for (let j = 0; j < amount; j++){
 
         this.clinicianService.addClinician(new_clinicians[j]).subscribe(data => {
           this.router.navigateByUrl('/admin/users');
         },
-        error =>{
+        error => {
           const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
           dialogRef.componentInstance.title = error.error.message;
         });
 
       }
 
-      const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-      dialogRef.componentInstance.title = amount + ' new clinicians have been added';
+    const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+    dialogRef.componentInstance.title = amount + ' new clinicians have been added';
   }
 
   addParent()
   {
-    var parentList: Observable<FFQParentResponse[]> = this.parentService.getAllParents();
+    let parentList: Observable<FFQParentResponse[]> = this.parentService.getAllParents();
 
-      parentList.subscribe(data => {
-        var numberOfParents = (data.length+1).toString();
-        var newParentId = (data.length+1).toString();
-        var newParentUsername = "parent"+numberOfParents;
-        this.ffqParent = new FFQParent(newParentId, newParentUsername, newParentUsername, "parent", "", "",  this.selectedClinic, "", [""], true);
+    parentList.subscribe(data => {
+        let numberOfParents = (data.length + 1).toString();
+        let newParentId = (data.length + 1).toString();
+        let newParentUsername = 'parent' + numberOfParents;
+        this.ffqParent = new FFQParent(newParentId, newParentUsername, newParentUsername, 'parent', '', '',  this.selectedClinic, '', [''], true);
         console.log(this.ffqParent);
 
         this.parentService.addParent(this.ffqParent).subscribe(data => {
@@ -227,7 +281,7 @@ export class UserComponent implements OnInit {
             const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
             dialogRef.componentInstance.title = newParentUsername + ' was added!';
         },
-        error =>{
+        error => {
             const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
             dialogRef.componentInstance.title = error.error.message;
         });
@@ -240,7 +294,7 @@ export class UserComponent implements OnInit {
     this.isParent = true;
     this.parentService.getParent(id).subscribe(data => {
        this.userAttributes = data;
-       //this.newParent = data;
+       // this.newParent = data;
 
     });
     this.dataLoaded = Promise.resolve(true);
@@ -251,15 +305,15 @@ export class UserComponent implements OnInit {
     this.isClinician = true;
     this.clinicianService.getClinician(id).subscribe(data => {
       this.userAttributes = data;
-      //this.newClinician = data;
-      //console.log(this.userAttributes);
+      // this.newClinician = data;
+      // console.log(this.userAttributes);
     });
     this.dataLoaded = Promise.resolve(true);
   }
 
   updateUser()
   {
-    if(this.isParent)
+    if (this.isParent)
     {
       this.updateParent();
     }
@@ -273,10 +327,10 @@ export class UserComponent implements OnInit {
   {
 
 
-    this.parentService.updateParent(<FFQParentResponse>this.userAttributes).subscribe(
+    this.parentService.updateParent(this.userAttributes as FFQParentResponse).subscribe(
      data => {this.router.navigateByUrl('/admin/users');
-     const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-     dialogRef.componentInstance.title = 'Parent successfully updated!';}
+              const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+              dialogRef.componentInstance.title = 'Parent successfully updated!'; }
 
     );
   }
@@ -285,9 +339,9 @@ export class UserComponent implements OnInit {
   {
 
 
-    this.clinicianService.updateClinician(<FFQClinicianResponse>this.userAttributes)
+    this.clinicianService.updateClinician(this.userAttributes as FFQClinicianResponse)
       .subscribe( data => {
-        console.log("data is");
+        console.log('data is');
         console.log(data);
         this.router.navigateByUrl('/admin/users');
         const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
@@ -297,7 +351,7 @@ export class UserComponent implements OnInit {
 
 
   deleteUser(){
-    if(this.isParent)
+    if (this.isParent)
     {
       this.deleteParent();
     }
@@ -309,13 +363,13 @@ export class UserComponent implements OnInit {
 
   deleteParent(){
     const confirmDelete = this.modalService.open(DeletePopupComponent);
-    confirmDelete.componentInstance.service = "Parent";
+    confirmDelete.componentInstance.service = 'Parent';
     confirmDelete.componentInstance.attributes = this.userAttributes;
   }
 
   deleteClinician(){
     const confirmDelete = this.modalService.open(DeletePopupComponent);
-    confirmDelete.componentInstance.service = "Clinician";
+    confirmDelete.componentInstance.service = 'Clinician';
     confirmDelete.componentInstance.attributes = this.userAttributes;
   }
 }
