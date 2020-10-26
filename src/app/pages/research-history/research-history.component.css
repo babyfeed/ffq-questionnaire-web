@@ -1,6 +1,6 @@
-h2 {
-    text-align: center;
-    color: aliceblue;
+.container {
+    padding-top: 20px;
+    margin-bottom: 20px;
 }
 
 .container_page {
@@ -8,29 +8,38 @@ h2 {
     margin-bottom: 50px;
 }
 
-.header1 {
-    background-color: #3f51b5;
+.container-choices {
+    padding-top: 30px;
+    margin-bottom: 20px;
+    margin-left: 40px;
+}
+
+.quest-results-card {
+    width: 60%;
+    display: inline-flex;
+    justify-content: center;
+    align-content: center;
+    padding: 50px;
+    height: 200px;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
     width: 100%;
-    height: 100px;
-    padding-top: 20px;
-    position: fixed;
 }
 
-a:hover {
-    color: blue;
-    cursor: pointer;
+td,
+th {
+    border: 1px solid #000000;
+    text-align: left;
+    padding: 8px;
 }
 
-.mat-raised-button {
-    background-color: #6573C3;
-    color: white;
-    width: 200px;
+tr:nth-child(even) {
+    background-color: #dddddd;
 }
 
-.table tbody {
-    cursor: grab;
-}
-
-.cdk-drop-list-dragging {
-    cursor: grabbing;
+.tableDiv {
+    padding: 35px;
 }
