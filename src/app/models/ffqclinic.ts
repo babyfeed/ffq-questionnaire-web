@@ -5,7 +5,7 @@ export class FFQClinic {
   clinicId: string;
   address: string;
   datebuilt: string;
-  clinicname: string
+  clinicname: string;
   headclinician: string;
   isactive: boolean;
   usersLimit: number;

@@ -7,7 +7,7 @@
       <div class="container" style="margin-top: 15px;"><a routerLink="/admin/users"><span
             class="fa fa-chevron-circle-left"></span> Back to Users </a></div>
 
-      <!-- Update user starts here -->    
+      <!-- Update user starts here -->
 
       <div *ngIf="isUpdate" class="container mt-3">
         <div align="right">
@@ -19,7 +19,7 @@
           <h6> Update User </h6>
           <div class="form-group col-12">
             <label style="font-weight: bold"> Account Type </label>
-            <br>  
+            <br>
             <mat-radio-group aria-label="Select an option">
               <mat-radio-button value="parent" [checked]="isParent" color="primary" [disabled]="true">Parent</mat-radio-button>
               <br>
@@ -37,7 +37,7 @@
               <br>
               <mat-form-field>
                 <mat-label appearance="fill">Choose Clinic...</mat-label>
-                <mat-select matNativeControl name="assignedclinic" [(ngModel)]="userAttributes.assignedclinic" required> 
+                <mat-select matNativeControl name="assignedclinic" [(ngModel)]="userAttributes.assignedclinic" required>
            <!--     <mat-select matNativeControl [(value)]="userAttributes[0].assignedclinic" required> -->
                   <mat-option *ngFor="let c of ffqclinicList" [value]="c.clinicId">{{ c.clinicname }}</mat-option>
                 </mat-select>
@@ -53,7 +53,7 @@
               <br>
               <mat-form-field>
                 <mat-label appearance="fill">Choose Clinic...</mat-label>
-                <mat-select matNativeControl name="assignedclinic" [(ngModel)]="userAttributes.assignedclinic" required> 
+                <mat-select matNativeControl name="assignedclinic" [(ngModel)]="userAttributes.assignedclinic" required>
            <!--     <mat-select matNativeControl [(value)]="userAttributes[0].assignedclinic" required> -->
                   <mat-option *ngFor="let c of ffqclinicList" [value]="c.clinicId">{{ c.clinicname }}</mat-option>
                 </mat-select>
@@ -77,10 +77,10 @@
 
         <div class="container frame-fooditem">
           <h6> New User(s) </h6>
-  
+
           <div class="form-group col-12">
             <label style="font-weight: bold"> Account Type </label>
-            <br>  
+            <br>
             <mat-radio-group aria-label="Select an option">
               <mat-radio-button value="parent" (change)="changeToParent($event)" color="primary">Parent</mat-radio-button>
               <br>
@@ -98,44 +98,79 @@
               <input placeholder="Amount of Parents (1 - 100)" width="25" style="border-color: mediumblue; border-width: 0.05cm" type="text"
                 class="form-control" name="amountToAdd" [(ngModel)]="amountToAdd" required #nameField="ngModel" />-->
               <hr>
-              <label style="font-weight: bold">Select Quantity:</label>
-                <br>
-                <input type="number" id="parent_quantity" name="quantity" min="1" value="1" style="margin-bottom: 10px">
-                <br>
               <label style="font-weight: bold">Choose Clinic to assign to:</label><label style="font-style: italic; font-size: small; margin-left: 10px"> *required </label>
                 <br>
               <mat-form-field>
                 <mat-label appearance="fill">Choose Clinic...</mat-label>
-                <mat-select matNativeControl required name="assignedclinic" [(ngModel)]="selectedClinic">
-                  <mat-option *ngFor="let c of ffqclinicList" [value]="c.clinicId" >{{ c.clinicname }}</mat-option>
+                <mat-select matNativeControl required name="assignedclinic" [(ngModel)]="selectedClinic" (selectionChange)="selectChangeHandler($event)">
+
+                  <mat-option  *ngFor="let c of ffqclinicList" [value]="c.clinicId" >
+                    {{ c.clinicname }}
+                  </mat-option>
                 </mat-select>
               </mat-form-field>
-              
-  
+              <table class="table table-bordered table-inverse">
+                <tr>
+                  <th width="25%"> No. of Clinicians </th>
+                  <th width="25%"> No. of Parents </th>
+                  <th width="25%"> Able to add </th>
+                  <th width="25%"> Users Limit </th>
+                </tr>
+                <tr >
+                  <td>{{ numClinician }}</td>
+                  <td>{{ numParent }}</td>
+                  <td>{{ able2Add }}</td>
+                  <td>{{ usersLimits }}</td>
+                </tr>
+              </table>
+              <hr>
+              <label style="font-weight: bold">Select Quantity:</label>
+              <br>
+              <input type="number" id="parent_quantity" name="quantity" min="1" max=able2Add style="margin-bottom: 10px">
+              <br>
             </div>
           </div>
 
           <!-- Create Parent ends here -->
 
           <!-- Create Clinician starts here -->
-  
+
           <div class="optional_container" *ngIf="createClinician">
             <div class="form-group col-12">
               <hr>
-              <label style="font-weight: bold">Select Quantity:</label>
-                <br>
-                <input type="number" id="clinician_quantity" name="quantity" min="1" value="1" style="margin-bottom: 10px">
-                <br>
+<!--              <label style="font-weight: bold">Select Quantity:</label>-->
+<!--                <br>-->
+<!--                <input type="number" id="clinician_quantity" name="quantity" min="1" value="1" style="margin-bottom: 10px">-->
+<!--                <br>-->
               <label style="font-weight: bold">Choose Clinic to assign to:</label><label style="font-style: italic; font-size: small; margin-left: 10px"> *required </label>
               <br>
               <mat-form-field>
                 <mat-label appearance="fill">Choose Clinic...</mat-label>
-                <mat-select matNativeControl required name="assignedclinic" [(ngModel)]="selectedClinic">
+                <mat-select matNativeControl required name="assignedclinic" [(ngModel)]="selectedClinic" (selectionChange)="selectChangeHandler($event)">
                   <mat-option *ngFor="let c of ffqclinicList" [value]="c.clinicId">{{ c.clinicname }}</mat-option>
                 </mat-select>
               </mat-form-field>
+              <table class="table table-bordered table-inverse">
+                <tr>
+                  <th width="25%"> No. of Clinicians </th>
+                  <th width="25%"> No. of Parents </th>
+                  <th width="25%"> Able to add </th>
+                  <th width="25%"> Users Limit </th>
+                </tr>
+                <tr >
+                  <td>{{ numClinician }}</td>
+                  <td>{{ numParent }}</td>
+                  <td>{{ able2Add }}</td>
+                  <td>{{ usersLimits }}</td>
+                </tr>
+              </table>
+              <hr>
+              <label style="font-weight: bold">Select Quantity:</label>
+              <br>
+              <input type="number" id="clinician_quantity" name="quantity" min="1" value="1" style="margin-bottom: 10px">
+              <br>
             </div>
-          
+
           </div>
 
           <!-- Create Clinician ends here -->
@@ -161,8 +196,8 @@
                   <mat-option *ngFor="let c of ffqclinicList" [value]="c.clinicId" >{{ c.clinicname }}</mat-option>
                 </mat-select>
               </mat-form-field>
-              
-  
+
+
             </div>
           </div>
       </div>
@@ -170,10 +205,10 @@
       <!-- Create Researcher ends here -->
 
       <!-- Add user ends here -->
-      
-      
 
-        
+
+
+
       </div>
     </div>
   </div>
