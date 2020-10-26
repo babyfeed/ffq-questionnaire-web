@@ -1,6 +1,9 @@
 <clinical-header></clinical-header>
 
 <div class="container_page">
+    <div class="container mt-3" align="right">
+      <button routerLink='/clinic/user/new' type="submit" mat-raised-button>New User(s)...</button>
+    </div>
     <div class="container mt-3">
         <h4>{{this.currentClinicName}}</h4>
         <div class="buttons">
@@ -26,7 +29,7 @@
                 <span style="color:gray; margin-left: 20px; margin-right: 20px; font-size: x-large;"> | </span>
                 <mat-checkbox (change)="toggleUnassignedClinicians($event)"> Hide All Unassigned </mat-checkbox>
             </div>
-            
+
             <table class="table table-bordered table-inverse">
                 <tr>
                     <!--<th width="5%"> Select </th>-->

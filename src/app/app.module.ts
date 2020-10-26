@@ -74,6 +74,8 @@ import { ResearchPageComponent } from "./pages/research-page/research-page.compo
 import { ResearchUsersComponent } from './pages/research-users/research-users.component';
 import { AdminTrackerHistoryComponent } from './pages/admin-tracker-history/admin-tracker-history.component';
 import { ResultRoundPipe } from './pipes/result-round.pipe';
+import {ClinicalUsersComponent} from "./pages/clinical-users";
+import {ClinicNewUserComponent} from "./pages/clinic-new-user/clinic-new-user.component";
 
 
 @NgModule({
@@ -98,6 +100,8 @@ import { ResultRoundPipe } from './pipes/result-round.pipe';
     FoodRecommendModalComponent,
     ClinicalPortalComponent,
     ClinicalHeaderComponent,
+    ClinicalUsersComponent,
+    ClinicNewUserComponent,
     ParentalHeaderComponent,
     LoginPageComponent,
     RecommendParentalComponent,

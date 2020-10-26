@@ -31,6 +31,8 @@ import { HttpClientModule } from "@angular/common/http";
 import { LogoutComponent } from "./pages/logout/logout.component";
 import { ClinicTrackerHistoryComponent } from "./pages/clinic-tracker-history/clinic-tracker-history.component";
 import { AdminTrackerHistoryComponent } from "./pages/admin-tracker-history/admin-tracker-history.component";
+import {ClinicalUsersComponent} from "./pages/clinical-users";
+import {ClinicNewUserComponent} from "./pages/clinic-new-user/clinic-new-user.component";
 
 const routes: Routes = [
   {
@@ -123,6 +125,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: "clinic/users",
+    component: ClinicalUsersComponent,
+    canActivate: [AuthGuard],
+  },
+  {
     path: "clinic/user/:type/:id",
     component: ClinicUserComponent,
     canActivate: [AuthGuard],
@@ -130,6 +137,11 @@ const routes: Routes = [
   {
     path: "clinic/user",
     component: ClinicUserComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "clinic/user/:id",
+    component: ClinicNewUserComponent,
     canActivate: [AuthGuard],
   },
   {

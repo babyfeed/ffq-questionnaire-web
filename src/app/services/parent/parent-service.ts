@@ -4,6 +4,8 @@ import {Observable} from 'rxjs';
 import {map, tap} from 'rxjs/operators';
 import { FFQParentResponse } from 'src/app/models/ffqparent-response';
 import { environment } from 'src/environments/environment';
+import {FFQParent} from "../../models/ffqparent";
+import {FFQClinician} from "../../models/ffqclinician";
 
 //Created by Khalid Alamoudi
 const httOptions ={ headers: new HttpHeaders({'Content-Type':'aplication/json'})}
@@ -19,13 +21,10 @@ export class ParentService {
 
   constructor(private http: HttpClient) { }
 
-  addParent(user : FFQParentResponse): Observable<any> {
+  addParent(user : FFQParentResponse): Observable<FFQParent> {
 
-    return this.http.post(this.endpoint + '/createparent', user, {headers : new HttpHeaders({ 'Content-Type': 'application/json' })}).pipe(
-      tap(
-        data => console.log(data),
-        error => console.log(error)
-      ));
+    return this.http.post<FFQParent>(this.endpoint + '/createparent', user,
+      {headers : new HttpHeaders({ 'Content-Type': 'application/json' })});
   }
 
   updateParent(user : FFQParentResponse): Observable<any> {
@@ -77,9 +76,6 @@ export class ParentService {
     );
   }
 
-
-
-
   /*DELETE: delete food item from the database */
   deleteItem(userId: string): Observable <any>{
     console.log("here" + userId);
@@ -87,6 +83,11 @@ export class ParentService {
   }
 
 
+  addMultipleParents(parents: FFQParent[]): Observable<FFQParent[]> {
+    return this.http.post<FFQParent[]>(this.endpoint + '/createManyParents', parents,
+      {headers : new HttpHeaders({ 'Content-Type': 'application/json' })});
+
+  }
 }
 
 
