@@ -1,0 +1,55 @@
+<clinical-header></clinical-header>
+
+<form #myForm="ngForm">
+  <div class="form-group">
+    <div class="container_page">
+      <div class="container" style="margin-top: 15px;"><a routerLink="/clinic/home" style="color:#7E1608">
+        <span class="fa fa-chevron-circle-left"></span> Back to Home </a>
+      </div>
+
+      <div class="container mt-3">
+        <div align="right">
+          <button type="submit" mat-raised-button (click)="addUser()"
+                  [disabled]="!myForm.form.valid"> Add User(s)
+          </button>
+        </div>
+
+        <div class="container frame-fooditem">
+          <h6> New User(s) </h6>
+
+          <div class="form-group col-12">
+            <label style="font-weight: bold"> Account Type </label>
+            <br>
+            <mat-radio-group aria-label="Select an option" [(ngModel)]="userType" name="userType">
+              <mat-radio-button [value]="userTypes.Parent" color="primary">Parent</mat-radio-button>
+              <br>
+              <mat-radio-button [value]="userTypes.Clinician" color="primary">Clinician</mat-radio-button>
+            </mat-radio-group>
+          </div>
+
+          <div class="optional_container" *ngIf="userType">
+            <div class="form-group col-12">
+              <hr>
+              <label style="font-weight: bold">Select Quantity:</label>
+              <br>
+              <input [(ngModel)]="usersQuantity" type="number" id="parent_quantity" name="quantity" min="1" value="1" style="margin-bottom: 10px">
+              <br>
+              <label style="font-weight: bold">Choose Clinic to assign to:</label>
+
+              <br>
+              <mat-form-field>
+                <mat-label appearance="fill">Choose Clinic...</mat-label>
+                <mat-select matNativeControl required name="assignedclinic" [(ngModel)]="selectedClinic">
+                  <mat-option *ngFor="let c of (ffqclinicList$| async)" [value]="c.clinicId">{{ c.clinicname }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <br/>
+              <label style="font-style: italic; font-size: small;"> *required </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+

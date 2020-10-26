@@ -1,11 +1,13 @@
 //Classed to store clinician user data in components
 
+import {Usertype} from "./usertype.enum";
+
 export class FFQClinician {
   id: string;
   userId: string;
   username: string;
   userpassword: string;
-  usertype: string;
+  usertype = Usertype.Clinician;
   abbreviation: string;
   firstname: string;
   lastname: string;
@@ -14,12 +16,11 @@ export class FFQClinician {
   isactive: boolean;
 
 
-  constructor(userId: string, username: string, userpassword: string, usertype:string, abbreviation: string, firstname: string,
+  constructor(userId: string, username: string, userpassword: string, abbreviation: string, firstname: string,
                lastname: string, assignedclinic: string, previousclinics: any, isactive: boolean) {
     this.userId = userId;
     this.username = username;
     this.userpassword = userpassword;
-    this.usertype = usertype;
     this.abbreviation = abbreviation;
     this.firstname = firstname;
     this.lastname = lastname;

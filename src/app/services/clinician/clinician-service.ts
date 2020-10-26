@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {map, tap} from 'rxjs/operators';
 import { FFQClinicianResponse } from 'src/app/models/ffqclinician-response';
 import { environment } from 'src/environments/environment';
+import {FFQClinician} from "../../models/ffqclinician";
 
 const httOptions ={ headers: new HttpHeaders({'Content-Type':'aplication/json'})}
 
@@ -20,13 +21,16 @@ export class ClinicianService {
 
   constructor(private http: HttpClient) { }
 
-  addClinician(user : FFQClinicianResponse): Observable<any> {
+  addClinician(user : FFQClinician): Observable<FFQClinician> {
 
-    return this.http.post(this.endpoint + '/createclinician', user, {headers : new HttpHeaders({ 'Content-Type': 'application/json' })}).pipe(
-      tap(
-        data => console.log(data),
-        error => console.log(error)
-      ));
+    return this.http.post<FFQClinician>(this.endpoint + '/createclinician', user,
+      {headers : new HttpHeaders({ 'Content-Type': 'application/json' })});
+  }
+
+  addMultipleClinicians(clinicians : FFQClinician[]): Observable<FFQClinician[]> {
+
+    return this.http.post<FFQClinician[]>(this.endpoint + '/createManyClinicians', clinicians,
+      {headers : new HttpHeaders({ 'Content-Type': 'application/json' })});
   }
 
   updateClinician(user : FFQClinicianResponse): Observable<any> {

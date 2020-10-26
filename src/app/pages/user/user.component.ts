@@ -208,11 +208,9 @@ export class UserComponent implements OnInit {
 
     clinicianList.subscribe(data => {
         let numberOfClinicians = (data.length + 1).toString();
-        // console.log("Number of clinicians is: " + numberOfClinicians);
         let newClincianId = (data.length + 1).toString();
         let newClincianUsername = 'clinician' + numberOfClinicians;
         this.ffqclinician = new FFQClinician(newClincianId, newClincianUsername, newClincianUsername, 'clinician', '', '', '', this.selectedClinic, [], true);
-        console.log(this.ffqclinician);
 
         this.clinicianService.addClinician(this.ffqclinician).subscribe(data => {
             this.router.navigateByUrl('/admin/users');
