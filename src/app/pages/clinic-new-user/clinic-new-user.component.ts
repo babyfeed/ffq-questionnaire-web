@@ -1,13 +1,3 @@
-/*
-
-  Added by Javier Romero
-  This is the create/edit user page for the admin portal
-  (admin/user, which differs from admin/users, which is the list all users page).
-  From here, the admin will create users or edit existing ones.
-  Users can also be deleted from the databases from here.
-
-*/
-
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
@@ -85,7 +75,7 @@ export class ClinicNewUserComponent implements OnInit {
   }
 
   addClinician() {
-    const ffqclinician = new FFQClinician("", "", "", "", "", "", this.selectedClinic.clinicname, [], true);
+    const ffqclinician = new FFQClinician("", "", "", "", "", "", this.selectedClinic.clinicId, [], true);
 
     this.clinicianService.addClinician(ffqclinician).subscribe(clinician => {
         const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
@@ -100,7 +90,7 @@ export class ClinicNewUserComponent implements OnInit {
   addMultipleClinicians() {
     const newClinicians = [];
     for (let i = 0; i < this.usersQuantity; i++) {
-      newClinicians.push(new FFQClinician("", "", "", "", "", "", this.selectedClinic.clinicname, [], true));
+      newClinicians.push(new FFQClinician("", "", "", "", "", "", this.selectedClinic.clinicId, [], true));
     }
 
     this.clinicianService.addMultipleClinicians(newClinicians).subscribe(clinicians => {
@@ -114,7 +104,7 @@ export class ClinicNewUserComponent implements OnInit {
   }
 
   addParent() {
-    this.ffqParent = new FFQParent("", "", "", "parent", "", "", this.selectedClinic.clinicname, "", [""], true);
+    this.ffqParent = new FFQParent("", "", "", "parent", "", "", this.selectedClinic.clinicId, "", [""], true);
     console.log(this.ffqParent);
 
     this.parentService.addParent(this.ffqParent).subscribe(parent => {
@@ -130,7 +120,7 @@ export class ClinicNewUserComponent implements OnInit {
   addMultipleParents() {
     const newParents = [];
     for (let i = 0; i < this.usersQuantity; i++) {
-      newParents.push(new FFQParent("", "", "", "parent", "", "", this.selectedClinic.clinicname, "", [""], true));
+      newParents.push(new FFQParent("", "", "", "parent", "", "", this.selectedClinic.clinicId, "", [""], true));
     }
 
     this.parentService.addMultipleParents(newParents).subscribe(clinicians => {
