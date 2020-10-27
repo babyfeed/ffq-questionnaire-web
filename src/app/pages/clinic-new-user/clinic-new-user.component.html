@@ -22,8 +22,6 @@
             <br>
             <mat-radio-group aria-label="Select an option" [(ngModel)]="userType" name="userType">
               <mat-radio-button [value]="userTypes.Parent" color="primary">Parent</mat-radio-button>
-              <br>
-              <mat-radio-button [value]="userTypes.Clinician" color="primary">Clinician</mat-radio-button>
             </mat-radio-group>
           </div>
 
@@ -34,17 +32,9 @@
               <br>
               <input [(ngModel)]="usersQuantity" type="number" id="parent_quantity" name="quantity" min="1" value="1" style="margin-bottom: 10px">
               <br>
-              <label style="font-weight: bold">Choose Clinic to assign to:</label>
-
+              <label style="font-weight: bold">Clinic to assign to:</label>
               <br>
-              <mat-form-field>
-                <mat-label appearance="fill">Choose Clinic...</mat-label>
-                <mat-select matNativeControl required name="assignedclinic" [(ngModel)]="selectedClinic">
-                  <mat-option *ngFor="let c of (ffqclinicList$| async)" [value]="c.clinicId">{{ c.clinicname }}</mat-option>
-                </mat-select>
-              </mat-form-field>
-              <br/>
-              <label style="font-style: italic; font-size: small;"> *required </label>
+              <p>{{ selectedClinic?.clinicname }}</p>
             </div>
           </div>
         </div>
