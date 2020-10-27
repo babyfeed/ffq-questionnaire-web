@@ -13,7 +13,7 @@ import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {ErrorDialogPopupComponent} from 'src/app/components/error-dialog-popup/error-dialog-popup.component';
 import {Subscription} from 'rxjs/internal/Subscription';
-import {Observable} from 'rxjs';
+import {combineLatest, Observable} from 'rxjs';
 import {ParentService} from 'src/app/services/parent/parent-service';
 import {ClinicianService} from 'src/app/services/clinician/clinician-service';
 import {FFQParent} from 'src/app/models/ffqparent';
@@ -21,6 +21,9 @@ import {FFQClinician} from 'src/app/models/ffqclinician';
 import {ClinicService} from 'src/app/services/clinic/clinic-service';
 import {FFQClinic} from 'src/app/models/ffqclinic';
 import {Usertype} from "../../models/usertype.enum";
+import {AuthenticationService} from "../../services/authentication/authentication.service";
+import {User} from "../../models/user";
+import {skipWhile, take} from "rxjs/operators";
 
 @Component({
   selector: 'app-clinic-new-user',
@@ -29,13 +32,13 @@ import {Usertype} from "../../models/usertype.enum";
 })
 export class ClinicNewUserComponent implements OnInit {
 
-  private routeSub: Subscription;
-  selectedClinic: string;
-  userType: Usertype;
+  selectedClinic: FFQClinic;
+  userType = Usertype.Parent;
   userTypes = Usertype;
   ffqParent: FFQParent;
-  public ffqclinicList$: Observable<FFQClinic[]>;
+  ffqclinicList$: Observable<FFQClinic[]>;
   usersQuantity = 1;
+  currentUser$: Observable<FFQClinician[]>;
 
   constructor(
     public parentService: ParentService,
@@ -43,15 +46,22 @@ export class ClinicNewUserComponent implements OnInit {
     private errorDialog: MatDialog,
     private router: Router,
     public clinicService: ClinicService,
+    private authenticationService: AuthenticationService
   ) {
     this.ffqclinicList$ = this.clinicService.getAllClinics();
+    this.currentUser$ = this.authenticationService.currentUser as unknown as Observable<FFQClinician[]>;
   }
 
   ngOnInit() {
+    combineLatest([this.currentUser$, this.ffqclinicList$]).pipe(
+      skipWhile(([users, clinics]) => users.length == 0 || clinics.length == 0),
+      take(1))
+      .subscribe(([user, clinics]) => {
+        this.selectedClinic = clinics.find(c => c.clinicId === user[0].assignedclinic);
+      })
   }
 
   addUser() {
-
     switch (this.userType) {
       case Usertype.Clinician: {
         if (this.usersQuantity === 1) {
@@ -75,7 +85,7 @@ export class ClinicNewUserComponent implements OnInit {
   }
 
   addClinician() {
-    const ffqclinician = new FFQClinician("", "", "", "", "", "", this.selectedClinic, [], true);
+    const ffqclinician = new FFQClinician("", "", "", "", "", "", this.selectedClinic.clinicname, [], true);
 
     this.clinicianService.addClinician(ffqclinician).subscribe(clinician => {
         const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
@@ -90,12 +100,12 @@ export class ClinicNewUserComponent implements OnInit {
   addMultipleClinicians() {
     const newClinicians = [];
     for (let i = 0; i < this.usersQuantity; i++) {
-      newClinicians.push(new FFQClinician("", "", "", "", "", "", this.selectedClinic, [], true));
+      newClinicians.push(new FFQClinician("", "", "", "", "", "", this.selectedClinic.clinicname, [], true));
     }
 
     this.clinicianService.addMultipleClinicians(newClinicians).subscribe(clinicians => {
         const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-        dialogRef.componentInstance.title = clinicians.map(clinician => clinician.username).join("<br/>") + '<br/>were added!';
+        dialogRef.componentInstance.title = 'Users<br/>' + clinicians.map(clinician => clinician.username).join("<br/>") + '<br/>were added!';
       },
       error => {
         const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
@@ -104,7 +114,7 @@ export class ClinicNewUserComponent implements OnInit {
   }
 
   addParent() {
-    this.ffqParent = new FFQParent("", "", "", "parent", "", "", this.selectedClinic, "", [""], true);
+    this.ffqParent = new FFQParent("", "", "", "parent", "", "", this.selectedClinic.clinicname, "", [""], true);
     console.log(this.ffqParent);
 
     this.parentService.addParent(this.ffqParent).subscribe(parent => {
@@ -120,12 +130,12 @@ export class ClinicNewUserComponent implements OnInit {
   addMultipleParents() {
     const newParents = [];
     for (let i = 0; i < this.usersQuantity; i++) {
-      newParents.push(new FFQParent("", "", "", "parent", "", "", this.selectedClinic, "", [""], true));
+      newParents.push(new FFQParent("", "", "", "parent", "", "", this.selectedClinic.clinicname, "", [""], true));
     }
 
     this.parentService.addMultipleParents(newParents).subscribe(clinicians => {
         const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-        dialogRef.componentInstance.title = clinicians.map(clinician => clinician.username).join("<br/>") + '<br/>were added!';
+        dialogRef.componentInstance.title = 'Users<br/>' + clinicians.map(clinician => clinician.username).join("<br/>") + '<br/>were added!';
       },
       error => {
         const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
