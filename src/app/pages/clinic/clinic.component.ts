@@ -109,7 +109,7 @@ export class ClinicComponent implements OnInit {
 
       this.clinicService.addClinic(this.ffqclinic).subscribe(data => {
           console.log("data: " + data);
-          this.router.navigateByUrl('/admin/clinics');
+          this.router.navigateByUrl('/admin/users');
           const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
           dialogRef.componentInstance.title = 'Clinic with id ' +  newClinicId + ' was added!';
       },

@@ -7,11 +7,7 @@
       </div>
 
       <div *ngIf="isUpdate" class="container mt-3">
-<!--        <div align="right">-->
-<!--          <button mat-raised-button class="delete" style="margin-right: 20px;" (click)="deleteUser()"> Delete </button>-->
-<!--          <button mat-raised-button class="update" (click)="updateUser()"-->
-<!--                  [disabled]="!myForm.form.valid"> Update User </button>-->
-<!--        </div>-->
+
         <div class="container frame-fooditem">
           <br>
           <h6 style="text-align:center"> <label style="font-weight: bold"> Update User </label> </h6>
@@ -98,7 +94,6 @@
                 <br>
                 <mat-form-field>
                   <mat-label appearance="fill">Choose Clinic...</mat-label>
-
                   <mat-select matNativeControl required name="assignedclinic" [(ngModel)]="selectedClinic" (selectionChange)="selectChangeHandler($event)">
                     <mat-option *ngFor="let c of (ffqclinicList$| async)" [value]="c.clinicId">
                       {{ c.clinicname }}
@@ -120,6 +115,21 @@
                     <td>{{ usersLimits }}</td>
                   </tr>
                 </table>
+
+
+                <!--                work in progress        -->
+
+                <mat-form-field>
+                  <mat-label appearance="fill">Choose Clinician...</mat-label>
+                  <mat-select matNativeControl name="assignedclinician" [(ngModel)]="selectedClinician">
+<!--                    <mat-option *ngFor="let u of ffqclinicianList" [hidden]=" u.assignedclinic != clinicId" [value]="u.userId">{{ "clinician" + u.userId }}</mat-option>-->
+                    <mat-option *ngFor="let c of (ffqclinicianList$| async)" [hidden]=" c.assignedclinic != clinicId" [value]="c.userId">{{ "clinician" + c.userId }}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+
+                <!--                work in progress        -->
+
 
                 <hr>
                 <label style="font-weight: bold">Select Quantity:</label>
