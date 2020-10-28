@@ -33,7 +33,7 @@ export class QuestionnairePageComponent implements OnInit {
     ' specify whether this was per week or per day.',
     "If your baby did not eat this food in the last week, hit 'x' for not applicable",
     'All open question blocks must be completely filled out before submitting the questionnaire.',
-    'Click the submit button at the bottom of the from when finished.'
+    'Click the submit button at the bottom of the form when finished.'
   ];
   userId: string;
   id: string;
