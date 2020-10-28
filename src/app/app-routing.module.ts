@@ -6,6 +6,7 @@ import { QuestIdInputComponent } from "./pages/quest-id-input-page/quest-id-inpu
 import { AdminPageComponent } from "./pages/admin-page/admin-page.component";
 import { ResearchPageComponent } from "./pages/research-page/research-page.component";
 import { ResearchUsersComponent } from "./pages/research-users/research-users.component";
+import { ResearchHistoryComponent } from "./pages/research-history/research-history.component";
 import { FooditemComponent } from "./pages/fooditem/fooditem.component";
 import { QuestResultsComponent } from "./pages/quest-results/quest-results.component";
 import { RecommendComponent } from "./pages/recommend/recommend.component";
@@ -30,6 +31,8 @@ import { BrowserModule } from "@angular/platform-browser";
 import { HttpClientModule } from "@angular/common/http";
 import { LogoutComponent } from "./pages/logout/logout.component";
 import { ClinicTrackerHistoryComponent } from "./pages/clinic-tracker-history/clinic-tracker-history.component";
+import { ResearchQuestIdInputComponent } from "./pages/researcher-quest-id-input-page/researcher-quest-id-input.component"
+
 
 const routes: Routes = [
   {
@@ -169,15 +172,30 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: "research/home",
+    path: "researcher/home",
     component: ResearchPageComponent,
     canActivate: [AuthGuard],
   },
   {
-    path: "research/users",
+    path: "researcher/users",
     component: ResearchUsersComponent,
     canActivate: [AuthGuard],
   },
+  {
+    path: "researcher/history",
+    component: ResearchHistoryComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "researcher_parents/home",
+    component: ResearchQuestIdInputComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "researcher_parents/questionnaire/:id",
+    component: QuestionnairePageComponent,
+  },
+
 ];
 
 @NgModule({

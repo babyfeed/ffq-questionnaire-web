@@ -22,7 +22,6 @@ import { moveItemInArray } from "@angular/cdk/drag-drop";
 import { CdkDragDrop } from "@angular/cdk/drag-drop";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "src/environments/environment";
-import { CreateParentModalComponent} from "src/app/components/create-parent-modal/create-parent-modal.component"
 
 @Component({
   selector: "app-questionnaire-page",
@@ -99,8 +98,10 @@ export class ResearchUsersComponent implements OnInit {
     return orderedItems;
   }
 
-  onOpenCreateParentModal(): void {
-    const modalRef = this.modalService.open(CreateParentModalComponent);
+  onModalRequest(id: string): void {
+    const modalRef = this.modalService.open(PopupComponent);
+    modalRef.componentInstance.id = id;
+    modalRef.componentInstance.service = this.foodService;
   }
 
   //added by teriq douglas
