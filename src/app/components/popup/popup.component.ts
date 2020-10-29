@@ -24,7 +24,6 @@ export class PopupComponent {
     }
 
     onClose(): void {
-        console.log(this.id);
         this.service.deleteItem(this.id).subscribe(newData => {
             this.data = newData;
             window.location.reload();

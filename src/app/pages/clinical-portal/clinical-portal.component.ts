@@ -137,7 +137,6 @@ export class ClinicalPortalComponent implements OnInit  {
     const loggedInUser = this.authenticationService.currentUserValue;
     var clinicId: string;
 
-    console.log("Logged in user clinic: " + loggedInUser[0].assignedclinic);
     clinicListObervable.subscribe(clinicList => {
       var clinic = clinicList.find(a => a.clinicId == loggedInUser[0].assignedclinic);
       if(clinic){
@@ -196,9 +195,7 @@ export class ClinicalPortalComponent implements OnInit  {
         }
       });
       this.numberOfPatients.push(count);
-      console.log("clinicianNames in function");
-      console.log(this.clinicianNames);
-    });
+      });
   }
 
   getClinicianNames(){
@@ -222,7 +219,7 @@ export class ClinicalPortalComponent implements OnInit  {
         if(clinic.clinicId == this.clinicId) {
           this.clinicList.push(clinic)
         }
-        
+
       })
 
     });

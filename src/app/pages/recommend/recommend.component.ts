@@ -51,8 +51,7 @@ export class RecommendComponent implements OnInit {
     this.showBracketThird = true;
   }
   editPost(obj,i){
-  console.log(obj);
-    let index = this.results.findIndex(o => o._id == obj._id);
+  let index = this.results.findIndex(o => o._id == obj._id);
     if(index != -1)
     this.show[i] = true;
   }

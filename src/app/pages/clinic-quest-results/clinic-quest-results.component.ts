@@ -108,7 +108,6 @@ export class ClinicQuestResultsComponent implements OnInit {
       element.dailyAverages = newDailyMap;
       })
 
-      console.log(m);
       this.results = m.reverse();
       this.parentNames = this.parentNames.reverse();
       for(var i = 0; i < this.parentNames.length; i++){
@@ -119,10 +118,7 @@ export class ClinicQuestResultsComponent implements OnInit {
         this.resultInfo.push(object);
         this.resultMap.set(this.results[i].userId, object);
       }
-      console.log("resultInfo in function");
-      console.log(this.resultInfo);
-
-     });
+      });
 
   }
 
@@ -130,17 +126,13 @@ export class ClinicQuestResultsComponent implements OnInit {
   get f() { return this.feedbackForm.controls; }
 
   submitFeedback(qId) {
-    console.log(qId);
-
     if (this.feedbackForm.invalid) {
-        console.log(this.feedbackForm);
         return;
     }
 
     this.loading = true;
     this.resultsService.submitFeedback(qId, this.f.feedback.value).subscribe((data: null) => {
-      console.log("testeroo");
-    });
+      });
   }
 
   //Function used to obtain the clinicId for the currently logged in clinician, in order to later display results based only for this specific clinic
@@ -150,14 +142,11 @@ export class ClinicQuestResultsComponent implements OnInit {
     const loggedInUser = this.authenticationService.currentUserValue;
     var clinicId: string;
 
-    console.log("Logged in user clinic: " + loggedInUser[0].assignedclinic);
     clinicListObervable.subscribe(clinicList => {
       var clinic = clinicList.find(a => a.clinicId == loggedInUser[0].assignedclinic);
       if(clinic){
         this.clinicId = clinic.clinicId;
         this.currentClinicName = clinic.clinicname;
-        console.log("clinic ID in function");
-        console.log(this.clinicId);
       }
       this.getParentList();
     });
@@ -176,20 +165,14 @@ private getParentList(){
      })
      this.getResultsList();
 
-     console.log(this.parentList);
   });
 }
 
 
   //Function to get all the results for each parent
 private getResultsList(){
-   //console.log("Parents in Get result");
-   //console.log(this.parentList);
-
    var allResultsObservable: Observable<FFQResultsResponse[]> = this.resultsService.getAllResults();
    allResultsObservable.subscribe((allResults: FFQResultsResponse[]) => {
-    //console.log("All REsults in function");
-    //console.log(allResults);
       this.parentList.forEach(parent => {
           allResults.forEach(result => {
               if(result.userId == parent.userId){
@@ -198,11 +181,7 @@ private getResultsList(){
                 this.parentNames.push(parentName);
               }
           });
-          //console.log("parentNames for this parent")
-          //console.log(this.parentNames);
       });
-      //console.log("results in function");
-      //console.log(this.resultList);
       this.loadData();
    });
 

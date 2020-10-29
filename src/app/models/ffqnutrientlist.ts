@@ -9,7 +9,6 @@ export class FFQNutrientlist {
   nutrientMap: any;
 
   constructor(id: string, nutrientMap: any) {
-    console.log(nutrientMap);
     this.nutrientListID = id;
     this.nutrientMap = nutrientMap;
   }
