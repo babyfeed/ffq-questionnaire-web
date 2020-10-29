@@ -51,7 +51,7 @@
                 <mat-form-field>
                   <mat-label appearance="fill">Choose Clinician...</mat-label>
                   <mat-select matNativeControl name="assignedclinician" [(value)]="userAttributes.assignedclinician" required>
-                    <mat-option *ngFor="let u of ffqclinicianList" [hidden]="u.assignedclinic != userAttributes.assignedclinic" [value]="u.userId">{{ u.abbreviation }} {{ u.firstname }} {{ u.lastname }}</mat-option>
+                    <mat-option *ngFor="let u of ffqclinicianList" [hidden]="u.assignedclinic != userAttributes.assignedclinic" [value]="u.userId">{{ "clinician" + u.userId }}</mat-option>
                   </mat-select>
                 </mat-form-field>
                 <!--<hr>

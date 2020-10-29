@@ -58,7 +58,7 @@ export class ClinicUserComponent implements OnInit {
 
     this.clinicianNames.push("");
 
-    var clinicianList: Observable<FFQClinicianResponse[]> = this.clinicianService.getAllClinicians();
+    const clinicianList: Observable<FFQClinicianResponse[]> = this.clinicianService.getAllClinicians();
     clinicianList.subscribe(a => {
       this.ffqclinicianList = a;
       console.log(a);
