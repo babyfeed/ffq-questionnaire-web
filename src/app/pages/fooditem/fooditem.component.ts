@@ -76,11 +76,8 @@ export class FooditemComponent implements OnInit {
         //this.ffqnutrientlist.nutrientMap.set(nutrient,0);
       //}
 
-      //console.log(this.ffqnutrientlist.nutrientMap);
-      this.foodNutrients = new FFQFoodNutrients(this.ffqfoditem, this.ffqnutrientlist);
+      //this.foodNutrients = new FFQFoodNutrients(this.ffqfoditem, this.ffqnutrientlist);
       //this.ffqfoodnutrients = FFQFoodNutrients.foodItemFromResponse(this.foodNutrientsResponse);
-      console.log(this.foodNutrients);
-
       this.foodNutrientsItem.push(this.foodNutrients);
       this.dataLoaded = Promise.resolve(true);
 
@@ -89,8 +86,7 @@ export class FooditemComponent implements OnInit {
       this.isUpdate = true;
       this.getFoodByObjectId(FoodItemObjectId);
 
-      console.log(this.foodNutrientsItem);
-    }
+      }
   }
 
   private getFoodByObjectId(name: string) {
@@ -107,9 +103,6 @@ export class FooditemComponent implements OnInit {
         });
       }
 
-      console.log(this.nutrientsMap);
-
-
       this.foodNutrientsItem.push(FFQFoodNutrients.foodItemFromResponse(data))
     });
     this.dataLoaded = Promise.resolve(true);
@@ -117,7 +110,6 @@ export class FooditemComponent implements OnInit {
 
   private addFoodNutrients(form:NgForm){
 
-    console.log(this.foodNutrientsItem[0]);
     //this.foodNutrientsItem[0].nutrientList.nutrientListID = this.foodNutrientsItem[0].foodItem.foodTypes[0].nutrientListID;
     //this.foodNutrientsItem[0].foodItem.nutrientId = this.foodNutrientsItem[0].foodItem.foodTypes[0].nutrientListID;
      this.foodService.addFoodNutrients(FFQFoodNutrients.foodItemToResponse(this.foodNutrientsItem[0])).subscribe(
@@ -135,7 +127,6 @@ export class FooditemComponent implements OnInit {
   }
 
   private updateFoodNutrients(){
-    console.log(this.foodNutrientsItem[0]);
     //this.foodNutrientsItem[0].nutrientList.nutrientListID = this.foodNutrientsItem[0].foodItem.foodTypes[0].nutrientListID;
     //this.foodNutrientsItem[0].foodItem.nutrientId = this.foodNutrientsItem[0].foodItem.foodTypes[0].nutrientListID;
     this.foodService.updateFoodNutrients(FFQFoodNutrients.foodItemToResponse(this.foodNutrientsItem[0])).subscribe(

@@ -30,7 +30,6 @@ import { environment } from "src/environments/environment";
 })
 export class ResearchPageComponent implements OnInit {
   TITLE = "FFQR Research Portal";
-
   endpoint = environment.foodServiceUrl + "/ffq";
 
   constructor(
@@ -46,7 +45,6 @@ export class ResearchPageComponent implements OnInit {
     private http: HttpClient
   ) {}
 
-  foodNutrients: FFQFoodNutrientsResponse[] = [];
   dataLoaded: Promise<boolean>;
 
   foodItems: FFQFoodItemResponse[] = [];
@@ -54,11 +52,6 @@ export class ResearchPageComponent implements OnInit {
   ngOnInit() {
     this.loadFoodsAndNutrients();
 
-    /*let i: any;
-
-        for(i in this.foodItems){
-          this.foodItems[i].itemPosition = ++i;
-        }*/
   }
 
   private handleFoodServiceError(error: HttpErrorResponse) {
@@ -77,13 +70,7 @@ export class ResearchPageComponent implements OnInit {
       (data) => {
         data.map((response) => {
           this.foodItems.push(response);
-          // this.foodNutrients.push(response);
         });
-        console.log(this.foodItems);
-        console.log(
-          this.foodNutrients.length +
-            " foods and its nutrients were returned from server."
-        );
         this.foodItems = this.orderFoodItems(this.foodItems);
         this.dataLoaded = Promise.resolve(true);
       },
@@ -117,23 +104,6 @@ export class ResearchPageComponent implements OnInit {
     for (let i = 0; i < this.foodItems.length; i++) {
       this.update(i);
     }
-
-    //or swap only 2 elements
-    /*var temp = this.foodItems[event.previousIndex].itemPosition;
-            this.foodItems[event.previousIndex].itemPosition = this.foodItems[event.currentIndex].itemPosition
-            this.foodItems[event.currentIndex].itemPosition = temp;*/
-
-    /*this.http.put(this.endpoint + '/update/' + this.foodItems[event.currentIndex].id, this.foodItems[event.currentIndex],
-                      {headers : new HttpHeaders({ 'Content-Type': 'application/json' })}).subscribe((data) => {
-                                    console.log(data);
-                                  }, (error) => {console.log(error)});
-
-    this.http.put(this.endpoint + '/update/' + this.foodItems[event.previousIndex].id, this.foodItems[event.previousIndex],
-                           {headers : new HttpHeaders({ 'Content-Type': 'application/json' })}).subscribe((data) => {
-                                         console.log(data);
-                                       }, (error) => {console.log(error)});*/
-
-    console.log(this.foodItems);
   }
 
   //added by teriq douglas
@@ -142,21 +112,8 @@ export class ResearchPageComponent implements OnInit {
       .put(
         this.endpoint + "/update/" + this.foodItems[i].id,
         this.foodItems[i],
-        { headers: new HttpHeaders({ "Content-Type": "application/json" }) }
+        {headers: new HttpHeaders({"Content-Type": "application/json"})}
       )
-      .subscribe(
-        (data) => {
-          console.log(data);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-    //console.log(this.foodItems[i].id);
+      .subscribe();
   }
-  /* private updateArray(){
-    this.foodService.getAllFoods().subscribe(data => {
-          data.map(response => {
-            this.foodItems.push(response);
-          });*/
 }

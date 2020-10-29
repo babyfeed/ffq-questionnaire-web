@@ -68,10 +68,13 @@
                 <input placeholder="Address" width="25" style="border-color: mediumblue; border-width: 0.05cm" type="text"
                     class="form-control" id="location" name="location" [(ngModel)]="location"/>
                 <br>
-                <label for="usersLimit" style="font-weight: bold"> Number of Users Limit </label>
-                <input required placeholder="100" width="25" style="border-color: mediumblue; border-width: 0.05cm" type="number" min="1"
-                       class="form-control" id="usersLimit" name="usersLimit" [(ngModel)]="usersLimit"/>
-
+                <label for="cliniciansLimit" style="font-weight: bold"> Number of Clinicians Limit </label>
+                <input placeholder="100" width="25" style="border-color: mediumblue; border-width: 0.05cm" type="number"
+                       class="form-control" id="cliniciansLimit" name="usersLimit" [(ngModel)]="cliniciansLimit"/>
+                <br>
+                <label for="parentsLimit" style="font-weight: bold"> Number of Parents Limit </label>
+                <input placeholder="100" width="25" style="border-color: mediumblue; border-width: 0.05cm" type="number"
+                       class="form-control" id="parentsLimit" name="parentsLimit" [(ngModel)]="parentsLimit"/>
             </div>
           </div>
       <!-- Add Clinic ends here -->

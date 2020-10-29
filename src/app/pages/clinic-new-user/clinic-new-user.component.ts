@@ -57,7 +57,6 @@ export class ClinicNewUserComponent implements OnInit {
         if (this.usersQuantity === 1) {
           this.addClinician();
         } else {
-          console.log("adding multiple clinicians")
           this.addMultipleClinicians();
         }
         break;
@@ -66,7 +65,6 @@ export class ClinicNewUserComponent implements OnInit {
         if (this.usersQuantity === 1) {
           this.addParent();
         } else {
-          console.log("adding multiple clinicians")
           this.addMultipleParents();
         }
         break;
@@ -105,8 +103,6 @@ export class ClinicNewUserComponent implements OnInit {
 
   addParent() {
     this.ffqParent = new FFQParent("", "", "", "parent", "", "", this.selectedClinic.clinicId, "", [""], true);
-    console.log(this.ffqParent);
-
     this.parentService.addParent(this.ffqParent).subscribe(parent => {
         const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
         dialogRef.componentInstance.title = parent.username + ' was added!';

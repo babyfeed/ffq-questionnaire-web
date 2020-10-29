@@ -28,21 +28,18 @@ import { DeletePopupComponent } from "src/app/components/delete-popup/delete-pop
 
 
 @Component({
-  selector: 'app-fooditem',
+  selector: 'app-new-clinic',
   templateUrl: './clinic.component.html',
   styleUrls: ['./clinic.component.css']
 })
 export class ClinicComponent implements OnInit {
 
-  private routeSub: Subscription;
   private isNew: boolean;
   private isUpdate: boolean;
-  showMsg: boolean = false;
   name_of_clinic: string;
-  usersLimit: number;
+  cliniciansLimit: number;
+  parentsLimit: number;
   location: string;
-  allClinicians: FFQClinician[] = [];
-  resultObjectList: Object[] = [];
 
   constructor(
     public parentService: ParentService,
@@ -98,22 +95,18 @@ export class ClinicComponent implements OnInit {
 
   }
 
-  addClinic(form:NgForm){
-
+  addClinic(form: NgForm){
     var clinicList: Observable<FFQClinicResponse[]> = this.clinicService.getAllClinics();
 
     clinicList.subscribe(data => {
       var newClinicId = (data.length+1).toString();
-      this.ffqclinic = new FFQClinic(newClinicId, this.location, "", this.name_of_clinic, "", false, this.usersLimit);
-      console.log(this.ffqclinic);
-
+      this.ffqclinic = new FFQClinic(newClinicId, this.location, "", this.name_of_clinic, "", false, this.cliniciansLimit, this.parentsLimit);
       this.clinicService.addClinic(this.ffqclinic).subscribe(data => {
-          console.log("data: " + data);
           this.router.navigateByUrl('/admin/users');
           const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
           dialogRef.componentInstance.title = 'Clinic with id ' +  newClinicId + ' was added!';
       },
-      error =>{
+      error => {
           const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
           dialogRef.componentInstance.title = error.error.message;
       });

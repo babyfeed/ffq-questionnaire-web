@@ -67,7 +67,6 @@ export class QuestResultsComponent implements OnInit {
        element.dailyAverages = newDailyMap;
        })
 
-       console.log(m);
        this.results = m.reverse();
     }
 

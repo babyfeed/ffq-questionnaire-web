@@ -6,18 +6,13 @@ import { FFQClinicianResponse } from 'src/app/models/ffqclinician-response';
 import { environment } from 'src/environments/environment';
 import {FFQClinician} from "../../models/ffqclinician";
 
-const httOptions ={ headers: new HttpHeaders({'Content-Type':'aplication/json'})}
-
 @Injectable({
   providedIn: 'root'
 })
 
-
-
 export class ClinicianService {
 
   endpoint = environment.userServiceUrl + '/ffq/clinicians';
-
 
   constructor(private http: HttpClient) { }
 
@@ -35,11 +30,8 @@ export class ClinicianService {
 
   updateClinician(user : FFQClinicianResponse): Observable<any> {
 
-    return this.http.put(this.endpoint + '/updateclinician', user, {headers : new HttpHeaders({ 'Content-Type': 'application/json' })}).pipe(
-      tap(
-        data => console.log(data),
-        error => console.log(error)
-      ));
+    return this.http.put(this.endpoint + '/updateclinician', user,
+      {headers : new HttpHeaders({ 'Content-Type': 'application/json' })});
   }
 
   getClinician(userId: string): Observable<FFQClinicianResponse> {
@@ -85,7 +77,6 @@ export class ClinicianService {
 
   /*DELETE: delete food item from the database */
   deleteItem(userId: string): Observable <any>{
-    console.log("here" + userId);
     return this.http.delete(this.endpoint + "/delete?userId=" + userId,  { responseType: 'text' })
   }
 }

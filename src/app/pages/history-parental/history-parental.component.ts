@@ -80,7 +80,6 @@ export class HistoryParentalComponent implements OnInit {
        element.dailyAverages = newDailyMap;
        })
 
-       console.log(m);
        this.results = m.reverse();
     }
 

@@ -48,8 +48,6 @@ export class QuestionnairePageComponent implements OnInit {
 
   submitting = false;
 
-
-
   constructor(public foodService: FoodItemService,
               public questService: QuestionnaireValidatorService,
               private activatedRoute: ActivatedRoute,
@@ -105,14 +103,12 @@ export class QuestionnairePageComponent implements OnInit {
       for (const fooditem of this.foodItems) {
         if (!fooditem.disabled) {
           const request = FFQItemCalcRequest.calcRequestFromFoodItem(fooditem);
-          console.log(request.toString());
           itemList.push(request);
         }
       }
 
       this.foodService.calculateNutrientBreakdown(this.userId, this.id, this.infantage, this.gender, itemList)
         .subscribe( (results) => {
-            console.log(results);
             const dailyMap: Map<string, number> = new Map();
             const weeklyMap: Map<string, number> = new Map();
             for (const nutrient of NutrientConstants.NUTRIENT_NAMES) {
@@ -120,19 +116,10 @@ export class QuestionnairePageComponent implements OnInit {
               const weeklyValue = results.weeklyTotals[nutrient];
               if (dailyValue !== null && dailyValue !== undefined
                 && weeklyValue !== null && weeklyValue !== undefined) {
-                console.log('Nutrient: ' + nutrient + ', Daily Value: ' + dailyValue);
                 dailyMap.set(nutrient, dailyValue);
-                console.log('Nutrient: ' + nutrient + ', Weekly Value: ' + weeklyValue);
                 weeklyMap.set(nutrient, weeklyValue);
               }
-              console.log(this.infantage);
-            }
-            const ffqResult = new FFQResult(dailyMap, weeklyMap);
-            /*
-            const modalRef = this.modalService.open(ResultsPageComponent);
-            modalRef.componentInstance.results = ffqResult;
-            console.log('OPENED MODAL');
-            */
+              }
 
             this.questService.submitQuestionnaire(this.id).subscribe((data: Questionnaire) => {
             this.router.navigateByUrl('/');
@@ -151,28 +138,13 @@ export class QuestionnairePageComponent implements OnInit {
       this.hideSecondaryItems = !this.hideSecondaryItems;
   }
 
-  // private loadFoodItems() {
-  //   this.foodService.getFoodItems().subscribe(data => {
-  //     data.map(response => {
-  //       this.foodItems.push(FFQItem.foodItemFromResponse(response));
-  //     });
-  //     console.log(this.foodItems.length + ' food items returned from server.');
-  //     this.dataLoaded = Promise.resolve(true);
-  //   }, (error: HttpErrorResponse) => this.handleFoodServiceError(error));
-  // }
-
-
   private loadFoodItems() {
     this.foodService.getFoodItems().subscribe(data => {
       data.map(response => {
         this.tmpfoodItems.push(FFQItem.foodItemFromResponse(response));
-        // console.log(FFQItem.foodItemFromResponse(response).name);
       });
 
       this.foodItems = this.getFoodItemByPosition(this.tmpfoodItems);
-
-      console.log(this.tmpfoodItems.length + 'tmp food items returned from server.');
-      console.log(this.foodItems.length + ' food items returned from server.');
 
       this.dataLoaded = Promise.resolve(true);
     }, (error: HttpErrorResponse) => this.handleFoodServiceError(error));
