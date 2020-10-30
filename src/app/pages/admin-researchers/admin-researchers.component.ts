@@ -4,13 +4,12 @@ import { FFQClinic } from 'src/app/models/ffqclinic';
 import { FFQParent } from 'src/app/models/ffqparent';
 import { FFQClinician } from 'src/app/models/ffqclinician';
 import { Observable } from 'rxjs';
-import { FFQClinicResponse } from 'src/app/models/ffqclinic-response'; // change to research
-import { FFQClinicianResponse } from 'src/app/models/ffqclinician-response'; // change to research
-import { FFQParentResponse } from 'src/app/models/ffqparent-response';
-import { ClinicService } from 'src/app/services/clinic/clinic-service'; // change to research
+import { FFQResearchtResponse } from 'src/app/models/ffqresearch-response'; 
+import { FFQClinicianResponse } from 'src/app/models/ffqclinician-response'; // change to research add institution response
+import { ResearchService } from 'src/app/services/research/research-service';
 import { ParentService } from 'src/app/services/parent/parent-service';
-import { ClinicianService } from 'src/app/services/clinician/clinician-service'; // change to research
-import { ClinicianPipe } from 'src/app/pipes/clinicianFilter.pipe'; // change to research
+import { ClinicianService } from 'src/app/services/clinician/clinician-service'; // change to research add institution service
+import { ClinicianPipe } from 'src/app/pipes/clinicianFilter.pipe'; // change to research add ResearchPipe
 import { ParentPipe } from 'src/app/pipes/parentFilter.pipe';
 
 @Component({

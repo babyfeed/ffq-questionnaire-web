@@ -15,12 +15,9 @@ import { FormGroup, FormControl, Validators, ReactiveFormsModule, NgForm } from 
 import { Subscription } from 'rxjs/internal/Subscription';
 import { FormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { ClinicianService } from 'src/app/services/clinician/clinician-service';
+import { ResearchService } from 'src/app/services/research/research-service';
 import { FFQClinicianResponse } from 'src/app/models/ffqclinician-response';
-import { FFQClinician } from 'src/app/models/ffqclinician';
-import { FFQClinicResponse } from 'src/app/models/ffqclinic-response';
-import { ClinicService } from 'src/app/services/clinic/clinic-service';
-import { FFQClinic } from 'src/app/models/ffqclinic';
+import { FFQResearchtResponse} from 'src/app/models/ffqresearch-response';
 import { ParentService } from 'src/app/services/parent/parent-service';
 import { FFQParentResponse } from 'src/app/models/ffqparent-response';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
