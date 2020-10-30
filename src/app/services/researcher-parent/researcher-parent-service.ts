@@ -13,7 +13,7 @@ const httOptions ={ headers: new HttpHeaders({'Content-Type':'aplication/json'})
 
 export class ResearcherParentService {
 
-  endpoint = environment.userServiceUrl + '/ffq/researcher_parents';
+  endpoint = environment.userServiceUrl + '/ffq/participants';
 
 
   constructor(private http: HttpClient) { }
