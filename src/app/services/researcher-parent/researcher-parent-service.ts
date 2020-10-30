@@ -13,14 +13,14 @@ const httOptions ={ headers: new HttpHeaders({'Content-Type':'aplication/json'})
 
 export class ResearcherParentService {
 
-  endpoint = environment.userServiceUrl + '/ffq/researcher_parents';
+  endpoint = environment.userServiceUrl + '/ffq/participant';
 
 
   constructor(private http: HttpClient) { }
 
   addParent(user : FFQResearcherParentResponse): Observable<any> {
 
-    return this.http.post(this.endpoint + '/createparent', user, {headers : new HttpHeaders({ 'Content-Type': 'application/json' })}).pipe(
+    return this.http.post(this.endpoint + '/createparticipant', user, {headers : new HttpHeaders({ 'Content-Type': 'application/json' })}).pipe(
       tap(
         data => console.log(data),
         error => console.log(error)
@@ -29,7 +29,7 @@ export class ResearcherParentService {
 
   updateParent(user : FFQResearcherParentResponse): Observable<any> {
 
-    return this.http.put(this.endpoint + '/updateparent', user, {headers : new HttpHeaders({ 'Content-Type': 'application/json' })}).pipe(
+    return this.http.put(this.endpoint + '/updateparticipant', user, {headers : new HttpHeaders({ 'Content-Type': 'application/json' })}).pipe(
       tap(
         data => console.log(data),
         error => console.log(error)

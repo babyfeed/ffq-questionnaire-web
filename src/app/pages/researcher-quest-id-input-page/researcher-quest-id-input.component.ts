@@ -15,7 +15,7 @@ import { AuthenticationService } from 'src/app/services/authentication/authentic
   styleUrls: ['./researcher-quest-id-input.component.css']
 })
 export class ResearchQuestIdInputComponent {
-  TITLE = 'Research Parent Portal';
+  TITLE = 'Research Participant Portal';
   questionnaire: QuestionnaireResponse;
 
   constructor(
@@ -34,7 +34,7 @@ export class ResearchQuestIdInputComponent {
           dialogRef.componentInstance.message = 'Please check the ID and try again or contact the issuer.';
         } else {
           console.log('Valid questionnaire Id supplied: ' + id);
-          const urlString = '/researcher_parents/questionnaire/' + id;
+          const urlString = '/participant/questionnaire/' + id;
           this.router.navigateByUrl(urlString);
         }
       } else {
@@ -47,7 +47,7 @@ export class ResearchQuestIdInputComponent {
 
   startQuestionnaireResearch() {
     const id = this.authenticationService.currentUserId + '-' + Date.now();
-    this.router.navigateByUrl('/researcher_parents/questionnaire/' + id);
+    this.router.navigateByUrl('/participant/questionnaire/' + id);
   }
 
   private handleQuestionnaireError(error: Error) {
