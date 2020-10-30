@@ -187,13 +187,13 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: "participants/home",
+    path: "participant/home",
     component: ResearchQuestIdInputComponent,
     canActivate: [AuthGuard],
     
   },
   {
-    path: "participants/questionnaire/:id",
+    path: "participant/questionnaire/:id",
     component: QuestionnairePageComponent,
   },
 
