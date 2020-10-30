@@ -75,7 +75,7 @@ import { ResearchPageComponent } from "./pages/research-page/research-page.compo
 import { ResearchUsersComponent } from './pages/research-users/research-users.component';
 import { ResearchQuestIdInputComponent } from "./pages/researcher-quest-id-input-page/researcher-quest-id-input.component"
 import { CreateParentModalComponent } from './components/create-parent-modal/create-parent-modal.component';
-
+import { SampleQuestionnairePageComponent } from "./pages/research-sample-questionnaire-page/research-questionnaire-page.component"
 import { ResearchHistoryComponent } from "./pages/research-history/research-history.component";
 
 @NgModule({
@@ -118,6 +118,7 @@ import { ResearchHistoryComponent } from "./pages/research-history/research-hist
     UserComponent,
     ClinicUserComponent,
     AdminClinicsComponent,
+    SampleQuestionnairePageComponent,
     ClinicComponent,
     LogoutComponent,
     ClinicianPipe,

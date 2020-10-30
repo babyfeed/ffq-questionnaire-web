@@ -32,6 +32,8 @@ import { HttpClientModule } from "@angular/common/http";
 import { LogoutComponent } from "./pages/logout/logout.component";
 import { ClinicTrackerHistoryComponent } from "./pages/clinic-tracker-history/clinic-tracker-history.component";
 import { ResearchQuestIdInputComponent } from "./pages/researcher-quest-id-input-page/researcher-quest-id-input.component"
+import { SampleQuestionnairePageComponent } from "./pages/research-sample-questionnaire-page/research-questionnaire-page.component"
+
 
 
 const routes: Routes = [
@@ -186,6 +188,12 @@ const routes: Routes = [
     component: ResearchHistoryComponent,
     canActivate: [AuthGuard],
   },
+  {
+    path: "researcher/samplequestionnaire",
+    component: SampleQuestionnairePageComponent,
+    canActivate: [AuthGuard],
+  },
+  
   {
     path: "participant/home",
     component: ResearchQuestIdInputComponent,
