@@ -4,6 +4,8 @@
     <div class="container mt-3" align="right">
         <button routerLink='/admin/clinic/new' type="submit" mat-raised-button>New Clinic...</button>
     </div>
+
+
     <div class="container mt-3">
         <span> {{ ffqclinicList.length }} {{ ffqclinicList.length | i18nPlural: {'=1': 'clinic', 'other': 'clinics'} }} </span>
         <table class="table table-bordered table-inverse">
@@ -28,6 +30,6 @@
             <td> {{ c.cliniciansLimit }} </td>
         </tr>
         </table>
-
     </div>
+
 </div>

@@ -70,11 +70,11 @@
                 <br>
                 <label for="cliniciansLimit" style="font-weight: bold"> Number of Clinicians Limit </label>
                 <input placeholder="100" width="25" style="border-color: mediumblue; border-width: 0.05cm" type="number"
-                       class="form-control" id="cliniciansLimit" name="usersLimit" [(ngModel)]="cliniciansLimit"/>
+                       class="form-control" id="cliniciansLimit" name="usersLimit" [(ngModel)]="cliniciansLimit" min="1" required/>
                 <br>
                 <label for="parentsLimit" style="font-weight: bold"> Number of Parents Limit </label>
                 <input placeholder="100" width="25" style="border-color: mediumblue; border-width: 0.05cm" type="number"
-                       class="form-control" id="parentsLimit" name="parentsLimit" [(ngModel)]="parentsLimit"/>
+                       class="form-control" id="parentsLimit" name="parentsLimit" [(ngModel)]="parentsLimit" min="1" required/>
             </div>
           </div>
       <!-- Add Clinic ends here -->
