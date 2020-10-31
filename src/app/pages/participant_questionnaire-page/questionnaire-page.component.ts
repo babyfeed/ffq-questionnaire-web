@@ -17,7 +17,6 @@ import { Validators, FormControl } from '@angular/forms';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import {MatDialog} from "@angular/material/dialog";
 
-
 @Component({
   selector: 'app-questionnaire-page',
   templateUrl: './questionnaire-page.component.html',
@@ -44,9 +43,12 @@ export class QuestionnairePageComponent implements OnInit {
   questionnaire: QuestionnaireResponse;
   hideSecondaryItems = false;
   dataLoaded: Promise<boolean>;
+
   foodItems: FFQItem[] = [];
   tmpfoodItems: FFQItem[] = [];
+
   submitting = false;
+
 
 
   constructor(public foodService: FoodItemService,
@@ -63,12 +65,8 @@ export class QuestionnairePageComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(params => {
         this.userId = this.authenticationService.currentUserId;
-        this.id = params.get('id');   
-        
-        //use the usertype to determine what collection to store the questionnaire  
+        this.id = params.get('id');
         this.userType =  this.authenticationService.currentUserValue[0].usertype;
-        
-        
       });
     this.loadFoodItems();
   }
@@ -96,7 +94,7 @@ export class QuestionnairePageComponent implements OnInit {
       dialogRef.componentInstance.message = 'Please ensure all required fields are completed.';
       this.submitting = false;
 
-    } else { //here is where the questionnaire is submitted**
+    } else {
 
       log('Questionnaire submitted successfully.');
       const itemList: FFQItemCalcRequest[] = [];
@@ -108,7 +106,7 @@ export class QuestionnairePageComponent implements OnInit {
         }
       }
 
-      this.foodService.calculateNutrientBreakdown(this.userId, this.id, this.userType, this.infantage, this.gender, itemList)
+      this.foodService.calculateNutrientBreakdown(this.userId, this.userType, this.id, this.infantage, this.gender, itemList)
         .subscribe( (results) => {
             console.log(results);
             const dailyMap: Map<string, number> = new Map();
