@@ -61,6 +61,7 @@ export class AdminUsersComponent implements OnInit {
   public filtered: boolean;
   public filtered_clinics: String[] = [];
   checked_users: string[] = [];
+  public clinicianNames: string[] =[];
 
   ngOnInit() {
     this.clinicNames.push("");
@@ -70,6 +71,20 @@ export class AdminUsersComponent implements OnInit {
     this.showResearch = true;
     this.filtered = false;
     this.loadAllUsers();
+    this.clinicianNames.push("");
+    const clinicList: Observable<FFQClinicResponse[]> = this.clinicService.getAllClinics();
+    clinicList.subscribe(a => {
+      this.ffqclinicList = a;
+    });
+
+    var clinicianList: Observable<FFQClinicianResponse[]> = this.clinicianService.getAllClinicians();
+    clinicianList.subscribe(a => {
+      this.ffqclinicianList = a;
+      for(var i = 0; i < a.length; i++)
+      {
+        this.clinicianNames.push(a[i].abbreviation + " " + a[i].firstname + " " + a[i].lastname);
+      }
+    });
   }
 
   toggleParents() {
@@ -87,6 +102,7 @@ export class AdminUsersComponent implements OnInit {
   toggleResearch() {
     this.showResearch = !this.showResearch;
   }
+
 
   filterByClinic(clinic_name: string) {
     const index = this.filtered_clinics.indexOf(clinic_name);
