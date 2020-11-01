@@ -17,7 +17,6 @@ import { TrackerPageComponent } from "./pages/tracker-page/tracker-page.componen
 import { TrackerHistoryPageComponent } from "./pages/tracker-history-page/tracker-history-page.component";
 import { HistoryParentalComponent } from "./pages/history-parental/history-parental.component";
 import { LoginComponent } from "./pages/login";
-import { LoginHeaderComponent } from "./pages/login-header";
 import { ClinicQuestResultsComponent } from "./pages/clinic-quest-results";
 import { ClinicRecommendComponent } from "./pages/clinic-recommend";
 import { AdminUsersComponent } from "./pages/admin-users";
@@ -25,9 +24,6 @@ import { UserComponent } from "./pages/user/user.component";
 import { ClinicUserComponent } from "./pages/clinic-user/clinic-user.component";
 import { AdminClinicsComponent } from "./pages/admin-clinics";
 import { ClinicComponent } from "./pages/clinic/clinic.component";
-import { FormsModule } from "@angular/forms";
-import { BrowserModule } from "@angular/platform-browser";
-import { HttpClientModule } from "@angular/common/http";
 import { LogoutComponent } from "./pages/logout/logout.component";
 import { ClinicTrackerHistoryComponent } from "./pages/clinic-tracker-history/clinic-tracker-history.component";
 import { AdminTrackerHistoryComponent } from "./pages/admin-tracker-history/admin-tracker-history.component";
@@ -112,7 +108,9 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: "admin/tracker-history", component: AdminTrackerHistoryComponent, canActivate: [AuthGuard]
+    path: "admin/tracker-history",
+    component: AdminTrackerHistoryComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: "clinic/results",
