@@ -5,12 +5,12 @@ import { AuthenticationService } from 'src/app/services/authentication/authentic
 import { User } from 'src/app/services/authentication/temp-user';
 
 @Component({
-  selector: 'app-researchparental-header',
+  selector: 'researchparental-header',
   templateUrl: './research-parental-header.component.html',
   styleUrls: ['./research-parental-header.component.css']
 })
 export class ResearchParentalHeaderComponent {
-    TITLE = 'Research Parent Portal';
+    TITLE = 'Participant Portal';
     currentUser: User;
     router: Router;
 

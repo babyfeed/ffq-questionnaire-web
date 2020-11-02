@@ -26,6 +26,7 @@ export class ResultsService {
           return new FFQResultsResponse(
             item.questionnaireId,
             item.userId,
+            item.userType,
             item.patientName,
             item.ageInMonths,
             item.userChoices,
@@ -45,6 +46,7 @@ export class ResultsService {
             return new FFQResultsResponse(
               item.questionnaireId,
               item.userId,
+              item.userType,
               item.patientName,
               item.ageInMonths,
               item.userChoices,
@@ -56,6 +58,26 @@ export class ResultsService {
           });
         }));
       }
+
+      getResultsByUserType(userType: string): Observable<FFQResultsResponse[]> {
+        return this.http.get(this.endpoint + '/type/' + userType).pipe(
+          map((res: any) => {
+            return res.map(item => {
+              return new FFQResultsResponse(
+                item.questionnaireId,
+                item.userId,
+                item.userType,
+                item.patientName,
+                item.ageInMonths,
+                item.userChoices,
+                item.weeklyTotals,
+                item.dailyAverages,
+                item.feedback,
+                item.gender
+              );
+            });
+          }));
+        }
 
       submitFeedback(id: string, feedback: string): Observable<any> {
         return this.http.put(this.endpoint + '/update', {

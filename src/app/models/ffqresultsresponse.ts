@@ -1,6 +1,7 @@
 export class FFQResultsResponse {
     questionnaireId: string;
     userId: string;
+    userType: string;
     patientName: string;
     feedback: string;
     ageInMonths: number;
@@ -11,9 +12,10 @@ export class FFQResultsResponse {
     showFeedback: boolean;
     gender: string;
 
-    constructor(id: string, userId: string, name: string, age: number, userChoices:any, weeklyTotals: Map<string, number>, dailyAverages: any, feedback: string, gender: string) {
+    constructor(id: string, userId: string, userType: string, name: string, age: number, userChoices:any, weeklyTotals: Map<string, number>, dailyAverages: any, feedback: string, gender: string) {
       this.questionnaireId = id;
       this.userId = userId;
+      this.userType = userType;
       this.patientName = name;
       this.ageInMonths = age;
       this.userChoices = userChoices;

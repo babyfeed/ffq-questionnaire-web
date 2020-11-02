@@ -38,9 +38,9 @@ export class AuthGuard implements CanActivate {
         if (urlType != "/researcher") {
           this.router.navigate(["/researcher/home"]);
         }
-      } else if (currentUser[0].usertype == "researcher_parents") {
-        if (urlType != "/researcher_parents") {
-          this.router.navigate(["/researcher_parents/home"]);
+      } else if (currentUser[0].usertype == "participant") {
+        if (urlType != "/participant") {
+          this.router.navigate(["/participant/home"]);
         }
       }
 

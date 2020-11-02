@@ -1,0 +1,20 @@
+<div class="container">
+    <h2 matDialogTitle>Nutrient Results</h2>
+    <mat-dialog-content>
+        <div class="tableDiv">
+            <table *ngFor="let result of recommendedNutrients">
+                <tr>
+                    <th>Nutrient name</th>
+                    <th>User input calculations</th>
+                </tr>
+                <tr *ngFor="let nutrient of result.recommendationsList">
+                    <td>{{nutrient.nutrientName}}</td>
+                    <td style="text-align: center">{{nutrient.calculatedAmount| number: '1.2-2'}}</td>
+                </tr>
+            </table>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button class="dialog-button" mat-raised-button matDialogClose="cancel" color="primary">Ok</button>
+    </mat-dialog-actions>
+</div>

@@ -25,6 +25,8 @@ import { FlashMessagesModule } from "angular2-flash-messages";
 import { Routes, RouterModule } from "@angular/router";
 import { RecommendModalComponent } from "./components/recommend-modal/recommend-modal.component";
 import { FoodRecommendModalComponent } from "./components/food-recommend-modal/food-recommend-modal.component";
+import { ResearchRecommendModalComponent } from 'src/app/components/research-recommend-modal/research-recommend-modal.component';
+import { FoodItemsModalComponent } from "./components/food-items-modal/food-items-modal.component";
 import { ClinicalPortalComponent } from "./pages/clinical-portal/clinical-portal.component";
 import { ClinicalHeaderComponent } from "./pages/clinical-header/clinical-header.component";
 import { ParentalHeaderComponent } from "./pages/parental-header/parental-header.component";
@@ -75,7 +77,7 @@ import { ResearchPageComponent } from "./pages/research-page/research-page.compo
 import { ResearchUsersComponent } from './pages/research-users/research-users.component';
 import { ResearchQuestIdInputComponent } from "./pages/researcher-quest-id-input-page/researcher-quest-id-input.component"
 import { CreateParentModalComponent } from './components/create-parent-modal/create-parent-modal.component';
-
+import { SampleQuestionnairePageComponent } from "./pages/research-sample-questionnaire-page/research-questionnaire-page.component"
 import { ResearchHistoryComponent } from "./pages/research-history/research-history.component";
 
 @NgModule({
@@ -100,6 +102,8 @@ import { ResearchHistoryComponent } from "./pages/research-history/research-hist
     PopupComponent,
     RecommendModalComponent,
     FoodRecommendModalComponent,
+    FoodItemsModalComponent,
+    ResearchRecommendModalComponent,
     ClinicalPortalComponent,
     ClinicalHeaderComponent,
     ParentalHeaderComponent,
@@ -118,6 +122,7 @@ import { ResearchHistoryComponent } from "./pages/research-history/research-hist
     UserComponent,
     ClinicUserComponent,
     AdminClinicsComponent,
+    SampleQuestionnairePageComponent,
     ClinicComponent,
     LogoutComponent,
     ClinicianPipe,
