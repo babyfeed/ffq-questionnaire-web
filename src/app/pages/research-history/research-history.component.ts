@@ -14,15 +14,16 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 // For getting results
-import { ResearchResultsService } from "src/app/services/researcher-results/researcher-results";
+import { ResultsService } from "src/app/services/results/results";
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { NutrientsRecommendationsService } from 'src/app/services/nutrients-recommendations/nutrients-recommendations.service';
-import { FFQResearchResultsResponse } from 'src/app/models/ffqresearchresultsresponse';
+import { ResearchRecommendModalComponent } from 'src/app/components/research-recommend-modal/research-recommend-modal.component';
+import { FFQResultsResponse } from 'src/app/models/ffqresultsresponse';
 import { NutrientConstants } from 'src/app/models/NutrientConstants';
 import { Observable } from 'rxjs';
 import { FoodRecommendationsService } from 'src/app/services/food-recommendation-service/food-recommendations.service';
 import { ErrorDialogPopupComponent } from 'src/app/components/error-dialog-popup/error-dialog-popup.component';
-import { FoodRecommendModalComponent } from 'src/app/components/food-recommend-modal/food-recommend-modal.component';
+import { FoodItemsModalComponent } from 'src/app/components/food-items-modal/food-items-modal.component';
 
 
 @Component({
@@ -37,7 +38,7 @@ export class ResearchHistoryComponent implements OnInit {
 
   MESSAGE = "No questionnaires have been submitted yet!";
 
-  results: FFQResearchResultsResponse[] = [];
+  results: FFQResultsResponse[] = [];
 
   constructor(
     private errorDialog: MatDialog,
@@ -45,8 +46,9 @@ export class ResearchHistoryComponent implements OnInit {
     private modalService: NgbModal,
     private http: HttpClient,
     private authenticationService: AuthenticationService,
-    public resultsService: ResearchResultsService,
-    public foodRecommendationsService: FoodRecommendationsService
+    public resultsService: ResultsService,
+    public foodRecommendationsService: FoodRecommendationsService,
+    public nutrientsRecommendationsService: NutrientsRecommendationsService,
 
   ) {}
 
@@ -57,12 +59,12 @@ export class ResearchHistoryComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getResultsByUser();
+    this.getParticipantResult();
   }
 
 
-  private getResultsByUser() {
-    const oldList: Observable<FFQResearchResultsResponse[]> = this.resultsService.getAllResults();
+  private getParticipantResult() {
+    const oldList: Observable<FFQResultsResponse[]> = this.resultsService.getResultsByUserType("participant");
     const reqList: string[] = NutrientConstants.NUTRIENT_NAMES;
 
     oldList.subscribe(m => {
@@ -103,8 +105,26 @@ export class ResearchHistoryComponent implements OnInit {
     );
   }
 
+  private getNutrientsRecommendations(questionnaireId: string) {
+    this.nutrientsRecommendationsService.getNutrientsRecommendationsByQuestionnaireId(questionnaireId).subscribe(
+      data => {
+        this.onModalRequest(questionnaireId);
+      },
+      error => {
+        const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+        dialogRef.componentInstance.title = error.error.message;
+        dialogRef.componentInstance.router = this.router;
+      }
+    );
+  }
+
+  onModalRequest(id: string): void {
+    const modalRef = this.errorDialog.open(ResearchRecommendModalComponent);
+    modalRef.componentInstance.id = id;
+  }
+
   onModalRequestFood(id: string): void {
-    const modalRef = this.errorDialog.open(FoodRecommendModalComponent);
+    const modalRef = this.errorDialog.open(FoodItemsModalComponent);
     modalRef.componentInstance.id = id;
   }
  

@@ -27,21 +27,24 @@
                         <div class="col-2" style="text-align:center">
                             <label><strong>Infant gender</strong></label>
                         </div>
-                        <div class="col-2" style="text-align:center">
-                            <label><strong>Results</strong></label>
+                        <div class="col-1" style="text-align:center">
+                            <label><strong>Nutrients</strong></label>
+                        </div>
+                        <div class="col-1" style="text-align:center">
+                            <label><strong>Food Items</strong></label>
                         </div>
                     </div>
 
                     <!--Questionnaire results-->
                     <div class="row">
                         <div class="col-2" style="text-align:center">
-                            {{result.feedback}}
+                            10/31/2020
                         </div>
                         <div class="col-2" style="text-align:center">
                             {{result.questionnaireId}}
                         </div>
                         <div class="col-2" style="text-align:center">
-                            {{result.participantUserId}}
+                            {{result.userId}}
                         </div>
                         <div class="col-2" style="text-align:center">
                             {{result.ageInMonths}}
@@ -49,10 +52,18 @@
                         <div class="col-2" style="text-align:center">
                             {{result.gender}}
                         </div>
-                        <div class="col-2" style="text-align:center">
-                            <button class="btn btn-info" (click)="toggle(i)" id="bt">
-                            {{buttonName}}
-                            </button>
+                        <div class="col-1" style="text-align:center; cursor:pointer">
+                            <a (click)="getNutrientsRecommendations(result.questionnaireId);"><i title="nutrients" class="fa fa-flask"></i></a>
+                        </div>
+                        <div class="col-1" style="text-align:center; cursor:pointer">
+                            <a (click)="getFoodRecommendations(result.questionnaireId);"><i title="fooditems" class="fa fa-cutlery"></i></a>
+                        </div>
+                        <div class="row">
+                            <div class="col-2 offset-9">
+                                <button class="btn btn-info" (click)="toggle(i)" id="bt">
+                                {{buttonName}}
+                                </button>
+                            </div>
                         </div>
                     </div>
 
