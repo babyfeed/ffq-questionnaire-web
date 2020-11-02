@@ -13,47 +13,47 @@ const httOptions ={ headers: new HttpHeaders({'Content-Type':'aplication/json'})
 
 export class ResearcherParentService {
 
-  endpoint = environment.userServiceUrl + '/ffq/researcher_parents';
+  endpoint = environment.userServiceUrl + '/ffq/participants';
 
 
   constructor(private http: HttpClient) { }
 
-  addParent(user : FFQResearcherParentResponse): Observable<any> {
+  // addParent(user : FFQResearcherParentResponse): Observable<any> {
 
-    return this.http.post(this.endpoint + '/createparent', user, {headers : new HttpHeaders({ 'Content-Type': 'application/json' })}).pipe(
-      tap(
-        data => console.log(data),
-        error => console.log(error)
-      ));
-  }
+  //   return this.http.post(this.endpoint + '/createparent', user, {headers : new HttpHeaders({ 'Content-Type': 'application/json' })}).pipe(
+  //     tap(
+  //       data => console.log(data),
+  //       error => console.log(error)
+  //     ));
+  // }
 
-  updateParent(user : FFQResearcherParentResponse): Observable<any> {
+  // updateParent(user : FFQResearcherParentResponse): Observable<any> {
 
-    return this.http.put(this.endpoint + '/updateparent', user, {headers : new HttpHeaders({ 'Content-Type': 'application/json' })}).pipe(
-      tap(
-        data => console.log(data),
-        error => console.log(error)
-      ));
-  }
+  //   return this.http.put(this.endpoint + '/updateparent', user, {headers : new HttpHeaders({ 'Content-Type': 'application/json' })}).pipe(
+  //     tap(
+  //       data => console.log(data),
+  //       error => console.log(error)
+  //     ));
+  // }
 
-  getParent(userId: string): Observable<FFQResearcherParentResponse> {
-    return this.http.get(this.endpoint + '/' + userId).pipe(
-      map((item: any) => {
-          return new FFQResearcherParentResponse(
-            item.userId,
-            item.username,
-            item.userpassword,
-            item.usertype,
-            item.firstname,
-            item.lastname,
-            item.assignedResearcherOrg,
-            item.assignedResearcherUser,
-            item.childrennames,
-            item.isactive
-          );
-      })
-    );
-  }
+  // getParent(userId: string): Observable<FFQResearcherParentResponse> {
+  //   return this.http.get(this.endpoint + '/' + userId).pipe(
+  //     map((item: any) => {
+  //         return new FFQResearcherParentResponse(
+  //           item.userId,
+  //           item.username,
+  //           item.userpassword,
+  //           item.usertype,
+  //           item.firstname,
+  //           item.lastname,
+  //           item.assignedResearcherOrg,
+  //           item.assignedResearcherUser,
+  //           item.childrennames,
+  //           item.isactive
+  //         );
+  //     })
+  //   );
+  // }
 
   getAllParents(): Observable<FFQResearcherParentResponse[]> {
     return this.http.get(this.endpoint + '/all').pipe(
@@ -62,12 +62,11 @@ export class ResearcherParentService {
           return new FFQResearcherParentResponse(
             item.userId,
             item.username,
-            item.userpassword,
             item.usertype,
             item.firstname,
             item.lastname,
-            item.assignedclinic,
-            item.assignedclinician,
+            item.assignedResearcherInst,
+            item.assignedResearcherUser,
             item.childrennames,
             item.isactive
           );

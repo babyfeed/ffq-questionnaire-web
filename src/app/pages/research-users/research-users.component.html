@@ -3,12 +3,12 @@
   <div class="container mt-3" align="right">
 
       <!-- Need to add route here for new parent -->
-      <button (click)="onOpenCreateParentModal()" mat-raised-button>Create parent account(s)...</button>
+      <button (click)="onOpenCreateParentModal()" mat-raised-button>Create participant account(s)...</button>
   </div>
   <div class="container mt-3">
 
       <!-- Just like in the admin admin user tab add the number of users here -->
-      <span>3 user(s)</span>
+      <span>{{ participants.length }} user(s)</span>
 
 
       <!-- The block below is used to filter by the diff user types. Might only need filter by institution -->
@@ -38,22 +38,12 @@
               <th width="60%"> Institution </th>
 
           </tr>
+          <tr *ngFor="let participant of participants;">
+            <td> {{ participant.userId}} </td>
+            <td> {{ participant.usertype }} </td>
+            <td> {{ participant.assignedResearcherInst }} </td>
+          </tr>
 
-          <tr>
-            <td> parent1 </td>
-            <td> Parent </td>
-            <td> University of Miami </td>
-          </tr>
-          <tr>
-            <td> parent2 </td>
-            <td> Parent </td>
-            <td> University of Miami </td>
-          </tr>
-          <tr>
-            <td> parent3 </td>
-            <td> Parent </td>
-            <td> University of Miami </td>
-          </tr>
           <!-- Need to map in here all rows with the actual data from db. Static data for now -->
           <!-- <tr *ngFor="let u of ffqclinicianList | searchFilter: search; index as i" [hidden]="!showClinicians || (filtered && filtered_clinics.indexOf(clinicNames[u.assignedclinic]) === -1)">
               <td><a [routerLink]="['/admin/user/c', u.userId]"> {{ u.username }} </a></td>
@@ -73,7 +63,6 @@
               <td> {{ clinicNames[u.assignedclinic] }} </td>
 
           </tr> -->
-
       </table>
 
   </div>

@@ -11,18 +11,18 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { MatDialog } from "@angular/material/dialog";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { FoodItemService } from "../../services/food-item/food-item.service";
+import { ResearcherParentService } from "../../services/researcher-parent/researcher-parent-service";
 import { HttpErrorResponse } from "@angular/common/http";
 import { ErrorDialogPopupComponent } from "src/app/components/error-dialog-popup/error-dialog-popup.component";
 import { FFQFoodNutrientsResponse } from "src/app/models/ffqfoodnutrients-response";
 import { PopupComponent } from "src/app/components/popup/popup.component";
 import { FlashMessagesService } from "angular2-flash-messages";
-import { FFQFoodItemResponse } from "src/app/models/ffqfooditem-response";
 import { moveItemInArray } from "@angular/cdk/drag-drop";
 import { CdkDragDrop } from "@angular/cdk/drag-drop";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { CreateParentModalComponent} from "src/app/components/create-parent-modal/create-parent-modal.component"
+import { FFQResearcherParentResponse } from 'src/app/models/ffqresearcherparent-response';
 
 @Component({
   selector: "app-questionnaire-page",
@@ -35,7 +35,7 @@ export class ResearchUsersComponent implements OnInit {
   endpoint = environment.foodServiceUrl + "/ffq";
 
   constructor(
-    public foodService: FoodItemService,
+    public researchParentService: ResearcherParentService,
     private activatedRoute: ActivatedRoute,
     private errorDialog: MatDialog,
     private submissionErrorDialog: MatDialog,
@@ -47,13 +47,12 @@ export class ResearchUsersComponent implements OnInit {
     private http: HttpClient
   ) {}
 
-  foodNutrients: FFQFoodNutrientsResponse[] = [];
   dataLoaded: Promise<boolean>;
 
-  foodItems: FFQFoodItemResponse[] = [];
+  participants: FFQResearcherParentResponse[] = [];
 
   ngOnInit() {
-    this.loadFoodsAndNutrients();
+    this.findAllParticipants();
 
     /*let i: any;
 
@@ -73,89 +72,104 @@ export class ResearchUsersComponent implements OnInit {
     });
   }
 
-  private loadFoodsAndNutrients() {
-    this.foodService.getAllFoods().subscribe(
-      (data) => {
-        data.map((response) => {
-          this.foodItems.push(response);
-          // this.foodNutrients.push(response);
-        });
-        console.log(this.foodItems);
-        console.log(
-          this.foodNutrients.length +
-            " foods and its nutrients were returned from server."
-        );
-        this.foodItems = this.orderFoodItems(this.foodItems);
-        this.dataLoaded = Promise.resolve(true);
-      },
-      (error: HttpErrorResponse) => this.handleFoodServiceError(error)
-    );
-  }
-  //added by teriq douglas
-  private orderFoodItems(items: FFQFoodItemResponse[]) {
-    var orderedItems = items.sort(function (a, b) {
-      return a.itemPosition - b.itemPosition;
-    });
-    return orderedItems;
-  }
+    private findAllParticipants() {
+      this.researchParentService.getAllParents().subscribe(
+        (data) => {
+          data.map((response) => {
+            this.participants.push(response);
+            // this.foodNutrients.push(response);
+          });
+          console.log(this.participants);
+          this.dataLoaded = Promise.resolve(true);
+        },
+        (error: HttpErrorResponse) => this.handleFoodServiceError(error)
+      );
+    }
+
+  // private loadFoodsAndNutrients() {
+  //   this.foodService.getAllFoods().subscribe(
+  //     (data) => {
+  //       data.map((response) => {
+  //         this.foodItems.push(response);
+  //         // this.foodNutrients.push(response);
+  //       });
+  //       console.log(this.foodItems);
+  //       console.log(
+  //         this.foodNutrients.length +
+  //           " foods and its nutrients were returned from server."
+  //       );
+  //       this.foodItems = this.orderFoodItems(this.foodItems);
+  //       this.dataLoaded = Promise.resolve(true);
+  //     },
+  //     (error: HttpErrorResponse) => this.handleFoodServiceError(error)
+  //   );
+  // }
+
+  // Order participants
+  // private orderFoodItems(items: FFQFoodItemResponse[]) {
+  //   var orderedItems = items.sort(function (a, b) {
+  //     return a.itemPosition - b.itemPosition;
+  //   });
+  //   return orderedItems;
+  // }
 
   onOpenCreateParentModal(): void {
     const modalRef = this.modalService.open(CreateParentModalComponent);
   }
 
-  //added by teriq douglas
-  onDrop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.foodItems, event.previousIndex, event.currentIndex);
-    let i: any;
+  // //added by teriq douglas
+  // onDrop(event: CdkDragDrop<string[]>) {
+  //   moveItemInArray(this.foodItems, event.previousIndex, event.currentIndex);
+  //   let i: any;
 
-    //update each food item with a new itemPosition
-    for (i in this.foodItems) {
-      this.foodItems[i].itemPosition = ++i;
-    }
-    //for loop with put calls for each element
-    for (let i = 0; i < this.foodItems.length; i++) {
-      this.update(i);
-    }
+  //   //update each food item with a new itemPosition
+  //   for (i in this.foodItems) {
+  //     this.foodItems[i].itemPosition = ++i;
+  //   }
+  //   //for loop with put calls for each element
+  //   for (let i = 0; i < this.foodItems.length; i++) {
+  //     this.update(i);
+  //   }
 
-    //or swap only 2 elements
-    /*var temp = this.foodItems[event.previousIndex].itemPosition;
-            this.foodItems[event.previousIndex].itemPosition = this.foodItems[event.currentIndex].itemPosition
-            this.foodItems[event.currentIndex].itemPosition = temp;*/
+  //   //or swap only 2 elements
+  //   /*var temp = this.foodItems[event.previousIndex].itemPosition;
+  //           this.foodItems[event.previousIndex].itemPosition = this.foodItems[event.currentIndex].itemPosition
+  //           this.foodItems[event.currentIndex].itemPosition = temp;*/
 
-    /*this.http.put(this.endpoint + '/update/' + this.foodItems[event.currentIndex].id, this.foodItems[event.currentIndex],
-                      {headers : new HttpHeaders({ 'Content-Type': 'application/json' })}).subscribe((data) => {
-                                    console.log(data);
-                                  }, (error) => {console.log(error)});
+  //   /*this.http.put(this.endpoint + '/update/' + this.foodItems[event.currentIndex].id, this.foodItems[event.currentIndex],
+  //                     {headers : new HttpHeaders({ 'Content-Type': 'application/json' })}).subscribe((data) => {
+  //                                   console.log(data);
+  //                                 }, (error) => {console.log(error)});
 
-    this.http.put(this.endpoint + '/update/' + this.foodItems[event.previousIndex].id, this.foodItems[event.previousIndex],
-                           {headers : new HttpHeaders({ 'Content-Type': 'application/json' })}).subscribe((data) => {
-                                         console.log(data);
-                                       }, (error) => {console.log(error)});*/
+  //   this.http.put(this.endpoint + '/update/' + this.foodItems[event.previousIndex].id, this.foodItems[event.previousIndex],
+  //                          {headers : new HttpHeaders({ 'Content-Type': 'application/json' })}).subscribe((data) => {
+  //                                        console.log(data);
+  //                                      }, (error) => {console.log(error)});*/
 
-    console.log(this.foodItems);
-  }
+  //   console.log(this.foodItems);
+  // }
 
-  //added by teriq douglas
-  update(i: any) {
-    this.http
-      .put(
-        this.endpoint + "/update/" + this.foodItems[i].id,
-        this.foodItems[i],
-        { headers: new HttpHeaders({ "Content-Type": "application/json" }) }
-      )
-      .subscribe(
-        (data) => {
-          console.log(data);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-    //console.log(this.foodItems[i].id);
-  }
-  /* private updateArray(){
-    this.foodService.getAllFoods().subscribe(data => {
-          data.map(response => {
-            this.foodItems.push(response);
-          });*/
+  // //added by teriq douglas
+  // update(i: any) {
+  //   this.http
+  //     .put(
+  //       this.endpoint + "/update/" + this.foodItems[i].id,
+  //       this.foodItems[i],
+  //       { headers: new HttpHeaders({ "Content-Type": "application/json" }) }
+  //     )
+  //     .subscribe(
+  //       (data) => {
+  //         console.log(data);
+  //       },
+  //       (error) => {
+  //         console.log(error);
+  //       }
+  //     );
+  //   //console.log(this.foodItems[i].id);
+  // }
+  // /* private updateArray(){
+  //   this.foodService.getAllFoods().subscribe(data => {
+  //         data.map(response => {
+  //           this.foodItems.push(response);
+  //         });*/
 }
