@@ -25,8 +25,7 @@ import { FlashMessagesModule } from "angular2-flash-messages";
 import { Routes, RouterModule } from "@angular/router";
 import { RecommendModalComponent } from "./components/recommend-modal/recommend-modal.component";
 import { FoodRecommendModalComponent } from "./components/food-recommend-modal/food-recommend-modal.component";
-import { ResearchRecommendModalComponent } from 'src/app/components/research-recommend-modal/research-recommend-modal.component';
-import { FoodItemsModalComponent } from "./components/food-items-modal/food-items-modal.component";
+import { FoodItemsTableComponent } from "./components/food-items-table/food-items-table.component";
 import { ClinicalPortalComponent } from "./pages/clinical-portal/clinical-portal.component";
 import { ClinicalHeaderComponent } from "./pages/clinical-header/clinical-header.component";
 import { ParentalHeaderComponent } from "./pages/parental-header/parental-header.component";
@@ -101,8 +100,7 @@ import { ResearchHistoryComponent } from "./pages/research-history/research-hist
     PopupComponent,
     RecommendModalComponent,
     FoodRecommendModalComponent,
-    FoodItemsModalComponent,
-    ResearchRecommendModalComponent,
+    FoodItemsTableComponent,
     ClinicalPortalComponent,
     ClinicalHeaderComponent,
     ParentalHeaderComponent,
