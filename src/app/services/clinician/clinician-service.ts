@@ -35,47 +35,14 @@ export class ClinicianService {
   }
 
   getClinician(userId: string): Observable<FFQClinicianResponse> {
-    return this.http.get(this.endpoint + '/' + userId).pipe(
-      map((item: any) => {
-          return new FFQClinicianResponse(
-            item.userId,
-            item.username,
-            item.userpassword,
-            item.usertype,
-            item.abbreviation,
-            item.firstname,
-            item.lastname,
-            item.assignedclinic,
-            item.previousclinics,
-            item.isactive
-          );
-      })
-    );
+    return this.http.get<FFQClinicianResponse>(this.endpoint + '/' + userId);
   }
 
 
   getAllClinicians(): Observable<FFQClinicianResponse[]> {
-    return this.http.get(this.endpoint + '/all').pipe(
-      map((res: any) => {
-        return res.map(item => {
-          return new FFQClinicianResponse(
-            item.userId,
-            item.username,
-            item.userpassword,
-            item.usertype,
-            item.abbreviation,
-            item.firstname,
-            item.lastname,
-            item.assignedclinic,
-            item.previousclinics,
-            item.isactive
-          );
-        });
-      })
-    );
+    return this.http.get<FFQClinicianResponse[]>(this.endpoint + '/all');
   }
 
-  /*DELETE: delete food item from the database */
   deleteItem(userId: string): Observable <any>{
     return this.http.delete(this.endpoint + "/delete?userId=" + userId,  { responseType: 'text' })
   }

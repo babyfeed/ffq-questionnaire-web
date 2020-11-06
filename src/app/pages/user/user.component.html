@@ -15,17 +15,22 @@
             <label style="font-weight: bold"> Account Type </label>
             <br>
             <mat-radio-group aria-label="Select an option">
-              <mat-radio-button value="parent" [checked]="isParent" color="primary" [disabled]="true">Parent</mat-radio-button>
+              <mat-radio-button value="parent" [checked]="isParent" color="primary" disabled="true">Parent</mat-radio-button>
               <br>
-              <mat-radio-button value="clinician" [checked]="isClinician" color="primary" [disabled]="true">Clinician</mat-radio-button>
+              <mat-radio-button value="clinician" [checked]="isClinician" color="primary" disabled="true">Clinician</mat-radio-button>
             </mat-radio-group>
 
             <br>
             <label style="font-weight: bold"> Username </label>
 
             <div *ngIf="isParent">
-              <input style="border-color: gray; border-width: 0.05cm" type="text"
-                     class="form-control" readonly name="username" [(ngModel)]="userAttributes.username">
+              <div style="display: flex; align-items: stretch; justify-content: space-between">
+                <input style="border-color: gray; border-width: 0.05cm; width:68%" type="text"
+                       class="form-control" name="newPassword" [(ngModel)]="userAttributes.userpassword">
+                <button mat-raised-button style="width:30%" class="update" (click)="generatePassword()">
+                  Generate new password
+                </button>
+              </div>
               <br>
               <label style="font-weight: bold">Choose Clinic to assign to:</label>
               <br>
@@ -44,6 +49,15 @@
             <div *ngIf="isClinician">
               <input style="border-color: gray; border-width: 0.05cm" type="text"
                      class="form-control" readonly name="username" [(ngModel)]="userAttributes.username">
+              <br>
+              <label style="font-weight: bold"> Password Reset </label>
+              <div style="display: flex; align-items: stretch; justify-content: space-between">
+                <input style="border-color: gray; border-width: 0.05cm; width:68%" type="text"
+                       class="form-control" name="newPassword" [(ngModel)]="userAttributes.userpassword">
+                <button mat-raised-button style="width:30%" class="update" (click)="generatePassword()">
+                  Generate new password
+                </button>
+              </div>
               <br>
               <label style="font-weight: bold">Choose Clinic to assign to:</label>
               <br>
