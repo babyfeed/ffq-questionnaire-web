@@ -13,7 +13,7 @@ const httOptions ={ headers: new HttpHeaders({'Content-Type':'aplication/json'})
 
 export class ResearcherParentService {
 
-  endpoint = environment.userServiceUrl + '/ffq/participants';
+  endpoint = environment.userServiceUrl + '/ffq/participant';
 
 
   constructor(private http: HttpClient) { }
@@ -55,7 +55,27 @@ export class ResearcherParentService {
   //   );
   // }
 
-  getAllParents(): Observable<FFQResearcherParentResponse[]> {
+  getAllParticipants(instID: string): Observable<FFQResearcherParentResponse[]> {
+    return this.http.get(this.endpoint + '/all/' + instID).pipe(
+      map((res: any) => {
+        return res.map(item => {
+          return new FFQResearcherParentResponse(
+            item.userId,
+            item.username,
+            item.usertype,
+            item.firstname,
+            item.lastname,
+            item.assignedResearcherInst,
+            item.assignedResearcherUser,
+            item.childrennames,
+            item.isactive
+          );
+        });
+      })
+    );
+  }
+
+  getAllParentsOld(): Observable<FFQResearcherParentResponse[]> {
     return this.http.get(this.endpoint + '/all').pipe(
       map((res: any) => {
         return res.map(item => {

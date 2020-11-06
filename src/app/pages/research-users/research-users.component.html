@@ -2,8 +2,8 @@
 <div class="container_page">
   <div class="container mt-3" align="right">
 
-      <!-- Need to add route here for new parent -->
-      <button (click)="onOpenCreateParentModal()" mat-raised-button>Create participant account(s)...</button>
+      <!-- Need to add route here for new participant -->
+      <button (click)="onOpenCreateParticipantModal()" mat-raised-button>Create participant account(s)...</button>
   </div>
   <div class="container mt-3">
 
@@ -39,7 +39,7 @@
 
           </tr>
           <tr *ngFor="let participant of participants;">
-            <td> {{ participant.userId}} </td>
+            <td> {{ participant.username}} </td>
             <td> {{ participant.usertype }} </td>
             <td> {{ participant.assignedResearcherInst }} </td>
           </tr>

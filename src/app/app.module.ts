@@ -76,7 +76,7 @@ import { MatListModule } from "@angular/material/list";
 import { ResearchPageComponent } from "./pages/research-page/research-page.component";
 import { ResearchUsersComponent } from './pages/research-users/research-users.component';
 import { ResearchQuestIdInputComponent } from "./pages/researcher-quest-id-input-page/researcher-quest-id-input.component"
-import { CreateParentModalComponent } from './components/create-parent-modal/create-parent-modal.component';
+import { CreateParticipantModalComponent } from './components/create-participant-modal/create-participant-modal.component';
 import { SampleQuestionnairePageComponent } from "./pages/research-sample-questionnaire-page/research-questionnaire-page.component"
 import { ResearchHistoryComponent } from "./pages/research-history/research-history.component";
 
@@ -135,7 +135,7 @@ import { ResearchHistoryComponent } from "./pages/research-history/research-hist
     TrackerFilterPipe,
     RecommendedFilterPipe,
     LoaderComponent,
-    CreateParentModalComponent
+    CreateParticipantModalComponent
   ],
   imports: [
     BrowserModule,
@@ -169,7 +169,7 @@ import { ResearchHistoryComponent } from "./pages/research-history/research-hist
     RecommendModalComponent,
     FoodRecommendModalComponent,
     DeletePopupComponent,
-    CreateParentModalComponent
+    CreateParticipantModalComponent
   ],
   providers: [
     {
