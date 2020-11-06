@@ -15,13 +15,17 @@ import { FormGroup, FormControl, Validators, ReactiveFormsModule, NgForm } from 
 import { Subscription } from 'rxjs/internal/Subscription';
 import { FormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { ResearchService } from 'src/app/services/research/research-service';
-import { FFQClinicianResponse } from 'src/app/models/ffqclinician-response';
+import { FFQInstitution } from 'src/app/models/ffqinstitution';
+import { FFQInstitutionResponse } from 'src/app/models/ffqinstitution-response';
+import { InstitutionService } from 'src/app/services/institution/institution-service';
+import { FFQResearch } from 'src/app/models/ffqresearch';
 import { FFQResearchtResponse} from 'src/app/models/ffqresearch-response';
+import { ResearchService } from 'src/app/services/research/research-service';
 import { ParentService } from 'src/app/services/parent/parent-service';
 import { FFQParentResponse } from 'src/app/models/ffqparent-response';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DeletePopupComponent } from "src/app/components/delete-popup/delete-popup.component";
+
 
 
 @Component({
@@ -29,67 +33,67 @@ import { DeletePopupComponent } from "src/app/components/delete-popup/delete-pop
   templateUrl: './clinic.component.html',
   styleUrls: ['./clinic.component.css']
 })
-export class ClinicComponent implements OnInit {
+export class ResearchComponent implements OnInit {
 
   private routeSub: Subscription;
   private isNew: boolean;
   private isUpdate: boolean;
   showMsg: boolean = false;
-  name_of_clinic: string;
+  name_of_institution: string;
   usersLimit: number;
   location: string;
-  allClinicians: FFQClinician[] = [];
+  allResearchers: FFQResearch[] = [];
   resultObjectList: Object[] = [];
 
   constructor(
     public parentService: ParentService,
-    public clinicianService: ClinicianService,
+    public researchService: ResearchService,
+    public institutionService: InstitutionService,
     private errorDialog: MatDialog,
     private router: Router,
     private route: ActivatedRoute,
-    public clinicService: ClinicService,
     private modalService: NgbModal
 
     ) { }
 
 
-  clinicians: FFQClinicianResponse[] = [];
+  clinicians: FFQResearchtResponse[] = [];
   parents: FFQParentResponse[] = [];
 
-  clinicAttributes: object;
+  institutionAttributes: object;
   dataLoaded: Promise<boolean>;
 
-  ffqclinic: FFQClinic;
-  clinicnumber: number;
-  clinic: number;
+  ffqinstitution: FFQInstitution;
+  institutionnumber: number;
+  institution: number;
 
-  public ffqclinicianList: FFQClinician[] = [];
-  clinicianNames: string[] = [];
+  public ffqresearcherList: FFQResearch[] = [];
+  researcherNames: string[] = [];
 
 
   ngOnInit() {
 
-    this.clinicianNames.push("");
+    this.researcherNames.push("");
 
     const UserID = this.route.snapshot.paramMap.get('id');
     if (UserID == "new"){
 
       this.isNew = true;
-      this.clinicnumber = this.clinic;
+      this.institutionnumber = this.institution;
       this.dataLoaded = Promise.resolve(true);
     }
     else
     {
       this.isUpdate = true;
-      this.getClinicById(UserID);
+      this.getInstitutionById(UserID);
     }
 
 
-    var clinicianList: Observable<FFQClinicianResponse[]> = this.clinicianService.getAllClinicians();
+    var clinicianList: Observable<FFQResearchtResponse[]> = this.researchService.getAllUsers();
       clinicianList.subscribe(a => {
-      this.ffqclinicianList = a;
+      this.ffqresearcherList = a;
       for (let i = 0; i < a.length; i++) {
-        this.clinicianNames.push(a[i].abbreviation + " " + a[i].firstname + " " + a[i].lastname);
+        this.researcherNames.push(a[i].firstname + " " + a[i].lastname); // removed abreviation because researcher does not contain it
       }
     });
 
@@ -97,18 +101,18 @@ export class ClinicComponent implements OnInit {
 
   addClinic(form:NgForm){
 
-    var clinicList: Observable<FFQClinicResponse[]> = this.clinicService.getAllClinics();
+    var clinicList: Observable<FFQResearchtResponse[]> = this.researchService.getAllUsers();
 
     clinicList.subscribe(data => {
-      var newClinicId = (data.length+1).toString();
-      this.ffqclinic = new FFQClinic(newClinicId, this.location, "", this.name_of_clinic, "", false, this.usersLimit);
-      console.log(this.ffqclinic);
+      var newInstitutionId = (data.length+1).toString();
+      this.ffqinstitution = new FFQInstitution(newInstitutionId, this.location, "", this.name_of_institution, "", false, this.usersLimit);
+      console.log(this.ffqinstitution);
 
-      this.clinicService.addClinic(this.ffqclinic).subscribe(data => {
+      this.institutionService.addInstitution(this.ffqinstitution).subscribe(data => {
           console.log("data: " + data);
           this.router.navigateByUrl('/admin/clinics');
           const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-          dialogRef.componentInstance.title = 'Clinic with id ' +  newClinicId + ' was added!';
+          dialogRef.componentInstance.title = 'Institution with id ' +  newInstitutionId + ' was added!';
       },
       error =>{
           const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
@@ -118,19 +122,19 @@ export class ClinicComponent implements OnInit {
     });
 }
 
-  private getClinicById(id: string)
+  private getInstitutionById(id: string)
   {
-      this.clinicService.getClinic(id).subscribe(data => {
-       this.clinicAttributes = data;
+      this.institutionService.getInstitution(id).subscribe(data => {
+       this.institutionAttributes = data;
       });
       this.dataLoaded = Promise.resolve(true);
   }
 
 
 
-  updateClinic()
+  updateInstitution()
   {
-    this.clinicService.updateClinic(<FFQClinicResponse>this.clinicAttributes).subscribe(
+    this.institutionService.updateInstitution(<FFQInstitutionResponse>this.institutionAttributes).subscribe(
      data => {this.router.navigateByUrl('/admin/clinics');
      const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
      dialogRef.componentInstance.title = 'Clinic successfully updated!';}
@@ -138,10 +142,10 @@ export class ClinicComponent implements OnInit {
     );
   }
 
-  deleteClinic(){
+  deleteInstitution(){
     const confirmDelete = this.modalService.open(DeletePopupComponent);
     confirmDelete.componentInstance.service = "Clinic";
-    confirmDelete.componentInstance.attributes = this.clinicAttributes;
+    confirmDelete.componentInstance.attributes = this.institutionAttributes;
   }
 }
 
