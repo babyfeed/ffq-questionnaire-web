@@ -73,7 +73,7 @@ export class UserComponent implements OnInit {
 
   }
 
-  userAttributes: object;
+  userAttributes: FFQClinician | FFQParent;
   dataLoaded: Promise<boolean>;
 
   ffqclinician: FFQClinician;
@@ -313,8 +313,6 @@ export class UserComponent implements OnInit {
     this.isParent = true;
     this.parentService.getParent(id).subscribe(data => {
        this.userAttributes = data;
-       // this.newParent = data;
-
     });
     this.dataLoaded = Promise.resolve(true);
   }
@@ -342,20 +340,15 @@ export class UserComponent implements OnInit {
 
   updateParent()
   {
-
-
     this.parentService.updateParent(this.userAttributes as FFQParentResponse).subscribe(
      data => {this.router.navigateByUrl('/admin/users');
               const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
               dialogRef.componentInstance.title = 'Parent successfully updated!'; }
-
     );
   }
 
   updateClinician()
   {
-
-
     this.clinicianService.updateClinician(this.userAttributes as FFQClinicianResponse)
       .subscribe( data => {
         this.router.navigateByUrl('/admin/users');
@@ -386,6 +379,10 @@ export class UserComponent implements OnInit {
     const confirmDelete = this.modalService.open(DeletePopupComponent);
     confirmDelete.componentInstance.service = 'Clinician';
     confirmDelete.componentInstance.attributes = this.userAttributes;
+  }
+
+  generatePassword() {
+    this.userAttributes.userpassword = Math.random().toString(36).slice(-10);
   }
 }
 
