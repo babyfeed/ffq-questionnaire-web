@@ -24,6 +24,10 @@
             <label style="font-weight: bold"> Username </label>
 
             <div *ngIf="isParent">
+              <input style="border-color: gray; border-width: 0.05cm" type="text"
+                     class="form-control" readonly name="username" [(ngModel)]="userAttributes.username">
+              <br>
+              <label style="font-weight: bold"> Password Reset </label>
               <div style="display: flex; align-items: stretch; justify-content: space-between">
                 <input style="border-color: gray; border-width: 0.05cm; width:68%" type="text"
                        class="form-control" name="newPassword" [(ngModel)]="userAttributes.userpassword">
@@ -31,7 +35,6 @@
                   Generate new password
                 </button>
               </div>
-              <br>
               <label style="font-weight: bold">Choose Clinic to assign to:</label>
               <br>
               <mat-form-field>
@@ -58,6 +61,12 @@
                   Generate new password
                 </button>
               </div>
+
+              <hr>
+              <label style="font-weight: bold">Set Parent Limit:</label>
+              <br>
+              <input [(ngModel)]="userAttributes.parentLimitForClinician" type="number" id="parentLimit" name="parentLimit" min="1" style="margin-bottom: 10px">
+              <br>
               <br>
               <label style="font-weight: bold">Choose Clinic to assign to:</label>
               <br>
@@ -96,13 +105,15 @@
               <label style="font-weight: bold"> Account Type </label>
               <br>
               <mat-radio-group aria-label="Select an option" [(ngModel)]="userType" name="userType">
-                <mat-radio-button [value]="userTypes.Parent"  color="primary">Parent</mat-radio-button>
-                <br>
                 <mat-radio-button [value]="userTypes.Clinician" color="primary">Clinician</mat-radio-button>
+                <br>
+                <mat-radio-button [value]="userTypes.Parent"  color="primary">Parent</mat-radio-button>
               </mat-radio-group>
             </div>
+
             <div class="optional_container" *ngIf="userType">
               <div class="form-group col-12">
+                <hr>
                 <label style="font-weight: bold">Choose Clinic to assign to:</label>
                 <label style="font-style: italic; font-size: small;"> *required </label>
                 <br>
@@ -119,18 +130,18 @@
                   <tr>
                     <th width="16.66%"> No. of Clinicians </th>
                     <th width="16.66%"> No. of Parents </th>
-                    <th width="16.66%"> Able to add Clinicians </th>
-                    <th width="16.66%"> Able to add Parents </th>
-                    <th width="16.66%"> Clinicians Limit </th>
-                    <th width="16.66%"> Parents Limit </th>
+<!--                    <th width="16.66%"> Able to add Clinicians </th>-->
+<!--                    <th width="16.66%"> Able to add Parents </th>-->
+<!--                    <th width="16.66%"> Clinicians Limit </th>-->
+<!--                    <th width="16.66%"> Parents Limit </th>-->
                   </tr>
                   <tr >
                     <td>{{ numClinician }}</td>
                     <td>{{ numParents }}</td>
-                    <td>{{ able2AddClinicians }}</td>
-                    <td>{{ able2AddParents }}</td>
-                    <td>{{ cliniciansLimit }}</td>
-                    <td>{{ parentsLimit }}</td>
+<!--                    <td>{{ able2AddClinicians }}</td>-->
+<!--                    <td>{{ able2AddParents }}</td>-->
+<!--                    <td>{{ cliniciansLimit }}</td>-->
+<!--                    <td>{{ parentsLimit }}</td>-->
                   </tr>
                 </table>
 
@@ -142,18 +153,20 @@
                   </mat-select>
                 </mat-form-field>
 
-                <div *ngIf="userType == userTypes.Clinician" >
-                  <hr>
-                  <label style="font-weight: bold">Set Parent Limit:</label>
-                  <br>
-                  <input [(ngModel)]="parentLimitForClinician" type="number" id="parentLimit" name="parentLimit" min="1" value="1" style="margin-bottom: 10px">
-                  <br>
-                </div>
+
                 <hr>
                 <label style="font-weight: bold">Select Quantity:</label>
                 <br>
                 <input [(ngModel)]="usersQuantity" type="number" id="parent_quantity" name="quantity" min="1" value="1" style="margin-bottom: 10px">
                 <br>
+                <div *ngIf="userType == userTypes.Clinician" >
+                  <hr>
+                  <label style="font-weight: bold">Set Parent Limit For Clinician:</label>
+                  <br>
+                  <input [(ngModel)]="parentLimitForClinician" type="number" id="parentLimit" name="parentLimit" min="1" value="1" style="margin-bottom: 10px">
+                  <br>
+                </div>
+
                 <div align="middle">
                   <button type="submit" mat-raised-button (click)="addUser()"
                           [disabled]="!myForm.form.valid"> Add User(s)
