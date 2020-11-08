@@ -127,11 +127,9 @@ export class ResearchComponent implements OnInit {
 
   addMultipleResearchers()
   {
-    //Still work in progress
-
     var researcherList: Observable<FFQResearchtResponse[]> = this.researchService.getAllUsers();
 
-    var input = <HTMLInputElement>document.getElementById("clinician_quantity");
+    var input = <HTMLInputElement>document.getElementById("researcher_quantity"); //change this to whatever html element is selecting the amount
     var amount : number = parseInt(input.value);
 
     var new_researchers = new Array();
@@ -158,7 +156,7 @@ export class ResearchComponent implements OnInit {
       
 
       const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-      dialogRef.componentInstance.title = amount + ' new clinicians have been added';
+      dialogRef.componentInstance.title = amount + ' new researchers have been added';
   }
 
   addInstitution(form:NgForm){
@@ -172,7 +170,7 @@ export class ResearchComponent implements OnInit {
 
       this.institutionService.addInstitution(this.ffqinstitution).subscribe(data => {
           console.log("data: " + data);
-          this.router.navigateByUrl('/admin/clinics');
+          this.router.navigateByUrl('/admin/institutions');
           const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
           dialogRef.componentInstance.title = 'Institution with id ' +  newInstitutionId + ' was added!';
       },
@@ -197,16 +195,16 @@ export class ResearchComponent implements OnInit {
   updateInstitution()
   {
     this.institutionService.updateInstitution(<FFQInstitutionResponse>this.institutionAttributes).subscribe(
-     data => {this.router.navigateByUrl('/admin/clinics');
+     data => {this.router.navigateByUrl('/admin/institutions');
      const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-     dialogRef.componentInstance.title = 'Clinic successfully updated!';}
+     dialogRef.componentInstance.title = 'Institution successfully updated!';}
 
     );
   }
 
   deleteInstitution(){
     const confirmDelete = this.modalService.open(DeletePopupComponent);
-    confirmDelete.componentInstance.service = "Clinic";
+    confirmDelete.componentInstance.service = "Institution";
     confirmDelete.componentInstance.attributes = this.institutionAttributes;
   }
 }
