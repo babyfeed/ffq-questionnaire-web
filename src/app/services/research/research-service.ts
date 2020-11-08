@@ -47,7 +47,7 @@ export class ResearchService {
       );
   }
 
-  addMultipleResea(user: FFQResearchtResponse[]): Observable<any> {
+  addMultipleResearchers(user: FFQResearchtResponse[]): Observable<any> {
     return this.http
       .post(this.endpoint + "/createMany", user, {
         headers: new HttpHeaders({ "Content-Type": "application/json" }),

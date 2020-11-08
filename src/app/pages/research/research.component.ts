@@ -69,6 +69,7 @@ export class ResearchComponent implements OnInit {
 
   public ffqresearcherList: FFQResearch[] = [];
   researcherNames: string[] = [];
+  ffqresearcher: FFQResearch;
 
 
   ngOnInit() {
@@ -89,8 +90,8 @@ export class ResearchComponent implements OnInit {
     }
 
 
-    var clinicianList: Observable<FFQResearchtResponse[]> = this.researchService.getAllUsers();
-      clinicianList.subscribe(a => {
+    var ffqresearcherList: Observable<FFQResearchtResponse[]> = this.researchService.getAllUsers();
+    ffqresearcherList.subscribe(a => {
       this.ffqresearcherList = a;
       for (let i = 0; i < a.length; i++) {
         this.researcherNames.push(a[i].firstname + " " + a[i].lastname); // removed abreviation because researcher does not contain it
@@ -99,13 +100,74 @@ export class ResearchComponent implements OnInit {
 
   }
 
-  addClinic(form:NgForm){
+  addResearcher()
+  {
+    var researcherList: Observable<FFQResearchtResponse[]> = this.researchService.getAllUsers();
+
+    researcherList.subscribe(data => {
+        var numberOfResearchers = (data.length+1).toString();
+        //console.log("Number of clinicians is: " + numberOfClinicians);
+        var newResearcherId = (data.length+1).toString();
+        var newResearcherUsername = "researcher"+numberOfResearchers;
+        this.ffqresearcher = new FFQResearch(newResearcherId,newResearcherUsername, newResearcherUsername,"researcher","first","last",true,"institution",10 );
+        console.log(this.ffqresearcher);
+
+        this.researchService.addResearcher(this.ffqresearcher).subscribe(data => {
+            this.router.navigateByUrl('/admin/users');
+            const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+            dialogRef.componentInstance.title = newResearcherUsername + ' was added!';
+        },
+        error =>{
+            const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+            dialogRef.componentInstance.title = error.error.message;
+        });
+
+      });
+  }
+
+  addMultipleResearchers()
+  {
+    //Still work in progress
+
+    var researcherList: Observable<FFQResearchtResponse[]> = this.researchService.getAllUsers();
+
+    var input = <HTMLInputElement>document.getElementById("clinician_quantity");
+    var amount : number = parseInt(input.value);
+
+    var new_researchers = new Array();
+
+      for(let i = 0; i < amount; i++){
+
+        researcherList.subscribe(data => {
+        var numberOfResearchers = (data.length + 1 + i).toString();
+        var newResearcherId = (data.length+1).toString();
+        var newResearcherUsername = "researcher"+numberOfResearchers;
+        new_researchers.push(new FFQResearch(newResearcherId, newResearcherUsername, newResearcherUsername,"researcher","first","last",true,"institution",10));
+        });
+
+      }
+
+      this.researchService.addMultipleResearchers(new_researchers).subscribe(data => {
+        this.router.navigateByUrl('/admin/users');
+      },
+      error =>{
+        const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+        dialogRef.componentInstance.title = error.error.message;
+      });
+
+      
+
+      const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+      dialogRef.componentInstance.title = amount + ' new clinicians have been added';
+  }
+
+  addInstitution(form:NgForm){
 
     var clinicList: Observable<FFQResearchtResponse[]> = this.researchService.getAllUsers();
 
     clinicList.subscribe(data => {
       var newInstitutionId = (data.length+1).toString();
-      this.ffqinstitution = new FFQInstitution(newInstitutionId, this.location, "", this.name_of_institution, "", false, this.usersLimit);
+      this.ffqinstitution = new FFQInstitution(newInstitutionId, this.location, "date placeholder", this.name_of_institution, "type placeholder");
       console.log(this.ffqinstitution);
 
       this.institutionService.addInstitution(this.ffqinstitution).subscribe(data => {

@@ -1,4 +1,4 @@
-export class FFQInstitution {
+export class FFQInstitutionResponse {
     
     researchInstitutionId: string;
 	address: string;
