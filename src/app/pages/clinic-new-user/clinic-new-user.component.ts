@@ -14,6 +14,7 @@ import {Usertype} from '../../models/usertype.enum';
 import {AuthenticationService} from '../../services/authentication/authentication.service';
 import {User} from '../../models/user';
 import {skipWhile, take} from 'rxjs/operators';
+import {FFQParentResponse} from "../../models/ffqparent-response";
 
 @Component({
   selector: 'app-clinic-new-user',
@@ -30,6 +31,14 @@ export class ClinicNewUserComponent implements OnInit {
   usersQuantity = 1;
   currentUser$: Observable<FFQClinician[]>;
   private parentLimitForClinician: number;
+  currentUser: Observable<FFQClinician[]>;
+  loggedInUser = this.authenticationService.currentUserValue;
+  clicked = false;
+  noMoreRoom = false;
+  // notice = true;
+  limit = this.loggedInUser[0].parentLimitForClinician;
+  numParents = 0;
+  prefix = 'tonces';
 
   constructor(
     public parentService: ParentService,
@@ -37,11 +46,18 @@ export class ClinicNewUserComponent implements OnInit {
     private errorDialog: MatDialog,
     private router: Router,
     public clinicService: ClinicService,
+
     private authenticationService: AuthenticationService
   ) {
     this.ffqclinicList$ = this.clinicService.getAllClinics();
     this.currentUser$ = this.authenticationService.currentUser as unknown as Observable<FFQClinician[]>;
+    this.currentUser = this.currentUser$;
   }
+
+  numberOfPatients: number[] = [];
+
+  ffqparentList: FFQParent[] = [];
+
 
   ngOnInit() {
     combineLatest([this.currentUser$, this.ffqclinicList$]).pipe(
@@ -49,9 +65,29 @@ export class ClinicNewUserComponent implements OnInit {
       take(1))
       .subscribe(([user, clinics]) => {
         this.selectedClinic = clinics.find(c => c.clinicId === user[0].assignedclinic);
-      });
-  }
 
+
+      });
+
+    const parentList: Observable<FFQParentResponse[]> = this.parentService.getAllParents();
+    parentList.subscribe(a => {
+      this.ffqparentList = a;
+    });
+
+    this.countParents();
+  }
+  countParents(){
+    for (let i = 0; i < this.ffqparentList.length; i++){
+    if (this.loggedInUser[0].userId === this.ffqparentList[i].assignedclinician){
+      this.limit --;
+      this.numParents ++;
+  }
+    if (this.limit <= 0){
+      this.limit = 0;
+      this.noMoreRoom = true;
+      // this.notice = false;
+    }
+  }}
   addUser() {
     switch (this.userType) {
       case Usertype.Clinician: {
@@ -103,8 +139,10 @@ export class ClinicNewUserComponent implements OnInit {
   }
 
   addParent() {
-    this.ffqParent = new FFQParent('', '', '', 'parent', '', '', this.selectedClinic.clinicId, '', [''], true);
-    this.parentService.addParent(this.ffqParent).subscribe(parent => {
+    this.ffqParent = new FFQParent('', '', '', 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true);
+    // this.ffqParent = new FFQParent('', this.prefix, '', 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true);
+    this.parentService.addParent(this.ffqParent).subscribe(parent  => {
+        this.router.navigateByUrl('/clinic/home');
         const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
         dialogRef.componentInstance.title = parent.username + ' was added!';
       },
@@ -117,10 +155,12 @@ export class ClinicNewUserComponent implements OnInit {
   addMultipleParents() {
     const newParents = [];
     for (let i = 0; i < this.usersQuantity; i++) {
-      newParents.push(new FFQParent('', '', '', 'parent', '', '', this.selectedClinic.clinicId, '', [''], true));
+      newParents.push(new FFQParent('', '', '', 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true));
+      //newParents.push(new FFQParent('', this.prefix + i + 1, '', 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true));
     }
 
     this.parentService.addMultipleParents(newParents).subscribe(clinicians => {
+        this.router.navigateByUrl('/clinic/home');
         const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
         dialogRef.componentInstance.title = 'Users<br/>' + clinicians.map(clinician => clinician.username).join('<br/>') + '<br/>were added!';
       },

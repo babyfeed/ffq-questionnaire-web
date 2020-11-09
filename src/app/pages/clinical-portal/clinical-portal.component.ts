@@ -40,6 +40,7 @@ export class ClinicalPortalComponent implements OnInit  {
   private hideUnassignedClinicians: boolean;
   p_search: string;
   c_search: string;
+  loggedInUser = this.authenticationService.currentUserValue;
 
   constructor(
     public parentService: ParentService,
