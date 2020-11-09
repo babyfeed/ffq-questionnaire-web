@@ -149,29 +149,16 @@
               <input placeholder="Amount of Parents (1 - 100)" width="25" style="border-color: mediumblue; border-width: 0.05cm" type="text"
                 class="form-control" name="amountToAdd" [(ngModel)]="amountToAdd" required #nameField="ngModel" />-->
               <hr>
-              <label style="font-weight: bold">Select Quantity of Researchers:</label>
-                <br>
-                <input type="number" id="research_quantity" name="quantity" min="1" value="1" style="margin-bottom: 10px">
-                <br>
+      
               <label style="font-weight: bold">Select Quantity of Parents per Researcher:</label>
                 <br>
                 <input type="number" id="research_quantity" name="quantity" min="1" value="1" style="margin-bottom: 10px">
                 <br>
-              <label style="font-weight: bold" for="fname">Prefix for Researcher:</label>
-                <br>
-                <input type="text" id="prefix" name="prefix">
-                <br>
-              <label style="font-weight: bold" for="fname">Name of site:</label>
-                <br>
-                <input type="text" id="name" name="name">
-                <br>
-              <label style="font-weight: bold">Type of site:</label><label style="font-style: italic; font-size: small; margin-left: 10px"> *required </label>
-                <br>
               <mat-form-field>
-                <mat-label appearance="fill">Choose type...</mat-label>
+                <mat-label appearance="fill">Choose Researcher...</mat-label>
                 <mat-select matNativeControl required name="assignedclinic" [(ngModel)]="selectedClinic">
-                  <mat-option value="clinic">Clinic</mat-option>
-                  <mat-option value="institution">Research Institution</mat-option>
+                  <mat-option value="clinic">Researcher1</mat-option>
+                  <mat-option value="institution">Researcher2</mat-option>
                 </mat-select>
               </mat-form-field>
               

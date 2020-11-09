@@ -28,6 +28,16 @@ export class ClinicianService {
         error => console.log(error)
       ));
   }
+  
+
+  addMultipleClinicians(users : FFQClinicianResponse[]): Observable<any> {
+
+    return this.http.post(this.endpoint + '/createclinician', users, {headers : new HttpHeaders({ 'Content-Type': 'application/json' })}).pipe(
+      tap(
+        data => console.log(data),
+        error => console.log(error)
+      ));
+  }
 
   updateClinician(user : FFQClinicianResponse): Observable<any> {
 

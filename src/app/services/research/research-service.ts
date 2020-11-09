@@ -34,9 +34,22 @@ export class ResearchService {
 
   constructor(private http: HttpClient) {}
 
-  addUser(user: FFQResearchtResponse): Observable<any> {
+  addResearcher(user: FFQResearchtResponse): Observable<any> {
     return this.http
-      .post(this.endpoint + "/createuser", user, {
+      .post(this.endpoint + "/create", user, {
+        headers: new HttpHeaders({ "Content-Type": "application/json" }),
+      })
+      .pipe(
+        tap(
+          (data) => console.log(data),
+          (error) => console.log(error)
+        )
+      );
+  }
+
+  addMultipleResearchers(user: FFQResearchtResponse[]): Observable<any> {
+    return this.http
+      .post(this.endpoint + "/createMany", user, {
         headers: new HttpHeaders({ "Content-Type": "application/json" }),
       })
       .pipe(
@@ -72,9 +85,9 @@ export class ResearchService {
           item.usertype,
           item.firstname,
           item.lastname,
+          item.isactive,
           item.AssignedResearchInstitutionId,
-          item.limitNumberOfParticipants,
-          item.isactive
+          item.limitNumberOfParticipants
         );
       })
     );
@@ -92,9 +105,9 @@ export class ResearchService {
             item.usertype,
             item.firstname,
             item.lastname,
+            item.isactive,
             item.AssignedResearchInstitutionId,
-            item.limitNumberOfParticipants,
-            item.isactive
+            item.limitNumberOfParticipants
           );
         });
       })
