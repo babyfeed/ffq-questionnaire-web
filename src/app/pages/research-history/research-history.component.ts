@@ -85,24 +85,6 @@ export class ResearchHistoryComponent implements OnInit {
 
   }
 
-  private getParticipantResult2() {
-    
-    const oldList: Observable<FFQResultsResponse[]> = this.resultsService.getResultsByUserType("participant");
-
-    oldList.subscribe((allResults: FFQResultsResponse[]) => {
-      this.participantList.forEach(participant => {
-        allResults.forEach(result => { 
-          if(result.userId == participant.userId){
-            this.results.push(result);
-          }
-        });
-        
-      });
-
-      
-    });
-
-  }
 
   private getParticipantResult() {
 
