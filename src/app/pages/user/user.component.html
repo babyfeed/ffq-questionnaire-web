@@ -24,6 +24,9 @@
             <label style="font-weight: bold"> Username </label>
 
             <div *ngIf="isParent">
+              <input style="border-color: gray; border-width: 0.05cm" type="text"
+                     class="form-control" readonly name="username" [(ngModel)]="userAttributes.username">
+              <br>
               <div style="display: flex; align-items: stretch; justify-content: space-between">
                 <input style="border-color: gray; border-width: 0.05cm; width:68%" type="text"
                        class="form-control" name="newPassword" [(ngModel)]="userAttributes.userpassword">
