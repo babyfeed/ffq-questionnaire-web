@@ -66,8 +66,8 @@ export class ResearcherParentService {
             item.usertype,
             item.firstname,
             item.lastname,
-            item.assignedclinic,
-            item.assignedclinician,
+            item.assignedResearcherOrg,
+            item.assignedResearcherUser,
             item.childrennames,
             item.isactive
           );
