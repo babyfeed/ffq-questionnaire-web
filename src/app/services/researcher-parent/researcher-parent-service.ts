@@ -76,6 +76,27 @@ export class ResearcherParentService {
     );
   }
 
+  getAllParents(): Observable<FFQResearcherParentResponse[]> {
+    return this.http.get(this.endpoint + '/all').pipe(
+      map((res: any) => {
+        return res.map(item => {
+          return new FFQResearcherParentResponse(
+            item.userId,
+            item.username,
+            item.userpassword,
+            item.usertype,
+            item.firstname,
+            item.lastname,
+            item.assignedResearcherOrg,
+            item.assignedResearcherUser,
+            item.childrennames,
+            item.isactive
+          );
+        });
+      })
+    );
+  }
+
   /*DELETE: delete food item from the database */
   deleteItem(userId: string): Observable <any>{
     console.log("here" + userId);
