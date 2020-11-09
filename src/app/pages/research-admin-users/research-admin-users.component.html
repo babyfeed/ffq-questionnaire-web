@@ -1,0 +1,70 @@
+<admin-header></admin-header>
+
+<div class="container_page">
+    <div class="container mt-3" align="center">
+      <div class="row">
+        <button routerLink='/admin/clinic/new' type="submit" mat-raised-button>New Research Institution...</button>
+        <span style="margin: 10px"></span>
+        <button routerLink='/admin/user/new' type="submit" mat-raised-button>New Researcher User(s)...</button>
+      </div>
+    </div>
+
+    <div class="container mt-3">
+      <span> {{ ffqclinicList.length }} research institution(s) </span>
+      <table class="table table-bordered table-inverse">
+        <tr>
+          <th width="20"> Research Institution Id</th>    
+         
+          <th width="20"> Research Institution Name</th>   
+           <th width="34%"> Location </th>
+        
+        </tr>
+        <tr *ngFor="let c of ffqclinicList; index as i">
+          <td><a [routerLink]="['/admin/clinic/', c.clinicId]"> {{ c.clinicId }} </a></td>
+          <td> {{ c.clinicname }}</td>
+          <td> {{ c.address }} </td>
+          
+        </tr>
+      </table>
+
+      <br>
+        <span>{{ ffqclinicianList.length + ffqparentList.length }} user(s)</span>
+        <div>
+            <input style="width: 25%; display: inline-block;  margin-left: 5px;" placeholder="Search..." type="text" class="form-control"
+                name="search" [(ngModel)]="search"/>
+            <span style="color:gray; margin-left: 20px; margin-right: 20px; font-size: x-large;"> | </span>
+            <mat-checkbox (change)="toggleParents()" [checked]="true" color="primary"> Show Participants </mat-checkbox>
+            <span style="color:gray; margin-left: 20px; margin-right: 20px; font-size: x-large;"> | </span>
+            <mat-checkbox (change)="toggleClinicians()" [checked]="true" color="primary"> Show Researchers </mat-checkbox>
+            <span style="color:gray; margin-left: 20px; margin-right: 20px; font-size: x-large;"> | </span>            
+            <mat-form-field>
+                <mat-label appearance="fill">Filter by Research Institution...</mat-label>
+                <mat-select matNativeControl multiple>
+                  <mat-option *ngFor="let c of ffqclinicList" [value]="c.clinicname" (click)="filterByClinic(c.clinicname)">{{ c.clinicname }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <table class="table table-bordered table-inverse">
+            <tr>
+                <th width="25%"> Username </th>
+                <th width="15%"> Account Type </th>
+                <th width="60%"> Research Institution </th>
+
+            </tr>
+            <tr *ngFor="let u of ffqclinicianList | searchFilter: search; index as i" [hidden]="!showClinicians || (filtered && filtered_clinics.indexOf(clinicNames[u.assignedclinic]) === -1)">
+                <td><a [routerLink]="['/admin/user/c', u.userId]"> {{ u.username }} </a></td>
+                <td> Researcher </td>
+                <td> {{ clinicNames[u.assignedclinic] }} </td>
+
+            </tr>
+            <tr *ngFor="let u of ffqparentList | searchFilter: search; index as i" [hidden]="!showParents || (filtered && filtered_clinics.indexOf(clinicNames[u.assignedclinic]) === -1)">
+                <td><a [routerLink]="['/admin/user/p', u.userId]"> {{ u.username }} </a></td>
+                <td> Participant </td>
+                <td> {{ clinicNames[u.assignedclinic] }} </td>
+
+            </tr>            
+        </table>
+
+    </div>
+</div>

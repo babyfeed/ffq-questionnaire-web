@@ -16,7 +16,7 @@ import {
 } from "@angular/http";
 import { FFQFoodItemResponse } from "src/app/models/ffqfooditem-response";
 import { FFQAdminResponse } from "src/app/models/ffqadmin-response";
-import { FFQResearchtResponse } from "src/app/models/ffqresearch-response";
+import { FFQResearchInstitutionResponse } from "src/app/models/ffqresearch-institution-response";
 import { environment } from "src/environments/environment";
 //const mongoose = require('mongoose');
 //declare var require: any
@@ -29,14 +29,14 @@ const httOptions = {
 @Injectable({
   providedIn: "root",
 })
-export class ResearchService {
-  endpoint = environment.userServiceUrl + "/ffq/research";
+export class ResearchInstitutionService {
+  endpoint = environment.userServiceUrl + "/ffq/research-institution";
 
   constructor(private http: HttpClient) {}
 
-  addUser(user: FFQResearchtResponse): Observable<any> {
+  addUser(researchInst: FFQResearchInstitutionResponse): Observable<any> {
     return this.http
-      .post(this.endpoint + "/createuser", user, {
+      .post(this.endpoint + "/create-research-institution", researchInst, {
         headers: new HttpHeaders({ "Content-Type": "application/json" }),
       })
       .pipe(
@@ -48,9 +48,9 @@ export class ResearchService {
   }
 
   //Still not implemented
-  updateUser(user: FFQResearchtResponse): Observable<any> {
+  updateUser(researchInst: FFQResearchInstitutionResponse): Observable<any> {
     return this.http
-      .put(this.endpoint + "/updateuser", user, {
+      .put(this.endpoint + "/create-research-institution", researchInst, {
         headers: new HttpHeaders({ "Content-Type": "application/json" }),
       })
       .pipe(
@@ -62,61 +62,42 @@ export class ResearchService {
   }
 
   //To be implemented
-  getUser(userId: string): Observable<FFQResearchtResponse> {
-    return this.http.get(this.endpoint + "/users/" + userId).pipe(
+  getResearchInstitution(researchInstitutionId: string): Observable<FFQResearchInstitutionResponse> {
+    return this.http.get(this.endpoint + "/research-institution/" + researchInstitutionId).pipe(
       map((item: any) => {
-        return new FFQResearchtResponse(
-          item.userId,
-          item.username,
-          item.userpassword,
-          item.usertype,
-          item.firstname,
-          item.lastname,
-          item.AssignedResearchInstitutionId,
-          item.limitNumberOfParticipants,
-          item.isactive
+        return new FFQResearchInstitutionResponse(
+          item.researchInstitutionId,
+          item.address,
+          item.createdDate,
+          item.institutionName,
+          "researchInstitution"        
         );
       })
     );
   }
 
-  getAllUsers(): Observable<FFQResearchtResponse[]> {
+  getAllResearchInstitutions(): Observable<FFQResearchInstitutionResponse[]> {
     // getMongoUsers();
     return this.http.get(this.endpoint + "/all").pipe(
       map((res: any) => {
         return res.map((item) => {
-          return new FFQResearchtResponse(
-            item.userId,
-            item.username,
-            item.userpassword,
-            item.usertype,
-            item.firstname,
-            item.lastname,
-            item.AssignedResearchInstitutionId,
-            item.limitNumberOfParticipants,
-            item.isactive
+          return new FFQResearchInstitutionResponse(
+          item.researchInstitutionId,
+          item.address,
+          item.createdDate,
+          item.institutionName,
+          item.researchInstitution
           );
         });
       })
     );
   }
 
-  /*DELETE: delete food item from the database */
-  deleteItem(userId: string): Observable<any> {
-    console.log("here" + userId);
-    return this.http.delete(this.endpoint + "/delete?userId=" + userId, {
+  deleteItem(researchInstitutionId: string): Observable<any> {
+    console.log("here" + researchInstitutionId);
+    return this.http.delete(this.endpoint + "/delete?researchInstitutionId=" + researchInstitutionId, {
       responseType: "text",
     });
   }
 }
 
-/*export async function getMongoUsers() {  //test function to get users from mongoDB
-  
-  const MongoClient = require('mongodb').MongoClient; 
-  const url = "mongodb://localhost:27017/"; 
-  const db = await MongoClient.connect(url);
-  const dbo = db.db("ffq_database");
-  var user = await dbo.collection("users").find().toArray();    //[{1, Admin}, {2, Khalid}]
-  console.log(user);
-  
-}*/
