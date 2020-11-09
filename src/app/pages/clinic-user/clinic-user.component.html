@@ -37,7 +37,7 @@
                   class="form-control" readonly name="username" [(ngModel)]="userAttributes[0].username">-->
 
                 <input style="border-width: 0.05cm" type="text"
-                  class="form-control" name="username" [(ngModel)]="userAttributes.username" required>
+                  class="form-control" name="username" [(ngModel)]="userAttributes.username" [disabled]="true">
                 <br>
                 <label style="font-weight: bold"> Name of Parent </label>
                 <input style="border-width: 0.05cm" placeholder="First Name" type="text" class="form-control"
@@ -54,6 +54,9 @@
                     <mat-option *ngFor="let u of ffqclinicianList" [hidden]="u.assignedclinic != userAttributes.assignedclinic" [value]="u.userId">{{ "clinician" + u.userId }}</mat-option>
                   </mat-select>
                 </mat-form-field>
+                <button mat-raised-button class="delete" style="margin-right: 20px;" (click)="deleteUser()">
+                  Delete
+                </button>
                 <!--<hr>
                 <label style="font-weight: bold"> Children </label>
                 <table class="table table-bordered table-inverse">
@@ -85,7 +88,7 @@
 
                 <label style="font-weight: bold"> Username </label>
                 <input style="border-width: 0.05cm" type="text"
-                  class="form-control" name="username" [(ngModel)]="userAttributes.username" required>
+                  class="form-control" name="username" [(ngModel)]="userAttributes.username" [disabled]="true">
                 <br>
                 <label style="font-weight: bold"> Role / Abbreviation </label>
                 <input style="border-width: 0.05cm" placeholder="Role" type="text" class="form-control" name="abbreviation" [(ngModel)]="userAttributes.abbreviation"/>

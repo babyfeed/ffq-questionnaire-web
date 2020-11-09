@@ -46,6 +46,7 @@ export class UserComponent implements OnInit {
   parentsLimit: number;
   numClinician: number;
   numParents: number;
+  parentLimitForClinician: number;
   able2AddClinicians: number;
   able2AddParents: number;
   userType: Usertype;
@@ -211,7 +212,7 @@ export class UserComponent implements OnInit {
   }
 
   addClinician() {
-    const ffqclinician = new FFQClinician('', '', '', '', '', '', this.selectedClinic, [], true);
+    const ffqclinician = new FFQClinician('', '', '', '', '', '', this.selectedClinic, [], true, this.parentLimitForClinician);
 
     this.clinicianService.addClinician(ffqclinician).subscribe(clinician => {
         const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
@@ -227,7 +228,7 @@ export class UserComponent implements OnInit {
   addMultipleClinicians() {
     const newClinicians = [];
     for (let i = 0; i < this.usersQuantity; i++) {
-      newClinicians.push(new FFQClinician('', '', '', '', '', '', this.selectedClinic, [], true));
+      newClinicians.push(new FFQClinician('', '', '', '', '', '', this.selectedClinic, [], true, this.parentLimitForClinician));
     }
 
     this.clinicianService.addMultipleClinicians(newClinicians).subscribe(clinicians => {

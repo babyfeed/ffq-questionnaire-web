@@ -18,18 +18,15 @@
           <!--<th width="14%"> Integration Date </th>-->
           <th width="13.5%"> No. of Clinicians </th>
           <th width="12.5%"> No. of Parents </th>
-          <th width="12.5%"> Clinicians Number Limit </th>
-          <th width="12.5%"> Parents Number Limit </th>
+
         </tr>
         <tr *ngFor="let c of ffqclinicList; index as i">
           <td><a [routerLink]="['/admin/clinic/', c.clinicId]"> {{ c.clinicname }} </a></td>
           <td> {{ clinicianNames[c.headclinician] }}</td>
           <td> {{ c.address }} </td>
-          <!--<td> {{ c.datebuilt }} </td>-->
           <td> {{ (ffqclinicianList | clinicianFilter: c.clinicId).length }} </td>
           <td> {{ (ffqparentList | parentFilter: c.clinicId).length }} </td>
-          <td> {{ c.cliniciansLimit }} </td>
-          <td> {{ c.cliniciansLimit }} </td>
+
         </tr>
       </table>
 
@@ -59,6 +56,7 @@
                 <th width="15%"> Account Type </th>
                 <th width="60%"> Clinic </th>
 
+
             </tr>
             <tr *ngFor="let u of ffqclinicianList | searchFilter: search; index as i" [hidden]="!showClinicians || (filtered && filtered_clinics.indexOf(clinicNames[u.assignedclinic]) === -1)">
                 <td><a [routerLink]="['/admin/user/c', u.userId]"> {{ u.username }} </a></td>
@@ -75,7 +73,6 @@
             <tr *ngFor="let u of ffqadminList | searchFilter: search; index as i" [hidden]="!showAdmins">
                 <td> {{ u.username }} </td>
                 <td> Admin </td>
-                <td> <!--{{ clinicNames[u.assignedclinic] }}--> </td>
 
             </tr>
         </table>
