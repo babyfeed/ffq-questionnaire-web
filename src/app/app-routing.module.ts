@@ -22,6 +22,7 @@ import { LoginHeaderComponent } from "./pages/login-header";
 import { ClinicQuestResultsComponent } from "./pages/clinic-quest-results";
 import { ClinicRecommendComponent } from "./pages/clinic-recommend";
 import { AdminUsersComponent } from "./pages/admin-users";
+import { AdminResearchUsersComponent } from "./pages/research-admin-users/research-admin-users.component";
 import { UserComponent } from "./pages/user/user.component";
 import { ClinicUserComponent } from "./pages/clinic-user/clinic-user.component";
 import { AdminClinicsComponent } from "./pages/admin-clinics";
@@ -85,6 +86,11 @@ const routes: Routes = [
   {
     path: "admin/users",
     component: AdminUsersComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "admin/research/users",
+    component: AdminResearchUsersComponent,//AdminResearchUsersComponent
     canActivate: [AuthGuard],
   },
   {

@@ -20,6 +20,8 @@ export class FFQResearch {
     this.usertype = usertype;
     this.firstname = firstname;
     this.lastname = lastname;
+    this.AssignedResearchInstitutionId = AssignedResearchInstitutionId;
+    this.limitNumberOfParticipants = limitNumberOfParticipants;
     this.isactive = isactive;
     this.AssignedResearchInstitutionId = AssignedResearchInstitutionId;
     this.limitNumberOfParticipants =limitNumberOfParticipants;
