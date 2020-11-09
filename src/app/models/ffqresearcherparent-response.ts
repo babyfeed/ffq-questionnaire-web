@@ -7,19 +7,21 @@ export class FFQResearcherParentResponse {
   id: string;
   userId: string;
   username: string;
+  userpassword: string;
   usertype: string;
   firstname: string;
   lastname: string;
-  assignedResearcherOrg: string;
+  assignedResearcherInst: string;
   assignedResearcherUser: any;
   childrennames: any;
   isactive: boolean;
 
 
   constructor(userId: string, username: string, userpassword: string, usertype:string, firstname: string,
-              lastname: string, assignedResearcherOrg: string, assignedResearcherUser: any, childrennames: any, isactive: boolean) {
+              lastname: string, assignedResearcherInst: string, assignedResearcherUser: any, childrennames: any, isactive: boolean) {
     this.userId = userId;
     this.username = username;
+    this.userpassword = userpassword;
     this.usertype = usertype;
     this.firstname = firstname;
     this.lastname = lastname;

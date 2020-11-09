@@ -37,24 +37,24 @@ export class ResearcherParentService {
   //     ));
   // }
 
-  // getParent(userId: string): Observable<FFQResearcherParentResponse> {
-  //   return this.http.get(this.endpoint + '/' + userId).pipe(
-  //     map((item: any) => {
-  //         return new FFQResearcherParentResponse(
-  //           item.userId,
-  //           item.username,
-  //           item.userpassword,
-  //           item.usertype,
-  //           item.firstname,
-  //           item.lastname,
-  //           item.assignedResearcherOrg,
-  //           item.assignedResearcherUser,
-  //           item.childrennames,
-  //           item.isactive
-  //         );
-  //     })
-  //   );
-  // }
+  getParent(userId: string): Observable<FFQResearcherParentResponse> {
+    return this.http.get(this.endpoint + '/' + userId).pipe(
+      map((item: any) => {
+          return new FFQResearcherParentResponse(
+            item.userId,
+            item.username,
+            item.userpassword,
+            item.usertype,
+            item.firstname,
+            item.lastname,
+            item.assignedResearcherOrg,
+            item.assignedResearcherUser,
+            item.childrennames,
+            item.isactive
+          );
+      })
+    );
+  }
 
   getAllParticipants(instID: string): Observable<FFQResearchParticipant[]> {
     return this.http.get(this.endpoint + '/all/' + instID).pipe(
@@ -75,29 +75,6 @@ export class ResearcherParentService {
       })
     );
   }
-
-  getAllParentsOld(): Observable<FFQResearcherParentResponse[]> {
-    return this.http.get(this.endpoint + '/all').pipe(
-      map((res: any) => {
-        return res.map(item => {
-          return new FFQResearcherParentResponse(
-            item.userId,
-            item.username,
-            item.usertype,
-            item.firstname,
-            item.lastname,
-            item.assignedResearcherInst,
-            item.assignedResearcherUser,
-            item.childrennames,
-            item.isactive
-          );
-        });
-      })
-    );
-  }
-
-
-
 
   /*DELETE: delete food item from the database */
   deleteItem(userId: string): Observable <any>{
