@@ -52,13 +52,13 @@
                 <th width="60%"> Research Institution </th>
 
             </tr>
-            <tr *ngFor="let u of ffqclinicianList | searchFilter: search; index as i" [hidden]="!showClinicians || (filtered && filtered_clinics.indexOf(clinicNames[u.assignedclinic]) === -1)">
+            <tr *ngFor="let u of ffqclinicianList | searchFilter: search; index as i" [hidden]="!showResearchers || (filtered && filtered_clinics.indexOf(clinicNames[u.assignedclinic]) === -1)">
                 <td><a [routerLink]="['/admin/user/c', u.userId]"> {{ u.username }} </a></td>
                 <td> Researcher </td>
                 <td> {{ clinicNames[u.assignedclinic] }} </td>
 
             </tr>
-            <tr *ngFor="let u of ffqparentList | searchFilter: search; index as i" [hidden]="!showParents || (filtered && filtered_clinics.indexOf(clinicNames[u.assignedclinic]) === -1)">
+            <tr *ngFor="let u of ffqparentList | searchFilter: search; index as i" [hidden]="!showParticipants || (filtered && filtered_clinics.indexOf(clinicNames[u.assignedclinic]) === -1)">
                 <td><a [routerLink]="['/admin/user/p', u.userId]"> {{ u.username }} </a></td>
                 <td> Participant </td>
                 <td> {{ clinicNames[u.assignedclinic] }} </td>
