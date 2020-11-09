@@ -8,14 +8,14 @@ export class FFQResearcherParent {
   usertype: string;
   lastname: string;
   assignedResearcherOrg: string;
-  assignedResearcherUser: string;
+  assignedResearcherUser: any;
   childrennames: any;
   isactive: boolean;
   userpassword: string;
 
 
   constructor(userId: string, username: string, userpassword: string, usertype:string, firstname: string, 
-              lastname: string, assignedResearcherOrg: string, assignedResearcherUser: string, childrennames: any, isactive: boolean) {
+              lastname: string, assignedResearcherOrg: string, assignedResearcherUser: any, childrennames: any, isactive: boolean) {
     this.userId = userId;
     this.username = username;
     this.userpassword = userpassword;

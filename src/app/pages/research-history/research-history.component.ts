@@ -17,13 +17,16 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { ResultsService } from "src/app/services/results/results";
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { NutrientsRecommendationsService } from 'src/app/services/nutrients-recommendations/nutrients-recommendations.service';
-import { ResearchRecommendModalComponent } from 'src/app/components/research-recommend-modal/research-recommend-modal.component';
 import { FFQResultsResponse } from 'src/app/models/ffqresultsresponse';
+import { ResearcherParentService } from 'src/app/services/researcher-parent/researcher-parent-service';
+import { FFQResearcherParentResponse } from 'src/app/models/ffqresearcherparent-response';
 import { NutrientConstants } from 'src/app/models/NutrientConstants';
 import { Observable } from 'rxjs';
+import { of } from 'rxjs';
 import { FoodRecommendationsService } from 'src/app/services/food-recommendation-service/food-recommendations.service';
 import { ErrorDialogPopupComponent } from 'src/app/components/error-dialog-popup/error-dialog-popup.component';
-import { FoodItemsModalComponent } from 'src/app/components/food-items-modal/food-items-modal.component';
+import { FFQResearcherParent } from 'src/app/models/ffqresearcherparent';
+import { element } from 'protractor';
 
 
 @Component({
@@ -35,10 +38,12 @@ export class ResearchHistoryComponent implements OnInit {
 
   public show: boolean = false;
   public buttonName: any = "Results";
+  researcherId: string = this.authenticationService.currentUserId;
 
   MESSAGE = "No questionnaires have been submitted yet!";
 
   results: FFQResultsResponse[] = [];
+  participantList: FFQResearcherParent[] = [];
 
   constructor(
     private errorDialog: MatDialog,
@@ -49,6 +54,7 @@ export class ResearchHistoryComponent implements OnInit {
     public resultsService: ResultsService,
     public foodRecommendationsService: FoodRecommendationsService,
     public nutrientsRecommendationsService: NutrientsRecommendationsService,
+    public participantService: ResearcherParentService
 
   ) {}
 
@@ -59,73 +65,84 @@ export class ResearchHistoryComponent implements OnInit {
   }
 
   ngOnInit() {
+    
+    this.getParticipantList();
     this.getParticipantResult();
+    
+  }
+
+  private getParticipantList(){
+
+    var participantListObservable: Observable<FFQResearcherParentResponse[]> = this.participantService.getAllParents();
+    
+    participantListObservable.subscribe(participantList => {
+      participantList.forEach(participant => {
+        if (participant.assignedResearcherUser.indexOf(this.researcherId) >= 0){
+          this.participantList.push(participant);
+        }
+      })
+    });
+
   }
 
 
   private getParticipantResult() {
+
     const oldList: Observable<FFQResultsResponse[]> = this.resultsService.getResultsByUserType("participant");
-    const reqList: string[] = NutrientConstants.NUTRIENT_NAMES;
 
     oldList.subscribe(m => {
 
+      this.participantList.forEach(participant => {
+
+        m.forEach(element => {
+
+          if(element.userId == participant.userId){
+
+            this.results.push(element);
+          }   
+        })
+
+      })
+
+      console.log(m);
+      //this.results = m.reverse();
+      this.setNutrients();
+    })
+   
+  }
+
+  private setNutrients() {
+
+    const reqList: string[] = NutrientConstants.NUTRIENT_NAMES;
+    const oldListObservable: Observable<FFQResultsResponse[]> = of(this.results);
+    const newWeeklyMap = new Map<string, number>();
+    const newDailyMap = new Map<string, number>();
+    const resultList: FFQResultsResponse[] = this.results;
+
+    oldListObservable.subscribe(m => {
+
       m.forEach(element => {
-       const newWeeklyMap = new Map<string, number>();
-       const newDailyMap = new Map<string, number>();
+      const newWeeklyMap = new Map<string, number>();
+      const newDailyMap = new Map<string, number>();
 
-       const weeklyMap = element.weeklyTotals;
-       const dailyMap = element.dailyAverages;
+      const weeklyMap = element.weeklyTotals;
+      const dailyMap = element.dailyAverages;
 
-       reqList.forEach(a =>  {
-           newWeeklyMap.set(a, weeklyMap[a]);
-           newDailyMap.set(a, dailyMap[a]);
-       })
+      reqList.forEach(a =>  {
+          newWeeklyMap.set(a, weeklyMap[a]);
+          newDailyMap.set(a, dailyMap[a]);
+      })
 
-       element.weeklyTotals = newWeeklyMap;
-       element.dailyAverages = newDailyMap;
-       })
+      element.weeklyTotals = newWeeklyMap;
+      element.dailyAverages = newDailyMap;
+      })
 
-       console.log(m);
-       this.results = m.reverse();
-    }
+      console.log(m);
+      this.results = m.reverse();
 
-   )
+     });
+
+
   }
 
-  private getFoodRecommendations(questionnaireId: string) {
-    this.foodRecommendationsService.getFoodRecommendationsByQuestionnaireId(questionnaireId).subscribe(
-      data => {
-        this.onModalRequestFood(questionnaireId);
-      },
-      error => {
-        const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-        dialogRef.componentInstance.title = error.error.message;
-        dialogRef.componentInstance.router = this.router;
-      }
-    );
-  }
-
-  private getNutrientsRecommendations(questionnaireId: string) {
-    this.nutrientsRecommendationsService.getNutrientsRecommendationsByQuestionnaireId(questionnaireId).subscribe(
-      data => {
-        this.onModalRequest(questionnaireId);
-      },
-      error => {
-        const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-        dialogRef.componentInstance.title = error.error.message;
-        dialogRef.componentInstance.router = this.router;
-      }
-    );
-  }
-
-  onModalRequest(id: string): void {
-    const modalRef = this.errorDialog.open(ResearchRecommendModalComponent);
-    modalRef.componentInstance.id = id;
-  }
-
-  onModalRequestFood(id: string): void {
-    const modalRef = this.errorDialog.open(FoodItemsModalComponent);
-    modalRef.componentInstance.id = id;
-  }
- 
 }

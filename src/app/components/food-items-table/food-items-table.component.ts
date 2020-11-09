@@ -10,11 +10,11 @@ import { FoodRecommendationsService } from 'src/app/services/food-recommendation
 import { FFQFoodRecommendations } from 'src/app/models/ffqfood-recommendations';
 
 @Component({
-  selector: 'app-items-modal',
-  templateUrl: './food-items-modal.component.html',
-  styleUrls: ['./food-items-modal.component.css']
+  selector: 'food-items-modal',
+  templateUrl: './food-items-table.component.html',
+  styleUrls: ['./food-items-table.component.css']
 })
-export class FoodItemsModalComponent {
+export class FoodItemsTableComponent {
 
   @Input() id;
 
