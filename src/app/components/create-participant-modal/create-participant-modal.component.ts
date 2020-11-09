@@ -2,7 +2,9 @@ import { Component,Input } from "@angular/core";
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { ResearcherParentService } from 'src/app/services/researcher-parent/researcher-parent-service';
+import { ResearcherParticipantService } from 'src/app/services/research-participant/research-participant-service';
+import { FFQResearch } from "src/app/models/ffqresearch";
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-create-participant-modal',
@@ -12,13 +14,27 @@ import { ResearcherParentService } from 'src/app/services/researcher-parent/rese
 export class CreateParticipantModalComponent{
   @Input() id;
   @Input() service;
+  @Input() researcher: FFQResearch;
   data: any;
+
+  currentUser = <FFQResearch>JSON.parse(localStorage.getItem('currentUser'))[0];
+  remainingParticipants = localStorage.getItem("remainingParticipants");
+
 
   constructor(
     public activeModal: NgbActiveModal,
-    public participants: ResearcherParentService,
+    public participantsService: ResearcherParticipantService,
     private router: Router,
-    private errorDialog: MatDialog, ) {
+    private errorDialog: MatDialog) {
+  }
+
+  onCreateParticipants(form: NgForm){
+    if(form.invalid){
+      return;
+    }
+    this.participantsService.addParent(form.value);
+    form.resetForm();
+    this.activeModal.close('closed');
   }
 
   onClose(): void {

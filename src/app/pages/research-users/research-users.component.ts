@@ -23,6 +23,9 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { CreateParticipantModalComponent} from "src/app/components/create-participant-modal/create-participant-modal.component"
 import { FFQResearcherParentResponse } from 'src/app/models/ffqresearcherparent-response';
+import { FFQResearch } from "src/app/models/ffqresearch";
+import { BehaviorSubject } from 'rxjs';
+import { FFQResearchParticipant } from 'src/app/models/ffqresearch-participant';
 
 @Component({
   selector: "app-questionnaire-page",
@@ -34,8 +37,9 @@ export class ResearchUsersComponent implements OnInit {
   TITLE = "FFQR Research Portal";
   endpoint = environment.foodServiceUrl + "/ffq";
 
-  currentUser = JSON.parse(localStorage.getItem('currentUser'))[0];
-  participants: FFQResearcherParentResponse[] = [];
+  currentUser = <FFQResearch>JSON.parse(localStorage.getItem('currentUser'))[0];
+
+  participants: FFQResearchParticipant[] = [];
   dataLoaded: Promise<boolean>;
 
   constructor(
@@ -57,6 +61,8 @@ export class ResearchUsersComponent implements OnInit {
   }
 
   onOpenCreateParticipantModal(): void {
+    let remainingParticipants = this.currentUser.limitNumberOfParticipants - this.participants.length;
+    localStorage.setItem("remainingParticipants", remainingParticipants.toString());
     const modalRef = this.modalService.open(CreateParticipantModalComponent);
   }
 

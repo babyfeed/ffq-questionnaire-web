@@ -33,13 +33,15 @@
 
       <table class="table table-bordered table-inverse">
           <tr>
-              <th width="25%"> Username </th>
-              <th width="15%"> Account Type </th>
-              <th width="60%"> Institution </th>
+              <th width="20%"> Username </th>
+              <th width="40%"> Password </th>
+              <th width="20%"> Account Type </th>
+              <th width="20%"> Institution </th>
 
           </tr>
           <tr *ngFor="let participant of participants;">
             <td> {{ participant.username}} </td>
+            <td> {{ participant.userpassword}} </td>
             <td> {{ participant.usertype }} </td>
             <td> {{ participant.assignedResearcherInst }} </td>
           </tr>

@@ -72,7 +72,9 @@ export class ResearchService {
           item.usertype,
           item.firstname,
           item.lastname,
-          item.isactive
+          item.isactive,
+          item.AssignedResearchInstitutionId,
+          item.limitNumberOfParticipants
         );
       })
     );
@@ -90,7 +92,9 @@ export class ResearchService {
             item.usertype,
             item.firstname,
             item.lastname,
-            item.isactive
+            item.isactive,
+            item.AssignedResearchInstitutionId,
+            item.limitNumberOfParticipants
           );
         });
       })
@@ -107,12 +111,12 @@ export class ResearchService {
 }
 
 /*export async function getMongoUsers() {  //test function to get users from mongoDB
-  
-  const MongoClient = require('mongodb').MongoClient; 
-  const url = "mongodb://localhost:27017/"; 
+
+  const MongoClient = require('mongodb').MongoClient;
+  const url = "mongodb://localhost:27017/";
   const db = await MongoClient.connect(url);
   const dbo = db.db("ffq_database");
   var user = await dbo.collection("users").find().toArray();    //[{1, Admin}, {2, Khalid}]
   console.log(user);
-  
+
 }*/
