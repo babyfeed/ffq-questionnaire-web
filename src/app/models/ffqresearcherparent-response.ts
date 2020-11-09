@@ -11,21 +11,21 @@ export class FFQResearcherParentResponse {
   usertype: string;
   firstname: string;
   lastname: string;
-  assignedResearcherInst: string;
+  assignedResearcherOrg: string;
   assignedResearcherUser: any;
   childrennames: any;
   isactive: boolean;
 
 
   constructor(userId: string, username: string, userpassword: string, usertype:string, firstname: string,
-              lastname: string, assignedResearcherInst: string, assignedResearcherUser: any, childrennames: any, isactive: boolean) {
+              lastname: string, assignedResearcherOrg: string, assignedResearcherUser: any, childrennames: any, isactive: boolean) {
     this.userId = userId;
     this.username = username;
     this.userpassword = userpassword;
     this.usertype = usertype;
     this.firstname = firstname;
     this.lastname = lastname;
-    this.assignedResearcherInst = assignedResearcherInst;
+    this.assignedResearcherOrg = assignedResearcherOrg;
     this.assignedResearcherUser = assignedResearcherUser;
     this.childrennames = childrennames;
     this.isactive = isactive;
