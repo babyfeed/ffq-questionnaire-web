@@ -1,11 +1,3 @@
-/*
-
-  Added by Javier Romero
-  This is the users page on the admin portal (admin/users).
-  From here, the admin can create, delete, and assign parents/clinicians to their clinics.
-  Khalid Alamoudi: wrote loadAllUsers() function that populates clinicians/parents lists.
-
-*/
 
 import { Component, OnInit } from "@angular/core";
 import { FFQClinician } from "src/app/models/ffqclinician";
@@ -30,14 +22,12 @@ import { AuthenticationService } from "src/app/services/authentication/authentic
 import { FFQResearch } from "src/app/models/ffqresearch";
 
 @Component({
-  templateUrl: "./admin-users.component.html",
-  styleUrls: ["./admin-users.component.css"],
+  templateUrl: "./research-admin-users.component.html",
+  styleUrls: ["./research-admin-users.component.css"],
 })
-export class AdminUsersComponent implements OnInit {
-  private showParents: boolean;
-  private showClinicians: boolean;
-  private showAdmins: boolean;
-  private showResearch: boolean;
+export class AdminResearchUsersComponent implements OnInit {
+  private showParticipants: boolean;
+  private showResearchers: boolean;   
 
   search: string;
 
@@ -65,10 +55,8 @@ export class AdminUsersComponent implements OnInit {
 
   ngOnInit() {
     this.clinicNames.push("");
-    this.showParents = true;
-    this.showClinicians = true;
-    this.showAdmins = true;
-    this.showResearch = true;
+    this.showParticipants = true;
+    this.showResearchers = true;    
     this.filtered = false;
     this.loadAllUsers();
     this.clinicianNames.push("");
@@ -88,20 +76,12 @@ export class AdminUsersComponent implements OnInit {
   }
 
   toggleParents() {
-    this.showParents = !this.showParents;
+    this.showParticipants = !this.showParticipants;
   }
 
   toggleClinicians() {
-    this.showClinicians = !this.showClinicians;
-  }
-
-  toggleAdmins() {
-    this.showAdmins = !this.showAdmins;
-  }
-
-  toggleResearch() {
-    this.showResearch = !this.showResearch;
-  }
+    this.showResearchers = !this.showResearchers;
+  } 
 
 
   filterByClinic(clinic_name: string) {
