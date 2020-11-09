@@ -12,13 +12,13 @@ export class FFQClinician {
   firstname: string;
   lastname: string;
   assignedclinic: string;
-  previousclinics: any;
+  previousclinics: string[];
   isactive: boolean;
   parentLimitForClinician: number;
 
 
   constructor(userId: string, username: string, userpassword: string, abbreviation: string, firstname: string,
-              lastname: string, assignedclinic: string, previousclinics: any, isactive: boolean, parentLimitForClinician: number) {
+              lastname: string, assignedclinic: string, previousclinics: string[], isactive: boolean, parentLimitForClinician: number) {
     this.userId = userId;
     this.username = username;
     this.userpassword = userpassword;

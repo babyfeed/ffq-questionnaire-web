@@ -140,7 +140,6 @@ export class ClinicNewUserComponent implements OnInit {
 
   addParent() {
     this.ffqParent = new FFQParent('', '', '', 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true);
-    // this.ffqParent = new FFQParent('', this.prefix, '', 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true);
     this.parentService.addParent(this.ffqParent).subscribe(parent  => {
         this.router.navigateByUrl('/clinic/home');
         const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
@@ -156,7 +155,6 @@ export class ClinicNewUserComponent implements OnInit {
     const newParents = [];
     for (let i = 0; i < this.usersQuantity; i++) {
       newParents.push(new FFQParent('', '', '', 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true));
-      //newParents.push(new FFQParent('', this.prefix + i + 1, '', 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true));
     }
 
     this.parentService.addMultipleParents(newParents).subscribe(clinicians => {
