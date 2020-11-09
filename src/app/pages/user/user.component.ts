@@ -229,17 +229,15 @@ export class UserComponent implements OnInit {
 
       }
 
-      for(let j = 0; j < amount; j++){
+      this.clinicianService.addMultipleClinicians(new_clinicians).subscribe(data => {
+        this.router.navigateByUrl('/admin/users');
+      },
+      error =>{
+        const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+        dialogRef.componentInstance.title = error.error.message;
+      });
 
-        this.clinicianService.addClinician(new_clinicians[j]).subscribe(data => {
-          this.router.navigateByUrl('/admin/users');
-        },
-        error =>{
-          const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-          dialogRef.componentInstance.title = error.error.message;
-        });
-
-      }
+      
 
       const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
       dialogRef.componentInstance.title = amount + ' new clinicians have been added';

@@ -12,7 +12,6 @@ export class FFQItem {
   isSubmitted: boolean;
   isPrimary: boolean;
   foodTypes: FoodType[];
-  /////
   itemPosition:number;
 
   constructor(name: string) {
