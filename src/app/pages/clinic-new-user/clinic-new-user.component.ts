@@ -135,13 +135,20 @@ export class ClinicNewUserComponent implements OnInit {
       });
   }
   getSuffix(){
-    this.lastUserId = this.ffqparentList[ this.ffqparentList.length - 1].userId;
-    this.suffix = parseInt(this.lastUserId, 10);
-    this.suffix++;
+    this.lastUserId = this.ffqparentList[this.ffqparentList.length - 1].userId;
+    this.suffix = parseInt(this.lastUserId, 10) + 1;
   }
   addParent() {
     this.getSuffix();
-    this.ffqParent = new FFQParent('', this.prefix + this.suffix, '', 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true);
+    if (this.prefix !== '') {
+      this.ffqParent = new FFQParent('', '', '', 'parent', '',
+        '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true);
+    }
+    else {
+      this.ffqParent = new FFQParent('', this.prefix + this.suffix, this.prefix +
+        + this.suffix.toString(), 'parent', '', '', this.selectedClinic.clinicId,
+        this.loggedInUser[0].userId, [''], true);
+    }
     this.parentService.addParent(this.ffqParent).subscribe(parent  => {
         this.router.navigateByUrl('/clinic/home');
         const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
@@ -156,10 +163,17 @@ export class ClinicNewUserComponent implements OnInit {
   addMultipleParents() {
     const newParents = [];
     this.getSuffix();
-    for (let i = 0; i < this.usersQuantity; i++) {
-      newParents.push(new FFQParent('', this.prefix + this.suffix, '', 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true));
-      this.suffix++;
+    if (this.prefix !== '') {
+      for (let i = 0; i < this.usersQuantity; i++) {
+        newParents.push(new FFQParent('', '', '', 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true));
+        this.suffix++;
+      }
     }
+    else {
+    for (let i = 0; i < this.usersQuantity; i++) {
+      newParents.push(new FFQParent('', this.prefix + this.suffix.toString(),this.prefix + this.suffix.toString(), 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true));
+      this.suffix++;
+    }}
 
     this.parentService.addMultipleParents(newParents).subscribe(clinicians => {
         this.router.navigateByUrl('/clinic/home');
