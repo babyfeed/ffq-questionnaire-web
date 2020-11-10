@@ -37,7 +37,7 @@ export class ClinicNewUserComponent implements OnInit {
   noMoreRoom = false;
   limit = this.loggedInUser[0].parentLimitForClinician;
   numParents = 0;
-  prefix = 'tonces';
+  prefix = this.loggedInUser[0].prefix;
   lastUserId;
   suffix;
 
@@ -107,7 +107,7 @@ export class ClinicNewUserComponent implements OnInit {
   }
 
   addClinician() {
-    const ffqclinician = new FFQClinician('', '', '', '', '', '', this.selectedClinic.clinicId, [], true, this.parentLimitForClinician);
+    const ffqclinician = new FFQClinician('', '', '', '', '', '', this.selectedClinic.clinicId, [], true, this.parentLimitForClinician, this.prefix);
 
     this.clinicianService.addClinician(ffqclinician).subscribe(clinician => {
         const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
@@ -122,7 +122,7 @@ export class ClinicNewUserComponent implements OnInit {
   addMultipleClinicians() {
     const newClinicians = [];
     for (let i = 0; i < this.usersQuantity; i++) {
-      newClinicians.push(new FFQClinician('', '', '', '', '', '', this.selectedClinic.clinicId, [], true, this.parentLimitForClinician));
+      newClinicians.push(new FFQClinician('', '', '', '', '', '', this.selectedClinic.clinicId, [], true, this.parentLimitForClinician, this.prefix));
     }
 
     this.clinicianService.addMultipleClinicians(newClinicians).subscribe(clinicians => {

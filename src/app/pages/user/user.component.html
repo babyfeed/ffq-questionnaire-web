@@ -68,6 +68,12 @@
               <input [(ngModel)]="userAttributes.parentLimitForClinician" type="number" id="parentLimit" name="parentLimit" min="1" style="margin-bottom: 10px">
               <br>
               <br>
+              <hr>
+              <label style="font-weight: bold">Set Prefix For Clinician:</label>
+              <br>
+              <input [(ngModel)]="userAttributes.prefix" type="text" id="prefix" name="prefix" style="margin-bottom: 10px" required>
+              <br>
+              <br>
               <label style="font-weight: bold">Choose Clinic to assign to:</label>
               <br>
               <mat-form-field>
@@ -79,6 +85,7 @@
                   </mat-option>
                 </mat-select>
               </mat-form-field>
+
             </div>
           </div>
           <div align="middle">
@@ -130,24 +137,16 @@
                   <tr>
                     <th width="16.66%"> No. of Clinicians </th>
                     <th width="16.66%"> No. of Parents </th>
-<!--                    <th width="16.66%"> Able to add Clinicians </th>-->
-<!--                    <th width="16.66%"> Able to add Parents </th>-->
-<!--                    <th width="16.66%"> Clinicians Limit </th>-->
-<!--                    <th width="16.66%"> Parents Limit </th>-->
                   </tr>
                   <tr >
                     <td>{{ numClinician }}</td>
                     <td>{{ numParents }}</td>
-<!--                    <td>{{ able2AddClinicians }}</td>-->
-<!--                    <td>{{ able2AddParents }}</td>-->
-<!--                    <td>{{ cliniciansLimit }}</td>-->
-<!--                    <td>{{ parentsLimit }}</td>-->
                   </tr>
                 </table>
 
                 <mat-form-field *ngIf="userType == userTypes.Parent">
                   <mat-label appearance="fill">Choose Clinician...</mat-label>
-                  <mat-select matNativeControl name="assignedclinician" [(ngModel)]="selectedClinician">
+                  <mat-select matNativeControl name="assignedclinician" [(ngModel)]="selectedClinician" required>
                     <!--                    <mat-option *ngFor="let u of ffqclinicianList" [hidden]=" u.assignedclinic != clinicId" [value]="u.userId">{{ "clinician" + u.userId }}</mat-option>-->
                     <mat-option *ngFor="let c of (ffqclinicianList$| async)" [hidden]=" c.assignedclinic != clinicId" [value]="c.userId">{{ "clinician" + c.userId }}</mat-option>
                   </mat-select>
@@ -163,7 +162,12 @@
                   <hr>
                   <label style="font-weight: bold">Set Parent Limit For Clinician:</label>
                   <br>
-                  <input [(ngModel)]="parentLimitForClinician" type="number" id="parentLimit" name="parentLimit" min="1" value="1" style="margin-bottom: 10px">
+                  <input [(ngModel)]="parentLimitForClinician" type="number" id="parentLimit" name="parentLimit" min="1" value="1" style="margin-bottom: 10px" required>
+                  <br>
+                  <hr>
+                  <label style="font-weight: bold">Set Prefix For Clinician:</label>
+                  <br>
+                  <input [(ngModel)]="prefix" type="text" id="prefix" name="prefix" style="margin-bottom: 10px" required>
                   <br>
                 </div>
 
