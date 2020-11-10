@@ -35,10 +35,11 @@ export class ClinicNewUserComponent implements OnInit {
   loggedInUser = this.authenticationService.currentUserValue;
   clicked = false;
   noMoreRoom = false;
-  // notice = true;
   limit = this.loggedInUser[0].parentLimitForClinician;
   numParents = 0;
   prefix = 'tonces';
+  lastUserId;
+  suffix;
 
   constructor(
     public parentService: ParentService,
@@ -46,7 +47,6 @@ export class ClinicNewUserComponent implements OnInit {
     private errorDialog: MatDialog,
     private router: Router,
     public clinicService: ClinicService,
-
     private authenticationService: AuthenticationService
   ) {
     this.ffqclinicList$ = this.clinicService.getAllClinics();
@@ -73,8 +73,6 @@ export class ClinicNewUserComponent implements OnInit {
     parentList.subscribe(a => {
       this.ffqparentList = a;
     });
-
-    this.countParents();
   }
   countParents(){
     for (let i = 0; i < this.ffqparentList.length; i++){
@@ -85,7 +83,6 @@ export class ClinicNewUserComponent implements OnInit {
     if (this.limit <= 0){
       this.limit = 0;
       this.noMoreRoom = true;
-      // this.notice = false;
     }
   }}
   addUser() {
@@ -137,9 +134,14 @@ export class ClinicNewUserComponent implements OnInit {
         dialogRef.componentInstance.title = error.error.message;
       });
   }
-
+  getSuffix(){
+    this.lastUserId = this.ffqparentList[ this.ffqparentList.length - 1].userId;
+    this.suffix = parseInt(this.lastUserId, 10);
+    this.suffix++;
+  }
   addParent() {
-    this.ffqParent = new FFQParent('', '', '', 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true);
+    this.getSuffix();
+    this.ffqParent = new FFQParent('', this.prefix + this.suffix, '', 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true);
     this.parentService.addParent(this.ffqParent).subscribe(parent  => {
         this.router.navigateByUrl('/clinic/home');
         const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
@@ -153,8 +155,10 @@ export class ClinicNewUserComponent implements OnInit {
 
   addMultipleParents() {
     const newParents = [];
+    this.getSuffix();
     for (let i = 0; i < this.usersQuantity; i++) {
-      newParents.push(new FFQParent('', '', '', 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true));
+      newParents.push(new FFQParent('', this.prefix + this.suffix, '', 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true));
+      this.suffix++;
     }
 
     this.parentService.addMultipleParents(newParents).subscribe(clinicians => {
