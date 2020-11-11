@@ -40,6 +40,7 @@ export class ClinicNewUserComponent implements OnInit {
   prefix = this.loggedInUser[0].prefix;
   lastUserId;
   suffix;
+  userPassword;
 
   constructor(
     public parentService: ParentService,
@@ -135,19 +136,20 @@ export class ClinicNewUserComponent implements OnInit {
       });
   }
   getSuffix(){
+    if (this.ffqparentList.length === 0){
+      this.suffix = 1;
+    } else {
     this.lastUserId = this.ffqparentList[this.ffqparentList.length - 1].userId;
     this.suffix = parseInt(this.lastUserId, 10) + 1;
-  }
+  }}
   addParent() {
     this.getSuffix();
-    if (this.prefix !== '') {
+    if (this.prefix !== '' || this.prefix === "") {
       this.ffqParent = new FFQParent('', '', '', 'parent', '',
         '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true);
     }
-    else {
-      this.ffqParent = new FFQParent('', this.prefix + this.suffix, this.prefix +
-        + this.suffix.toString(), 'parent', '', '', this.selectedClinic.clinicId,
-        this.loggedInUser[0].userId, [''], true);
+    else {                                                              //leaving password like this for now until file download is possible
+      this.ffqParent = new FFQParent('', this.prefix + this.suffix, this.prefix + this.suffix.toString(), 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true);
     }
     this.parentService.addParent(this.ffqParent).subscribe(parent  => {
         this.router.navigateByUrl('/clinic/home');
@@ -163,15 +165,15 @@ export class ClinicNewUserComponent implements OnInit {
   addMultipleParents() {
     const newParents = [];
     this.getSuffix();
-    if (this.prefix !== '') {
+    if (this.prefix !== '' || this.prefix === "") {
       for (let i = 0; i < this.usersQuantity; i++) {
         newParents.push(new FFQParent('', '', '', 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true));
         this.suffix++;
       }
     }
     else {
-    for (let i = 0; i < this.usersQuantity; i++) {
-      newParents.push(new FFQParent('', this.prefix + this.suffix.toString(),this.prefix + this.suffix.toString(), 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true));
+    for (let i = 0; i < this.usersQuantity; i++) {                        //leaving password like this for now until file download is possible
+      newParents.push(new FFQParent('', this.prefix + this.suffix.toString(), this.prefix + this.suffix.toString(), 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true));
       this.suffix++;
     }}
 
@@ -184,6 +186,9 @@ export class ClinicNewUserComponent implements OnInit {
         const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
         dialogRef.componentInstance.title = error.error.message;
       });
+  }
+  generatePassword() {
+    this.userPassword = Math.random().toString(36).slice(-10);
   }
 }
 
