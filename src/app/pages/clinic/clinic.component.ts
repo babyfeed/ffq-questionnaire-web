@@ -48,7 +48,9 @@ export class ClinicComponent implements OnInit, OnDestroy {
   clinic: number;
   public ffqclinicianList: FFQClinician[] = [];
   clinicianNames: string[] = [];
-
+  ffqclinicList: FFQClinic[] = [];
+  curClinId;
+  newClinicId;
   constructor(
     public parentService: ParentService,
     public clinicianService: ClinicianService,
@@ -78,7 +80,20 @@ export class ClinicComponent implements OnInit, OnDestroy {
         this.clinicianNames.push(a[i].abbreviation + " " + a[i].firstname + " " + a[i].lastname);
       }
     }));
+
+    const clinList: Observable<FFQClinicResponse[]> = this.clinicService.getAllClinics();
+    clinList.subscribe(a => {
+      this.ffqclinicList = a;
+    });
   }
+
+  getClinId(){
+    if (this.ffqclinicList.length === 0){
+      this.newClinicId = 1;
+    } else {
+    this.curClinId = this.ffqclinicList[this.ffqclinicList.length - 1].clinicId;
+    this.newClinicId = parseInt(this.curClinId, 10) + 1;
+  }}
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
@@ -86,14 +101,13 @@ export class ClinicComponent implements OnInit, OnDestroy {
 
   addClinic(form: NgForm) {
     var clinicList: Observable<FFQClinicResponse[]> = this.clinicService.getAllClinics();
-
+    this.getClinId();
     clinicList.subscribe(data => {
-      var newClinicId = (data.length + 1).toString();
-      this.ffqclinic = new FFQClinic(newClinicId, this.location, "", this.name_of_clinic, "", false, this.cliniciansLimit, this.parentsLimit);
+      this.ffqclinic = new FFQClinic(this.newClinicId, this.location, "", this.name_of_clinic, "", false, this.cliniciansLimit, this.parentsLimit);
       this.clinicService.addClinic(this.ffqclinic).subscribe(data => {
           this.router.navigateByUrl('/admin/users');
           const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-          dialogRef.componentInstance.title = 'Clinic with id ' + newClinicId + ' was added!';
+          dialogRef.componentInstance.title = 'Clinic with id ' + this.newClinicId + ' was added!';
         },
         error => {
           const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);

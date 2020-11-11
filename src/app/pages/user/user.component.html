@@ -63,10 +63,26 @@
               </div>
 
               <hr>
-              <label style="font-weight: bold">Set Parent Limit:</label>
-              <br>
-              <input [(ngModel)]="userAttributes.parentLimitForClinician" type="number" id="parentLimit" name="parentLimit" min="1" style="margin-bottom: 10px">
-              <br>
+              <form class="example-form">
+                <label style="font-weight: bold">Set Parent Limit For Clinician:</label>
+                <br>
+                <mat-form-field class="example-full-width">
+                  <mat-label>Parent limit</mat-label>
+                  <input required matInput [(ngModel)]="userAttributes.parentLimitForClinician" type="number" id="parentLimit" name="parentLimit" min="1" value="1" placeholder="Enter parent limit...">
+<!--                  <mat-hint align="start"><strong>* required</strong> </mat-hint>-->
+                </mat-form-field>
+              </form>
+              <hr>
+              <form class="example-form">
+                <label style="font-weight: bold">Set Prefix For Clinician:</label>
+                <br>
+                <mat-form-field class="example-full-width">
+                  <mat-label>Prefix</mat-label>
+                  <input required matInput [(ngModel)]="userAttributes.prefix" id="prefix" name="prefix" #message maxlength="8" placeholder="Enter Prefix...">
+                  <mat-hint align="start"><strong>If no prefix entered, will use Parent as prefix</strong> </mat-hint>
+                  <mat-hint align="end">{{message.value.length}} / 8</mat-hint>
+                </mat-form-field>
+              </form>
               <br>
               <label style="font-weight: bold">Choose Clinic to assign to:</label>
               <br>
@@ -79,6 +95,7 @@
                   </mat-option>
                 </mat-select>
               </mat-form-field>
+
             </div>
           </div>
           <div align="middle">
@@ -130,40 +147,53 @@
                   <tr>
                     <th width="16.66%"> No. of Clinicians </th>
                     <th width="16.66%"> No. of Parents </th>
-<!--                    <th width="16.66%"> Able to add Clinicians </th>-->
-<!--                    <th width="16.66%"> Able to add Parents </th>-->
-<!--                    <th width="16.66%"> Clinicians Limit </th>-->
-<!--                    <th width="16.66%"> Parents Limit </th>-->
                   </tr>
                   <tr >
                     <td>{{ numClinician }}</td>
                     <td>{{ numParents }}</td>
-<!--                    <td>{{ able2AddClinicians }}</td>-->
-<!--                    <td>{{ able2AddParents }}</td>-->
-<!--                    <td>{{ cliniciansLimit }}</td>-->
-<!--                    <td>{{ parentsLimit }}</td>-->
                   </tr>
                 </table>
 
                 <mat-form-field *ngIf="userType == userTypes.Parent">
                   <mat-label appearance="fill">Choose Clinician...</mat-label>
-                  <mat-select matNativeControl name="assignedclinician" [(ngModel)]="selectedClinician">
+                  <mat-select matNativeControl name="assignedclinician" [(ngModel)]="selectedClinician" required>
                     <!--                    <mat-option *ngFor="let u of ffqclinicianList" [hidden]=" u.assignedclinic != clinicId" [value]="u.userId">{{ "clinician" + u.userId }}</mat-option>-->
                     <mat-option *ngFor="let c of (ffqclinicianList$| async)" [hidden]=" c.assignedclinic != clinicId" [value]="c.userId">{{ "clinician" + c.userId }}</mat-option>
                   </mat-select>
                 </mat-form-field>
-
-
                 <hr>
-                <label style="font-weight: bold">Select Quantity:</label>
-                <br>
-                <input [(ngModel)]="usersQuantity" type="number" id="parent_quantity" name="quantity" min="1" value="1" style="margin-bottom: 10px">
+                <form class="example-form">
+                  <label style="font-weight: bold">Select Quantity:</label>
+                  <br>
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Parent limit</mat-label>
+                    <input required matInput [(ngModel)]="usersQuantity" type="number" id="parent_quantity" name="quantity" min="1" value="1" placeholder="Select quantity...">
+                    <mat-hint align="start"><strong>* required</strong> </mat-hint>
+                  </mat-form-field>
+                </form>
                 <br>
                 <div *ngIf="userType == userTypes.Clinician" >
                   <hr>
-                  <label style="font-weight: bold">Set Parent Limit For Clinician:</label>
-                  <br>
-                  <input [(ngModel)]="parentLimitForClinician" type="number" id="parentLimit" name="parentLimit" min="1" value="1" style="margin-bottom: 10px">
+                  <form class="example-form">
+                    <label style="font-weight: bold">Set Parent Limit For Clinician:</label>
+                    <br>
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Parent limit</mat-label>
+                      <input required matInput [(ngModel)]="parentLimitForClinician" type="number" id="parentLimit" name="parentLimit" min="1" value="1" placeholder="Enter parent limit...">
+                      <mat-hint align="start"><strong>* required</strong> </mat-hint>
+                    </mat-form-field>
+                  </form>
+                  <hr>
+                  <form class="example-form">
+                    <label style="font-weight: bold">Set Prefix For Clinician:</label>
+                    <br>
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Prefix</mat-label>
+                      <input required matInput [(ngModel)]="prefix" id="prefix" name="prefix" #message maxlength="8" placeholder="Enter Prefix...">
+                      <mat-hint align="start"><strong>If no prefix entered, will use Parent as prefix</strong> </mat-hint>
+                      <mat-hint align="end">{{message.value.length}} / 8</mat-hint>
+                    </mat-form-field>
+                  </form>
                   <br>
                 </div>
 

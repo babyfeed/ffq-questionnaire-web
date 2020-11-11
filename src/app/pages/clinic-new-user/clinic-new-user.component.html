@@ -15,7 +15,7 @@
         </div>
 
         <div class="container frame-fooditem" >
-          <h6> New parent(s) will be added to </h6>
+          <h6> New parent(s) will be added to:</h6>
           <div class="form-group col-12">
           <p style="font-weight: bold">{{ loggedInUser[0].username }}</p>
           </div>
@@ -37,20 +37,18 @@
           <div [hidden]="clicked" class="form-group col-12">
             <label style="font-weight: bold"> Account Type </label>
             <br>
-            <mat-radio-group  aria-label="Select an option" [(ngModel)]="userType" name="userType">
+            <mat-radio-group  aria-label="Select an option" [(ngModel)]="userType">
               <mat-radio-button  (click)="countParents(); clicked = true;" [value]="userTypes.Parent" color="primary" >Parent</mat-radio-button>
-              <mat-radio-button [value]="userTypes.Parent" [hidden]="true" color="primary">Parent</mat-radio-button>
             </mat-radio-group>
           </div>
           <div class="optional_container" >
             <div class="form-group col-12" [hidden]="!clicked">
-              <label style="font-weight: bold">Select Quantity:</label>
+              <label style="font-weight: bold" [hidden]="noMoreRoom">Select Quantity:</label>
               <br>
-              <input [(ngModel)]="usersQuantity" [hidden]="noMoreRoom" type="number" id="parent_quantity" name="quantity" min="1" max={{limit}} style="margin-bottom: 10px" >
+              <input [(ngModel)]="usersQuantity" [hidden]="noMoreRoom" type="number" id="parent_quantity" name="quantity" min="1" max={{limit}} style="margin-bottom: 10px">
               <h5 align="center" class="container frame-fooditem" [hidden]="!noMoreRoom"> No room to add more parents, contact admin to request increase</h5>
               <br>
               <hr>
-
             </div>
           </div>
         </div>

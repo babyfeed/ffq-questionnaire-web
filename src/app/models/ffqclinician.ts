@@ -15,10 +15,11 @@ export class FFQClinician {
   previousclinics: string[];
   isactive: boolean;
   parentLimitForClinician: number;
+  prefix: string;
 
 
   constructor(userId: string, username: string, userpassword: string, abbreviation: string, firstname: string,
-              lastname: string, assignedclinic: string, previousclinics: string[], isactive: boolean, parentLimitForClinician: number) {
+              lastname: string, assignedclinic: string, previousclinics: string[], isactive: boolean, parentLimitForClinician: number, prefix: string) {
     this.userId = userId;
     this.username = username;
     this.userpassword = userpassword;
@@ -29,6 +30,7 @@ export class FFQClinician {
     this.previousclinics = previousclinics;
     this.isactive = isactive;
     this.parentLimitForClinician = parentLimitForClinician;
+    this.prefix = prefix;
   }
 
 }

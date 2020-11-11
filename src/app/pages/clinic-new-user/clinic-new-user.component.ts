@@ -35,10 +35,12 @@ export class ClinicNewUserComponent implements OnInit {
   loggedInUser = this.authenticationService.currentUserValue;
   clicked = false;
   noMoreRoom = false;
-  // notice = true;
   limit = this.loggedInUser[0].parentLimitForClinician;
   numParents = 0;
-  prefix = 'tonces';
+  prefix = this.loggedInUser[0].prefix;
+  lastUserId;
+  suffix;
+  userPassword;
 
   constructor(
     public parentService: ParentService,
@@ -46,7 +48,6 @@ export class ClinicNewUserComponent implements OnInit {
     private errorDialog: MatDialog,
     private router: Router,
     public clinicService: ClinicService,
-
     private authenticationService: AuthenticationService
   ) {
     this.ffqclinicList$ = this.clinicService.getAllClinics();
@@ -73,8 +74,6 @@ export class ClinicNewUserComponent implements OnInit {
     parentList.subscribe(a => {
       this.ffqparentList = a;
     });
-
-    this.countParents();
   }
   countParents(){
     for (let i = 0; i < this.ffqparentList.length; i++){
@@ -85,7 +84,6 @@ export class ClinicNewUserComponent implements OnInit {
     if (this.limit <= 0){
       this.limit = 0;
       this.noMoreRoom = true;
-      // this.notice = false;
     }
   }}
   addUser() {
@@ -110,7 +108,7 @@ export class ClinicNewUserComponent implements OnInit {
   }
 
   addClinician() {
-    const ffqclinician = new FFQClinician('', '', '', '', '', '', this.selectedClinic.clinicId, [], true, this.parentLimitForClinician);
+    const ffqclinician = new FFQClinician('', '', '', '', '', '', this.selectedClinic.clinicId, [], true, this.parentLimitForClinician, this.prefix);
 
     this.clinicianService.addClinician(ffqclinician).subscribe(clinician => {
         const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
@@ -125,7 +123,7 @@ export class ClinicNewUserComponent implements OnInit {
   addMultipleClinicians() {
     const newClinicians = [];
     for (let i = 0; i < this.usersQuantity; i++) {
-      newClinicians.push(new FFQClinician('', '', '', '', '', '', this.selectedClinic.clinicId, [], true, this.parentLimitForClinician));
+      newClinicians.push(new FFQClinician('', '', '', '', '', '', this.selectedClinic.clinicId, [], true, this.parentLimitForClinician, this.prefix));
     }
 
     this.clinicianService.addMultipleClinicians(newClinicians).subscribe(clinicians => {
@@ -137,9 +135,22 @@ export class ClinicNewUserComponent implements OnInit {
         dialogRef.componentInstance.title = error.error.message;
       });
   }
-
+  getSuffix(){
+    if (this.ffqparentList.length === 0){
+      this.suffix = 1;
+    } else {
+    this.lastUserId = this.ffqparentList[this.ffqparentList.length - 1].userId;
+    this.suffix = parseInt(this.lastUserId, 10) + 1;
+  }}
   addParent() {
-    this.ffqParent = new FFQParent('', '', '', 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true);
+    this.getSuffix();
+    if (this.prefix !== '' || this.prefix === "") {
+      this.ffqParent = new FFQParent('', '', '', 'parent', '',
+        '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true);
+    }
+    else {                                                              //leaving password like this for now until file download is possible
+      this.ffqParent = new FFQParent('', this.prefix + this.suffix, this.prefix + this.suffix.toString(), 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true);
+    }
     this.parentService.addParent(this.ffqParent).subscribe(parent  => {
         this.router.navigateByUrl('/clinic/home');
         const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
@@ -153,9 +164,18 @@ export class ClinicNewUserComponent implements OnInit {
 
   addMultipleParents() {
     const newParents = [];
-    for (let i = 0; i < this.usersQuantity; i++) {
-      newParents.push(new FFQParent('', '', '', 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true));
+    this.getSuffix();
+    if (this.prefix !== '' || this.prefix === "") {
+      for (let i = 0; i < this.usersQuantity; i++) {
+        newParents.push(new FFQParent('', '', '', 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true));
+        this.suffix++;
+      }
     }
+    else {
+    for (let i = 0; i < this.usersQuantity; i++) {                        //leaving password like this for now until file download is possible
+      newParents.push(new FFQParent('', this.prefix + this.suffix.toString(), this.prefix + this.suffix.toString(), 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true));
+      this.suffix++;
+    }}
 
     this.parentService.addMultipleParents(newParents).subscribe(clinicians => {
         this.router.navigateByUrl('/clinic/home');
@@ -166,6 +186,9 @@ export class ClinicNewUserComponent implements OnInit {
         const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
         dialogRef.componentInstance.title = error.error.message;
       });
+  }
+  generatePassword() {
+    this.userPassword = Math.random().toString(36).slice(-10);
   }
 }
 
