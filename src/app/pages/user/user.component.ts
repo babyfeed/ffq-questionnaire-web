@@ -213,7 +213,6 @@ export class UserComponent implements OnInit {
   }
 
   addClinician() {
-    console.log(this.prefix);
     const ffqclinician = new FFQClinician('', '', '', '', '', '', this.selectedClinic, [], true, this.parentLimitForClinician, this.prefix.replace(/\s/g, ''));
 
     this.clinicianService.addClinician(ffqclinician).subscribe(clinician => {

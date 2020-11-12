@@ -9,7 +9,7 @@
 
       <div class="container mt-3">
         <div align="right">
-          <button type="submit" mat-raised-button (click)="addUser()" [hidden]="noMoreRoom" [disabled]="!myForm.form.valid">
+          <button type="submit" mat-raised-button (click)="addUser()" [hidden]="noMoreRoom" [disabled]="!myForm.form.valid || dissabled || intialLoad" >
             Add User(s)
           </button>
         </div>
@@ -38,7 +38,8 @@
             <label style="font-weight: bold"> Account Type </label>
             <br>
             <mat-radio-group  aria-label="Select an option" [(ngModel)]="userType">
-              <mat-radio-button  (click)="countParents(); clicked = true;" [value]="userTypes.Parent" color="primary" >Parent</mat-radio-button>
+              <mat-radio-button  (click)="countParents(); clicked = true; intialLoad = false;" [value]="userTypes.Parent" color="primary" >Parent</mat-radio-button>
+              <mat-radio-button   [hidden]="true" [value]="userTypes.Clinician" color="primary" >Clinician</mat-radio-button>
             </mat-radio-group>
           </div>
           <div class="optional_container" >
@@ -52,6 +53,7 @@
             </div>
           </div>
         </div>
+        <angular2csv [hidden]="!dissabled" [data]="data" filename="ParentsLoginInfo" [options]="options"></angular2csv>
       </div>
     </div>
   </div>

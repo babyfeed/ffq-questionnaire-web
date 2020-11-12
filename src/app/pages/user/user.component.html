@@ -153,7 +153,6 @@
                     <td>{{ numParents }}</td>
                   </tr>
                 </table>
-
                 <mat-form-field *ngIf="userType == userTypes.Parent">
                   <mat-label appearance="fill">Choose Clinician...</mat-label>
                   <mat-select matNativeControl name="assignedclinician" [(ngModel)]="selectedClinician" required>
@@ -183,15 +182,15 @@
                       <mat-hint align="start"><strong>* required</strong> </mat-hint>
                     </mat-form-field>
                   </form>
+                  <br>
                   <hr>
                   <form class="example-form">
                     <label style="font-weight: bold">Set Prefix For Clinician:</label>
                     <br>
                     <mat-form-field class="example-full-width">
                       <mat-label>Prefix</mat-label>
-                      <input required matInput [(ngModel)]="prefix" id="prefix" name="prefix" #message maxlength="8" placeholder="Enter Prefix...">
-                      <mat-hint align="start"><strong>If no prefix entered, will use Parent as prefix</strong> </mat-hint>
-                      <mat-hint align="end">{{message.value.length}} / 8</mat-hint>
+                      <input matInput required [(ngModel)]="prefix" id="prefix" name="prefix"  placeholder="Enter Prefix...">
+<!--                      <mat-hint align="start"><strong>If no prefix entered, will use Parent as prefix</strong> </mat-hint>-->
                     </mat-form-field>
                   </form>
                   <br>
