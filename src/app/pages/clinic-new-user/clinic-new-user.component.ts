@@ -182,7 +182,7 @@ export class ClinicNewUserComponent implements OnInit {
     this.getSuffix();
     this.generatePassword();
     if (this.prefix === '') {
-      this.ffqParent = new FFQParent('', '', '', 'parent', '',
+      this.ffqParent = new FFQParent('', '', this.userPassword, 'parent', '',
         '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true);
     }
     else {                                                              // leaving password like this for now until file download is possible
@@ -264,7 +264,8 @@ export class ClinicNewUserComponent implements OnInit {
     this.getSuffix();
     if (this.prefix === '') {
       for (let i = 0; i < this.usersQuantity; i++) {
-        this.newParents.push(new FFQParent('', '', '', 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true));
+        this.generatePassword();
+        this.newParents.push(new FFQParent('', '', this.userPassword, 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true));
         this.suffix++;
       }
     }
