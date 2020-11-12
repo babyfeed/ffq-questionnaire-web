@@ -15,7 +15,7 @@ import {AuthenticationService} from '../../services/authentication/authenticatio
 import {User} from '../../models/user';
 import {skipWhile, take} from 'rxjs/operators';
 import {FFQParentResponse} from '../../models/ffqparent-response';
-import { Angular2CsvComponent } from 'angular2-csv/Angular2-csv';
+// import { Angular2CsvComponent } from 'angular2-csv/Angular2-csv';
 import {FFQClinicResponse} from "../../models/ffqclinic-response";
 
 @Component({
@@ -182,6 +182,7 @@ export class ClinicNewUserComponent implements OnInit {
     this.getSuffix();
     this.generatePassword();
     if (this.prefix === '') {
+      this.prefix = 'parent';
       this.ffqParent = new FFQParent('', '', this.userPassword, 'parent', '',
         '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true);
     }
@@ -264,8 +265,9 @@ export class ClinicNewUserComponent implements OnInit {
     this.getSuffix();
     if (this.prefix === '') {
       for (let i = 0; i < this.usersQuantity; i++) {
+        this.prefix = 'parent';
         this.generatePassword();
-        this.newParents.push(new FFQParent('', '', this.userPassword, 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true));
+        this.newParents.push(new FFQParent('', this.prefix + this.suffix, this.userPassword, 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true));
         this.suffix++;
       }
     }
