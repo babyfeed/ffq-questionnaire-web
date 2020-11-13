@@ -90,15 +90,16 @@
                 <tr>
                     <!--<th width="5%"> Select </th>-->
                     <th width="30%"> Username </th>
-                    <th width="30%"> Parent Name </th>
-                    <th width="15%"> No. of Children </th>
-                    <th width="25%"> Assigned Clinician </th>
+                    <th width="30%"> No. of Children </th>
+                    <th width="40%"> Assigned Clinician </th>
 
                 </tr>
-                <tr *ngFor="let u of parentList | searchFilter: p_search; index as i" [hidden]="hideUnassignedParents && !clinicianNames[u.assignedclinician] || (filtered && filtered_clinicians.indexOf(clinicianNames[u.assignedclinician]) === -1)">
+                <tr *ngFor="let u of parentList | searchFilter: p_search; index as i"
+                    [hidden]="hideUnassignedParents && !clinicianNames[u.assignedclinician] ||
+                     (filtered && filtered_clinicians.indexOf(clinicianNames[u.assignedclinician]) === -1)"
+                >
                     <!--<td align="center"><mat-checkbox [checked]="toggleAllParents"></mat-checkbox></td>-->
                     <td><a [routerLink]="['/clinic/user/p', u.userId]"> {{ u.username }} </a></td>
-                    <td> {{ u.firstname }} {{ u.lastname }}</td>
                     <td> {{ u.childrennames.length }}</td>
                     <td> {{ clinicianNames[u.assignedclinician] }}</td>
                 </tr>
