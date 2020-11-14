@@ -44,7 +44,7 @@ export class AdminResearchUsersComponent implements OnInit {
   ffqparentList: FFQParent[] = [];
   ffqclinicList: FFQClinic[] = [];
   ffqadminList: FFQAdmin[] = [];
-  ffqresearchList: FFQResearch[] = [];
+  ffqresearchList: FFQResearchtResponse[] = [];
   clinicianClinicNames: string[] = [];
   parentClinicNames: string[] = [];
   clinicNames: string[] = [];

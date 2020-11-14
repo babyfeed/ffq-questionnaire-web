@@ -30,13 +30,13 @@ const httOptions = {
   providedIn: "root",
 })
 export class ResearchService {
-  endpoint = environment.userServiceUrl + "/ffq/research";
+  endpoint = environment.userServiceUrl + "/ffq/researchers";
 
   constructor(private http: HttpClient) {}
 
   addResearcher(user: FFQResearchtResponse): Observable<any> {
     return this.http
-      .post(this.endpoint + "/create", user, {
+      .post(this.endpoint + "/createuser", user, {
         headers: new HttpHeaders({ "Content-Type": "application/json" }),
       })
       .pipe(
@@ -92,6 +92,7 @@ export class ResearchService {
       })
     );
   }
+  
 
   getAllUsers(): Observable<FFQResearchtResponse[]> {
     // getMongoUsers();

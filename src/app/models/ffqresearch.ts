@@ -23,8 +23,7 @@ export class FFQResearch {
     this.AssignedResearchInstitutionId = AssignedResearchInstitutionId;
     this.limitNumberOfParticipants = limitNumberOfParticipants;
     this.isactive = isactive;
-    this.AssignedResearchInstitutionId = AssignedResearchInstitutionId;
-    this.limitNumberOfParticipants =limitNumberOfParticipants;
+  
   }
 
 }

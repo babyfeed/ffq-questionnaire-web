@@ -13,7 +13,8 @@ export class FFQResearchtResponse {
   limitNumberOfParticipants: number;
 
 
-  constructor(userId: string, username: string, userpassword: string, usertype:string, firstname: string, lastname: string, isactive: boolean, AssignedResearchInstitutionId: string, limitNumberOfParticipants: number) {
+  constructor(userId: string, username: string, userpassword: string, usertype:string, 
+  firstname: string, lastname: string, isactive: boolean, AssignedResearchInstitutionId: string, limitNumberOfParticipants: number) {
     this.userId = userId;
     this.username = username;
     this.userpassword = userpassword;
@@ -23,8 +24,7 @@ export class FFQResearchtResponse {
      this.AssignedResearchInstitutionId = AssignedResearchInstitutionId;
     this.limitNumberOfParticipants = limitNumberOfParticipants;
     this.isactive = isactive;
-    this.AssignedResearchInstitutionId = AssignedResearchInstitutionId;
-    this.limitNumberOfParticipants =limitNumberOfParticipants;
+
   }
 
 }

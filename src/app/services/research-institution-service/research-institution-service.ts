@@ -30,13 +30,13 @@ const httOptions = {
   providedIn: "root",
 })
 export class ResearchInstitutionService {
-  endpoint = environment.userServiceUrl + "/ffq/research-institution";
+  endpoint = environment.userServiceUrl + "/ffq/research_institution";
 
   constructor(private http: HttpClient) {}
 
   addUser(researchInst: FFQResearchInstitutionResponse): Observable<any> {
     return this.http
-      .post(this.endpoint + "/create-research-institution", researchInst, {
+      .post(this.endpoint + "/createInstitution", researchInst, {
         headers: new HttpHeaders({ "Content-Type": "application/json" }),
       })
       .pipe(
@@ -50,7 +50,7 @@ export class ResearchInstitutionService {
   //Still not implemented
   updateUser(researchInst: FFQResearchInstitutionResponse): Observable<any> {
     return this.http
-      .put(this.endpoint + "/create-research-institution", researchInst, {
+      .put(this.endpoint + "/updateinstitution", researchInst, {
         headers: new HttpHeaders({ "Content-Type": "application/json" }),
       })
       .pipe(
@@ -63,7 +63,22 @@ export class ResearchInstitutionService {
 
   //To be implemented
   getResearchInstitution(researchInstitutionId: string): Observable<FFQResearchInstitutionResponse> {
-    return this.http.get(this.endpoint + "/research-institution/" + researchInstitutionId).pipe(
+    return this.http.get(this.endpoint + "/" + researchInstitutionId).pipe(
+      map((item: any) => {
+        return new FFQResearchInstitutionResponse(
+          item.researchInstitutionId,
+          item.address,
+          item.createdDate,
+          item.institutionName,
+          "researchInstitution"        
+        );
+      })
+    );
+  }
+  
+  //To be implemented
+  getResearchInstitutionByName(institutionName: string): Observable<FFQResearchInstitutionResponse> {
+    return this.http.get(this.endpoint + "/name/" + institutionName).pipe(
       map((item: any) => {
         return new FFQResearchInstitutionResponse(
           item.researchInstitutionId,

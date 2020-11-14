@@ -1,6 +1,6 @@
 export class FFQInstitution {
     
-    researchInstitutionId: string;
+  researchInstitutionId: string;
 	address: string;
 	createdDate: string;
 	institutionName: string;
