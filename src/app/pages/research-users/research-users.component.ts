@@ -7,19 +7,26 @@
 
 */
 
-import {Component, OnInit} from "@angular/core";
-import {ActivatedRoute, Router} from "@angular/router";
-import {MatDialog} from "@angular/material/dialog";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {FoodItemService} from "../../services/food-item/food-item.service";
-import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
-import {ErrorDialogPopupComponent} from "src/app/components/error-dialog-popup/error-dialog-popup.component";
-import {FFQFoodNutrientsResponse} from "src/app/models/ffqfoodnutrients-response";
-import {PopupComponent} from "src/app/components/popup/popup.component";
-import {FlashMessagesService} from "angular2-flash-messages";
-import {FFQFoodItemResponse} from "src/app/models/ffqfooditem-response";
-import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
-import {environment} from "src/environments/environment";
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { MatDialog } from "@angular/material/dialog";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { ResearcherParentService } from "../../services/researcher-parent/researcher-parent-service";
+import { HttpErrorResponse } from "@angular/common/http";
+import { ErrorDialogPopupComponent } from "src/app/components/error-dialog-popup/error-dialog-popup.component";
+import { FFQFoodNutrientsResponse } from "src/app/models/ffqfoodnutrients-response";
+import { PopupComponent } from "src/app/components/popup/popup.component";
+import { FlashMessagesService } from "angular2-flash-messages";
+import { moveItemInArray } from "@angular/cdk/drag-drop";
+import { CdkDragDrop } from "@angular/cdk/drag-drop";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { environment } from "src/environments/environment";
+import { CreateParticipantModalComponent} from "src/app/components/create-participant-modal/create-participant-modal.component"
+import { FFQResearcherParentResponse } from 'src/app/models/ffqresearcherparent-response';
+import { FFQResearch } from "src/app/models/ffqresearch";
+import { BehaviorSubject } from 'rxjs';
+import { FFQResearchParticipant } from 'src/app/models/ffqresearch-participant';
+
 
 @Component({
   selector: "app-questionnaire-page",
@@ -27,12 +34,17 @@ import {environment} from "src/environments/environment";
   styleUrls: ["./research-users.component.css"],
 })
 export class ResearchUsersComponent implements OnInit {
-  TITLE = "FFQR Research Portal";
 
+  TITLE = "FFQR Research Portal";
   endpoint = environment.foodServiceUrl + "/ffq";
 
+  currentUser = <FFQResearch>JSON.parse(localStorage.getItem('currentUser'))[0];
+
+  participants: FFQResearchParticipant[] = [];
+  dataLoaded: Promise<boolean>;
+
   constructor(
-    public foodService: FoodItemService,
+    public researchParentService: ResearcherParentService,
     private activatedRoute: ActivatedRoute,
     private errorDialog: MatDialog,
     private submissionErrorDialog: MatDialog,
@@ -45,19 +57,15 @@ export class ResearchUsersComponent implements OnInit {
   ) {
   }
 
-  foodNutrients: FFQFoodNutrientsResponse[] = [];
-  dataLoaded: Promise<boolean>;
-
-  foodItems: FFQFoodItemResponse[] = [];
 
   ngOnInit() {
-    this.loadFoodsAndNutrients();
+    this.findAllParticipants();
+  }
 
-    /*let i: any;
-
-        for(i in this.foodItems){
-          this.foodItems[i].itemPosition = ++i;
-        }*/
+  onOpenCreateParticipantModal(): void {
+    let remainingParticipants = this.currentUser.limitNumberOfParticipants - this.participants.length;
+    localStorage.setItem("remainingParticipants", remainingParticipants.toString());
+    const modalRef = this.modalService.open(CreateParticipantModalComponent);
   }
 
   private handleFoodServiceError(error: HttpErrorResponse) {
@@ -71,63 +79,20 @@ export class ResearchUsersComponent implements OnInit {
     });
   }
 
-  private loadFoodsAndNutrients() {
-    this.foodService.getAllFoods().subscribe(
+  private findAllParticipants() {
+    this.researchParentService.getAllParticipants(this.currentUser.AssignedResearchInstitutionId).subscribe(
       (data) => {
         data.map((response) => {
-          this.foodItems.push(response);
+
+          this.participants.push(response);
+          // this.foodNutrients.push(response);
         });
-        this.foodItems = this.orderFoodItems(this.foodItems);
+        console.log(this.participants);
+
         this.dataLoaded = Promise.resolve(true);
       },
       (error: HttpErrorResponse) => this.handleFoodServiceError(error)
     );
   }
 
-  //added by teriq douglas
-  private orderFoodItems(items: FFQFoodItemResponse[]) {
-    var orderedItems = items.sort(function (a, b) {
-      return a.itemPosition - b.itemPosition;
-    });
-    return orderedItems;
-  }
-
-  onModalRequest(id: string): void {
-    const modalRef = this.modalService.open(PopupComponent);
-    modalRef.componentInstance.id = id;
-    modalRef.componentInstance.service = this.foodService;
-  }
-
-  //added by teriq douglas
-  onDrop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.foodItems, event.previousIndex, event.currentIndex);
-    let i: any;
-
-    //update each food item with a new itemPosition
-    for (i in this.foodItems) {
-      this.foodItems[i].itemPosition = ++i;
-    }
-    //for loop with put calls for each element
-    for (let i = 0; i < this.foodItems.length; i++) {
-      this.update(i);
-    }
-  }
-
-  //added by teriq douglas
-  update(i: any) {
-    this.http
-      .put(
-        this.endpoint + "/update/" + this.foodItems[i].id,
-        this.foodItems[i],
-        {headers: new HttpHeaders({"Content-Type": "application/json"})}
-      )
-      .subscribe(
-        (data) => {
-          console.log(data);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-  }
 }

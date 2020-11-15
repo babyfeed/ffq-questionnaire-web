@@ -24,9 +24,11 @@ import { DeletePopupComponent } from "./components/delete-popup/delete-popup.com
 import { FlashMessagesModule } from "angular2-flash-messages";
 import { RecommendModalComponent } from "./components/recommend-modal/recommend-modal.component";
 import { FoodRecommendModalComponent } from "./components/food-recommend-modal/food-recommend-modal.component";
+import { FoodItemsTableComponent } from "./components/food-items-table/food-items-table.component";
 import { ClinicalPortalComponent } from "./pages/clinical-portal/clinical-portal.component";
 import { ClinicalHeaderComponent } from "./pages/clinical-header/clinical-header.component";
 import { ParentalHeaderComponent } from "./pages/parental-header/parental-header.component";
+import { ResearchParentalHeaderComponent } from "./pages/research-parental-header/research-parental-header.component";
 import { LoginPageComponent } from "./pages/login-page/login-page.component";
 import { RecommendParentalComponent } from "./pages/recommend-parental/recommend-parental.component";
 import { TrackerPageComponent } from "./pages/tracker-page/tracker-page.component";
@@ -40,6 +42,7 @@ import { LoginHeaderComponent } from "./pages/login-header";
 import { ClinicQuestResultsComponent } from "./pages/clinic-quest-results";
 import { ClinicRecommendComponent } from "./pages/clinic-recommend";
 import { AdminUsersComponent } from "./pages/admin-users";
+import {AdminResearchUsersComponent} from "./pages/research-admin-users/research-admin-users.component";
 import { UserComponent } from "./pages/user/user.component";
 import { ClinicUserComponent } from "./pages/clinic-user/clinic-user.component";
 import { AdminClinicsComponent } from "./pages/admin-clinics/";
@@ -69,6 +72,11 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatListModule } from "@angular/material/list";
 import { ResearchPageComponent } from "./pages/research-page/research-page.component";
 import { ResearchUsersComponent } from './pages/research-users/research-users.component';
+import { ResearchQuestIdInputComponent } from "./pages/researcher-quest-id-input-page/researcher-quest-id-input.component"
+import { CreateParticipantModalComponent } from './components/create-participant-modal/create-participant-modal.component';
+import { ResearchHistoryComponent } from "./pages/research-history/research-history.component";
+import { ResearchInstitutionComponent } from "./pages/research-institution/research-institution.component";
+import { AdminResearcherUserComponent } from "./pages/admin-research-user/admin-research-user.component";
 import { AdminTrackerHistoryComponent } from './pages/admin-tracker-history/admin-tracker-history.component';
 import { ResultRoundPipe } from './pipes/result-round.pipe';
 import {ClinicalUsersComponent} from "./pages/clinical-users";
@@ -92,16 +100,23 @@ import { Angular2CsvModule } from 'angular2-csv';
     ResearchHeaderComponent,
     ResearchUsersComponent,
     ResearchPageComponent,
+    ResearchQuestIdInputComponent,
+    AdminResearchUsersComponent,
+    ResearchHistoryComponent,
     QuestResultsComponent,
     RecommendComponent,
+    ResearchInstitutionComponent,
+    AdminResearcherUserComponent,
     PopupComponent,
     RecommendModalComponent,
     FoodRecommendModalComponent,
+    FoodItemsTableComponent,
     ClinicalPortalComponent,
     ClinicalHeaderComponent,
     ClinicalUsersComponent,
     ClinicNewUserComponent,
     ParentalHeaderComponent,
+    ResearchParentalHeaderComponent,
     LoginPageComponent,
     RecommendParentalComponent,
     TrackerPageComponent,
@@ -128,6 +143,7 @@ import { Angular2CsvModule } from 'angular2-csv';
     TrackerFilterPipe,
     RecommendedFilterPipe,
     LoaderComponent,
+    CreateParticipantModalComponent,
     AdminTrackerHistoryComponent,
     ResultRoundPipe,
   ],
@@ -157,7 +173,6 @@ import { Angular2CsvModule } from 'angular2-csv';
     BrowserModule,
     Angular2CsvModule
   ],
-
   bootstrap: [AppComponent],
   entryComponents: [
     ErrorDialogPopupComponent,
@@ -166,6 +181,7 @@ import { Angular2CsvModule } from 'angular2-csv';
     RecommendModalComponent,
     FoodRecommendModalComponent,
     DeletePopupComponent,
+    CreateParticipantModalComponent
   ],
   providers: [
     {

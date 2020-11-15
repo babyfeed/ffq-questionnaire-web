@@ -40,6 +40,8 @@ export class UserComponent implements OnInit {
   isUpdate: boolean;
   private createParents: boolean;
   private createClinician: boolean;
+  private createResearcher: boolean;
+  showMsg: boolean = false;
   selectedClinic: string;
   selectedClinician: string;
   cliniciansLimit: number;
@@ -82,6 +84,7 @@ export class UserComponent implements OnInit {
   amountToAdd: number;
   isParent: boolean;
   isClinician: boolean;
+  isProcessing: boolean;
 
   public ffqclinicList: FFQClinic[] = [];
   public ffqclinicianList: FFQClinician[] = [];
@@ -92,8 +95,10 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
 
+    this.isProcessing = false;
     this.createParents = false;
     this.createClinician = false;
+    this.createResearcher = false;
     this.isParent = false;
     this.isClinician = false;
     this.clinicNames.push('');
@@ -224,6 +229,7 @@ export class UserComponent implements OnInit {
         const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
         dialogRef.componentInstance.title = error.error.message;
       });
+      this.isProcessing = false;
   }
 
   addMultipleClinicians() {
@@ -276,7 +282,7 @@ export class UserComponent implements OnInit {
       });
   }
 
-  addMultipleParents() {
+   addMultipleParents() {
     const newParents = [];
     for (let i = 0; i < this.usersQuantity; i++) {
       newParents.push(new FFQParent('', '', '', 'parent', '', '', this.selectedClinic, '', [''], true));
@@ -309,6 +315,7 @@ export class UserComponent implements OnInit {
         dialogRef.componentInstance.title = error.error.message;
       });
   }
+
 
   getParentByID(id: string)
   {
