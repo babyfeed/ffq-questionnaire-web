@@ -33,7 +33,6 @@ export class QuestIdInputComponent {
           dialogRef.componentInstance.title = 'Questionnaire Already Submitted';
           dialogRef.componentInstance.message = 'Please check the ID and try again or contact the issuer.';
         } else {
-          console.log('Valid questionnaire Id supplied: ' + id);
           const urlString = '/parent/questionnaire/' + id;
           this.router.navigateByUrl(urlString);
         }
