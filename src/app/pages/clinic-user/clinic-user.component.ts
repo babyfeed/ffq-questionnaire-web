@@ -23,7 +23,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DeletePopupComponent } from "src/app/components/delete-popup/delete-popup.component";
 
 @Component({
-  selector: 'app-fooditem',
+  selector: 'app-new-clinic',
   templateUrl: './clinic-user.component.html',
   styleUrls: ['./clinic-user.component.css']
 })
@@ -58,10 +58,9 @@ export class ClinicUserComponent implements OnInit {
 
     this.clinicianNames.push("");
 
-    var clinicianList: Observable<FFQClinicianResponse[]> = this.clinicianService.getAllClinicians();
+    const clinicianList: Observable<FFQClinicianResponse[]> = this.clinicianService.getAllClinicians();
     clinicianList.subscribe(a => {
       this.ffqclinicianList = a;
-      console.log(a);
       for (let i = 0; i < a.length; i++) {
         this.clinicianNames.push(a[i].abbreviation + " " + a[i].firstname + " " + a[i].lastname);
       }
@@ -80,8 +79,6 @@ export class ClinicUserComponent implements OnInit {
       this.isClinician = true;
       this.getClinicianByID(UserID);
     }
-
-    //console.log(this.userAttributes);
   }
 
   getParentByID(id: string)
@@ -114,7 +111,6 @@ export class ClinicUserComponent implements OnInit {
 
   updateParent()
   {
-    console.log(this.userAttributes);
     this.parentService.updateParent(<FFQParentResponse>this.userAttributes).subscribe(
      data => {this.router.navigateByUrl('/clinic/home');
      const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
@@ -125,7 +121,6 @@ export class ClinicUserComponent implements OnInit {
 
   updateClinician()
   {
-    console.log(this.userAttributes);
     this.clinicianService.updateClinician(<FFQClinicianResponse>this.userAttributes).subscribe(
      data => {this.router.navigateByUrl('/clinic/home');
      const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);

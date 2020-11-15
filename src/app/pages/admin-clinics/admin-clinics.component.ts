@@ -51,7 +51,6 @@ export class AdminClinicsComponent implements OnInit {
     const clinicList: Observable<FFQClinicResponse[]> = this.clinicService.getAllClinics();
     clinicList.subscribe(a => {
       this.ffqclinicList = a;
-      //console.log(a);
     });
 
     var clinicianList: Observable<FFQClinicianResponse[]> = this.clinicianService.getAllClinicians();
@@ -61,14 +60,12 @@ export class AdminClinicsComponent implements OnInit {
       {
         this.clinicianNames.push(a[i].abbreviation + " " + a[i].firstname + " " + a[i].lastname);
       }
-      //console.log(a);
     });
 
     var parentList: Observable<FFQParentResponse[]> = this.parentService.getAllParents();
     parentList.subscribe(a => {
       this.ffqparentList = a;
-      //console.log(a);
-    });    
+    });
 
   }
 }

@@ -27,6 +27,7 @@ import { FFQResearch } from "src/app/models/ffqresearch";
 import { BehaviorSubject } from 'rxjs';
 import { FFQResearchParticipant } from 'src/app/models/ffqresearch-participant';
 
+
 @Component({
   selector: "app-questionnaire-page",
   templateUrl: "./research-users.component.html",
@@ -53,7 +54,8 @@ export class ResearchUsersComponent implements OnInit {
     private modalService: NgbModal,
     private flashMessage: FlashMessagesService,
     private http: HttpClient
-  ) {}
+  ) {
+  }
 
 
   ngOnInit() {
@@ -81,13 +83,16 @@ export class ResearchUsersComponent implements OnInit {
     this.researchParentService.getAllParticipants(this.currentUser.AssignedResearchInstitutionId).subscribe(
       (data) => {
         data.map((response) => {
+
           this.participants.push(response);
           // this.foodNutrients.push(response);
         });
         console.log(this.participants);
+
         this.dataLoaded = Promise.resolve(true);
       },
       (error: HttpErrorResponse) => this.handleFoodServiceError(error)
     );
   }
+
 }

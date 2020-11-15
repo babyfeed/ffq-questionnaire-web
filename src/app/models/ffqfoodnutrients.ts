@@ -43,8 +43,6 @@ export class FFQFoodNutrients {
         return foodNutrientsResponse;
     }
     public static foodItemFromResponse(response: FFQFoodNutrientsResponse): FFQFoodNutrients {
-        console.log(response);
-
         const fooditem = new FFQFoodItem(response.foodItem.name, response.foodItem.itemPosition);
 
         fooditem.id = response.foodItem.id;
@@ -64,7 +62,6 @@ export class FFQFoodNutrients {
             var index = response.foodItem.servingsList.length;
             for (var serving  of response.foodItem.servingsList){
                 index--;
-                console.log(serving['servingName']);
                 if (index != 0)
                     servingsString += serving['servingName'] + ", ";
                 else

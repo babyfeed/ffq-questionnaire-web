@@ -12,7 +12,7 @@ export class FFQItem {
   isSubmitted: boolean;
   isPrimary: boolean;
   foodTypes: FoodType[];
-  itemPosition:number;
+  itemPosition: number;
 
   constructor(name: string) {
     this.name = name;
@@ -40,7 +40,7 @@ export class FFQItem {
     }
     item.isPrimary = response.primary;
      /////
-     item.itemPosition = response.itemPosition;
+    item.itemPosition = response.itemPosition;
      /////
     return item;
   }

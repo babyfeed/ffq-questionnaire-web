@@ -22,7 +22,6 @@ import { RecommendComponent } from "./pages/recommend/recommend.component";
 import { PopupComponent } from "./components/popup/popup.component";
 import { DeletePopupComponent } from "./components/delete-popup/delete-popup.component";
 import { FlashMessagesModule } from "angular2-flash-messages";
-import { Routes, RouterModule } from "@angular/router";
 import { RecommendModalComponent } from "./components/recommend-modal/recommend-modal.component";
 import { FoodRecommendModalComponent } from "./components/food-recommend-modal/food-recommend-modal.component";
 import { FoodItemsTableComponent } from "./components/food-items-table/food-items-table.component";
@@ -31,8 +30,6 @@ import { ClinicalHeaderComponent } from "./pages/clinical-header/clinical-header
 import { ParentalHeaderComponent } from "./pages/parental-header/parental-header.component";
 import { ResearchParentalHeaderComponent } from "./pages/research-parental-header/research-parental-header.component";
 import { LoginPageComponent } from "./pages/login-page/login-page.component";
-// import { JwtInterceptor } from './services/authentication/jwt.interceptor';
-// import { fakeBackendProvider } from './services/authentication/temp-backend';
 import { RecommendParentalComponent } from "./pages/recommend-parental/recommend-parental.component";
 import { TrackerPageComponent } from "./pages/tracker-page/tracker-page.component";
 import { TrackerBlockComponent } from "./components/tracker-block/tracker-block.component";
@@ -80,6 +77,13 @@ import { CreateParticipantModalComponent } from './components/create-participant
 import { ResearchHistoryComponent } from "./pages/research-history/research-history.component";
 import { ResearchInstitutionComponent } from "./pages/research-institution/research-institution.component";
 import { AdminResearcherUserComponent } from "./pages/admin-research-user/admin-research-user.component";
+import { AdminTrackerHistoryComponent } from './pages/admin-tracker-history/admin-tracker-history.component';
+import { ResultRoundPipe } from './pipes/result-round.pipe';
+import {ClinicalUsersComponent} from "./pages/clinical-users";
+import {ClinicNewUserComponent} from "./pages/clinic-new-user/clinic-new-user.component";
+import { Angular2CsvModule } from 'angular2-csv';
+
+
 
 @NgModule({
   declarations: [
@@ -109,6 +113,8 @@ import { AdminResearcherUserComponent } from "./pages/admin-research-user/admin-
     FoodItemsTableComponent,
     ClinicalPortalComponent,
     ClinicalHeaderComponent,
+    ClinicalUsersComponent,
+    ClinicNewUserComponent,
     ParentalHeaderComponent,
     ResearchParentalHeaderComponent,
     LoginPageComponent,
@@ -137,7 +143,9 @@ import { AdminResearcherUserComponent } from "./pages/admin-research-user/admin-
     TrackerFilterPipe,
     RecommendedFilterPipe,
     LoaderComponent,
-    CreateParticipantModalComponent
+    CreateParticipantModalComponent,
+    AdminTrackerHistoryComponent,
+    ResultRoundPipe,
   ],
   imports: [
     BrowserModule,
@@ -162,6 +170,8 @@ import { AdminResearcherUserComponent } from "./pages/admin-research-user/admin-
     FlashMessagesModule.forRoot(),
     MatProgressBarModule,
     DragDropModule,
+    BrowserModule,
+    Angular2CsvModule
   ],
   bootstrap: [AppComponent],
   entryComponents: [
