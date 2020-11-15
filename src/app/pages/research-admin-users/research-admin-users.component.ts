@@ -20,6 +20,8 @@ import { User } from "src/app/models/user";
 import { HttpClient } from "@angular/common/http";
 import { AuthenticationService } from "src/app/services/authentication/authentication.service";
 import { FFQResearch } from "src/app/models/ffqresearch";
+import { FFQResearchInstitutionResponse } from "src/app/models/ffqresearch-institution-response";
+import { ResearchInstitutionService } from 'src/app/services/research-institution-service/research-institution-service';
 
 @Component({
   templateUrl: "./research-admin-users.component.html",
@@ -31,67 +33,49 @@ export class AdminResearchUsersComponent implements OnInit {
 
   search: string;
 
-  constructor(
-    public parentService: ParentService,
-    public clinicianService: ClinicianService,
-    public clinicService: ClinicService,
-    public adminService: AdminService,
-    public researchService: ResearchService,
-    public authenticationService: AuthenticationService
+  constructor(    
+    public authenticationService: AuthenticationService,  
+      
+    public researcherService: ResearchService,
+    public researchInstitutionService: ResearchInstitutionService,
   ) {}
-
-  ffqclinicianList: FFQClinician[] = [];
-  ffqparentList: FFQParent[] = [];
-  ffqclinicList: FFQClinic[] = [];
-  ffqadminList: FFQAdmin[] = [];
-  ffqresearchList: FFQResearch[] = [];
-  clinicianClinicNames: string[] = [];
-  parentClinicNames: string[] = [];
-  clinicNames: string[] = [];
+  
   public filtered: boolean;
-  public filtered_clinics: String[] = [];
+  public filtered_researchInst: String[] = [];
   checked_users: string[] = [];
-  public clinicianNames: string[] =[];
-
-  ngOnInit() {
-    this.clinicNames.push("");
+  public researcherUserNames: string[] =[];
+  ResearchInstNames: string[] = [];
+  researchInstitutionList: FFQResearchInstitutionResponse[];
+  researcherList: FFQResearchtResponse[] = []; 
+  
+  ngOnInit() {   
     this.showParticipants = true;
     this.showResearchers = true;    
     this.filtered = false;
-    this.loadAllUsers();
-    this.clinicianNames.push("");
-    const clinicList: Observable<FFQClinicResponse[]> = this.clinicService.getAllClinics();
-    clinicList.subscribe(a => {
-      this.ffqclinicList = a;
-    });
-
-    var clinicianList: Observable<FFQClinicianResponse[]> = this.clinicianService.getAllClinicians();
-    clinicianList.subscribe(a => {
-      this.ffqclinicianList = a;
-      for(var i = 0; i < a.length; i++)
-      {
-        this.clinicianNames.push(a[i].abbreviation + " " + a[i].firstname + " " + a[i].lastname);
-      }
-    });
+    
+    this.loadAllUsers(); 
   }
 
-  toggleParents() {
+//participants
+  toggleParticipants() {
     this.showParticipants = !this.showParticipants;
   }
 
-  toggleClinicians() {
+//researchers
+  toggleResearcherUsers() {
     this.showResearchers = !this.showResearchers;
   } 
 
 
-  filterByClinic(clinic_name: string) {
-    const index = this.filtered_clinics.indexOf(clinic_name);
+//filterby research Institution
+  filterByResearchInstitution(researchInst_name: string) {
+    const index = this.filtered_researchInst.indexOf(researchInst_name);
     if (index === -1) {
-      this.filtered_clinics.push(clinic_name);
+      this.filtered_researchInst.push(researchInst_name);
     } else {
-      this.filtered_clinics.splice(index, 1);
+      this.filtered_researchInst.splice(index, 1);
     }
-    if (this.filtered_clinics.length == 0) {
+    if (this.filtered_researchInst.length == 0) {
       this.filtered = false;
     } else {
       this.filtered = true;
@@ -100,67 +84,26 @@ export class AdminResearchUsersComponent implements OnInit {
 
   /* Loads all users from the databases and pushes them into their respective lists to be displayed */
   private loadAllUsers() {
-    var clinicianList: Observable<
-      FFQClinicianResponse[]
-    > = this.clinicianService.getAllClinicians();
-    var parentList: Observable<
-      FFQParentResponse[]
-    > = this.parentService.getAllParents();
-    var clinicList: Observable<
-      FFQClinicResponse[]
-    > = this.clinicService.getAllClinics();
-    var adminList: Observable<
-      FFQAdminResponse[]
-    > = this.adminService.getAllUsers();
-    var researchList: Observable<
-      FFQResearchtResponse[]
-    > = this.researchService.getAllUsers();
-
-    clinicList.subscribe((a) => {
-      this.ffqclinicList = a;
-      a.forEach((clinic) => {
-        this.clinicNames.push(clinic.clinicname);
-      });
-
-      clinicianList.subscribe((b) => {
-        this.ffqclinicianList = b;
-
-        b.forEach((clinician) => {
-          var clinicianClinic = a.find(
-            (n) => n.clinicId == clinician.assignedclinic
-          );
-
-          if (!!clinicianClinic) {
-            var clinicianClinicName = clinicianClinic.clinicname;
-            this.clinicianClinicNames.push(clinicianClinicName);
-          }
-        });
-        parentList.subscribe((c) => {
-          this.ffqparentList = c;
-
-          c.forEach((parent) => {
-            var clinicians = b.find((n) => n.userId == parent.assignedclinic);
-
-            if (!!clinicians) {
-              var parentClinic = a.find(
-                (n) => n.clinicId == clinicians.assignedclinic
-              );
-              if (!!parentClinic) {
-                var parentClinicName = parentClinic.clinicname;
-              }
-            }
-            this.parentClinicNames.push(parentClinicName);
-          });
-        });
+      
+    var researchInstList: Observable<
+    FFQResearchInstitutionResponse[]> = 
+    this.researchInstitutionService.getAllResearchInstitutions();
+    researchInstList.subscribe((data) => {
+        this.researchInstitutionList = data;
+        data.forEach((researchInst) => {
+        this.ResearchInstNames.push(researchInst.institutionName);
       });
     });
-
-    adminList.subscribe((admin) => {
-      this.ffqadminList = admin;
-    });
-
-    researchList.subscribe((research) => {
-      this.ffqresearchList = research;
+     
+    var researcherUserList: Observable<
+    FFQResearchtResponse[]> = this.researcherService.getAllUsers();
+     researcherUserList.subscribe((data) => {
+        this.researcherList = data;
+        
+        for(var i = 0; i < data.length; i++)
+      {
+        this.researcherUserNames.push(data[i].firstname + " " + data[i].lastname);
+      }
     });
   }
 }

@@ -78,6 +78,8 @@ import { ResearchUsersComponent } from './pages/research-users/research-users.co
 import { ResearchQuestIdInputComponent } from "./pages/researcher-quest-id-input-page/researcher-quest-id-input.component"
 import { CreateParticipantModalComponent } from './components/create-participant-modal/create-participant-modal.component';
 import { ResearchHistoryComponent } from "./pages/research-history/research-history.component";
+import { ResearchInstitutionComponent } from "./pages/research-institution/research-institution.component";
+import { AdminResearcherUserComponent } from "./pages/admin-research-user/admin-research-user.component";
 
 @NgModule({
   declarations: [
@@ -99,6 +101,8 @@ import { ResearchHistoryComponent } from "./pages/research-history/research-hist
     ResearchHistoryComponent,
     QuestResultsComponent,
     RecommendComponent,
+    ResearchInstitutionComponent,
+    AdminResearcherUserComponent,
     PopupComponent,
     RecommendModalComponent,
     FoodRecommendModalComponent,
