@@ -29,7 +29,7 @@ import { DeletePopupComponent } from "src/app/components/delete-popup/delete-pop
 })
 export class ClinicUserComponent implements OnInit {
 
-  userAttributes: object;
+  userAttributes: FFQClinician | FFQParent;
   public ffqclinicianList: FFQClinician[] = [];
   clinicianNames: string[] = [];
 
@@ -153,5 +153,9 @@ export class ClinicUserComponent implements OnInit {
     const confirmDelete = this.modalService.open(DeletePopupComponent);
     confirmDelete.componentInstance.service = "Clinician";
     confirmDelete.componentInstance.attributes = this.userAttributes;
+  }
+
+  generatePassword() {
+    this.userAttributes.userpassword = Math.random().toString(36).slice(-10);
   }
 }
