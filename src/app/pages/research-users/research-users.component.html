@@ -3,7 +3,10 @@
   <div class="container mt-3" align="right">
 
       <!-- Need to add route here for new participant -->
-      <button (click)="onOpenCreateParticipantModal()" mat-raised-button>Create participant account(s)...</button>
+      <div class="container mt-3" align="right">
+        <button routerLink='/researcher/user/new' type="submit" mat-raised-button>Create participant account(s)...</button>
+      </div>
+      <!-- <button (click)="onOpenCreateParticipantModal()" mat-raised-button>Create participant account(s)...</button> -->
   </div>
   <div class="container mt-3">
 

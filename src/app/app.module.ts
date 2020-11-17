@@ -81,6 +81,7 @@ import { AdminTrackerHistoryComponent } from './pages/admin-tracker-history/admi
 import { ResultRoundPipe } from './pipes/result-round.pipe';
 import {ClinicalUsersComponent} from "./pages/clinical-users";
 import {ClinicNewUserComponent} from "./pages/clinic-new-user/clinic-new-user.component";
+import {ResearchNewUserComponent} from "./pages/research-new-user/research-new-user.component";
 import { Angular2CsvModule } from 'angular2-csv';
 
 
@@ -146,6 +147,7 @@ import { Angular2CsvModule } from 'angular2-csv';
     CreateParticipantModalComponent,
     AdminTrackerHistoryComponent,
     ResultRoundPipe,
+    ResearchNewUserComponent
   ],
   imports: [
     BrowserModule,
