@@ -22,7 +22,7 @@ export class ClinicianService {
       {headers : new HttpHeaders({ 'Content-Type': 'application/json' })});
   }
 
-  addMultipleClinicians(clinicians : FFQClinician[]): Observable<FFQClinician[]> {
+ addMultipleClinicians(clinicians : FFQClinician[]): Observable<FFQClinician[]> {
 
     return this.http.post<FFQClinician[]>(this.endpoint + '/createManyClinicians', clinicians,
       {headers : new HttpHeaders({ 'Content-Type': 'application/json' })});

@@ -83,6 +83,7 @@ export class DeletePopupComponent implements OnInit {
             "Clinic " + clinicName + " was deleted";
         });
     }
+    
     this.activeModal.close("closed");
   }
 

@@ -23,15 +23,28 @@ import { environment } from "src/environments/environment";
   providedIn: "root",
 })
 export class ResearchService {
-  endpoint = environment.userServiceUrl + "/ffq/research";
+  endpoint = environment.userServiceUrl + "/ffq/researchers";
 
   constructor(private http: HttpClient) {}
 
-  addUser(user: FFQResearchtResponse): Observable<any> {
+  addResearcher(user: FFQResearchtResponse): Observable<any> {
     return this.http
       .post(this.endpoint + "/createuser", user, {
         headers: new HttpHeaders({ "Content-Type": "application/json" }),
       });
+  }
+
+  addMultipleResearchers(user: FFQResearchtResponse[]): Observable<any> {
+    return this.http
+      .post(this.endpoint + "/createMany", user, {
+        headers: new HttpHeaders({ "Content-Type": "application/json" }),
+      })
+      .pipe(
+        tap(
+          (data) => console.log(data),
+          (error) => console.log(error)
+        )
+      );
   }
 
   //Still not implemented
@@ -53,11 +66,14 @@ export class ResearchService {
           item.usertype,
           item.firstname,
           item.lastname,
-          item.isactive
+          item.isactive,
+          item.AssignedResearchInstitutionId,
+          item.limitNumberOfParticipants
         );
       })
     );
   }
+
 
   getAllUsers(): Observable<FFQResearchtResponse[]> {
     // getMongoUsers();
@@ -71,7 +87,9 @@ export class ResearchService {
             item.usertype,
             item.firstname,
             item.lastname,
-            item.isactive
+            item.isactive,
+            item.AssignedResearchInstitutionId,
+            item.limitNumberOfParticipants
           );
         });
       })

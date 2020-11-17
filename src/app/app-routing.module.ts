@@ -6,6 +6,7 @@ import { QuestIdInputComponent } from "./pages/quest-id-input-page/quest-id-inpu
 import { AdminPageComponent } from "./pages/admin-page/admin-page.component";
 import { ResearchPageComponent } from "./pages/research-page/research-page.component";
 import { ResearchUsersComponent } from "./pages/research-users/research-users.component";
+import { ResearchHistoryComponent } from "./pages/research-history/research-history.component";
 import { FooditemComponent } from "./pages/fooditem/fooditem.component";
 import { QuestResultsComponent } from "./pages/quest-results/quest-results.component";
 import { RecommendComponent } from "./pages/recommend/recommend.component";
@@ -20,15 +21,20 @@ import { LoginComponent } from "./pages/login";
 import { ClinicQuestResultsComponent } from "./pages/clinic-quest-results";
 import { ClinicRecommendComponent } from "./pages/clinic-recommend";
 import { AdminUsersComponent } from "./pages/admin-users";
+import { AdminResearchUsersComponent } from "./pages/research-admin-users/research-admin-users.component";
+import { AdminResearcherUserComponent } from "./pages/admin-research-user/admin-research-user.component";
+import { ResearchInstitutionComponent } from "./pages/research-institution/research-institution.component";
 import { UserComponent } from "./pages/user/user.component";
 import { ClinicUserComponent } from "./pages/clinic-user/clinic-user.component";
 import { AdminClinicsComponent } from "./pages/admin-clinics";
 import { ClinicComponent } from "./pages/clinic/clinic.component";
 import { LogoutComponent } from "./pages/logout/logout.component";
 import { ClinicTrackerHistoryComponent } from "./pages/clinic-tracker-history/clinic-tracker-history.component";
+import { ResearchQuestIdInputComponent } from "./pages/researcher-quest-id-input-page/researcher-quest-id-input.component"
 import { AdminTrackerHistoryComponent } from "./pages/admin-tracker-history/admin-tracker-history.component";
 import {ClinicalUsersComponent} from "./pages/clinical-users";
 import {ClinicNewUserComponent} from "./pages/clinic-new-user/clinic-new-user.component";
+import {ResearchNewUserComponent} from "./pages/research-new-user/research-new-user.component";
 
 const routes: Routes = [
   {
@@ -80,6 +86,21 @@ const routes: Routes = [
   {
     path: "admin/users",
     component: AdminUsersComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "admin/research/users",
+    component: AdminResearchUsersComponent,
+    canActivate: [AuthGuard],
+  },
+   {
+    path: "admin/research/institution",
+    component: ResearchInstitutionComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "admin/researcher",
+    component: AdminResearcherUserComponent,
     canActivate: [AuthGuard],
   },
   {
@@ -143,6 +164,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: "researcher/user/:id",
+    component: ResearchNewUserComponent,
+    canActivate: [AuthGuard],
+  },
+  {
     path: "clinic/tracker-history",
     component: ClinicTrackerHistoryComponent,
     canActivate: [AuthGuard],
@@ -183,15 +209,31 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: "research/home",
+    path: "researcher/home",
     component: ResearchPageComponent,
     canActivate: [AuthGuard],
   },
   {
-    path: "research/users",
+    path: "researcher/users",
     component: ResearchUsersComponent,
     canActivate: [AuthGuard],
   },
+  {
+    path: "researcher/history",
+    component: ResearchHistoryComponent,
+    canActivate: [AuthGuard],
+  },
+
+  {
+    path: "participant/home",
+    component: ResearchQuestIdInputComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "participant/questionnaire/:id",
+    component: QuestionnairePageComponent,
+  },
+
 ];
 
 @NgModule({

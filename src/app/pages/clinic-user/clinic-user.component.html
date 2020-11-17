@@ -1,3 +1,4 @@
+
 <clinical-header></clinical-header>
 
 <form #myForm="ngForm">
@@ -39,12 +40,14 @@
                 <input style="border-width: 0.05cm" type="text"
                   class="form-control" name="username" [(ngModel)]="userAttributes.username" [disabled]="true">
                 <br>
-                <label style="font-weight: bold"> Name of Parent </label>
-                <input style="border-width: 0.05cm" placeholder="First Name" type="text" class="form-control"
-                  name="firstname" [(ngModel)]="userAttributes.firstname"/>
-                <br>
-                <input style="border-width: 0.05cm" placeholder="Last Name" type="text" class="form-control"
-                  name="lastname" [(ngModel)]="userAttributes.lastname"/>
+                <label style="font-weight: bold"> Password Reset </label>
+                <div style="display: flex; align-items: stretch; justify-content: space-between">
+                  <input style="border-color: gray; border-width: 0.05cm; width:68%" type="text"
+                         class="form-control" name="newPassword" [(ngModel)]="userAttributes.userpassword">
+                  <button mat-raised-button style="width:30%" class="update" (click)="generatePassword()">
+                    Generate new password
+                  </button>
+                </div>
                 <br>
                 <label style="font-weight: bold"> Assigned Clinician </label>
                 <br>
