@@ -1,6 +1,9 @@
-//Classed to store admin user data in components
+//Class used to store participant user data from response
 
-export class FFQResearchParticipant {
+import {FFQItemResponse} from './ffqitem-response';
+import { ObjectUnsubscribedError } from 'rxjs';
+
+export class FFQParticipantResponse {
   id: string;
   userId: string;
   username: string;

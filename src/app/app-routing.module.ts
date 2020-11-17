@@ -34,6 +34,7 @@ import { ResearchQuestIdInputComponent } from "./pages/researcher-quest-id-input
 import { AdminTrackerHistoryComponent } from "./pages/admin-tracker-history/admin-tracker-history.component";
 import {ClinicalUsersComponent} from "./pages/clinical-users";
 import {ClinicNewUserComponent} from "./pages/clinic-new-user/clinic-new-user.component";
+import {ResearchNewUserComponent} from "./pages/research-new-user/research-new-user.component";
 
 const routes: Routes = [
   {
@@ -163,6 +164,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: "researcher/user/:id",
+    component: ResearchNewUserComponent,
+    canActivate: [AuthGuard],
+  },
+  {
     path: "clinic/tracker-history",
     component: ClinicTrackerHistoryComponent,
     canActivate: [AuthGuard],
@@ -222,7 +228,6 @@ const routes: Routes = [
     path: "participant/home",
     component: ResearchQuestIdInputComponent,
     canActivate: [AuthGuard],
-    
   },
   {
     path: "participant/questionnaire/:id",

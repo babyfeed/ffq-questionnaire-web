@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {map, tap} from 'rxjs/operators';
 import { FFQResearchParticipant } from 'src/app/models/ffqresearch-participant';
 import { environment } from 'src/environments/environment';
+import { FFQResearch } from 'src/app/models/ffqresearch';
 
 const httOptions ={ headers: new HttpHeaders({'Content-Type':'aplication/json'})}
 
@@ -14,11 +15,15 @@ const httOptions ={ headers: new HttpHeaders({'Content-Type':'aplication/json'})
 export class ResearcherParticipantService {
 
   endpoint = environment.userServiceUrl + '/ffq/participants';
+  currentUser = <FFQResearch>JSON.parse(localStorage.getItem('currentUser'))[0];
+
 
 
   constructor(private http: HttpClient) { }
 
   addParent(user : FFQResearchParticipant): Observable<any> {
+    user.assignedResearcherInst = this.currentUser.AssignedResearchInstitutionId;
+    user.assignedResearcherUsers.push(this.currentUser.userId);
 
     return this.http.post(this.endpoint + '/createparticipants', user, {headers : new HttpHeaders({ 'Content-Type': 'application/json' })}).pipe(
       tap(
@@ -44,7 +49,8 @@ export class ResearcherParticipantService {
             item.userId,
             item.username,
             item.usertype,
-            item.usercount,
+            item.firstname,
+            item.lastname,
             item.assignedResearcherInst,
             item.assignedResearcherUsers,
             item.childrennames,
