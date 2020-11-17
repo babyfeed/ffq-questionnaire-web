@@ -15,7 +15,6 @@ import {AuthenticationService} from '../../services/authentication/authenticatio
 import {User} from '../../models/user';
 import {skipWhile, take} from 'rxjs/operators';
 import {FFQParentResponse} from '../../models/ffqparent-response';
-// import { Angular2CsvComponent } from 'angular2-csv/Angular2-csv';
 import {FFQClinicResponse} from "../../models/ffqclinic-response";
 
 @Component({
@@ -95,6 +94,7 @@ export class ClinicNewUserComponent implements OnInit {
     parentList.subscribe(a => {
       this.ffqparentList = a;
     });
+
     const clinList: Observable<FFQClinicResponse[]> = this.clinicService.getAllClinics();
     clinList.subscribe(a => {
       this.ffqclinicList = a;
@@ -118,7 +118,6 @@ export class ClinicNewUserComponent implements OnInit {
       this.limit = 0;
       this.noMoreRoom = true;
     }
-    // console.log(this.data[0].userName);
   }}
   addUser() {
     switch (this.userType) {
@@ -186,8 +185,8 @@ export class ClinicNewUserComponent implements OnInit {
       this.ffqParent = new FFQParent('', '', this.userPassword, 'parent', '',
         '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true);
     }
-    else {                                                              // leaving password like this for now until file download is possible
-      this.ffqParent = new FFQParent('', this.prefix + this.suffix, this.userPassword, 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true);
+    else {
+      this.ffqParent = new FFQParent('', this.prefix + this.suffix.toString(), this.userPassword, 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true);
     }
     this.parentService.addParent(this.ffqParent).subscribe(parent  => {
         const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
@@ -267,7 +266,7 @@ export class ClinicNewUserComponent implements OnInit {
       for (let i = 0; i < this.usersQuantity; i++) {
         this.prefix = 'parent';
         this.generatePassword();
-        this.newParents.push(new FFQParent('', this.prefix + this.suffix, this.userPassword, 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true));
+        this.newParents.push(new FFQParent('', this.prefix + this.suffix.toString(), this.userPassword, 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true));
         this.suffix++;
       }
     }

@@ -77,7 +77,7 @@ export class DeletePopupComponent implements OnInit {
       this.clinicService
         .deleteItem((<FFQClinicResponse>this.attributes).clinicId)
         .subscribe((clinic) => {
-          this.router.navigateByUrl("/admin/clinics");
+          this.router.navigateByUrl("/admin/users");
           const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
           dialogRef.componentInstance.title =
             "Clinic " + clinicName + " was deleted";
