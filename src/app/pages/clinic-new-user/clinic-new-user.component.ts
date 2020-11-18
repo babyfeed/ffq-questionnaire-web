@@ -61,6 +61,7 @@ export class ClinicNewUserComponent implements OnInit {
   testing = [];
   newParents = [];
   loggedInCliName;
+  parentName: string;
 
   constructor(
     public parentService: ParentService,
@@ -182,11 +183,13 @@ export class ClinicNewUserComponent implements OnInit {
     this.generatePassword();
     if (this.prefix === '') {
       this.prefix = 'parent';
+      this.parentName = this.prefix.replace(/\s/g, '') + this.suffix.toString();
       this.ffqParent = new FFQParent('', '', this.userPassword, 'parent', '',
         '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true);
     }
     else {
-      this.ffqParent = new FFQParent('', this.prefix + this.suffix.toString(), this.userPassword, 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true);
+      this.parentName = this.prefix.replace(/\s/g, '') + this.suffix.toString();
+      this.ffqParent = new FFQParent('', this.parentName, this.userPassword, 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true);
     }
     this.parentService.addParent(this.ffqParent).subscribe(parent  => {
         const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
@@ -226,7 +229,7 @@ export class ClinicNewUserComponent implements OnInit {
     this.data[4].password = 'Password';
     this.data[5].userName = '';
     this.data[5].password = '';
-    this.data[6].userName = this.prefix + this.suffix;
+    this.data[6].userName = this.parentName;
     this.data[6].password = this.userPassword;
   }
   dataLoopMultiple() {
@@ -266,14 +269,16 @@ export class ClinicNewUserComponent implements OnInit {
       for (let i = 0; i < this.usersQuantity; i++) {
         this.prefix = 'parent';
         this.generatePassword();
-        this.newParents.push(new FFQParent('', this.prefix + this.suffix.toString(), this.userPassword, 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true));
+        this.parentName = this.prefix.replace(/\s/g, '') + this.suffix.toString();
+        this.newParents.push(new FFQParent('', this.parentName, this.userPassword, 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true));
         this.suffix++;
       }
     }
     else {
     for (let i = 0; i < this.usersQuantity; i++) {
       this.generatePassword();
-      this.newParents.push(new FFQParent('', this.prefix + this.suffix.toString(), this.userPassword, 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true));
+      this.parentName = this.prefix.replace(/\s/g, '') + this.suffix.toString();
+      this.newParents.push(new FFQParent('', this.parentName, this.userPassword, 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true));
       this.suffix++;
     }}
 
