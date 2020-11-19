@@ -59,6 +59,27 @@ export class UserComponent implements OnInit {
   public ffqclinicianList$: Observable<FFQClinician[]>;
   usersQuantity = 1;
   userId: string;
+  lastUserId;
+  suffix;
+  userPassword: string;
+  dissabled = false;
+  clinicianName: string;
+  clinicName: string;
+  newClinicians = [];
+  data = [];
+  options = {
+    fieldSeparator: ',',
+    quoteStrings: '"',
+    decimalseparator: '.',
+    showLabels: false,
+    headers: [],
+    showTitle: true,
+    title: 'Clinician Login',
+    titles: 'User Info',
+    useBom: false,
+    removeNewLines: true,
+    keys: ['userName', 'password' ]
+  };
 
   constructor(
     public parentService: ParentService,
@@ -156,6 +177,7 @@ export class UserComponent implements OnInit {
       {
         this.cliniciansLimit = item.cliniciansLimit;
         this.parentsLimit = item.parentsLimit;
+        this.clinicName = item.clinicname;
       }
     }
 
@@ -176,13 +198,21 @@ export class UserComponent implements OnInit {
     else{
       this.able2AddClinicians = this.cliniciansLimit - this.numClinician;
     }
-    if(this.parentsLimit === 0){
+    if (this.parentsLimit === 0){
       this.able2AddParents = 0;
     }
     else{
       this.able2AddParents = this.parentsLimit - this.numParents;
     }
   }
+
+  getSuffix(){
+    if (this.ffqclinicianList.length === 0){
+      this.suffix = 1;
+    } else {
+      this.lastUserId = this.ffqclinicianList[this.ffqclinicianList.length - 1].userId;
+      this.suffix = parseInt(this.lastUserId, 10) + 1;
+    }}
 
   addUser() {
 
@@ -216,14 +246,46 @@ export class UserComponent implements OnInit {
       }
     }
   }
+  dataLoop(){
+    for (let i = 0; i < 6; i++){
+      this.data[i] = [
+        {
+          userName: '',
+          password: ''
+        },
+      ];
+    }
+  }
+  save2csvSingleClinician() {
+    this.dataLoop();
+    this.data[0].userName = 'Assingned clinic: ';
+    this.data[0].password = this.clinicName;
+    this.data[1].userName = 'Assingned clinic ID: ';
+    this.data[1].password = this.selectedClinic;
+    this.data[2].userName = '';
+    this.data[2].password = '';
+    this.data[3].userName = 'User Name';
+    this.data[3].password = 'Password';
+    this.data[4].userName = '';
+    this.data[4].password = '';
+    this.data[5].userName = this.clinicianName;
+    this.data[5].password = this.userPassword;
+  }
 
   addClinician() {
-    const ffqclinician = new FFQClinician('', '', '', '', '', '', this.selectedClinic, [], true, this.parentLimitForClinician, this.prefix.replace(/\s/g, ''));
+    this.getSuffix();
+    this.generatePasswordCreation();
+    this.prefix = this.prefix.replace(/\s/g, '');
+    this.clinicianName = this.prefix + 'Clinician' +  this.suffix.toString();
+
+    const ffqclinician = new FFQClinician('', this.clinicianName, this.userPassword, '', '', '', this.selectedClinic, [], true, this.parentLimitForClinician, this.prefix);
 
     this.clinicianService.addClinician(ffqclinician).subscribe(clinician => {
         const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-        this.router.navigateByUrl('/admin/users');
+        // this.router.navigateByUrl('/admin/users');
         dialogRef.componentInstance.title = clinician.username + ' was added!';
+        this.save2csvSingleClinician();
+        this.dissabled = true;
       },
       error => {
         const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
@@ -232,17 +294,52 @@ export class UserComponent implements OnInit {
       this.isProcessing = false;
   }
 
+  dataLoopMultiple() {
+    for (let i = 0; i < this.newClinicians.length + 5; i++) {
+      this.data[i] = [
+        {
+          userName: '',
+          password: ''
+        },
+      ];
+    }
+  }
+  save2csvMultipleClinician() {
+    this.dataLoopMultiple();
+    this.data[0].userName = 'Assingned clinic: ';
+    this.data[0].password = this.clinicName;
+    this.data[1].userName = 'Assingned clinic ID: ';
+    this.data[1].password = this.selectedClinic;
+    this.data[2].userName = '';
+    this.data[2].password = '';
+    this.data[3].userName = 'User Name';
+    this.data[3].password = 'Password';
+    this.data[4].userName = '';
+    this.data[4].password = '';
+
+    for (let i = 0; i < this.newClinicians.length; i++){
+      this.data[i + 5].userName = this.newClinicians[i].username;
+      this.data[i + 5].password = this.newClinicians[i].userpassword;
+    }
+  }
+
   addMultipleClinicians() {
-    const newClinicians = [];
+    this.getSuffix();
+    this.prefix = this.prefix.replace(/\s/g, '');
+    // this.clinicianName = this.prefix + 'Clinician' +  this.suffix.toString();
     for (let i = 0; i < this.usersQuantity; i++) {
-      newClinicians.push(new FFQClinician('', '', '', '', '', '', this.selectedClinic, [], true, this.parentLimitForClinician, this.prefix.replace(/\s/g, '')));
+      this.generatePasswordCreation();
+      this.clinicianName = this.prefix + 'Clinician' +  this.suffix.toString();
+      this.newClinicians.push(new FFQClinician('', this.clinicianName, this.userPassword, '', '', '', this.selectedClinic, [], true, this.parentLimitForClinician, this.prefix));
+      this.suffix++;
     }
 
-    this.clinicianService.addMultipleClinicians(newClinicians).subscribe(clinicians => {
-        this.router.navigateByUrl('/admin/users');
+    this.clinicianService.addMultipleClinicians(this.newClinicians).subscribe(clinicians => {
+        // this.router.navigateByUrl('/admin/users');
         const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-        // this.router.navigateByUrl('/admin/user/new');
         dialogRef.componentInstance.title = clinicians.map(clinician => clinician.username).join('<br/>') + '<br/>were added!';
+        this.save2csvMultipleClinician();
+        this.dissabled = true;
       },
       error => {
         const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
@@ -390,6 +487,9 @@ export class UserComponent implements OnInit {
     confirmDelete.componentInstance.attributes = this.userAttributes;
   }
 
+  generatePasswordCreation() {
+    this.userPassword = Math.random().toString(36).slice(-10);
+  }
   generatePassword() {
     this.userAttributes.userpassword = Math.random().toString(36).slice(-10);
   }
