@@ -30,7 +30,6 @@ export class NutrientsRecommendationsService {
       map(((item: FFQNutrientsRecommendations) => {
           return new FFQNutrientsRecommendations(
             item.questionnaireId,
-            item.patientName,
             item.patientAge,
             item.recommendationsList
           );

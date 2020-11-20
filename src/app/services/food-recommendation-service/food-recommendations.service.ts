@@ -31,7 +31,6 @@ export class FoodRecommendationsService {
       map(((item: FFQFoodRecommendations) => {
           return new FFQFoodRecommendations(
             item.questionnaireId,
-            item.patientName,
             item.patientAge,
             item.foodCategoryRecList,
           );
