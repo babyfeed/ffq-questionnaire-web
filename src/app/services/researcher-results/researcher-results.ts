@@ -25,7 +25,6 @@ const httpOptions = { headers: new HttpHeaders({'Content-Type': 'application/jso
             return new FFQResearchResultsResponse(
               item.questionnaireId,
               item.participantUserId,
-              item.participantName,
               item.feedback,
               item.ageInMonths,
               item.gender,
@@ -45,7 +44,6 @@ const httpOptions = { headers: new HttpHeaders({'Content-Type': 'application/jso
               return new FFQResearchResultsResponse(
                 item.questionnaireId,
                 item.participantUserId,
-                item.participantName,
                 item.feedback,
                 item.ageInMonths,
                 item.gender,

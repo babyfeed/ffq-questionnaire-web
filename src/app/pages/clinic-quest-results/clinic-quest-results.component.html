@@ -16,15 +16,19 @@
                     <mat-card-content>
                         <!--Labels for questionnaire results-->
                         <div class="row">
+                            <!--
                             <div class="col-1" style="text-align:center">
                                 <label><strong>Parent Name</strong></label>
                             </div>
+                            -->
                             <div class="col-2" style="text-align:center">
                                 <label><strong>Questionnaire ID</strong></label>
                             </div>
+                            <!--
                             <div class="col-1" style="text-align:center">
                                 <label><strong>Patient Name</strong></label>
                             </div>
+                            -->
                             <div class="col-1" style="text-align:center">
                                 <label><strong>Infant Age (in months)</strong></label>
                             </div>
@@ -44,15 +48,20 @@
 
                         <!--Questionnaire results-->
                         <div class="row mb-3">
-                            <div class="col-1" style="text-align:center">
+                            <!--
+                                <div class="col-1" style="text-align:center">
                                 {{result.parentName}}
                             </div>
+                            -->
+                            
                             <div class="col-2" style="text-align:center">
                                 {{result.ffqresult.questionnaireId}}
                             </div>
+                            <!--
                             <div class="col-1" style="text-align:center">
                                 {{result.ffqresult.patientName}}
                             </div>
+                            -->
                             <div class="col-1" style="text-align:center">
                                 {{result.ffqresult.ageInMonths}}
                             </div>
