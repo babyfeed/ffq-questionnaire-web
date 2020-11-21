@@ -35,6 +35,8 @@ export class QuestionnairePageComponent implements OnInit {
     'All open question blocks must be completely filled out before submitting the questionnaire.',
     'Click the submit button at the bottom of the from when finished.'
   ];
+
+
   userId: string;
   id: string;
   userType: string;
@@ -69,6 +71,7 @@ export class QuestionnairePageComponent implements OnInit {
         this.userType =  this.authenticationService.currentUserValue[0].usertype;
       });
     this.loadFoodItems();
+
   }
 
   submitQuestionnaire() {
@@ -106,7 +109,7 @@ export class QuestionnairePageComponent implements OnInit {
         }
       }
 
-      this.foodService.calculateNutrientBreakdown(this.userId, this.userType, this.id, this.infantage, this.gender, itemList)
+      this.foodService.calculateNutrientBreakdown(this.userId, this.userType,this.id, this.infantage, this.gender, itemList)
         .subscribe( (results) => {
             console.log(results);
             const dailyMap: Map<string, number> = new Map();

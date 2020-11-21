@@ -36,6 +36,8 @@ export class QuestionnairePageComponent implements OnInit {
     'All open question blocks must be completely filled out before submitting the questionnaire.',
     'Click the submit button at the bottom of the form when finished.'
   ];
+
+
   userId: string;
   id: string;
   userType: string;
