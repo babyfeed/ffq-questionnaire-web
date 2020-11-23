@@ -24,6 +24,7 @@ import { NutrientConstants } from 'src/app/models/NutrientConstants';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs';
 import { FoodRecommendationsService } from 'src/app/services/food-recommendation-service/food-recommendations.service';
+import { ExportService } from 'src/app/services/export/export-service';
 import { ErrorDialogPopupComponent } from 'src/app/components/error-dialog-popup/error-dialog-popup.component';
 import { FFQResearcherParent } from 'src/app/models/ffqresearcherparent';
 import { element } from 'protractor';
@@ -44,6 +45,8 @@ export class ResearchHistoryComponent implements OnInit {
 
   results: FFQResultsResponse[] = [];
   participantList: FFQResearcherParent[] = [];
+  //Test
+  customers: any = [];
 
   constructor(
     private errorDialog: MatDialog,
@@ -51,10 +54,11 @@ export class ResearchHistoryComponent implements OnInit {
     private modalService: NgbModal,
     private http: HttpClient,
     private authenticationService: AuthenticationService,
-    public resultsService: ResultsService,
-    public foodRecommendationsService: FoodRecommendationsService,
-    public nutrientsRecommendationsService: NutrientsRecommendationsService,
-    public participantService: ResearcherParentService
+    private resultsService: ResultsService,
+    private foodRecommendationsService: FoodRecommendationsService,
+    private nutrientsRecommendationsService: NutrientsRecommendationsService,
+    private participantService: ResearcherParentService,
+    private exportService: ExportService
 
   ) {}
 
@@ -68,7 +72,17 @@ export class ResearchHistoryComponent implements OnInit {
     
     this.getParticipantList();
     this.getParticipantResult();
+
+    //Test
+    for (let i = 0; i <= 25; i++) {
+      this.customers.push({firstName: `first${i}`, lastName: `last${i}`,
+      email: `abc${i}@gmail.com`, address: `000${i} street city, ST`, zipcode: `0000${i}`});
+    }
     
+  }
+
+  export() {
+    this.exportService.exportExcel(this.customers, 'FFQ_Results');
   }
 
   private getParticipantList(){
