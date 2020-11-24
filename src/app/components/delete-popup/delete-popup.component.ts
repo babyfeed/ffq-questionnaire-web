@@ -17,6 +17,11 @@ import { ClinicianService } from "src/app/services/clinician/clinician-service";
 import { ParentService } from "src/app/services/parent/parent-service";
 import { ClinicService } from "src/app/services/clinic/clinic-service";
 import { FFQClinicResponse } from "src/app/models/ffqclinic-response";
+import {ResearchService} from "src/app/services/research/research-service";
+import {ResearchInstitutionService} from "src/app/services/research-institution-service/research-institution-service"
+import {FFQResearchtResponse} from "src/app/models/ffqresearch-response";
+import {FFQInstitutionResponse} from "src/app/models/ffqinstitution-response";
+
 
 @Component({
   selector: "delete-popup",
@@ -33,12 +38,14 @@ export class DeletePopupComponent implements OnInit {
   isClinician: boolean = false;
   isClinic: boolean = false;
   isResearch: boolean = false;
+  isResearch_institution: boolean = false;
 
   ngOnInit() {
     if (this.service == "Clinician") this.isClinician = true;
     else if (this.service == "Parent") this.isParent = true;
     else if (this.service == "Clinic") this.isClinic = true;
-    else if (this.service == "Research") this.isResearch = true;
+    else if (this.service == "Researcher") this.isResearch = true;
+    else if (this.service == "Research-institution") this.isResearch_institution = true;
   }
 
   constructor(
@@ -47,7 +54,9 @@ export class DeletePopupComponent implements OnInit {
     private errorDialog: MatDialog,
     public clinicianService: ClinicianService,
     public parentService: ParentService,
-    public clinicService: ClinicService
+    public clinicService: ClinicService,
+    public researchService: ResearchService,
+    public researchInstitutionService: ResearchInstitutionService
   ) {}
 
   /* When confirmed deletion, this function does the delete action on the object based on its type */
@@ -81,6 +90,30 @@ export class DeletePopupComponent implements OnInit {
           const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
           dialogRef.componentInstance.title =
             "Clinic " + clinicName + " was deleted";
+        });
+    }
+    else if (this.isResearch) {
+      var researchName = (<FFQResearchtResponse>this.attributes).username;
+      this.researchService
+        .deleteItem((<FFQResearchtResponse>this.attributes).userId)
+        .subscribe((data) => {
+          this.router.navigateByUrl("/admin/research/users");
+          const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+          dialogRef.componentInstance.title =
+            "Researcher: " + researchName + " was deleted";
+        });
+    }
+    else if (this.isResearch_institution) {
+      
+      var researchInstitutionName = (<FFQInstitutionResponse>this.attributes).institutionName;
+     
+      this.researchInstitutionService
+        .deleteItem((<FFQInstitutionResponse>this.attributes).researchInstitutionId)
+        .subscribe((data) => {
+          this.router.navigateByUrl("/admin/research/users");
+          const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+          dialogRef.componentInstance.title =
+            "Research Institution: " + researchInstitutionName + " was deleted";
         });
     }
     

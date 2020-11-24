@@ -10,7 +10,7 @@
     </div>
 
     <div class="container mt-3">
-      <span> {{ researchInstitutionList.length }} research institution(s) </span>
+      <span> {{ researchInstitutionLenght }} research institution(s) </span>
       <table class="table table-bordered table-inverse">
         <tr>
           <th width="20"> Research Institution Id</th>    
@@ -21,7 +21,7 @@
         </tr>
         <tr *ngFor="let c of researchInstitutionList; index as i">
           <td> {{ c.researchInstitutionId }} </td>
-          <td> <a [routerLink]="['/admin/clinic/', c.clinicId]">{{ c.institutionName }}</a></td>
+          <td> <a [routerLink]="['/admin/research/institution/', c.researchInstitutionId]">{{ c.institutionName }}</a></td>
           <td> {{ c.address }} </td>
           
         </tr>
@@ -51,7 +51,7 @@
 
             </tr>
             <tr *ngFor="let u of researcherList | searchFilter: search; index as i" [hidden]="!showResearchers || (filtered && filtered_researchInst.indexOf(ResearchInstNames[u.AssignedResearchInstitutionId -1]) === -1)">
-                <td><a [routerLink]="['/admin/user/p', u.userId]"> {{ u.username }} </a></td>
+                <td><a [routerLink]="['/admin/researcher/user/', u.userId]"> {{ u.username }} </a></td>
                 <td> {{ u.firstname}} </td>
                 <td> {{ u.lastname }} </td>
                 <td> {{ ResearchInstNames[u.AssignedResearchInstitutionId -1] }} </td>

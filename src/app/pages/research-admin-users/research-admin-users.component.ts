@@ -47,7 +47,8 @@ export class AdminResearchUsersComponent implements OnInit {
   ResearchInstNames: string[] = [];
   researchInstitutionList: FFQResearchInstitutionResponse[];
   researcherList: FFQResearchtResponse[] = []; 
-  
+  researchInstitutionLenght: Number;
+
   ngOnInit() {   
     this.showParticipants = true;
     this.showResearchers = true;    
@@ -92,6 +93,7 @@ export class AdminResearchUsersComponent implements OnInit {
         this.researchInstitutionList = data;
         data.forEach((researchInst) => {
         this.ResearchInstNames.push(researchInst.institutionName);
+        this.researchInstitutionLenght = data.length;
       });
     });
      

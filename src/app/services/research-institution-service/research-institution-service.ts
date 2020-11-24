@@ -51,15 +51,9 @@ export class ResearchInstitutionService {
   updateUser(researchInst: FFQResearchInstitutionResponse): Observable<any> {
     return this.http
       .put(this.endpoint + "/updateinstitution", researchInst, {
-        headers: new HttpHeaders({ "Content-Type": "application/json" }),
-      })
-      .pipe(
-        tap(
-          (data) => console.log(data),
-          (error) => console.log(error)
-        )
-      );
+        headers: new HttpHeaders({ "Content-Type": "application/json" })})
   }
+
 
   //To be implemented
   getResearchInstitution(researchInstitutionId: string): Observable<FFQResearchInstitutionResponse> {
@@ -108,8 +102,7 @@ export class ResearchInstitutionService {
     );
   }
 
-  deleteItem(researchInstitutionId: string): Observable<any> {
-    console.log("here" + researchInstitutionId);
+  deleteItem(researchInstitutionId: string): Observable<any> {   
     return this.http.delete(this.endpoint + "/delete?researchInstitutionId=" + researchInstitutionId, {
       responseType: "text",
     });

@@ -70,10 +70,28 @@ export class ResearchService {
           item.AssignedResearchInstitutionId,
           item.limitNumberOfParticipants
         );
-      })
+      })     
     );
   }
 
+//To be implemented
+  getUserById(userId: string): Observable<FFQResearchtResponse> {
+    return this.http.get(this.endpoint + "/" + userId).pipe(
+      map((item: any) => {
+        return new FFQResearchtResponse(
+          item.userId,
+          item.username,
+          item.userpassword,
+          item.usertype,
+          item.firstname,
+          item.lastname,
+          item.isactive,
+          item.AssignedResearchInstitutionId,
+          item.limitNumberOfParticipants
+        );
+      })     
+    );
+  }
 
   getAllUsers(): Observable<FFQResearchtResponse[]> {
     // getMongoUsers();
