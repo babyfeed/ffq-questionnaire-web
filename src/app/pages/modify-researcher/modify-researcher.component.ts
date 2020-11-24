@@ -48,36 +48,48 @@ export class UpdateResearcherComponent implements OnInit {
       
       this.selectedResearcher = data;        
       this.researchAttributes = this.selectedResearcher;
+ 
+      var chosenResearchInstName: Observable<FFQResearchInstitutionResponse> = this.researchInstitutionService.getResearchInstitution(this.researchAttributes.AssignedResearchInstitutionId);
 
+      chosenResearchInstName.subscribe (inst => {
+        this.AssignedResearchInstitutionName = inst.institutionName;       
+      })
       var researchInstitutionList: Observable<FFQResearchInstitutionResponse[]> = this.researchInstitutionService.getAllResearchInstitutions();
       researchInstitutionList.subscribe(a => {
       this.researchInstitutionList = a;   
-      
+            
       if(data != null && a != null)
       { 
         this.dataLoaded = Promise.resolve(true);       
       }     
     });  
        
-    })
-       
-   
+    })   
     
   }  
 
 
   updateResearchInstitution() {   
 
-    this.researcherService.updateUser(<FFQResearchtResponse>this.researchAttributes).subscribe(
-      data => {        
-        this.router.navigateByUrl("/admin/research/users");
-        const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-        dialogRef.componentInstance.title = 'Research Institution successfully updated!';
-      }
-    );
+    var chosenResearchInstName: Observable<FFQResearchInstitutionResponse> = this.researchInstitutionService.getResearchInstitutionByName(this.AssignedResearchInstitutionName);
+
+    chosenResearchInstName.subscribe(inst => {
+      this.researchAttributes.AssignedResearchInstitutionId = inst.researchInstitutionId;      
+
+      this.researcherService.updateUser(<FFQResearchtResponse>this.researchAttributes).subscribe(
+        data => {        
+          this.router.navigateByUrl("/admin/research/users");
+          const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+          dialogRef.componentInstance.title = 'Research Institution successfully updated!';
+        }
+      );
+      
+    });
+
+ 
   }
 
-  deleteResearchInstitution() {
+  deleteResearcher() {
     const confirmDelete = this.modalService.open(DeletePopupComponent);    
     confirmDelete.componentInstance.service = "Researcher";
     confirmDelete.componentInstance.attributes = this.researchAttributes;
