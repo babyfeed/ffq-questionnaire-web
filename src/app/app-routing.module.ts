@@ -35,6 +35,8 @@ import { AdminTrackerHistoryComponent } from "./pages/admin-tracker-history/admi
 import {ClinicalUsersComponent} from "./pages/clinical-users";
 import {ClinicNewUserComponent} from "./pages/clinic-new-user/clinic-new-user.component";
 import {ResearchNewUserComponent} from "./pages/research-new-user/research-new-user.component";
+import {UpdateResearchInstitutionComponent} from "./pages/modify-research-institution/modify-research-institution.component";
+import {UpdateResearcherComponent} from "./pages/modify-researcher/modify-researcher.component";
 
 const routes: Routes = [
   {
@@ -98,6 +100,17 @@ const routes: Routes = [
     component: ResearchInstitutionComponent,
     canActivate: [AuthGuard],
   },
+  {
+    path: "admin/research/institution/:id",
+    component: UpdateResearchInstitutionComponent,
+    canActivate: [AuthGuard],
+  }, 
+  {
+    path: "admin/researcher/user/:id",
+    component: UpdateResearcherComponent,
+    canActivate: [AuthGuard],
+  }, 
+  
   {
     path: "admin/researcher",
     component: AdminResearcherUserComponent,
