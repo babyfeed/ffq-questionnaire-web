@@ -48,6 +48,7 @@ export class UpdateResearcherComponent implements OnInit {
       
       this.selectedResearcher = data;        
       this.researchAttributes = this.selectedResearcher;
+      this.userPassword = this.researchAttributes.userpassword;
  
       var chosenResearchInstName: Observable<FFQResearchInstitutionResponse> = this.researchInstitutionService.getResearchInstitution(this.researchAttributes.AssignedResearchInstitutionId);
 
@@ -80,7 +81,7 @@ export class UpdateResearcherComponent implements OnInit {
         data => {        
           this.router.navigateByUrl("/admin/research/users");
           const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-          dialogRef.componentInstance.title = 'Research Institution successfully updated!';
+          dialogRef.componentInstance.title = 'Researcher was successfully updated!';
         }
       );
       
