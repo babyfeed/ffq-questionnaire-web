@@ -26,6 +26,7 @@ import { FFQResearcherParentResponse } from 'src/app/models/ffqresearcherparent-
 import { FFQResearch } from "src/app/models/ffqresearch";
 import { BehaviorSubject } from 'rxjs';
 import { FFQResearchParticipant } from 'src/app/models/ffqresearch-participant';
+import { InstitutionService } from 'src/app/services/institution/institution-service';
 
 
 @Component({
@@ -39,12 +40,13 @@ export class ResearchUsersComponent implements OnInit {
   endpoint = environment.foodServiceUrl + "/ffq";
 
   currentUser = <FFQResearch>JSON.parse(localStorage.getItem('currentUser'))[0];
-
+  institutionAttributes: object;
   participants: FFQResearchParticipant[] = [];
   dataLoaded: Promise<boolean>;
 
   constructor(
     public researchParentService: ResearcherParentService,
+    public institutionService: InstitutionService,
     private activatedRoute: ActivatedRoute,
     private errorDialog: MatDialog,
     private submissionErrorDialog: MatDialog,
@@ -60,6 +62,7 @@ export class ResearchUsersComponent implements OnInit {
 
   ngOnInit() {
     this.findAllParticipants();
+    this.getInstitutionById(this.currentUser.AssignedResearchInstitutionId);
   }
 
   onOpenCreateParticipantModal(): void {
@@ -83,9 +86,7 @@ export class ResearchUsersComponent implements OnInit {
     this.researchParentService.getAllParticipants(this.currentUser.AssignedResearchInstitutionId).subscribe(
       (data) => {
         data.map((response) => {
-
           this.participants.push(response);
-          // this.foodNutrients.push(response);
         });
         console.log(this.participants);
 
@@ -95,4 +96,11 @@ export class ResearchUsersComponent implements OnInit {
     );
   }
 
+  private getInstitutionById(id: string)
+  {
+      this.institutionService.getInstitution(id).subscribe(data => {
+       this.institutionAttributes = data;
+      });
+      this.dataLoaded = Promise.resolve(true);
+  }
 }

@@ -16,7 +16,7 @@ const httOptions ={ headers: new HttpHeaders({'Content-Type':'aplication/json'})
 
 export class InstitutionService {
 
-  endpoint = environment.userServiceUrl + '/ffq/institutions';
+  endpoint = environment.userServiceUrl + '/ffq/research_institution';
 
 
   constructor(private http: HttpClient) { }
