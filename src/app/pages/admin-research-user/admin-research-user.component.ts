@@ -41,6 +41,7 @@ export class AdminResearcherUserComponent implements OnInit {
   limitNumberOfParticipants: number;
   AssignedResearchInstitutionName: string;
   AssignedResearchInstitutionId: string;
+
  
  
   resultObjectList: Object[] = [];
@@ -142,6 +143,10 @@ export class AdminResearcherUserComponent implements OnInit {
     const confirmDelete = this.modalService.open(DeletePopupComponent);
     confirmDelete.componentInstance.service = "researchers";
     confirmDelete.componentInstance.attributes = this.researcherUserAttributes;
+  }
+
+  generatePassword() {
+    this.userpassword = Math.random().toString(36).slice(-10);   
   }
 }
 

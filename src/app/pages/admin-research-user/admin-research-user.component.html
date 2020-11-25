@@ -25,9 +25,14 @@
                     class="form-control" id="username" name="username" [(ngModel)]="username" required/>
                 <br>
                 <label for="userpassword" style="font-weight: bold"> Researcher password </label>
-                <label style="font-style: italic; font-size: small; margin-left: 10px"> *required </label>
-                <input placeholder="userpassword" width="25" style="border-color: mediumblue; border-width: 0.05cm" type="text"
-                    class="form-control" id="userpassword" name="userpassword" [(ngModel)]="userpassword" required/>
+                <label style="font-style: italic; font-size: small; margin-left: 10px"> *required </label>                
+                    <div style="display: flex; align-items: stretch; justify-content: space-between">
+                      <input placeholder="userpassword" width="25" style="border-color: mediumblue; border-width: 0.05cm" type="text"
+                      class="form-control" id="userpassword" name="userpassword" [(ngModel)]="userpassword" required/>
+                      <button mat-raised-button style="width:30%; margin-left: 10px" class="update" (click)="generatePassword()">
+                        Generate new password
+                      </button>
+                    </div>
                 <br>
                 <label for="firstname" style="font-weight: bold"> First Name </label>
                 <label style="font-style: italic; font-size: small; margin-left: 10px"> *required </label>
