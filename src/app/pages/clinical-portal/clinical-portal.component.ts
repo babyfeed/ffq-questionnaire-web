@@ -136,7 +136,6 @@ export class ClinicalPortalComponent implements OnInit  {
 
     var clinicListObervable: Observable<FFQClinicResponse[]> = this.clinicService.getAllClinics();
     const loggedInUser = this.authenticationService.currentUserValue;
-    var clinicId: string;
 
     clinicListObervable.subscribe(clinicList => {
       var clinic = clinicList.find(a => a.clinicId == loggedInUser[0].assignedclinic);
@@ -158,7 +157,6 @@ export class ClinicalPortalComponent implements OnInit  {
     clinicianListObservable.subscribe(clinicianList => {
       parentListObservable.subscribe(parentList => {
         clinicianList.forEach(clinician => {
-          var count = 0;
           if(clinician.assignedclinic == this.clinicId){
             this.clinicianList.push(clinician);
           }
@@ -173,12 +171,12 @@ export class ClinicalPortalComponent implements OnInit  {
   }
 
   getParents(){
-    var parentListObservable: Observable<FFQParentResponse[]> = this.parentService.getAllParents();
-    var parentInClinic: FFQParent[];
+    const parentListObservable: Observable<FFQParentResponse[]> = this.parentService.getAllParents();
+    const currentClinicianId = this.authenticationService.currentUserId;
 
     parentListObservable.subscribe(parentList => {
       parentList.forEach(parent => {
-        if(parent.assignedclinic == this.clinicId){
+        if(parent.assignedclinic == this.clinicId && parent.assignedclinician == currentClinicianId){
           this.parentList.push(parent);
         }
       });

@@ -83,6 +83,8 @@ import {ClinicalUsersComponent} from "./pages/clinical-users";
 import {ClinicNewUserComponent} from "./pages/clinic-new-user/clinic-new-user.component";
 import {ResearchNewUserComponent} from "./pages/research-new-user/research-new-user.component";
 import { Angular2CsvModule } from 'angular2-csv';
+import {UpdateResearchInstitutionComponent} from "./pages/modify-research-institution/modify-research-institution.component";
+import {UpdateResearcherComponent} from "./pages/modify-researcher/modify-researcher.component";
 
 
 
@@ -120,6 +122,8 @@ import { Angular2CsvModule } from 'angular2-csv';
     ResearchParentalHeaderComponent,
     LoginPageComponent,
     RecommendParentalComponent,
+    UpdateResearchInstitutionComponent,
+    UpdateResearcherComponent,
     TrackerPageComponent,
     TrackerBlockComponent,
     TrackerHistoryPageComponent,

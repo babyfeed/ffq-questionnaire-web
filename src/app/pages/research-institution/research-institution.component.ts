@@ -70,10 +70,12 @@ export class ResearchInstitutionComponent implements OnInit {
 
 
   var researchInstitutionList: Observable<FFQResearchInstitutionResponse[]> = this.researchInstitutionService.getAllResearchInstitutions();
-  console.log(researchInstitutionList);
-  
+   
        researchInstitutionList.subscribe(data => {
-      var newResearchInstId = (data.length+1).toString();
+      
+      var lastItem = data[data.length - 1]; 
+     
+      var newResearchInstId = (parseInt(lastItem.researchInstitutionId) + 1).toString() 
       
       
      console.log(newResearchInstId,this.location, today, 

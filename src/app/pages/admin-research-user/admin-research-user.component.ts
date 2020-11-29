@@ -41,6 +41,7 @@ export class AdminResearcherUserComponent implements OnInit {
   limitNumberOfParticipants: number;
   AssignedResearchInstitutionName: string;
   AssignedResearchInstitutionId: string;
+
  
  
   resultObjectList: Object[] = [];
@@ -65,20 +66,30 @@ export class AdminResearcherUserComponent implements OnInit {
   newUserId:string;
   
   ngOnInit() { 
-
+      
     var researchInstitutionList: Observable<FFQResearchInstitutionResponse[]> = this.researchInstitutionService.getAllResearchInstitutions();
       researchInstitutionList.subscribe(a => {
       this.researchInstitutionList = a;      
     }); 
     
+     
+    
   }
 
   addResearcherUser(form:NgForm){
 
-  var researcherList: Observable<FFQResearchtResponse[]> = this.researcherService.getAllUsers();  
+     var researcherList: Observable<FFQResearchtResponse[]> = this.researcherService.getAllUsers();  
   
       researcherList.subscribe(data => {
-      this.newUserId = (data.length+1).toString()    
+         
+      //getting last element in the list 
+      var lastItem = data[data.length - 1]; 
+    
+      this.newUserId = (parseInt(lastItem.userId) + 1).toString()           
+      //Check if user does not exist in the DB before saving
+      //var researcherIdAlreadyExist = this.researcherService.getUser(this.newUserId);
+      //console.log("user found: ", researcherIdAlreadyExist);
+      
           
      var selectedResearchInst: Observable<FFQResearchInstitutionResponse> = 
             this.researchInstitutionService.getResearchInstitutionByName(this.AssignedResearchInstitutionName);          
@@ -132,6 +143,10 @@ export class AdminResearcherUserComponent implements OnInit {
     const confirmDelete = this.modalService.open(DeletePopupComponent);
     confirmDelete.componentInstance.service = "researchers";
     confirmDelete.componentInstance.attributes = this.researcherUserAttributes;
+  }
+
+  generatePassword() {
+    this.userpassword = Math.random().toString(36).slice(-10);   
   }
 }
 

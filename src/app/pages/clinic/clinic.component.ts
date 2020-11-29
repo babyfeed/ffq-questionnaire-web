@@ -127,7 +127,7 @@ export class ClinicComponent implements OnInit, OnDestroy {
   updateClinic() {
     this.clinicService.updateClinic(<FFQClinicResponse>this.clinicAttributes).subscribe(
       data => {
-        this.router.navigateByUrl('/admin/clinics');
+        this.router.navigateByUrl('/admin/users');
         const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
         dialogRef.componentInstance.title = 'Clinic successfully updated!';
       }

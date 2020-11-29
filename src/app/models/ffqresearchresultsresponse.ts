@@ -1,7 +1,6 @@
 export class FFQResearchResultsResponse {
     questionnaireId: string;
     participantUserId: string;
-    participantName: string;
     feedback: string;
     ageInMonths: number;
     gender: string;
@@ -12,10 +11,9 @@ export class FFQResearchResultsResponse {
     dailyAverages: any;
     
 
-    constructor(id: string, participantId: string, name: string, feedback : string, age: number, gender: string, creationDate: string, userChoices:any, weeklyTotals: Map<string, number>, dailyAverages: any ) {
+    constructor(id: string, participantId: string, feedback : string, age: number, gender: string, creationDate: string, userChoices:any, weeklyTotals: Map<string, number>, dailyAverages: any ) {
       this.questionnaireId = id;
       this.participantUserId = participantId;
-      this.participantName = name;
       this.feedback = feedback;
       this.ageInMonths = age;
       this.gender = gender;
