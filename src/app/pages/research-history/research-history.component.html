@@ -5,7 +5,7 @@
             <h2 matDialogTitle>{{MESSAGE}}</h2>
         </mat-card>
     </div>
-    <div class="container">
+    <div class="container" *ngIf="results.length > 0">
         <button type="button" (click)="export()" class="btn btn-danger">
             Export Data
         </button>
