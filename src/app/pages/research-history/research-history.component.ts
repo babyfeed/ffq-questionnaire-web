@@ -27,6 +27,7 @@ import { FoodRecommendationsService } from 'src/app/services/food-recommendation
 import { ExportService } from 'src/app/services/export/export-service';
 import { ErrorDialogPopupComponent } from 'src/app/components/error-dialog-popup/error-dialog-popup.component';
 import { FFQResearcherParent } from 'src/app/models/ffqresearcherparent';
+import { FFQFoodRecommendations } from 'src/app/models/ffqfood-recommendations';
 import { element } from 'protractor';
 
 
@@ -74,15 +75,15 @@ export class ResearchHistoryComponent implements OnInit {
     this.getParticipantResult();
 
     //Test
-    for (let i = 0; i <= 25; i++) {
-      this.customers.push({firstName: `first${i}`, lastName: `last${i}`,
-      email: `abc${i}@gmail.com`, address: `000${i} street city, ST`, zipcode: `0000${i}`});
-    }
+    // for (let i = 0; i <= 25; i++) {
+    //   this.customers.push({firstName: `first${i}`, lastName: `last${i}`,
+    //   email: `abc${i}@gmail.com`, address: `000${i} street city, ST`, zipcode: `0000${i}`});
+    // }
     
   }
 
   export() {
-    this.exportService.exportExcel(this.customers, 'FFQ_Results');
+    this.exportService.exportFFQResults(this.results, 'FFQ_Results');
   }
 
   private getParticipantList(){
@@ -119,8 +120,9 @@ export class ResearchHistoryComponent implements OnInit {
       })
 
       console.log(m);
-      //this.results = m.reverse();
+
       this.setNutrients();
+      this.setFoodList();
     })
    
   }
@@ -129,9 +131,7 @@ export class ResearchHistoryComponent implements OnInit {
 
     const reqList: string[] = NutrientConstants.NUTRIENT_NAMES;
     const oldListObservable: Observable<FFQResultsResponse[]> = of(this.results);
-    const newWeeklyMap = new Map<string, number>();
-    const newDailyMap = new Map<string, number>();
-    const resultList: FFQResultsResponse[] = this.results;
+
 
     oldListObservable.subscribe(m => {
 
@@ -156,6 +156,24 @@ export class ResearchHistoryComponent implements OnInit {
 
      });
 
+
+  }
+
+  private setFoodList() {
+
+    this.results.forEach(result => {
+
+      var recommendedFood: FFQFoodRecommendations[] = [];
+
+      this.foodRecommendationsService.getFoodRecommendationsByQuestionnaireId(result.questionnaireId).subscribe(
+        data => {
+          recommendedFood.push(data);
+        },
+      );
+
+      result.foodRecList = recommendedFood;
+
+    });
 
   }
 

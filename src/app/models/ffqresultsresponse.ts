@@ -10,6 +10,7 @@ export class FFQResultsResponse {
     weeklyTotals: any;
     dailyAverages: any;
     show: boolean;
+    foodRecList: any;
     showFeedback: boolean;
     gender: string;
 
