@@ -57,9 +57,10 @@
                     <mat-option *ngFor="let u of ffqclinicianList" [hidden]="u.assignedclinic != userAttributes.assignedclinic" [value]="u.userId">{{ "clinician" + u.userId }}</mat-option>
                   </mat-select>
                 </mat-form-field>
-                <button mat-raised-button class="delete" style="margin-right: 20px;" (click)="deleteUser()">
+
+                <div align="middle"><button mat-raised-button class="delete" style="margin-right: 20px;" (click)="deleteUser()">
                   Delete
-                </button>
+                </button></div>
                 <!--<hr>
                 <label style="font-weight: bold"> Children </label>
                 <table class="table table-bordered table-inverse">
