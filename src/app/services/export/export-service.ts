@@ -14,14 +14,14 @@ import { createHostListener } from '@angular/compiler/src/core';
 
 export class ExportService {
 
-  constructor(  
+  constructor(
     public foodRecommendationsService: FoodRecommendationsService
   ) { }
 
   fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
   fileExtension = '.xlsx';
-  
-  
+
+
 
   public exportFFQResults(results: FFQResultsResponse[], fileName: string): void {
 
@@ -40,16 +40,16 @@ export class ExportService {
     var resultRows = [];
 
     results.forEach(result => {
-  
+
       // Initialize columns with general result information
-      var resultCol = {  
+      var resultCol = {
         'Participant ID': result.userId,
         'Questionnaire ID': result.questionnaireId,
         'Date': result.date,};
 
       // Add columns with nurient data
       for (let key of result.dailyAverages.keys()) {
-        resultCol[key] = result.dailyAverages.get(key)
+        resultCol[key] = result.dailyAverages.get(key).toFixed(2);
       }
 
       // Push columns to array of rows
@@ -60,21 +60,21 @@ export class ExportService {
     return resultRows;
 
   }
-  
+
   private getFoodsJson(results: FFQResultsResponse[]): any {
 
         // Array of rows of data
         var resultRows = [];
 
         results.forEach(result => {
-      
+
           // Initialize columns with general result information
-          var resultCol = {  
+          var resultCol = {
             'Participant ID': result.userId,
             'Questionnaire ID': result.questionnaireId,
             'Date': result.date,
           };
-    
+
           // Add columns with nurient data
           result.userChoices.forEach(choice => {
 
@@ -84,12 +84,12 @@ export class ExportService {
 
           });
 
-    
+
           // Push columns to array of rows
           resultRows.push(resultCol)
-    
+
         });
-    
+
         return resultRows;
 
   }
@@ -100,9 +100,9 @@ export class ExportService {
     var resultRows = [];
 
     results.forEach(result => {
-  
+
       // Initialize columns with general result information
-      var resultCol = {  
+      var resultCol = {
         'Participant ID': result.userId,
         'Questionnaire ID': result.questionnaireId,
         'Date': result.date
@@ -111,12 +111,12 @@ export class ExportService {
       // Add columns with nurient data
       result.foodRecList.forEach( res => {
         res.foodCategoryRecList.forEach( food => {
-          resultCol[food.categoryName] = food.calculatedAmount
+          resultCol[food.categoryName] = food.calculatedAmount.toFixed(2);
         });
       });
-        
+
       // Push columns to array of rows
-      resultRows.push(resultCol)
+      resultRows.push(resultCol);
 
     });
 

@@ -194,17 +194,19 @@
                   </form>
                   <br>
                 </div>
-
                 <div align="middle">
-                  <button type="submit" mat-raised-button (click)="addUser()"
+                  <button [hidden]="dissabled" type="submit" mat-raised-button (click)="addUser()"
                           [disabled]="!myForm.form.valid || dissabled"> Add User(s)
                   </button>
+                </div>
+                <div align="middle">
+                  <angular2csv class="btn btn-danger" [hidden]="!dissabled" [data]="data" filename="ClinicianLoginInfo" [options]="options"></angular2csv>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <angular2csv [hidden]="!dissabled" [data]="data" filename="ClinicianLoginInfo" [options]="options"></angular2csv>
+
       </div>
     </div>
   </div>

@@ -8,36 +8,37 @@
     </div>
     <div class="container mt-3" *ngIf="results.length != 0">
         <label style="font-weight:bold"> Questionnaire Results </label>
-        <input style="width: 25%" placeholder="Search..." type="text" class="form-control" name="search" [(ngModel)]="search" />
-        <!-- <div *ngFor="let result of results | resultsFilter: allParentNames: search ; let i = index"> -->
+        <div style="display: flex; align-items: stretch; justify-content: space-between">
+          <input style="width: 25%" placeholder="Search by questionnaire ID" type="text" class="form-control" name="search" [(ngModel)]="search" />
+          <div align="right">
+            <button mat-raised-button type="button" (click)="export()">
+              Download Results
+            </button>
+          </div>
+        </div>
         <div *ngFor="let result of resultInfo| resultsFilter: resultMap: search ; let i = index">
             <div class="container">
                 <mat-card class="quest-id-card">
                     <mat-card-content>
                         <!--Labels for questionnaire results-->
                         <div class="row">
-                            <!--
-                            <div class="col-1" style="text-align:center">
-                                <label><strong>Parent Name</strong></label>
+
+                            <div class="col-2" style="text-align:center">
+                              <label><strong>Date</strong></label>
                             </div>
-                            -->
+                            <div class="col-1" style="text-align:center">
+                              <label><strong>Parent ID</strong></label>
+                            </div>
                             <div class="col-2" style="text-align:center">
                                 <label><strong>Questionnaire ID</strong></label>
                             </div>
-                            <!--
-                            <div class="col-1" style="text-align:center">
-                                <label><strong>Patient Name</strong></label>
-                            </div>
-                            -->
-                            <div class="col-1" style="text-align:center">
+                            <div class="col-2" style="text-align:center">
                                 <label><strong>Infant Age (in months)</strong></label>
                             </div>
                             <div class="col-1" style="text-align:center">
                                 <label><strong>Infant Gender</strong></label>
                             </div>
-                            <div class="col-1" style="text-align:center">
-                                <label><strong>Parent Access</strong></label>
-                            </div>
+
                             <div class="col-2" style="text-align:center">
                                 <label><strong>Nutrient Recommendations</strong></label>
                             </div>
@@ -47,29 +48,21 @@
                         </div>
 
                         <!--Questionnaire results-->
-                        <div class="row mb-3">
-                            <!--
-                                <div class="col-1" style="text-align:center">
-                                {{result.parentName}}
+                        <div class="row">
+                            <div class="col-2" style="text-align:center">
+                              {{result.ffqresult.date}}
                             </div>
-                            -->
-                            
+                            <div class="col-1" style="text-align:center">
+                              {{result.ffqresult.userId}}
+                            </div>
                             <div class="col-2" style="text-align:center">
                                 {{result.ffqresult.questionnaireId}}
                             </div>
-                            <!--
-                            <div class="col-1" style="text-align:center">
-                                {{result.ffqresult.patientName}}
-                            </div>
-                            -->
-                            <div class="col-1" style="text-align:center">
+                            <div class="col-2" style="text-align:center">
                                 {{result.ffqresult.ageInMonths}}
                             </div>
                             <div class="col-1" style="text-align:center">
                                 {{result.ffqresult.gender}}
-                            </div>
-                            <div class="col-1" style="text-align:center">
-                                <mat-checkbox></mat-checkbox>
                             </div>
                             <div class="col-2" style="text-align:center; cursor:pointer">
                                 <a (click)="getNutrientsRecommendations(result.ffqresult.questionnaireId)"><i title="nutrients" class="fa fa-flask"></i></a>
@@ -79,20 +72,14 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
-                            <div class="col-12 offset-9">
+                        <div class="row" style="padding: 15px">
+                            <div class="col-12 offset-10">
                                 <button mat-raised-button [hidden]="result.ffqresult.show" (click)="toggle(i)" [hidden]="result.ffqresult.showFeedback" (click)="toggleFeedback(i)">
                     <i class="fa fa-plus-square-o"></i> Results
                   </button>
                                 <button mat-raised-button [hidden]="!result.ffqresult.show" (click)="toggle(i)" [hidden]="!result.ffqresult.showFeedback" (click)="toggleFeedback(i)">
                     <i class="fa fa-minus-square-o"></i> Results
                   </button>
-                                <!-- <button mat-button color="primary" [hidden]="result.ffqresult.showFeedback" (click)="toggleFeedback(i)">
-                    <i class="fa fa-plus-square-o"></i> Feedback
-                  </button>
-                                <button mat-button color="primary" [hidden]="!result.ffqresult.showFeedback" (click)="toggleFeedback(i)">
-                    <i class="fa fa-minus-square-o"></i> Feedback
-                  </button> -->
                             </div>
                         </div>
 
@@ -171,11 +158,6 @@
                                     </table>
                                 </div>
                                 <br>
-                                <div style="text-align:center">
-                                    <button mat-raised-button (click)="toggle(i)">
-                    <i class="fa fa-minus-square-o"></i> Close Results
-                  </button>
-                                </div>
                             </div>
 
                         </ng-container>
