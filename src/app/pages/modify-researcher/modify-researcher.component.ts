@@ -6,10 +6,10 @@ import {NgForm} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {ResearchService} from 'src/app/services/research/research-service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {DeletePopupComponent} from "src/app/components/delete-popup/delete-popup.component";
-import { FFQResearchtResponse } from "src/app/models/ffqresearch-response";
+import {DeletePopupComponent} from 'src/app/components/delete-popup/delete-popup.component';
+import { FFQResearchtResponse } from 'src/app/models/ffqresearch-response';
 import { FFQResearch } from 'src/app/models/ffqresearch';
-import { FFQResearchInstitutionResponse } from "src/app/models/ffqresearch-institution-response";
+import { FFQResearchInstitutionResponse } from 'src/app/models/ffqresearch-institution-response';
 import { ResearchInstitutionService } from 'src/app/services/research-institution-service/research-institution-service';
 
 
@@ -19,9 +19,9 @@ import { ResearchInstitutionService } from 'src/app/services/research-institutio
   styleUrls: ['./modify-researcher.component.css']
 })
 export class UpdateResearcherComponent implements OnInit {
-  
+
   dataLoaded: Promise<boolean>;
-  public selectedResearcher:FFQResearchtResponse;
+  public selectedResearcher: FFQResearchtResponse;
   researchAttributes: FFQResearch;
   userPassword: string;
   limitNumberOfParticipants: number;
@@ -38,61 +38,61 @@ export class UpdateResearcherComponent implements OnInit {
     private modalService: NgbModal
   ) { }
 
-  ngOnInit() {     
+  ngOnInit() {
 
-    const UserID = this.route.snapshot.paramMap.get('id'); 
-          
-    var researcherResult: Observable<FFQResearchtResponse> = this.researcherService.getUserById(UserID);
-    
+    const UserID = this.route.snapshot.paramMap.get('id');
+
+    let researcherResult: Observable<FFQResearchtResponse> = this.researcherService.getUserById(UserID);
+
     researcherResult.subscribe(data => {
-      
-      this.selectedResearcher = data;        
+
+      this.selectedResearcher = data;
       this.researchAttributes = this.selectedResearcher;
       this.userPassword = this.researchAttributes.userpassword;
- 
-      var chosenResearchInstName: Observable<FFQResearchInstitutionResponse> = this.researchInstitutionService.getResearchInstitution(this.researchAttributes.AssignedResearchInstitutionId);
+
+      let chosenResearchInstName: Observable<FFQResearchInstitutionResponse> = this.researchInstitutionService.getResearchInstitution(this.researchAttributes.AssignedResearchInstitutionId);
 
       chosenResearchInstName.subscribe (inst => {
-        this.AssignedResearchInstitutionName = inst.institutionName;       
-      })
-      var researchInstitutionList: Observable<FFQResearchInstitutionResponse[]> = this.researchInstitutionService.getAllResearchInstitutions();
+        this.AssignedResearchInstitutionName = inst.institutionName;
+      });
+      let researchInstitutionList: Observable<FFQResearchInstitutionResponse[]> = this.researchInstitutionService.getAllResearchInstitutions();
       researchInstitutionList.subscribe(a => {
-      this.researchInstitutionList = a;   
-            
-      if(data != null && a != null)
-      { 
-        this.dataLoaded = Promise.resolve(true);       
-      }     
-    });  
-       
-    })   
-    
-  }  
+      this.researchInstitutionList = a;
+
+      if (data != null && a != null)
+      {
+        this.dataLoaded = Promise.resolve(true);
+      }
+    });
+
+    });
+
+  }
 
 
-  updateResearchInstitution() {   
+  updateResearchInstitution() {
 
-    var chosenResearchInstName: Observable<FFQResearchInstitutionResponse> = this.researchInstitutionService.getResearchInstitutionByName(this.AssignedResearchInstitutionName);
+    let chosenResearchInstName: Observable<FFQResearchInstitutionResponse> = this.researchInstitutionService.getResearchInstitutionByName(this.AssignedResearchInstitutionName);
 
     chosenResearchInstName.subscribe(inst => {
-      this.researchAttributes.AssignedResearchInstitutionId = inst.researchInstitutionId;      
+      this.researchAttributes.AssignedResearchInstitutionId = inst.researchInstitutionId;
 
-      this.researcherService.updateUser(<FFQResearchtResponse>this.researchAttributes).subscribe(
-        data => {        
-          this.router.navigateByUrl("/admin/research/users");
+      this.researcherService.updateUser(this.researchAttributes as FFQResearchtResponse).subscribe(
+        data => {
+          this.router.navigateByUrl('/admin/research/users');
           const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
           dialogRef.componentInstance.title = 'Researcher was successfully updated!';
         }
       );
-      
+
     });
 
- 
+
   }
 
   deleteResearcher() {
-    const confirmDelete = this.modalService.open(DeletePopupComponent);    
-    confirmDelete.componentInstance.service = "Researcher";
+    const confirmDelete = this.modalService.open(DeletePopupComponent);
+    confirmDelete.componentInstance.service = 'Researcher';
     confirmDelete.componentInstance.attributes = this.researchAttributes;
   }
 

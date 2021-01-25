@@ -11,19 +11,20 @@ export class FFQResearchtResponse {
   isactive: boolean;
   AssignedResearchInstitutionId: string;
   limitNumberOfParticipants: number;
+  prefix: string;
 
 
-  constructor(userId: string, username: string, userpassword: string, usertype:string, 
-  firstname: string, lastname: string, isactive: boolean, AssignedResearchInstitutionId: string, limitNumberOfParticipants: number) {
+  constructor(userId: string, username: string, userpassword: string, usertype: string, firstname: string, lastname: string, isactive: boolean, AssignedResearchInstitutionId: string, limitNumberOfParticipants: number, prefix: string) {
     this.userId = userId;
     this.username = username;
     this.userpassword = userpassword;
     this.usertype = usertype;
     this.firstname = firstname;
     this.lastname = lastname;
-     this.AssignedResearchInstitutionId = AssignedResearchInstitutionId;
+    this.AssignedResearchInstitutionId = AssignedResearchInstitutionId;
     this.limitNumberOfParticipants = limitNumberOfParticipants;
     this.isactive = isactive;
+    this.prefix = prefix;
 
   }
 

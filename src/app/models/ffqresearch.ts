@@ -1,4 +1,4 @@
-//Classed to store admin user data in components
+// Classed to store admin user data in components
 
 export class FFQResearch {
   id: string;
@@ -11,9 +11,10 @@ export class FFQResearch {
   isactive: boolean;
   AssignedResearchInstitutionId: string;
   limitNumberOfParticipants: number;
+  prefix: string;
 
 
-  constructor(userId: string, username: string, userpassword: string, usertype:string, firstname: string, lastname: string, isactive: boolean, AssignedResearchInstitutionId: string, limitNumberOfParticipants: number) {
+  constructor(userId: string, username: string, userpassword: string, usertype: string, firstname: string, lastname: string, isactive: boolean, AssignedResearchInstitutionId: string, limitNumberOfParticipants: number, prefix: string) {
     this.userId = userId;
     this.username = username;
     this.userpassword = userpassword;
@@ -23,7 +24,8 @@ export class FFQResearch {
     this.AssignedResearchInstitutionId = AssignedResearchInstitutionId;
     this.limitNumberOfParticipants = limitNumberOfParticipants;
     this.isactive = isactive;
-  
+    this.prefix = prefix;
+
   }
 
 }
