@@ -1,43 +1,43 @@
-import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { FFQItemResponse } from "../../models/ffqitem-response";
-import { Observable } from "rxjs";
-import { map, tap } from "rxjs/operators";
-import { FFQItemCalcRequest } from "../../models/ffqitem-calc-request";
-import { FFQFoodNutrientsResponse } from "src/app/models/ffqfoodnutrients-response";
-import { FFQFoodItem } from "src/app/models/ffqfooditem";
-import { ɵangular_packages_forms_forms_q } from "@angular/forms";
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { FFQItemResponse } from '../../models/ffqitem-response';
+import { Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
+import { FFQItemCalcRequest } from '../../models/ffqitem-calc-request';
+import { FFQFoodNutrientsResponse } from 'src/app/models/ffqfoodnutrients-response';
+import { FFQFoodItem } from 'src/app/models/ffqfooditem';
+import { ɵangular_packages_forms_forms_q } from '@angular/forms';
 import {
   Http,
   Headers,
   Response,
   RequestOptions,
   RequestMethod,
-} from "@angular/http";
-import { FFQFoodItemResponse } from "src/app/models/ffqfooditem-response";
-import { FFQAdminResponse } from "src/app/models/ffqadmin-response";
-import { FFQResearchtResponse } from "src/app/models/ffqresearch-response";
-import { environment } from "src/environments/environment";
+} from '@angular/http';
+import { FFQFoodItemResponse } from 'src/app/models/ffqfooditem-response';
+import { FFQAdminResponse } from 'src/app/models/ffqadmin-response';
+import { FFQResearchtResponse } from 'src/app/models/ffqresearch-response';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class ResearchService {
-  endpoint = environment.userServiceUrl + "/ffq/researchers";
+  endpoint = environment.userServiceUrl + '/ffq/researchers';
 
   constructor(private http: HttpClient) {}
 
   addResearcher(user: FFQResearchtResponse): Observable<any> {
     return this.http
-      .post(this.endpoint + "/createuser", user, {
-        headers: new HttpHeaders({ "Content-Type": "application/json" }),
+      .post(this.endpoint + '/createuser', user, {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       });
   }
 
   addMultipleResearchers(user: FFQResearchtResponse[]): Observable<any> {
     return this.http
-      .post(this.endpoint + "/createMany", user, {
-        headers: new HttpHeaders({ "Content-Type": "application/json" }),
+      .post(this.endpoint + '/createMany', user, {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       })
       .pipe(
         tap(
@@ -47,17 +47,17 @@ export class ResearchService {
       );
   }
 
-  //Still not implemented
+  // Still not implemented
   updateUser(user: FFQResearchtResponse): Observable<any> {
     return this.http
-      .put(this.endpoint + "/updateuser", user, {
-        headers: new HttpHeaders({ "Content-Type": "application/json" }),
+      .put(this.endpoint + '/updateuser', user, {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       });
   }
 
-  //To be implemented
+  // To be implemented
   getUser(userId: string): Observable<FFQResearchtResponse> {
-    return this.http.get(this.endpoint + "/users/" + userId).pipe(
+    return this.http.get(this.endpoint + '/users/' + userId).pipe(
       map((item: any) => {
         return new FFQResearchtResponse(
           item.userId,
@@ -68,15 +68,16 @@ export class ResearchService {
           item.lastname,
           item.isactive,
           item.AssignedResearchInstitutionId,
-          item.limitNumberOfParticipants
+          item.limitNumberOfParticipants,
+          item.prefix
         );
-      })     
+      })
     );
   }
 
-//To be implemented
+// To be implemented
   getUserById(userId: string): Observable<FFQResearchtResponse> {
-    return this.http.get(this.endpoint + "/" + userId).pipe(
+    return this.http.get(this.endpoint + '/' + userId).pipe(
       map((item: any) => {
         return new FFQResearchtResponse(
           item.userId,
@@ -87,15 +88,16 @@ export class ResearchService {
           item.lastname,
           item.isactive,
           item.AssignedResearchInstitutionId,
-          item.limitNumberOfParticipants
+          item.limitNumberOfParticipants,
+          item.prefix
         );
-      })     
+      })
     );
   }
 
   getAllUsers(): Observable<FFQResearchtResponse[]> {
     // getMongoUsers();
-    return this.http.get(this.endpoint + "/all").pipe(
+    return this.http.get(this.endpoint + '/all').pipe(
       map((res: any) => {
         return res.map((item) => {
           return new FFQResearchtResponse(
@@ -107,7 +109,8 @@ export class ResearchService {
             item.lastname,
             item.isactive,
             item.AssignedResearchInstitutionId,
-            item.limitNumberOfParticipants
+            item.limitNumberOfParticipants,
+            item.prefix
           );
         });
       })
@@ -116,8 +119,8 @@ export class ResearchService {
 
   /*DELETE: delete food item from the database */
   deleteItem(userId: string): Observable<any> {
-    return this.http.delete(this.endpoint + "/delete?userId=" + userId, {
-      responseType: "text",
+    return this.http.delete(this.endpoint + '/delete?userId=' + userId, {
+      responseType: 'text',
     });
   }
 }

@@ -18,8 +18,8 @@ import { FFQInstitution } from 'src/app/models/ffqinstitution';
 import { ResearchService } from 'src/app/services/research/research-service';
 import { FFQParentResponse } from 'src/app/models/ffqparent-response';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DeletePopupComponent } from "src/app/components/delete-popup/delete-popup.component";
-import { FFQResearchInstitutionResponse } from "src/app/models/ffqresearch-institution-response";
+import { DeletePopupComponent } from 'src/app/components/delete-popup/delete-popup.component';
+import { FFQResearchInstitutionResponse } from 'src/app/models/ffqresearch-institution-response';
 
 
 @Component({
@@ -32,8 +32,8 @@ export class AdminResearcherUserComponent implements OnInit {
   private routeSub: Subscription;
   private isNew: boolean;
   private isUpdate: boolean;
-  showMsg: boolean = false;
-  
+  showMsg = false;
+
   username: string;
   userpassword: string;
   firstname: string;
@@ -41,9 +41,10 @@ export class AdminResearcherUserComponent implements OnInit {
   limitNumberOfParticipants: number;
   AssignedResearchInstitutionName: string;
   AssignedResearchInstitutionId: string;
+  prefix: string;
 
- 
- 
+
+
   resultObjectList: Object[] = [];
 
   constructor(
@@ -57,66 +58,66 @@ export class AdminResearcherUserComponent implements OnInit {
     ) { }
 
   researchInstitutionList: FFQResearchInstitutionResponse[];
-  researcher: FFQResearchtResponse[] = []; 
+  researcher: FFQResearchtResponse[] = [];
   dataLoaded: Promise<boolean>;
   ffqresearcherUser: FFQResearchtResponse;
-  public ffqresearcherList: FFQResearch[] = []; 
-  public ffqresearchInstitutionSelected: FFQResearchInstitutionResponse; 
+  public ffqresearcherList: FFQResearch[] = [];
+  public ffqresearchInstitutionSelected: FFQResearchInstitutionResponse;
   researcherUserAttributes: FFQResearchtResponse;
-  newUserId:string;
-  
-  ngOnInit() { 
-      
-    var researchInstitutionList: Observable<FFQResearchInstitutionResponse[]> = this.researchInstitutionService.getAllResearchInstitutions();
-      researchInstitutionList.subscribe(a => {
-      this.researchInstitutionList = a;      
-    }); 
-    
-     
-    
+  newUserId: string;
+
+  ngOnInit() {
+
+    const researchInstitutionList: Observable<FFQResearchInstitutionResponse[]> = this.researchInstitutionService.getAllResearchInstitutions();
+    researchInstitutionList.subscribe(a => {
+      this.researchInstitutionList = a;
+    });
+
+
+
   }
 
-  addResearcherUser(form:NgForm){
+  addResearcherUser(form: NgForm){
 
-     var researcherList: Observable<FFQResearchtResponse[]> = this.researcherService.getAllUsers();  
-  
-      researcherList.subscribe(data => {
-         
-      //getting last element in the list 
-      var lastItem = data[data.length - 1]; 
-    
-      this.newUserId = (parseInt(lastItem.userId) + 1).toString()           
-      //Check if user does not exist in the DB before saving
-      //var researcherIdAlreadyExist = this.researcherService.getUser(this.newUserId);
-      //console.log("user found: ", researcherIdAlreadyExist);
-      
-          
-     var selectedResearchInst: Observable<FFQResearchInstitutionResponse> = 
-            this.researchInstitutionService.getResearchInstitutionByName(this.AssignedResearchInstitutionName);          
-      
-      selectedResearchInst.subscribe(data => {      
-      console.log(data);   
-          this.AssignedResearchInstitutionId = data.researchInstitutionId;
-     
-      this.ffqresearcherUser = new FFQResearchtResponse(this.newUserId, this.username, this.userpassword, "researcher",
-                this.firstname, this.lastname, true, this.AssignedResearchInstitutionId, this.limitNumberOfParticipants); 
-                    
-     console.log("object to be sent", this.ffqresearcherUser);
-     
-      this.researcherService.addResearcher(this.ffqresearcherUser).subscribe(data => { 
-              console.log("object created", data);
-              
-          this.router.navigateByUrl('/admin/research/users');
-          const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-          dialogRef.componentInstance.title = 'Researcher User: "' + this.ffqresearcherUser.firstname +  " " +
+     const researcherList: Observable<FFQResearchtResponse[]> = this.researcherService.getAllUsers();
+
+     researcherList.subscribe(data => {
+
+      // getting last element in the list
+      const lastItem = data[data.length - 1];
+      this.generatePassword();
+      this.newUserId = (parseInt(lastItem.userId) + 1).toString();
+      // Check if user does not exist in the DB before saving
+      // var researcherIdAlreadyExist = this.researcherService.getUser(this.newUserId);
+      // console.log("user found: ", researcherIdAlreadyExist);
+
+
+      const selectedResearchInst: Observable<FFQResearchInstitutionResponse> =
+            this.researchInstitutionService.getResearchInstitutionByName(this.AssignedResearchInstitutionName);
+
+      selectedResearchInst.subscribe(data => {
+      console.log(data);
+      this.AssignedResearchInstitutionId = data.researchInstitutionId;
+      this.prefix = this.prefix.replace(/\s/g, '');
+      this.ffqresearcherUser = new FFQResearchtResponse(this.newUserId, this.prefix + '_researcher' + this.newUserId , this.userpassword, 'researcher',
+                this.firstname, this.lastname, true, this.AssignedResearchInstitutionId, this.limitNumberOfParticipants, this.prefix);
+
+      console.log('object to be sent', this.ffqresearcherUser);
+
+      this.researcherService.addResearcher(this.ffqresearcherUser).subscribe(data => {
+              console.log('object created', data);
+
+              this.router.navigateByUrl('/admin/research/users');
+              const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+              dialogRef.componentInstance.title = 'Researcher User: "' + this.ffqresearcherUser.firstname +  ' ' +
           this.ffqresearcherUser.lastname + '" was added!';
       },
-      error =>{
+      error => {
           const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
           dialogRef.componentInstance.title = error.error.message;
-      });  
-      }); 
-      }); 
+      });
+      });
+      });
   }
 
   private getResearcherUserById(id: string)
@@ -131,22 +132,22 @@ export class AdminResearcherUserComponent implements OnInit {
 
   updateResearcherUser()
   {
-    this.researcherService.updateUser(<FFQResearchtResponse>this.ffqresearcherUser).subscribe(
+    this.researcherService.updateUser(this.ffqresearcherUser as FFQResearchtResponse).subscribe(
      data => {this.router.navigateByUrl('admin/research/users');
-     const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-     dialogRef.componentInstance.title = 'Research User successfully updated!';}
+              const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+              dialogRef.componentInstance.title = 'Research User successfully updated!'; }
 
     );
   }
 
   deleteResearchInstitution(){
     const confirmDelete = this.modalService.open(DeletePopupComponent);
-    confirmDelete.componentInstance.service = "researchers";
+    confirmDelete.componentInstance.service = 'researchers';
     confirmDelete.componentInstance.attributes = this.researcherUserAttributes;
   }
 
   generatePassword() {
-    this.userpassword = Math.random().toString(36).slice(-10);   
+    this.userpassword = Math.random().toString(36).slice(-10);
   }
 }
 
