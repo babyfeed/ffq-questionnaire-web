@@ -189,7 +189,7 @@ export class ResearchNewUserComponent implements OnInit {
       this.ffqParticipant = new FFQResearchParticipant('','',this.userPassword,'participant','','',this.selectedInstitution.researchInstitutionId,[this.loggedInUser[0].userId],[''],true);
     }
     else {
-      this.ffqParticipant = new FFQResearchParticipant('', this.prefix + this.suffix, this.userPassword,'participant','','',this.selectedInstitution.researchInstitutionId,[this.loggedInUser[0].userId],[''],true);
+      this.ffqParticipant = new FFQResearchParticipant('', this.prefix + '_' + this.suffix, this.userPassword,'participant','','',this.selectedInstitution.researchInstitutionId,[this.loggedInUser[0].userId],[''],true);
     }
     this.participantService.addParticipant(this.ffqParticipant).subscribe(participant  => {
         const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
@@ -229,7 +229,7 @@ export class ResearchNewUserComponent implements OnInit {
     this.data[4].password = 'Password';
     this.data[5].userName = '';
     this.data[5].password = '';
-    this.data[6].userName = this.prefix + this.suffix;
+    this.data[6].userName = this.prefix + '_' + this.suffix;
     this.data[6].password = this.userPassword;
   }
   dataLoopMultiple() {
@@ -266,17 +266,18 @@ export class ResearchNewUserComponent implements OnInit {
   addMultipleParticipants() {
     this.getSuffix();
     if (this.prefix === '') {
+      this.prefix = 'participant';
       for (let i = 0; i < this.usersQuantity; i++) {
         this.prefix = this.ffqinstitutionList[0].institutionName;
         this.generatePassword();
-        this.newParticipants.push(new FFQResearchParticipant('', this.prefix + this.suffix.toString(), this.userPassword, 'participant', '','', this.selectedInstitution.researchInstitutionId, [this.loggedInUser[0].userId], [''], true));
+        this.newParticipants.push(new FFQResearchParticipant('', this.prefix + '_' + this.suffix.toString(), this.userPassword, 'participant', '','', this.selectedInstitution.researchInstitutionId, [this.loggedInUser[0].userId], [''], true));
         this.suffix++;
       }
     }
     else {
     for (let i = 0; i < this.usersQuantity; i++) {
       this.generatePassword();
-      this.newParticipants.push(new FFQResearchParticipant('', this.prefix + this.suffix.toString(), this.userPassword, 'participant', '','', this.selectedInstitution.researchInstitutionId, [this.loggedInUser[0].userId], [''], true));
+      this.newParticipants.push(new FFQResearchParticipant('', this.prefix + '_' + this.suffix.toString(), this.userPassword, 'participant', '','', this.selectedInstitution.researchInstitutionId, [this.loggedInUser[0].userId], [''], true));
       this.suffix++;
     }}
 
