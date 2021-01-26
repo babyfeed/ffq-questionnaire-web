@@ -121,8 +121,6 @@ export class AdminResearcherUserComponent implements OnInit {
 
       this.researcherService.addResearcher(this.ffqresearcherUser).subscribe(data => {
               console.log('object created', data);
-
-              // this.router.navigateByUrl('/admin/research/users');
               const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
               dialogRef.componentInstance.title = 'Researcher User: "' + this.ffqresearcherUser.firstname +  ' ' +
           this.ffqresearcherUser.lastname + '" was added!';
