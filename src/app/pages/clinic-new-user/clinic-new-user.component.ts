@@ -112,11 +112,11 @@ export class ClinicNewUserComponent implements OnInit {
   countParents(){
     for (let i = 0; i < this.ffqparentList.length; i++){
     if (this.loggedInUser[0].userId === this.ffqparentList[i].assignedclinician){
-      this.limit --;
+      //this.limit --;
       this.numParents ++;
   }
-    if (this.limit <= 0){
-      this.limit = 0;
+    if (this.limit - this.numParents <= 0){
+      //this.limit = 0;
       this.noMoreRoom = true;
     }
   }}
