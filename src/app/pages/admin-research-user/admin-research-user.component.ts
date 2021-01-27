@@ -33,7 +33,7 @@ export class AdminResearcherUserComponent implements OnInit {
   private isNew: boolean;
   private isUpdate: boolean;
   showMsg = false;
-
+  dissabled = false;
   username: string;
   userpassword: string;
   firstname: string;
@@ -42,6 +42,21 @@ export class AdminResearcherUserComponent implements OnInit {
   AssignedResearchInstitutionName: string;
   AssignedResearchInstitutionId: string;
   prefix: string;
+  clinicianName: string;
+  data = [];
+  options = {
+    fieldSeparator: ',',
+    quoteStrings: '"',
+    decimalseparator: '.',
+    showLabels: false,
+    headers: [],
+    showTitle: true,
+    title: 'Researcher Login',
+    titles: 'User Info',
+    useBom: false,
+    removeNewLines: true,
+    keys: ['userName', 'password' ]
+  };
 
 
 
@@ -99,18 +114,18 @@ export class AdminResearcherUserComponent implements OnInit {
       console.log(data);
       this.AssignedResearchInstitutionId = data.researchInstitutionId;
       this.prefix = this.prefix.replace(/\s/g, '');
-      this.ffqresearcherUser = new FFQResearchtResponse(this.newUserId, this.prefix + '_researcher' + this.newUserId , this.userpassword, 'researcher',
+      this.ffqresearcherUser = new FFQResearchtResponse(this.newUserId, this.prefix + 'Researcher' + this.newUserId , this.userpassword, 'researcher',
                 this.firstname, this.lastname, true, this.AssignedResearchInstitutionId, this.limitNumberOfParticipants, this.prefix);
 
       console.log('object to be sent', this.ffqresearcherUser);
 
       this.researcherService.addResearcher(this.ffqresearcherUser).subscribe(data => {
               console.log('object created', data);
-
-              this.router.navigateByUrl('/admin/research/users');
               const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
               dialogRef.componentInstance.title = 'Researcher User: "' + this.ffqresearcherUser.firstname +  ' ' +
           this.ffqresearcherUser.lastname + '" was added!';
+              this.save2csvSingleResearcher();
+              this.dissabled = true;
       },
       error => {
           const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
@@ -119,7 +134,31 @@ export class AdminResearcherUserComponent implements OnInit {
       });
       });
   }
-
+  dataLoop(){
+    for (let i = 0; i < 6; i++){
+      this.data[i] = [
+        {
+          userName: '',
+          password: ''
+        },
+      ];
+    }
+  }
+  save2csvSingleResearcher() {
+    this.dataLoop();
+    this.data[0].userName = 'Assingned Research site: ';
+    this.data[0].password = this.AssignedResearchInstitutionName;
+    this.data[1].userName = 'Assingned Research site ID: ';
+    this.data[1].password = this.AssignedResearchInstitutionId;
+    this.data[2].userName = '';
+    this.data[2].password = '';
+    this.data[3].userName = 'User Name';
+    this.data[3].password = 'Password';
+    this.data[4].userName = '';
+    this.data[4].password = '';
+    this.data[5].userName = this.prefix + 'Researcher' + this.newUserId;
+    this.data[5].password = this.userpassword;
+  }
   private getResearcherUserById(id: string)
   {
       this.researcherService.getUser(id).subscribe(data => {

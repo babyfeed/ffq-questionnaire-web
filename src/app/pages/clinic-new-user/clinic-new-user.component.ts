@@ -183,12 +183,12 @@ export class ClinicNewUserComponent implements OnInit {
     this.generatePassword();
     if (this.prefix === '') {
       this.prefix = 'parent';
-      this.parentName = this.prefix.replace(/\s/g, '') + this.suffix.toString();
+      this.parentName = this.prefix.replace(/\s/g, '') + '_' + this.suffix.toString();
       this.ffqParent = new FFQParent('', '', this.userPassword, 'parent', '',
         '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true);
     }
     else {
-      this.parentName = this.prefix.replace(/\s/g, '') + this.suffix.toString();
+      this.parentName = this.prefix.replace(/\s/g, '') + '_' + this.suffix.toString();
       this.ffqParent = new FFQParent('', this.parentName, this.userPassword, 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true);
     }
     this.parentService.addParent(this.ffqParent).subscribe(parent  => {
@@ -269,7 +269,7 @@ export class ClinicNewUserComponent implements OnInit {
       for (let i = 0; i < this.usersQuantity; i++) {
         this.prefix = 'parent';
         this.generatePassword();
-        this.parentName = this.prefix.replace(/\s/g, '') + this.suffix.toString();
+        this.parentName = this.prefix.replace(/\s/g, '') + '_' + this.suffix.toString();
         this.newParents.push(new FFQParent('', this.parentName, this.userPassword, 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true));
         this.suffix++;
       }
@@ -277,7 +277,7 @@ export class ClinicNewUserComponent implements OnInit {
     else {
     for (let i = 0; i < this.usersQuantity; i++) {
       this.generatePassword();
-      this.parentName = this.prefix.replace(/\s/g, '') + this.suffix.toString();
+      this.parentName = this.prefix.replace(/\s/g, '') + '_' + this.suffix.toString();
       this.newParents.push(new FFQParent('', this.parentName, this.userPassword, 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true));
       this.suffix++;
     }}
