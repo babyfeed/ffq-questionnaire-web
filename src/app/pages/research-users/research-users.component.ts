@@ -86,7 +86,9 @@ export class ResearchUsersComponent implements OnInit {
     this.researchParentService.getAllParticipants(this.currentUser.AssignedResearchInstitutionId).subscribe(
       (data) => {
         data.map((response) => {
-          this.participants.push(response);
+          if (response.assignedResearcherUsers[0] === this.currentUser.userId) {
+            this.participants.push(response);
+          }
         });
         console.log(this.participants);
 
