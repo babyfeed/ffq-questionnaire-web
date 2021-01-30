@@ -72,6 +72,7 @@ export class ClinicalPortalComponent implements OnInit  {
   public currentClinicName: string;
 
   public UserList: User[];
+  public count: 0;
 
   ngOnInit() {
 
@@ -185,15 +186,15 @@ export class ClinicalPortalComponent implements OnInit  {
   }
 
   getNumberOfPatients(){
-
+    this.count = 0;
     this.clinicianList.forEach(clinician => {
-      var count = 0;
+
       this.parentList.forEach(parent => {
         if(parent.assignedclinician == clinician.userId){
-          count++;
+          this.count++;
         }
       });
-      this.numberOfPatients.push(count);
+      this.numberOfPatients.push(this.count);
       });
   }
 
