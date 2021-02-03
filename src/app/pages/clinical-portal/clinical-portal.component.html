@@ -15,15 +15,18 @@
         <!-- Clinicians starts here -->
 
         <div *ngIf="showClinicians">
-         <h5> <a [routerLink]="['/clinic/user/c', loggedInUser[0].userId]">{{loggedInUser[0].username}}</a></h5>
+          <label style="font-weight:bold"> Clinician </label>
+         <h5> </h5>
             <table class="table table-bordered table-inverse">
               <tr>
-                <th width="20%"> UserId </th>
+                <th width="20%"> Clinician UserName </th>
+                <th width="20%"> Clinician UserId </th>
                 <th width="20%"> Prefix </th>
                 <th width="20%"> Total Parent Limit </th>
                 <th width="20%"> Current number of Parents </th>
               </tr>
               <tr>
+                <td> <a [routerLink]="['/clinic/user/c', loggedInUser[0].userId]">{{loggedInUser[0].username}}</a> </td>
                 <td>{{ loggedInUser[0].userId }}</td>
                 <td>{{ loggedInUser[0].prefix }}</td>
                 <td>{{ loggedInUser[0].parentLimitForClinician }}</td>
@@ -48,9 +51,10 @@
 
             <table class="table table-bordered table-inverse">
                 <tr>
-                  <th width="25%"> Username </th>
-                  <th width="25%"> UserID </th>
-                  <th width="25%"> Assigned Clinician </th>
+                  <th width="20%"> Username </th>
+                  <th width="15%"> Parent UserID </th>
+                  <th width="20%"> Assigned Clinician </th>
+                  <th width="25%"> Assigned Clinician UserName</th>
                   <th width="25%"> Assigned Clinician UserID</th>
 
                 </tr>
@@ -61,7 +65,8 @@
                     <td><a [routerLink]="['/clinic/user/p', u.userId]"> {{ u.username }} </a></td>
                     <td> {{ u.userId }}</td>
                     <td> {{ clinicianNames[u.assignedclinician] }}</td>
-                    <td> {{ clinicianNames[u.username] }} </td>
+                    <td> {{ clinicianUserNames[u.assignedclinician] }}</td>
+                    <td> {{ u.assignedclinician }} </td>
                 </tr>
             </table>
 

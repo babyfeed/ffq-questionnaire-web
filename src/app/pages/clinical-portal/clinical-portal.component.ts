@@ -60,6 +60,7 @@ export class ClinicalPortalComponent implements OnInit  {
   ffqclinicList: FFQClinic[] = [];
   clinicNames: string[] = [];
   clinicianNames: string[] = [];
+  clinicianUserNames: string[] = [];
   numberOfPatients: number[] = [];
   public filtered_clinicians: String[] = [];
   public filtered: boolean;
@@ -79,6 +80,7 @@ export class ClinicalPortalComponent implements OnInit  {
     this.hideUnassignedParents = false;
     this.hideUnassignedClinicians = false;
     this.clinicianNames.push('');
+    this.clinicianUserNames.push('');
     this.getClinicId();
   }
 
@@ -191,6 +193,7 @@ export class ClinicalPortalComponent implements OnInit  {
       this.ffqclinicianList = a;
       for (let i = 0; i < a.length; i++) {
         this.clinicianNames.push(a[i].abbreviation + ' ' + a[i].firstname + ' ' + a[i].lastname);
+        this.clinicianUserNames.push(a[i].username);
       }
     });
   }
