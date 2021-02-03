@@ -185,11 +185,11 @@ export class ClinicNewUserComponent implements OnInit {
       this.prefix = 'parent';
       this.parentName = this.prefix.replace(/\s/g, '') + '_' + this.suffix.toString();
       this.ffqParent = new FFQParent('', '', this.userPassword, 'parent', '',
-        '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true);
+        '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true, this.prefix);
     }
     else {
       this.parentName = this.prefix.replace(/\s/g, '') + '_' + this.suffix.toString();
-      this.ffqParent = new FFQParent('', this.parentName, this.userPassword, 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true);
+      this.ffqParent = new FFQParent('', this.parentName, this.userPassword, 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true, this.loggedInUser[0].prefix);
     }
     this.parentService.addParent(this.ffqParent).subscribe(parent  => {
         const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
@@ -270,7 +270,7 @@ export class ClinicNewUserComponent implements OnInit {
         this.prefix = 'parent';
         this.generatePassword();
         this.parentName = this.prefix.replace(/\s/g, '') + '_' + this.suffix.toString();
-        this.newParents.push(new FFQParent('', this.parentName, this.userPassword, 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true));
+        this.newParents.push(new FFQParent('', this.parentName, this.userPassword, 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true, this.prefix));
         this.suffix++;
       }
     }
@@ -278,7 +278,7 @@ export class ClinicNewUserComponent implements OnInit {
     for (let i = 0; i < this.usersQuantity; i++) {
       this.generatePassword();
       this.parentName = this.prefix.replace(/\s/g, '') + '_' + this.suffix.toString();
-      this.newParents.push(new FFQParent('', this.parentName, this.userPassword, 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true));
+      this.newParents.push(new FFQParent('', this.parentName, this.userPassword, 'parent', '', '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true, this.prefix));
       this.suffix++;
     }}
 

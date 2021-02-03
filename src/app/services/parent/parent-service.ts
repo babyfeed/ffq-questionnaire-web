@@ -42,7 +42,8 @@ export class ParentService {
           item.assignedclinic,
           item.assignedclinician,
           item.childrennames,
-          item.isactive
+          item.isactive,
+          item.prefix
         );
       })
     );
@@ -62,7 +63,8 @@ export class ParentService {
             item.assignedclinic,
             item.assignedclinician,
             item.childrennames,
-            item.isactive
+            item.isactive,
+            item.prefix
           );
         });
       })
