@@ -15,10 +15,11 @@ export class FFQParentResponse {
   assignedclinician: string;
   childrennames: any;
   isactive: boolean;
+  prefix: string;
 
 
-  constructor(userId: string, username: string, userpassword: string, usertype:string, firstname: string, 
-              lastname: string, assignedclinic: string, assignedclinician: string, childrennames: any, isactive: boolean) {
+  constructor(userId: string, username: string, userpassword: string, usertype:string, firstname: string,
+              lastname: string, assignedclinic: string, assignedclinician: string, childrennames: any, isactive: boolean, prefix: string) {
     this.userId = userId;
     this.username = username;
     this.userpassword = userpassword;
@@ -29,6 +30,7 @@ export class FFQParentResponse {
     this.assignedclinician = assignedclinician;
     this.childrennames = childrennames;
     this.isactive = isactive;
+    this.prefix = prefix;
   }
 
 }
