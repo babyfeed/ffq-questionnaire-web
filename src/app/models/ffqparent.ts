@@ -15,7 +15,7 @@ export class FFQParent {
   prefix: string;
 
 
-  constructor(userId: string, username: string, userpassword: string, usertype:string, firstname: string,
+  constructor(userId: string, username: string, userpassword: string, usertype: string, firstname: string,
               lastname: string, assignedclinic: string, assignedclinician: string, childrennames: any, isactive: boolean, prefix: string) {
     this.userId = userId;
     this.username = username;
