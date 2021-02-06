@@ -17,6 +17,8 @@ import {skipWhile, take} from 'rxjs/operators';
 import {FFQParentResponse} from '../../models/ffqparent-response';
 import {FFQClinicResponse} from "../../models/ffqclinic-response";
 
+//hello
+
 @Component({
   selector: 'app-clinic-new-user',
   templateUrl: './clinic-new-user.component.html',
