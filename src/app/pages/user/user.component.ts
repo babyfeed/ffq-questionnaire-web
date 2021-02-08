@@ -279,7 +279,6 @@ export class UserComponent implements OnInit {
   userNameCreator(){
     for (let i = 0; i <= this.ffqclinicianList.length - 1; i++){
       if (this.prefix === this.ffqclinicianList[i].prefix && this.ffqclinicianList[i].assignedclinic === this.selectedClinic){
-        console.log('prefix its good, its for same clinic');
         this.toStrip = this.prefix + '_Clinician';
         this.newNumber = parseInt(this.ffqclinicianList[i].username.replace(this.toStrip, ''), 10);
         if (this.newNumber > this.max){
@@ -288,13 +287,11 @@ export class UserComponent implements OnInit {
         this.newPrefix = false;
       }
       else if (this.ffqclinicianList[i].assignedclinic !== this.selectedClinic && this.prefix === this.ffqclinicianList[i].prefix) {
-        console.log('this prefix is already assigned to another clinic' + i);
         this.found = true;
         break;
       }
       else if (this.ffqclinicianList.length - 1 === i && this.newPrefix == undefined){
         this.newPrefix = true;
-        console.log('prefix its good, it doesn\'t exists');
         this.clinicianName = this.prefix + '_Clinician1';
         this.newNumber = 1;
         break;
@@ -327,7 +324,7 @@ export class UserComponent implements OnInit {
     if (this.found){
       const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
       this.router.navigateByUrl('/admin/users');
-      dialogRef.componentInstance.title = 'this prefix is already in use by another clinic';
+      dialogRef.componentInstance.title = 'This prefix is already in use by another Clinic';
     }
   }
 
@@ -396,7 +393,7 @@ export class UserComponent implements OnInit {
     if (this.found){
       const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
       this.router.navigateByUrl('/admin/users');
-      dialogRef.componentInstance.title = 'this prefix is already in use by another clinic';
+      dialogRef.componentInstance.title = 'This prefix is already in use by another Clinic';
     }
   }
 
