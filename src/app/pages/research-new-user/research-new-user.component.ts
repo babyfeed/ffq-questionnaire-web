@@ -109,14 +109,12 @@ export class ResearchNewUserComponent implements OnInit {
   countParticipants(){
     for (let i = 0; i < this.ffqparticipantList.length; i++){
     if (this.loggedInUser[0].userId === this.ffqparticipantList[i].assignedResearcherUsers[0]){
-      this.limit --;
       this.numParticipants ++;
   }
-    if (this.limit <= 0){
-      this.limit = 0;
+    if (this.limit - this.numParticipants <= 0){
       this.noMoreRoom = true;
     }
-    // console.log(this.data[0].userName);
+
   }}
   addUser() {
     switch (this.userType) {
@@ -283,7 +281,7 @@ export class ResearchNewUserComponent implements OnInit {
 
     this.participantService.addMultipleParticipants(this.newParticipants).subscribe(researchers => {
         const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-        dialogRef.componentInstance.title = 'Users<br/>' + researchers.map(researcher => researcher.username).join('<br/>') + '<br/>were added!';
+        dialogRef.componentInstance.title = this.usersQuantity + ' users were added.';
         console.log(this.newParticipants[0].username);
         this.save2csvMultipleParticipant();
         this.dissabled = true;
