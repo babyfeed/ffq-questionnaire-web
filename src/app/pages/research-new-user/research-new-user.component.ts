@@ -281,7 +281,7 @@ export class ResearchNewUserComponent implements OnInit {
 
     this.participantService.addMultipleParticipants(this.newParticipants).subscribe(researchers => {
         const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-        dialogRef.componentInstance.title = 'Users<br/>' + researchers.map(researcher => researcher.username).join('<br/>') + '<br/>were added!';
+        dialogRef.componentInstance.title = this.usersQuantity + ' users were added.';
         console.log(this.newParticipants[0].username);
         this.save2csvMultipleParticipant();
         this.dissabled = true;
