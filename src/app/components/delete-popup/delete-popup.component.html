@@ -2,6 +2,7 @@
     <div *ngIf="isClinician"><h4 class="modal-title">Delete Clinician</h4></div>
     <div *ngIf="isParent"><h4 class="modal-title">Delete Parent</h4></div>
     <div *ngIf="isClinic"><h4 class="modal-title">Delete Clinic</h4></div>
+    <div *ngIf="isQuestionnaire"><h4 class="modal-title">Delete Questionnaire</h4></div>
     <button type="button" class="close" aria-label="Close" (click)="onDismiss('Cross click')">
         <span aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i></span>
     </button>
@@ -12,6 +13,7 @@
     <div *ngIf="isClinic">Are you sure you want to delete this clinic?</div>
     <div *ngIf="isResearch">Are you sure you want to delete this researcher?</div>
     <div *ngIf="isResearch_institution">Are you sure you want to delete this research institution?</div>
+    <div *ngIf="isQuestionnaire">Are you sure you want to delete this result?</div>
 </div>
 <div class="modal-footer">
     <button class="btn btn-primary" type="button" (click)="onDismiss('Close click')">Cancel</button>

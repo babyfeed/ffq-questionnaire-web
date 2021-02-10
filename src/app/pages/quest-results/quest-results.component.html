@@ -61,12 +61,17 @@
 
 
                             <div class="col-12 offset-10">
-                                <button mat-raised-button [hidden]="results[i].show" (click)="toggle(i)">
-                  <i class="fa fa-plus-square-o"></i> Results
-                </button>
+                                <button mat-raised-button  [hidden]="results[i].show" (click)="toggle(i)">
+                                  <i class="fa fa-plus-square-o"></i> Results
+                                </button>
+
                                 <button mat-raised-button [hidden]="!results[i].show" (click)="toggle(i)">
-                  <i class="fa fa-minus-square-o"></i> Results
-                </button>
+                                  <i class="fa fa-minus-square-o"></i> Results
+                                </button>
+
+                                <button mat-raised-button class="btn btn-danger" (click)="deleteQuestionnaire(result.questionnaireId)">
+                                  Delete
+                                </button>
                             </div>
                         </div>
 
