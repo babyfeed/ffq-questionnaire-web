@@ -1,51 +1,57 @@
-import { Component, OnInit } from "@angular/core";
-import { ResultsService } from "src/app/services/results/results";
-import { FFQResultsResponse } from "src/app/models/ffqresultsresponse";
-import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { ResultsService } from 'src/app/services/results/results';
+import { FFQResultsResponse } from 'src/app/models/ffqresultsresponse';
 import {Observable} from 'rxjs';
-import {map, tap} from 'rxjs/operators';
 import { NutrientConstants } from 'src/app/models/NutrientConstants';
-// import { RecommendComponent } from '../recommend/recommend.component'
 
-///////////added imports from recommend.component.ts/////////////////////
+
+/////////// added imports from recommend.component.ts/////////////////////
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RecommendModalComponent } from 'src/app/components/recommend-modal/recommend-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { NutrientsRecommendationsService } from 'src/app/services/nutrients-recommendations/nutrients-recommendations.service';
-import { FFQNutrientsRecommendations } from 'src/app/models/ffqnutrients-recommendations';
 import { ErrorDialogPopupComponent } from 'src/app/components/error-dialog-popup/error-dialog-popup.component';
 import { Router } from '@angular/router';
 import { FoodRecommendModalComponent } from 'src/app/components/food-recommend-modal/food-recommend-modal.component';
 import { FoodRecommendationsService } from 'src/app/services/food-recommendation-service/food-recommendations.service';
 import { FoodDescriptionService } from 'src/app/services/food-description/food-description.service';
+import {DeletePopupComponent} from '../../components/delete-popup/delete-popup.component';
 
 // Questionnaire reesults page added by Daykel Muro 09/30/2019
 @Component({
-  selector: "app-quest-results",
-  templateUrl: "./quest-results.component.html",
-  styleUrls: ["./quest-results.component.css"]
+  selector: 'app-quest-results',
+  templateUrl: './quest-results.component.html',
+  styleUrls: ['./quest-results.component.css']
 })
 export class QuestResultsComponent implements OnInit {
-  public show: boolean = false;
-  public showFeedback: boolean = false;
+  public show = false;
+  public showFeedback = false;
 
   results: FFQResultsResponse[] = [];
+  questionnaireId: string;
 
-  constructor(public resultsService: ResultsService,////////////////////////////////////////
+  constructor(public resultsService: ResultsService, ////////////////////////////////////////
               public nutrientsRecommendationsService: NutrientsRecommendationsService,
               public foodRecommendationsService: FoodRecommendationsService,
               public foodDescriptionService: FoodDescriptionService,
               private modalService: NgbModal,
               private errorDialog: MatDialog,
               private router: Router) {}
+  userAttributes: FFQResultsResponse[];
+  toDelete: Observable<FFQResultsResponse[]>;
+  dataLoaded: Promise<boolean>;
 
   ngOnInit() {
     this.getAllResults();
   }
 
-  //(Khalid)Changed below code to sort the list in the nutient view page
+  // (Khalid)Changed below code to sort the list in the nutient view page
   private getAllResults() {
+
+    this.resultsService.getAllResults().subscribe(data => {
+      this.userAttributes = data;
+    });
+    this.dataLoaded = Promise.resolve(true);
     const oldList: Observable<FFQResultsResponse[]> = this.resultsService.getAllResults();
     const reqList: string[] = NutrientConstants.NUTRIENT_NAMES;
 
@@ -61,18 +67,29 @@ export class QuestResultsComponent implements OnInit {
        reqList.forEach(a =>  {
            newWeeklyMap.set(a, weeklyMap[a]);
            newDailyMap.set(a, dailyMap[a]);
-       })
+       });
 
        element.weeklyTotals = newWeeklyMap;
        element.dailyAverages = newDailyMap;
-       })
+       });
 
-       this.results = m.reverse();
+      this.results = m.reverse();
     }
 
-   )
+   );
 
  }
+  deleteQuestionnaire(questionnaireId: string){
+    for (let item of this.userAttributes) {
+      if (item.questionnaireId == questionnaireId)
+      {
+        const confirmDelete = this.modalService.open(DeletePopupComponent);
+        confirmDelete.componentInstance.service = 'Questionnaire';
+        confirmDelete.componentInstance.attributes = item;
+        break;
+      }
+    }
+  }
 
   private returnZero(){
     return 0;

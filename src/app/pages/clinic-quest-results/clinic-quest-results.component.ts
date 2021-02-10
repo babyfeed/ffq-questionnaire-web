@@ -181,7 +181,7 @@ private getResultsList(){
    allResultsObservable.subscribe((allResults: FFQResultsResponse[]) => {
       this.parentList.forEach(parent => {
           allResults.forEach(result => {
-              if (result.userId === parent.userId && parent.assignedclinician === this.loggedInUser[0].userId){
+              if (result.userId === parent.userId && parent.prefix === this.loggedInUser[0].prefix){
                 this.resultList.push(result);
                 let parentName = parent.firstname + ' ' + parent.lastname;
                 this.parentNames.push(parentName);
