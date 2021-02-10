@@ -29,32 +29,33 @@ import { ResearchInstitutionService } from 'src/app/services/research-institutio
 })
 export class AdminResearchUsersComponent implements OnInit {
   private showParticipants: boolean;
-  private showResearchers: boolean;   
+  showResearchers: boolean;
 
-  search: string;
+  searchResearcher: string;
+  searchResearchInstitution: string;
 
-  constructor(    
-    public authenticationService: AuthenticationService,  
-      
+  constructor(
+    public authenticationService: AuthenticationService,
+
     public researcherService: ResearchService,
     public researchInstitutionService: ResearchInstitutionService,
   ) {}
-  
+
   public filtered: boolean;
   public filtered_researchInst: String[] = [];
   checked_users: string[] = [];
   public researcherUserNames: string[] =[];
   ResearchInstNames: string[] = [];
   researchInstitutionList: FFQResearchInstitutionResponse[];
-  researcherList: FFQResearchtResponse[] = []; 
+  researcherList: FFQResearchtResponse[] = [];
   researchInstitutionLenght: Number;
 
-  ngOnInit() {   
+  ngOnInit() {
     this.showParticipants = true;
-    this.showResearchers = true;    
+    this.showResearchers = true;
     this.filtered = false;
-    
-    this.loadAllUsers(); 
+
+    this.loadAllUsers();
   }
 
 //participants
@@ -65,7 +66,7 @@ export class AdminResearchUsersComponent implements OnInit {
 //researchers
   toggleResearcherUsers() {
     this.showResearchers = !this.showResearchers;
-  } 
+  }
 
 
 //filterby research Institution
@@ -85,9 +86,9 @@ export class AdminResearchUsersComponent implements OnInit {
 
   /* Loads all users from the databases and pushes them into their respective lists to be displayed */
   private loadAllUsers() {
-      
+
     var researchInstList: Observable<
-    FFQResearchInstitutionResponse[]> = 
+    FFQResearchInstitutionResponse[]> =
     this.researchInstitutionService.getAllResearchInstitutions();
     researchInstList.subscribe((data) => {
         this.researchInstitutionList = data;
@@ -96,12 +97,12 @@ export class AdminResearchUsersComponent implements OnInit {
         this.researchInstitutionLenght = data.length;
       });
     });
-     
+
     var researcherUserList: Observable<
     FFQResearchtResponse[]> = this.researcherService.getAllUsers();
      researcherUserList.subscribe((data) => {
         this.researcherList = data;
-        
+
         for(var i = 0; i < data.length; i++)
       {
         this.researcherUserNames.push(data[i].firstname + " " + data[i].lastname);
