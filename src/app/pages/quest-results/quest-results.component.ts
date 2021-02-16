@@ -1,14 +1,6 @@
-<<<<<<< Updated upstream
-import { Component, OnInit } from '@angular/core';
-import { ResultsService } from 'src/app/services/results/results';
-import { FFQResultsResponse } from 'src/app/models/ffqresultsresponse';
-=======
 import { Component, OnInit } from "@angular/core";
 import { ResultsService } from "src/app/services/results/results.service";
 import { FFQResultsResponse } from "src/app/models/ffqresultsresponse";
-import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
->>>>>>> Stashed changes
 import {Observable} from 'rxjs';
 import { NutrientConstants } from 'src/app/models/NutrientConstants';
 
