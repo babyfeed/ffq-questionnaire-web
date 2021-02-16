@@ -91,4 +91,8 @@ export class ResultsService {
           feedback: feedback
         });
       }
+
+  deleteItemsByParentId(parentId: string): Observable<any> {
+    return this.http.delete(this.endpoint + "/delete?parentId=" + parentId, {responseType: 'text'})
+  }
   }
