@@ -7,24 +7,6 @@
 
 */
 
-<<<<<<< Updated upstream
-import { Component, Input, OnInit } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
-import { ErrorDialogPopupComponent } from '../error-dialog-popup/error-dialog-popup.component';
-import { FFQClinicianResponse } from 'src/app/models/ffqclinician-response';
-import { ClinicianService } from 'src/app/services/clinician/clinician-service';
-import { ParentService } from 'src/app/services/parent/parent-service';
-import { ClinicService } from 'src/app/services/clinic/clinic-service';
-import { FFQClinicResponse } from 'src/app/models/ffqclinic-response';
-import {ResearchService} from 'src/app/services/research/research-service';
-import {ResearchInstitutionService} from 'src/app/services/research-institution-service/research-institution-service';
-import {FFQResearchtResponse} from 'src/app/models/ffqresearch-response';
-import {FFQInstitutionResponse} from 'src/app/models/ffqinstitution-response';
-import {FFQResultsResponse} from '../../models/ffqresultsresponse';
-import {ResultsService} from '../../services/results/results';
-=======
 import { Component, Input, OnInit } from "@angular/core";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { Router } from "@angular/router";
@@ -39,9 +21,9 @@ import {ResearchService} from "src/app/services/research/research-service";
 import {ResearchInstitutionService} from "src/app/services/research-institution-service/research-institution-service"
 import {FFQResearchtResponse} from "src/app/models/ffqresearch-response";
 import {FFQInstitutionResponse} from "src/app/models/ffqinstitution-response";
+import {FFQResultsResponse} from '../../models/ffqresultsresponse';
 import {combineLatest} from "rxjs";
 import {ResultsService} from "../../services/results/results.service";
->>>>>>> Stashed changes
 
 
 @Component({
@@ -77,7 +59,6 @@ export class DeletePopupComponent implements OnInit {
     private errorDialog: MatDialog,
     public clinicianService: ClinicianService,
     public parentService: ParentService,
-    public resultsService: ResultsService,
     public clinicService: ClinicService,
     public researchService: ResearchService,
     public researchInstitutionService: ResearchInstitutionService,
@@ -97,20 +78,12 @@ export class DeletePopupComponent implements OnInit {
             'Clinician ' + userName + ' was deleted';
         });
     } else if (this.isParent) {
-<<<<<<< Updated upstream
       let userName = (this.attributes as FFQClinicianResponse).username;
-      this.parentService
-        .deleteItem((this.attributes as FFQClinicianResponse).userId)
-        .subscribe((user) => {
-          this.router.navigateByUrl('/admin/users');
-=======
-      var userName = (<FFQClinicianResponse>this.attributes).username;
       combineLatest([this.parentService
         .deletePatient((<FFQClinicianResponse>this.attributes).userId),
         this.resultsService.deleteItemsByParentId((<FFQClinicianResponse>this.attributes).userId)])
         .subscribe(([user, results]) => {
           this.router.navigateByUrl("/admin/users");
->>>>>>> Stashed changes
           const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
           dialogRef.componentInstance.title =
             'Parent ' + userName + ' was deleted';
@@ -139,11 +112,7 @@ export class DeletePopupComponent implements OnInit {
     }
     else if (this.isResearch_institution) {
 
-<<<<<<< Updated upstream
       let researchInstitutionName = (this.attributes as FFQInstitutionResponse).institutionName;
-=======
-      var researchInstitutionName = (<FFQInstitutionResponse>this.attributes).institutionName;
->>>>>>> Stashed changes
 
       this.researchInstitutionService
         .deleteItem((this.attributes as FFQInstitutionResponse).researchInstitutionId)
@@ -154,7 +123,6 @@ export class DeletePopupComponent implements OnInit {
             'Research Institution: ' + researchInstitutionName + ' was deleted';
         });
     }
-<<<<<<< Updated upstream
     else if (this.isQuestionnaire){
       const questionnaireId = (this.attributes as FFQResultsResponse).questionnaireId;
 
@@ -169,10 +137,6 @@ export class DeletePopupComponent implements OnInit {
     }
 
     this.activeModal.close('closed');
-=======
-
-    this.activeModal.close("closed");
->>>>>>> Stashed changes
   }
 
   onDismiss(reason: String): void {
