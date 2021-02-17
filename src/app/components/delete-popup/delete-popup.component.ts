@@ -43,6 +43,7 @@ export class DeletePopupComponent implements OnInit {
   isResearch = false;
   isResearch_institution = false;
   isQuestionnaire = false;
+  hidden = true;
 
   ngOnInit() {
     if (this.service == 'Clinician') { this.isClinician = true; }
@@ -125,17 +126,15 @@ export class DeletePopupComponent implements OnInit {
     }
     else if (this.isQuestionnaire){
       const questionnaireId = (this.attributes as FFQResultsResponse).questionnaireId;
-
       this.resultsService.
         deleteItem(questionnaireId)
-          .subscribe((data) => {
-            this.router.navigateByUrl('/admin/users');
+          .subscribe(() => {
             const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
             dialogRef.componentInstance.title =
               'Result ' + questionnaireId + ' was deleted';
+            window.location.reload();
           });
     }
-
     this.activeModal.close('closed');
   }
 

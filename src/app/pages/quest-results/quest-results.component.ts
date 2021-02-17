@@ -26,7 +26,6 @@ import {DeletePopupComponent} from '../../components/delete-popup/delete-popup.c
 export class QuestResultsComponent implements OnInit {
   public show = false;
   public showFeedback = false;
-
   results: FFQResultsResponse[] = [];
   questionnaireId: string;
 
@@ -37,9 +36,6 @@ export class QuestResultsComponent implements OnInit {
               private modalService: NgbModal,
               private errorDialog: MatDialog,
               private router: Router) {}
-  userAttributes: FFQResultsResponse[];
-  toDelete: Observable<FFQResultsResponse[]>;
-  dataLoaded: Promise<boolean>;
 
   ngOnInit() {
     this.getAllResults();
@@ -47,11 +43,6 @@ export class QuestResultsComponent implements OnInit {
 
   // (Khalid)Changed below code to sort the list in the nutient view page
   private getAllResults() {
-
-    this.resultsService.getAllResults().subscribe(data => {
-      this.userAttributes = data;
-    });
-    this.dataLoaded = Promise.resolve(true);
     const oldList: Observable<FFQResultsResponse[]> = this.resultsService.getAllResults();
     const reqList: string[] = NutrientConstants.NUTRIENT_NAMES;
 
@@ -60,7 +51,6 @@ export class QuestResultsComponent implements OnInit {
       m.forEach(element => {
        const newWeeklyMap = new Map<string, number>();
        const newDailyMap = new Map<string, number>();
-
        const weeklyMap = element.weeklyTotals;
        const dailyMap = element.dailyAverages;
 
@@ -77,10 +67,9 @@ export class QuestResultsComponent implements OnInit {
     }
 
    );
-
  }
   deleteQuestionnaire(questionnaireId: string){
-    for (let item of this.userAttributes) {
+    for (let item of this.results) {
       if (item.questionnaireId == questionnaireId)
       {
         const confirmDelete = this.modalService.open(DeletePopupComponent);
