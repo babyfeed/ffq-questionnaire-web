@@ -39,7 +39,8 @@ export class AdminUsersComponent implements OnInit {
   private showAdmins: boolean;
   private showResearch: boolean;
 
-  search: string;
+  searchClinicians: string;
+  searchClinics: string;
 
   constructor(
     public parentService: ParentService,
