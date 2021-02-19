@@ -11,6 +11,11 @@
 
     <div class="container mt-3">
       <span> {{ ffqclinicList.length }} {{ ffqclinicList.length | i18nPlural: {'=1': 'clinic', 'other': 'clinics'} }} </span>
+      <div style="margin-bottom: 15px">
+        <input style="width: 25%; display: inline-block;  margin-left: 5px;" placeholder="Search..." type="text" class="form-control"
+               name="search" [(ngModel)]="searchClinics"/>
+      </div>
+
       <table class="table table-bordered table-inverse">
         <tr>
           <th width="20"> Clinic Name </th>
@@ -20,7 +25,7 @@
           <th width="13.5%"> No. of Clinicians </th>
           <th width="12.5%"> No. of Parents </th>
         </tr>
-        <tr *ngFor="let c of ffqclinicList; index as i">
+        <tr *ngFor="let c of ffqclinicList | searchFilter: searchClinics; index as i">
           <td><a [routerLink]="['/admin/clinic/', c.clinicId]"> {{ c.clinicname }} </a></td>
           <td> {{ clinicianNames[c.headclinician] }}</td>
           <td> {{ c.address }} </td>
@@ -34,7 +39,7 @@
         <span>{{ ffqclinicianList.length + ffqparentList.length }} user(s)</span>
         <div>
             <input style="width: 25%; display: inline-block;  margin-left: 5px;" placeholder="Search..." type="text" class="form-control"
-                name="search" [(ngModel)]="search"/>
+                name="search" [(ngModel)]="searchClinicians"/>
             <span style="color:gray; margin-left: 20px; margin-right: 20px; font-size: x-large;"> | </span>
             <mat-checkbox (change)="toggleParents()" [checked]="true" color="primary"> Show Parents </mat-checkbox>
             <span style="color:gray; margin-left: 20px; margin-right: 20px; font-size: x-large;"> | </span>
@@ -57,19 +62,19 @@
                 <th width="60%"> Clinic </th>
 
             </tr>
-            <tr *ngFor="let u of ffqclinicianList | searchFilter: search; index as i" [hidden]="!showClinicians || (filtered && filtered_clinics.indexOf(clinicNames[u.assignedclinic]) === -1)">
+            <tr *ngFor="let u of ffqclinicianList | searchFilter: searchClinicians; index as i" [hidden]="!showClinicians || (filtered && filtered_clinics.indexOf(clinicNames[u.assignedclinic]) === -1)">
                 <td><a [routerLink]="['/admin/user/c', u.userId]"> {{ u.username }} </a></td>
                 <td> Clinician </td>
                 <td> {{ clinicNames[u.assignedclinic] }} </td>
 
             </tr>
-            <tr *ngFor="let u of ffqparentList | searchFilter: search; index as i" [hidden]="!showParents || (filtered && filtered_clinics.indexOf(clinicNames[u.assignedclinic]) === -1)">
+            <tr *ngFor="let u of ffqparentList | searchFilter: searchClinicians; index as i" [hidden]="!showParents || (filtered && filtered_clinics.indexOf(clinicNames[u.assignedclinic]) === -1)">
                 <td><a [routerLink]="['/admin/user/p', u.userId]"> {{ u.username }} </a></td>
                 <td> Parent </td>
                 <td> {{ clinicNames[u.assignedclinic] }} </td>
 
             </tr>
-            <tr *ngFor="let u of ffqadminList | searchFilter: search; index as i" [hidden]="!showAdmins">
+            <tr *ngFor="let u of ffqadminList | searchFilter: searchClinicians; index as i" [hidden]="!showAdmins">
                 <td> {{ u.username }} </td>
                 <td> Admin </td>
 
