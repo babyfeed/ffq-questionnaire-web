@@ -184,10 +184,10 @@ export class ResearchNewUserComponent implements OnInit {
     this.generatePassword();
     if (this.prefix === '') {
       this.prefix = 'participant';
-      this.ffqParticipant = new FFQResearchParticipant('','',this.userPassword,'participant','','',this.selectedInstitution.researchInstitutionId,[this.loggedInUser[0].userId],[''],true);
+      this.ffqParticipant = new FFQResearchParticipant('','',this.userPassword,'participant','','',this.selectedInstitution.researchInstitutionId,[this.loggedInUser[0].userId],[''],true, this.prefix);
     }
     else {
-      this.ffqParticipant = new FFQResearchParticipant('', this.prefix + '_' + this.suffix, this.userPassword,'participant','','',this.selectedInstitution.researchInstitutionId,[this.loggedInUser[0].userId],[''],true);
+      this.ffqParticipant = new FFQResearchParticipant('', this.prefix + '_' + this.suffix, this.userPassword,'participant','','',this.selectedInstitution.researchInstitutionId,[this.loggedInUser[0].userId],[''],true, this.prefix);
     }
     this.participantService.addParticipant(this.ffqParticipant).subscribe(participant  => {
         const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
@@ -268,14 +268,14 @@ export class ResearchNewUserComponent implements OnInit {
       for (let i = 0; i < this.usersQuantity; i++) {
         this.prefix = this.ffqinstitutionList[0].institutionName;
         this.generatePassword();
-        this.newParticipants.push(new FFQResearchParticipant('', this.prefix + '_' + this.suffix.toString(), this.userPassword, 'participant', '','', this.selectedInstitution.researchInstitutionId, [this.loggedInUser[0].userId], [''], true));
+        this.newParticipants.push(new FFQResearchParticipant('', this.prefix + '_' + this.suffix.toString(), this.userPassword, 'participant', '','', this.selectedInstitution.researchInstitutionId, [this.loggedInUser[0].userId], [''], true, this.prefix));
         this.suffix++;
       }
     }
     else {
     for (let i = 0; i < this.usersQuantity; i++) {
       this.generatePassword();
-      this.newParticipants.push(new FFQResearchParticipant('', this.prefix + '_' + this.suffix.toString(), this.userPassword, 'participant', '','', this.selectedInstitution.researchInstitutionId, [this.loggedInUser[0].userId], [''], true));
+      this.newParticipants.push(new FFQResearchParticipant('', this.prefix + '_' + this.suffix.toString(), this.userPassword, 'participant', '','', this.selectedInstitution.researchInstitutionId, [this.loggedInUser[0].userId], [''], true, this.prefix));
       this.suffix++;
     }}
 
