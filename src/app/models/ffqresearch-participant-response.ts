@@ -15,9 +15,10 @@ export class FFQParticipantResponse {
   assignedResearcherUsers: string[];
   childrennames: string[];
   isactive: boolean;
+  prefix: string;
 
 
-  constructor(userId: string, username: string, userpassword: string, usertype: string, firstname: string, lastname: string, assignedResearcherInst: string, assignedResearcherUsers: string[], childrennames: string[], isactive: boolean){
+  constructor(userId: string, username: string, userpassword: string, usertype: string, firstname: string, lastname: string, assignedResearcherInst: string, assignedResearcherUsers: string[], childrennames: string[], isactive: boolean, prefix: string){
     this.userId = userId;
     this.username = username;
     this.userpassword = userpassword;
@@ -28,6 +29,7 @@ export class FFQParticipantResponse {
     this.assignedResearcherUsers = assignedResearcherUsers;
     this.childrennames = childrennames;
     this.isactive = isactive;
+	this.prefix = prefix;
   }
 
 }
