@@ -20,6 +20,7 @@ import { FFQParentResponse } from 'src/app/models/ffqparent-response';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DeletePopupComponent } from 'src/app/components/delete-popup/delete-popup.component';
 import { FFQResearchInstitutionResponse } from 'src/app/models/ffqresearch-institution-response';
+import {FFQClinicianResponse} from '../../models/ffqclinician-response';
 
 
 @Component({
@@ -28,21 +29,22 @@ import { FFQResearchInstitutionResponse } from 'src/app/models/ffqresearch-insti
   styleUrls: ['./admin-research-user.component.css']
 })
 export class AdminResearcherUserComponent implements OnInit {
-
-  private routeSub: Subscription;
-  private isNew: boolean;
-  private isUpdate: boolean;
   showMsg = false;
   dissabled = false;
   username: string;
   userpassword: string;
   firstname: string;
   lastname: string;
+  found: boolean;
+  newPrefix: boolean;
+  max = 0;
+  newNumber: number;
+  toStrip: string;
   limitNumberOfParticipants: number;
   AssignedResearchInstitutionName: string;
   AssignedResearchInstitutionId: string;
   prefix: string;
-  clinicianName: string;
+  researcherName: string;
   data = [];
   options = {
     fieldSeparator: ',',
@@ -58,10 +60,6 @@ export class AdminResearcherUserComponent implements OnInit {
     keys: ['userName', 'password' ]
   };
 
-
-
-  resultObjectList: Object[] = [];
-
   constructor(
     public researcherService: ResearchService,
     public researchInstitutionService: ResearchInstitutionService,
@@ -71,68 +69,94 @@ export class AdminResearcherUserComponent implements OnInit {
     private modalService: NgbModal
 
     ) { }
-
   researchInstitutionList: FFQResearchInstitutionResponse[];
   researcher: FFQResearchtResponse[] = [];
   dataLoaded: Promise<boolean>;
   ffqresearcherUser: FFQResearchtResponse;
   public ffqresearcherList: FFQResearch[] = [];
+  public ffqresearcList: FFQResearch[] = [];
   public ffqresearchInstitutionSelected: FFQResearchInstitutionResponse;
   researcherUserAttributes: FFQResearchtResponse;
   newUserId: string;
+  institutionName: string[] = [];
+  institutionIds: Map<string, string> = new Map<string, string>();
+  researchInstitutionId: string;
 
   ngOnInit() {
-
     const researchInstitutionList: Observable<FFQResearchInstitutionResponse[]> = this.researchInstitutionService.getAllResearchInstitutions();
-    researchInstitutionList.subscribe(a => {
-      this.researchInstitutionList = a;
+    researchInstitutionList.subscribe(institutionList => {
+      this.researchInstitutionList = institutionList;
+      institutionList.forEach(institution => {
+        this.institutionIds.set(institution.researchInstitutionId, institution.institutionName);
+        this.institutionName.push(institution.institutionName);
+      });
     });
 
-
-
+    const researchList: Observable<FFQResearchtResponse[]> = this.researcherService.getAllUsers();
+    researchList.subscribe(a => {
+      this.ffqresearcList = a;
+    });
   }
 
-  addResearcherUser(form: NgForm){
-
+  userNameCreator(){
+    this.prefix = this.prefix.replace(/\s/g, '');
+    for (let i = 0; i <= this.ffqresearcList.length - 1; i++){
+      if (this.prefix === this.ffqresearcList[i].prefix && this.ffqresearcList[i].AssignedResearchInstitutionId === this.AssignedResearchInstitutionId){
+        this.toStrip = this.prefix + '_Researcher';
+        this.newNumber = parseInt(this.ffqresearcList[i].username.replace(this.toStrip, ''), 10);
+        if (this.newNumber > this.max){
+          this.max = this.newNumber;
+        }
+        this.newPrefix = false;
+      }
+      else if (this.ffqresearcList[i].AssignedResearchInstitutionId !== this.AssignedResearchInstitutionId && this.prefix === this.ffqresearcList[i].prefix) {
+        this.found = true;
+        break;
+      }
+      else if (this.ffqresearcList.length - 1 === i && this.newPrefix === undefined){
+        this.newPrefix = true;
+        this.researcherName = this.prefix + '_Researcher1';
+        this.newNumber = 1;
+        break;
+      }
+    }
+  }
+  addResearcherUser(form: NgForm) {
      const researcherList: Observable<FFQResearchtResponse[]> = this.researcherService.getAllUsers();
-
      researcherList.subscribe(data => {
+       const lastItem = data[data.length - 1];
+       this.userNameCreator();
 
-      // getting last element in the list
-      const lastItem = data[data.length - 1];
-      this.generatePassword();
-      this.newUserId = (parseInt(lastItem.userId) + 1).toString();
-      // Check if user does not exist in the DB before saving
-      // var researcherIdAlreadyExist = this.researcherService.getUser(this.newUserId);
-      // console.log("user found: ", researcherIdAlreadyExist);
+       if (!this.found) {
+         this.generatePassword();
+         this.newUserId = (parseInt(lastItem.userId, 10) + 1).toString();
 
+         if (!this.newPrefix) {
+           this.max++;
+           this.researcherName = this.toStrip.replace(/\s/g, '') + (this.max).toString();
+         }
+         this.ffqresearcherUser = new FFQResearchtResponse(this.newUserId, this.researcherName, this.userpassword,
+           'researcher', this.firstname, this.lastname, true, this.AssignedResearchInstitutionId,
+           this.limitNumberOfParticipants, this.prefix);
 
-      const selectedResearchInst: Observable<FFQResearchInstitutionResponse> =
-            this.researchInstitutionService.getResearchInstitutionByName(this.AssignedResearchInstitutionName);
-
-      selectedResearchInst.subscribe(data => {
-      console.log(data);
-      this.AssignedResearchInstitutionId = data.researchInstitutionId;
-      this.prefix = this.prefix.replace(/\s/g, '');
-      this.ffqresearcherUser = new FFQResearchtResponse(this.newUserId, this.prefix + 'Researcher' + this.newUserId , this.userpassword, 'researcher',
-                this.firstname, this.lastname, true, this.AssignedResearchInstitutionId, this.limitNumberOfParticipants, this.prefix);
-
-      console.log('object to be sent', this.ffqresearcherUser);
-
-      this.researcherService.addResearcher(this.ffqresearcherUser).subscribe(data => {
-              console.log('object created', data);
-              const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-              dialogRef.componentInstance.title = 'Researcher User: "' + this.ffqresearcherUser.firstname +  ' ' +
-          this.ffqresearcherUser.lastname + '" was added!';
-              this.save2csvSingleResearcher();
-              this.dissabled = true;
-      },
-      error => {
-          const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-          dialogRef.componentInstance.title = error.error.message;
-      });
-      });
-      });
+         this.researcherService.addResearcher(this.ffqresearcherUser).subscribe(data => {
+             const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+             dialogRef.componentInstance.title = 'Researcher User: "' + this.ffqresearcherUser.firstname + ' ' +
+               this.ffqresearcherUser.lastname + '" was added!';
+             this.save2csvSingleResearcher();
+             this.dissabled = true;
+           },
+           error => {
+             const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+             dialogRef.componentInstance.title = error.error.message;
+           });
+       }
+       if (this.found) {
+         const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+         this.router.navigateByUrl('/admin/research/users');
+         dialogRef.componentInstance.title = 'This prefix is already in use by another Research Institution';
+       }
+     });
   }
   dataLoop(){
     for (let i = 0; i < 6; i++){
@@ -146,6 +170,12 @@ export class AdminResearcherUserComponent implements OnInit {
   }
   save2csvSingleResearcher() {
     this.dataLoop();
+    this.researchInstitutionList.forEach(item => {
+      if (this.AssignedResearchInstitutionId === item.researchInstitutionId)
+      {
+        this.AssignedResearchInstitutionName = item.institutionName;
+      }
+    });
     this.data[0].userName = 'Assingned Research site: ';
     this.data[0].password = this.AssignedResearchInstitutionName;
     this.data[1].userName = 'Assingned Research site ID: ';
@@ -156,7 +186,7 @@ export class AdminResearcherUserComponent implements OnInit {
     this.data[3].password = 'Password';
     this.data[4].userName = '';
     this.data[4].password = '';
-    this.data[5].userName = this.prefix + 'Researcher' + this.newUserId;
+    this.data[5].userName = this.researcherName;
     this.data[5].password = this.userpassword;
   }
   private getResearcherUserById(id: string)
