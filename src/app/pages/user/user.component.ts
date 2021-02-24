@@ -186,17 +186,17 @@ export class UserComponent implements OnInit {
       }
     }
 
-    for (let i = 0; i < this.ffqclinicianList.length; i++){
-      if (this.clinicId === this.ffqclinicianList[i].assignedclinic){
+    this.ffqclinicianList.forEach(item => {
+      if (this.clinicId === item.assignedclinic){
         this.numClinician += 1;
       }
-    }
+    });
 
-    for (let i = 0; i < this.ffqparentList.length; i++){
-      if (this.clinicId === this.ffqparentList[i].assignedclinic){
+    this.ffqparentList.forEach(item => {
+      if (this.clinicId === item.assignedclinic){
         this.numParents += 1;
       }
-    }
+    });
     if ((this.cliniciansLimit === 0) || (this.numClinician > this.cliniciansLimit) ){
       this.able2AddClinicians = 0;
     }
@@ -210,14 +210,6 @@ export class UserComponent implements OnInit {
       this.able2AddParents = this.parentsLimit - this.numParents;
     }
   }
-
-  getSuffix(){
-    if (this.ffqclinicianList.length === 0){
-      this.suffix = 1;
-    } else {
-      this.lastUserId = this.ffqclinicianList[this.ffqclinicianList.length - 1].userId;
-      this.suffix = parseInt(this.lastUserId, 10) + 1;
-    }}
 
   addUser() {
 
@@ -290,7 +282,7 @@ export class UserComponent implements OnInit {
         this.found = true;
         break;
       }
-      else if (this.ffqclinicianList.length - 1 === i && this.newPrefix == undefined){
+      else if (this.ffqclinicianList.length - 1 === i && this.newPrefix === undefined){
         this.newPrefix = true;
         this.clinicianName = this.prefix + '_Clinician1';
         this.newNumber = 1;
