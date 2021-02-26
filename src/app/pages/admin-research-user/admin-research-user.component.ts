@@ -45,6 +45,7 @@ export class AdminResearcherUserComponent implements OnInit {
   AssignedResearchInstitutionId: string;
   prefix: string;
   researcherName: string;
+  noUsers: boolean;
   data = [];
   options = {
     fieldSeparator: ',',
@@ -68,7 +69,7 @@ export class AdminResearcherUserComponent implements OnInit {
     private route: ActivatedRoute,
     private modalService: NgbModal
 
-    ) { }
+  ) { }
   researchInstitutionList: FFQResearchInstitutionResponse[];
   researcher: FFQResearchtResponse[] = [];
   dataLoaded: Promise<boolean>;
@@ -122,41 +123,52 @@ export class AdminResearcherUserComponent implements OnInit {
     }
   }
   addResearcherUser(form: NgForm) {
-     const researcherList: Observable<FFQResearchtResponse[]> = this.researcherService.getAllUsers();
-     researcherList.subscribe(data => {
-       const lastItem = data[data.length - 1];
-       this.userNameCreator();
+    if (this.ffqresearcList.length === 0){
+      this.generatePassword();
+      this.researcherName = this.prefix + '_Researcher1';
+      this.ffqresearcherUser = new FFQResearchtResponse('1', this.researcherName, this.userpassword,
+        'researcher', this.firstname, this.lastname, true, this.AssignedResearchInstitutionId,
+        this.limitNumberOfParticipants, this.prefix);
+      this.noUsers = true;
+    }
+    const researcherList: Observable<FFQResearchtResponse[]> = this.researcherService.getAllUsers();
+    researcherList.subscribe(data => {
+      if (!this.noUsers) {
+        const lastItem = data[data.length - 1];
+        this.userNameCreator();
 
-       if (!this.found) {
-         this.generatePassword();
-         this.newUserId = (parseInt(lastItem.userId, 10) + 1).toString();
+        if (!this.found) {
+          this.generatePassword();
+          this.newUserId = (parseInt(lastItem.userId, 10) + 1).toString();
 
-         if (!this.newPrefix) {
-           this.max++;
-           this.researcherName = this.toStrip.replace(/\s/g, '') + (this.max).toString();
-         }
-         this.ffqresearcherUser = new FFQResearchtResponse(this.newUserId, this.researcherName, this.userpassword,
-           'researcher', this.firstname, this.lastname, true, this.AssignedResearchInstitutionId,
-           this.limitNumberOfParticipants, this.prefix);
-
-         this.researcherService.addResearcher(this.ffqresearcherUser).subscribe(data => {
-             const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-             dialogRef.componentInstance.title = 'Researcher User: "' + this.ffqresearcherUser.firstname + ' ' +
-               this.ffqresearcherUser.lastname + '" was added!';
-             this.save2csvSingleResearcher();
-             this.dissabled = true;
-           },
-           error => {
-             const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-             dialogRef.componentInstance.title = error.error.message;
-           });
-       }
-       if (this.found) {
-         const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-         this.router.navigateByUrl('/admin/research/users');
-         dialogRef.componentInstance.title = 'This prefix is already in use by another Research Institution';
-       }
-     });
+          if (!this.newPrefix) {
+            this.max++;
+            this.researcherName = this.toStrip.replace(/\s/g, '') + (this.max).toString();
+          }
+          this.ffqresearcherUser = new FFQResearchtResponse(this.newUserId, this.researcherName, this.userpassword,
+            'researcher', this.firstname, this.lastname, true, this.AssignedResearchInstitutionId,
+            this.limitNumberOfParticipants, this.prefix);
+        }
+      }
+      if (!this.found || this.noUsers) {
+        this.researcherService.addResearcher(this.ffqresearcherUser).subscribe(data => {
+            const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+            dialogRef.componentInstance.title = 'Researcher User: "' + this.ffqresearcherUser.firstname + ' ' +
+              this.ffqresearcherUser.lastname + '" was added!';
+            this.save2csvSingleResearcher();
+            this.dissabled = true;
+          },
+          error => {
+            const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+            dialogRef.componentInstance.title = error.error.message;
+          });
+      }
+      if (this.found) {
+        const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+        this.router.navigateByUrl('/admin/research/users');
+        dialogRef.componentInstance.title = 'This prefix is already in use by another Research Institution';
+      }
+    });
   }
   dataLoop(){
     for (let i = 0; i < 6; i++){
@@ -191,10 +203,10 @@ export class AdminResearcherUserComponent implements OnInit {
   }
   private getResearcherUserById(id: string)
   {
-      this.researcherService.getUser(id).subscribe(data => {
-       this.researcherUserAttributes = data;
-      });
-      this.dataLoaded = Promise.resolve(true);
+    this.researcherService.getUser(id).subscribe(data => {
+      this.researcherUserAttributes = data;
+    });
+    this.dataLoaded = Promise.resolve(true);
   }
 
 
@@ -202,9 +214,9 @@ export class AdminResearcherUserComponent implements OnInit {
   updateResearcherUser()
   {
     this.researcherService.updateUser(this.ffqresearcherUser as FFQResearchtResponse).subscribe(
-     data => {this.router.navigateByUrl('admin/research/users');
-              const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-              dialogRef.componentInstance.title = 'Research User successfully updated!'; }
+      data => {this.router.navigateByUrl('admin/research/users');
+               const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+               dialogRef.componentInstance.title = 'Research User successfully updated!'; }
 
     );
   }
@@ -219,7 +231,3 @@ export class AdminResearcherUserComponent implements OnInit {
     this.userpassword = Math.random().toString(36).slice(-10);
   }
 }
-
-
-
-
