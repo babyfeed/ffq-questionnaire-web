@@ -55,11 +55,12 @@ export class UserComponent implements OnInit {
   userType: Usertype;
   userTypes = Usertype;
   ffqParent: FFQParent;
+  ffqclinician: FFQClinician;
   public ffqclinicList$: Observable<FFQClinic[]>;
   public ffqclinicianList$: Observable<FFQClinician[]>;
   usersQuantity = 1;
   userId: string;
-  lastUserId;
+  noUsers: boolean;
   suffix;
   found: boolean;
   newPrefix: boolean;
@@ -97,7 +98,7 @@ export class UserComponent implements OnInit {
     private modalService: NgbModal
 
 
-    ) {
+  ) {
     this.ffqclinicList$ = this.clinicService.getAllClinics();
     this.ffqclinicianList$ = this.clinicianService.getAllClinicians();
 
@@ -106,7 +107,7 @@ export class UserComponent implements OnInit {
   userAttributes: FFQClinician | FFQParent;
   dataLoaded: Promise<boolean>;
 
-  ffqclinician: FFQClinician;
+  // ffqclinician: FFQClinician;
   amountToAdd: number;
   isParent: boolean;
   isClinician: boolean;
@@ -292,28 +293,37 @@ export class UserComponent implements OnInit {
   }
   addClinician() {
     this.generatePasswordCreation();
-    this.userNameCreator();
-    if (!this.found){
-      if (!this.newPrefix) {
-        this.max++;
-        this.clinicianName = this.toStrip.replace(/\s/g, '') + (this.max).toString();
-      }
-      const ffqclinician = new FFQClinician('', this.clinicianName, this.userPassword, '', '', '',
+    if (this.ffqclinicianList.length === 0) {
+      this.clinicianName = this.prefix + '_Clinician1';
+      this.ffqclinician = new FFQClinician('', this.clinicianName, this.userPassword, '', '', '',
         this.selectedClinic, [], true, this.parentLimitForClinician, this.prefix);
-
-      this.clinicianService.addClinician(ffqclinician).subscribe(clinician => {
-        const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-        dialogRef.componentInstance.title = clinician.username + ' was added!';
-        this.save2csvSingleClinician();
-        this.dissabled = true;
-      },
-      error => {
-        const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-        dialogRef.componentInstance.title = error.error.message;
-      });
+      this.noUsers = true;
+    }
+    if (!this.noUsers) {
+      this.userNameCreator();
+      if (!this.found) {
+        if (!this.newPrefix) {
+          this.max++;
+          this.clinicianName = this.toStrip.replace(/\s/g, '') + (this.max).toString();
+        }
+        this.ffqclinician = new FFQClinician('', this.clinicianName, this.userPassword, '', '', '',
+          this.selectedClinic, [], true, this.parentLimitForClinician, this.prefix);
+      }
+    }
+    if (!this.found || this.noUsers) {
+      this.clinicianService.addClinician(this.ffqclinician).subscribe(clinician => {
+          const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+          dialogRef.componentInstance.title = clinician.username + ' was added!';
+          this.save2csvSingleClinician();
+          this.dissabled = true;
+        },
+        error => {
+          const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+          dialogRef.componentInstance.title = error.error.message;
+        });
       this.isProcessing = false;
-  }
-    if (this.found){
+    }
+    if (this.found) {
       const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
       this.router.navigateByUrl('/admin/users');
       dialogRef.componentInstance.title = 'This prefix is already in use by another Clinic';
@@ -350,28 +360,42 @@ export class UserComponent implements OnInit {
   }
 
   addMultipleClinicians() {
-    this.userNameCreator();
-    if (!this.found) {
+    if (this.ffqclinicianList.length === 0) {
+      this.clinicianName = this.prefix + '_Clinician1';
+      this.toStrip = this.prefix + '_Clinician';
       for (let i = 0; i < this.usersQuantity; i++) {
-        if (!this.newPrefix) {
-          this.max += 1;
-          this.clinicianName = this.toStrip + (this.max).toString();
-      }
-        if (this.newPrefix){
-          if (this.newNumber >= 2){
-            this.toStrip = this.prefix + '_Clinician';
-            this.newNumber = parseInt(this.clinicianName.replace(this.toStrip, ''), 10) + 1;
-            this.clinicianName = this.toStrip + (this.newNumber).toString();
-          }
-          this.newNumber += 1;
-        }
         this.generatePasswordCreation();
         this.newClinicians.push(new FFQClinician('', this.clinicianName, this.userPassword, '', '',
           '', this.selectedClinic, [], true, this.parentLimitForClinician, this.prefix));
+        this.newNumber = parseInt(this.clinicianName.replace(this.toStrip, ''), 10) + 1;
+        this.clinicianName = this.toStrip + this.newNumber.toString();
       }
-
+      this.noUsers = true;
+    }
+    if (!this.noUsers) {
+      this.userNameCreator();
+      if (!this.found) {
+        for (let i = 0; i < this.usersQuantity; i++) {
+          if (!this.newPrefix) {
+            this.max += 1;
+            this.clinicianName = this.toStrip + (this.max).toString();
+          }
+          if (this.newPrefix) {
+            if (this.newNumber >= 2) {
+              this.toStrip = this.prefix + '_Clinician';
+              this.newNumber = parseInt(this.clinicianName.replace(this.toStrip, ''), 10) + 1;
+              this.clinicianName = this.toStrip + (this.newNumber).toString();
+            }
+            this.newNumber += 1;
+          }
+          this.generatePasswordCreation();
+          this.newClinicians.push(new FFQClinician('', this.clinicianName, this.userPassword, '', '',
+            '', this.selectedClinic, [], true, this.parentLimitForClinician, this.prefix));
+        }
+      }
+    }
+    if (!this.found || this.noUsers) {
       this.clinicianService.addMultipleClinicians(this.newClinicians).subscribe(clinicians => {
-          // this.router.navigateByUrl('/admin/users');
           const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
           dialogRef.componentInstance.title = clinicians.map(clinician => clinician.username).join('<br/>') + '<br/>were added!';
           this.save2csvMultipleClinician();
@@ -382,7 +406,7 @@ export class UserComponent implements OnInit {
           dialogRef.componentInstance.title = error.error.message;
         });
     }
-    if (this.found){
+    if (this.found) {
       const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
       this.router.navigateByUrl('/admin/users');
       dialogRef.componentInstance.title = 'This prefix is already in use by another Clinic';
@@ -423,7 +447,7 @@ export class UserComponent implements OnInit {
       });
   }
 
-   addMultipleParents() {
+  addMultipleParents() {
     const newParents = [];
     for (let i = 0; i < this.usersQuantity; i++) {
       newParents.push(new FFQParent('', '', '', 'parent', '', '',
@@ -464,7 +488,7 @@ export class UserComponent implements OnInit {
   {
     this.isParent = true;
     this.parentService.getParent(id).subscribe(data => {
-       this.userAttributes = data;
+      this.userAttributes = data;
     });
     this.dataLoaded = Promise.resolve(true);
   }
@@ -493,9 +517,9 @@ export class UserComponent implements OnInit {
   updateParent()
   {
     this.parentService.updateParent(this.userAttributes as FFQParentResponse).subscribe(
-     data => {this.router.navigateByUrl('/admin/users');
-              const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-              dialogRef.componentInstance.title = 'Parent successfully updated!'; }
+      data => {this.router.navigateByUrl('/admin/users');
+        const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+        dialogRef.componentInstance.title = 'Parent successfully updated!'; }
     );
   }
 
@@ -540,4 +564,3 @@ export class UserComponent implements OnInit {
     this.userAttributes.userpassword = Math.random().toString(36).slice(-10);
   }
 }
-
