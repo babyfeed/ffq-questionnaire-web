@@ -25,9 +25,9 @@
           <hr>
           <table class="table table-bordered table-inverse" [hidden]="!clicked">
             <tr>
-              <th width="16.66%"> No. of Parents </th>
+              <th width="16.66%"> No. of Parents in Clinic </th>
               <th width="16.66%"> Can add this many more </th>
-              <th width="16.66%"> Total Parent Limit </th>
+              <th width="16.66%"> Total Parent Limit for Clinic</th>
             </tr>
             <tr >
               <td>{{ numParents }}</td>
@@ -49,7 +49,7 @@
             <div class="form-group col-12" [hidden]="!clicked">
               <label style="font-weight: bold" [hidden]="noMoreRoom">Select Quantity:</label>
               <br>
-              <input [(ngModel)]="usersQuantity" [hidden]="noMoreRoom" type="number" id="parent_quantity" name="quantity" min="1" max={{limit}} style="margin-bottom: 10px">
+              <input [(ngModel)]="usersQuantity" [hidden]="noMoreRoom" type="number" id="parent_quantity" name="quantity" min="1" max={{newLimit}} style="margin-bottom: 10px">
               <h5 align="center" class="container frame-fooditem" [hidden]="!noMoreRoom"> No room to add more parents, contact admin to request increase</h5>
               <br>
               <hr>
