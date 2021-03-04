@@ -125,7 +125,7 @@ export class ClinicComponent implements OnInit, OnDestroy {
   }
 
   updateClinic() {
-    this.clinicService.updateClinic(<FFQClinicResponse>this.clinicAttributes).subscribe(
+    this.clinicService.updateClinic(<FFQClinicResponse> this.clinicAttributes).subscribe(
       data => {
         this.router.navigateByUrl('/admin/users');
         const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);

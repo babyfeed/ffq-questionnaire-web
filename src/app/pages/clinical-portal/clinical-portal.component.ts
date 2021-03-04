@@ -41,6 +41,8 @@ export class ClinicalPortalComponent implements OnInit  {
   p_search: string;
   c_search: string;
   loggedInUser = this.authenticationService.currentUserValue;
+  private clinicParentLimit: number;
+  private countDifPrefix: 0;
 
   constructor(
     public parentService: ParentService,
@@ -156,13 +158,14 @@ export class ClinicalPortalComponent implements OnInit  {
             this.clinicianList.push(clinician);
           }
         });
-        this.getNumberOfPatients();
+        // this.getNumberOfPatients();
         this.getClinicianNames();
         this.getClinics();
       });
   }
 
   getParents(){
+    this.count = 0;
     const parentListObservable: Observable<FFQParentResponse[]> = this.parentService.getAllParents();
 
     parentListObservable.subscribe(parentList => {
@@ -170,22 +173,26 @@ export class ClinicalPortalComponent implements OnInit  {
         if (parent.assignedclinic === this.clinicId && parent.prefix === this.loggedInUser[0].prefix){
           this.parentList.push(parent);
         }
+        if (parent.assignedclinic === this.loggedInUser[0].assignedclinic){
+          this.count++;
+        }
       });
       this.loadData();
     });
   }
 
-  getNumberOfPatients(){
-    this.count = 0;
-    this.clinicianList.forEach(clinician => {
-      this.parentList.forEach(parent => {
-        if (parent.assignedclinician === clinician.userId && clinician.userId === this.loggedInUser[0].userId ){
-          this.count++;
-        }
-      });
-      this.numberOfPatients.push(this.count);
-      });
-  }
+  // getNumberOfPatients(){
+  //   this.count = 0;
+  //   // this.clinicianList.forEach(clinician => {
+  //   this.parentList.forEach(parent => {
+  //       // if (parent.assignedclinic === clinician.assignedclinic && clinician.assignedclinic === this.loggedInUser[0].assignedclinic ){
+  //       if (parent.assignedclinic == this.loggedInUser[0].assignedclinic ){
+  //         this.count++;
+  //       }
+  //     });
+  //   this.numberOfPatients.push(this.count);
+  //     // });
+  // }
 
   getClinicianNames(){
     const clinicianList: Observable<FFQClinicianResponse[]> = this.clinicianService.getAllClinicians();
@@ -204,13 +211,14 @@ export class ClinicalPortalComponent implements OnInit  {
     const loggedInUser = this.authenticationService.currentUserValue;
 
     let clinicId: string;
-
     clinicListObervable.subscribe(clinicList => {
       clinicList.forEach(clinic => {
         if (clinic.clinicId === this.clinicId) {
           this.clinicList.push(clinic);
         }
-
+        if (clinic.clinicId === this.loggedInUser[0].assignedclinic){
+          this.clinicParentLimit = clinic.parentsLimit;
+        }
       });
 
     });
