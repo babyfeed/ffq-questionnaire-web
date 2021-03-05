@@ -62,7 +62,7 @@ export class ResearchUsersComponent implements OnInit {
 
   ngOnInit() {
     this.findAllParticipants();
-    this.getInstitutionById(this.currentUser.AssignedResearchInstitutionId);
+    this.getInstitutionById(this.currentUser.assignedResearchInstitutionId);
   }
 
   onOpenCreateParticipantModal(): void {
@@ -83,7 +83,7 @@ export class ResearchUsersComponent implements OnInit {
   }
 
   private findAllParticipants() {
-    this.researchParentService.getAllParticipants(this.currentUser.AssignedResearchInstitutionId).subscribe(
+    this.researchParentService.getAllParticipants(this.currentUser.assignedResearchInstitutionId).subscribe(
       (data) => {
         data.map((response) => {
           if (response.assignedResearcherUsers[0] === this.currentUser.userId) {

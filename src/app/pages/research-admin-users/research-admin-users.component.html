@@ -56,11 +56,11 @@
 
             </tr>
             <tr *ngFor="let u of researcherList | searchFilter: searchResearcher; index as i"
-                [hidden]="!showResearchers || (filtered && filtered_researchInst.indexOf(ResearchInstNames[u.AssignedResearchInstitutionId -1]) === -1)">
+                [hidden]="!showResearchers || (filtered && filtered_researchInst.indexOf(ResearchInstNames[u.assignedResearchInstitutionId -1]) === -1)">
                 <td><a [routerLink]="['/admin/researcher/user/', u.userId]"> {{ u.username }} </a></td>
                 <td> {{ u.firstname}} </td>
                 <td> {{ u.lastname }} </td>
-                <td> {{ ResearchInstNames[u.AssignedResearchInstitutionId -1] }} </td>
+                <td> {{ ResearchInstNames[u.assignedResearchInstitutionId -1] }} </td>
                 <td> {{ u.limitNumberOfParticipants }} </td>
             </tr>
         </table>

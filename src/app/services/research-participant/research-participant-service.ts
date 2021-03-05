@@ -22,7 +22,7 @@ export class ResearcherParticipantService {
   constructor(private http: HttpClient) { }
 
   addParent(user : FFQResearchParticipant): Observable<any> {
-    user.assignedResearcherInst = this.currentUser.AssignedResearchInstitutionId;
+    user.assignedResearcherInst = this.currentUser.assignedResearchInstitutionId;
     user.assignedResearcherUsers.push(this.currentUser.userId);
 
     return this.http.post(this.endpoint + '/createparticipants', user, {headers : new HttpHeaders({ 'Content-Type': 'application/json' })}).pipe(
