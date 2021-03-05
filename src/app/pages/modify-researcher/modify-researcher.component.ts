@@ -26,7 +26,7 @@ export class UpdateResearcherComponent implements OnInit {
   userPassword: string;
   limitNumberOfParticipants: number;
   AssignedResearchInstitutionName: string;
-  AssignedResearchInstitutionId: string;
+  assignedResearchInstitutionId: string;
   researchInstitutionList: FFQResearchInstitutionResponse[];
 
   constructor(
@@ -50,7 +50,7 @@ export class UpdateResearcherComponent implements OnInit {
       this.researchAttributes = this.selectedResearcher;
       this.userPassword = this.researchAttributes.userpassword;
 
-      let chosenResearchInstName: Observable<FFQResearchInstitutionResponse> = this.researchInstitutionService.getResearchInstitution(this.researchAttributes.AssignedResearchInstitutionId);
+      let chosenResearchInstName: Observable<FFQResearchInstitutionResponse> = this.researchInstitutionService.getResearchInstitution(this.researchAttributes.assignedResearchInstitutionId);
 
       chosenResearchInstName.subscribe (inst => {
         this.AssignedResearchInstitutionName = inst.institutionName;
@@ -75,7 +75,7 @@ export class UpdateResearcherComponent implements OnInit {
     let chosenResearchInstName: Observable<FFQResearchInstitutionResponse> = this.researchInstitutionService.getResearchInstitutionByName(this.AssignedResearchInstitutionName);
 
     chosenResearchInstName.subscribe(inst => {
-      this.researchAttributes.AssignedResearchInstitutionId = inst.researchInstitutionId;
+      this.researchAttributes.assignedResearchInstitutionId = inst.researchInstitutionId;
 
       this.researcherService.updateUser(this.researchAttributes as FFQResearchtResponse).subscribe(
         data => {

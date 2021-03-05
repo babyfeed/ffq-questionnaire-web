@@ -86,7 +86,7 @@ export class ResearchNewUserComponent implements OnInit {
       skipWhile(([users, institutions]) => users.length === 0 || institutions.length === 0),
       take(1))
       .subscribe(([user, institution]) => {
-        this.selectedInstitution = institution.find(i => i.researchInstitutionId === user[0].AssignedResearchInstitutionId);
+        this.selectedInstitution = institution.find(i => i.researchInstitutionId === user[0].assignedResearchInstitutionId);
       });
 
     const participantList: Observable<FFQParticipantResponse[]> = this.participantService.getAllParticipants();
@@ -100,7 +100,7 @@ export class ResearchNewUserComponent implements OnInit {
   }
   getInstiutionName() {
     for (let item of this.ffqinstitutionList) {
-      if ( this.loggedInUser[0].AssignedResearchInstitutionId === item.researchInstitutionId){
+      if ( this.loggedInUser[0].assignedResearchInstitutionId === item.researchInstitutionId){
         this.loggedInInstitutionName= item.institutionName;
       }
     }
@@ -179,6 +179,28 @@ export class ResearchNewUserComponent implements OnInit {
     this.suffix = parseInt(this.lastUserId, 10) + 1;
   }}
 
+  userNameCreator() {
+    for (let i = 0; i <= this.ffqparticipantList.length - 1; i++){
+      if (this.ffqparticipantList[i].assignedResearcherInst === this.loggedInUser[0].assignedResearchInstitutionId
+        && this.ffqparticipantList[i].prefix === this.loggedInUser[0].prefix){
+
+        this.notFound = false;
+        this.toStrip = this.prefix + '_';
+        this.newNumber = parseInt(this.ffqparticipantList[i].username.replace(this.toStrip, ''), 10);
+
+        if (this.newNumber > this.max){
+          this.max = this.newNumber;
+        }
+        this.participantName = this.prefix + '_' + (this.max + 1).toString();
+      }
+      if (this.ffqparticipantList.length - 1 === i && this.notFound){
+        // multiple participants added
+        this.toStrip = this.prefix + '_';
+        // one participant added
+        this.participantName = this.prefix + '_1';
+      }
+    }
+  }
   addParticipant() {
     this.getSuffix();
     this.generatePassword();
@@ -218,7 +240,7 @@ export class ResearchNewUserComponent implements OnInit {
     this.data[0].userName = 'Assingned institution: ';
     this.data[0].password = this.loggedInInstitutionName;
     this.data[1].userName = 'Assingned institution ID: ';
-    this.data[1].password = this.loggedInUser[0].AssignedResearchInstitutionId;
+    this.data[1].password = this.loggedInUser[0].assignedResearchInstitutionId;
     this.data[2].userName = 'Assingned researcher: ';
     this.data[2].password = this.loggedInUser[0].username;
     this.data[3].userName = '';
@@ -246,7 +268,7 @@ export class ResearchNewUserComponent implements OnInit {
     this.data[0].userName = 'Assingned institution: ';
     this.data[0].password = this.loggedInInstitutionName;
     this.data[1].userName = 'Assingned institution ID: ';
-    this.data[1].password = this.loggedInUser[0].AssignedResearchInstitutionId;
+    this.data[1].password = this.loggedInUser[0].assignedResearchInstitutionId;
     this.data[2].userName = 'Assingned researcher: ';
     this.data[2].password = this.loggedInUser[0].username;
     this.data[3].userName = '';
