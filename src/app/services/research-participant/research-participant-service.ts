@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 import {map, tap} from 'rxjs/operators';
 import { FFQResearchParticipant } from 'src/app/models/ffqresearch-participant';
 import { environment } from 'src/environments/environment';
-import { FFQResearcher } from 'src/app/models/FFQResearcher';
+import { FFQResearcher } from 'src/app/models/ffqresearcher';
 
 const httOptions ={ headers: new HttpHeaders({'Content-Type':'aplication/json'})}
 

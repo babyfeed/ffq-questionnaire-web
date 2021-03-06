@@ -3,7 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ResearcherParticipantService } from 'src/app/services/research-participant/research-participant-service';
-import { FFQResearcher } from "src/app/models/FFQResearcher";
+import { FFQResearcher } from "src/app/models/ffqresearcher";
 import { NgForm } from '@angular/forms';
 
 @Component({

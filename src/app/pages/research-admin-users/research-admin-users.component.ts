@@ -3,7 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
 import { ResearchService } from "src/app/services/research/research-service";
 import { AuthenticationService } from "src/app/services/authentication/authentication.service";
-import { FFQResearcher } from "src/app/models/FFQResearcher";
+import { FFQResearcher } from "src/app/models/ffqresearcher";
 import { FFQResearchInstitutionResponse } from "src/app/models/ffqresearch-institution-response";
 import { ResearchInstitutionService } from 'src/app/services/research-institution-service/research-institution-service';
 import {FFQParticipant} from "../../models/ffqresearch-participant-response";
