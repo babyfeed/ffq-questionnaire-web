@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {FFQParticipantResponse} from 'src/app/models/ffqresearch-participant-response';
+import {FFQParticipant} from 'src/app/models/ffqresearch-participant-response';
 import {environment} from 'src/environments/environment';
 import {FFQResearchParticipant} from "../../models/ffqresearch-participant";
 import { Console } from 'console';
@@ -19,24 +19,24 @@ export class ParticipantService {
   constructor(private http: HttpClient) {
   }
 
-  addParticipant(user: FFQParticipantResponse): Observable<FFQResearchParticipant> {
+  addParticipant(user: FFQParticipant): Observable<FFQResearchParticipant> {
 
     return this.http.post<FFQResearchParticipant>(this.endpoint + '/createparticipant', user,
       {headers: new HttpHeaders({'Content-Type': 'application/json'})});
   }
 
   //Not required at the time
-  updateParticipant(user: FFQParticipantResponse): Observable<any> {
+  updateParticipant(user: FFQParticipant): Observable<any> {
     throw new Error("Not implemented");
 
     // return this.http.put(this.endpoint + '/updateparticipant', user,
     //   {headers: new HttpHeaders({'Content-Type': 'application/json'})});
   }
 
-  getParticipant(userId: string): Observable<FFQParticipantResponse> {
+  getParticipant(userId: string): Observable<FFQParticipant> {
     return this.http.get(this.endpoint + '/' + userId).pipe(
       map((item: any) => {
-        return new FFQParticipantResponse(
+        return new FFQParticipant(
           item.userId,
           item.username,
           item.usertype,
@@ -53,11 +53,11 @@ export class ParticipantService {
     );
   }
 
-  getAllParticipants(): Observable<FFQParticipantResponse[]> {
+  getAllParticipants(): Observable<FFQParticipant[]> {
     return this.http.get(this.endpoint + '/all').pipe(
       map((res: any) => {
         return res.map(item => {
-          return new FFQParticipantResponse(
+          return new FFQParticipant(
             item.userId,
             item.username,
             item.userpassword,

@@ -3,7 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ResearcherParticipantService } from 'src/app/services/research-participant/research-participant-service';
-import { FFQResearch } from "src/app/models/ffqresearch";
+import { FFQResearcher } from "src/app/models/FFQResearcher";
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -14,10 +14,10 @@ import { NgForm } from '@angular/forms';
 export class CreateParticipantModalComponent{
   @Input() id;
   @Input() service;
-  @Input() researcher: FFQResearch;
+  @Input() researcher: FFQResearcher;
   data: any;
 
-  currentUser = <FFQResearch>JSON.parse(localStorage.getItem('currentUser'))[0];
+  currentUser = <FFQResearcher>JSON.parse(localStorage.getItem('currentUser'))[0];
   remainingParticipants = localStorage.getItem("remainingParticipants");
 
 

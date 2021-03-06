@@ -7,14 +7,14 @@ import {combineLatest, Observable} from 'rxjs';
 import {ParticipantService} from 'src/app/services/participant/participant-service';
 import {ResearchService} from 'src/app/services/research/research-service';
 import {FFQResearchParticipant} from 'src/app/models/ffqresearch-participant';
-import {FFQResearch} from 'src/app/models/ffqresearch';
+import {FFQResearcher} from 'src/app/models/FFQResearcher';
 import {ResearchInstitutionService} from 'src/app/services/research-institution-service/research-institution-service';
 import {FFQInstitution} from 'src/app/models/ffqinstitution';
 import {Usertype} from '../../models/usertype.enum';
 import {AuthenticationService} from '../../services/authentication/authentication.service';
 import {User} from '../../models/user';
 import {skipWhile, take} from 'rxjs/operators';
-import {FFQParticipantResponse} from '../../models/ffqresearch-participant-response';
+import {FFQParticipant} from '../../models/ffqresearch-participant-response';
 // import { Angular2CsvComponent } from 'angular2-csv/Angular2-csv';
 import {FFQInstitutionResponse} from '../../models/ffqinstitution-response';
 
@@ -45,9 +45,8 @@ export class ResearchNewUserComponent implements OnInit {
   ffqParticipant: FFQResearchParticipant;
   ffqInstitutionList$: Observable<FFQInstitution[]>;
   usersQuantity = 1;
-  currentUser$: Observable<FFQResearch[]>;
-  private participantLimitForResearch: number;
-  currentUser: Observable<FFQResearch[]>;
+  currentUser$: Observable<FFQResearcher[]>;
+  currentUser: Observable<FFQResearcher[]>;
   clicked = false;
   noMoreRoom = false;
   limit = this.loggedInUser[0].limitNumberOfParticipants;
@@ -78,7 +77,7 @@ export class ResearchNewUserComponent implements OnInit {
     private authenticationService: AuthenticationService
   ) {
     this.ffqInstitutionList$ = this.institutionService.getAllResearchInstitutions();
-    this.currentUser$ = this.authenticationService.currentUser as unknown as Observable<FFQResearch[]>;
+    this.currentUser$ = this.authenticationService.currentUser as unknown as Observable<FFQResearcher[]>;
     this.currentUser = this.currentUser$;
   }
 
@@ -92,10 +91,15 @@ export class ResearchNewUserComponent implements OnInit {
       skipWhile(([users, institutions]) => users.length === 0 || institutions.length === 0),
       take(1))
       .subscribe(([user, institution]) => {
-        this.selectedInstitution = institution.find(i => i.researchInstitutionId === user[0].assignedResearchInstitutionId);
+        this.selectedInstitution = institution.find(i => {
+          console.log(i.researchInstitutionId);
+          console.log(user[0].assignedResearchInstitutionId);
+          return i.researchInstitutionId === user[0].assignedResearchInstitutionId;
+        }
+        );
       });
 
-    const participantList: Observable<FFQParticipantResponse[]> = this.participantService.getAllParticipants();
+    const participantList: Observable<FFQParticipant[]> = this.participantService.getAllParticipants();
     participantList.subscribe(a => {
       this.ffqparticipantList = a;
     });
