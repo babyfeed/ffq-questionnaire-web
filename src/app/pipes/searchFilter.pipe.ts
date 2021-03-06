@@ -15,7 +15,7 @@ import { FFQClinicianResponse } from '../models/ffqclinician-response';
 })
 export class SearchPipe implements PipeTransform {
 
-  transform<T>(list: T[], term: any): T[] {
+  transform(list: any, term: any): any {
     if(term === undefined)
     {
       return list;

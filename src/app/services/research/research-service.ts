@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
+import { FFQResearchtResponse } from 'src/app/models/ffqresearch-response';
 import { environment } from 'src/environments/environment';
-import {FFQResearcher} from "../../models/ffqresearcher";
 
 @Injectable({
   providedIn: 'root',
@@ -13,14 +13,14 @@ export class ResearchService {
 
   constructor(private http: HttpClient) {}
 
-  addResearcher(user: FFQResearcher): Observable<any> {
+  addResearcher(user: FFQResearchtResponse): Observable<any> {
     return this.http
       .post(this.endpoint + '/createuser', user, {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       });
   }
 
-  addMultipleResearchers(user: FFQResearcher[]): Observable<any> {
+  addMultipleResearchers(user: FFQResearchtResponse[]): Observable<any> {
     return this.http
       .post(this.endpoint + '/createMany', user, {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -34,7 +34,7 @@ export class ResearchService {
   }
 
   // Still not implemented
-  updateUser(user: FFQResearcher): Observable<any> {
+  updateUser(user: FFQResearchtResponse): Observable<any> {
     return this.http
       .put(this.endpoint + '/updateuser', user, {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -42,10 +42,10 @@ export class ResearchService {
   }
 
   // To be implemented
-  getUser(userId: string): Observable<FFQResearcher> {
+  getUser(userId: string): Observable<FFQResearchtResponse> {
     return this.http.get(this.endpoint + '/users/' + userId).pipe(
       map((item: any) => {
-        return new FFQResearcher(
+        return new FFQResearchtResponse(
           item.userId,
           item.username,
           item.userpassword,
@@ -62,10 +62,10 @@ export class ResearchService {
   }
 
 // To be implemented
-  getUserById(userId: string): Observable<FFQResearcher> {
+  getUserById(userId: string): Observable<FFQResearchtResponse> {
     return this.http.get(this.endpoint + '/' + userId).pipe(
       map((item: any) => {
-        return new FFQResearcher(
+        return new FFQResearchtResponse(
           item.userId,
           item.username,
           item.userpassword,
@@ -81,12 +81,12 @@ export class ResearchService {
     );
   }
 
-  getAllUsers(): Observable<FFQResearcher[]> {
+  getAllUsers(): Observable<FFQResearchtResponse[]> {
     // getMongoUsers();
     return this.http.get(this.endpoint + '/all').pipe(
       map((res: any) => {
         return res.map((item) => {
-          return new FFQResearcher(
+          return new FFQResearchtResponse(
             item.userId,
             item.username,
             item.userpassword,

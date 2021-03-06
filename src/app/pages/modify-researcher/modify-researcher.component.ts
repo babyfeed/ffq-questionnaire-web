@@ -2,11 +2,13 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {ErrorDialogPopupComponent} from 'src/app/components/error-dialog-popup/error-dialog-popup.component';
+import {NgForm} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {ResearchService} from 'src/app/services/research/research-service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {DeletePopupComponent} from 'src/app/components/delete-popup/delete-popup.component';
-import { FFQResearcher } from 'src/app/models/FFQResearcher';
+import { FFQResearchtResponse } from 'src/app/models/ffqresearch-response';
+import { FFQResearch } from 'src/app/models/ffqresearch';
 import { FFQResearchInstitutionResponse } from 'src/app/models/ffqresearch-institution-response';
 import { ResearchInstitutionService } from 'src/app/services/research-institution-service/research-institution-service';
 
@@ -19,8 +21,8 @@ import { ResearchInstitutionService } from 'src/app/services/research-institutio
 export class UpdateResearcherComponent implements OnInit {
 
   dataLoaded: Promise<boolean>;
-  public selectedResearcher: FFQResearcher;
-  researchAttributes: FFQResearcher;
+  public selectedResearcher: FFQResearchtResponse;
+  researchAttributes: FFQResearch;
   userPassword: string;
   limitNumberOfParticipants: number;
   AssignedResearchInstitutionName: string;
@@ -40,7 +42,7 @@ export class UpdateResearcherComponent implements OnInit {
 
     const UserID = this.route.snapshot.paramMap.get('id');
 
-    let researcherResult: Observable<FFQResearcher> = this.researcherService.getUserById(UserID);
+    let researcherResult: Observable<FFQResearchtResponse> = this.researcherService.getUserById(UserID);
 
     researcherResult.subscribe(data => {
 
@@ -75,7 +77,7 @@ export class UpdateResearcherComponent implements OnInit {
     chosenResearchInstName.subscribe(inst => {
       this.researchAttributes.assignedResearchInstitutionId = inst.researchInstitutionId;
 
-      this.researcherService.updateUser(this.researchAttributes as FFQResearcher).subscribe(
+      this.researcherService.updateUser(this.researchAttributes as FFQResearchtResponse).subscribe(
         data => {
           this.router.navigateByUrl('/admin/research/users');
           const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);

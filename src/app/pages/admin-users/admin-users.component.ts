@@ -14,16 +14,20 @@ import { FFQAdmin } from 'src/app/models/ffqadmin';
 import { FFQClinicianResponse } from 'src/app/models/ffqclinician-response';
 import { ParentService } from 'src/app/services/parent/parent-service';
 import { ClinicianService } from 'src/app/services/clinician/clinician-service';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { FFQParentResponse } from 'src/app/models/ffqparent-response';
 import { FFQClinicResponse } from 'src/app/models/ffqclinic-response';
 import { FFQAdminResponse } from 'src/app/models/ffqadmin-response';
+import { FFQResearchtResponse } from 'src/app/models/ffqresearch-response';
 import { ClinicService } from 'src/app/services/clinic/clinic-service';
 import { AdminService } from 'src/app/services/admin/admin-service';
 import { ResearchService } from 'src/app/services/research/research-service';
 import { FFQClinic } from 'src/app/models/ffqclinic';
+import { SearchPipe } from 'src/app/pipes/searchFilter.pipe';
+import { User } from 'src/app/models/user';
+import { HttpClient } from '@angular/common/http';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
-import { FFQResearcher } from 'src/app/models/FFQResearcher';
+import { FFQResearch } from 'src/app/models/ffqresearch';
 
 @Component({
   templateUrl: './admin-users.component.html',
@@ -50,7 +54,7 @@ export class AdminUsersComponent implements OnInit {
   ffqparentList: FFQParent[] = [];
   ffqclinicList: FFQClinic[] = [];
   ffqadminList: FFQAdmin[] = [];
-  ffqresearchList: FFQResearcher[] = [];
+  ffqresearchList: FFQResearchtResponse[] = [];
   clinicianClinicNames: string[] = [];
   parentClinicNames: string[] = [];
   clinicNames: string[] = [];
@@ -125,7 +129,7 @@ export class AdminUsersComponent implements OnInit {
       FFQAdminResponse[]
     > = this.adminService.getAllUsers();
     const researchList: Observable<
-      FFQResearcher[]
+      FFQResearchtResponse[]
     > = this.researchService.getAllUsers();
 
     clinicList.subscribe((a) => {

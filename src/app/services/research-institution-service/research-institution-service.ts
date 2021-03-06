@@ -57,9 +57,19 @@ export class ResearchInstitutionService {
 
   //To be implemented
   getResearchInstitution(researchInstitutionId: string): Observable<FFQResearchInstitutionResponse> {
-    return this.http.get<FFQResearchInstitutionResponse>(this.endpoint + "/" + researchInstitutionId);
+    return this.http.get(this.endpoint + "/" + researchInstitutionId).pipe(
+      map((item: any) => {
+        return new FFQResearchInstitutionResponse(
+          item.researchInstitutionId,
+          item.address,
+          item.createdDate,
+          item.institutionName,
+          "researchInstitution"        
+        );
+      })
+    );
   }
-
+  
   //To be implemented
   getResearchInstitutionByName(institutionName: string): Observable<FFQResearchInstitutionResponse> {
     return this.http.get(this.endpoint + "/name/" + institutionName).pipe(
@@ -69,7 +79,7 @@ export class ResearchInstitutionService {
           item.address,
           item.createdDate,
           item.institutionName,
-          "researchInstitution"
+          "researchInstitution"        
         );
       })
     );
@@ -92,7 +102,7 @@ export class ResearchInstitutionService {
     );
   }
 
-  deleteItem(researchInstitutionId: string): Observable<any> {
+  deleteItem(researchInstitutionId: string): Observable<any> {   
     return this.http.delete(this.endpoint + "/delete?researchInstitutionId=" + researchInstitutionId, {
       responseType: "text",
     });

@@ -23,7 +23,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { CreateParticipantModalComponent} from "src/app/components/create-participant-modal/create-participant-modal.component"
 import { FFQResearcherParentResponse } from 'src/app/models/ffqresearcherparent-response';
-import { FFQResearcher } from "src/app/models/FFQResearcher";
+import { FFQResearch } from "src/app/models/ffqresearch";
 import { BehaviorSubject } from 'rxjs';
 import { FFQResearchParticipant } from 'src/app/models/ffqresearch-participant';
 import { InstitutionService } from 'src/app/services/institution/institution-service';
@@ -39,7 +39,7 @@ export class ResearchUsersComponent implements OnInit {
   TITLE = "FFQR Research Portal";
   endpoint = environment.foodServiceUrl + "/ffq";
 
-  currentUser = <FFQResearcher>JSON.parse(localStorage.getItem('currentUser'))[0];
+  currentUser = <FFQResearch>JSON.parse(localStorage.getItem('currentUser'))[0];
   institutionAttributes: object;
   participants: FFQResearchParticipant[] = [];
   dataLoaded: Promise<boolean>;

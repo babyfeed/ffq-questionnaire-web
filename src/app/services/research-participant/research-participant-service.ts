@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 import {map, tap} from 'rxjs/operators';
 import { FFQResearchParticipant } from 'src/app/models/ffqresearch-participant';
 import { environment } from 'src/environments/environment';
-import { FFQResearcher } from 'src/app/models/FFQResearcher';
+import { FFQResearch } from 'src/app/models/ffqresearch';
 
 const httOptions ={ headers: new HttpHeaders({'Content-Type':'aplication/json'})}
 
@@ -15,7 +15,7 @@ const httOptions ={ headers: new HttpHeaders({'Content-Type':'aplication/json'})
 export class ResearcherParticipantService {
 
   endpoint = environment.userServiceUrl + '/ffq/participants';
-  currentUser = <FFQResearcher>JSON.parse(localStorage.getItem('currentUser'))[0];
+  currentUser = <FFQResearch>JSON.parse(localStorage.getItem('currentUser'))[0];
 
 
 

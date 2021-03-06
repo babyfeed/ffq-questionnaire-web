@@ -1,6 +1,6 @@
 // Classed to store admin user data in components
 
-export class FFQResearcher {
+export class FFQResearch {
   id: string;
   userId: string;
   username: string;

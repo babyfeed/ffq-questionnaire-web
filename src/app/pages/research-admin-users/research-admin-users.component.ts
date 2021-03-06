@@ -1,13 +1,27 @@
 
 import { Component, OnInit } from "@angular/core";
-import { Observable } from "rxjs";
+import { FFQClinician } from "src/app/models/ffqclinician";
+import { FFQParent } from "src/app/models/ffqparent";
+import { FFQAdmin } from "src/app/models/ffqadmin";
+import { FFQClinicianResponse } from "src/app/models/ffqclinician-response";
+import { ParentService } from "src/app/services/parent/parent-service";
+import { ClinicianService } from "src/app/services/clinician/clinician-service";
+import { Observable, BehaviorSubject } from "rxjs";
+import { FFQParentResponse } from "src/app/models/ffqparent-response";
+import { FFQClinicResponse } from "src/app/models/ffqclinic-response";
+import { FFQAdminResponse } from "src/app/models/ffqadmin-response";
+import { FFQResearchtResponse } from "src/app/models/ffqresearch-response";
+import { ClinicService } from "src/app/services/clinic/clinic-service";
+import { AdminService } from "src/app/services/admin/admin-service";
 import { ResearchService } from "src/app/services/research/research-service";
+import { FFQClinic } from "src/app/models/ffqclinic";
+import { SearchPipe } from "src/app/pipes/searchFilter.pipe";
+import { User } from "src/app/models/user";
+import { HttpClient } from "@angular/common/http";
 import { AuthenticationService } from "src/app/services/authentication/authentication.service";
-import { FFQResearcher } from "src/app/models/FFQResearcher";
+import { FFQResearch } from "src/app/models/ffqresearch";
 import { FFQResearchInstitutionResponse } from "src/app/models/ffqresearch-institution-response";
 import { ResearchInstitutionService } from 'src/app/services/research-institution-service/research-institution-service';
-import {FFQParticipant} from "../../models/ffqresearch-participant-response";
-import {ParticipantService} from "../../services/participant/participant-service";
 
 @Component({
   templateUrl: "./research-admin-users.component.html",
@@ -18,31 +32,28 @@ export class AdminResearchUsersComponent implements OnInit {
   showResearchers: boolean;
 
   searchResearcher: string;
-  searchParticipant: string;
   searchResearchInstitution: string;
 
   constructor(
     public authenticationService: AuthenticationService,
 
-    private researcherService: ResearchService,
-    private researchInstitutionService: ResearchInstitutionService,
-    private participantsService: ParticipantService
+    public researcherService: ResearchService,
+    public researchInstitutionService: ResearchInstitutionService,
   ) {}
 
-  public filteredResearchInstForResearchersList: String[] = [];
-  public filteredResearchInstForParticipantsList: String[] = [];
+  public filtered: boolean;
+  public filtered_researchInst: String[] = [];
   checked_users: string[] = [];
   public researcherUserNames: string[] =[];
-  public participantUserNames: string[] =[];
   ResearchInstNames: string[] = [];
   researchInstitutionList: FFQResearchInstitutionResponse[];
-  researcherList: FFQResearcher[] = [];
-  participantsList: FFQParticipant[] = [];
-  researchInstitutionLength: Number;
+  researcherList: FFQResearchtResponse[] = [];
+  researchInstitutionLenght: Number;
 
   ngOnInit() {
     this.showParticipants = true;
     this.showResearchers = true;
+    this.filtered = false;
 
     this.loadAllUsers();
   }
@@ -59,12 +70,17 @@ export class AdminResearchUsersComponent implements OnInit {
 
 
 //filterby research Institution
-  filterByResearchInstitution(researchInst_name: string, filtered_researchInst: string[]) {
-    const index = filtered_researchInst.indexOf(researchInst_name);
+  filterByResearchInstitution(researchInst_name: string) {
+    const index = this.filtered_researchInst.indexOf(researchInst_name);
     if (index === -1) {
-      filtered_researchInst.push(researchInst_name);
+      this.filtered_researchInst.push(researchInst_name);
     } else {
-      filtered_researchInst.splice(index, 1);
+      this.filtered_researchInst.splice(index, 1);
+    }
+    if (this.filtered_researchInst.length == 0) {
+      this.filtered = false;
+    } else {
+      this.filtered = true;
     }
   }
 
@@ -78,12 +94,12 @@ export class AdminResearchUsersComponent implements OnInit {
         this.researchInstitutionList = data;
         data.forEach((researchInst) => {
         this.ResearchInstNames.push(researchInst.institutionName);
-        this.researchInstitutionLength = data.length;
+        this.researchInstitutionLenght = data.length;
       });
     });
 
     var researcherUserList: Observable<
-    FFQResearcher[]> = this.researcherService.getAllUsers();
+    FFQResearchtResponse[]> = this.researcherService.getAllUsers();
      researcherUserList.subscribe((data) => {
         this.researcherList = data;
 
@@ -92,19 +108,5 @@ export class AdminResearchUsersComponent implements OnInit {
         this.researcherUserNames.push(data[i].firstname + " " + data[i].lastname);
       }
     });
-     this.participantsService.getAllParticipants().subscribe((data) => {
-       this.participantsList = data;
-
-       for(let i = 0; i < data.length; i++)
-       {
-         this.participantUserNames.push(data[i].firstname + " " + data[i].lastname);
-       }
-     });
-  }
-
-  findAssignedResearcherForParticipant(participant: FFQParticipant) {
-    return this.researcherList.find(researcher =>
-      participant.assignedResearcherUsers.includes(researcher.userId)
-    )
   }
 }

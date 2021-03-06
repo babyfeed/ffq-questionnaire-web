@@ -19,11 +19,11 @@ import { ClinicService } from "src/app/services/clinic/clinic-service";
 import { FFQClinicResponse } from "src/app/models/ffqclinic-response";
 import {ResearchService} from "src/app/services/research/research-service";
 import {ResearchInstitutionService} from "src/app/services/research-institution-service/research-institution-service"
+import {FFQResearchtResponse} from "src/app/models/ffqresearch-response";
 import {FFQInstitutionResponse} from "src/app/models/ffqinstitution-response";
 import {FFQResultsResponse} from '../../models/ffqresultsresponse';
 import {combineLatest} from "rxjs";
 import {ResultsService} from "../../services/results/results.service";
-import {FFQResearcher} from "../../models/ffqresearcher";
 
 
 @Component({
@@ -101,9 +101,9 @@ export class DeletePopupComponent implements OnInit {
         });
     }
     else if (this.isResearch) {
-      let researchName = (this.attributes as FFQResearcher).username;
+      let researchName = (this.attributes as FFQResearchtResponse).username;
       this.researchService
-        .deleteItem((this.attributes as FFQResearcher).userId)
+        .deleteItem((this.attributes as FFQResearchtResponse).userId)
         .subscribe((data) => {
           this.router.navigateByUrl('/admin/research/users');
           const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);

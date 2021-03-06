@@ -1,6 +1,9 @@
 //Class used to store participant user data from response
 
-export class FFQParticipant {
+import {FFQItemResponse} from './ffqitem-response';
+import { ObjectUnsubscribedError } from 'rxjs';
+
+export class FFQParticipantResponse {
   id: string;
   userId: string;
   username: string;
