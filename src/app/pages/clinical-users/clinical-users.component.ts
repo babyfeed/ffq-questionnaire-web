@@ -14,7 +14,7 @@ import {AdminService} from "src/app/services/admin/admin-service";
 import {ResearchService} from "src/app/services/research/research-service";
 import {FFQClinic} from "src/app/models/ffqclinic";
 import {AuthenticationService} from "src/app/services/authentication/authentication.service";
-import {FFQResearcher} from "src/app/models/FFQResearcher";
+import {FFQResearcher} from "src/app/models/ffqresearcher";
 
 @Component({
   templateUrl: "./clinical-users.component.html",

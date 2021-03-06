@@ -7,7 +7,7 @@ import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { Observable } from 'rxjs';
 import { ResearchInstitutionService } from 'src/app/services/research-institution-service/research-institution-service';
-import {FFQResearcher} from 'src/app/models/FFQResearcher';
+import {FFQResearcher} from 'src/app/models/ffqresearcher';
 import { ResearchService } from 'src/app/services/research/research-service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DeletePopupComponent } from "src/app/components/delete-popup/delete-popup.component";

@@ -6,7 +6,7 @@ import {Observable} from 'rxjs';
 import {ResearchService} from 'src/app/services/research/research-service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {DeletePopupComponent} from 'src/app/components/delete-popup/delete-popup.component';
-import { FFQResearcher } from 'src/app/models/FFQResearcher';
+import { FFQResearcher } from 'src/app/models/ffqresearcher';
 import { FFQResearchInstitutionResponse } from 'src/app/models/ffqresearch-institution-response';
 import { ResearchInstitutionService } from 'src/app/services/research-institution-service/research-institution-service';
 

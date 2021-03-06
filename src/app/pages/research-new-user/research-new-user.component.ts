@@ -7,7 +7,7 @@ import {combineLatest, Observable} from 'rxjs';
 import {ParticipantService} from 'src/app/services/participant/participant-service';
 import {ResearchService} from 'src/app/services/research/research-service';
 import {FFQResearchParticipant} from 'src/app/models/ffqresearch-participant';
-import {FFQResearcher} from 'src/app/models/FFQResearcher';
+import {FFQResearcher} from 'src/app/models/ffqresearcher';
 import {ResearchInstitutionService} from 'src/app/services/research-institution-service/research-institution-service';
 import {FFQInstitution} from 'src/app/models/ffqinstitution';
 import {Usertype} from '../../models/usertype.enum';
