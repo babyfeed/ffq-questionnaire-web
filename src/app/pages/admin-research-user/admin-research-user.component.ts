@@ -42,7 +42,7 @@ export class AdminResearcherUserComponent implements OnInit {
   toStrip: string;
   limitNumberOfParticipants: number;
   AssignedResearchInstitutionName: string;
-  AssignedResearchInstitutionId: string;
+  assignedResearchInstitutionId: string;
   prefix: string;
   researcherName: string;
   noUsers: boolean;
@@ -102,7 +102,7 @@ export class AdminResearcherUserComponent implements OnInit {
   userNameCreator(){
     this.prefix = this.prefix.replace(/\s/g, '');
     for (let i = 0; i <= this.ffqresearcList.length - 1; i++){
-      if (this.prefix === this.ffqresearcList[i].prefix && this.ffqresearcList[i].AssignedResearchInstitutionId === this.AssignedResearchInstitutionId){
+      if (this.prefix === this.ffqresearcList[i].prefix && this.ffqresearcList[i].assignedResearchInstitutionId === this.assignedResearchInstitutionId){
         this.toStrip = this.prefix + '_Researcher';
         this.newNumber = parseInt(this.ffqresearcList[i].username.replace(this.toStrip, ''), 10);
         if (this.newNumber > this.max){
@@ -110,7 +110,7 @@ export class AdminResearcherUserComponent implements OnInit {
         }
         this.newPrefix = false;
       }
-      else if (this.ffqresearcList[i].AssignedResearchInstitutionId !== this.AssignedResearchInstitutionId && this.prefix === this.ffqresearcList[i].prefix) {
+      else if (this.ffqresearcList[i].assignedResearchInstitutionId !== this.assignedResearchInstitutionId && this.prefix === this.ffqresearcList[i].prefix) {
         this.found = true;
         break;
       }
@@ -127,7 +127,7 @@ export class AdminResearcherUserComponent implements OnInit {
       this.generatePassword();
       this.researcherName = this.prefix + '_Researcher1';
       this.ffqresearcherUser = new FFQResearchtResponse('1', this.researcherName, this.userpassword,
-        'researcher', this.firstname, this.lastname, true, this.AssignedResearchInstitutionId,
+        'researcher', this.firstname, this.lastname, true, this.assignedResearchInstitutionId,
         this.limitNumberOfParticipants, this.prefix);
       this.noUsers = true;
     }
@@ -146,7 +146,7 @@ export class AdminResearcherUserComponent implements OnInit {
             this.researcherName = this.toStrip.replace(/\s/g, '') + (this.max).toString();
           }
           this.ffqresearcherUser = new FFQResearchtResponse(this.newUserId, this.researcherName, this.userpassword,
-            'researcher', this.firstname, this.lastname, true, this.AssignedResearchInstitutionId,
+            'researcher', this.firstname, this.lastname, true, this.assignedResearchInstitutionId,
             this.limitNumberOfParticipants, this.prefix);
         }
       }
@@ -183,7 +183,7 @@ export class AdminResearcherUserComponent implements OnInit {
   save2csvSingleResearcher() {
     this.dataLoop();
     this.researchInstitutionList.forEach(item => {
-      if (this.AssignedResearchInstitutionId === item.researchInstitutionId)
+      if (this.assignedResearchInstitutionId === item.researchInstitutionId)
       {
         this.AssignedResearchInstitutionName = item.institutionName;
       }
@@ -191,7 +191,7 @@ export class AdminResearcherUserComponent implements OnInit {
     this.data[0].userName = 'Assingned Research site: ';
     this.data[0].password = this.AssignedResearchInstitutionName;
     this.data[1].userName = 'Assingned Research site ID: ';
-    this.data[1].password = this.AssignedResearchInstitutionId;
+    this.data[1].password = this.assignedResearchInstitutionId;
     this.data[2].userName = '';
     this.data[2].password = '';
     this.data[3].userName = 'User Name';

@@ -1,21 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { FFQItemResponse } from '../../models/ffqitem-response';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { FFQItemCalcRequest } from '../../models/ffqitem-calc-request';
-import { FFQFoodNutrientsResponse } from 'src/app/models/ffqfoodnutrients-response';
-import { FFQFoodItem } from 'src/app/models/ffqfooditem';
-import { ɵangular_packages_forms_forms_q } from '@angular/forms';
-import {
-  Http,
-  Headers,
-  Response,
-  RequestOptions,
-  RequestMethod,
-} from '@angular/http';
-import { FFQFoodItemResponse } from 'src/app/models/ffqfooditem-response';
-import { FFQAdminResponse } from 'src/app/models/ffqadmin-response';
 import { FFQResearchtResponse } from 'src/app/models/ffqresearch-response';
 import { environment } from 'src/environments/environment';
 
@@ -67,7 +53,7 @@ export class ResearchService {
           item.firstname,
           item.lastname,
           item.isactive,
-          item.AssignedResearchInstitutionId,
+          item.assignedResearchInstitutionId,
           item.limitNumberOfParticipants,
           item.prefix
         );
@@ -87,7 +73,7 @@ export class ResearchService {
           item.firstname,
           item.lastname,
           item.isactive,
-          item.AssignedResearchInstitutionId,
+          item.assignedResearchInstitutionId,
           item.limitNumberOfParticipants,
           item.prefix
         );
@@ -108,7 +94,7 @@ export class ResearchService {
             item.firstname,
             item.lastname,
             item.isactive,
-            item.AssignedResearchInstitutionId,
+            item.assignedResearchInstitutionId,
             item.limitNumberOfParticipants,
             item.prefix
           );

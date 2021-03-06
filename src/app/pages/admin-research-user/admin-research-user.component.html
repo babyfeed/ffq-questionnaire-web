@@ -43,7 +43,7 @@
               <br>
               <mat-form-field>
                 <mat-label appearance="fill">Choose Research Institution...</mat-label>
-                <mat-select matNativeControl id="AssignedResearchInstitutionName" name="AssignedResearchInstitutionName" [(ngModel)]="AssignedResearchInstitutionId" required>
+                <mat-select matNativeControl id="assignedResearchInstitutionName" name="assignedResearchInstitutionName" [(ngModel)]="assignedResearchInstitutionId" required>
                   <mat-option *ngFor="let c of researchInstitutionList" [value]="c.researchInstitutionId">{{ c.institutionName }}</mat-option>
                 </mat-select>
               </mat-form-field>

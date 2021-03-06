@@ -92,7 +92,7 @@ export class ResearchNewUserComponent implements OnInit {
       skipWhile(([users, institutions]) => users.length === 0 || institutions.length === 0),
       take(1))
       .subscribe(([user, institution]) => {
-        this.selectedInstitution = institution.find(i => i.researchInstitutionId === user[0].AssignedResearchInstitutionId);
+        this.selectedInstitution = institution.find(i => i.researchInstitutionId === user[0].assignedResearchInstitutionId);
       });
 
     const participantList: Observable<FFQParticipantResponse[]> = this.participantService.getAllParticipants();
@@ -106,7 +106,7 @@ export class ResearchNewUserComponent implements OnInit {
   }
   getInstiutionName() {
     for (const item of this.ffqinstitutionList) {
-      if ( this.loggedInUser[0].AssignedResearchInstitutionId === item.researchInstitutionId){
+      if ( this.loggedInUser[0].assignedResearchInstitutionId === item.researchInstitutionId){
         this.loggedInInstitutionName = item.institutionName;
       }
     }
@@ -145,7 +145,7 @@ export class ResearchNewUserComponent implements OnInit {
 
   userNameCreator() {
     for (let i = 0; i <= this.ffqparticipantList.length - 1; i++){
-      if (this.ffqparticipantList[i].assignedResearcherInst === this.loggedInUser[0].AssignedResearchInstitutionId
+      if (this.ffqparticipantList[i].assignedResearcherInst === this.loggedInUser[0].assignedResearchInstitutionId
         && this.ffqparticipantList[i].prefix === this.loggedInUser[0].prefix){
 
         this.notFound = false;
@@ -217,7 +217,7 @@ export class ResearchNewUserComponent implements OnInit {
     this.data[0].userName = 'Assingned institution: ';
     this.data[0].password = this.loggedInInstitutionName;
     this.data[1].userName = 'Assingned institution ID: ';
-    this.data[1].password = this.loggedInUser[0].AssignedResearchInstitutionId;
+    this.data[1].password = this.loggedInUser[0].assignedResearchInstitutionId;
     this.data[2].userName = 'Assingned researcher: ';
     this.data[2].password = this.loggedInUser[0].username;
     this.data[3].userName = '';
@@ -245,7 +245,7 @@ export class ResearchNewUserComponent implements OnInit {
     this.data[0].userName = 'Assingned institution: ';
     this.data[0].password = this.loggedInInstitutionName;
     this.data[1].userName = 'Assingned institution ID: ';
-    this.data[1].password = this.loggedInUser[0].AssignedResearchInstitutionId;
+    this.data[1].password = this.loggedInUser[0].assignedResearchInstitutionId;
     this.data[2].userName = 'Assingned researcher: ';
     this.data[2].password = this.loggedInUser[0].username;
     this.data[3].userName = '';
