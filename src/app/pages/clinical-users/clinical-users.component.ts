@@ -9,13 +9,12 @@ import {Observable} from "rxjs";
 import {FFQParentResponse} from "src/app/models/ffqparent-response";
 import {FFQClinicResponse} from "src/app/models/ffqclinic-response";
 import {FFQAdminResponse} from "src/app/models/ffqadmin-response";
-import {FFQResearchtResponse} from "src/app/models/ffqresearch-response";
 import {ClinicService} from "src/app/services/clinic/clinic-service";
 import {AdminService} from "src/app/services/admin/admin-service";
 import {ResearchService} from "src/app/services/research/research-service";
 import {FFQClinic} from "src/app/models/ffqclinic";
 import {AuthenticationService} from "src/app/services/authentication/authentication.service";
-import {FFQResearch} from "src/app/models/ffqresearch";
+import {FFQResearcher} from "src/app/models/FFQResearcher";
 
 @Component({
   templateUrl: "./clinical-users.component.html",
@@ -43,7 +42,7 @@ export class ClinicalUsersComponent implements OnInit {
   ffqparentList: FFQParent[] = [];
   ffqclinicList: FFQClinic[] = [];
   ffqadminList: FFQAdmin[] = [];
-  ffqresearchList: FFQResearch[] = [];
+  ffqresearchList: FFQResearcher[] = [];
   clinicianClinicNames: string[] = [];
   parentClinicNames: string[] = [];
   clinicNames: string[] = [];
@@ -96,7 +95,7 @@ export class ClinicalUsersComponent implements OnInit {
     var parentList: Observable<FFQParentResponse[]> = this.parentService.getAllParents();
     var clinicList: Observable<FFQClinicResponse[]> = this.clinicService.getAllClinics();
     var adminList: Observable<FFQAdminResponse[]> = this.adminService.getAllUsers();
-    var researchList: Observable<FFQResearchtResponse[]> = this.researchService.getAllUsers();
+    var researchList: Observable<FFQResearcher[]> = this.researchService.getAllUsers();
 
     clinicList.subscribe((a) => {
       this.ffqclinicList = a;

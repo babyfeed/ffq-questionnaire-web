@@ -3,24 +3,14 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogPopupComponent } from 'src/app/components/error-dialog-popup/error-dialog-popup.component';
-import { FormGroup, FormControl, Validators, ReactiveFormsModule, NgForm } from '@angular/forms';
-import { Subscription } from 'rxjs/internal/Subscription';
-import { FormsModule } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { ResearchInstitutionService } from 'src/app/services/research-institution-service/research-institution-service';
-import { FFQResearchtResponse } from 'src/app/models/ffqresearch-response';
-import { FFQResearchParticipant } from 'src/app/models/ffqresearch-participant';
-import {FFQResearch} from 'src/app/models/ffqresearch';
-import { FFQClinician } from 'src/app/models/ffqclinician';
-import { FFQClinicResponse } from 'src/app/models/ffqclinic-response';
-import { ClinicService } from 'src/app/services/clinic/clinic-service';
-import { FFQInstitution } from 'src/app/models/ffqinstitution';
+import {FFQResearcher} from 'src/app/models/FFQResearcher';
 import { ResearchService } from 'src/app/services/research/research-service';
-import { FFQParentResponse } from 'src/app/models/ffqparent-response';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DeletePopupComponent } from 'src/app/components/delete-popup/delete-popup.component';
 import { FFQResearchInstitutionResponse } from 'src/app/models/ffqresearch-institution-response';
-import {FFQClinicianResponse} from '../../models/ffqclinician-response';
 
 
 @Component({
@@ -71,13 +61,13 @@ export class AdminResearcherUserComponent implements OnInit {
 
   ) { }
   researchInstitutionList: FFQResearchInstitutionResponse[];
-  researcher: FFQResearchtResponse[] = [];
+  researcher: FFQResearcher[] = [];
   dataLoaded: Promise<boolean>;
-  ffqresearcherUser: FFQResearchtResponse;
-  public ffqresearcherList: FFQResearch[] = [];
-  public ffqresearcList: FFQResearch[] = [];
+  ffqresearcherUser: FFQResearcher;
+  public ffqresearcherList: FFQResearcher[] = [];
+  public ffqresearcList: FFQResearcher[] = [];
   public ffqresearchInstitutionSelected: FFQResearchInstitutionResponse;
-  researcherUserAttributes: FFQResearchtResponse;
+  researcherUserAttributes: FFQResearcher;
   newUserId: string;
   institutionName: string[] = [];
   institutionIds: Map<string, string> = new Map<string, string>();
@@ -93,7 +83,7 @@ export class AdminResearcherUserComponent implements OnInit {
       });
     });
 
-    const researchList: Observable<FFQResearchtResponse[]> = this.researcherService.getAllUsers();
+    const researchList: Observable<FFQResearcher[]> = this.researcherService.getAllUsers();
     researchList.subscribe(a => {
       this.ffqresearcList = a;
     });
@@ -122,16 +112,24 @@ export class AdminResearcherUserComponent implements OnInit {
       }
     }
   }
-  addResearcherUser(form: NgForm) {
+  addResearcherUser() {
     if (this.ffqresearcList.length === 0){
       this.generatePassword();
       this.researcherName = this.prefix + '_Researcher1';
-      this.ffqresearcherUser = new FFQResearchtResponse('1', this.researcherName, this.userpassword,
-        'researcher', this.firstname, this.lastname, true, this.assignedResearchInstitutionId,
-        this.limitNumberOfParticipants, this.prefix);
+      this.ffqresearcherUser = new FFQResearcher(
+        '1',
+        this.researcherName,
+        this.userpassword,
+        'researcher',
+        this.firstname,
+        this.lastname,
+        true,
+        this.assignedResearchInstitutionId,
+        this.limitNumberOfParticipants,
+        this.prefix);
       this.noUsers = true;
     }
-    const researcherList: Observable<FFQResearchtResponse[]> = this.researcherService.getAllUsers();
+    const researcherList: Observable<FFQResearcher[]> = this.researcherService.getAllUsers();
     researcherList.subscribe(data => {
       if (!this.noUsers) {
         const lastItem = data[data.length - 1];
@@ -145,9 +143,18 @@ export class AdminResearcherUserComponent implements OnInit {
             this.max++;
             this.researcherName = this.toStrip.replace(/\s/g, '') + (this.max).toString();
           }
-          this.ffqresearcherUser = new FFQResearchtResponse(this.newUserId, this.researcherName, this.userpassword,
-            'researcher', this.firstname, this.lastname, true, this.assignedResearchInstitutionId,
-            this.limitNumberOfParticipants, this.prefix);
+          this.ffqresearcherUser = new FFQResearcher(
+            this.newUserId,
+            this.researcherName,
+            this.userpassword,
+            'researcher',
+            this.firstname,
+            this.lastname,
+            true,
+            this.assignedResearchInstitutionId,
+            this.limitNumberOfParticipants,
+            this.prefix
+          );
         }
       }
       if (!this.found || this.noUsers) {
@@ -213,7 +220,7 @@ export class AdminResearcherUserComponent implements OnInit {
 
   updateResearcherUser()
   {
-    this.researcherService.updateUser(this.ffqresearcherUser as FFQResearchtResponse).subscribe(
+    this.researcherService.updateUser(this.ffqresearcherUser as FFQResearcher).subscribe(
       data => {this.router.navigateByUrl('admin/research/users');
                const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
                dialogRef.componentInstance.title = 'Research User successfully updated!'; }
