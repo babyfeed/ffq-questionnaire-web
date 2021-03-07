@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map, tap} from 'rxjs/operators';
-import { FFQResearchParticipant } from 'src/app/models/ffqresearch-participant';
+import { FfqParticipant } from 'src/app/models/ffq-participant';
 import { environment } from 'src/environments/environment';
 import { FFQResearcher } from 'src/app/models/ffqresearcher';
 
@@ -21,7 +21,7 @@ export class ResearcherParticipantService {
 
   constructor(private http: HttpClient) { }
 
-  addParent(user : FFQResearchParticipant): Observable<any> {
+  addParent(user : FfqParticipant): Observable<any> {
     user.assignedResearcherInst = this.currentUser.assignedResearchInstitutionId;
     user.assignedResearcherUsers.push(this.currentUser.userId);
 
@@ -32,7 +32,7 @@ export class ResearcherParticipantService {
       ));
   }
 
-  updateParent(user : FFQResearchParticipant): Observable<any> {
+  updateParent(user : FfqParticipant): Observable<any> {
 
     return this.http.put(this.endpoint + '/updateparticipants', user, {headers : new HttpHeaders({ 'Content-Type': 'application/json' })}).pipe(
       tap(
@@ -41,11 +41,11 @@ export class ResearcherParticipantService {
       ));
   }
 
-  getAllResearchParticipants(): Observable<FFQResearchParticipant[]> {
+  getAllResearchParticipants(): Observable<FfqParticipant[]> {
     return this.http.get(this.endpoint + '/all').pipe(
       map((res: any) => {
         return res.map(item => {
-          return new FFQResearchParticipant(
+          return new FfqParticipant(
             item.userId,
             item.username,
             item.usertype,

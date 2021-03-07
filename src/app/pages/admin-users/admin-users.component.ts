@@ -24,6 +24,7 @@ import { ResearchService } from 'src/app/services/research/research-service';
 import { FFQClinic } from 'src/app/models/ffqclinic';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { FFQResearcher } from 'src/app/models/ffqresearcher';
+import {Usertype} from "../../models/usertype.enum";
 
 @Component({
   templateUrl: './admin-users.component.html',
@@ -57,6 +58,7 @@ export class AdminUsersComponent implements OnInit {
   public filtered: boolean;
   public filteredClinics: string[] = [];
   public clinicianNames: string[] = [];
+  usertype = Usertype;
 
   ngOnInit() {
     this.clinicNames.push('');

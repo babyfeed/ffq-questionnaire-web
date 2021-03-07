@@ -11,7 +11,7 @@ import {FFQResearcher} from 'src/app/models/ffqresearcher';
 import { ResearchService } from 'src/app/services/research/research-service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DeletePopupComponent } from "src/app/components/delete-popup/delete-popup.component";
-import { FFQResearchInstitutionResponse } from "src/app/models/ffqresearch-institution-response";
+import { FFQResearchInstitution } from "src/app/models/ffq-research-institution";
 
 
 @Component({
@@ -43,9 +43,9 @@ export class ResearchInstitutionComponent implements OnInit {
   researcher: FFQResearcher[] = [];
   researchInstitutionAttributes: object;
   dataLoaded: Promise<boolean>;
-  ffqinsitution: FFQResearchInstitutionResponse;
+  ffqinsitution: FFQResearchInstitution;
   public ffqresearcherList: FFQResearcher[] = [];
-  public ffqresearchInstList: FFQResearchInstitutionResponse[] = [];
+  public ffqresearchInstList: FFQResearchInstitution[] = [];
   researcherNames: string[] = [];
 
   ngOnInit() {
@@ -61,7 +61,7 @@ export class ResearchInstitutionComponent implements OnInit {
    var today = mm + '/' + dd + '/' + yyyy;
 
 
-  var researchInstitutionList: Observable<FFQResearchInstitutionResponse[]> = this.researchInstitutionService.getAllResearchInstitutions();
+  var researchInstitutionList: Observable<FFQResearchInstitution[]> = this.researchInstitutionService.getAllResearchInstitutions();
 
        researchInstitutionList.subscribe(data => {
 
@@ -73,7 +73,7 @@ export class ResearchInstitutionComponent implements OnInit {
      console.log(newResearchInstId,this.location, today,
                 this.institutionName);
 
-      this.ffqinsitution = new FFQResearchInstitutionResponse(newResearchInstId, this.location, today,
+      this.ffqinsitution = new FFQResearchInstitution(newResearchInstId, this.location, today,
                 this.institutionName, "researchInstitution");
 
  console.log(this.ffqinsitution);
@@ -103,7 +103,7 @@ export class ResearchInstitutionComponent implements OnInit {
 
   updateResearchInstitution()
   {
-    this.researchInstitutionService.updateUser(<FFQResearchInstitutionResponse>this.ffqinsitution).subscribe(
+    this.researchInstitutionService.updateUser(<FFQResearchInstitution>this.ffqinsitution).subscribe(
      data => {this.router.navigateByUrl('admin/research/users');
      const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
      dialogRef.componentInstance.title = 'Research Institution successfully updated!';}

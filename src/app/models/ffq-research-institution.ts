@@ -1,12 +1,12 @@
 //Class used to store admin user data from response
 
-export class FFQResearchInstitutionResponse {
+export class FFQResearchInstitution {
   id: string;
   researchInstitutionId: string;
   address: string;
   createdDate: string;
   institutionName: string;
-  siteType: string; 
+  siteType: string;
 
 
   constructor(researchInstitutionId: string, address: string, createdDate: string, institutionName:string, siteType: string) {

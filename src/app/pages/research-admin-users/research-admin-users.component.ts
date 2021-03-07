@@ -4,16 +4,18 @@ import { Observable } from "rxjs";
 import { ResearchService } from "src/app/services/research/research-service";
 import { AuthenticationService } from "src/app/services/authentication/authentication.service";
 import { FFQResearcher } from "src/app/models/ffqresearcher";
-import { FFQResearchInstitutionResponse } from "src/app/models/ffqresearch-institution-response";
+import { FFQResearchInstitution } from "src/app/models/ffq-research-institution";
 import { ResearchInstitutionService } from 'src/app/services/research-institution-service/research-institution-service';
-import {FFQParticipant} from "../../models/ffqresearch-participant-response";
 import {ParticipantService} from "../../services/participant/participant-service";
+import {FfqParticipant} from "../../models/ffq-participant";
+import {Usertype} from "../../models/usertype.enum";
 
 @Component({
   templateUrl: "./research-admin-users.component.html",
   styleUrls: ["./research-admin-users.component.css"],
 })
 export class AdminResearchUsersComponent implements OnInit {
+  usertype = Usertype
   private showParticipants: boolean;
   showResearchers: boolean;
 
@@ -31,13 +33,12 @@ export class AdminResearchUsersComponent implements OnInit {
 
   public filteredResearchInstForResearchersList: String[] = [];
   public filteredResearchInstForParticipantsList: String[] = [];
-  checked_users: string[] = [];
   public researcherUserNames: string[] =[];
   public participantUserNames: string[] =[];
   ResearchInstNames: string[] = [];
-  researchInstitutionList: FFQResearchInstitutionResponse[];
+  researchInstitutionList: FFQResearchInstitution[];
   researcherList: FFQResearcher[] = [];
-  participantsList: FFQParticipant[] = [];
+  participantsList: FfqParticipant[] = [];
   researchInstitutionLength: Number;
 
   ngOnInit() {
@@ -72,7 +73,7 @@ export class AdminResearchUsersComponent implements OnInit {
   private loadAllUsers() {
 
     var researchInstList: Observable<
-    FFQResearchInstitutionResponse[]> =
+    FFQResearchInstitution[]> =
     this.researchInstitutionService.getAllResearchInstitutions();
     researchInstList.subscribe((data) => {
         this.researchInstitutionList = data;
@@ -102,7 +103,7 @@ export class AdminResearchUsersComponent implements OnInit {
      });
   }
 
-  findAssignedResearcherForParticipant(participant: FFQParticipant) {
+  findAssignedResearcherForParticipant(participant: FfqParticipant) {
     return this.researcherList.find(researcher =>
       participant.assignedResearcherUsers.includes(researcher.userId)
     )

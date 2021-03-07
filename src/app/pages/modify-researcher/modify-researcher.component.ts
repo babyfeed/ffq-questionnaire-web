@@ -7,7 +7,7 @@ import {ResearchService} from 'src/app/services/research/research-service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {DeletePopupComponent} from 'src/app/components/delete-popup/delete-popup.component';
 import { FFQResearcher } from 'src/app/models/ffqresearcher';
-import { FFQResearchInstitutionResponse } from 'src/app/models/ffqresearch-institution-response';
+import { FFQResearchInstitution } from 'src/app/models/ffq-research-institution';
 import { ResearchInstitutionService } from 'src/app/services/research-institution-service/research-institution-service';
 
 
@@ -25,7 +25,7 @@ export class UpdateResearcherComponent implements OnInit {
   limitNumberOfParticipants: number;
   AssignedResearchInstitutionName: string;
   assignedResearchInstitutionId: string;
-  researchInstitutionList: FFQResearchInstitutionResponse[];
+  researchInstitutionList: FFQResearchInstitution[];
 
   constructor(
     private researcherService: ResearchService,
@@ -48,12 +48,12 @@ export class UpdateResearcherComponent implements OnInit {
       this.researchAttributes = this.selectedResearcher;
       this.userPassword = this.researchAttributes.userpassword;
 
-      let chosenResearchInstName: Observable<FFQResearchInstitutionResponse> = this.researchInstitutionService.getResearchInstitution(this.researchAttributes.assignedResearchInstitutionId);
+      let chosenResearchInstName: Observable<FFQResearchInstitution> = this.researchInstitutionService.getResearchInstitution(this.researchAttributes.assignedResearchInstitutionId);
 
       chosenResearchInstName.subscribe (inst => {
         this.AssignedResearchInstitutionName = inst.institutionName;
       });
-      let researchInstitutionList: Observable<FFQResearchInstitutionResponse[]> = this.researchInstitutionService.getAllResearchInstitutions();
+      let researchInstitutionList: Observable<FFQResearchInstitution[]> = this.researchInstitutionService.getAllResearchInstitutions();
       researchInstitutionList.subscribe(a => {
       this.researchInstitutionList = a;
 
@@ -70,7 +70,7 @@ export class UpdateResearcherComponent implements OnInit {
 
   updateResearchInstitution() {
 
-    let chosenResearchInstName: Observable<FFQResearchInstitutionResponse> = this.researchInstitutionService.getResearchInstitutionByName(this.AssignedResearchInstitutionName);
+    let chosenResearchInstName: Observable<FFQResearchInstitution> = this.researchInstitutionService.getResearchInstitutionByName(this.AssignedResearchInstitutionName);
 
     chosenResearchInstName.subscribe(inst => {
       this.researchAttributes.assignedResearchInstitutionId = inst.researchInstitutionId;

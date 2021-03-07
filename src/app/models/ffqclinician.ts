@@ -7,7 +7,7 @@ export class FFQClinician {
   userId: string;
   username: string;
   userpassword: string;
-  usertype = Usertype.Clinician;
+  usertype = Usertype.clinician;
   abbreviation: string;
   firstname: string;
   lastname: string;

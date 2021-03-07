@@ -10,7 +10,7 @@ import {FFQResearcher} from 'src/app/models/ffqresearcher';
 import { ResearchService } from 'src/app/services/research/research-service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DeletePopupComponent } from 'src/app/components/delete-popup/delete-popup.component';
-import { FFQResearchInstitutionResponse } from 'src/app/models/ffqresearch-institution-response';
+import { FFQResearchInstitution } from 'src/app/models/ffq-research-institution';
 
 
 @Component({
@@ -60,13 +60,13 @@ export class AdminResearcherUserComponent implements OnInit {
     private modalService: NgbModal
 
   ) { }
-  researchInstitutionList: FFQResearchInstitutionResponse[];
+  researchInstitutionList: FFQResearchInstitution[];
   researcher: FFQResearcher[] = [];
   dataLoaded: Promise<boolean>;
   ffqresearcherUser: FFQResearcher;
   public ffqresearcherList: FFQResearcher[] = [];
   public ffqresearcList: FFQResearcher[] = [];
-  public ffqresearchInstitutionSelected: FFQResearchInstitutionResponse;
+  public ffqresearchInstitutionSelected: FFQResearchInstitution;
   researcherUserAttributes: FFQResearcher;
   newUserId: string;
   institutionName: string[] = [];
@@ -74,7 +74,7 @@ export class AdminResearcherUserComponent implements OnInit {
   researchInstitutionId: string;
 
   ngOnInit() {
-    const researchInstitutionList: Observable<FFQResearchInstitutionResponse[]> = this.researchInstitutionService.getAllResearchInstitutions();
+    const researchInstitutionList: Observable<FFQResearchInstitution[]> = this.researchInstitutionService.getAllResearchInstitutions();
     researchInstitutionList.subscribe(institutionList => {
       this.researchInstitutionList = institutionList;
       institutionList.forEach(institution => {

@@ -1,6 +1,6 @@
-//Class used to store participant user data from response
+//Classed to store admin user data in components
 
-export class FFQParticipant {
+export class FfqParticipant {
   id: string;
   userId: string;
   username: string;
@@ -26,7 +26,7 @@ export class FFQParticipant {
     this.assignedResearcherUsers = assignedResearcherUsers;
     this.childrennames = childrennames;
     this.isactive = isactive;
-	this.prefix = prefix;
+	  this.prefix = prefix;
   }
 
 }

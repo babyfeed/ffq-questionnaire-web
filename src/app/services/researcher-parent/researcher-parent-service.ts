@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 import {map, tap} from 'rxjs/operators';
 import { FFQResearcherParentResponse } from 'src/app/models/ffqresearcherparent-response';
 import { environment } from 'src/environments/environment';
-import { FFQResearchParticipant } from 'src/app/models/ffqresearch-participant';
+import { FfqParticipant } from 'src/app/models/ffq-participant';
 
 const httOptions ={ headers: new HttpHeaders({'Content-Type':'aplication/json'})}
 
@@ -56,11 +56,11 @@ export class ResearcherParentService {
     );
   }
 
-  getAllParticipants(instID: string): Observable<FFQResearchParticipant[]> {
+  getAllParticipants(instID: string): Observable<FfqParticipant[]> {
     return this.http.get(this.endpoint + '/all/' + instID).pipe(
       map((res: any) => {
         return res.map(item => {
-          return new FFQResearchParticipant(
+          return new FfqParticipant(
             item.userId,
             item.username,
             item.userpassword,

@@ -2,11 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {FFQParticipant} from 'src/app/models/ffqresearch-participant-response';
 import {environment} from 'src/environments/environment';
-import {FFQResearchParticipant} from "../../models/ffqresearch-participant";
-import { Console } from 'console';
-import { stringify } from 'querystring';
+import {FfqParticipant} from "../../models/ffq-participant";
 
 @Injectable({
   providedIn: 'root'
@@ -19,60 +16,24 @@ export class ParticipantService {
   constructor(private http: HttpClient) {
   }
 
-  addParticipant(user: FFQParticipant): Observable<FFQResearchParticipant> {
+  addParticipant(user: FfqParticipant): Observable<FfqParticipant> {
 
-    return this.http.post<FFQResearchParticipant>(this.endpoint + '/createparticipant', user,
+    return this.http.post<FfqParticipant>(this.endpoint + '/createparticipant', user,
       {headers: new HttpHeaders({'Content-Type': 'application/json'})});
   }
 
   //Not required at the time
-  updateParticipant(user: FFQParticipant): Observable<any> {
-    throw new Error("Not implemented");
-
-    // return this.http.put(this.endpoint + '/updateparticipant', user,
-    //   {headers: new HttpHeaders({'Content-Type': 'application/json'})});
+  updateParticipant(user: FfqParticipant): Observable<any> {
+    return this.http.put(this.endpoint + '/updateparticipant', user,
+      {headers: new HttpHeaders({'Content-Type': 'application/json'})});
   }
 
-  getParticipant(userId: string): Observable<FFQParticipant> {
-    return this.http.get(this.endpoint + '/' + userId).pipe(
-      map((item: any) => {
-        return new FFQParticipant(
-          item.userId,
-          item.username,
-          item.usertype,
-          item.firstname,
-          item.lastname,
-          item.assignedResearcherInst,
-          item.assignedResearcherUsers,
-          item.childrennames,
-          item.isactive,
-          item.userpassword,
-		  item.prefix
-        );
-      })
-    );
+  getParticipant(userId: string): Observable<FfqParticipant> {
+    return this.http.get<FfqParticipant>(this.endpoint + '/' + userId);
   }
 
-  getAllParticipants(): Observable<FFQParticipant[]> {
-    return this.http.get(this.endpoint + '/all').pipe(
-      map((res: any) => {
-        return res.map(item => {
-          return new FFQParticipant(
-            item.userId,
-            item.username,
-            item.userpassword,
-            item.usertype,
-            item.firstname,
-            item.lastname,
-            item.assignedResearcherInst,
-            item.assignedResearcherUsers,
-            item.childrennames,
-            item.isactive,
-			item.prefix
-          );
-        });
-      })
-    );
+  getAllParticipants(): Observable<FfqParticipant[]> {
+    return this.http.get<FfqParticipant[]>(this.endpoint + '/all');
   }
 
   //Not required at the time
@@ -81,8 +42,8 @@ export class ParticipantService {
   }
 
 
-  addMultipleParticipants(participants: FFQResearchParticipant[]): Observable<FFQResearchParticipant[]> {
-    const foo = this.http.post<FFQResearchParticipant[]>(this.endpoint + '/createManyParticipants', participants,
+  addMultipleParticipants(participants: FfqParticipant[]): Observable<FfqParticipant[]> {
+    const foo = this.http.post<FfqParticipant[]>(this.endpoint + '/createManyParticipants', participants,
       {headers: new HttpHeaders({'Content-Type': 'application/json'})});
 
     return foo;
