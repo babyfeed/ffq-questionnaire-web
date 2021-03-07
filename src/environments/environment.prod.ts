@@ -1,4 +1,7 @@
+import { environment as environmentQA} from "./environment";
+
 export const environment = {
+  ...environmentQA,
   production: true,
   thisUrl: 'https://babyfeedweb.z13.web.core.windows.net',
   apiUrl: 'https://ffq-authentication-service.azurewebsites.net',
