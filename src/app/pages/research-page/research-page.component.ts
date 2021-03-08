@@ -7,14 +7,11 @@
   import { Observable } from 'rxjs';
   import { ResearchService } from 'src/app/services/research/research-service';
   import {ResearchInstitutionService} from "src/app/services/research-institution-service/research-institution-service"
-  import {FFQResearchtResponse} from "src/app/models/ffqresearch-response";
   import {FFQInstitutionResponse} from "src/app/models/ffqinstitution-response";
-  import { FFQResearchParticipant } from 'src/app/models/ffqresearch-participant';
+  import { FfqParticipant  } from 'src/app/models/ffq-participant';
   import { ResearcherParticipantService } from 'src/app/services/research-participant/research-participant-service';
-  import { FFQParticipantResponse } from 'src/app/models/ffqresearch-participant-response'; 
-  import {FFQResearch} from 'src/app/models/ffqresearch';
+  import {FFQResearcher} from 'src/app/models/ffqresearcher';
   import { FFQInstitution } from 'src/app/models/ffqinstitution';
-  import { FFQResearchInstitutionResponse } from 'src/app/models/ffqresearch-institution-response';
   import { User } from 'src/app/models/user';
   import { Validators, FormControl } from '@angular/forms';
   import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
@@ -49,8 +46,8 @@
        }
 
     
-    ffqresearcherList: FFQResearch[] = [];
-    ffqparticipantList: FFQResearchParticipant[] = [];
+    ffqresearcherList: FFQResearcher[] = [];
+    ffqparticipantList: FfqParticipant[] = [];
     ffqinstituteList: FFQInstitution[] = [];
     instituteNames: string[] = [];
     researcherNames: string[] = [];
@@ -59,8 +56,8 @@
     public filtered_researcher: String[] = [];
     public filtered: boolean;
     private instituteId: string;
-    private researcherList: FFQResearch[] = [];
-    private participantList: FFQResearchParticipant[] = [];
+    private researcherList: FFQResearcher[] = [];
+    private participantList: FfqParticipant[] = [];
     private instituteList: FFQInstitution[] = [];
     public currentInstituteName: string;
     public UserList: User[];
@@ -126,7 +123,7 @@
   
     private getInstituteId(){
   
-      const instituteListObervable: Observable<FFQResearchInstitutionResponse[]> = this.instituteService.getAllResearchInstitutions();
+      const instituteListObervable: Observable<FFQInstitutionResponse[]> = this.instituteService.getAllResearchInstitutions();
   
       instituteListObervable.subscribe(instituteList => {
         const institution = instituteList.find(a => a.researchInstitutionId == this.loggedInUser[0].assignedinstitution);
@@ -142,11 +139,11 @@
       // loadData function serves to store the result and parent names into the FFQParentResult object
       //                  serves to display the questionnaire-result data using the specification based on PO's list
     loadData(){
-      const reseracherListObservable: Observable<FFQResearchtResponse[]> = this.researchService.getAllUsers();
+      const reseracherListObservable: Observable<FFQResearcher[]> = this.researchService.getAllUsers();
   
       reseracherListObservable.subscribe(researcherList => {
           researcherList.forEach(researcher => {
-            if (researcher.AssignedResearchInstitutionId === this.instituteId){
+            if (researcher.assignedResearchInstitutionId === this.instituteId){
               this.researcherList.push(researcher);
             }
           });
@@ -158,7 +155,7 @@
   
     //Not getting participant names
     getParticipants(){
-      const participantListObservable: Observable<FFQParticipantResponse[]> = this.participantService.getAllResearchParticipants();
+      const participantListObservable: Observable<FfqParticipant[]> = this.participantService.getAllResearchParticipants();
   
       participantListObservable.subscribe(participantList => {
         participantList.forEach(participant => {
@@ -186,7 +183,7 @@
     }
   
     getResearcherNames(){
-      const researcherList: Observable<FFQResearchtResponse[]> = this.researchService.getAllUsers();
+      const researcherList: Observable<FFQResearcher[]> = this.researchService.getAllUsers();
       researcherList.subscribe(a => {
         this.ffqresearcherList = a;
         for (let i = 0; i < a.length; i++) {
