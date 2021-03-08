@@ -71,6 +71,7 @@ import { MatRadioModule } from "@angular/material/radio";
 import { MatIconModule } from "@angular/material/icon";
 import { MatListModule } from "@angular/material/list";
 import { ResearchPageComponent } from "./pages/research-page/research-page.component";
+import { ResearchQuestionnaireComponent } from "./pages/research-questionnaire/research-questionnaire.component";
 import { ResearchUsersComponent } from './pages/research-users/research-users.component';
 import { ResearchQuestIdInputComponent } from "./pages/researcher-quest-id-input-page/researcher-quest-id-input.component"
 import { CreateParticipantModalComponent } from './components/create-participant-modal/create-participant-modal.component';
@@ -103,6 +104,7 @@ import {UpdateResearcherComponent} from "./pages/modify-researcher/modify-resear
     ResearchHeaderComponent,
     ResearchUsersComponent,
     ResearchPageComponent,
+    ResearchQuestionnaireComponent,
     ResearchQuestIdInputComponent,
     AdminResearchUsersComponent,
     ResearchHistoryComponent,

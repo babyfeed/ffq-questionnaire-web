@@ -1,18 +1,21 @@
   import {Component, OnInit} from '@angular/core';
-  import { QuestionnaireValidatorService } from '../../services/questionnaire-validator/questionnaire-validator.service';
   import {ActivatedRoute, Router} from '@angular/router';
   import {ErrorDialogPopupComponent} from '../../components/error-dialog-popup/error-dialog-popup.component';
-  import {FFQItem} from '../../models/ffqitem';
-  import {FoodItemService} from '../../services/food-item/food-item.service';
   import {log} from 'util';
   import {HttpErrorResponse} from '@angular/common/http';
-  import {QuestionnaireResponse} from '../../models/questionnaire-response';
-  import {Questionnaire} from '../../models/Questionnaire';
-  import {FFQItemCalcRequest} from '../../models/ffqitem-calc-request';
   import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-  import {ResultsPageComponent} from '../results-page/results-page.component';
-  import {FFQResult} from '../../models/FFQResult';
-  import {NutrientConstants} from '../../models/NutrientConstants';
+  import { Observable } from 'rxjs';
+  import { ResearchService } from 'src/app/services/research/research-service';
+  import {ResearchInstitutionService} from "src/app/services/research-institution-service/research-institution-service"
+  import {FFQResearchtResponse} from "src/app/models/ffqresearch-response";
+  import {FFQInstitutionResponse} from "src/app/models/ffqinstitution-response";
+  import { FFQResearchParticipant } from 'src/app/models/ffqresearch-participant';
+  import { ResearcherParticipantService } from 'src/app/services/research-participant/research-participant-service';
+  import { FFQParticipantResponse } from 'src/app/models/ffqresearch-participant-response'; 
+  import {FFQResearch} from 'src/app/models/ffqresearch';
+  import { FFQInstitution } from 'src/app/models/ffqinstitution';
+  import { FFQResearchInstitutionResponse } from 'src/app/models/ffqresearch-institution-response';
+  import { User } from 'src/app/models/user';
   import { Validators, FormControl } from '@angular/forms';
   import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
   import {MatDialog} from "@angular/material/dialog";
@@ -24,87 +27,192 @@
   })
 
   export class ResearchPageComponent implements OnInit {
+    public showResearchers: boolean;
+    public showParticipants: boolean;
+    public showInstitution: boolean;
+    private hideUnassignedParticipants: boolean;
+    private hideUnassignedResearchers: boolean;
+    p_search: string;
+    c_search: string;
+    loggedInUser = this.authenticationService.currentUserValue;
   
-    TITLE = 'SAMPLE - Food Frequency Questionnaire';
-    MAIN_MESSAGE = 'In the last 7 days and nights, how many times did your baby eat or drink the following?\n' +
-      'Include those foods and drinks given to the baby by you and others, such as grandparents, babysitters, etc.\n\n';
-    INSTRUCTIONS_TITLE = 'Instructions: \n';
-    BULLETED_INSTRUCTIONS = [
-      'For each entry, enter the number of times a food was consumed by your baby and\n' +
-      ' specify whether this was per week or per day.',
-      "If your baby did not eat this food in the last week, hit 'x' for not applicable",
-      'All open question blocks must be completely filled out before submitting the questionnaire.',
-      'Click the submit button at the bottom of the from when finished.'
-    ]; 
-   
-    hideSecondaryItems = false;
-    dataLoaded: Promise<boolean>;
-    foodItems: FFQItem[] = [];
-    tmpfoodItems: FFQItem[] = [];
+    constructor(
+      public researchService: ResearchService,
+      public participantService: ResearcherParticipantService,
+      public instituteService: ResearchInstitutionService,
+      public authenticationService: AuthenticationService,
+      private errorDialog: MatDialog,
+      private router: Router,
+      private route: ActivatedRoute,
+      ) {
+        this.authenticationService = authenticationService;
+       }
+
+    
+    ffqresearcherList: FFQResearch[] = [];
+    ffqparticipantList: FFQResearchParticipant[] = [];
+    ffqinstituteList: FFQInstitution[] = [];
+    instituteNames: string[] = [];
+    researcherNames: string[] = [];
+    researcherUserNames: string[] = [];
+    numberOfParticipants: number[] = [];
+    public filtered_researcher: String[] = [];
+    public filtered: boolean;
+    private instituteId: string;
+    private researcherList: FFQResearch[] = [];
+    private participantList: FFQResearchParticipant[] = [];
+    private instituteList: FFQInstitution[] = [];
+    public currentInstituteName: string;
+    public UserList: User[];
+    public count: 0;
   
-    constructor(public foodService: FoodItemService,
-                public questService: QuestionnaireValidatorService,
-                private activatedRoute: ActivatedRoute,
-                private errorDialog: MatDialog,
-                private submissionErrorDialog: MatDialog,
-                private httpErrorDialog: MatDialog,
-                private successDialog: MatDialog,
-                private router: Router,
-                private modalService: NgbModal,
-                private authenticationService: AuthenticationService) {}
+    ngOnInit() {
   
-    ngOnInit() {   
-      this.loadFoodItems();
+      this.showResearchers = true;
+      this.showInstitution = true;
+      this.showParticipants = true;
+      this.hideUnassignedParticipants = false;
+      this.hideUnassignedResearchers = false;
+      this.researcherNames.push('');
+      this.researcherUserNames.push('');
+      this.getInstituteId();
     }
   
+    toggleResearchers($event)
+    {
+      this.showResearchers = !this.showResearchers;
+    }
   
-    public toggleHideSecondaryItems() {
-        this.hideSecondaryItems = !this.hideSecondaryItems;
-    }  
+    toggleInstitutions($event)
+    {
+      this.showInstitution = !this.showInstitution;
+    }
   
+    toggleParticipants($event)
+    {
+      this.showParticipants = !this.showParticipants;
+    }
   
-    private loadFoodItems() {
-      this.foodService.getFoodItems().subscribe(data => {
-        data.map(response => {
-          this.tmpfoodItems.push(FFQItem.foodItemFromResponse(response));
-        
+    toggleUnassignedParticipants($event)
+    {
+      this.hideUnassignedParticipants = !this.hideUnassignedParticipants;
+    }
+  
+    toggleUnassignedResearchers($event)
+    {
+      this.hideUnassignedResearchers = !this.hideUnassignedResearchers;
+    }
+  
+    filterByResearcher(researcher_name: string)
+    {
+      const index = this.filtered_researcher.indexOf(researcher_name);
+      if (index === -1)
+      {
+        this.filtered_researcher.push(researcher_name);
+      }
+      else
+      {
+        this.filtered_researcher.splice(index, 1);
+      }
+      if (this.filtered_researcher.length == 0)
+      {
+        this.filtered = false;
+      }
+      else
+      {
+        this.filtered = true;
+      }
+    }
+  
+    private getInstituteId(){
+  
+      const instituteListObervable: Observable<FFQResearchInstitutionResponse[]> = this.instituteService.getAllResearchInstitutions();
+  
+      instituteListObervable.subscribe(instituteList => {
+        const institution = instituteList.find(a => a.researchInstitutionId == this.loggedInUser[0].assignedinstitution);
+        if (institution){
+          this.instituteId = institution.researchInstitutionId;
+          this.currentInstituteName = institution.institutionName;
+        }
+        this.getParticipants();
+      });
+  
+    }
+  
+      // loadData function serves to store the result and parent names into the FFQParentResult object
+      //                  serves to display the questionnaire-result data using the specification based on PO's list
+    loadData(){
+      const reseracherListObservable: Observable<FFQResearchtResponse[]> = this.researchService.getAllUsers();
+  
+      reseracherListObservable.subscribe(researcherList => {
+          researcherList.forEach(researcher => {
+            if (researcher.AssignedResearchInstitutionId === this.instituteId){
+              this.researcherList.push(researcher);
+            }
+          });
+          this.getNumberOfParticipants();
+          this.getResearcherNames();
+          this.getInstitutes();
         });
-  
-        this.foodItems = this.getFoodItemByPosition(this.tmpfoodItems);
-  
-        this.dataLoaded = Promise.resolve(true);
-      }, (error: HttpErrorResponse) => this.handleFoodServiceError(error));
     }
   
-  // returns a FFQ item with the itemPosition equal to the position param
-  private getFoodItemByPosition (arr:FFQItem[] ): FFQItem[]{
-    var sortedArray = arr.sort(function(a,b){
-      return a.itemPosition >b.itemPosition?1:a.itemPosition <b.itemPosition?-1:0
-     })
-     return sortedArray;
-  }
+    //Not getting participant names
+    getParticipants(){
+      const participantListObservable: Observable<FFQParticipantResponse[]> = this.participantService.getAllResearchParticipants();
   
-    private handleFoodServiceError(error: HttpErrorResponse) {
-      console.error('Error occurred.\n' + error.message);
-      const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-      dialogRef.componentInstance.title = 'Error Fetching Food Items';
-      dialogRef.componentInstance.message = error.message;
-      dialogRef.componentInstance.router = this.router;
-      dialogRef.afterClosed().subscribe(() => {
-        this.router.navigateByUrl('/');
+      participantListObservable.subscribe(participantList => {
+        participantList.forEach(participant => {
+          if (participant.assignedResearcherInst === this.instituteId && participant.prefix === this.loggedInUser[0].prefix){
+            this.participantList.push(participant);
+          }
+        });
+        this.loadData();
       });
     }
   
-    private handleQuestionnaireError(error: Error) {
-      this.router.navigateByUrl('/');
-      console.error('Error occurred: ' + error.message);
-      const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-      dialogRef.componentInstance.title = 'Error Validating Id';
-      dialogRef.componentInstance.message = error.message;
+    //Not getting participant count
+    getNumberOfParticipants(){
+      this.count = 0;
+      this.researcherList.forEach(researcher => {
+        this.participantList.forEach(participant => {
+          for (let i = 0; i < participant.assignedResearcherUsers.length; i++) {
+            if (participant.assignedResearcherUsers[i] === researcher.userId && researcher.userId === this.loggedInUser[0].userId ){
+              this.count++;
+            }
+          }
+        });
+        this.numberOfParticipants.push(this.count);
+        });
     }
   
-   
+    getResearcherNames(){
+      const researcherList: Observable<FFQResearchtResponse[]> = this.researchService.getAllUsers();
+      researcherList.subscribe(a => {
+        this.ffqresearcherList = a;
+        for (let i = 0; i < a.length; i++) {
+          this.researcherNames.push(a[i].firstname + ' ' + a[i].lastname);
+          this.researcherUserNames.push(a[i].username);
+        }
+      });
+    }
   
-  }
+    private getInstitutes(){
+  
+      const instituteListObervable: Observable<FFQInstitutionResponse[]> = this.instituteService.getAllResearchInstitutions();
+      const loggedInUser = this.authenticationService.currentUserValue;
+  
+      let instituteId: string;
+  
+      instituteListObervable.subscribe(instituteList => {
+        instituteList.forEach(institute => {
+          if (institute.researchInstitutionId === this.instituteId) {
+            this.instituteList.push(institute);
+          }
+  
+        });
+  
+      });
+  
+    }  }
   
   
