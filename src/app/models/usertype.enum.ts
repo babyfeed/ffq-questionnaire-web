@@ -1,7 +1,7 @@
 export enum Usertype {
-  Admin = 'admin',
-  Parent = 'parent',
-  Clinician = 'clinician',
-  Researcher = 'researcher',
-  Participant = 'participant'
+  admin = 'admin',
+  parent = 'parent',
+  clinician = 'clinician',
+  researcher = 'researcher',
+  participant = 'participant'
 }

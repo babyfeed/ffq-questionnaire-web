@@ -19,7 +19,7 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { CreateParticipantModalComponent} from "src/app/components/create-participant-modal/create-participant-modal.component"
 import { FFQResearcher } from "src/app/models/ffqresearcher";
-import { FFQResearchParticipant } from 'src/app/models/ffqresearch-participant';
+import { FfqParticipant } from 'src/app/models/ffq-participant';
 import { InstitutionService } from 'src/app/services/institution/institution-service';
 
 
@@ -35,7 +35,7 @@ export class ResearchUsersComponent implements OnInit {
 
   currentUser = <FFQResearcher>JSON.parse(localStorage.getItem('currentUser'))[0];
   institutionAttributes: object;
-  participants: FFQResearchParticipant[] = [];
+  participants: FfqParticipant[] = [];
   dataLoaded: Promise<boolean>;
 
   constructor(

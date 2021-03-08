@@ -41,7 +41,7 @@ export class ClinicNewUserComponent implements OnInit {
   };
   data = [];
   selectedClinic: FFQClinic;
-  userType = Usertype.Parent;
+  userType = Usertype.parent;
   userTypes = Usertype;
   ffqParent: FFQParent;
   ffqclinicList$: Observable<FFQClinic[]>;
@@ -138,7 +138,7 @@ export class ClinicNewUserComponent implements OnInit {
   }
   addUser() {
     switch (this.userType) {
-      case Usertype.Clinician: {
+      case Usertype.clinician: {
         if (this.usersQuantity === 1) {
           this.addClinician();
         } else {
@@ -146,7 +146,7 @@ export class ClinicNewUserComponent implements OnInit {
         }
         break;
       }
-      case Usertype.Parent: {
+      case Usertype.parent: {
         if (this.usersQuantity === 1) {
           this.addParent();
         } else {

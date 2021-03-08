@@ -100,7 +100,7 @@
             [hidden]="(filteredResearchInstForParticipantsList.length > 0 &&
              filteredResearchInstForParticipantsList.indexOf(
              ResearchInstNames[participant?.assignedResearcherInst - 1]) === -1)">
-          <td> {{ participant.username}} </td>
+          <td> <a [routerLink]="['/admin/user/' + usertype.participant, participant.userId]"> {{ participant.username}} </a></td>
           <td> {{ findAssignedResearcherForParticipant(participant)?.username }} </td>
           <td> {{ participant.usertype }} </td>
           <td> {{ ResearchInstNames[participant?.assignedResearcherInst - 1] }} </td>

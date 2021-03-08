@@ -33,13 +33,13 @@
 
             </tr>
             <tr *ngFor="let u of ffqclinicianList | searchFilter: search; index as i" [hidden]="!showClinicians || (filtered && filtered_clinics.indexOf(clinicNames[u.assignedclinic]) === -1)">
-                <td><a [routerLink]="['/admin/user/c', u.userId]"> {{ u.username }} </a></td>
+                <td><a [routerLink]="['/admin/user/' + usertype.clinician, u.userId]"> {{ u.username }} </a></td>
                 <td> Clinician </td>
                 <td> {{ clinicNames[u.assignedclinic] }} </td>
 
             </tr>
             <tr *ngFor="let u of ffqparentList | searchFilter: search; index as i" [hidden]="!showParents || (filtered && filtered_clinics.indexOf(clinicNames[u.assignedclinic]) === -1)">
-                <td><a [routerLink]="['/admin/user/p', u.userId]"> {{ u.username }} </a></td>
+                <td><a [routerLink]="['/admin/user/' + usertype.parent, u.userId]"> {{ u.username }} </a></td>
                 <td> Parent </td>
                 <td> {{ clinicNames[u.assignedclinic] }} </td>
 

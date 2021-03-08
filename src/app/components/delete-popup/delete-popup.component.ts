@@ -24,6 +24,9 @@ import {FFQResultsResponse} from '../../models/ffqresultsresponse';
 import {combineLatest} from "rxjs";
 import {ResultsService} from "../../services/results/results.service";
 import {FFQResearcher} from "../../models/ffqresearcher";
+import {FfqParticipant} from "../../models/ffq-participant";
+import {ParticipantService} from "../../services/participant/participant-service";
+import {environment} from "../../../environments/environment";
 
 
 @Component({
@@ -44,12 +47,14 @@ export class DeletePopupComponent implements OnInit {
   isResearch_institution = false;
   isQuestionnaire = false;
   hidden = true;
+  isParticipant = false;
 
   ngOnInit() {
     if (this.service == 'Clinician') { this.isClinician = true; }
     else if (this.service == 'Parent') { this.isParent = true; }
     else if (this.service == 'Clinic') { this.isClinic = true; }
     else if (this.service == 'Researcher') { this.isResearch = true; }
+    else if (this.service == 'Participant') { this.isParticipant = true; }
     else if (this.service == 'Research-institution') { this.isResearch_institution = true; }
     else if (this.service == 'Questionnaire') { this.isQuestionnaire = true; }
   }
@@ -58,12 +63,13 @@ export class DeletePopupComponent implements OnInit {
     public activeModal: NgbActiveModal,
     private router: Router,
     private errorDialog: MatDialog,
-    public clinicianService: ClinicianService,
-    public parentService: ParentService,
-    public clinicService: ClinicService,
-    public researchService: ResearchService,
-    public researchInstitutionService: ResearchInstitutionService,
-    public resultsService: ResultsService
+    private clinicianService: ClinicianService,
+    private parentService: ParentService,
+    private participantService: ParticipantService,
+    private clinicService: ClinicService,
+    private researchService: ResearchService,
+    private researchInstitutionService: ResearchInstitutionService,
+    private resultsService: ResultsService
   ) {}
 
   /* When confirmed deletion, this function does the delete action on the object based on its type */
@@ -88,6 +94,16 @@ export class DeletePopupComponent implements OnInit {
           const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
           dialogRef.componentInstance.title =
             'Parent ' + userName + ' was deleted';
+        });
+    } else if (this.isParticipant) {
+      let userName = (this.attributes as FfqParticipant).username;
+      this.participantService
+        .deleteItem((<FfqParticipant>this.attributes).userId)
+        .subscribe((user) => {
+          this.router.navigateByUrl(environment.routes.adminResearchUsersRoute);
+          const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+          dialogRef.componentInstance.title =
+            'Participant ' + userName + ' was deleted';
         });
     } else if (this.isClinic) {
       let clinicName = (this.attributes as FFQClinicResponse).clinicname;
