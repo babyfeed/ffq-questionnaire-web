@@ -19,18 +19,20 @@
       <table class="table table-bordered table-inverse">
         <tr>
           <th width="20"> Clinic Name </th>
-          <th width="20%"> Head Clinician </th>
+<!--          <th width="20%"> Head Clinician </th>-->
           <th width="34%"> Location </th>
           <!--<th width="14%"> Integration Date </th>-->
           <th width="13.5%"> No. of Clinicians </th>
           <th width="12.5%"> No. of Parents </th>
+          <th width="20%"> Parent Limit for Clinic </th>
         </tr>
         <tr *ngFor="let c of ffqclinicList | searchFilter: searchClinics; index as i">
           <td><a [routerLink]="['/admin/clinic/', c.clinicId]"> {{ c.clinicname }} </a></td>
-          <td> {{ clinicianNames[c.headclinician] }}</td>
+<!--          <td> {{ clinicianNames[c.headclinician] }}</td>-->
           <td> {{ c.address }} </td>
           <td> {{ (ffqclinicianList | clinicianFilter: c.clinicId).length }} </td>
           <td> {{ (ffqparentList | parentFilter: c.clinicId).length }} </td>
+          <td> {{ c.parentsLimit }} </td>
 
         </tr>
       </table>
@@ -62,14 +64,14 @@
                 <th width="60%"> Clinic </th>
 
             </tr>
-            <tr *ngFor="let u of ffqclinicianList | searchFilter: searchClinicians; index as i" [hidden]="!showClinicians || (filtered && filtered_clinics.indexOf(clinicNames[u.assignedclinic]) === -1)">
-                <td><a [routerLink]="['/admin/user/c', u.userId]"> {{ u.username }} </a></td>
+            <tr *ngFor="let u of ffqclinicianList | searchFilter: searchClinicians; index as i" [hidden]="!showClinicians || (filtered && filteredClinics.indexOf(clinicNames[u.assignedclinic]) === -1)">
+                <td><a [routerLink]="['/admin/user/' + usertype.clinician, u.userId]"> {{ u.username }} </a></td>
                 <td> Clinician </td>
                 <td> {{ clinicNames[u.assignedclinic] }} </td>
 
             </tr>
-            <tr *ngFor="let u of ffqparentList | searchFilter: searchClinicians; index as i" [hidden]="!showParents || (filtered && filtered_clinics.indexOf(clinicNames[u.assignedclinic]) === -1)">
-                <td><a [routerLink]="['/admin/user/p', u.userId]"> {{ u.username }} </a></td>
+            <tr *ngFor="let u of ffqparentList | searchFilter: searchClinicians; index as i" [hidden]="!showParents || (filtered && filteredClinics.indexOf(clinicNames[u.assignedclinic]) === -1)">
+                <td><a [routerLink]="['/admin/user/' + usertype.parent, u.userId]"> {{ u.username }} </a></td>
                 <td> Parent </td>
                 <td> {{ clinicNames[u.assignedclinic] }} </td>
 

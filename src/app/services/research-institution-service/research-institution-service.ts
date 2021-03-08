@@ -16,7 +16,7 @@ import {
 } from "@angular/http";
 import { FFQFoodItemResponse } from "src/app/models/ffqfooditem-response";
 import { FFQAdminResponse } from "src/app/models/ffqadmin-response";
-import { FFQResearchInstitutionResponse } from "src/app/models/ffqresearch-institution-response";
+import { FFQResearchInstitution } from "src/app/models/ffq-research-institution";
 import { environment } from "src/environments/environment";
 //const mongoose = require('mongoose');
 //declare var require: any
@@ -34,7 +34,7 @@ export class ResearchInstitutionService {
 
   constructor(private http: HttpClient) {}
 
-  addUser(researchInst: FFQResearchInstitutionResponse): Observable<any> {
+  addUser(researchInst: FFQResearchInstitution): Observable<any> {
     return this.http
       .post(this.endpoint + "/createInstitution", researchInst, {
         headers: new HttpHeaders({ "Content-Type": "application/json" }),
@@ -48,7 +48,7 @@ export class ResearchInstitutionService {
   }
 
   //Still not implemented
-  updateUser(researchInst: FFQResearchInstitutionResponse): Observable<any> {
+  updateUser(researchInst: FFQResearchInstitution): Observable<any> {
     return this.http
       .put(this.endpoint + "/updateinstitution", researchInst, {
         headers: new HttpHeaders({ "Content-Type": "application/json" })})
@@ -56,41 +56,31 @@ export class ResearchInstitutionService {
 
 
   //To be implemented
-  getResearchInstitution(researchInstitutionId: string): Observable<FFQResearchInstitutionResponse> {
-    return this.http.get(this.endpoint + "/" + researchInstitutionId).pipe(
-      map((item: any) => {
-        return new FFQResearchInstitutionResponse(
-          item.researchInstitutionId,
-          item.address,
-          item.createdDate,
-          item.institutionName,
-          "researchInstitution"        
-        );
-      })
-    );
+  getResearchInstitution(researchInstitutionId: string): Observable<FFQResearchInstitution> {
+    return this.http.get<FFQResearchInstitution>(this.endpoint + "/" + researchInstitutionId);
   }
-  
+
   //To be implemented
-  getResearchInstitutionByName(institutionName: string): Observable<FFQResearchInstitutionResponse> {
+  getResearchInstitutionByName(institutionName: string): Observable<FFQResearchInstitution> {
     return this.http.get(this.endpoint + "/name/" + institutionName).pipe(
       map((item: any) => {
-        return new FFQResearchInstitutionResponse(
+        return new FFQResearchInstitution(
           item.researchInstitutionId,
           item.address,
           item.createdDate,
           item.institutionName,
-          "researchInstitution"        
+          "researchInstitution"
         );
       })
     );
   }
 
-  getAllResearchInstitutions(): Observable<FFQResearchInstitutionResponse[]> {
+  getAllResearchInstitutions(): Observable<FFQResearchInstitution[]> {
     // getMongoUsers();
     return this.http.get(this.endpoint + "/all").pipe(
       map((res: any) => {
         return res.map((item) => {
-          return new FFQResearchInstitutionResponse(
+          return new FFQResearchInstitution(
           item.researchInstitutionId,
           item.address,
           item.createdDate,
@@ -102,7 +92,7 @@ export class ResearchInstitutionService {
     );
   }
 
-  deleteItem(researchInstitutionId: string): Observable<any> {   
+  deleteItem(researchInstitutionId: string): Observable<any> {
     return this.http.delete(this.endpoint + "/delete?researchInstitutionId=" + researchInstitutionId, {
       responseType: "text",
     });

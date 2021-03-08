@@ -41,7 +41,7 @@ export class ClinicNewUserComponent implements OnInit {
   };
   data = [];
   selectedClinic: FFQClinic;
-  userType = Usertype.Parent;
+  userType = Usertype.parent;
   userTypes = Usertype;
   ffqParent: FFQParent;
   ffqclinicList$: Observable<FFQClinic[]>;
@@ -51,8 +51,10 @@ export class ClinicNewUserComponent implements OnInit {
   currentUser: Observable<FFQClinician[]>;
   clicked = false;
   noMoreRoom = false;
-  limit = this.loggedInUser[0].parentLimitForClinician;
+  // limit = this.loggedInUser[0].parentLimitForClinician;
+  limit = 0;
   numParents = 0;
+  newLimit = 0;
   prefix = this.loggedInUser[0].prefix;
   lastUserId;
   suffix;
@@ -69,6 +71,7 @@ export class ClinicNewUserComponent implements OnInit {
   newNumber: number;
   notFound = true;
   noUsers: boolean;
+  loggedinClinic: Observable<FFQClinicResponse>;
 
   constructor(
     public parentService: ParentService,
@@ -117,17 +120,25 @@ export class ClinicNewUserComponent implements OnInit {
 
   }
   countParents(){
+    for (let i = 0; i < this.ffqclinicList.length; i++){
+      if (this.loggedInUser[0].assignedclinic === this.ffqclinicList[i].clinicId) {
+        this.limit = this.ffqclinicList[i].parentsLimit;
+      }
+    }
+
     for (let i = 0; i < this.ffqparentList.length; i++){
-      if (this.loggedInUser[0].userId === this.ffqparentList[i].assignedclinician){
+      if (this.loggedInUser[0].assignedclinic === this.ffqparentList[i].assignedclinic){
         this.numParents ++;
       }
-      if (this.limit - this.numParents <= 0){
-        this.noMoreRoom = true;
-      }
-    }}
+    }
+    if (this.limit - this.numParents <= 0){
+      this.noMoreRoom = true;
+    }
+    this.newLimit = this.limit - this.numParents;
+  }
   addUser() {
     switch (this.userType) {
-      case Usertype.Clinician: {
+      case Usertype.clinician: {
         if (this.usersQuantity === 1) {
           this.addClinician();
         } else {
@@ -135,7 +146,7 @@ export class ClinicNewUserComponent implements OnInit {
         }
         break;
       }
-      case Usertype.Parent: {
+      case Usertype.parent: {
         if (this.usersQuantity === 1) {
           this.addParent();
         } else {
@@ -296,30 +307,10 @@ export class ClinicNewUserComponent implements OnInit {
     }
   }
   addMultipleParents() {
-    if (this.ffqparentList.length === 0) {
-      this.parentName = this.prefix + '_1';
-      this.toStrip = this.prefix + '_';
-      for (let i = 0; i < this.usersQuantity; i++) {
-        this.generatePassword();
-
-        this.newParents.push(new FFQParent('', this.parentName, this.userPassword, 'parent', '',
-          '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true, this.prefix));
-        this.newNumber = parseInt(this.parentName.replace(this.toStrip, ''), 10) + 1;
-        this.parentName = this.toStrip + this.newNumber.toString();
-      }
-      this.noUsers = true;
-    }
-    if (!this.noUsers) {
-      if (this.prefix === '') {
-        for (let i = 0; i < this.usersQuantity; i++) {
-          this.prefix = 'parent';
-          this.generatePassword();
-          this.newParents.push(new FFQParent('', this.parentName, this.userPassword, 'parent', '',
-            '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true, this.prefix));
-          this.suffix++;
-        }
-      } else {
-        this.userNameCreator();
+    if (this.usersQuantity <= this.newLimit){
+      if (this.ffqparentList.length === 0) {
+        this.parentName = this.prefix + '_1';
+        this.toStrip = this.prefix + '_';
         for (let i = 0; i < this.usersQuantity; i++) {
           this.generatePassword();
 
@@ -328,21 +319,48 @@ export class ClinicNewUserComponent implements OnInit {
           this.newNumber = parseInt(this.parentName.replace(this.toStrip, ''), 10) + 1;
           this.parentName = this.toStrip + this.newNumber.toString();
         }
+        this.noUsers = true;
       }
-    }
+      if (!this.noUsers) {
+        if (this.prefix === '') {
+          for (let i = 0; i < this.usersQuantity; i++) {
+            this.prefix = 'parent';
+            this.generatePassword();
+            this.newParents.push(new FFQParent('', this.parentName, this.userPassword, 'parent', '',
+              '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true, this.prefix));
+            this.suffix++;
+          }
+        } else {
+          this.userNameCreator();
+          for (let i = 0; i < this.usersQuantity; i++) {
+            this.generatePassword();
 
-    this.parentService.addMultipleParents(this.newParents).subscribe(clinicians => {
-        const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-        dialogRef.componentInstance.title = 'Users<br/>' + clinicians.map(clinician => clinician.username).join('<br/>') + '<br/>were added!';
-        console.log(this.newParents[0].username);
-        this.save2csvMultipleParent();
-        this.dissabled = true;
-      },
-      error => {
-        const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-        dialogRef.componentInstance.title = error.error.message;
-        this.router.navigateByUrl('/clinic/home');
-      });
+            this.newParents.push(new FFQParent('', this.parentName, this.userPassword, 'parent', '',
+              '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true, this.prefix));
+            this.newNumber = parseInt(this.parentName.replace(this.toStrip, ''), 10) + 1;
+            this.parentName = this.toStrip + this.newNumber.toString();
+          }
+        }
+      }
+
+      this.parentService.addMultipleParents(this.newParents).subscribe(clinicians => {
+          const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+          dialogRef.componentInstance.title = 'Users<br/>' + clinicians.map(clinician => clinician.username).join('<br/>') + '<br/>were added!';
+          console.log(this.newParents[0].username);
+          this.save2csvMultipleParent();
+          this.dissabled = true;
+        },
+        error => {
+          const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+          dialogRef.componentInstance.title = error.error.message;
+          this.router.navigateByUrl('/clinic/home');
+        });
+    }
+    else {
+      const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+      dialogRef.componentInstance.title = '<center>Cannot add more Parents than allowed limit<br/> ' +
+        'Contact admin if this is an error or to increase limit<br/></center>';
+    }
   }
   generatePassword() {
     this.userPassword = Math.random().toString(36).slice(-10);

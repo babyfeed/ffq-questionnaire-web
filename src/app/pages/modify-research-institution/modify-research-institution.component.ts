@@ -7,7 +7,7 @@ import {Observable} from 'rxjs';
 import {ResearchInstitutionService} from 'src/app/services/research-institution-service/research-institution-service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {DeletePopupComponent} from "src/app/components/delete-popup/delete-popup.component";
-import { FFQResearchInstitutionResponse } from "src/app/models/ffqresearch-institution-response";
+import { FFQResearchInstitution } from "src/app/models/ffq-research-institution";
 import { FFQInstitution } from 'src/app/models/ffqinstitution';
 
 
@@ -18,15 +18,15 @@ import { FFQInstitution } from 'src/app/models/ffqinstitution';
 })
 export class UpdateResearchInstitutionComponent implements OnInit, OnDestroy {
 
-  name_of_research_institution: string;  
+  name_of_research_institution: string;
   id_of_research_institution: string;
   location: string;
-  private subscriptions = []; 
+  private subscriptions = [];
   dataLoaded: Promise<boolean>;
-  public selectedResearchInstitution:FFQResearchInstitutionResponse;
+  public selectedResearchInstitution:FFQResearchInstitution;
   researchInstitutionAttributes: FFQInstitution;
-  
-  
+
+
   constructor(
     private researchInstitutionService: ResearchInstitutionService,
     private errorDialog: MatDialog,
@@ -35,15 +35,15 @@ export class UpdateResearchInstitutionComponent implements OnInit, OnDestroy {
     private modalService: NgbModal
   ) { }
 
-  ngOnInit() {     
+  ngOnInit() {
 
-    const UserID = this.route.snapshot.paramMap.get('id'); 
-          
-    var researchInstitutionResult: Observable<FFQResearchInstitutionResponse> = this.researchInstitutionService.getResearchInstitution(UserID);
-    
+    const UserID = this.route.snapshot.paramMap.get('id');
+
+    var researchInstitutionResult: Observable<FFQResearchInstitution> = this.researchInstitutionService.getResearchInstitution(UserID);
+
     researchInstitutionResult.subscribe(data => {
-      
-      this.selectedResearchInstitution = data;  
+
+      this.selectedResearchInstitution = data;
 
       this.researchInstitutionAttributes = this.selectedResearchInstitution;
       this.id_of_research_institution = this.selectedResearchInstitution.researchInstitutionId;
@@ -51,27 +51,27 @@ export class UpdateResearchInstitutionComponent implements OnInit, OnDestroy {
       this.location = this.selectedResearchInstitution.address;
 
       if(data != null)
-      { 
-        this.dataLoaded = Promise.resolve(true);       
-      }     
-    
-       
+      {
+        this.dataLoaded = Promise.resolve(true);
+      }
+
+
     })
-       
-   
-    
-  }  
+
+
+
+  }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
- 
 
-  updateResearchInstitution() {   
 
-    this.researchInstitutionService.updateUser(<FFQResearchInstitutionResponse>this.researchInstitutionAttributes).subscribe(
-      data => {   
+  updateResearchInstitution() {
+
+    this.researchInstitutionService.updateUser(<FFQResearchInstitution>this.researchInstitutionAttributes).subscribe(
+      data => {
         this.router.navigateByUrl("/admin/research/users");
         const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
         dialogRef.componentInstance.title = 'Research Institution successfully updated!';
@@ -80,7 +80,7 @@ export class UpdateResearchInstitutionComponent implements OnInit, OnDestroy {
   }
 
   deleteResearchInstitution() {
-    const confirmDelete = this.modalService.open(DeletePopupComponent);    
+    const confirmDelete = this.modalService.open(DeletePopupComponent);
     confirmDelete.componentInstance.service = "Research-institution";
     confirmDelete.componentInstance.attributes = this.researchInstitutionAttributes;
   }

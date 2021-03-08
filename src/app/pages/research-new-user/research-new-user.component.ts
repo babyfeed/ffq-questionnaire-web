@@ -2,20 +2,16 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {ErrorDialogPopupComponent} from 'src/app/components/error-dialog-popup/error-dialog-popup.component';
-import {Subscription} from 'rxjs/internal/Subscription';
 import {combineLatest, Observable} from 'rxjs';
 import {ParticipantService} from 'src/app/services/participant/participant-service';
 import {ResearchService} from 'src/app/services/research/research-service';
-import {FFQResearchParticipant} from 'src/app/models/ffqresearch-participant';
-import {FFQResearch} from 'src/app/models/ffqresearch';
+import {FfqParticipant} from 'src/app/models/ffq-participant';
+import {FFQResearcher} from 'src/app/models/ffqresearcher';
 import {ResearchInstitutionService} from 'src/app/services/research-institution-service/research-institution-service';
 import {FFQInstitution} from 'src/app/models/ffqinstitution';
 import {Usertype} from '../../models/usertype.enum';
 import {AuthenticationService} from '../../services/authentication/authentication.service';
-import {User} from '../../models/user';
 import {skipWhile, take} from 'rxjs/operators';
-import {FFQParticipantResponse} from '../../models/ffqresearch-participant-response';
-// import { Angular2CsvComponent } from 'angular2-csv/Angular2-csv';
 import {FFQInstitutionResponse} from '../../models/ffqinstitution-response';
 
 @Component({
@@ -40,14 +36,13 @@ export class ResearchNewUserComponent implements OnInit {
   };
   data = [];
   selectedInstitution: FFQInstitution;
-  userType = Usertype.Participant;
+  userType = Usertype.participant;
   userTypes = Usertype;
-  ffqParticipant: FFQResearchParticipant;
+  ffqParticipant: FfqParticipant;
   ffqInstitutionList$: Observable<FFQInstitution[]>;
   usersQuantity = 1;
-  currentUser$: Observable<FFQResearch[]>;
-  private participantLimitForResearch: number;
-  currentUser: Observable<FFQResearch[]>;
+  currentUser$: Observable<FFQResearcher[]>;
+  currentUser: Observable<FFQResearcher[]>;
   clicked = false;
   noMoreRoom = false;
   limit = this.loggedInUser[0].limitNumberOfParticipants;
@@ -78,12 +73,12 @@ export class ResearchNewUserComponent implements OnInit {
     private authenticationService: AuthenticationService
   ) {
     this.ffqInstitutionList$ = this.institutionService.getAllResearchInstitutions();
-    this.currentUser$ = this.authenticationService.currentUser as unknown as Observable<FFQResearch[]>;
+    this.currentUser$ = this.authenticationService.currentUser as unknown as Observable<FFQResearcher[]>;
     this.currentUser = this.currentUser$;
   }
 
   numberOfPatients: number[] = [];
-  ffqparticipantList: FFQResearchParticipant[] = [];
+  ffqparticipantList: FfqParticipant[] = [];
   ffqinstitutionList: FFQInstitution[] = [];
 
 
@@ -92,10 +87,15 @@ export class ResearchNewUserComponent implements OnInit {
       skipWhile(([users, institutions]) => users.length === 0 || institutions.length === 0),
       take(1))
       .subscribe(([user, institution]) => {
-        this.selectedInstitution = institution.find(i => i.researchInstitutionId === user[0].AssignedResearchInstitutionId);
+        this.selectedInstitution = institution.find(i => {
+          console.log(i.researchInstitutionId);
+          console.log(user[0].assignedResearchInstitutionId);
+          return i.researchInstitutionId === user[0].assignedResearchInstitutionId;
+        }
+        );
       });
 
-    const participantList: Observable<FFQParticipantResponse[]> = this.participantService.getAllParticipants();
+    const participantList: Observable<FfqParticipant[]> = this.participantService.getAllParticipants();
     participantList.subscribe(a => {
       this.ffqparticipantList = a;
     });
@@ -106,7 +106,7 @@ export class ResearchNewUserComponent implements OnInit {
   }
   getInstiutionName() {
     for (const item of this.ffqinstitutionList) {
-      if ( this.loggedInUser[0].AssignedResearchInstitutionId === item.researchInstitutionId){
+      if ( this.loggedInUser[0].assignedResearchInstitutionId === item.researchInstitutionId){
         this.loggedInInstitutionName = item.institutionName;
       }
     }
@@ -124,7 +124,7 @@ export class ResearchNewUserComponent implements OnInit {
     }}
   addUser() {
     switch (this.userType) {
-      case Usertype.Participant: {
+      case Usertype.participant: {
         if (this.usersQuantity === 1) {
           this.addParticipant();
         } else {
@@ -145,7 +145,7 @@ export class ResearchNewUserComponent implements OnInit {
 
   userNameCreator() {
     for (let i = 0; i <= this.ffqparticipantList.length - 1; i++){
-      if (this.ffqparticipantList[i].assignedResearcherInst === this.loggedInUser[0].AssignedResearchInstitutionId
+      if (this.ffqparticipantList[i].assignedResearcherInst === this.loggedInUser[0].assignedResearchInstitutionId
         && this.ffqparticipantList[i].prefix === this.loggedInUser[0].prefix){
 
         this.notFound = false;
@@ -170,7 +170,7 @@ export class ResearchNewUserComponent implements OnInit {
     this.generatePassword();
     if (this.ffqparticipantList.length === 0) {
       this.participantName = this.prefix + '_1';
-      this.ffqParticipant = new FFQResearchParticipant('', this.participantName, this.userPassword,
+      this.ffqParticipant = new FfqParticipant('', this.participantName, this.userPassword,
         'participant', '', '', this.selectedInstitution.researchInstitutionId,
         [this.loggedInUser[0].userId], [''], true, this.prefix);
       this.noUsers = true;
@@ -178,12 +178,12 @@ export class ResearchNewUserComponent implements OnInit {
     if (!this.noUsers) {
       if (this.prefix === '') {
         this.prefix = 'participant';
-        this.ffqParticipant = new FFQResearchParticipant('', '', this.userPassword, 'participant',
+        this.ffqParticipant = new FfqParticipant('', '', this.userPassword, 'participant',
           '', '', this.selectedInstitution.researchInstitutionId,
           [this.loggedInUser[0].userId], [''], true, this.prefix);
       } else {
         this.userNameCreator();
-        this.ffqParticipant = new FFQResearchParticipant('', this.participantName, this.userPassword,
+        this.ffqParticipant = new FfqParticipant('', this.participantName, this.userPassword,
           'participant', '', '', this.selectedInstitution.researchInstitutionId,
           [this.loggedInUser[0].userId], [''], true, this.prefix);
       }
@@ -217,7 +217,7 @@ export class ResearchNewUserComponent implements OnInit {
     this.data[0].userName = 'Assingned institution: ';
     this.data[0].password = this.loggedInInstitutionName;
     this.data[1].userName = 'Assingned institution ID: ';
-    this.data[1].password = this.loggedInUser[0].AssignedResearchInstitutionId;
+    this.data[1].password = this.loggedInUser[0].assignedResearchInstitutionId;
     this.data[2].userName = 'Assingned researcher: ';
     this.data[2].password = this.loggedInUser[0].username;
     this.data[3].userName = '';
@@ -245,7 +245,7 @@ export class ResearchNewUserComponent implements OnInit {
     this.data[0].userName = 'Assingned institution: ';
     this.data[0].password = this.loggedInInstitutionName;
     this.data[1].userName = 'Assingned institution ID: ';
-    this.data[1].password = this.loggedInUser[0].AssignedResearchInstitutionId;
+    this.data[1].password = this.loggedInUser[0].assignedResearchInstitutionId;
     this.data[2].userName = 'Assingned researcher: ';
     this.data[2].password = this.loggedInUser[0].username;
     this.data[3].userName = '';
@@ -267,7 +267,7 @@ export class ResearchNewUserComponent implements OnInit {
       this.toStrip = this.prefix + '_';
       for (let i = 0; i < this.usersQuantity; i++) {
         this.generatePassword();
-        this.newParticipants.push(new FFQResearchParticipant('', this.participantName, this.userPassword,
+        this.newParticipants.push(new FfqParticipant('', this.participantName, this.userPassword,
           'participant', '', '', this.selectedInstitution.researchInstitutionId,
           [this.loggedInUser[0].userId], [''], true, this.prefix));
         this.newNumber = parseInt(this.participantName.replace(this.toStrip, ''), 10) + 1;
@@ -281,7 +281,7 @@ export class ResearchNewUserComponent implements OnInit {
         for (let i = 0; i < this.usersQuantity; i++) {
           this.prefix = this.ffqinstitutionList[0].institutionName;
           this.generatePassword();
-          this.newParticipants.push(new FFQResearchParticipant('', this.participantName, this.userPassword,
+          this.newParticipants.push(new FfqParticipant('', this.participantName, this.userPassword,
             'participant', '', '', this.selectedInstitution.researchInstitutionId,
             [this.loggedInUser[0].userId], [''], true, this.prefix));
           this.suffix++;
@@ -290,7 +290,7 @@ export class ResearchNewUserComponent implements OnInit {
         this.userNameCreator();
         for (let i = 0; i < this.usersQuantity; i++) {
           this.generatePassword();
-          this.newParticipants.push(new FFQResearchParticipant('', this.participantName, this.userPassword,
+          this.newParticipants.push(new FfqParticipant('', this.participantName, this.userPassword,
             'participant', '', '', this.selectedInstitution.researchInstitutionId,
             [this.loggedInUser[0].userId], [''], true, this.prefix));
 

@@ -14,18 +14,12 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { ResearcherParentService } from "../../services/researcher-parent/researcher-parent-service";
 import { HttpErrorResponse } from "@angular/common/http";
 import { ErrorDialogPopupComponent } from "src/app/components/error-dialog-popup/error-dialog-popup.component";
-import { FFQFoodNutrientsResponse } from "src/app/models/ffqfoodnutrients-response";
-import { PopupComponent } from "src/app/components/popup/popup.component";
 import { FlashMessagesService } from "angular2-flash-messages";
-import { moveItemInArray } from "@angular/cdk/drag-drop";
-import { CdkDragDrop } from "@angular/cdk/drag-drop";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { CreateParticipantModalComponent} from "src/app/components/create-participant-modal/create-participant-modal.component"
-import { FFQResearcherParentResponse } from 'src/app/models/ffqresearcherparent-response';
-import { FFQResearch } from "src/app/models/ffqresearch";
-import { BehaviorSubject } from 'rxjs';
-import { FFQResearchParticipant } from 'src/app/models/ffqresearch-participant';
+import { FFQResearcher } from "src/app/models/ffqresearcher";
+import { FfqParticipant } from 'src/app/models/ffq-participant';
 import { InstitutionService } from 'src/app/services/institution/institution-service';
 
 
@@ -39,9 +33,9 @@ export class ResearchUsersComponent implements OnInit {
   TITLE = "FFQR Research Portal";
   endpoint = environment.foodServiceUrl + "/ffq";
 
-  currentUser = <FFQResearch>JSON.parse(localStorage.getItem('currentUser'))[0];
+  currentUser = <FFQResearcher>JSON.parse(localStorage.getItem('currentUser'))[0];
   institutionAttributes: object;
-  participants: FFQResearchParticipant[] = [];
+  participants: FfqParticipant[] = [];
   dataLoaded: Promise<boolean>;
 
   constructor(
@@ -62,7 +56,7 @@ export class ResearchUsersComponent implements OnInit {
 
   ngOnInit() {
     this.findAllParticipants();
-    this.getInstitutionById(this.currentUser.AssignedResearchInstitutionId);
+    this.getInstitutionById(this.currentUser.assignedResearchInstitutionId);
   }
 
   onOpenCreateParticipantModal(): void {
@@ -83,7 +77,7 @@ export class ResearchUsersComponent implements OnInit {
   }
 
   private findAllParticipants() {
-    this.researchParentService.getAllParticipants(this.currentUser.AssignedResearchInstitutionId).subscribe(
+    this.researchParentService.getAllParticipants(this.currentUser.assignedResearchInstitutionId).subscribe(
       (data) => {
         data.map((response) => {
           if (response.assignedResearcherUsers[0] === this.currentUser.userId) {

@@ -10,12 +10,7 @@
 
       <div class="container mt-3">
         <div align="right">
-          <!-- Remove comments below if you want the option to delete research institution (feature is completely functional)
-               Reminder:Researcher users have a research institution assigned. If an institution is deleted, a researcher
-               might be without research institution and this can have errors in the UI. 
-               If this option is to be available, ensure that researchers are assigned to a different institution or deleted 
-               as well-->
-          <!-- <button mat-raised-button class="delete" style="margin-right: 20px;" (click)="deleteResearchInstitution()"> Delete </button> -->
+           <button mat-raised-button class="delete" style="margin-right: 20px;" (click)="deleteResearchInstitution()"> Delete </button>
           <button mat-raised-button class="update" (click)="updateResearchInstitution()"
                   [disabled]="!myForm.form.valid"> Update</button>
         </div>
@@ -33,8 +28,8 @@
             <br>
             <label style="font-weight: bold"> Location </label>
             <input placeholder="Address" width="25" style="border-width: 0.05cm" type="text"
-                   class="form-control" name="address" [(ngModel)]="researchInstitutionAttributes.address"/>          
-            <br>           
+                   class="form-control" name="address" [(ngModel)]="researchInstitutionAttributes.address"/>
+            <br>
 
           </div>
         </div>

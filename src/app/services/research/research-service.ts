@@ -1,23 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { FFQItemResponse } from '../../models/ffqitem-response';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { FFQItemCalcRequest } from '../../models/ffqitem-calc-request';
-import { FFQFoodNutrientsResponse } from 'src/app/models/ffqfoodnutrients-response';
-import { FFQFoodItem } from 'src/app/models/ffqfooditem';
-import { ɵangular_packages_forms_forms_q } from '@angular/forms';
-import {
-  Http,
-  Headers,
-  Response,
-  RequestOptions,
-  RequestMethod,
-} from '@angular/http';
-import { FFQFoodItemResponse } from 'src/app/models/ffqfooditem-response';
-import { FFQAdminResponse } from 'src/app/models/ffqadmin-response';
-import { FFQResearchtResponse } from 'src/app/models/ffqresearch-response';
 import { environment } from 'src/environments/environment';
+import {FFQResearcher} from "../../models/ffqresearcher";
 
 @Injectable({
   providedIn: 'root',
@@ -27,14 +13,14 @@ export class ResearchService {
 
   constructor(private http: HttpClient) {}
 
-  addResearcher(user: FFQResearchtResponse): Observable<any> {
+  addResearcher(user: FFQResearcher): Observable<any> {
     return this.http
       .post(this.endpoint + '/createuser', user, {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       });
   }
 
-  addMultipleResearchers(user: FFQResearchtResponse[]): Observable<any> {
+  addMultipleResearchers(user: FFQResearcher[]): Observable<any> {
     return this.http
       .post(this.endpoint + '/createMany', user, {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -48,7 +34,7 @@ export class ResearchService {
   }
 
   // Still not implemented
-  updateUser(user: FFQResearchtResponse): Observable<any> {
+  updateUser(user: FFQResearcher): Observable<any> {
     return this.http
       .put(this.endpoint + '/updateuser', user, {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -56,10 +42,10 @@ export class ResearchService {
   }
 
   // To be implemented
-  getUser(userId: string): Observable<FFQResearchtResponse> {
+  getUser(userId: string): Observable<FFQResearcher> {
     return this.http.get(this.endpoint + '/users/' + userId).pipe(
       map((item: any) => {
-        return new FFQResearchtResponse(
+        return new FFQResearcher(
           item.userId,
           item.username,
           item.userpassword,
@@ -67,7 +53,7 @@ export class ResearchService {
           item.firstname,
           item.lastname,
           item.isactive,
-          item.AssignedResearchInstitutionId,
+          item.assignedResearchInstitutionId,
           item.limitNumberOfParticipants,
           item.prefix
         );
@@ -76,10 +62,10 @@ export class ResearchService {
   }
 
 // To be implemented
-  getUserById(userId: string): Observable<FFQResearchtResponse> {
+  getUserById(userId: string): Observable<FFQResearcher> {
     return this.http.get(this.endpoint + '/' + userId).pipe(
       map((item: any) => {
-        return new FFQResearchtResponse(
+        return new FFQResearcher(
           item.userId,
           item.username,
           item.userpassword,
@@ -87,7 +73,7 @@ export class ResearchService {
           item.firstname,
           item.lastname,
           item.isactive,
-          item.AssignedResearchInstitutionId,
+          item.assignedResearchInstitutionId,
           item.limitNumberOfParticipants,
           item.prefix
         );
@@ -95,12 +81,12 @@ export class ResearchService {
     );
   }
 
-  getAllUsers(): Observable<FFQResearchtResponse[]> {
+  getAllUsers(): Observable<FFQResearcher[]> {
     // getMongoUsers();
     return this.http.get(this.endpoint + '/all').pipe(
       map((res: any) => {
         return res.map((item) => {
-          return new FFQResearchtResponse(
+          return new FFQResearcher(
             item.userId,
             item.username,
             item.userpassword,
@@ -108,7 +94,7 @@ export class ResearchService {
             item.firstname,
             item.lastname,
             item.isactive,
-            item.AssignedResearchInstitutionId,
+            item.assignedResearchInstitutionId,
             item.limitNumberOfParticipants,
             item.prefix
           );

@@ -8,29 +8,31 @@
 
 */
 
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
-import { ErrorDialogPopupComponent } from 'src/app/components/error-dialog-popup/error-dialog-popup.component';
-import { FormGroup, FormControl, Validators, ReactiveFormsModule, NgForm } from '@angular/forms';
-import { Subscription } from 'rxjs/internal/Subscription';
-import { FormsModule } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { ParentService } from 'src/app/services/parent/parent-service';
-import { ClinicianService } from 'src/app/services/clinician/clinician-service';
-import { FFQClinicianResponse } from 'src/app/models/ffqclinician-response';
-import { FFQParent } from 'src/app/models/ffqparent';
-import { FFQClinician } from 'src/app/models/ffqclinician';
-import { FFQParentResponse } from 'src/app/models/ffqparent-response';
-import { FFQClinicResponse } from 'src/app/models/ffqclinic-response';
-import { ClinicService } from 'src/app/services/clinic/clinic-service';
-import { FFQClinic } from 'src/app/models/ffqclinic';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DeletePopupComponent } from 'src/app/components/delete-popup/delete-popup.component';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {MatDialog} from '@angular/material/dialog';
+import {ErrorDialogPopupComponent} from 'src/app/components/error-dialog-popup/error-dialog-popup.component';
+import {Observable} from 'rxjs';
+import {ParentService} from 'src/app/services/parent/parent-service';
+import {ClinicianService} from 'src/app/services/clinician/clinician-service';
+import {FFQClinicianResponse} from 'src/app/models/ffqclinician-response';
+import {FFQParent} from 'src/app/models/ffqparent';
+import {FFQClinician} from 'src/app/models/ffqclinician';
+import {FFQParentResponse} from 'src/app/models/ffqparent-response';
+import {FFQClinicResponse} from 'src/app/models/ffqclinic-response';
+import {ClinicService} from 'src/app/services/clinic/clinic-service';
+import {FFQClinic} from 'src/app/models/ffqclinic';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {DeletePopupComponent} from 'src/app/components/delete-popup/delete-popup.component';
 import {Usertype} from '../../models/usertype.enum';
+import {ParticipantService} from "../../services/participant/participant-service";
+import {FfqParticipant} from "../../models/ffq-participant";
+import {ResearchInstitutionService} from "../../services/research-institution-service/research-institution-service";
+import {FFQResearchInstitution} from "../../models/ffq-research-institution";
+import {environment} from "../../../environments/environment";
 
 @Component({
-  selector: 'app-new-clinic',
+  selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
@@ -52,7 +54,6 @@ export class UserComponent implements OnInit {
   prefix: string;
   able2AddClinicians: number;
   able2AddParents: number;
-  userType: Usertype;
   userTypes = Usertype;
   ffqParent: FFQParent;
   ffqclinician: FFQClinician;
@@ -86,9 +87,12 @@ export class UserComponent implements OnInit {
     removeNewLines: true,
     keys: ['userName', 'password' ]
   };
+  userType: Usertype;
 
   constructor(
-    public parentService: ParentService,
+    private parentService: ParentService,
+    private participantService: ParticipantService,
+    private researchInstitutionService: ResearchInstitutionService,
     public clinicianService: ClinicianService,
     private errorDialog: MatDialog,
     private router: Router,
@@ -104,21 +108,25 @@ export class UserComponent implements OnInit {
 
   }
 
-  userAttributes: FFQClinician | FFQParent;
+  userAttributes: FFQClinician | FFQParent | FfqParticipant;
   dataLoaded: Promise<boolean>;
 
   // ffqclinician: FFQClinician;
   amountToAdd: number;
-  isParent: boolean;
-  isClinician: boolean;
   isProcessing: boolean;
 
   public ffqclinicList: FFQClinic[] = [];
+  public researchInstitutionList: FFQResearchInstitution[] = [];
   public ffqclinicianList: FFQClinician[] = [];
   public ffqparentList: FFQParent[] = [];
   clinicNames: string[] = [];
   clinicIds: Map<string, string> = new Map<string, string>();
   clinicId: string;
+  get backToListLink(): string {
+    return this.isParticipant ?
+      environment.routes.adminResearchUsersRoute :
+      environment.routes.adminUserRoute
+  }
 
   ngOnInit() {
 
@@ -126,11 +134,9 @@ export class UserComponent implements OnInit {
     this.createParents = false;
     this.createClinician = false;
     this.createResearcher = false;
-    this.isParent = false;
-    this.isClinician = false;
     this.clinicNames.push('');
 
-    const UserType = this.route.snapshot.paramMap.get('type');
+    this.userType = Usertype[this.route.snapshot.paramMap.get('type')];
     const UserID = this.route.snapshot.paramMap.get('id');
 
     if (UserID === 'new')
@@ -141,11 +147,15 @@ export class UserComponent implements OnInit {
     else
     {
       this.isUpdate = true;
-      if (UserType === 'p')
+      if (this.userType === Usertype.parent)
       {
         this.getParentByID(UserID);
       }
-      else
+        else if (this.userType === Usertype.participant)
+      {
+        this.getParticipantByID(UserID);
+      }
+        else
       {
         this.getClinicianByID(UserID);
       }
@@ -158,6 +168,10 @@ export class UserComponent implements OnInit {
         this.clinicIds.set(clinic.clinicname, clinic.clinicId);
         this.clinicNames.push(clinic.clinicname);
       });
+    });
+
+    this.researchInstitutionService.getAllResearchInstitutions().subscribe(researchInstitutions => {
+      this.researchInstitutionList = researchInstitutions;
     });
 
     const parentList: Observable<FFQParentResponse[]> = this.parentService.getAllParents();
@@ -215,7 +229,7 @@ export class UserComponent implements OnInit {
   addUser() {
 
     switch (this.userType) {
-      case Usertype.Clinician: {
+      case Usertype.clinician: {
         if (this.usersQuantity === 1) {
           this.addClinician();
         } else {
@@ -223,7 +237,7 @@ export class UserComponent implements OnInit {
         }
         break;
       }
-      case Usertype.Parent: {
+      case Usertype.parent: {
         console.log(this.selectedClinician);
         if (this.usersQuantity === 1) {
           if (this.selectedClinician === undefined){
@@ -486,8 +500,15 @@ export class UserComponent implements OnInit {
 
   getParentByID(id: string)
   {
-    this.isParent = true;
     this.parentService.getParent(id).subscribe(data => {
+      this.userAttributes = data;
+    });
+    this.dataLoaded = Promise.resolve(true);
+  }
+
+  getParticipantByID(id: string)
+  {
+    this.participantService.getParticipant(id).subscribe(data => {
       this.userAttributes = data;
     });
     this.dataLoaded = Promise.resolve(true);
@@ -495,7 +516,6 @@ export class UserComponent implements OnInit {
 
   getClinicianByID(id: string)
   {
-    this.isClinician = true;
     this.clinicianService.getClinician(id).subscribe(data => {
       this.userAttributes = data;
     });
@@ -507,6 +527,10 @@ export class UserComponent implements OnInit {
     if (this.isParent)
     {
       this.updateParent();
+    }
+    else if (this.isParticipant)
+    {
+      this.updateParticipant();
     }
     else
     {
@@ -520,6 +544,15 @@ export class UserComponent implements OnInit {
       data => {this.router.navigateByUrl('/admin/users');
         const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
         dialogRef.componentInstance.title = 'Parent successfully updated!'; }
+    );
+  }
+
+  updateParticipant()
+  {
+    this.participantService.updateParticipant(this.userAttributes as FfqParticipant).subscribe(
+      data => {this.router.navigateByUrl(environment.routes.adminResearchUsersRoute);
+        const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+        dialogRef.componentInstance.title = 'Participant successfully updated!'; }
     );
   }
 
@@ -539,6 +572,10 @@ export class UserComponent implements OnInit {
     {
       this.deleteParent();
     }
+    else if (this.isParticipant)
+    {
+      this.deleteParent();
+    }
     else
     {
       this.deleteClinician();
@@ -548,6 +585,12 @@ export class UserComponent implements OnInit {
   deleteParent(){
     const confirmDelete = this.modalService.open(DeletePopupComponent);
     confirmDelete.componentInstance.service = 'Parent';
+    confirmDelete.componentInstance.attributes = this.userAttributes;
+  }
+
+  deleteParticipant(){
+    const confirmDelete = this.modalService.open(DeletePopupComponent);
+    confirmDelete.componentInstance.service = 'Participant';
     confirmDelete.componentInstance.attributes = this.userAttributes;
   }
 
@@ -563,4 +606,14 @@ export class UserComponent implements OnInit {
   generatePassword() {
     this.userAttributes.userpassword = Math.random().toString(36).slice(-10);
   }
+
+  get isParent() {
+    return this.userType === Usertype.parent;
+  }
+  get isClinician() {
+    return this.userType === Usertype.clinician;
+  };
+  get isParticipant() {
+    return this.userType === Usertype.participant;
+  };
 }
