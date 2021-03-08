@@ -9,7 +9,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ResultsService } from 'src/app/services/results/results';
+import { ResultsService } from 'src/app/services/results/results.service';
 import { FFQResultsResponse } from 'src/app/models/ffqresultsresponse';
 import { Observable } from 'rxjs';
 import { NutrientConstants } from 'src/app/models/NutrientConstants';
@@ -181,7 +181,7 @@ private getResultsList(){
    allResultsObservable.subscribe((allResults: FFQResultsResponse[]) => {
       this.parentList.forEach(parent => {
           allResults.forEach(result => {
-              if (result.userId === parent.userId && parent.assignedclinician === this.loggedInUser[0].userId){
+              if (result.userId === parent.userId && parent.prefix === this.loggedInUser[0].prefix){
                 this.resultList.push(result);
                 let parentName = parent.firstname + ' ' + parent.lastname;
                 this.parentNames.push(parentName);

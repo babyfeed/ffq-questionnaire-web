@@ -19,14 +19,20 @@ import { ClinicService } from "src/app/services/clinic/clinic-service";
 import { FFQClinicResponse } from "src/app/models/ffqclinic-response";
 import {ResearchService} from "src/app/services/research/research-service";
 import {ResearchInstitutionService} from "src/app/services/research-institution-service/research-institution-service"
-import {FFQResearchtResponse} from "src/app/models/ffqresearch-response";
 import {FFQInstitutionResponse} from "src/app/models/ffqinstitution-response";
+import {FFQResultsResponse} from '../../models/ffqresultsresponse';
+import {combineLatest} from "rxjs";
+import {ResultsService} from "../../services/results/results.service";
+import {FFQResearcher} from "../../models/ffqresearcher";
+import {FfqParticipant} from "../../models/ffq-participant";
+import {ParticipantService} from "../../services/participant/participant-service";
+import {environment} from "../../../environments/environment";
 
 
 @Component({
-  selector: "delete-popup",
-  templateUrl: "./delete-popup.component.html",
-  styleUrls: ["./delete-popup.component.css"],
+  selector: 'delete-popup',
+  templateUrl: './delete-popup.component.html',
+  styleUrls: ['./delete-popup.component.css'],
 })
 export class DeletePopupComponent implements OnInit {
   // @Input attributes: the object and its attributes to be deleted
@@ -34,90 +40,118 @@ export class DeletePopupComponent implements OnInit {
   @Input() attributes;
   @Input() service;
 
-  isParent: boolean = false;
-  isClinician: boolean = false;
-  isClinic: boolean = false;
-  isResearch: boolean = false;
-  isResearch_institution: boolean = false;
+  isParent = false;
+  isClinician = false;
+  isClinic = false;
+  isResearch = false;
+  isResearch_institution = false;
+  isQuestionnaire = false;
+  hidden = true;
+  isParticipant = false;
 
   ngOnInit() {
-    if (this.service == "Clinician") this.isClinician = true;
-    else if (this.service == "Parent") this.isParent = true;
-    else if (this.service == "Clinic") this.isClinic = true;
-    else if (this.service == "Researcher") this.isResearch = true;
-    else if (this.service == "Research-institution") this.isResearch_institution = true;
+    if (this.service == 'Clinician') { this.isClinician = true; }
+    else if (this.service == 'Parent') { this.isParent = true; }
+    else if (this.service == 'Clinic') { this.isClinic = true; }
+    else if (this.service == 'Researcher') { this.isResearch = true; }
+    else if (this.service == 'Participant') { this.isParticipant = true; }
+    else if (this.service == 'Research-institution') { this.isResearch_institution = true; }
+    else if (this.service == 'Questionnaire') { this.isQuestionnaire = true; }
   }
 
   constructor(
     public activeModal: NgbActiveModal,
     private router: Router,
     private errorDialog: MatDialog,
-    public clinicianService: ClinicianService,
-    public parentService: ParentService,
-    public clinicService: ClinicService,
-    public researchService: ResearchService,
-    public researchInstitutionService: ResearchInstitutionService
+    private clinicianService: ClinicianService,
+    private parentService: ParentService,
+    private participantService: ParticipantService,
+    private clinicService: ClinicService,
+    private researchService: ResearchService,
+    private researchInstitutionService: ResearchInstitutionService,
+    private resultsService: ResultsService
   ) {}
 
   /* When confirmed deletion, this function does the delete action on the object based on its type */
   onClose(): void {
     if (this.isClinician) {
-      var userName = (<FFQClinicianResponse>this.attributes).username;
+      let userName = (this.attributes as FFQClinicianResponse).username;
       this.clinicianService
-        .deleteItem((<FFQClinicianResponse>this.attributes).userId)
+        .deleteItem((this.attributes as FFQClinicianResponse).userId)
         .subscribe((user) => {
-          this.router.navigateByUrl("/admin/users");
+          this.router.navigateByUrl('/admin/users');
           const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
           dialogRef.componentInstance.title =
-            "Clinician " + userName + " was deleted";
+            'Clinician ' + userName + ' was deleted';
         });
     } else if (this.isParent) {
-      var userName = (<FFQClinicianResponse>this.attributes).username;
-      this.parentService
-        .deleteItem((<FFQClinicianResponse>this.attributes).userId)
-        .subscribe((user) => {
+      let userName = (this.attributes as FFQClinicianResponse).username;
+      combineLatest([this.parentService
+        .deletePatient((<FFQClinicianResponse>this.attributes).userId),
+        this.resultsService.deleteItemsByParentId((<FFQClinicianResponse>this.attributes).userId)])
+        .subscribe(([user, results]) => {
           this.router.navigateByUrl("/admin/users");
           const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
           dialogRef.componentInstance.title =
-            "Parent " + userName + " was deleted";
+            'Parent ' + userName + ' was deleted';
+        });
+    } else if (this.isParticipant) {
+      let userName = (this.attributes as FfqParticipant).username;
+      this.participantService
+        .deleteItem((<FfqParticipant>this.attributes).userId)
+        .subscribe((user) => {
+          this.router.navigateByUrl(environment.routes.adminResearchUsersRoute);
+          const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+          dialogRef.componentInstance.title =
+            'Participant ' + userName + ' was deleted';
         });
     } else if (this.isClinic) {
-      var clinicName = (<FFQClinicResponse>this.attributes).clinicname;
+      let clinicName = (this.attributes as FFQClinicResponse).clinicname;
       this.clinicService
-        .deleteItem((<FFQClinicResponse>this.attributes).clinicId)
+        .deleteItem((this.attributes as FFQClinicResponse).clinicId)
         .subscribe((clinic) => {
-          this.router.navigateByUrl("/admin/users");
+          this.router.navigateByUrl('/admin/users');
           const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
           dialogRef.componentInstance.title =
-            "Clinic " + clinicName + " was deleted";
+            'Clinic ' + clinicName + ' was deleted';
         });
     }
     else if (this.isResearch) {
-      var researchName = (<FFQResearchtResponse>this.attributes).username;
+      let researchName = (this.attributes as FFQResearcher).username;
       this.researchService
-        .deleteItem((<FFQResearchtResponse>this.attributes).userId)
+        .deleteItem((this.attributes as FFQResearcher).userId)
         .subscribe((data) => {
-          this.router.navigateByUrl("/admin/research/users");
+          this.router.navigateByUrl('/admin/research/users');
           const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
           dialogRef.componentInstance.title =
-            "Researcher: " + researchName + " was deleted";
+            'Researcher: ' + researchName + ' was deleted';
         });
     }
     else if (this.isResearch_institution) {
-      
-      var researchInstitutionName = (<FFQInstitutionResponse>this.attributes).institutionName;
-     
+
+      let researchInstitutionName = (this.attributes as FFQInstitutionResponse).institutionName;
+
       this.researchInstitutionService
-        .deleteItem((<FFQInstitutionResponse>this.attributes).researchInstitutionId)
+        .deleteItem((this.attributes as FFQInstitutionResponse).researchInstitutionId)
         .subscribe((data) => {
-          this.router.navigateByUrl("/admin/research/users");
+          this.router.navigateByUrl('/admin/research/users');
           const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
           dialogRef.componentInstance.title =
-            "Research Institution: " + researchInstitutionName + " was deleted";
+            'Research Institution: ' + researchInstitutionName + ' was deleted';
         });
     }
-    
-    this.activeModal.close("closed");
+    else if (this.isQuestionnaire){
+      const questionnaireId = (this.attributes as FFQResultsResponse).questionnaireId;
+      this.resultsService.
+        deleteItem(questionnaireId)
+          .subscribe(() => {
+            const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+            dialogRef.componentInstance.title =
+              'Result ' + questionnaireId + ' was deleted';
+            window.location.reload();
+          });
+    }
+    this.activeModal.close('closed');
   }
 
   onDismiss(reason: String): void {

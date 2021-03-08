@@ -14,7 +14,7 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 // For getting results
-import { ResultsService } from "src/app/services/results/results";
+import { ResultsService } from "src/app/services/results/results.service";
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { NutrientsRecommendationsService } from 'src/app/services/nutrients-recommendations/nutrients-recommendations.service';
 import { FFQResultsResponse } from 'src/app/models/ffqresultsresponse';
@@ -70,7 +70,7 @@ export class ResearchHistoryComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+
     this.getParticipantList();
     this.getParticipantResult();
 
@@ -79,7 +79,7 @@ export class ResearchHistoryComponent implements OnInit {
     //   this.customers.push({firstName: `first${i}`, lastName: `last${i}`,
     //   email: `abc${i}@gmail.com`, address: `000${i} street city, ST`, zipcode: `0000${i}`});
     // }
-    
+
   }
 
   export() {
@@ -89,7 +89,7 @@ export class ResearchHistoryComponent implements OnInit {
   private getParticipantList(){
 
     var participantListObservable: Observable<FFQResearcherParentResponse[]> = this.participantService.getAllParents();
-    
+
     participantListObservable.subscribe(participantList => {
       participantList.forEach(participant => {
         if (participant.assignedResearcherUser.indexOf(this.researcherId) >= 0){
@@ -114,7 +114,7 @@ export class ResearchHistoryComponent implements OnInit {
           if(element.userId == participant.userId){
 
             this.results.push(element);
-          }   
+          }
         })
 
       })
@@ -124,7 +124,7 @@ export class ResearchHistoryComponent implements OnInit {
       this.setNutrients();
       this.setFoodList();
     })
-   
+
   }
 
   private setNutrients() {

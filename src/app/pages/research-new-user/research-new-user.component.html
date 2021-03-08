@@ -40,8 +40,8 @@
             <label style="font-weight: bold"> Account Type </label>
             <br>
             <mat-radio-group  aria-label="Select an option" [(ngModel)]="userType" name="userType">
-              <mat-radio-button  (click)="countParticipants(); clicked = true; intialLoad = false;" [value]="userTypes.Participant" color="primary" >Participant</mat-radio-button>
-              <mat-radio-button   [hidden]="true" [value]="userTypes.Participant" color="primary" >Participant</mat-radio-button>
+              <mat-radio-button (click)="countParticipants(); clicked = true; intialLoad = false;" [value]="userTypes.participant" color="primary" >Participant</mat-radio-button>
+              <mat-radio-button [hidden]="true" [value]="userTypes.participant" color="primary" >Participant</mat-radio-button>
             </mat-radio-group>
           </div>
           <div class="optional_container" >

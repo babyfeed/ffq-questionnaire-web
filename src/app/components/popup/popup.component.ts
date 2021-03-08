@@ -16,6 +16,7 @@ export class PopupComponent {
     @Input() id;
     @Input() service;
     data: any;
+    hidden = true;
 
     constructor(public activeModal: NgbActiveModal,
                 public foodService: FoodItemService,

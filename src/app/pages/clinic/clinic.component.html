@@ -35,18 +35,18 @@
             <!--            <label for="cliniciansLimit" style="font-weight: bold"> Number of Clinicians Limit </label>-->
             <!--            <input placeholder="100" width="25" style="border-color: mediumblue; border-width: 0.05cm" type="number"-->
             <!--                   class="form-control" id="cliniciansLimitUpdate" name="cliniciansLimitUpdate" [(ngModel)]="clinicAttributes.cliniciansLimit" required/>-->
-            <!--            <br>-->
-            <!--            <label for="parentsLimit" style="font-weight: bold"> Number of Parents Limit </label>-->
-            <!--            <input placeholder="100" width="25" style="border-color: mediumblue; border-width: 0.05cm" type="number"-->
-            <!--                   class="form-control" id="parentsLimitUpdate" name="parentsLimitUpdate" [(ngModel)]="clinicAttributes.parentsLimit" required/>-->
+                        <br>
+                        <label for="parentsLimit" style="font-weight: bold"> Number of Parents Limit </label>
+                        <input placeholder="100" width="25" style="border-color: mediumblue; border-width: 0.05cm" type="number"
+                               class="form-control" id="parentsLimitUpdate" name="parentsLimitUpdate" [(ngModel)]="clinicAttributes.parentsLimit" required/>
             <br>
-            <label style="font-weight: bold"> Head Clinician </label>
-            <mat-form-field>
-              <mat-label appearance="fill">Choose...</mat-label>
-              <mat-select matNativeControl name="headclinician" [(ngModel)]="clinicAttributes.headclinician">
-                <mat-option *ngFor="let u of ffqclinicianList" [value]="u.userId" [hidden]="u.assignedclinic != clinicAttributes.clinicId">{{ u.abbreviation }} {{ u.firstname }} {{ u.lastname }}</mat-option>
-              </mat-select>
-            </mat-form-field>
+<!--            <label style="font-weight: bold"> Head Clinician </label>-->
+<!--            <mat-form-field>-->
+<!--              <mat-label appearance="fill">Choose...</mat-label>-->
+<!--              <mat-select matNativeControl name="headclinician" [(ngModel)]="clinicAttributes.headclinician">-->
+<!--                <mat-option *ngFor="let u of ffqclinicianList" [value]="u.userId" [hidden]="u.assignedclinic != clinicAttributes.clinicId">{{ u.abbreviation }} {{ u.firstname }} {{ u.lastname }}</mat-option>-->
+<!--              </mat-select>-->
+<!--            </mat-form-field>-->
 
 
           </div>
@@ -78,14 +78,14 @@
                      class="form-control" id="location" name="location" [(ngModel)]="location"/>
 
               <!--              commenting out clinician limit parent limit if its needed in future      -->
-              <!--                <br>-->
-              <!--                <label for="cliniciansLimit" style="font-weight: bold" > Number of Clinicians Limit </label>-->
-              <!--                <input placeholder="100" width="25" style="border-color: mediumblue; border-width: 0.05cm" type="number"-->
-              <!--                       class="form-control" id="cliniciansLimit" name="usersLimit" [(ngModel)]="cliniciansLimit" min="1"/>-->
-              <!--                <br>-->
-              <!--                <label for="parentsLimit" style="font-weight: bold"> Number of Parents Limit </label>-->
-              <!--                <input placeholder="100" width="25" style="border-color: mediumblue; border-width: 0.05cm" type="number"-->
-              <!--                       class="form-control" id="parentsLimit" name="parentsLimit" [(ngModel)]="parentsLimit" min="1" required/>-->
+<!--                              <br>-->
+<!--                              <label for="cliniciansLimit" style="font-weight: bold" > Number of Clinicians Limit </label>-->
+<!--                              <input placeholder="100" width="25" style="border-color: mediumblue; border-width: 0.05cm" type="number"-->
+<!--                                     class="form-control" id="cliniciansLimit" name="usersLimit" [(ngModel)]="cliniciansLimit" min="1"/>-->
+                              <br>
+                              <label for="parentsLimit" style="font-weight: bold"> Number of Parents Limit </label>
+                              <input placeholder="100" width="25" style="border-color: mediumblue; border-width: 0.05cm" type="number"
+                                     class="form-control" id="parentsLimit" name="parentsLimit" [(ngModel)]="parentsLimit" min="1" required/>
             </div>
           </div>
           <!-- Add Clinic ends here -->

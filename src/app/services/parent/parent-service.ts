@@ -71,8 +71,8 @@ export class ParentService {
     );
   }
 
-  /*DELETE: delete food item from the database */
-  deleteItem(userId: string): Observable<any> {
+  /*DELETE: delete parent from the database */
+  deletePatient(userId: string): Observable<any> {
     return this.http.delete(this.endpoint + "/delete?userId=" + userId, {responseType: 'text'})
   }
 

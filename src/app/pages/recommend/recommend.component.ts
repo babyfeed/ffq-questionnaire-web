@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ResultsService } from "src/app/services/results/results";
+import { ResultsService } from "src/app/services/results/results.service";
 import { FFQResultsResponse } from "src/app/models/ffqresultsresponse";
 import {Observable} from 'rxjs';
 import { Description } from 'src/app/models/ffqfooddescription';

@@ -10,7 +10,7 @@
 
       <div class="container mt-3">
         <div align="right">
-          <button type="submit" class="btn btn-primary col-3 margin" (click)="addResearcherUser(myForm)"
+          <button type="submit" class="btn btn-primary col-3 margin" (click)="addResearcherUser()"
             [disabled]="!myForm.form.valid"> Add Researcher User </button>
         </div>
 
@@ -19,25 +19,10 @@
 
           <div>
             <div class="form-group col-12">
-<!--                <label for="userName" style="font-weight: bold"> Researcher Username </label>-->
-<!--                <label style="font-style: italic; font-size: small; margin-left: 10px"> *required </label>-->
-<!--                <input placeholder="username" width="25" style="border-color: mediumblue; border-width: 0.05cm" type="text"-->
-<!--                    class="form-control" id="username" name="username" [(ngModel)]="username" required/>-->
-<!--                <br>-->
               <label for="prefix" style="font-weight: bold"> Researcher prefix </label>
               <label style="font-style: italic; font-size: small; margin-left: 10px"> *required </label>
               <input placeholder="prefix" width="25" style="border-color: mediumblue; border-width: 0.05cm" type="text"
                      class="form-control" id="prefix" name="prefix" [(ngModel)]="prefix" required/>
-<!--              <br>-->
-<!--                <label for="userpassword" style="font-weight: bold"> Researcher password </label>-->
-<!--                <label style="font-style: italic; font-size: small; margin-left: 10px"> *required </label>-->
-<!--                    <div style="display: flex; align-items: stretch; justify-content: space-between">-->
-<!--                      <input placeholder="userpassword" width="25" style="border-color: mediumblue; border-width: 0.05cm" type="text"-->
-<!--                      class="form-control" id="userpassword" name="userpassword" [(ngModel)]="userpassword" required/>-->
-<!--                      <button mat-raised-button style="width:30%; margin-left: 10px" class="update" (click)="generatePassword()">-->
-<!--                        Generate new password-->
-<!--                      </button>-->
-<!--                    </div>-->
                 <br>
                 <label for="firstname" style="font-weight: bold"> First Name </label>
                 <label style="font-style: italic; font-size: small; margin-left: 10px"> *required </label>
@@ -58,8 +43,8 @@
               <br>
               <mat-form-field>
                 <mat-label appearance="fill">Choose Research Institution...</mat-label>
-                <mat-select matNativeControl id="AssignedResearchInstitutionName" name="AssignedResearchInstitutionName" [(ngModel)]="AssignedResearchInstitutionName" required>
-                  <mat-option *ngFor="let c of researchInstitutionList" [value]="c.institutionName">{{ c.institutionName }}</mat-option>
+                <mat-select matNativeControl id="assignedResearchInstitutionName" name="assignedResearchInstitutionName" [(ngModel)]="assignedResearchInstitutionId" required>
+                  <mat-option *ngFor="let c of researchInstitutionList" [value]="c.researchInstitutionId">{{ c.institutionName }}</mat-option>
                 </mat-select>
               </mat-form-field>
               <br>

@@ -8,7 +8,11 @@ export const environment = {
   apiUrl: 'http://localhost:4000',
   foodServiceUrl: 'http://localhost:9090',
   questionnaireServiceUrl: 'http://localhost:9080',
-  userServiceUrl: 'http://localhost:9070'
+  userServiceUrl: 'http://localhost:9070',
+  routes: {
+    adminResearchUsersRoute: '/admin/research/users',
+    adminUserRoute: '/admin/users'
+  }
 };
 
 /*

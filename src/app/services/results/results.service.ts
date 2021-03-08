@@ -82,10 +82,17 @@ export class ResultsService {
           }));
         }
 
+  deleteItem(questionnaireId: string): Observable<any> {
+    return this.http.delete(this.endpoint + '/delete?questionnaireId=' + questionnaireId, {responseType: 'text'});
+  }
       submitFeedback(id: string, feedback: string): Observable<any> {
         return this.http.put(this.endpoint + '/update', {
           questionnaireId: id,
           feedback: feedback
         });
       }
+
+  deleteItemsByParentId(parentId: string): Observable<any> {
+    return this.http.delete(this.endpoint + "/delete?parentId=" + parentId, {responseType: 'text'})
+  }
   }

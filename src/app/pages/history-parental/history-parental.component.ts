@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FFQResultsResponse } from 'src/app/models/ffqresultsresponse';
 import { Observable } from 'rxjs';
-import { ResultsService } from "src/app/services/results/results";
+import { ResultsService } from "src/app/services/results/results.service";
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { NutrientConstants } from 'src/app/models/NutrientConstants';
 ///
