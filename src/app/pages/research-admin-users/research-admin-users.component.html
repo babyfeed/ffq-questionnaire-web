@@ -24,6 +24,7 @@
 
           <th width="20"> Research Institution Name</th>
           <th width="34%"> Location</th>
+          <th width="34%"> Participants limit for Research Institution </th>
 
         </tr>
         <tr *ngFor="let c of researchInstitutionList | searchFilter: searchResearchInstitution; index as i">
@@ -31,6 +32,7 @@
           <td><a [routerLink]="['/admin/research/institution/', c.researchInstitutionId]">{{ c.institutionName }}</a>
           </td>
           <td> {{ c.address }} </td>
+          <td> {{ c.participantsLimit }} </td>
 
         </tr>
       </table>
@@ -57,7 +59,6 @@
           <th width="15%"> First Name</th>
           <th width="15%"> Last Name</th>
           <th width="20%"> Research Institution</th>
-          <th width="60%"> Limit Number of Participants</th>
 
         </tr>
         <tr *ngFor="let u of researcherList | searchFilter: searchResearcher; index as i"
@@ -66,7 +67,6 @@
           <td> {{ u.firstname}} </td>
           <td> {{ u.lastname }} </td>
           <td> {{ ResearchInstNames[u.assignedResearchInstitutionId - 1] }} </td>
-          <td> {{ u.limitNumberOfParticipants }} </td>
         </tr>
       </table>
 
