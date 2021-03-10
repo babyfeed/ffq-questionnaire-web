@@ -2,17 +2,16 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { environment as productionEnv } from './environment.prod';
+
 export const environment = {
+  ...productionEnv,
   production: false,
   thisUrl: 'http://localhost:4200',
   apiUrl: 'http://localhost:4000',
   foodServiceUrl: 'http://localhost:9090',
   questionnaireServiceUrl: 'http://localhost:9080',
-  userServiceUrl: 'http://localhost:9070',
-  routes: {
-    adminResearchUsersRoute: '/admin/research/users',
-    adminUserRoute: '/admin/users'
-  }
+  userServiceUrl: 'http://localhost:9070'
 };
 
 /*
