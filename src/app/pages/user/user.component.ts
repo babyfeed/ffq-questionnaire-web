@@ -574,7 +574,7 @@ export class UserComponent implements OnInit {
     }
     else if (this.isParticipant)
     {
-      this.deleteParent();
+      this.deleteParticipant();
     }
     else
     {

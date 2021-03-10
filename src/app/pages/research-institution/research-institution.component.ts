@@ -29,6 +29,7 @@ export class ResearchInstitutionComponent implements OnInit {
   location: string;
   resultObjectList: Object[] = [];
   participantsLimit: number;
+  lastItem: string;
 
   constructor(
     public researcherService: ResearchService,
@@ -55,20 +56,25 @@ export class ResearchInstitutionComponent implements OnInit {
 
   addResearchInstitution(form: NgForm){
     console.log('this is the limit = ' + this.participantsLimit);
-   let todayDate = new Date();
-   let dd = String(todayDate.getDate()).padStart(2, '0');
-   let mm = String(todayDate.getMonth() + 1).padStart(2, '0'); // January is 0!
-   let yyyy = todayDate.getFullYear();
-   let today = mm + '/' + dd + '/' + yyyy;
+    const todayDate = new Date();
+    const dd = String(todayDate.getDate()).padStart(2, '0');
+    const mm = String(todayDate.getMonth() + 1).padStart(2, '0'); // January is 0!
+    const yyyy = todayDate.getFullYear();
+    const today = mm + '/' + dd + '/' + yyyy;
 
 
-   let researchInstitutionList: Observable<FFQResearchInstitution[]> = this.researchInstitutionService.getAllResearchInstitutions();
+    const researchInstitutionList: Observable<FFQResearchInstitution[]> = this.researchInstitutionService.getAllResearchInstitutions();
 
-   researchInstitutionList.subscribe(data => {
+    researchInstitutionList.subscribe(data => {
 
-      let lastItem = data[data.length - 1];
+      if (data.length === 0){
+       this.lastItem = '0';
+     }else {
+        this.lastItem = data[data.length - 1].researchInstitutionId;
+      }
 
-      let newResearchInstId = (parseInt(lastItem.researchInstitutionId) + 1).toString();
+
+      const newResearchInstId = (parseInt(this.lastItem, 10) + 1).toString();
 
 
       console.log(newResearchInstId, this.location, today,
