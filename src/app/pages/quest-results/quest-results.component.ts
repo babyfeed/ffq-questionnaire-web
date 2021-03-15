@@ -1,6 +1,6 @@
-import { Component, OnInit } from "@angular/core";
-import { ResultsService } from "src/app/services/results/results.service";
-import { FFQResultsResponse } from "src/app/models/ffqresultsresponse";
+import { Component, OnInit } from '@angular/core';
+import { ResultsService } from 'src/app/services/results/results.service';
+import { FFQResultsResponse } from 'src/app/models/ffqresultsresponse';
 import {Observable} from 'rxjs';
 import { NutrientConstants } from 'src/app/models/NutrientConstants';
 
@@ -27,7 +27,11 @@ export class QuestResultsComponent implements OnInit {
   public show = false;
   public showFeedback = false;
   results: FFQResultsResponse[] = [];
+  parentResults: FFQResultsResponse[] = [];
+  participantResults: FFQResultsResponse[] = [];
   questionnaireId: string;
+  showParent = false;
+  showParticipant = false;
 
   constructor(public resultsService: ResultsService, ////////////////////////////////////////
               public nutrientsRecommendationsService: NutrientsRecommendationsService,
@@ -64,13 +68,16 @@ export class QuestResultsComponent implements OnInit {
        });
 
       this.results = m.reverse();
+      this.parentResults = this.results.filter(t => t.userType === 'parent');
+      this.participantResults = this.results.filter(t => t.userType === 'participant');
     }
 
    );
  }
+
   deleteQuestionnaire(questionnaireId: string){
-    for (let item of this.results) {
-      if (item.questionnaireId == questionnaireId)
+    for (const item of this.results) {
+      if (item.questionnaireId === questionnaireId)
       {
         const confirmDelete = this.modalService.open(DeletePopupComponent);
         confirmDelete.componentInstance.service = 'Questionnaire';
@@ -84,9 +91,13 @@ export class QuestResultsComponent implements OnInit {
     return 0;
   }
 
-  toggle(index) {
-    this.results[index].show = !this.results[index].show;
+  toggleParentResults(index) {
+    this.parentResults[index].show = !this.parentResults[index].show;
   }
+  toggleParticipantResults(index) {
+    this.participantResults[index].show = !this.participantResults[index].show;
+  }
+
   /////////////////////////////////////////////////////////////////////////////////
   // (Francis) attempting to add Nutrients and Food Items buttons from recommend tab
   //            copy/pasted from recommend.component.ts

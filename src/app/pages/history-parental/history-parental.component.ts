@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FFQResultsResponse } from 'src/app/models/ffqresultsresponse';
 import { Observable } from 'rxjs';
-import { ResultsService } from "src/app/services/results/results.service";
+import { ResultsService } from 'src/app/services/results/results.service';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { NutrientConstants } from 'src/app/models/NutrientConstants';
 ///
 
-///////////added imports from recommend.component.ts/////////////////////
+/////////// added imports from recommend.component.ts/////////////////////
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RecommendModalComponent } from 'src/app/components/recommend-modal/recommend-modal.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -24,11 +24,11 @@ import { FoodDescriptionService } from 'src/app/services/food-description/food-d
   styleUrls: ['./history-parental.component.css']
 })
 export class HistoryParentalComponent implements OnInit {
-  public show: boolean = false;
-  public showFeedback: boolean = false;
-  public buttonName: any = "Results";
+  public show = false;
+  public showFeedback = false;
+  public buttonName: any = 'Results';
 
-  MESSAGE = "No questionnaires have been submitted yet!";
+  MESSAGE = 'No questionnaires have been submitted yet!';
 
   results: FFQResultsResponse[] = [];
 
@@ -50,8 +50,8 @@ export class HistoryParentalComponent implements OnInit {
 
   toggle(index) {
     this.results[index].show = !this.results[index].show;
-    if (this.results[index].show) this.buttonName = "Results";
-    else this.buttonName = "Results ";
+    if (this.results[index].show) { this.buttonName = 'Results'; }
+    else { this.buttonName = 'Results '; }
   }
 
   toggleFeedback(index) {
@@ -63,28 +63,25 @@ export class HistoryParentalComponent implements OnInit {
     const reqList: string[] = NutrientConstants.NUTRIENT_NAMES;
 
     oldList.subscribe(m => {
-
       m.forEach(element => {
        const newWeeklyMap = new Map<string, number>();
        const newDailyMap = new Map<string, number>();
-
        const weeklyMap = element.weeklyTotals;
        const dailyMap = element.dailyAverages;
 
        reqList.forEach(a =>  {
            newWeeklyMap.set(a, weeklyMap[a]);
            newDailyMap.set(a, dailyMap[a]);
-       })
+       });
 
        element.weeklyTotals = newWeeklyMap;
        element.dailyAverages = newDailyMap;
-       })
+       });
 
-       this.results = m.reverse();
+      this.results = m.reverse();
+      this.results = this.results.filter(t => t.userType === 'parent');
     }
-
-   )
-
+   );
  }
 
  returnZero()

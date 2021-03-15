@@ -177,7 +177,7 @@ private getParentList(){
 }
   // Function to get all the results for each parent
 private getResultsList(){
-   let allResultsObservable: Observable<FFQResultsResponse[]> = this.resultsService.getAllResults();
+   const allResultsObservable: Observable<FFQResultsResponse[]> = this.resultsService.getResultsByUserType('parent');
    allResultsObservable.subscribe((allResults: FFQResultsResponse[]) => {
       this.parentList.forEach(parent => {
           allResults.forEach(result => {
