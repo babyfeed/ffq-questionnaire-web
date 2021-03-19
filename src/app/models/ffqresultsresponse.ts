@@ -13,6 +13,7 @@ export class FFQResultsResponse {
     foodRecList: any;
     showFeedback: boolean;
     gender: string;
+    assignedClinicOrSiteId: string;
 
     constructor(id: string, userId: string, userType: string, date: string, name: string, age: number, userChoices:any, weeklyTotals: Map<string, number>, dailyAverages: any, feedback: string, gender: string) {
       this.questionnaireId = id;
