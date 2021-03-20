@@ -37,4 +37,14 @@ export class FoodRecommendModalComponent {
       },
     );
   }
+
+  color(label: string) {
+    let colorLabel;
+     switch (label.toLowerCase()) {
+      case 'below': colorLabel = 'yellow'; break;
+      case 'above': colorLabel = 'red'; break;
+      default: colorLabel = 'green'; break;
+    }
+    return colorLabel;
+  }
 }
