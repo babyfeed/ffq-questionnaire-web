@@ -40,3 +40,18 @@ tr:nth-child(even) {
 .concat::before{
   content: '>= ';
 }
+
+.green {
+  color: green;
+  font-weight: bold;
+}
+
+.yellow {
+  color: #ffcb0c;
+  font-weight: bold;
+}
+
+.red {
+  color: red;
+  font-weight: bold;
+}
