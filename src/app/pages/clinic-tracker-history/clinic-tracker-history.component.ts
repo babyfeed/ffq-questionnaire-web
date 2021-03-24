@@ -32,6 +32,7 @@ export class ClinicTrackerHistoryComponent implements OnInit {
   resultMap: Map<string, TrackerParentResultsResponse> = new Map<string, TrackerParentResultsResponse>();
   resultInfo: TrackerParentResultsResponse[] = [];
   search: string;
+  loggedInUser = this.authenticationService.currentUserValue;
 
   constructor(private trackerResultsService: TrackerResultsService,
               private authenticationService: AuthenticationService,
@@ -78,7 +79,7 @@ export class ClinicTrackerHistoryComponent implements OnInit {
         allTrackers.forEach(tracker => {
           if (tracker.userId == parent.userId) {
             this.trackerList.push(tracker);
-            var parentName = parent.firstname + " " + parent.lastname;
+            var parentName = parent.username;
             this.parentNames.push(parentName);
           }
         });
@@ -93,11 +94,10 @@ export class ClinicTrackerHistoryComponent implements OnInit {
   private getClinicId() {
 
     var clinicListObervable: Observable<FFQClinicResponse[]> = this.clinicService.getAllClinics();
-    const loggedInUser = this.authenticationService.currentUserValue;
     var clinicId: string;
 
     clinicListObervable.subscribe(clinicList => {
-      var clinic = clinicList.find(a => a.clinicId == loggedInUser[0].assignedclinic);
+      var clinic = clinicList.find(a => a.clinicId === this.loggedInUser[0].assignedclinic);
       if (clinic) {
         this.clinicId = clinic.clinicId;
       }
@@ -112,7 +112,7 @@ export class ClinicTrackerHistoryComponent implements OnInit {
 
     parentListObservable.subscribe(parentList => {
       parentList.forEach(parent => {
-        if (parent.assignedclinic == this.clinicId) {
+        if (parent.prefix === this.loggedInUser[0].prefix) {
 
           this.parentList.push(parent);
         }
