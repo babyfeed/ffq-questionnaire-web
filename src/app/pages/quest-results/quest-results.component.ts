@@ -234,7 +234,7 @@ export class QuestResultsComponent implements OnInit {
   }
 
   export() {
-    this.exportService.exportFFQResults(this.results, 'FFQ_Results');
+    this.exportService.exportFFQResults(this.results, this.ffqparentList, 'FFQ_Results');
   }
 
   private setFoodList() {
