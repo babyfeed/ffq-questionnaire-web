@@ -14,6 +14,7 @@ export class FFQParentResult {
     show: boolean;*/
     ffqresult: FFQResultsResponse;
     parentName: string;
+    assignedClinicOrSiteId: string;
 
     constructor(ffqresult: FFQResultsResponse, parentName: string) {
 

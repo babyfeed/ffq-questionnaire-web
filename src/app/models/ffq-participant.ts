@@ -13,6 +13,7 @@ export class FfqParticipant {
   childrennames: string[];
   isactive: boolean;
   prefix: string;
+  assignedClinicOrSiteId: string;
 
 
   constructor(userId: string, username: string, userpassword: string, usertype: string, firstname: string, lastname: string, assignedResearcherInst: string, assignedResearcherUsers: string[], childrennames: string[], isactive: boolean, prefix: string){

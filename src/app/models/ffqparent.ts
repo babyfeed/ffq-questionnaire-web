@@ -13,6 +13,7 @@ export class FFQParent {
   childrennames: any;
   isactive: boolean;
   prefix: string;
+  assignedClinicOrSiteId: string;
 
 
   constructor(userId: string, username: string, userpassword: string, usertype: string, firstname: string,
