@@ -30,6 +30,9 @@
             <input placeholder="Address" width="25" style="border-width: 0.05cm" type="text"
                    class="form-control" name="address" [(ngModel)]="researchInstitutionAttributes.address"/>
             <br>
+            <label for="participantsLimit" style="font-weight: bold"> Number of Participants Limit </label>
+            <input placeholder="100" width="25" style="border-color: mediumblue; border-width: 0.05cm" type="number"
+                   class="form-control" id="participantsLimit" name="participantsLimit" [(ngModel)]="researchInstitutionAttributes.participantsLimit" min="1" required/>
 
           </div>
         </div>

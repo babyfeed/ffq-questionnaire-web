@@ -10,7 +10,12 @@
 
       <div class="container mt-3">
         <div align="right">
-          <button mat-raised-button class="delete" style="margin-right: 20px;" (click)="deleteResearcher()"> Delete </button>
+           <!-- Remove comments below if you want the option to delete researcher user (feature is completely functional)
+               Reminder:Researcher users have participants under them. If a researcher user is deleted, all participants
+                under will be without a researcher, this can have errors in the UI.
+               If this option is to be available, ensure that participants are assigned to a different researcher or deleted
+               as well-->
+           <button mat-raised-button class="delete" style="margin-right: 20px;" (click)="deleteResearcher()"> Delete </button>
           <button mat-raised-button class="update" (click)="updateResearchInstitution()"
                   [disabled]="!myForm.form.valid"> Update</button>
         </div>
@@ -52,10 +57,10 @@
               </mat-select>
             </mat-form-field>
             <br>
-            <label for="limitNumberOfParticipants" style="font-weight: bold"> limit Number Of Participants </label>
+<!--            <label for="limitNumberOfParticipants" style="font-weight: bold"> limit Number Of Participants </label>-->
 
-            <input placeholder="limitNumberOfParticipants" width="25" style="border-color: mediumblue; border-width: 0.05cm" type="number"
-                class="form-control" id="limitNumberOfParticipants" name="limitNumberOfParticipants" [(ngModel)]="researchAttributes.limitNumberOfParticipants" required/>
+<!--            <input placeholder="limitNumberOfParticipants" width="25" style="border-color: mediumblue; border-width: 0.05cm" type="number"-->
+<!--                class="form-control" id="limitNumberOfParticipants" name="limitNumberOfParticipants" [(ngModel)]="researchAttributes.limitNumberOfParticipants" required/>-->
           </div>
         </div>
 

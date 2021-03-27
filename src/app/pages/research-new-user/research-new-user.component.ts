@@ -45,7 +45,8 @@ export class ResearchNewUserComponent implements OnInit {
   currentUser: Observable<FFQResearcher[]>;
   clicked = false;
   noMoreRoom = false;
-  limit = this.loggedInUser[0].limitNumberOfParticipants;
+  // limit = this.loggedInUser[0].limitNumberOfParticipants;
+  limit = 0;
   numParticipants = 0;
   prefix = (this.loggedInUser[0].prefix === undefined) ? '' : this.loggedInUser[0].prefix;
   lastUserId;
@@ -113,15 +114,21 @@ export class ResearchNewUserComponent implements OnInit {
 
   }
   countParticipants(){
+    for (let i = 0; i < this.ffqinstitutionList.length; i++) {
+      if (this.loggedInUser[0].assignedResearchInstitutionId === this.ffqinstitutionList[i].researchInstitutionId) {
+        this.limit = this.ffqinstitutionList[i].participantsLimit;
+        break;
+      }
+    }
     for (let i = 0; i < this.ffqparticipantList.length; i++){
-      if (this.loggedInUser[0].userId === this.ffqparticipantList[i].assignedResearcherUsers[0]){
+      if (this.loggedInUser[0].assignedResearchInstitutionId === this.ffqparticipantList[i].assignedResearcherInst){
         this.numParticipants ++;
       }
-      if (this.limit - this.numParticipants <= 0){
-        this.noMoreRoom = true;
-      }
-
-    }}
+    }
+    if (this.limit - this.numParticipants <= 0){
+      this.noMoreRoom = true;
+    }
+  }
   addUser() {
     switch (this.userType) {
       case Usertype.participant: {
@@ -261,56 +268,63 @@ export class ResearchNewUserComponent implements OnInit {
     }
   }
   addMultipleParticipants() {
-    this.getSuffix();
-    if (this.ffqparticipantList.length === 0) {
-      this.participantName = this.prefix + '_1';
-      this.toStrip = this.prefix + '_';
-      for (let i = 0; i < this.usersQuantity; i++) {
-        this.generatePassword();
-        this.newParticipants.push(new FfqParticipant('', this.participantName, this.userPassword,
-          'participant', '', '', this.selectedInstitution.researchInstitutionId,
-          [this.loggedInUser[0].userId], [''], true, this.prefix));
-        this.newNumber = parseInt(this.participantName.replace(this.toStrip, ''), 10) + 1;
-        this.participantName = this.toStrip + this.newNumber.toString();
-      }
-      this.noUsers = true;
-    }
-    if (!this.noUsers) {
-      if (this.prefix === '') {
-        this.prefix = 'participant';
-        for (let i = 0; i < this.usersQuantity; i++) {
-          this.prefix = this.ffqinstitutionList[0].institutionName;
-          this.generatePassword();
-          this.newParticipants.push(new FfqParticipant('', this.participantName, this.userPassword,
-            'participant', '', '', this.selectedInstitution.researchInstitutionId,
-            [this.loggedInUser[0].userId], [''], true, this.prefix));
-          this.suffix++;
-        }
-      } else {
-        this.userNameCreator();
+    if (this.usersQuantity <= (this.limit - this.numParticipants)) {
+      this.getSuffix();
+      if (this.ffqparticipantList.length === 0) {
+        this.participantName = this.prefix + '_1';
+        this.toStrip = this.prefix + '_';
         for (let i = 0; i < this.usersQuantity; i++) {
           this.generatePassword();
           this.newParticipants.push(new FfqParticipant('', this.participantName, this.userPassword,
             'participant', '', '', this.selectedInstitution.researchInstitutionId,
             [this.loggedInUser[0].userId], [''], true, this.prefix));
-
           this.newNumber = parseInt(this.participantName.replace(this.toStrip, ''), 10) + 1;
           this.participantName = this.toStrip + this.newNumber.toString();
         }
+        this.noUsers = true;
       }
+      if (!this.noUsers) {
+        if (this.prefix === '') {
+          this.prefix = 'participant';
+          for (let i = 0; i < this.usersQuantity; i++) {
+            this.prefix = this.ffqinstitutionList[0].institutionName;
+            this.generatePassword();
+            this.newParticipants.push(new FfqParticipant('', this.participantName, this.userPassword,
+              'participant', '', '', this.selectedInstitution.researchInstitutionId,
+              [this.loggedInUser[0].userId], [''], true, this.prefix));
+            this.suffix++;
+          }
+        } else {
+          this.userNameCreator();
+          for (let i = 0; i < this.usersQuantity; i++) {
+            this.generatePassword();
+            this.newParticipants.push(new FfqParticipant('', this.participantName, this.userPassword,
+              'participant', '', '', this.selectedInstitution.researchInstitutionId,
+              [this.loggedInUser[0].userId], [''], true, this.prefix));
+
+            this.newNumber = parseInt(this.participantName.replace(this.toStrip, ''), 10) + 1;
+            this.participantName = this.toStrip + this.newNumber.toString();
+          }
+        }
+      }
+      this.participantService.addMultipleParticipants(this.newParticipants).subscribe(researchers => {
+          const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+          dialogRef.componentInstance.title = this.usersQuantity + ' users were added.';
+          console.log(this.newParticipants[0].username);
+          this.save2csvMultipleParticipant();
+          this.dissabled = true;
+        },
+        error => {
+          const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+          dialogRef.componentInstance.title = error.error.message;
+          this.router.navigateByUrl('/research/home');
+        });
     }
-    this.participantService.addMultipleParticipants(this.newParticipants).subscribe(researchers => {
-        const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-        dialogRef.componentInstance.title = this.usersQuantity + ' users were added.';
-        console.log(this.newParticipants[0].username);
-        this.save2csvMultipleParticipant();
-        this.dissabled = true;
-      },
-      error => {
-        const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-        dialogRef.componentInstance.title = error.error.message;
-        this.router.navigateByUrl('/research/home');
-      });
+    else{
+      const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+      dialogRef.componentInstance.title = '<center>Cannot add more Participants than allowed limit<br/> ' +
+        'Contact admin if this is an error or to increase limit<br/></center>';
+    }
   }
   generatePassword() {
     this.userPassword = Math.random().toString(36).slice(-10);

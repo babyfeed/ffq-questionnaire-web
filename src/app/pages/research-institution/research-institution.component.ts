@@ -10,8 +10,8 @@ import { ResearchInstitutionService } from 'src/app/services/research-institutio
 import {FFQResearcher} from 'src/app/models/ffqresearcher';
 import { ResearchService } from 'src/app/services/research/research-service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DeletePopupComponent } from "src/app/components/delete-popup/delete-popup.component";
-import { FFQResearchInstitution } from "src/app/models/ffq-research-institution";
+import { DeletePopupComponent } from 'src/app/components/delete-popup/delete-popup.component';
+import { FFQResearchInstitution } from 'src/app/models/ffq-research-institution';
 
 
 @Component({
@@ -24,10 +24,12 @@ export class ResearchInstitutionComponent implements OnInit {
   private routeSub: Subscription;
   private isNew: boolean;
   private isUpdate: boolean;
-  showMsg: boolean = false;
+  showMsg = false;
   institutionName: string;
   location: string;
   resultObjectList: Object[] = [];
+  participantsLimit: number;
+  lastItem: string;
 
   constructor(
     public researcherService: ResearchService,
@@ -52,38 +54,43 @@ export class ResearchInstitutionComponent implements OnInit {
 
    }
 
-  addResearchInstitution(form:NgForm){
-
-   var todayDate = new Date();
-   var dd = String(todayDate.getDate()).padStart(2, '0');
-   var mm = String(todayDate.getMonth() + 1).padStart(2, '0'); //January is 0!
-   var yyyy = todayDate.getFullYear();
-   var today = mm + '/' + dd + '/' + yyyy;
-
-
-  var researchInstitutionList: Observable<FFQResearchInstitution[]> = this.researchInstitutionService.getAllResearchInstitutions();
-
-       researchInstitutionList.subscribe(data => {
-
-      var lastItem = data[data.length - 1];
-
-      var newResearchInstId = (parseInt(lastItem.researchInstitutionId) + 1).toString()
+  addResearchInstitution(form: NgForm){
+    console.log('this is the limit = ' + this.participantsLimit);
+    const todayDate = new Date();
+    const dd = String(todayDate.getDate()).padStart(2, '0');
+    const mm = String(todayDate.getMonth() + 1).padStart(2, '0'); // January is 0!
+    const yyyy = todayDate.getFullYear();
+    const today = mm + '/' + dd + '/' + yyyy;
 
 
-     console.log(newResearchInstId,this.location, today,
+    const researchInstitutionList: Observable<FFQResearchInstitution[]> = this.researchInstitutionService.getAllResearchInstitutions();
+
+    researchInstitutionList.subscribe(data => {
+
+      if (data.length === 0){
+       this.lastItem = '0';
+     }else {
+        this.lastItem = data[data.length - 1].researchInstitutionId;
+      }
+
+
+      const newResearchInstId = (parseInt(this.lastItem, 10) + 1).toString();
+
+
+      console.log(newResearchInstId, this.location, today,
                 this.institutionName);
 
       this.ffqinsitution = new FFQResearchInstitution(newResearchInstId, this.location, today,
-                this.institutionName, "researchInstitution");
+                this.institutionName, 'researchInstitution', this.participantsLimit);
 
- console.log(this.ffqinsitution);
+      console.log(this.ffqinsitution);
 
       this.researchInstitutionService.addUser(this.ffqinsitution).subscribe(data => {
           this.router.navigateByUrl('/admin/research/users');
           const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
           dialogRef.componentInstance.title = 'Research Institution: "' + this.ffqinsitution.institutionName + '" was added!';
       },
-      error =>{
+      error => {
           const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
           dialogRef.componentInstance.title = error.error.message;
       });
@@ -103,17 +110,17 @@ export class ResearchInstitutionComponent implements OnInit {
 
   updateResearchInstitution()
   {
-    this.researchInstitutionService.updateUser(<FFQResearchInstitution>this.ffqinsitution).subscribe(
+    this.researchInstitutionService.updateUser(this.ffqinsitution as FFQResearchInstitution).subscribe(
      data => {this.router.navigateByUrl('admin/research/users');
-     const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-     dialogRef.componentInstance.title = 'Research Institution successfully updated!';}
+              const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+              dialogRef.componentInstance.title = 'Research Institution successfully updated!'; }
 
     );
   }
 
   deleteResearchInstitution(){
     const confirmDelete = this.modalService.open(DeletePopupComponent);
-    confirmDelete.componentInstance.service = "research_institution";
+    confirmDelete.componentInstance.service = 'research_institution';
     confirmDelete.componentInstance.attributes = this.researchInstitutionAttributes;
   }
 }

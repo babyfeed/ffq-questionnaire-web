@@ -11,6 +11,9 @@ import { ResearchService } from 'src/app/services/research/research-service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DeletePopupComponent } from 'src/app/components/delete-popup/delete-popup.component';
 import { FFQResearchInstitution } from 'src/app/models/ffq-research-institution';
+import {FFQClinicianResponse} from '../../models/ffqclinician-response';
+import {FFQClinician} from '../../models/ffqclinician';
+import {ClinicianService} from '../../services/clinician/clinician-service';
 
 
 @Component({
@@ -52,6 +55,7 @@ export class AdminResearcherUserComponent implements OnInit {
   };
 
   constructor(
+    public clinicianService: ClinicianService,
     public researcherService: ResearchService,
     public researchInstitutionService: ResearchInstitutionService,
     private errorDialog: MatDialog,
@@ -65,7 +69,7 @@ export class AdminResearcherUserComponent implements OnInit {
   dataLoaded: Promise<boolean>;
   ffqresearcherUser: FFQResearcher;
   public ffqresearcherList: FFQResearcher[] = [];
-  public ffqresearcList: FFQResearcher[] = [];
+  public ffqclinicianList: FFQClinician[] = [];
   public ffqresearchInstitutionSelected: FFQResearchInstitution;
   researcherUserAttributes: FFQResearcher;
   newUserId: string;
@@ -85,26 +89,39 @@ export class AdminResearcherUserComponent implements OnInit {
 
     const researchList: Observable<FFQResearcher[]> = this.researcherService.getAllUsers();
     researchList.subscribe(a => {
-      this.ffqresearcList = a;
+      this.ffqresearcherList = a;
+    });
+
+    const clinicianList: Observable<FFQClinicianResponse[]> = this.clinicianService.getAllClinicians();
+    clinicianList.subscribe(a => {
+      this.ffqclinicianList = a;
     });
   }
 
   userNameCreator(){
     this.prefix = this.prefix.replace(/\s/g, '');
-    for (let i = 0; i <= this.ffqresearcList.length - 1; i++){
-      if (this.prefix === this.ffqresearcList[i].prefix && this.ffqresearcList[i].assignedResearchInstitutionId === this.assignedResearchInstitutionId){
+    let prefixInClinic = true;
+    for (let i = 0; i <= this.ffqresearcherList.length - 1; i++){
+      if (this.prefix === this.ffqresearcherList[i].prefix && this.ffqresearcherList[i].assignedResearchInstitutionId === this.assignedResearchInstitutionId){
         this.toStrip = this.prefix + '_Researcher';
-        this.newNumber = parseInt(this.ffqresearcList[i].username.replace(this.toStrip, ''), 10);
+        this.newNumber = parseInt(this.ffqresearcherList[i].username.replace(this.toStrip, ''), 10);
         if (this.newNumber > this.max){
           this.max = this.newNumber;
         }
         this.newPrefix = false;
       }
-      else if (this.ffqresearcList[i].assignedResearchInstitutionId !== this.assignedResearchInstitutionId && this.prefix === this.ffqresearcList[i].prefix) {
+      else if (this.ffqresearcherList[i].assignedResearchInstitutionId !== this.assignedResearchInstitutionId && this.prefix === this.ffqresearcherList[i].prefix) {
         this.found = true;
         break;
       }
-      else if (this.ffqresearcList.length - 1 === i && this.newPrefix === undefined){
+      else if (prefixInClinic) {
+        if (this.ffqclinicianList.some(clinician => clinician.prefix === this.prefix)) {
+          this.found = true;
+          break;
+        }
+        prefixInClinic = false;
+    }
+      else if (this.ffqresearcherList.length - 1 === i && this.newPrefix === undefined){
         this.newPrefix = true;
         this.researcherName = this.prefix + '_Researcher1';
         this.newNumber = 1;
@@ -113,7 +130,7 @@ export class AdminResearcherUserComponent implements OnInit {
     }
   }
   addResearcherUser() {
-    if (this.ffqresearcList.length === 0){
+    if (this.ffqresearcherList.length === 0){
       this.generatePassword();
       this.researcherName = this.prefix + '_Researcher1';
       this.ffqresearcherUser = new FFQResearcher(
@@ -173,7 +190,7 @@ export class AdminResearcherUserComponent implements OnInit {
       if (this.found) {
         const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
         this.router.navigateByUrl('/admin/research/users');
-        dialogRef.componentInstance.title = 'This prefix is already in use by another Research Institution';
+        dialogRef.componentInstance.title = 'This prefix is already in use by another Clinic <br> or Research Institution';
       }
     });
   }

@@ -69,7 +69,8 @@ export class ResearchInstitutionService {
           item.address,
           item.createdDate,
           item.institutionName,
-          "researchInstitution"
+          "researchInstitution",
+          item.participantsLimit
         );
       })
     );
@@ -85,7 +86,8 @@ export class ResearchInstitutionService {
           item.address,
           item.createdDate,
           item.institutionName,
-          item.researchInstitution
+          item.researchInstitution,
+            item.participantsLimit
           );
         });
       })

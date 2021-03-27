@@ -1,6 +1,6 @@
-import { Component, OnInit } from "@angular/core";
-import { ResultsService } from "src/app/services/results/results.service";
-import { FFQResultsResponse } from "src/app/models/ffqresultsresponse";
+import { Component, OnInit } from '@angular/core';
+import { ResultsService } from 'src/app/services/results/results.service';
+import { FFQResultsResponse } from 'src/app/models/ffqresultsresponse';
 import {Observable} from 'rxjs';
 import { NutrientConstants } from 'src/app/models/NutrientConstants';
 
@@ -16,6 +16,19 @@ import { FoodRecommendModalComponent } from 'src/app/components/food-recommend-m
 import { FoodRecommendationsService } from 'src/app/services/food-recommendation-service/food-recommendations.service';
 import { FoodDescriptionService } from 'src/app/services/food-description/food-description.service';
 import {DeletePopupComponent} from '../../components/delete-popup/delete-popup.component';
+import {ExportService} from '../../services/export/export-service';
+import {FFQFoodRecommendations} from '../../models/ffqfood-recommendations';
+import {FFQClinic} from '../../models/ffqclinic';
+import {ClinicService} from 'src/app/services/clinic/clinic-service';
+import {FFQParent} from '../../models/ffqparent';
+import {ParentService} from '../../services/parent/parent-service';
+import {FFQParentResponse} from '../../models/ffqparent-response';
+import {FfqParticipant} from '../../models/ffq-participant';
+import {ParticipantService} from '../../services/participant/participant-service';
+import {FFQResearchInstitution} from '../../models/ffq-research-institution';
+import {ResearchInstitutionService} from '../../services/research-institution-service/research-institution-service';
+import {FFQClinicResponse} from '../../models/ffqclinic-response';
+import {FFQInstitution} from '../../models/ffqinstitution';
 
 // Questionnaire reesults page added by Daykel Muro 09/30/2019
 @Component({
@@ -27,18 +40,60 @@ export class QuestResultsComponent implements OnInit {
   public show = false;
   public showFeedback = false;
   results: FFQResultsResponse[] = [];
+  parentResults: FFQResultsResponse[] = [];
+  parentResultsByClinicId: FFQResultsResponse[] = [];
+  participantResults: FFQResultsResponse[] = [];
+  participantResultsByClinicId: FFQResultsResponse[] = [];
   questionnaireId: string;
+  showParent = false;
+  bySite = true;
+  byClinic = true;
+  showParticipant = false;
+  selectedClinic: string;
+  selectedSite: string;
+  public ffqclinicList$: Observable<FFQClinic[]>;
+  public ffqSiteList$: Observable<FFQResearchInstitution[]>;
+  clinicId: string;
+  public ffqparentList: FFQParent[] = [];
+  public ffqParticipantList: FfqParticipant[] = [];
+  showByClinic = true;
+  showBySite = true;
+  private clinic = [];
+  private site = [];
+  clinicAttributes: FFQClinic;
+  siteAttributes: FFQInstitution;
+  clinicName: string;
 
   constructor(public resultsService: ResultsService, ////////////////////////////////////////
               public nutrientsRecommendationsService: NutrientsRecommendationsService,
               public foodRecommendationsService: FoodRecommendationsService,
+              private parentService: ParentService,
+              private participantService: ParticipantService,
               public foodDescriptionService: FoodDescriptionService,
               private modalService: NgbModal,
+              public clinicService: ClinicService,
+              public researchInstitutionService: ResearchInstitutionService,
               private errorDialog: MatDialog,
-              private router: Router) {}
+              private router: Router,
+              private exportService: ExportService
+
+  ) {
+    this.ffqclinicList$ = this.clinicService.getAllClinics();
+    this.ffqSiteList$ = this.researchInstitutionService.getAllResearchInstitutions();
+  }
 
   ngOnInit() {
     this.getAllResults();
+
+    const parentList: Observable<FFQParentResponse[]> = this.parentService.getAllParents();
+    parentList.subscribe(a => {
+      this.ffqparentList = a;
+    });
+
+    const participantList: Observable<FfqParticipant[]> = this.participantService.getAllParticipants();
+    participantList.subscribe(a => {
+      this.ffqParticipantList = a;
+    });
   }
 
   // (Khalid)Changed below code to sort the list in the nutient view page
@@ -64,13 +119,59 @@ export class QuestResultsComponent implements OnInit {
        });
 
       this.results = m.reverse();
+      this.parentResults = this.results.filter(t => t.userType === 'parent');
+      this.participantResults = this.results.filter(t => t.userType === 'participant');
+      this.setFoodList();
     }
 
    );
  }
+  sortByClinic(event: any) {
+    this.clinic.push(this.clinicService.getClinic(event.value).subscribe(data => {
+      this.clinicAttributes = data;
+    }));
+
+    // manually adding assignedClinicOrSite id field to result since it doesn't get added when parent takes ffq
+    for (let i = 0; i <= this.ffqparentList.length - 1; i++) {
+      for (let j = 0; j <= this.parentResults.length - 1; j++){
+        if (this.parentResults[j].userId === this.ffqparentList[i].userId) {
+          this.parentResults[j].assignedClinicOrSiteId = this.ffqparentList[i].assignedclinic;
+        }
+      }
+    }
+    // TO-DO create assignedClinicOrSite id field to result when a parent takes a questionnaire
+    // will then be able to remove nested for loop and just filter by assignedClinicOrSite id
+    this.parentResultsByClinicId = this.parentResults.filter(t => t.assignedClinicOrSiteId === event.value);
+
+    const matSelect: any = event.source;
+    matSelect.writeValue(null);
+  }
+
+  sortBySite(event: any)
+  {
+    this.site.push(this.researchInstitutionService.getResearchInstitution(event.value).subscribe(data => {
+      this.siteAttributes = data;
+    }));
+
+    // manually adding assignedClinicOrSite id field to result since it doesn't get added when participant takes ffq
+    for (let i = 0; i <= this.ffqParticipantList.length - 1; i++) {
+      for (let j = 0; j <= this.participantResults.length - 1; j++){
+        if (this.participantResults[j].userId === this.ffqParticipantList[i].userId) {
+          this.participantResults[j].assignedClinicOrSiteId = this.ffqParticipantList[i].assignedResearcherInst;
+        }
+      }
+    }
+    // TO-DO create assignedClinicOrSite id field to result when a participant takes a questionnaire
+    // will then be able to remove nested for loop and just filter by assignedClinicOrSite id
+    this.participantResultsByClinicId = this.participantResults.filter(t => t.assignedClinicOrSiteId === event.value);
+
+    const matSelect: any = event.source;
+    matSelect.writeValue(null);
+  }
+
   deleteQuestionnaire(questionnaireId: string){
-    for (let item of this.results) {
-      if (item.questionnaireId == questionnaireId)
+    for (const item of this.results) {
+      if (item.questionnaireId === questionnaireId)
       {
         const confirmDelete = this.modalService.open(DeletePopupComponent);
         confirmDelete.componentInstance.service = 'Questionnaire';
@@ -84,9 +185,13 @@ export class QuestResultsComponent implements OnInit {
     return 0;
   }
 
-  toggle(index) {
-    this.results[index].show = !this.results[index].show;
+  toggleParentResults(index) {
+    this.parentResults[index].show = !this.parentResults[index].show;
   }
+  toggleParticipantResults(index) {
+    this.participantResults[index].show = !this.participantResults[index].show;
+  }
+
   /////////////////////////////////////////////////////////////////////////////////
   // (Francis) attempting to add Nutrients and Food Items buttons from recommend tab
   //            copy/pasted from recommend.component.ts
@@ -128,5 +233,20 @@ export class QuestResultsComponent implements OnInit {
     modalRef.componentInstance.id = id;
   }
 
+  export() {
+    this.exportService.exportFFQResults(this.results, this.ffqparentList, 'FFQ_Results');
+  }
+
+  private setFoodList() {
+    this.results.forEach(result => {
+      const recommendedFood: FFQFoodRecommendations[] = [];
+      this.foodRecommendationsService.getFoodRecommendationsByQuestionnaireId(result.questionnaireId).subscribe(
+        data => {
+          recommendedFood.push(data);
+        },
+      );
+      result.foodRecList = recommendedFood;
+    });
+  }
 
 }
