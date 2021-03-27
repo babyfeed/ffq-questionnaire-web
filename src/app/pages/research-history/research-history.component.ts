@@ -29,6 +29,10 @@ import { ErrorDialogPopupComponent } from 'src/app/components/error-dialog-popup
 import { FFQResearcherParent } from 'src/app/models/ffqresearcherparent';
 import { FFQFoodRecommendations } from 'src/app/models/ffqfood-recommendations';
 import { element } from 'protractor';
+import {FFQParent} from "../../models/ffqparent";
+import {FFQParentResponse} from "../../models/ffqparent-response";
+import {ParentService} from "../../services/parent/parent-service";
+import {take} from "rxjs/operators";
 
 
 @Component({
@@ -41,6 +45,7 @@ export class ResearchHistoryComponent implements OnInit {
   public show: boolean = false;
   public buttonName: any = "Results";
   researcherId: string = this.authenticationService.currentUserId;
+  private ffqparentList: FFQParent[] = [];
 
   MESSAGE = "No questionnaires have been submitted yet!";
 
@@ -59,7 +64,8 @@ export class ResearchHistoryComponent implements OnInit {
     private foodRecommendationsService: FoodRecommendationsService,
     private nutrientsRecommendationsService: NutrientsRecommendationsService,
     private participantService: ResearcherParentService,
-    private exportService: ExportService
+    private exportService: ExportService,
+    private parentService: ParentService
 
   ) {}
 
@@ -72,6 +78,7 @@ export class ResearchHistoryComponent implements OnInit {
   ngOnInit() {
 
     this.getParticipantList();
+    this.getParentsList();
     this.getParticipantResult();
 
     //Test
@@ -83,7 +90,7 @@ export class ResearchHistoryComponent implements OnInit {
   }
 
   export() {
-    this.exportService.exportFFQResults(this.results, 'FFQ_Results');
+    this.exportService.exportFFQResults(this.results, this.ffqparentList, 'FFQ_Results');
   }
 
   private getParticipantList(){
@@ -177,4 +184,11 @@ export class ResearchHistoryComponent implements OnInit {
 
   }
 
+  private getParentsList() {
+    this.parentService.getAllParents().pipe(
+      take(1),
+    ).subscribe(a => {
+      this.ffqparentList = a;
+    });
+  }
 }

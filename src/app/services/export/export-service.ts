@@ -7,6 +7,7 @@ import { FFQResultsResponse } from 'src/app/models/ffqresultsresponse';
 import { FoodRecommendationsService } from 'src/app/services/food-recommendation-service/food-recommendations.service';
 import { FFQFoodRecommendations } from 'src/app/models/ffqfood-recommendations';
 import { createHostListener } from '@angular/compiler/src/core';
+import {FFQParent} from "../../models/ffqparent";
 
 @Injectable({
   providedIn: 'root'
@@ -23,18 +24,18 @@ export class ExportService {
 
 
 
-  public exportFFQResults(results: FFQResultsResponse[], fileName: string): void {
+  public exportFFQResults(results: FFQResultsResponse[], parentList: FFQParent[], fileName: string): void {
 
-    const nutrients: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.getNutrientJson(results));
-    const foodGroups: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.getFoodGroupsJson(results));
-    const foods: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.getFoodsJson(results));
+    const nutrients: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.getNutrientJson(results, parentList));
+    const foodGroups: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.getFoodGroupsJson(results, parentList));
+    const foods: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.getFoodsJson(results, parentList));
     const wb: XLSX.WorkBook = { Sheets: { Nutrients: nutrients, FoodGroups: foodGroups, Foods: foods }, SheetNames: ['Nutrients', 'FoodGroups', 'Foods'] };
     const excelBuffer: any = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
     this.saveExcelFile(excelBuffer, fileName);
   }
 
   // Creates json object with nutrient sheet rows and collumns of data
-  private getNutrientJson(results: FFQResultsResponse[]): any {
+  private getNutrientJson(results: FFQResultsResponse[], parentList: FFQParent[]): any {
 
     // Array of rows of data
     var resultRows = [];
@@ -43,7 +44,7 @@ export class ExportService {
 
       // Initialize columns with general result information
       var resultCol = {
-        'Participant ID': result.userId,
+        'Participant Username': parentList.find(parent => parent.userId === result.userId)?.username ?? "[not found]",
         'Questionnaire ID': result.questionnaireId,
         'Date': result.date,};
 
@@ -61,7 +62,7 @@ export class ExportService {
 
   }
 
-  private getFoodsJson(results: FFQResultsResponse[]): any {
+  private getFoodsJson(results: FFQResultsResponse[], parentList: FFQParent[]): any {
 
         // Array of rows of data
         var resultRows = [];
@@ -70,7 +71,7 @@ export class ExportService {
 
           // Initialize columns with general result information
           var resultCol = {
-            'Participant ID': result.userId,
+            'Participant Username': parentList.find(parent => parent.userId === result.userId)?.username ?? "[not found]",
             'Questionnaire ID': result.questionnaireId,
             'Date': result.date,
           };
@@ -94,7 +95,7 @@ export class ExportService {
 
   }
 
-  private getFoodGroupsJson(results: FFQResultsResponse[]): any {
+  private getFoodGroupsJson(results: FFQResultsResponse[], parentList: FFQParent[]): any {
 
     // Array of rows of data
     var resultRows = [];
@@ -103,7 +104,7 @@ export class ExportService {
 
       // Initialize columns with general result information
       var resultCol = {
-        'Participant ID': result.userId,
+        'Participant Username': parentList.find(parent => parent.userId === result.userId)?.username ?? "[not found]",
         'Questionnaire ID': result.questionnaireId,
         'Date': result.date
       };

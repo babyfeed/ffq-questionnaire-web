@@ -85,7 +85,7 @@ export class ClinicQuestResultsComponent implements OnInit {
     this.getClinicId();
   }
   export() {
-    this.exportService.exportFFQResults(this.results, 'FFQ_Results');
+    this.exportService.exportFFQResults(this.results, this.parentList, 'FFQ_Results');
   }
   // loadData function serves to store the result and parent names into the FFQParentResult object
   //                  serves to display the questionnaire-result data using the specification based on PO's list
@@ -263,4 +263,7 @@ private getResultsList(){
   }
 
 
+  getParentUsernameById(userId: string) {
+    return this.parentList.find(parent => parent.userId === userId)?.username ?? "[not found]";
+  }
 }
