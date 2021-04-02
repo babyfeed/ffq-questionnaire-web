@@ -7,14 +7,14 @@
 
 */
 
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
-import { MatDialog } from "@angular/material/dialog";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 // For getting results
-import { ResultsService } from "src/app/services/results/results.service";
+import { ResultsService } from 'src/app/services/results/results.service';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { NutrientsRecommendationsService } from 'src/app/services/nutrients-recommendations/nutrients-recommendations.service';
 import { FFQResultsResponse } from 'src/app/models/ffqresultsresponse';
@@ -29,29 +29,30 @@ import { ErrorDialogPopupComponent } from 'src/app/components/error-dialog-popup
 import { FFQResearcherParent } from 'src/app/models/ffqresearcherparent';
 import { FFQFoodRecommendations } from 'src/app/models/ffqfood-recommendations';
 import { element } from 'protractor';
-import {FFQParent} from "../../models/ffqparent";
-import {FFQParentResponse} from "../../models/ffqparent-response";
-import {ParentService} from "../../services/parent/parent-service";
-import {take} from "rxjs/operators";
+import {FFQParent} from '../../models/ffqparent';
+import {FFQParentResponse} from '../../models/ffqparent-response';
+import {ParentService} from '../../services/parent/parent-service';
+import {take} from 'rxjs/operators';
 
 
 @Component({
-  selector: "research-history",
-  templateUrl: "./research-history.component.html",
-  styleUrls: ["./research-history.component.css"],
+  selector: 'research-history',
+  templateUrl: './research-history.component.html',
+  styleUrls: ['./research-history.component.css'],
 })
 export class ResearchHistoryComponent implements OnInit {
 
-  public show: boolean = false;
-  public buttonName: any = "Results";
-  researcherId: string = this.authenticationService.currentUserId;
+  public show = false;
+  public buttonName: any = 'Results';
+  // researcherId: string = this.authenticationService.currentUserId;
+  loggedInUser = this.authenticationService.currentUserValue;
   private ffqparentList: FFQParent[] = [];
 
-  MESSAGE = "No questionnaires have been submitted yet!";
+  MESSAGE = 'No questionnaires have been submitted yet!';
 
   results: FFQResultsResponse[] = [];
   participantList: FFQResearcherParent[] = [];
-  //Test
+  // Test
   customers: any = [];
 
   constructor(
@@ -71,8 +72,8 @@ export class ResearchHistoryComponent implements OnInit {
 
   toggle(index) {
     this.results[index].show = !this.results[index].show;
-    if (this.results[index].show) this.buttonName = "Results";
-    else this.buttonName = "Results";
+    if (this.results[index].show) { this.buttonName = 'Results'; }
+    else { this.buttonName = 'Results'; }
   }
 
   ngOnInit() {
@@ -81,7 +82,7 @@ export class ResearchHistoryComponent implements OnInit {
     this.getParentsList();
     this.getParticipantResult();
 
-    //Test
+    // Test
     // for (let i = 0; i <= 25; i++) {
     //   this.customers.push({firstName: `first${i}`, lastName: `last${i}`,
     //   email: `abc${i}@gmail.com`, address: `000${i} street city, ST`, zipcode: `0000${i}`});
@@ -95,14 +96,14 @@ export class ResearchHistoryComponent implements OnInit {
 
   private getParticipantList(){
 
-    var participantListObservable: Observable<FFQResearcherParentResponse[]> = this.participantService.getAllParents();
+    let participantListObservable: Observable<FFQResearcherParentResponse[]> = this.participantService.getAllParents();
 
     participantListObservable.subscribe(participantList => {
       participantList.forEach(participant => {
-        if (participant.assignedResearcherUser.indexOf(this.researcherId) >= 0){
+        if (participant.prefix === this.loggedInUser[0].prefix){
           this.participantList.push(participant);
         }
-      })
+      });
     });
 
   }
@@ -110,7 +111,7 @@ export class ResearchHistoryComponent implements OnInit {
 
   private getParticipantResult() {
 
-    const oldList: Observable<FFQResultsResponse[]> = this.resultsService.getResultsByUserType("participant");
+    const oldList: Observable<FFQResultsResponse[]> = this.resultsService.getResultsByUserType('participant');
 
     oldList.subscribe(m => {
 
@@ -118,19 +119,19 @@ export class ResearchHistoryComponent implements OnInit {
 
         m.forEach(element => {
 
-          if(element.userId == participant.userId){
+          if (element.userId == participant.userId){
 
             this.results.push(element);
           }
-        })
+        });
 
-      })
+      });
 
       console.log(m);
 
       this.setNutrients();
       this.setFoodList();
-    })
+    });
 
   }
 
@@ -152,11 +153,11 @@ export class ResearchHistoryComponent implements OnInit {
       reqList.forEach(a =>  {
           newWeeklyMap.set(a, weeklyMap[a]);
           newDailyMap.set(a, dailyMap[a]);
-      })
+      });
 
       element.weeklyTotals = newWeeklyMap;
       element.dailyAverages = newDailyMap;
-      })
+      });
 
       console.log(m);
       this.results = m.reverse();
@@ -170,7 +171,7 @@ export class ResearchHistoryComponent implements OnInit {
 
     this.results.forEach(result => {
 
-      var recommendedFood: FFQFoodRecommendations[] = [];
+      let recommendedFood: FFQFoodRecommendations[] = [];
 
       this.foodRecommendationsService.getFoodRecommendationsByQuestionnaireId(result.questionnaireId).subscribe(
         data => {

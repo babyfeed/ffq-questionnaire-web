@@ -109,13 +109,9 @@
                                         <th>Nutrient</th>
                                         <th>Daily Average</th>
                                     </tr>
-                                    <!-- Below code changed to show requested digits by PO-->
                                     <tr *ngFor="let item of result.dailyAverages | keyvalue : returnZero; let i=index">
-                                        <!--td *ngIf="i != 0 && i != 1 && i != 2"-->
                                         <td>{{item.key}}</td>
-                                        <!--Khalid, changed item.value to display 3 digits-->
-                                        <!--td *ngIf="i != 0 && i != 1 && i != 2"-->
-                                        <td>{{item.value}}</td>
+                                        <td>{{item.value | resultRound}}</td>
                                     </tr>
                                 </table>
                             </div>

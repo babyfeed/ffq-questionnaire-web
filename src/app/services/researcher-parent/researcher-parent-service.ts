@@ -50,7 +50,8 @@ export class ResearcherParentService {
             item.assignedResearcherOrg,
             item.assignedResearcherUser,
             item.childrennames,
-            item.isactive
+            item.isactive,
+            item.prefix
           );
       })
     );
@@ -71,7 +72,7 @@ export class ResearcherParentService {
             item.assignedResearcherUser,
             item.childrennames,
             item.isactive,
-			item.prefix
+			      item.prefix
           );
         });
       })
@@ -92,7 +93,8 @@ export class ResearcherParentService {
             item.assignedResearcherOrg,
             item.assignedResearcherUser,
             item.childrennames,
-            item.isactive
+            item.isactive,
+            item.prefix
           );
         });
       })

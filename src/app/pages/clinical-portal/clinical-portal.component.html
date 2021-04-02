@@ -20,14 +20,12 @@
             <table class="table table-bordered table-inverse">
               <tr>
                 <th width="20%"> Clinician UserName </th>
-                <th width="10%"> Clinician UserId </th>
                 <th width="10%"> Prefix </th>
                 <th width="20%"> Current number of Parents in Clinic </th>
                 <th width="20%"> Total Parent Limit for Clinic</th>
               </tr>
               <tr>
                 <td> <a [routerLink]="['/clinic/user/c', loggedInUser[0].userId]">{{loggedInUser[0].username}}</a> </td>
-                <td>{{ loggedInUser[0].userId }}</td>
                 <td>{{ loggedInUser[0].prefix }}</td>
                 <td>{{ count }}</td>
                 <td>{{ clinicParentLimit }}</td>
@@ -52,10 +50,7 @@
             <table class="table table-bordered table-inverse">
                 <tr>
                   <th width="20%"> Parent Username </th>
-                  <th width="15%"> Parent UserId </th>
-<!--                  <th width="20%"> Assigned Clinician </th>-->
-<!--                  <th width="25%"> Assigned Clinician UserName</th>-->
-<!--                  <th width="25%"> Assigned Clinician UserId</th>-->
+
 
                 </tr>
                 <tr *ngFor="let u of parentList | searchFilter: p_search; index as i"
@@ -63,10 +58,6 @@
                      (filtered && filtered_clinicians.indexOf(clinicianNames[u.assignedclinician]) === -1)"
                 >
                     <td><a [routerLink]="['/clinic/user/p', u.userId]"> {{ u.username }} </a></td>
-                    <td> {{ u.userId }}</td>
-<!--                    <td> {{ clinicianNames[u.assignedclinician] }}</td>-->
-<!--                    <td> {{ clinicianUserNames[u.assignedclinician] }}</td>-->
-<!--                    <td> {{ u.assignedclinician }} </td>-->
                 </tr>
             </table>
 
