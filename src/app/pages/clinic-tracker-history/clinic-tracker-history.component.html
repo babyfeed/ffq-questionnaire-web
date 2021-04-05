@@ -1,5 +1,9 @@
 <clinical-header></clinical-header>
 
+<div class="tracker-button-container">
+  <button [hidden]='resultInfo.length === 0' type="button" (click)="export()" class="btn btn-danger"> Export Data</button>
+</div>
+
 <div class="tracker-container">
   <br><br><br>
   <div class="trackeritem-container" *ngIf="resultInfo.length === 0">

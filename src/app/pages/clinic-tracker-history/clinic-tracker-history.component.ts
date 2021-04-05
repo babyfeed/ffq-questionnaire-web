@@ -16,6 +16,7 @@ import {ParentService} from 'src/app/services/parent/parent-service';
 import {FFQClinicResponse} from 'src/app/models/ffqclinic-response';
 import {ClinicService} from 'src/app/services/clinic/clinic-service';
 import {TrackerParentResultsResponse} from 'src/app/models/ffqparentresulttracker';
+import { ExportService } from '../../services/export/export-service';
 
 @Component({
   templateUrl: './clinic-tracker-history.component.html',
@@ -37,7 +38,8 @@ export class ClinicTrackerHistoryComponent implements OnInit {
   constructor(private trackerResultsService: TrackerResultsService,
               private authenticationService: AuthenticationService,
               public parentService: ParentService,
-              public clinicService: ClinicService
+              public clinicService: ClinicService,
+              public exportService: ExportService
   ) {
   }
 
@@ -119,5 +121,9 @@ export class ClinicTrackerHistoryComponent implements OnInit {
       });
       this.getAllResults();
     });
+  }
+
+  export() {
+    this.exportService.exportClinicTrackingHistory(this.trackerList, this.parentNames, 'TrackingHistory');
   }
 }

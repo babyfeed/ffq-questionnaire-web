@@ -53,6 +53,38 @@ export class ExportService {
     return resultRows;
   }
 
+  // had to make a new function because the input lists for both lists are in different formats; can't index with userID in clinic
+  public exportClinicTrackingHistory(results: TrackerResultsResponse[], parentList: string[], fileName: string): void{
+    const trackingHistory: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.getClinicTrackingJSON(results, parentList));
+    const wb: XLSX.WorkBook = { Sheets: { TrackingHistory : trackingHistory }, SheetNames: ['TrackingHistory'] };
+    const excelBuffer: any = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+    this.saveExcelFile(excelBuffer, fileName);
+  }
+
+  private getClinicTrackingJSON(results: TrackerResultsResponse[], parentList: string[]): any{
+
+    var resultRows = [];
+    var parentIndex = 0;
+
+    results.forEach(result => {
+
+      var resultCol = {
+        'Participant Username': parentList[parentIndex++],
+        'Date': result.date,
+        'Age(Months)': result.age
+      };
+
+      for(let item of result.responses){
+        resultCol[item['food']] = item['response'];
+      }
+      
+      resultRows.push(resultCol)
+
+    });
+
+    return resultRows;
+  }
+
   public exportFFQResults(results: FFQResultsResponse[], parentList: FFQParent[], fileName: string): void {
 
     const nutrients: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.getNutrientJson(results, parentList));

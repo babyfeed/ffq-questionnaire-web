@@ -1,7 +1,7 @@
 <admin-header></admin-header>
 
 <div class="tracker-button-container">
-    <button type="button" (click)="export()" class="btn btn-danger"> Export Data</button>
+    <button [hidden]='results.length === 0' type="button" (click)="export()" class="btn btn-danger"> Export Data</button>
 </div>
 
 <div class="tracker-container">
