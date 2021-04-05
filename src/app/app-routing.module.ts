@@ -105,13 +105,13 @@ const routes: Routes = [
     path: "admin/research/institution/:id",
     component: UpdateResearchInstitutionComponent,
     canActivate: [AuthGuard],
-  }, 
+  },
   {
     path: "admin/researcher/user/:id",
     component: UpdateResearcherComponent,
     canActivate: [AuthGuard],
-  }, 
-  
+  },
+
   {
     path: "admin/researcher",
     component: AdminResearcherUserComponent,
@@ -224,7 +224,7 @@ const routes: Routes = [
   },
   {
     path: "researcher/home",
-    component: ResearchPageComponent,
+    component: ResearchUsersComponent,
     canActivate: [AuthGuard],
   },
   {
