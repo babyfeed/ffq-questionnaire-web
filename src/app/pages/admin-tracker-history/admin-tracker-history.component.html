@@ -1,5 +1,9 @@
 <admin-header></admin-header>
 
+<div class="tracker-button-container">
+    <button type="button" (click)="export()" class="btn btn-danger"> Export Data</button>
+</div>
+
 <div class="tracker-container">
 
     <div class="trackeritem-container" *ngIf="results.length === 0">

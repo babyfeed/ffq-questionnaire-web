@@ -1,11 +1,15 @@
 .tracker-container {
-    padding-top: 140px;
     margin-bottom: 50px;
 }
 
 .trackeritem-container {
     display: flex;
     justify-content: center;
+}
+
+.tracker-button-container {
+    padding-top: 170px;
+    margin-left: 69%;
 }
 
 .tracker-card {
