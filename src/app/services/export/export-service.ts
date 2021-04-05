@@ -8,6 +8,7 @@ import { FoodRecommendationsService } from 'src/app/services/food-recommendation
 import { FFQFoodRecommendations } from 'src/app/models/ffqfood-recommendations';
 import { createHostListener } from '@angular/compiler/src/core';
 import {FFQParent} from "../../models/ffqparent";
+import { TrackerResultsResponse } from 'src/app/models/trackerresultsresponse';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,35 @@ export class ExportService {
   fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
   fileExtension = '.xlsx';
 
+  public exportTrackingHistory(results: TrackerResultsResponse[], parentList: string[], fileName: string): void{
+    const trackingHistory: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.getTrackingJSON(results, parentList));
+    const wb: XLSX.WorkBook = { Sheets: { TrackingHistory : trackingHistory }, SheetNames: ['TrackingHistory'] };
+    const excelBuffer: any = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+    this.saveExcelFile(excelBuffer, fileName);
+  }
 
+  private getTrackingJSON(results: TrackerResultsResponse[], parentList: string[]): any{
+
+    var resultRows = [];
+
+    results.forEach(result => {
+
+      var resultCol = {
+        'Participant Username': parentList[result.userId],
+        'Date': result.date,
+        'Age(Months)': result.age
+      };
+
+      for(let item of result.responses){
+        resultCol[item['food']] = item['response'];
+      }
+      
+      resultRows.push(resultCol)
+
+    });
+
+    return resultRows;
+  }
 
   public exportFFQResults(results: FFQResultsResponse[], parentList: FFQParent[], fileName: string): void {
 

@@ -7,6 +7,7 @@ import { FFQParentResponse } from 'src/app/models/ffqparent-response';
 import { ParentService } from 'src/app/services/parent/parent-service';
 import { FFQClinicResponse } from 'src/app/models/ffqclinic-response';
 import { ClinicService } from 'src/app/services/clinic/clinic-service';
+import { ExportService } from '../../services/export/export-service';
 
 @Component({
   templateUrl: './admin-tracker-history.component.html',
@@ -22,7 +23,8 @@ export class AdminTrackerHistoryComponent implements OnInit {
   constructor(private trackerResultsService: TrackerResultsService,
               private authenticationService: AuthenticationService,
               public parentService: ParentService,
-              public clinicService: ClinicService
+              public clinicService: ClinicService,
+              public exportService: ExportService,
               ) { }
 
   ngOnInit() {
@@ -67,4 +69,9 @@ export class AdminTrackerHistoryComponent implements OnInit {
       });
     });
   }
+
+  export() {
+    this.exportService.exportTrackingHistory(this.results, this.allParents, 'TrackingHistory');
+  }
+
 }
