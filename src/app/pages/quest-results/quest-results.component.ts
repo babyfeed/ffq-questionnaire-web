@@ -62,7 +62,6 @@ export class QuestResultsComponent implements OnInit {
   private site = [];
   clinicAttributes: FFQClinic;
   siteAttributes: FFQInstitution;
-  clinicName: string;
 
   constructor(public resultsService: ResultsService, ////////////////////////////////////////
               public nutrientsRecommendationsService: NutrientsRecommendationsService,
@@ -83,8 +82,6 @@ export class QuestResultsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getAllResults();
-
     const parentList: Observable<FFQParentResponse[]> = this.parentService.getAllParents();
     parentList.subscribe(a => {
       this.ffqparentList = a;
@@ -94,6 +91,8 @@ export class QuestResultsComponent implements OnInit {
     participantList.subscribe(a => {
       this.ffqParticipantList = a;
     });
+
+    this.getAllResults();
   }
 
   // (Khalid)Changed below code to sort the list in the nutient view page
@@ -119,7 +118,10 @@ export class QuestResultsComponent implements OnInit {
        });
 
       this.results = m.reverse();
-      this.parentResults = this.results.filter(t => t.userType === 'parent');
+      this.parentResults = this.results.filter(t => t.userType === 'parent').map(result => ({
+        ...result,
+          username: this.getParentUsernameById(result.userId)
+      }));
       this.participantResults = this.results.filter(t => t.userType === 'participant');
       this.setFoodList();
     }
@@ -196,6 +198,7 @@ export class QuestResultsComponent implements OnInit {
   // (Francis) attempting to add Nutrients and Food Items buttons from recommend tab
   //            copy/pasted from recommend.component.ts
   /////////////////////////////////////////////////////////////////////////////////
+  searchResults: string;
 
   private getNutrientsRecommendations(questionnaireId: string) {
     this.nutrientsRecommendationsService.getNutrientsRecommendationsByQuestionnaireId(questionnaireId).subscribe(
@@ -249,4 +252,7 @@ export class QuestResultsComponent implements OnInit {
     });
   }
 
+  getParentUsernameById(userId: string) {
+    return this.ffqparentList.find(parent => parent.userId === userId)?.username ?? "[not found]";
+  }
 }

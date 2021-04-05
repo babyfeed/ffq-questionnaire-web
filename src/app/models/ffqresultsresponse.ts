@@ -14,6 +14,7 @@ export class FFQResultsResponse {
     showFeedback: boolean;
     gender: string;
     assignedClinicOrSiteId: string;
+    username?: string;
 
     constructor(id: string, userId: string, userType: string, date: string, name: string, age: number, userChoices:any, weeklyTotals: Map<string, number>, dailyAverages: any, feedback: string, gender: string) {
       this.questionnaireId = id;

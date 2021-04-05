@@ -301,12 +301,22 @@
 
     <div [hidden]="showParent" class="container mt-3" *ngIf="parentResults.length != 0">
         <label style="font-weight:bold"> Parent Questionnaire Results </label>
-        <div *ngFor="let result of parentResults; let i = index">
+        <br/>
+        <span> {{ parentResults.length }} result(s) </span>
+        <div style="margin-bottom: 15px">
+          <input style="width: 25%; display: inline-block;  margin-left: 5px;" placeholder="Search..." type="text"
+                 class="form-control"
+                 name="search" [(ngModel)]="searchResults"/>
+        </div>
+        <div *ngFor="let result of parentResults | searchFilter: searchResults; let i = index">
             <div class="container">
                 <mat-card class="quest-id-card">
                     <mat-card-content>
                         <!--Labels for questionnaire results-->
                         <div class="row">
+                            <div class="col-2" style="text-align:center">
+                              <label><strong>Parent Username</strong></label>
+                            </div>
                             <div class="col-2" style="text-align:center">
                                 <label><strong>Questionnaire ID</strong></label>
                             </div>
@@ -326,6 +336,9 @@
 
                         <!--Questionnaire results-->
                         <div class="row mb-3">
+                            <div class="col-1" style="text-align:center">
+                                {{result.username}}
+                            </div>
                             <div class="col-2" style="text-align:center">
                                 {{result.questionnaireId}}
                             </div>
