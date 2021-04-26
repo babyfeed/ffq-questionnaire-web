@@ -8,14 +8,17 @@
     </div>
     <div class="container mt-3" *ngIf="results.length != 0">
         <label style="font-weight:bold"> Questionnaire Results </label>
-        <div style="display: flex; align-items: stretch; justify-content: space-between">
-          <input style="width: 25%" placeholder="Search by questionnaire ID" type="text" class="form-control" name="search" [(ngModel)]="search" />
-          <div align="right">
-            <button mat-raised-button type="button" (click)="export()">
-              Download Results
-            </button>
-          </div>
+        <div style="display: flex; align-items: stretch; justify-content: space-between; margin-bottom: 10px;">
+          <input style="width: 25%" placeholder="Search by username" type="text" class="form-control" name="searchByUserName" [(ngModel)]="search" />
         </div>
+      <div style="display: flex; align-items: stretch; justify-content: space-between">
+        <input style="width: 25%" placeholder="Search by questionnaire ID" type="text" class="form-control" name="search" [(ngModel)]="search" />
+        <div align="right">
+          <button mat-raised-button type="button" (click)="export()">
+            Download Results
+          </button>
+        </div>
+      </div>
         <div *ngFor="let result of resultInfo| resultsFilter: resultMap: search ; let i = index">
             <div class="container">
                 <mat-card class="quest-id-card">
