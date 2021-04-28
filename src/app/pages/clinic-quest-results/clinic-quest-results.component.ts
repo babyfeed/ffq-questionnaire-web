@@ -7,31 +7,31 @@
 
 */
 
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ResultsService } from 'src/app/services/results/results.service';
-import { FFQResultsResponse } from 'src/app/models/ffqresultsresponse';
-import { Observable } from 'rxjs';
-import { NutrientConstants } from 'src/app/models/NutrientConstants';
-import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
-import { FFQClinicResponse } from 'src/app/models/ffqclinic-response';
-import { ClinicService } from 'src/app/services/clinic/clinic-service';
-import { FFQParentResponse } from 'src/app/models/ffqparent-response';
-import { ParentService } from 'src/app/services/parent/parent-service';
-import { FFQParent } from 'src/app/models/ffqparent';
-import { of } from 'rxjs';
-import { ResultsPipe } from 'src/app/pipes/resultsFilter.pipe';
-import { FFQParentResult } from 'src/app/models/ffqparentresult';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ResultsService} from 'src/app/services/results/results.service';
+import {FFQResultsResponse} from 'src/app/models/ffqresultsresponse';
+import {Observable} from 'rxjs';
+import {NutrientConstants} from 'src/app/models/NutrientConstants';
+import {AuthenticationService} from 'src/app/services/authentication/authentication.service';
+import {FFQClinicResponse} from 'src/app/models/ffqclinic-response';
+import {ClinicService} from 'src/app/services/clinic/clinic-service';
+import {FFQParentResponse} from 'src/app/models/ffqparent-response';
+import {ParentService} from 'src/app/services/parent/parent-service';
+import {FFQParent} from 'src/app/models/ffqparent';
+import {of} from 'rxjs';
+import {ResultsPipe} from 'src/app/pipes/resultsFilter.pipe';
+import {FFQParentResult} from 'src/app/models/ffqparentresult';
 // ////
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { RecommendModalComponent } from 'src/app/components/recommend-modal/recommend-modal.component';
-import { MatDialog } from '@angular/material/dialog';
-import { NutrientsRecommendationsService } from 'src/app/services/nutrients-recommendations/nutrients-recommendations.service';
-import { ErrorDialogPopupComponent } from 'src/app/components/error-dialog-popup/error-dialog-popup.component';
-import { Router } from '@angular/router';
-import { FoodRecommendModalComponent } from 'src/app/components/food-recommend-modal/food-recommend-modal.component';
-import { FoodRecommendationsService } from 'src/app/services/food-recommendation-service/food-recommendations.service';
-import { QuestionnaireValidatorService } from '../../services/questionnaire-validator/questionnaire-validator.service';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {RecommendModalComponent} from 'src/app/components/recommend-modal/recommend-modal.component';
+import {MatDialog} from '@angular/material/dialog';
+import {NutrientsRecommendationsService} from 'src/app/services/nutrients-recommendations/nutrients-recommendations.service';
+import {ErrorDialogPopupComponent} from 'src/app/components/error-dialog-popup/error-dialog-popup.component';
+import {Router} from '@angular/router';
+import {FoodRecommendModalComponent} from 'src/app/components/food-recommend-modal/food-recommend-modal.component';
+import {FoodRecommendationsService} from 'src/app/services/food-recommendation-service/food-recommendations.service';
+import {QuestionnaireValidatorService} from '../../services/questionnaire-validator/questionnaire-validator.service';
 import {ExportService} from '../../services/export/export-service';
 import {FFQFoodRecommendations} from '../../models/ffqfood-recommendations';
 
@@ -59,6 +59,7 @@ export class ClinicQuestResultsComponent implements OnInit {
   parentNames: string[] = [];
   resultMap: Map<string, FFQParentResult> = new Map<string, FFQParentResult>();
   resultInfo: FFQParentResult[] = [];
+
 //
 
 
@@ -75,7 +76,8 @@ export class ClinicQuestResultsComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private exportService: ExportService
-    ) {}
+  ) {
+  }
 
   ngOnInit() {
     this.feedbackForm = this.formBuilder.group({
@@ -84,41 +86,43 @@ export class ClinicQuestResultsComponent implements OnInit {
 
     this.getClinicId();
   }
+
   export() {
     this.exportService.exportFFQResults(this.results, this.parentList, 'FFQ_Results');
   }
+
   // loadData function serves to store the result and parent names into the FFQParentResult object
   //                  serves to display the questionnaire-result data using the specification based on PO's list
   private loadData() {
 
-     const oldListObservable: Observable<FFQResultsResponse[]> = of(this.resultList);
+    const oldListObservable: Observable<FFQResultsResponse[]> = of(this.resultList);
 
-     const newList: string[] = NutrientConstants.NUTRIENT_NAMES;
-     const newWeeklyMap = new Map<string, number>();
-     const newDailyMap = new Map<string, number>();
-     const resultList: FFQResultsResponse[] = this.resultList;
+    const newList: string[] = NutrientConstants.NUTRIENT_NAMES;
+    const newWeeklyMap = new Map<string, number>();
+    const newDailyMap = new Map<string, number>();
+    const resultList: FFQResultsResponse[] = this.resultList;
 
-     oldListObservable.subscribe(m => {
+    oldListObservable.subscribe(m => {
 
       m.forEach(element => {
-      const newWeeklyMap = new Map<string, number>();
-      const newDailyMap = new Map<string, number>();
+        const newWeeklyMap = new Map<string, number>();
+        const newDailyMap = new Map<string, number>();
 
-      const weeklyMap = element.weeklyTotals;
-      const dailyMap = element.dailyAverages;
+        const weeklyMap = element.weeklyTotals;
+        const dailyMap = element.dailyAverages;
 
-      newList.forEach(a =>  {
+        newList.forEach(a => {
           newWeeklyMap.set(a, weeklyMap[a]);
           newDailyMap.set(a, dailyMap[a]);
-      });
+        });
 
-      element.weeklyTotals = newWeeklyMap;
-      element.dailyAverages = newDailyMap;
+        element.weeklyTotals = newWeeklyMap;
+        element.dailyAverages = newDailyMap;
       });
 
       this.results = m.reverse();
       this.parentNames = this.parentNames.reverse();
-      for (let i = 0; i < this.parentNames.length; i++){
+      for (let i = 0; i < this.parentNames.length; i++) {
         let object: FFQParentResult = new FFQParentResult(
           this.results[i],
           this.parentNames[i]
@@ -126,25 +130,27 @@ export class ClinicQuestResultsComponent implements OnInit {
         this.resultInfo.push(object);
         this.resultMap.set(this.results[i].userId, object);
       }
-      });
+    });
 
   }
 
   // convenience getter for easy access to form fields
-  get f() { return this.feedbackForm.controls; }
+  get f() {
+    return this.feedbackForm.controls;
+  }
 
   submitFeedback(qId) {
     if (this.feedbackForm.invalid) {
-        return;
+      return;
     }
 
     this.loading = true;
     this.resultsService.submitFeedback(qId, this.f.feedback.value).subscribe((data: null) => {
-      });
+    });
   }
 
   // Function used to obtain the clinicId for the currently logged in clinician, in order to later display results based only for this specific clinic
-  private getClinicId(){
+  private getClinicId() {
 
     let clinicListObervable: Observable<FFQClinicResponse[]> = this.clinicService.getAllClinics();
     const loggedInUser = this.authenticationService.currentUserValue;
@@ -152,7 +158,7 @@ export class ClinicQuestResultsComponent implements OnInit {
 
     clinicListObervable.subscribe(clinicList => {
       let clinic = clinicList.find(a => a.clinicId == loggedInUser[0].assignedclinic);
-      if (clinic){
+      if (clinic) {
         this.clinicId = clinic.clinicId;
         this.currentClinicName = clinic.clinicname;
       }
@@ -162,37 +168,39 @@ export class ClinicQuestResultsComponent implements OnInit {
   }
 
   // Function used to filter the parent list to hold only the parents that are assigned to that specific clinic
-private getParentList(){
-  let parentListObervable: Observable<FFQParentResponse[]> = this.parentService.getAllParents();
+  private getParentList() {
+    let parentListObervable: Observable<FFQParentResponse[]> = this.parentService.getAllParents();
 
-  parentListObervable.subscribe(parentList => {
-     parentList.forEach(parent => {
-       if (parent.assignedclinic === this.clinicId){
-         this.parentList.push(parent);
-       }
-     });
-     this.getResultsList();
+    parentListObervable.subscribe(parentList => {
+      parentList.forEach(parent => {
+        if (parent.assignedclinic === this.clinicId) {
+          this.parentList.push(parent);
+        }
+      });
+      this.getResultsList();
 
-  });
-}
+    });
+  }
+
   // Function to get all the results for each parent
-private getResultsList(){
-   const allResultsObservable: Observable<FFQResultsResponse[]> = this.resultsService.getResultsByUserType('parent');
-   allResultsObservable.subscribe((allResults: FFQResultsResponse[]) => {
+  private getResultsList() {
+    const allResultsObservable: Observable<FFQResultsResponse[]> = this.resultsService.getResultsByUserType('parent');
+    allResultsObservable.subscribe((allResults: FFQResultsResponse[]) => {
       this.parentList.forEach(parent => {
-          allResults.forEach(result => {
-              if (result.userId === parent.userId && parent.prefix === this.loggedInUser[0].prefix){
-                this.resultList.push(result);
-                let parentName = parent.firstname + ' ' + parent.lastname;
-                this.parentNames.push(parentName);
-              }
-          });
+        allResults.forEach(result => {
+          if (result.userId === parent.userId && parent.prefix === this.loggedInUser[0].prefix) {
+            this.resultList.push(result);
+            let parentName = parent.firstname + ' ' + parent.lastname;
+            this.parentNames.push(parentName);
+          }
+        });
       });
       this.loadData();
       this.setFoodList();
-   });
+    });
 
- }
+  }
+
   private setFoodList() {
     this.results.forEach(result => {
       let recommendedFood: FFQFoodRecommendations[] = [];
@@ -204,7 +212,8 @@ private getResultsList(){
       result.foodRecList = recommendedFood;
     });
   }
-  private returnZero(){
+
+  private returnZero() {
     return 0;
   }
 
@@ -250,13 +259,13 @@ private getResultsList(){
   }
 
 
-    // functions used in HTML to display the nutrient recommendation after clicking on the button
+  // functions used in HTML to display the nutrient recommendation after clicking on the button
   onModalRequest(id: string): void {
     const modalRef = this.errorDialog.open(RecommendModalComponent);
     modalRef.componentInstance.id = id;
   }
 
-    // functions used in HTML to display the food recommendation after clicking on the button
+  // functions used in HTML to display the food recommendation after clicking on the button
   onModalRequestFood(id: string): void {
     const modalRef = this.errorDialog.open(FoodRecommendModalComponent);
     modalRef.componentInstance.id = id;
@@ -264,6 +273,10 @@ private getResultsList(){
 
 
   getParentUsernameById(userId: string) {
+    var i = 0;
+    for (i = 0; i < this.results.length; i++) {
+      this.results[i].userSearchName = this.parentList.find(parent => parent.userId === this.results[i].userId)?.username ?? "[not found]";
+    }
     return this.parentList.find(parent => parent.userId === userId)?.username ?? "[not found]";
   }
 }

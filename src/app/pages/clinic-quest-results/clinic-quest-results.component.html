@@ -9,7 +9,7 @@
     <div class="container mt-3" *ngIf="results.length != 0">
         <label style="font-weight:bold"> Questionnaire Results </label>
         <div style="display: flex; align-items: stretch; justify-content: space-between">
-          <input style="width: 25%" placeholder="Search by questionnaire ID" type="text" class="form-control" name="search" [(ngModel)]="search" />
+          <input style="width: 25%" placeholder="Search by Parent Username" type="text" class="form-control" name="search" [(ngModel)]="search" />
           <div align="right">
             <button mat-raised-button type="button" (click)="export()">
               Download Results
