@@ -14,13 +14,11 @@ export class FFQParentResult {
    show: boolean;*/
   ffqresult: FFQResultsResponse;
   parentName: string;
-  userName: string;
   assignedClinicOrSiteId: string;
 
-  constructor(ffqresult: FFQResultsResponse, parentName: string, userName: string) {
+  constructor(ffqresult: FFQResultsResponse, parentName: string) {
 
     this.ffqresult = ffqresult;
     this.parentName = parentName;
-    this.userName = userName;
   }
 }
