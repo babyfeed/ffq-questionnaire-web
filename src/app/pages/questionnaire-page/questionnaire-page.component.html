@@ -1,6 +1,6 @@
 <div class="questionnaire-container" *ngIf="(dataLoaded | async)">
     <div align="center"><i> <img src="assets/images/logo.png" alt="" height="80" width="80"> </i></div>
-    <h2 matDialogTitle>{{TITLE}}</h2><br>
+    <h2 matDialogTitle style="font-size: 2rem">{{TITLE}}</h2><br>
     <text-card mainMessage="{{MAIN_MESSAGE}}" [bulletedMessages]="BULLETED_INSTRUCTIONS" [instructionsTitle]="INSTRUCTIONS_TITLE"></text-card>
     <br>
 
@@ -9,7 +9,7 @@
             <mat-label style="text-align:center" class="qb-row-item"><strong>Serving sizes for the questionnaire are reviewed <a href="assets/pdf/QuestionnaireRef.pdf" target="_blank">here</a>.</strong></mat-label>
         </mat-card>
     </div>
-    
+
     <!--Question block per food item before button-->
 
     <div class="qb-container">
@@ -30,7 +30,7 @@
             <label class="radio-inline">
 
               <input type="radio" value="male" [(ngModel)]="gender" name="gender" required>
-              Male     
+              Male
               <input type="radio" value="female" [(ngModel)]="gender" name="gender" required>
               Female
           </label>
