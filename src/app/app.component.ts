@@ -11,16 +11,16 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 export class AppComponent {
   constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer){
     this.matIconRegistry.addSvgIcon(
-      "arrow_red",
-      this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/images/arrow_red.svg")
+      "up_arrow",
+      this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/images/up_arrow.svg")
     );
     this.matIconRegistry.addSvgIcon(
-      "arrow_yellow",
-      this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/images/arrow_yellow.svg")
+      "down_arrow",
+      this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/images/down_arrow.svg")
     );
     this.matIconRegistry.addSvgIcon(
-      "check_green",
-      this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/images/check_green.svg")
+      "equal_sign",
+      this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/images/equal_sign.svg")
     );
   }
   title = 'ffq-questionnaire-web';
