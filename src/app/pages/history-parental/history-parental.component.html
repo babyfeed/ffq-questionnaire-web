@@ -21,16 +21,16 @@
                         </div>
                         -->
                         <div class="col-2" style="text-align:center">
-                            <label i18n><strong>Infant age (In months)</strong></label>
+                            <label><strong>Infant age (In months)</strong></label>
                         </div>
                         <div class="col-2" style="text-align:center">
-                            <label i18n><strong>Infant gender</strong></label>
+                            <label><strong>Infant gender</strong></label>
                         </div>
                         <div class="col-2" style="text-align:center">
-                            <label i18n><strong>Nutrients</strong></label>
+                            <label><strong>Nutrients</strong></label>
                         </div>
                         <div class="col-2" style="text-align:center">
-                            <label i18n><strong>Food Items</strong></label>
+                            <label><strong>Food Items</strong></label>
                         </div>
                     </div>
 
@@ -87,19 +87,19 @@
                         <hr />
                         <div class="row mt-3">
                             <div class="col-4" style="text-align:center">
-                                <label i18n><strong>Name</strong></label>
+                                <label><strong>Name</strong></label>
                             </div>
                             <div class="col-2" style="text-align:center">
-                                <label i18n><strong>Frequency</strong></label>
+                                <label><strong>Frequency</strong></label>
                             </div>
                             <div class="col-2" style="text-align:center">
-                                <label i18n><strong>Frequency Type</strong></label>
+                                <label><strong>Frequency Type</strong></label>
                             </div>
                             <div class="col-2" style="text-align:center">
-                                <label i18n><strong>Servings</strong></label>
+                                <label><strong>Servings</strong></label>
                             </div>
                             <div class="col-2" style="text-align:center">
-                                <label i18n><strong>Sugar(g)</strong></label>
+                                <label><strong>Sugar(g)</strong></label>
                             </div>
                         </div>
                         <div *ngFor="let choice of result.userChoices">
@@ -129,8 +129,8 @@
                             <div class="row">
                                 <table class="col-12">
                                     <tr>
-                                        <th i18n>Nutrient</th>
-                                        <th i18n>Daily Average</th>
+                                        <th>Nutrient</th>
+                                        <th>Daily Average</th>
                                     </tr>
                                     <!-- Below code changed to show requested digits by PO-->
                                     <tr *ngFor="let item of result.dailyAverages | keyvalue : returnZero; let i=index">

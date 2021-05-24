@@ -13,21 +13,15 @@
     <!--Question block per food item before button-->
 
     <div class="qb-container">
-      <mat-card class="qb-card">
-        <mat-label style="text-align:center" class="qb-row-item"><strong>Infant age</strong></mat-label>
-        <mat-form-field>
-          <input matInput value="infantage" class="qb-row-item" [(ngModel)]=infantage type="number" min="1" max="24" step="1" pattern="\d+" placeholder=" In months " autocomplete="off" required>
-        </mat-form-field>
-        <mat-error *ngIf="">
-          Age (in months) of the infant is required.
-        </mat-error>
-        <!--Added this mat-error to let the user know that they need to input integers only-->
-        <!--Trying to figure out how to stack error messages so they can see a input error and a integer error-->
-        <mat-error *ngIf="infantage % 1 != 0">
-          Age must be in integer
-        </mat-error>
-
-      </mat-card>
+        <mat-card class="qb-card">
+            <mat-label style="text-align:center" class="qb-row-item"><strong>Infant age</strong></mat-label>
+            <mat-form-field>
+                <input matInput value="infantage" class="qb-row-item" [(ngModel)]=infantage type="number" min="1" max="24" placeholder=" In months " autocomplete="off" required>
+            </mat-form-field>
+            <mat-error *ngIf="">
+                Age (in months) of the infant is required.
+            </mat-error>
+        </mat-card>
     </div>
     <div class="qb-container">
         <mat-card class="qb-card">
