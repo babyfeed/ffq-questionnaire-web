@@ -31,116 +31,116 @@ import { AdminClinicsComponent } from "./pages/admin-clinics";
 import { ClinicComponent } from "./pages/clinic/clinic.component";
 import { LogoutComponent } from "./pages/logout/logout.component";
 import { ClinicTrackerHistoryComponent } from "./pages/clinic-tracker-history/clinic-tracker-history.component";
-import { ResearchQuestIdInputComponent } from "./pages/researcher-quest-id-input-page/researcher-quest-id-input.component"
+import { ResearchQuestIdInputComponent } from "./pages/researcher-quest-id-input-page/researcher-quest-id-input.component";
 import { AdminTrackerHistoryComponent } from "./pages/admin-tracker-history/admin-tracker-history.component";
-import {ClinicalUsersComponent} from "./pages/clinical-users";
-import {ClinicNewUserComponent} from "./pages/clinic-new-user/clinic-new-user.component";
-import {ResearchNewUserComponent} from "./pages/research-new-user/research-new-user.component";
-import {UpdateResearchInstitutionComponent} from "./pages/modify-research-institution/modify-research-institution.component";
-import {UpdateResearcherComponent} from "./pages/modify-researcher/modify-researcher.component";
-
+import { ClinicalUsersComponent } from "./pages/clinical-users";
+import { ClinicNewUserComponent } from "./pages/clinic-new-user/clinic-new-user.component";
+import { ResearchNewUserComponent } from "./pages/research-new-user/research-new-user.component";
+import { UpdateResearchInstitutionComponent } from "./pages/modify-research-institution/modify-research-institution.component";
+import { UpdateResearcherComponent } from "./pages/modify-researcher/modify-researcher.component";
+import { ClinicQuestionnaireComponent } from "./pages/clinic-questionnaire/clinic-questionnaire.component";
 const routes: Routes = [
   {
     path: "",
     redirectTo: "admin/home",
-    pathMatch: "full",
+    pathMatch: "full"
   },
   {
     path: "*",
-    redirectTo: "login",
+    redirectTo: "login"
   },
   {
     path: "login",
-    component: LoginComponent,
+    component: LoginComponent
   },
   {
     path: "logout",
-    component: LogoutComponent,
+    component: LogoutComponent
   },
   {
     path: "login-page",
-    component: LoginPageComponent,
+    component: LoginPageComponent
   },
   {
     path: "admin/fooditem/:id",
     component: FooditemComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: "admin/fooditem",
     component: FooditemComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: "admin/user/:type/:id",
     component: UserComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: "admin/user/:id",
     component: UserComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: "admin/home",
     component: AdminPageComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: "admin/users",
     component: AdminUsersComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: "admin/research/users",
     component: AdminResearchUsersComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   },
-   {
+  {
     path: "admin/research/institution",
     component: ResearchInstitutionComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: "admin/research/institution/:id",
     component: UpdateResearchInstitutionComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: "admin/researcher/user/:id",
     component: UpdateResearcherComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   },
 
   {
     path: "admin/researcher",
     component: AdminResearcherUserComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: "admin/results",
     component: QuestResultsComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: "admin/recommend",
     component: RecommendComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: "admin/clinics",
     component: AdminClinicsComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: "admin/clinic",
     component: ClinicComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: "admin/clinic/:id",
     component: ClinicComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: "admin/tracker-history",
@@ -150,113 +150,117 @@ const routes: Routes = [
   {
     path: "clinic/results",
     component: ClinicQuestResultsComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: "clinic/recommend",
     component: ClinicRecommendComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "clinic/questionnaire",
+    component: ClinicQuestionnaireComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: "clinic/users",
     component: ClinicalUsersComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: "clinic/user/:type/:id",
     component: ClinicUserComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: "clinic/user",
     component: ClinicUserComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: "clinic/user/:id",
     component: ClinicNewUserComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: "researcher/user/:id",
     component: ResearchNewUserComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: "clinic/tracker-history",
     component: ClinicTrackerHistoryComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: "clinic/home",
     component: ClinicalPortalComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: "parent/home",
     component: QuestIdInputComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: "parent/questionnaire/:id",
     component: QuestionnairePageComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: "parent/tracker",
     component: TrackerPageComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: "parent/tracker-history",
     component: TrackerHistoryPageComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: "parent/history",
     component: HistoryParentalComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: "parent/recommend",
     component: RecommendParentalComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: "researcher/home",
     component: ResearchUsersComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: "researcher/questionnaire",
     component: ResearchQuestionnaireComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: "researcher/users",
     component: ResearchUsersComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: "researcher/history",
     component: ResearchHistoryComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   },
 
   {
     path: "participant/home",
     component: ResearchQuestIdInputComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: "participant/questionnaire/:id",
-    component: QuestionnairePageComponent,
-  },
-
+    component: QuestionnairePageComponent
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: "reload" })],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {}
