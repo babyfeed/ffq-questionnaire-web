@@ -26,7 +26,7 @@ export class TrackerPageComponent implements OnInit {
   BULLETED_INSTRUCTIONS = [
     'For each food item select the appropriate answer',
     'If your baby consumed more than the recommended amount select the up arrow',
-    'If your baby consumed the recommended amount select the check mark',
+    'If your baby consumed the recommended amount select the equal sign',
     'If your baby consumed less than the recommended amount select the down arrow',
     'Click the submit button when finished.'
   ];
