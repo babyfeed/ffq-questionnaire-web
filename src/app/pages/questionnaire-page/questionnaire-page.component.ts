@@ -16,6 +16,7 @@ import {NutrientConstants} from '../../models/NutrientConstants';
 import { Validators, FormControl } from '@angular/forms';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import {MatDialog} from "@angular/material/dialog";
+import { isInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
 
 
 @Component({
@@ -84,6 +85,13 @@ export class QuestionnairePageComponent implements OnInit {
       pageHasErrors = true;
     }
 
+    //Typecheck to only receive Integers. Without this we get a submit error and exits the page.
+    if (this.infantage % 1 != 0)
+    {
+      pageHasErrors = true;
+    }
+    
+
     for (const foodItem of this.foodItems) {
       if (this.hideSecondaryItems && !foodItem.isPrimary) {
         foodItem.disabled = true;
@@ -113,7 +121,8 @@ export class QuestionnairePageComponent implements OnInit {
           itemList.push(request);
         }
       }
-
+      
+      
       this.foodService.calculateNutrientBreakdown(this.userId, this.id, this.userType, this.infantage, this.gender, itemList)
         .subscribe( (results) => {
             const dailyMap: Map<string, number> = new Map();

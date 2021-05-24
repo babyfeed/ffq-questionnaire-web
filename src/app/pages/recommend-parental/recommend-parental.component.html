@@ -3,10 +3,10 @@
 <div class="rec-container">
   <mat-card>
     <mat-radio-group aria-label="Select an option">
-      <label style="text-align: left;"><strong>Select infant age range:</strong></label>
-      <mat-radio-button (click)="showFirst()" value="1">0 to 5.9 months</mat-radio-button>
-      <mat-radio-button (click)="showSecond()" value="2">6 to 11.9 Months</mat-radio-button>
-      <mat-radio-button (click)="showThird()" value="3">12 to 24 Months</mat-radio-button>
+      <label style="text-align: left;" i18n><strong>Select infant age range:</strong></label>
+      <mat-radio-button (click)="showFirst()" value="1" i18n>0 to 5.9 months</mat-radio-button>
+      <mat-radio-button (click)="showSecond()" value="2" i18n>6 to 11.9 Months</mat-radio-button>
+      <mat-radio-button (click)="showThird()" value="3" i18n>12 to 24 Months</mat-radio-button>
     </mat-radio-group>
   </mat-card>
 
@@ -15,10 +15,10 @@
       <img class="image" src="{{result.imageUrl}}">
       <div>
         <label><strong>{{result.foodItemGroupName}}</strong></label><br>
-        <label><strong *ngIf="showBracketFirst">{{ result.firstBracketIntake }} {{ ageMessage }}</strong></label>
-        <label><strong *ngIf="showBracketSecond">{{ result.secondBracketIntake }} {{ ageMessage }}</strong></label>
-        <label><strong *ngIf="showBracketThird">{{ result.thirdBracketIntake }} {{ ageMessage }}</strong></label>
-        <label><strong *ngIf="showNone">{{ ageMessage }}</strong></label>
+        <label><strong *ngIf="showBracketFirst" i18n>{{ result.firstBracketIntake }} {{ ageMessage }}</strong></label>
+        <label><strong *ngIf="showBracketSecond" i18n>{{ result.secondBracketIntake }} {{ ageMessage }}</strong></label>
+        <label><strong *ngIf="showBracketThird" i18n>{{ result.thirdBracketIntake }} {{ ageMessage }}</strong></label>
+        <label><strong *ngIf="showNone" i18n>{{ ageMessage }}</strong></label>
         <br>
         <label>
           {{result.description}}

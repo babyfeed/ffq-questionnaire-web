@@ -1,16 +1,16 @@
-<title>Parent Portal</title>
+<title i18n>Parent Portal</title>
 
 <div class="header">
   <h2 matDialogTitle>{{TITLE}}</h2>
   <div align="center"><i> <img src="assets/images/logo.png" alt="" height="80" width="80"> </i></div>
   <div class="login-button">
-    <button mat-raised-button (click)="logout()">Log out <i class="fa fa-sign-out" aria-hidden="true"></i></button>
+    <button mat-raised-button (click)="logout()" i18nx>Log out <i class="fa fa-sign-out" aria-hidden="true" i18n></i></button>
   </div>
 
   <div align="center"><i></i></div>
-  <a class="tab-link" routerLink="/parent/home" routerLinkActive="active">Questionnaire</a>
-  <a class="tab-link" routerLink="/parent/history" routerLinkActive="active">Results</a>
-  <a class="tab-link" routerLink="/parent/recommend" routerLinkActive="active">Recommendations</a>
-  <a class="tab-link" routerLink="/parent/tracker" routerLinkActive="active">Tracking</a>
-  <a class="tab-link" routerLink="/parent/tracker-history" routerLinkActive="active">Tracking History</a>
+  <a class="tab-link" routerLink="/parent/home" routerLinkActive="active" i18n>Questionnaire</a>
+  <a class="tab-link" routerLink="/parent/history" routerLinkActive="active" i18n>Results</a>
+  <a class="tab-link" routerLink="/parent/recommend" routerLinkActive="active" i18n>Recommendations</a>
+  <a class="tab-link" routerLink="/parent/tracker" routerLinkActive="active" i18n>Tracking</a>
+  <a class="tab-link" routerLink="/parent/tracker-history" routerLinkActive="active" i18n>Tracking History</a>
 </div>
