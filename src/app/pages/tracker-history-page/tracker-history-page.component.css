@@ -6,12 +6,14 @@
 .trackeritem-container {
     display: flex;
     justify-content: center;
+    
   }
-  
+
 .tracker-card {
-    width: 50%;
-    justify-content: center;
-    margin-bottom: 10px;
+  width: 50%;
+  justify-content: center;
+  margin-bottom: 10px;
+  background-color: yellow;
 }
 
 .top{
@@ -22,4 +24,12 @@
 }
 .bot{
     color: #ffcc5c;
+}
+
+li.GoalList{
+    font-size: 25px;
+}
+
+h2.GoalTitle{
+    font-size: 28px;
 }
