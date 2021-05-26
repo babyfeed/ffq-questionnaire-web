@@ -13,7 +13,7 @@
                     <!--Labels for questionnaire results-->
                     <div class="row">
                         <div class="col-2" style="text-align:center">
-                            <label i18n><strong>Questionnaire ID</strong></label>
+                            <label><strong>Questionnaire ID</strong></label>
                         </div>
                         <!--
                         <div class="col-2" style="text-align:center">
@@ -60,7 +60,7 @@
                     <div class="row mb-3">
 
                         <div class="col-12 offset-9">
-                            <button class="btn btn-info" (click)="toggle(i)" id="bt" i18n>
+                            <button class="btn btn-info" (click)="toggle(i)" id="bt">
                 {{buttonName}}
               </button>
 
@@ -73,7 +73,7 @@
 
                     <!--Feedback results-->
                     <!-- <ng-container *ngIf="result.showFeedback"> -->
-                    <label class="mt-3 mb-0 ml-3" i18n><strong>Additional Recommendations and Feedback</strong> </label>
+                    <label class="mt-3 mb-0 ml-3"><strong>Additional Recommendations and Feedback</strong> </label>
                     <hr>
                     <mat-card class="qb-card">
                         <p>{{result.feedback}}</p>
