@@ -42,7 +42,7 @@ import { LoginHeaderComponent } from "./pages/login-header";
 import { ClinicQuestResultsComponent } from "./pages/clinic-quest-results";
 import { ClinicRecommendComponent } from "./pages/clinic-recommend";
 import { AdminUsersComponent } from "./pages/admin-users";
-import {AdminResearchUsersComponent} from "./pages/research-admin-users/research-admin-users.component";
+import { AdminResearchUsersComponent } from "./pages/research-admin-users/research-admin-users.component";
 import { UserComponent } from "./pages/user/user.component";
 import { ClinicUserComponent } from "./pages/clinic-user/clinic-user.component";
 import { AdminClinicsComponent } from "./pages/admin-clinics/";
@@ -72,22 +72,21 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatListModule } from "@angular/material/list";
 import { ResearchPageComponent } from "./pages/research-page/research-page.component";
 import { ResearchQuestionnaireComponent } from "./pages/research-questionnaire/research-questionnaire.component";
-import { ResearchUsersComponent } from './pages/research-users/research-users.component';
-import { ResearchQuestIdInputComponent } from "./pages/researcher-quest-id-input-page/researcher-quest-id-input.component"
-import { CreateParticipantModalComponent } from './components/create-participant-modal/create-participant-modal.component';
+import { ResearchUsersComponent } from "./pages/research-users/research-users.component";
+import { ResearchQuestIdInputComponent } from "./pages/researcher-quest-id-input-page/researcher-quest-id-input.component";
+import { CreateParticipantModalComponent } from "./components/create-participant-modal/create-participant-modal.component";
 import { ResearchHistoryComponent } from "./pages/research-history/research-history.component";
 import { ResearchInstitutionComponent } from "./pages/research-institution/research-institution.component";
 import { AdminResearcherUserComponent } from "./pages/admin-research-user/admin-research-user.component";
-import { AdminTrackerHistoryComponent } from './pages/admin-tracker-history/admin-tracker-history.component';
-import { ResultRoundPipe } from './pipes/result-round.pipe';
-import {ClinicalUsersComponent} from "./pages/clinical-users";
-import {ClinicNewUserComponent} from "./pages/clinic-new-user/clinic-new-user.component";
-import {ResearchNewUserComponent} from "./pages/research-new-user/research-new-user.component";
-import { Angular2CsvModule } from 'angular2-csv';
-import {UpdateResearchInstitutionComponent} from "./pages/modify-research-institution/modify-research-institution.component";
-import {UpdateResearcherComponent} from "./pages/modify-researcher/modify-researcher.component";
-
-
+import { AdminTrackerHistoryComponent } from "./pages/admin-tracker-history/admin-tracker-history.component";
+import { ResultRoundPipe } from "./pipes/result-round.pipe";
+import { ClinicalUsersComponent } from "./pages/clinical-users";
+import { ClinicNewUserComponent } from "./pages/clinic-new-user/clinic-new-user.component";
+import { ClinicQuestionnaireComponent } from "./pages/clinic-questionnaire/clinic-questionnaire.component";
+import { ResearchNewUserComponent } from "./pages/research-new-user/research-new-user.component";
+import { Angular2CsvModule } from "angular2-csv";
+import { UpdateResearchInstitutionComponent } from "./pages/modify-research-institution/modify-research-institution.component";
+import { UpdateResearcherComponent } from "./pages/modify-researcher/modify-researcher.component";
 
 @NgModule({
   declarations: [
@@ -153,7 +152,8 @@ import {UpdateResearcherComponent} from "./pages/modify-researcher/modify-resear
     CreateParticipantModalComponent,
     AdminTrackerHistoryComponent,
     ResultRoundPipe,
-    ResearchNewUserComponent
+    ResearchNewUserComponent,
+    ClinicQuestionnaireComponent
   ],
   imports: [
     BrowserModule,
@@ -195,8 +195,8 @@ import {UpdateResearcherComponent} from "./pages/modify-researcher/modify-resear
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LoaderInterceptorService,
-      multi: true,
-    },
-  ],
+      multi: true
+    }
+  ]
 })
 export class AppModule {}
