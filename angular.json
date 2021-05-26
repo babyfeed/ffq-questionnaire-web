@@ -63,10 +63,14 @@
               ]
             },
             "en-US": {
-              "localize": [ "en-US" ],
+              "localize": [
+                "en-US"
+              ]
             },
             "es": {
-              "localize": [ "es" ]
+              "localize": [
+                "es"
+              ]
             }
           }
         },
@@ -141,7 +145,7 @@
         "locales": {
           "es": {
             "translation": "src/locale/messages.es.xlf",
-            "baseHref": "es/"
+            "baseHref": ""
 
           }
         }
