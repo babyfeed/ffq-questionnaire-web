@@ -26,16 +26,16 @@ import { isInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
 })
 export class QuestionnairePageComponent implements OnInit {
 
-  TITLE = 'Food Frequency Questionnaire';
-  MAIN_MESSAGE = 'In the last 7 days and nights, how many times did your baby eat or drink the following?\n' +
-    'Include those foods and drinks given to the baby by you and others, such as grandparents, babysitters, etc.\n\n';
-  INSTRUCTIONS_TITLE = 'Instructions: \n';
+  TITLE = $localize`:@@TITLEQUEST:Food Frequency Questionnaire`;
+  MAIN_MESSAGE = $localize`:@@MAINMESSAGE.PARTICIPANT:In the last 7 days and nights, how many times did your baby eat or drink the following?\n
+Include those foods and drinks given to the baby by you and others, such as grandparents, babysitters, etc.`;
+  INSTRUCTIONS_TITLE = $localize`:@@INSTRUCTIONSTITLE.PARTICIPANT:Instructions: \n`;
   BULLETED_INSTRUCTIONS = [
-    'For each entry, enter the number of times a food was consumed by your baby and\n' +
-    ' specify whether this was per week or per day.',
-    "If your baby did not eat this food in the last week, hit 'x' for not applicable",
-    'All open question blocks must be completely filled out before submitting the questionnaire.',
-    'Click the submit button at the bottom of the form when finished.'
+    $localize`:@@BULLETEDINSTRUCTIONS.1:For each entry, enter the number of times a food was consumed by your baby and
+    specify whether this was per week or per day.`,
+    $localize`:@@BULLETEDINSTRUCTIONS.2:If your baby did not eat this food in the last week, hit 'x' for not applicable`,
+    $localize`:@@BULLETEDINSTRUCTIONS.3:All open question blocks must be completely filled out before submitting the questionnaire.`,
+    $localize`:@@BULLETEDINSTRUCTIONS.4:Click the submit button at the bottom of the form when finished.`
   ];
 
 

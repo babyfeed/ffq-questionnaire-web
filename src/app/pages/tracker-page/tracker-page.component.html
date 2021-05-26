@@ -9,8 +9,8 @@
     <!-- age form -->
     <div *ngIf="showAgeForm" class="qb-container">
         <mat-card class="qb-card">
-            <div style="font-style: italic; color:Blue;">Please complete the tracking once a week</div>
-            <mat-label style="text-align:center" class="qb-row-item"><strong>Infant age</strong></mat-label>
+            <div style="font-style: italic; color:Blue;" i18n>Please complete the tracking once a week</div>
+            <mat-label style="text-align:center" class="qb-row-item" i18n><strong>Infant age</strong></mat-label>
             <mat-form-field>
                 <input #ageValue matInput value="infantage" class="qb-row-item" type="number" min="1" max="24" placeholder=" In months " autocomplete="off" required>
             </mat-form-field>
@@ -46,7 +46,7 @@
 
         <!-- submit button -->
         <div class="footer">
-            <button mat-raised-button color="primary">Submit</button>
+            <button mat-raised-button color="primary" i18n>Submit</button>
         </div>
 
     </form>
