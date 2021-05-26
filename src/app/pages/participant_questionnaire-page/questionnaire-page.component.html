@@ -1,7 +1,7 @@
 <div class="questionnaire-container" *ngIf="(dataLoaded | async)">
     <div align="center"><i> <img src="assets/images/logo.png" alt="" height="80" width="80"> </i></div>
-    <h2 matDialogTitle i18n>{{TITLE | translate}}</h2><br>
-    <text-card mainMessage="{{MAIN_MESSAGE | translate}}" [bulletedMessages]="BULLETED_INSTRUCTIONS" [instructionsTitle]="INSTRUCTIONS_TITLE" i18n></text-card>
+    <h2 matDialogTitle i18n>{{TITLE}}</h2><br>
+    <text-card mainMessage="{{MAIN_MESSAGE}}" [bulletedMessages]="BULLETED_INSTRUCTIONS" [instructionsTitle]="INSTRUCTIONS_TITLE" i18n></text-card>
     <br>
     <!--Question block per food item before button-->
 
@@ -38,10 +38,10 @@
     <!--Hide foods button-->
     <div *ngIf="!hideSecondaryItems" class="skip-foods-div">
         <mat-label i18n>If your baby did not eat any additional foods, click to skip.</mat-label>
-        <button mat-raised-button class="skip-foods-button" (click)="toggleHideSecondaryItems()" color="primary" i18n-button>Skip Additional Foods</button>
+        <button mat-raised-button class="skip-foods-button" (click)="toggleHideSecondaryItems()" color="primary" i18n>Skip Additional Foods</button>
     </div>
     <div *ngIf="hideSecondaryItems" class="skip-foods-div">
-        <button class="reenable-foods-button" (click)="toggleHideSecondaryItems()" i18n-button>View additional food items</button>
+        <button class="reenable-foods-button" (click)="toggleHideSecondaryItems()" i18n>View additional food items</button>
     </div>
     <!--Question block per food item after button-->
     <div *ngFor="let item of foodItems">

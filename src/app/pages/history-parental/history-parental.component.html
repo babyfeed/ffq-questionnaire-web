@@ -3,7 +3,7 @@
 <div class="container_page">
     <div class="container" *ngIf="results.length === 0">
         <mat-card class="quest-id-card">
-            <h2 matDialogTitle i18n>{{MESSAGE}}</h2>
+            <h2 matDialogTitle>{{MESSAGE}}</h2>
         </mat-card>
     </div>
     <div *ngFor="let result of results; let i = index">

@@ -15,10 +15,10 @@
       <img class="image" src="{{result.imageUrl}}">
       <div>
         <label><strong>{{result.foodItemGroupName}}</strong></label><br>
-        <label i18n><strong *ngIf="showBracketFirst">{{ result.firstBracketIntake }} {{ ageMessage }}</strong></label>
-        <label i18n><strong *ngIf="showBracketSecond">{{ result.secondBracketIntake }} {{ ageMessage }}</strong></label>
-        <label i18n><strong *ngIf="showBracketThird">{{ result.thirdBracketIntake }} {{ ageMessage }}</strong></label>
-        <label i18n><strong *ngIf="showNone">{{ ageMessage }}</strong></label>
+        <label><strong *ngIf="showBracketFirst">{{ result.firstBracketIntake }} {{ ageMessage }}</strong></label>
+        <label><strong *ngIf="showBracketSecond">{{ result.secondBracketIntake }} {{ ageMessage }}</strong></label>
+        <label><strong *ngIf="showBracketThird">{{ result.thirdBracketIntake }} {{ ageMessage }}</strong></label>
+        <label><strong *ngIf="showNone">{{ ageMessage }}</strong></label>
         <br>
         <label>
           {{result.description}}

@@ -139,11 +139,7 @@
       "i18n": {
         "sourceLocale": "en-US",
         "locales": {
-          "es": {
-            "translation": "src/locale/messages.es.xlf",
-            "baseHref": ""
-          }
-
+          "es": "src/locale/messages.es.xlf"
         }
       },
       "prefix": "app",
