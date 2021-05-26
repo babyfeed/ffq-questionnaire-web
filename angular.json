@@ -63,14 +63,10 @@
               ]
             },
             "en-US": {
-              "localize": [
-                "en-US"
-              ]
+              "localize": ["en-US"]
             },
             "es": {
-              "localize": [
-                "es"
-              ]
+              "localize": ["es"]
             }
           }
         },
