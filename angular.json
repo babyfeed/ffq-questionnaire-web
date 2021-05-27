@@ -17,7 +17,7 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
-            "localize": false,
+            "localize": true,
             "assets": [
               "src/favicon.ico",
               "src/assets"
