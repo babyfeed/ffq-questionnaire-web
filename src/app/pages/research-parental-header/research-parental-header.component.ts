@@ -10,7 +10,7 @@ import { User } from 'src/app/services/authentication/temp-user';
   styleUrls: ['./research-parental-header.component.css']
 })
 export class ResearchParentalHeaderComponent {
-    TITLE = $localize`:@@PARTICIPANT.TITLE:Participant Portal`;
+    TITLE = 'Participant Portal';
     currentUser: User;
     router: Router;
 
