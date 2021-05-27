@@ -1068,6 +1068,66 @@
         <source>Participant Portal</source>
         <target>Portal del Participante</target>
       </trans-unit>
+      <trans-unit id="MESSAGE.PARENT">
+        <source>No questionnaires have been submitted yet!</source>
+      </trans-unit>
+      <trans-unit id="PARENTS.RESULTS.1">
+        <source>Results</source>
+      </trans-unit>
+      <trans-unit id="PARENTS.RESULTS.2">
+        <source>Results</source>
+      </trans-unit>
+      <trans-unit id="ERRORDIALOG.1">
+        <source>Questionnaire Incomplete</source>
+      </trans-unit>
+      <trans-unit id="ERRORDIALOG.2">
+        <source>Please ensure all required fields are completed.</source>
+      </trans-unit>
+      <trans-unit id="SUCCESSDIALOG.1">
+        <source>Questionnaire submitted successfully.</source>
+      </trans-unit>
+      <trans-unit id="SUCCESSDIALOG.2">
+        <source>The questionnaire has been sent to the issuer.</source>
+      </trans-unit>
+      <trans-unit id="NUTRITION.TITLE">
+        <source>Nutrition Tracker</source>
+      </trans-unit>
+      <trans-unit id="NUTRITION.MESSAGE">
+        <source>Message</source>
+      </trans-unit>
+      <trans-unit id="NUTRITION.INSTRUCTIONS">
+        <source>Instructions:</source>
+      </trans-unit>
+      <trans-unit id="NUTRITION.MESSAGE.1">
+        <source>For each food item select the appropriate answer</source>
+      </trans-unit>
+      <trans-unit id="NUTRITION.MESSAGE.2">
+        <source>If your baby consumed more than the recommended amount select the up arrow</source>
+      </trans-unit>
+      <trans-unit id="NUTRITION.MESSAGE.3">
+        <source>If your baby consumed the recommended amount select the equal sign</source>
+      </trans-unit>
+      <trans-unit id="NUTRITION.MESSAGE.4">
+        <source>If your baby consumed less than the recommended amount select the down arrow</source>
+      </trans-unit>
+      <trans-unit id="NUTRITION.MESSAGE.5">
+        <source>Click the submit button when finished.</source>
+      </trans-unit>
+      <trans-unit id="NUTRITION.SUBMIT.TITLE">
+        <source>Submitted Successfully</source>
+      </trans-unit>
+      <trans-unit id="NUTRITION.SUBMIT.MESSAGE">
+        <source>Your submission has been recorded.</source>
+      </trans-unit>
+      <trans-unit id="NUTRITION.SUBMIT.ERROR.TITLE">
+        <source>Submission Error</source>
+      </trans-unit>
+      <trans-unit id="NUTRITION.TRACKER.ERROR.TITLE">
+        <source>Tracker Incomplete</source>
+      </trans-unit>
+      <trans-unit id="NUTRITION.TRACKER.ERROR.MESSAGE">
+        <source>Please ensure all required fields are completed.</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

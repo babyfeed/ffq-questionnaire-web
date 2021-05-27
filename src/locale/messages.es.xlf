@@ -1449,6 +1449,86 @@
         <source>Participant Portal</source>
         <target>Portal del Participante</target>
       </trans-unit>
+      <trans-unit id="MESSAGE.PARENT">
+        <source>No questionnaires have been submitted yet!</source>
+        <target>¡Aún no se han enviado cuestionarios!</target>
+      </trans-unit>
+      <trans-unit id="PARENTS.RESULTS.1">
+        <source>Results</source>
+        <target>Resultados</target>
+      </trans-unit>
+      <trans-unit id="PARENTS.RESULTS.2">
+        <source>Results</source>
+        <target>Resultados</target>
+      </trans-unit>
+      <trans-unit id="ERRORDIALOG.1">
+        <source>Questionnaire Incomplete</source>
+        <target>Cuestionario Incompleto</target>
+      </trans-unit>
+      <trans-unit id="ERRORDIALOG.2">
+        <source>Please ensure all required fields are completed.</source>
+        <target>Asegúrese de completar todos los campos obligatorios.</target>
+      </trans-unit>
+      <trans-unit id="SUCCESSDIALOG.1">
+        <source>Questionnaire submitted successfully.</source>
+        <target>Cuestionario enviado con éxito.</target>
+      </trans-unit>
+      <trans-unit id="SUCCESSDIALOG.2">
+        <source>The questionnaire has been sent to the issuer.</source>
+        <target>El cuestionario se ha enviado al emisor.</target>
+      </trans-unit>
+      <trans-unit id="NUTRITION.TITLE">
+        <source>Nutrition Tracker</source>
+        <target>Rastreador de Nutrición</target>
+      </trans-unit>
+      <trans-unit id="NUTRITION.MESSAGE">
+        <source>Message</source>
+        <target>Mensaje</target>
+      </trans-unit>
+      <trans-unit id="NUTRITION.INSTRUCTIONS">
+        <source>Instructions:</source>
+        <target>Instrucciones:</target>
+      </trans-unit>
+      <trans-unit id="NUTRITION.MESSAGE.1">
+        <source>For each food item select the appropriate answer</source>
+        <target>Para cada alimento, seleccione la respuesta adecuada.</target>
+      </trans-unit>
+      <trans-unit id="NUTRITION.MESSAGE.2">
+        <source>If your baby consumed more than the recommended amount select the up arrow</source>
+        <target>Si su bebé consumió más de la cantidad recomendada, seleccione la flecha hacia arriba</target>
+      </trans-unit>
+      <trans-unit id="NUTRITION.MESSAGE.3">
+        <source>If your baby consumed the recommended amount select the equal sign</source>
+        <target>Si su bebé consumió la cantidad recomendada seleccione el signo igual</target>
+      </trans-unit>
+      <trans-unit id="NUTRITION.MESSAGE.4">
+        <source>If your baby consumed less than the recommended amount select the down arrow</source>
+        <target>Si su bebé consumió menos de la cantidad recomendada, seleccione la flecha hacia abajo</target>
+      </trans-unit>
+      <trans-unit id="NUTRITION.MESSAGE.5">
+        <source>Click the submit button when finished.</source>
+        <target>Haga clic en el botón enviar cuando haya terminado.</target>
+      </trans-unit>
+      <trans-unit id="NUTRITION.SUBMIT.TITLE">
+        <source>Submitted Successfully</source>
+        <target>Enviado satisfactoriamente</target>
+      </trans-unit>
+      <trans-unit id="NUTRITION.SUBMIT.MESSAGE">
+        <source>Your submission has been recorded.</source>
+        <target>Su envío ha sido registrado.</target>
+      </trans-unit>
+      <trans-unit id="NUTRITION.SUBMIT.ERROR.TITLE">
+        <source>Submission Error</source>
+        <target>Error de envío</target>
+      </trans-unit>
+      <trans-unit id="NUTRITION.TRACKER.ERROR.TITLE">
+        <source>Tracker Incomplete</source>
+        <target>Rastreador Incompleto</target>
+      </trans-unit>
+      <trans-unit id="NUTRITION.TRACKER.ERROR.MESSAGE">
+        <source>Please ensure all required fields are completed.</source>
+        <target>Asegúrese de completar todos los campos obligatorios.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

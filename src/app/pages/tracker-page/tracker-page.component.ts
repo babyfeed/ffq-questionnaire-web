@@ -20,15 +20,15 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class TrackerPageComponent implements OnInit {
 
-  TITLE = 'Nutrition Tracker';
-  MAIN_MESSAGE = 'Message';
-  INSTRUCTIONS_TITLE = 'Instructions: \n';
+  TITLE = $localize`:@@NUTRITION.TITLE: Nutrition Tracker`;
+  MAIN_MESSAGE = $localize`:@@NUTRITION.MESSAGE: Message`;
+  INSTRUCTIONS_TITLE = $localize `:@@NUTRITION.INSTRUCTIONS:Instructions: \n`;
   BULLETED_INSTRUCTIONS = [
-    'For each food item select the appropriate answer',
-    'If your baby consumed more than the recommended amount select the up arrow',
-    'If your baby consumed the recommended amount select the equal sign',
-    'If your baby consumed less than the recommended amount select the down arrow',
-    'Click the submit button when finished.'
+    $localize`:@@NUTRITION.MESSAGE.1:For each food item select the appropriate answer`,
+    $localize `:@@NUTRITION.MESSAGE.2:If your baby consumed more than the recommended amount select the up arrow`,
+    $localize `:@@NUTRITION.MESSAGE.3:If your baby consumed the recommended amount select the equal sign`,
+    $localize `:@@NUTRITION.MESSAGE.4:If your baby consumed less than the recommended amount select the down arrow`,
+    $localize `:@@NUTRITION.MESSAGE.5:Click the submit button when finished.`
   ];
 
   showBracketFirst = false;
@@ -85,20 +85,20 @@ export class TrackerPageComponent implements OnInit {
 
       this.trackerResponseService.submitTracker(this.trackerResponse).subscribe(() => {
         const dialogRef = this.successDialog.open(ErrorDialogPopupComponent);
-        dialogRef.componentInstance.title = 'Submitted Successfully';
-        dialogRef.componentInstance.message = 'Your submission has been recorded.';
+        dialogRef.componentInstance.title = $localize `:@@NUTRITION.SUBMIT.TITLE:Submitted Successfully`;
+        dialogRef.componentInstance.message = $localize`:@@NUTRITION.SUBMIT.MESSAGE:Your submission has been recorded.`;
         this.router.navigate(['parent/tracker-history']);
       }, (error: HttpErrorResponse) => {
         const  dialogRef  = this.submissionErrorDialog.open(ErrorDialogPopupComponent);
-        dialogRef.componentInstance.title = 'Submission Error';
+        dialogRef.componentInstance.title = $localize `:@@NUTRITION.SUBMIT.ERROR.TITLE:Submission Error`;
         dialogRef.componentInstance.message = error.message;
         this.router.navigate(['parent/tracker-history']);
       });
 
     } else {
       const  dialogRef  = this.submissionErrorDialog.open(ErrorDialogPopupComponent);
-      dialogRef.componentInstance.title = 'Tracker Incomplete';
-      dialogRef.componentInstance.message = 'Please ensure all required fields are completed.';
+      dialogRef.componentInstance.title = $localize`:@@NUTRITION.TRACKER.ERROR.TITLE:Tracker Incomplete`;
+      dialogRef.componentInstance.message = $localize`:@@NUTRITION.TRACKER.ERROR.MESSAGE:Please ensure all required fields are completed.`;
     }
   }
 

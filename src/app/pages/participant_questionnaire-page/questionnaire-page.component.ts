@@ -93,8 +93,8 @@ export class QuestionnairePageComponent implements OnInit {
     if (pageHasErrors) {
       log('Errors on page. Questionnaire incomplete.');
       const  dialogRef  = this.submissionErrorDialog.open(ErrorDialogPopupComponent);
-      dialogRef.componentInstance.title = 'Questionnaire Incomplete';
-      dialogRef.componentInstance.message = 'Please ensure all required fields are completed.';
+      dialogRef.componentInstance.title = $localize`:@@ERRORDIALOG.1: Questionnaire Incomplete`;
+      dialogRef.componentInstance.message = $localize`:@@ERRORDIALOG.2: Please ensure all required fields are completed.`;
       this.submitting = false;
 
     } else {
@@ -135,9 +135,9 @@ export class QuestionnairePageComponent implements OnInit {
 
             this.questService.submitQuestionnaire(this.id).subscribe((data: Questionnaire) => {
             this.router.navigateByUrl('/');
-            const dialogRef = this.successDialog.open(ErrorDialogPopupComponent);
-            dialogRef.componentInstance.title = 'Submitted Successfully';
-            dialogRef.componentInstance.message = 'The questionnaire has been sent to the issuer.';
+              const dialogRef = this.successDialog.open(ErrorDialogPopupComponent);
+            dialogRef.componentInstance.title = $localize`:@@SUCCESSDIALOG.1: Questionnaire submitted successfully.`;
+            dialogRef.componentInstance.message = $localize`:@@SUCCESSDIALOG.2: The questionnaire has been sent to the issuer.`;
             this.submitting = false;
             }, (error: HttpErrorResponse) => this.handleSubmissionError(error));
 

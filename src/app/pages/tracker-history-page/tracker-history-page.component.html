@@ -15,13 +15,13 @@
   </div>
 
   <div class="trackeritem-container" *ngIf="results.length === 0">
-    <mat-card class="tracker-card">
+    <mat-card class="tracker-card2">
       <h2 matDialogTitle i18n>No responses have been submitted yet.</h2>
     </mat-card>
   </div>
 
   <div *ngFor="let result of results" class="trackeritem-container">
-    <mat-card class="tracker-card">
+    <mat-card class="tracker-card2">
       <div><label><strong>{{result.date}} - {{result.age}} Months</strong></label></div>
       <div style="float: left">
         <tr *ngFor="let item of result.responses">{{item.food}}</tr>
