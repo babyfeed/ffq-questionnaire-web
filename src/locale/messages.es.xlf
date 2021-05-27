@@ -1341,6 +1341,14 @@
         <source>Click the submit button at the bottom of the form when finished.</source>
         <target>Haga clic en el botón enviar en la parte inferior del formulario cuando haya terminado.</target>
       </trans-unit>
+      <trans-unit id="994b5b0b5395a6f7a62d1e5b4fb976925d49ebe8" datatype="html">
+        <source> In months </source>
+        <target> En meses </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/questionnaire-page/questionnaire-page.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="dd14d5e1f06dd6852e712457f3e8679cc098b8de" datatype="html">
         <source>
           Age (in months) of the infant is required.
@@ -1365,6 +1373,26 @@
           <context context-type="linenumber">26</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="41fa81806d59c3640bd2d33bb09858be7533fe74" datatype="html">
+        <source>
+
+          <x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input/&gt;"/>
+          Male
+          <x id="TAG_INPUT_1" ctype="x-input" equiv-text="&lt;input/&gt;"/>
+          Female
+        </source>
+        <target>
+
+          <x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input/&gt;"/>
+          Niño
+          <x id="TAG_INPUT_1" ctype="x-input" equiv-text="&lt;input/&gt;"/>
+          Niña
+        </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/questionnaire-page/questionnaire-page.component.html</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="100f85da8d378ed4d842c9bf3f4eb4a1b537c26b" datatype="html">
         <source>
           Gender is required.
@@ -1383,6 +1411,14 @@
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/questionnaire-page/questionnaire-page.component.html</context>
           <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="73fb2de5aa370cd517074180b99757b465d279f6" datatype="html">
+        <source>Skip Additional Foods</source>
+        <target>Omitir Alimentos Adicionales</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/questionnaire-page/questionnaire-page.component.html</context>
+          <context context-type="linenumber">54</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6f3c27d8457adf03aaf4a296a94fbe77ed3419c8" datatype="html">
@@ -1528,6 +1564,22 @@
       <trans-unit id="NUTRITION.TRACKER.ERROR.MESSAGE">
         <source>Please ensure all required fields are completed.</source>
         <target>Asegúrese de completar todos los campos obligatorios.</target>
+      </trans-unit>
+      <trans-unit id="QUESTIONNAIRE.INCOMPLETE.TITLE">
+        <source>Questionnaire Incomplete</source>
+        <target>Cuestionario Incompleto</target>
+      </trans-unit>
+      <trans-unit id="QUESTIONNAIRE.INCOMPLETE.MESSAGE">
+        <source>Please ensure all required fields are completed.</source>
+        <target>Asegúrese de completar todos los campos obligatorios.</target>
+      </trans-unit>
+      <trans-unit id="QUESTIONNAIRE.COMPLETE.TITLE">
+        <source>Submitted Successfully</source>
+        <target>Enviado satisfactoriamente</target>
+      </trans-unit>
+      <trans-unit id="QUESTIONNAIRE.COMPLETE.MESSAGE">
+        <source>The questionnaire has been sent to the issuer.</source>
+        <target>El cuestionario se ha enviado al emisor.</target>
       </trans-unit>
     </body>
   </file>

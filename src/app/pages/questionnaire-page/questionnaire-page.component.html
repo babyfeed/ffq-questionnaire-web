@@ -16,7 +16,7 @@
       <mat-card class="qb-card">
         <mat-label style="text-align:center" class="qb-row-item" i18n><strong>Infant age</strong></mat-label>
         <mat-form-field>
-          <input matInput value="infantage" class="qb-row-item" [(ngModel)]=infantage type="number" min="1" max="24" step="1" pattern="\d+" placeholder=" In months " autocomplete="off" required i18n>
+          <input matInput value="infantage" class="qb-row-item" [(ngModel)]=infantage type="number" min="1" max="24" step="1" pattern="\d+" placeholder=" In months " autocomplete="off" required i18n-placeholder>
         </mat-form-field>
         <mat-error *ngIf="" i18n>
           Age (in months) of the infant is required.
@@ -33,11 +33,11 @@
         <mat-card class="qb-card">
             <mat-label style="text-align:center" class="qb-row-item" i18n><strong>Infant gender</strong></mat-label>
 
-            <label class="radio-inline">
+            <label class="radio-inline" i18n>
 
-              <input type="radio" value="male" [(ngModel)]="gender" name="gender" required i18n>
+              <input type="radio" value="male" [(ngModel)]="gender" name="gender" required>
               Male
-              <input type="radio" value="female" [(ngModel)]="gender" name="gender" required i18n>
+              <input type="radio" value="female" [(ngModel)]="gender" name="gender" required>
               Female
           </label>
             <mat-error *ngIf="!gender" i18n>
@@ -51,7 +51,7 @@
     <!--Hide foods button-->
     <div *ngIf="!hideSecondaryItems" class="skip-foods-div">
         <mat-label i18n>If your baby did not eat any additional foods, click to skip.</mat-label>
-        <button mat-raised-button class="skip-foods-button" (click)="toggleHideSecondaryItems()" color="primary">Skip Additional Foods</button>
+        <button mat-raised-button class="skip-foods-button" (click)="toggleHideSecondaryItems()" color="primary" i18n>Skip Additional Foods</button>
     </div>
     <div *ngIf="hideSecondaryItems" class="skip-foods-div">
         <button class="reenable-foods-button" (click)="toggleHideSecondaryItems()" i18n>View additional food items</button>

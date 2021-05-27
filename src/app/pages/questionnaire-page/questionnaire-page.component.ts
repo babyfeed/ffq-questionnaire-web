@@ -107,8 +107,8 @@ Include those foods and drinks given to the baby by you and others, such as gran
     if (pageHasErrors) {
       log('Errors on page. Questionnaire incomplete.');
       const  dialogRef  = this.submissionErrorDialog.open(ErrorDialogPopupComponent);
-      dialogRef.componentInstance.title = 'Questionnaire Incomplete';
-      dialogRef.componentInstance.message = 'Please ensure all required fields are completed.';
+      dialogRef.componentInstance.title = $localize `:@@QUESTIONNAIRE.INCOMPLETE.TITLE:Questionnaire Incomplete`;
+      dialogRef.componentInstance.message = $localize `:@@QUESTIONNAIRE.INCOMPLETE.MESSAGE:Please ensure all required fields are completed.`;
       this.submitting = false;
 
     } else { //here is where the questionnaire is submitted**
@@ -140,8 +140,8 @@ Include those foods and drinks given to the baby by you and others, such as gran
             this.questService.submitQuestionnaire(this.id).subscribe((data: Questionnaire) => {
             this.router.navigateByUrl('/');
             const dialogRef = this.successDialog.open(ErrorDialogPopupComponent);
-            dialogRef.componentInstance.title = 'Submitted Successfully';
-            dialogRef.componentInstance.message = 'The questionnaire has been sent to the issuer.';
+            dialogRef.componentInstance.title = $localize `:@@QUESTIONNAIRE.COMPLETE.TITLE:Submitted Successfully`;
+            dialogRef.componentInstance.message = $localize `:@@QUESTIONNAIRE.COMPLETE.MESSAGE:The questionnaire has been sent to the issuer.`;
             this.submitting = false;
             }, (error: HttpErrorResponse) => this.handleSubmissionError(error));
 
