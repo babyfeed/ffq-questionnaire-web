@@ -1166,6 +1166,199 @@
       <trans-unit id="QUESTIONNAIRE.COMPLETE.MESSAGE">
         <source>The questionnaire has been sent to the issuer.</source>
       </trans-unit>
+      <trans-unit id="LOGINPAGE.TITLE">
+        <source>Login Page</source>
+      </trans-unit>
+      <trans-unit id="b244c3b6b6645ab3d916a6488ff9accaa1874eb9" datatype="html">
+      <source>Parental Portal Login</source>
+      <context-group purpose="location">
+        <context context-type="sourcefile">src/app/pages/login-page/login-page.component.ts</context>
+        <context context-type="linenumber">31,42</context>
+      </context-group>
+      </trans-unit>
+      <trans-unit id="6bab6d326fd080437975e7bbc7a2895ffd80872e" datatype="html">
+        <source>
+          <x id="START_TAG_MAT-ERROR" ctype="x-mat-error" equiv-text="&lt;mat-error&gt;"/>Username is required<x id="CLOSE_TAG_MAT-ERROR" ctype="x-mat-error" equiv-text="&lt;/mat-error&gt;"/>
+          <x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input/&gt;"/>
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/login/login.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="24baa32ac1a8fd4ec579d25a56c45bda50ee8b4b" datatype="html">
+        <source>Food Results</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/food-recommend-modal/food-recommend-modal.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0070e83d11da39d6f4bb95065c2675db1610b419" datatype="html">
+        <source>Username is required</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/login/login.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="08c74dc9762957593b91f6eb5d65efdfc975bf48" datatype="html">
+        <source>Username</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/login/login.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c32ef07f8803a223a83ed17024b38e8d82292407" datatype="html">
+        <source>Password</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/login/login.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="06a7656cb2408d454df7da5a1307020f7fa34405" datatype="html">
+        <source>Enter Age</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/tracker-page/tracker-page.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.1">
+        <source>Energy (kcal)</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.2">
+        <source>Protein (g)</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.3">
+        <source>Carbohydrate (g)</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.4">
+        <source>Fat (g)</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.5">
+        <source>% Calories from Protein</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.6">
+        <source>% Calories from Carbs</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.7">
+        <source>% Calories from Fat</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.8">
+        <source>Animal Protein (g)</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.9">
+        <source>Vegetable Protein (g)</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.10">
+        <source>Total Dietary Fiber (g)</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.11">
+        <source>Total Sugars (g)</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.12">
+        <source>Added Sugars (by Total Sugars) (g)</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.13">
+        <source>Fructose (g)</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.14">
+        <source>Lactose (g)</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.15">
+        <source>Starch (g)</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.16">
+        <source>Total Grains (ounce equivalents)</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.17">
+        <source>Whole Grains (ounce equivalents)</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.18">
+        <source>Refined Grains (ounce equivalents)</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.19">
+        <source>Total Saturated Fatty Acids (SFA) (g)</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.20">
+        <source>Total Monounsaturated Fatty Acids (MUFA) (g)</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.21">
+        <source>Total Polyunsaturated Fatty Acids (PUFA) (g)</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.22">
+        <source>Omega-3 Fatty Acids (g)</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.23">
+        <source>Water (g)</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.24">
+        <source>Caffeine (mg)</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.25">
+        <source>Vitamin B1 (Thiamin) (mg)</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.26">
+        <source>Vitamin B2 (Riboflavin) (mg)</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.27">
+        <source>Vitamin B3 (Niacin) (mg)</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.28">
+        <source>Vitamin B5 (Pantothenic acid) (mg)</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.29">
+        <source>Vitamin B6 (mg)</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.30">
+        <source>Vitamin B9 (Folate) (mcg)</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.31">
+        <source>Vitamin B12 (Cobalamin) (mcg)</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.32">
+        <source>Vitamin C (Ascorbic acid) (mg)</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.33">
+        <source>Vitamin A (Retinol) (mcg)</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.34">
+        <source>Vitamin D (mcg)</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.35">
+        <source>Vitamin E (mg)</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.36">
+        <source>Vitamin K (mcg)</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.37">
+        <source>Calcium (mg)</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.38">
+        <source>Copper (mg)</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.39">
+        <source>Iron (mg)</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.40">
+        <source>Manganese (mg)</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.41">
+        <source>Magnesium (mg)</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.42">
+        <source>Phosphorus (mg)</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.43">
+        <source>Potassium (mg)</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.44">
+        <source>Selenium (mcg)</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.45">
+        <source>Sodium (mg)</source>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.46">
+        <source>Zinc (mg)</source>
+      </trans-unit>
    </body>
   </file>
 </xliff>

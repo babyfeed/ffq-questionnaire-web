@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 
-@Component({ 
+@Component({
     selector: 'login-header',
     templateUrl: 'login-header.component.html',
-    styleUrls: ['./login-header.component.css'] 
+    styleUrls: ['./login-header.component.css']
 })
 export class LoginHeaderComponent implements OnInit{
 
-    TITLE = 'Login Page';
+    TITLE = $localize `:@@LOGINPAGE.TITLE:Login Page`;
 
     constructor() { }
 
      ngOnInit() {
-    
+
   }
 
 

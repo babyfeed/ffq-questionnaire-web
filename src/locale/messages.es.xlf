@@ -743,7 +743,7 @@
           <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/>Close Results<x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
         </source>
         <target>
-          <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/>Cerrar Resultados<x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/> 
+          <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/>Cerrar Resultados<x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
         </target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/quest-results/quest-results.component.html</context>
@@ -1580,6 +1580,256 @@
       <trans-unit id="QUESTIONNAIRE.COMPLETE.MESSAGE">
         <source>The questionnaire has been sent to the issuer.</source>
         <target>El cuestionario se ha enviado al emisor.</target>
+      </trans-unit>
+      <trans-unit id="LOGINPAGE.TITLE">
+        <source>Login Page</source>
+        <target>Página de Inicio de Sesión</target>
+      </trans-unit>
+      <trans-unit id="b244c3b6b6645ab3d916a6488ff9accaa1874eb9" datatype="html">
+      <source>Parental Portal Login</source>
+      <target>Inicio de Sesión en el Portal Padres</target>
+      <context-group purpose="location">
+        <context context-type="sourcefile">src/app/pages/login-page/login-page.component.ts</context>
+        <context context-type="linenumber">31,42</context>
+      </context-group>
+      </trans-unit>
+      <trans-unit id="6bab6d326fd080437975e7bbc7a2895ffd80872e" datatype="html">
+        <source>
+          <x id="START_TAG_MAT-ERROR" ctype="x-mat-error" equiv-text="&lt;mat-error&gt;"/>Username is required<x id="CLOSE_TAG_MAT-ERROR" ctype="x-mat-error" equiv-text="&lt;/mat-error&gt;"/>
+          <x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input/&gt;"/>
+        </source>
+        <target>
+          <x id="START_TAG_MAT-ERROR" ctype="x-mat-error" equiv-text="&lt;mat-error&gt;"/>Username is required<x id="CLOSE_TAG_MAT-ERROR" ctype="x-mat-error" equiv-text="&lt;/mat-error&gt;"/>
+          <x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input/&gt;"/>
+        </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/login/login.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="24baa32ac1a8fd4ec579d25a56c45bda50ee8b4b" datatype="html">
+        <source>Food Results</source>
+        <target>Resultados de Alimentos</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/components/food-recommend-modal/food-recommend-modal.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0070e83d11da39d6f4bb95065c2675db1610b419" datatype="html">
+        <source>Username is required</source>
+        <target>Se requiere nombre de usuario</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/login/login.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="08c74dc9762957593b91f6eb5d65efdfc975bf48" datatype="html">
+        <source>Username</source>
+        <target>Nombre de usuario</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/login/login.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c32ef07f8803a223a83ed17024b38e8d82292407" datatype="html">
+        <source>Password</source>
+        <target>Contraseña</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/login/login.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="06a7656cb2408d454df7da5a1307020f7fa34405" datatype="html">
+        <source>Enter Age</source>
+        <target>Ingrese la Edad</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/tracker-page/tracker-page.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.1">
+        <source>Energy (kcal)</source>
+        <target>Energía (kcal)</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.2">
+        <source>Protein (g)</source>
+        <target>Proteína (g)</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.3">
+        <source>Carbohydrate (g)</source>
+        <target>Carbohidrato (g)</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.4">
+        <source>Fat (g)</source>
+        <target>Grasa (g)</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.5">
+        <source>% Calories from Protein</source>
+        <target>% Calorías de proteínas</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.6">
+        <source>% Calories from Carbs</source>
+        <target>% Calorías de carbohidratos</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.7">
+        <source>% Calories from Fat</source>
+        <target>% Calorías de grasa</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.8">
+        <source>Animal Protein (g)</source>
+        <target>Proteína Animal (g)</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.9">
+        <source>Vegetable Protein (g)</source>
+        <target>Proteína vegetal (g)</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.10">
+        <source>Total Dietary Fiber (g)</source>
+        <target>Fibra Dietética Total (g)</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.11">
+        <source>Total Sugars (g)</source>
+        <target>Azúcares Totales (g)</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.12">
+        <source>Added Sugars (by Total Sugars) (g)</source>
+        <target>Azúcares añadidos (por azúcares totales) (g)</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.13">
+        <source>Fructose (g)</source>
+        <target>Fructosa (g)</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.14">
+        <source>Lactose (g)</source>
+        <target>Lactosa (g)</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.15">
+        <source>Starch (g)</source>
+        <target>Almidón (g)</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.16">
+        <source>Total Grains (ounce equivalents)</source>
+        <target>Granos Totales (equivalentes a onzas)</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.17">
+        <source>Whole Grains (ounce equivalents)</source>
+        <target>Granos integrales (equivalentes a onzas)</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.18">
+        <source>Refined Grains (ounce equivalents)</source>
+        <target>Granos refinados (equivalentes a onzas)</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.19">
+        <source>Total Saturated Fatty Acids (SFA) (g)</source>
+        <target>Ácidos grasos saturados totales (AGS) (g)</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.20">
+        <source>Total Monounsaturated Fatty Acids (MUFA) (g)</source>
+        <target>Ácidos grasos monoinsaturados totales (MUFA) (g)</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.21">
+        <source>Total Polyunsaturated Fatty Acids (PUFA) (g)</source>
+        <target>Ácidos grasos poliinsaturados totales (PUFA) (g)</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.22">
+        <source>Omega-3 Fatty Acids (g)</source>
+        <target>Ácidos grasos omega-3 (g)</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.23">
+        <source>Water (g)</source>
+        <target>Agua (g)</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.24">
+        <source>Caffeine (mg)</source>
+        <target>Cafeína (mg)</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.25">
+        <source>Vitamin B1 (Thiamin) (mg)</source>
+        <target>Vitamina B1 (tiamina) (mg)</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.26">
+        <source>Vitamin B2 (Riboflavin) (mg)</source>
+        <target>Vitamina B2 (Riboflavina) (mg)</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.27">
+        <source>Vitamin B3 (Niacin) (mg)</source>
+        <target>Vitamina Bz (Niacina) (mg)</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.28">
+        <source>Vitamin B5 (Pantothenic acid) (mg)</source>
+        <target>Vitamina B5 (ácido pantoténico) (mg)</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.29">
+        <source>Vitamin B6 (mg)</source>
+        <target>Vitamina B6 (mg)</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.30">
+        <source>Vitamin B9 (Folate) (mcg)</source>
+        <target>Vitamina B9 (folato) (mcg)</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.31">
+        <source>Vitamin B12 (Cobalamin) (mcg)</source>
+        <target>Vitamina B12 (cobalamina) (mcg)</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.32">
+        <source>Vitamin C (Ascorbic acid) (mg)</source>
+        <target>Vitamina C (ácido ascórbico) (mg)</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.33">
+        <source>Vitamin A (Retinol) (mcg)</source>
+        <target>Vitamina A (retinol) (mcg)</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.34">
+        <source>Vitamin D (mcg)</source>
+        <target>Vitamina D (mcg)</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.35">
+        <source>Vitamin E (mg)</source>
+        <target>Vitamina E (mg)</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.36">
+        <source>Vitamin K (mcg)</source>
+        <target>Vitamina K (mcg)</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.37">
+        <source>Calcium (mg)</source>
+        <target>Calcio (mg)</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.38">
+        <source>Copper (mg)</source>
+        <target>Cobre (mg)</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.39">
+        <source>Iron (mg)</source>
+        <target>Hierro (mg)</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.40">
+        <source>Manganese (mg)</source>
+        <target>Manganeso (mg)</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.41">
+        <source>Magnesium (mg)</source>
+        <target>Magnesio (mg)</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.42">
+        <source>Phosphorus (mg)</source>
+        <target>Fósforo (mg)</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.43">
+        <source>Potassium (mg)</source>
+        <target>Potasio (mg)</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.44">
+        <source>Selenium (mcg)</source>
+        <target>Selenio (mcg)</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.45">
+        <source>Sodium (mg)</source>
+        <target>Sodio (mg)</target>
+      </trans-unit>
+      <trans-unit id="NUTRIENT.ITEM.46">
+        <source>Zinc (mg)</source>
+        <target>Zinc (mg)</target>
       </trans-unit>
     </body>
   </file>
