@@ -16,6 +16,13 @@
   background-color: yellow;
 }
 
+.tracker-card2 {
+  width: 50%;
+  justify-content: center;
+  margin-bottom: 10px;
+  background-color: white;
+}
+
 .top{
     color: #ff6f69;
 }
