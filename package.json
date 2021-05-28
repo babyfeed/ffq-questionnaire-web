@@ -4,6 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.config.json",
+    "start:es": "ng serve --configuration=es --proxy-config proxy.config.json",
+    "start:en": "ng serve --configuration=es --proxy-config proxy.config.json",
+    ",: null,: null,
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
