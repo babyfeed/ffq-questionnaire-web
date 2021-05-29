@@ -28,7 +28,7 @@ export class HistoryParentalComponent implements OnInit {
   public showFeedback = false;
   public buttonName: any = "Results";
 
-  MESSAGE = "No questionnaires have been submitted yet!";
+  MESSAGE = $localize`:@@MESSAGE.PARENT:No questionnaires have been submitted yet!`;
 
   results: FFQResultsResponse[] = [];
 
@@ -51,9 +51,9 @@ export class HistoryParentalComponent implements OnInit {
   toggle(index) {
     this.results[index].show = !this.results[index].show;
     if (this.results[index].show) {
-      this.buttonName = "Results";
+      this.buttonName = $localize`:@@PARENTS.RESULTS.1:Results`;
     } else {
-      this.buttonName = "Results ";
+      this.buttonName = $localize`:@@PARENTS.RESULTS.2:Results `;
     }
   }
 
