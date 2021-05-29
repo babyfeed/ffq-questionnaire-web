@@ -13,9 +13,8 @@
           <td>{{nutrient.nutrientName}}</td>
           <td style="text-align: center">{{nutrient.calculatedAmount| resultRound}}</td>
           <td style="text-align: center">{{nutrient.recommendedAmount| resultRound}}</td>
-          <td
-            [ngClass]="color(nutrient.status)"
-            style="text-align: center">{{nutrient.status}}</td>
+          <td [ngClass]="color(nutrient.status)"
+              style="text-align: center">{{nutrient.status}} by {{nutrient.calculatedAmount - nutrient.recommendedAmount|resultRound}}</td>
         </tr>
       </table>
     </div>

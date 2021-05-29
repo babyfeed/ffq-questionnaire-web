@@ -1,5 +1,5 @@
 import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
+import { LOCALE_ID, NgModule } from "@angular/core";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { QuestIdInputComponent } from "./pages/quest-id-input-page/quest-id-input.component";
@@ -87,6 +87,7 @@ import { ResearchNewUserComponent } from "./pages/research-new-user/research-new
 import { Angular2CsvModule } from "angular2-csv";
 import { UpdateResearchInstitutionComponent } from "./pages/modify-research-institution/modify-research-institution.component";
 import { UpdateResearcherComponent } from "./pages/modify-researcher/modify-researcher.component";
+import { getLocaleId } from "@angular/common";
 
 @NgModule({
   declarations: [
