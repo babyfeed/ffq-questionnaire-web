@@ -50,6 +50,7 @@ export class HistoryParentalComponent implements OnInit {
 
   toggle(index) {
     this.results[index].show = !this.results[index].show;
+
     if (this.results[index].show) {
       this.buttonName = $localize`:@@PARENTS.RESULTS.1:Results`;
     } else {
