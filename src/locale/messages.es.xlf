@@ -1497,6 +1497,10 @@
         <source>Results</source>
         <target>Resultados</target>
       </trans-unit>
+      <trans-unit id="PARENTS.RESULTS.3">
+        <source>Results</source>
+        <target>Resultados</target>
+      </trans-unit>
       <trans-unit id="ERRORDIALOG.1">
         <source>Questionnaire Incomplete</source>
         <target>Cuestionario Incompleto</target>

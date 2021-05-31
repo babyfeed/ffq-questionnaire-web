@@ -138,10 +138,11 @@
       },
       "i18n": {
         "sourceLocale": "en-US",
+        "baseHref": ""
         "locales": {
           "es": {
             "translation": "src/locale/messages.es.xlf",
-            "baseHref": ""
+            "baseHref": "/es/"
 
           }
         }

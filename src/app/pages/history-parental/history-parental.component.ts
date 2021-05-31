@@ -26,7 +26,7 @@ import { FoodDescriptionService } from 'src/app/services/food-description/food-d
 export class HistoryParentalComponent implements OnInit {
   public show = false;
   public showFeedback = false;
-  public buttonName: any = 'Results';
+  public buttonName: any = $localize`:@@PARENTS.RESULTS.1:Results`;
 
   MESSAGE = $localize `:@@MESSAGE.PARENT:No questionnaires have been submitted yet!`;
 
@@ -50,8 +50,8 @@ export class HistoryParentalComponent implements OnInit {
 
   toggle(index) {
     this.results[index].show = !this.results[index].show;
-    if (this.results[index].show) { this.buttonName = $localize `:@@PARENTS.RESULTS.1:Results`; }
-    else { this.buttonName = $localize`:@@PARENTS.RESULTS.2:Results `; }
+    if (this.results[index].show) { this.buttonName = $localize `:@@PARENTS.RESULTS.2:Results`; }
+    else { this.buttonName = $localize`:@@PARENTS.RESULTS.3:Results `; }
   }
 
   toggleFeedback(index) {

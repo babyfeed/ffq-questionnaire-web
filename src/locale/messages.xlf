@@ -1103,6 +1103,9 @@
       <trans-unit id="PARENTS.RESULTS.2">
         <source>Results</source>
       </trans-unit>
+      <trans-unit id="PARENTS.RESULTS.3">
+        <source>Results</source>
+      </trans-unit>
       <trans-unit id="ERRORDIALOG.1">
         <source>Questionnaire Incomplete</source>
       </trans-unit>
