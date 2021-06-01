@@ -17,7 +17,7 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
-            "localize": false,
+            "localize": true,
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -63,10 +63,14 @@
               ]
             },
             "en-US": {
-              "localize": ["en-US"]
+              "localize": [
+                "en-US"
+              ]
             },
             "es": {
-              "localize": ["es"]
+              "localize": [
+                "es"
+              ]
             }
           }
         },
@@ -84,7 +88,6 @@
             },
             "es": {
               "browserTarget": "ffq-questionnaire-web:build:es"
-
             }
           }
         },
@@ -138,12 +141,10 @@
       },
       "i18n": {
         "sourceLocale": "en-US",
-        "baseHref": ""
         "locales": {
           "es": {
             "translation": "src/locale/messages.es.xlf",
             "baseHref": "/es/"
-
           }
         }
       },
