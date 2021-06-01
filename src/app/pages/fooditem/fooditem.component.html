@@ -45,10 +45,10 @@
         </div>
         <hr>
         <label style="font-weight: bold">Nutrients*</label>
-        <div style="display: flex"><label style="padding: 10px; font-style: italic">*in Portion Size</label><input
+        <!--<div style="display: flex"><label style="padding: 10px; font-style: italic">*in Portion Size</label><input
             style="width: 150px; height: 35px" placeholder="portion size" type="text" class="form-control"
             name="portion" [(ngModel)]=foodNutrientsItem[0].foodItem.portionSize /></div>
-
+          -->
         <div class="col-12">
           <label style="font-weight: bold"> Food Type(s) - Total:
             <span>{{foodNutrientsItem[0].foodItem.foodTypes.length}} </span></label><br>
@@ -56,13 +56,14 @@
           <div *ngFor="let foodtype of foodNutrientsItem[0].foodItem.foodTypes; let i = index">
             <div style="margin: 10px 0 10px 0" class="row">
 
+              <!--
               <div class="col-4">
                 <label style="font-weight: bold" class="form-check-label" for="fooditemname"> Name </label><label style="font-style: italic; font-size: small; margin-left: 10px;"> *required </label>
                 <input id="fooditemname" style="border-color: mediumblue; border-width: 0.05cm" placeholder="food type"
                   type="text" class="form-control" name="nutrientname" required #nutrientnameField="ngModel"
                   [(ngModel)]=foodtype.typeName />
               </div>
-
+              -->
               <div class="col-4">
                 <label class="form-check-label" style="font-weight: bold" for="additionalSugar"> ID </label><label style="font-style: italic; font-size: small; margin-left: 10px;"> *required </label>
                 <input placeholder="nutrient list id" type="text" style="border-color: mediumblue; border-width: 0.05cm"
