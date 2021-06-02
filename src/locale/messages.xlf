@@ -590,6 +590,10 @@
           <context context-type="sourcefile">app/pages/quest-results/quest-results.component.html</context>
           <context context-type="linenumber">318</context>
         </context-group>
+        <context-group>
+          <context context-type="sourcefile">app/pages/history-parental/history-parental.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="230e7850967b2aba96ef72e82702d66bbe27efc0" datatype="html">
         <source>
@@ -1375,6 +1379,20 @@
           <context context-type="sourcefile">app/pages/login/login.component.html</context>
           <context context-type="linenumber">39</context>
         </context-group>
+      </trans-unit>
+      <trans-unit id="1cdeb524e24b1e7d5c3bc315630b255639daa1a9" datatype="html">
+        <source>Additional Recommendations and Feedback</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/history-parental/history-parental.component.html</context>
+          <context context-type="linenumber">86</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="75499d4acfe7bee781078c9e49052c670e5c9b77" datatype="html">
+      <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Date<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
+      <context-group purpose="location">
+        <context context-type="sourcefile">app/pages/history-parental/history-parental.component.html</context>
+        <context context-type="linenumber">16</context>
+      </context-group>
       </trans-unit>
    </body>
   </file>
