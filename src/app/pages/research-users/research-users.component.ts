@@ -37,6 +37,7 @@ export class ResearchUsersComponent implements OnInit {
   institutionAttributes: object;
   participants: FfqParticipant[] = [];
   dataLoaded: Promise<boolean>;
+  searchParticipants: string;
 
   constructor(
     public researchParentService: ResearcherParentService,

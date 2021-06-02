@@ -1497,6 +1497,10 @@
         <source>Results</source>
         <target>Resultados</target>
       </trans-unit>
+      <trans-unit id="PARENTS.RESULTS.3">
+        <source>Results</source>
+        <target>Resultados</target>
+      </trans-unit>
       <trans-unit id="ERRORDIALOG.1">
         <source>Questionnaire Incomplete</source>
         <target>Cuestionario Incompleto</target>
@@ -1830,6 +1834,22 @@
       <trans-unit id="NUTRIENT.ITEM.46">
         <source>Zinc (mg)</source>
         <target>Zinc (mg)</target>
+      </trans-unit>
+      <trans-unit id="6902220d9474a5586ac8799d827806f9b4e34f2b" datatype="html">
+        <source>SPANISH VERSION</source>
+        <target>VERSIÓN EN ESPAÑOL</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/login/login.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="eb5a13e4a808ed4a4c33051b7d16ff2eb7e4153c" datatype="html">
+        <source>ENGLISH VERSION</source>
+        <target>VERSIÓN INGLES</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/login/login.component.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
       </trans-unit>
     </body>
   </file>

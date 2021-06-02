@@ -1,23 +1,25 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "cli": {
-    "analytics": "73d96eb3-d635-4811-a451-b81f67cb9d14"
-  },
-  "defaultProject": "ffq-questionnaire-web",
+  "version": 1,
   "newProjectRoot": "projects",
   "projects": {
     "ffq-questionnaire-web": {
+      "root": "",
+      "sourceRoot": "src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "localize": true,
             "aot": true,
             "outputPath": "dist/ffq-questionnaire-web",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
-            "localize": false,
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -62,11 +64,11 @@
                 }
               ]
             },
-            "en-US": {
-              "localize": ["en-US"]
-            },
             "es": {
               "localize": ["es"]
+            },
+            "en-US": {
+              "localize": ["en-US"]
             }
           }
         },
@@ -84,7 +86,6 @@
             },
             "es": {
               "browserTarget": "ffq-questionnaire-web:build:es"
-
             }
           }
         },
@@ -141,16 +142,10 @@
         "locales": {
           "es": {
             "translation": "src/locale/messages.es.xlf",
-            "baseHref": ""
-
+            "baseHref": "/es/"
           }
         }
-      },
-      "prefix": "app",
-      "projectType": "application",
-      "root": "",
-      "schematics": {},
-      "sourceRoot": "src"
+      }
     },
     "ffq-questionnaire-web-e2e": {
       "root": "e2e/",
@@ -161,7 +156,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "ffq-questionnaire-web:serve:es"
+            "devServerTarget": "ffq-questionnaire-web:serve"
           },
           "configurations": {
             "production": {
@@ -181,5 +176,8 @@
       }
     }
   },
-  "version": 1
+  "defaultProject": "ffq-questionnaire-web",
+  "cli": {
+    "analytics": "73d96eb3-d635-4811-a451-b81f67cb9d14"
+  }
 }
