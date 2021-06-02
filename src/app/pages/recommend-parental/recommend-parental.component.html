@@ -12,7 +12,7 @@
 
   <mat-card *ngFor="let result of results; let i = index" >
     <div class="item-container">
-      <img class="image" src="{{result.imageUrl}}">
+      <img class="image" src="{{ result.imageUrl}}">
       <div>
         <label><strong>{{result.foodItemGroupName}}</strong></label><br>
         <label><strong *ngIf="showBracketFirst">{{ result.firstBracketIntake }} {{ ageMessage }}</strong></label>

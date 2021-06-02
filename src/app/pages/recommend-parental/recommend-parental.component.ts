@@ -4,6 +4,19 @@ import { FFQResultsResponse } from "src/app/models/ffqresultsresponse";
 import {Observable} from 'rxjs';
 import { Description } from 'src/app/models/ffqfooddescription';
 import { FoodDescriptionService } from 'src/app/services/food-description/food-description.service';
+import {
+  L10nConfig,
+  L10nLoader,
+  L10nStorage,
+  L10nLocale,
+  L10nTranslationLoader,
+  L10nProvider,
+  L10nValidation,
+  L10N_LOCALE,
+  L10nNumberFormatOptions,
+  L10nDateTimeFormatOptions,
+  parseDigits
+} from 'angular-l10n';
 
 @Component({
   selector: 'app-recommend-parental',
