@@ -4,8 +4,6 @@ import { FFQResultsResponse } from 'src/app/models/ffqresultsresponse';
 import {Observable} from 'rxjs';
 import { Description } from 'src/app/models/ffqfooddescription';
 import { FoodDescriptionService } from 'src/app/services/food-description/food-description.service';
-import {TranslateService} from '@ngx-translate/core';
-import {TranslateModule} from '@ngx-translate/core';
 
 
 @Component({
@@ -20,10 +18,10 @@ export class RecommendParentalComponent implements OnInit {
   showBracketThird = false;
   showNone = true;
 
-  ageMessage = $localize `:@@RECOMMEND.CHILD.MESSAGE:Please select infant age.`;
-  ageRange1 = $localize `:@@RECOMMEND.CHILD.MESSAGE1: for child 0 to 5.9 months`;
-  ageRange2 = $localize `:@@RECOMMEND.CHILD.MESSAGE2:for child 6 to 11.9 months`;
-  ageRange3 = $localize `:@@RECOMMEND.CHILD.MESSAGE3:for child 12 to 24 months`;
+  ageMessage = 'Please select infant age.';
+  ageRange1 =  'for child 0 to 5.9 months';
+  ageRange2 = 'for child 6 to 11.9 months';
+  ageRange3 = 'for child 12 to 24 months';
 
   results: Description[] = [];
   constructor(public foodDescriptionService: FoodDescriptionService) {}

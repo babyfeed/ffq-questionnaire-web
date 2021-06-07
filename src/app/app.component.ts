@@ -10,9 +10,9 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class AppComponent {
   title = 'ffq-questionnaire-web';
-  constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer, @Inject(LOCALE_ID) protected localeId: string, public translate: TranslateService)
+  constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer, @Inject(LOCALE_ID) protected localeId: string, private translate: TranslateService)
   {
-    translate.setDefaultLang('es');
+    translate.setDefaultLang('en-US');
     this.matIconRegistry.addSvgIcon(
       "up_arrow",
       this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/images/up_arrow.svg")
@@ -25,8 +25,5 @@ export class AppComponent {
       "equal_sign",
       this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/images/equal_sign.svg")
     );
-  }
-  useLanguage(language: string): void {
-    this.translate.use(language);
   }
 }

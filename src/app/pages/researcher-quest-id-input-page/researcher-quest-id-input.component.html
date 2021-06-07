@@ -8,7 +8,9 @@
           <div class="research-quest-id-button">
             <button mat-raised-button
                     (click)="startQuestionnaireResearch()"
-                    color="primary" i18n>Begin Questionnaire</button>
+                    color="primary" >{{'Begin Questionnaire' | translate}}</button>
+            <a (click)="useLanguage('es')" mat-raised-button class="button">Para Español</a>
+            <a (click)="useLanguage('en-US')" mat-raised-button class="button">English Version</a>
           </div>
         </mat-card-actions>
       </span>

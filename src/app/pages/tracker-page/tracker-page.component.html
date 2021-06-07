@@ -16,7 +16,7 @@
             </mat-form-field>
             <mat-card-actions>
                 <div class="qb-button">
-                    <button mat-raised-button (click)="enterAge(ageValue.value)" color="primary" i18n>Enter Age</button>
+                    <button mat-raised-button (click)="enterAge(ageValue.value)" color="primary" >{{'Enter Age' | translate}}</button>
                 </div>
             </mat-card-actions>
         </mat-card>
@@ -28,10 +28,10 @@
       <div class="trackeritem-container" *ngFor="let result of foodResults; let $index = index" [formGroupName]="$index">
         <mat-card class="tracker-card">
           <div style="float: left">
-            <label><strong>{{ $index + '.foodItemGroupName' | translate }}</strong></label><br>
-            <label *ngIf="showBracketFirst">{{ $index + '.firstBracketIntake' | translate}}</label>
-            <label *ngIf="showBracketSecond">{{ $index + '.secondBracketIntake' | translate}}</label>
-            <label *ngIf="showBracketThird">{{ $index + '.thirdBracketIntake' | translate}}</label>
+            <label><strong>{{ 'result.' + $index + '.foodItemGroupName' | translate }}</strong></label><br>
+            <label *ngIf="showBracketFirst">{{ 'result.'+ $index + '.firstBracketIntake' | translate}}</label>
+            <label *ngIf="showBracketSecond">{{ 'result.' + $index + '.secondBracketIntake' | translate}}</label>
+            <label *ngIf="showBracketThird">{{ 'result.' + $index + '.thirdBracketIntake' | translate}}</label>
           </div>
           <div class="tracker-buttons">
             <mat-button-toggle-group formControlName="answer">

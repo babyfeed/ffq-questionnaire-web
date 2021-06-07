@@ -8,7 +8,7 @@ import { AuthenticationService } from 'src/app/services/authentication/authentic
 })
 export class LoginHeaderComponent implements OnInit{
 
-    TITLE = $localize `:@@LOGINPAGE.TITLE:Login Page`;
+    TITLE = 'Login Page';
 
     constructor() { }
 

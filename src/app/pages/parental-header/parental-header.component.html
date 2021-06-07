@@ -1,16 +1,16 @@
-<title i18n>Parent Portal</title>
+<title>{{'PARENTPORTAL.TITLE' | translate}}</title>
 
 <div class="header">
-  <h2 matDialogTitle>{{ TITLE }}</h2>
+  <h2 matDialogTitle>{{ 'PARENTPORTAL.TITLE' | translate }}</h2>
   <div align="center"><i> <img src="assets/images/logo.png" alt="" height="80" width="80"> </i></div>
   <div class="login-button">
-    <button mat-raised-button (click)="logout()" i18n>Log out <i class="fa fa-sign-out" aria-hidden="true"></i></button>
+    <button mat-raised-button (click)="logout()" translate>{{'Log out' | translate}}<i class="fa fa-sign-out" aria-hidden="true"></i></button>
   </div>
 
   <div align="center"><i></i></div>
-  <a class="tab-link" routerLink="/parent/home" routerLinkActive="active" i18n>Questionnaire</a>
-  <a class="tab-link" routerLink="/parent/history" routerLinkActive="active" i18n>Results</a>
-  <a class="tab-link" routerLink="/parent/recommend" routerLinkActive="active" i18n>Recommendations</a>
-  <a class="tab-link" routerLink="/parent/tracker" routerLinkActive="active" i18n>Tracking</a>
-  <a class="tab-link" routerLink="/parent/tracker-history" routerLinkActive="active" i18n>Tracking History</a>
+  <a class="tab-link" routerLink="/parent/home" routerLinkActive="active">{{'Questionnaire' | translate}}</a>
+  <a class="tab-link" routerLink="/parent/history" routerLinkActive="active">{{'Results' | translate}}</a>
+  <a class="tab-link" routerLink="/parent/recommend" routerLinkActive="active">{{'Recommendations' | translate}}</a>
+  <a class="tab-link" routerLink="/parent/tracker" routerLinkActive="active">{{'Tracking' | translate}}</a>
+  <a class="tab-link" routerLink="/parent/tracker-history" routerLinkActive="active">{{'Tracking History' | translate}}</a>
 </div>
