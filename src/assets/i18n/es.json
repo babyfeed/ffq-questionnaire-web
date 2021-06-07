@@ -1,0 +1,143 @@
+{
+	"0 to 5.9 Months": "0 a 5.9 Meses",
+	"12 to 24 Months": "12 a 24 Meses",
+	"6 to 11.9 Months": "6 a 11.9 Meses",
+	"Additional Recommendations and Feedback": "Recomendaciones y Comentarios Adicionales",
+	"Begin Questionnaire": "Comenzar Cuestionario",
+	"Daily Average": "Promedio Diario",
+	"Date": "Fecha",
+	"Enter Age": "Ingrese Edad",
+	"Food Items": "Alimentos",
+	"Frequency": "Frecuencia",
+	"Frequency Type": "Tipo de Frecuencia",
+	"Infant age (In months)": "Edad infantil (en meses)",
+	"Infant gender": "Género infantil",
+	"LOGINPAGE": {
+		"TITLE": {
+			"1": "Página de Inicio de Sesión",
+			"2": "Página de Inicio de Sesión"
+		}
+	},
+	"Log out": "Cerrar sesión",
+	"Login": "Iniciar sesión",
+	"Name": "Nombre",
+	"Nutrient": "Nutritivo",
+	"Nutrient Breakdown": "Desglose de Nutrientes",
+	"Nutrients": "Nutrientes",
+	"PARENTPORTAL": {
+		"TITLE": "Portal para padres"
+	},
+	"PARTICIPANTPORTAL": {
+		"TITLE": "Portal del Participante de la Investigación"
+	},
+	"Parent Username": "Nombre de Usuario Principal",
+	"Password is required": "Se requiere contraseña",
+	"Questionnaire": "Cuestionario",
+	"Questionnaire ID": "ID del Cuestionario",
+	"RECOMMEND": {
+		"CHILD": {
+			"MESSAGE1": "Seleccione la edad del bebé",
+			"MESSAGE2": "para niños de 0 a 5,9 meses",
+			"MESSAGE3": "para niños de 6 a 11,9 meses",
+			"MESSAGE4": "para niño de 12 a 24 meses"
+		}
+	},
+	"Recommendations": "Recomendaciones",
+	"Results": "Resultados",
+	"Select infant age range:": "Seleccione el rango de edad del bebé:",
+	"Servings": "Porciones",
+	"Sugar(g)": "Azúcar (g)",
+	"Tracking": "Seguimiento",
+	"Tracking History": "Historial de Seguimiento",
+	"User Login": "Inicio de Sesión de Usuario",
+	"Username is required": "Se Requiere Nombre de Usuario",
+	"ageMessage": "Seleccione la edad del bebé",
+	"ageMessage1": "para niños de 0 a 5.9 meses",
+	"ageMessage2": "para niños de 6 a 11.9 meses",
+	"ageMessage3": "para niño de 12 a 24 meses",
+	"buttonName": "Resultados",
+	"passwordPlaceHolder": "Contraseña",
+	"result": [
+		{
+			"description": "Se recomienda leche materna o fórmula infantil fortificada con hierro hasta los 12 meses de edad. No use leche baja en hierro, como la de vaca o de soya, ni siquiera en cereales para bebés. No sirva leches al 1% (bajas en grasa) o descremadas (sin grasa) antes de los 24 meses.",
+			"firstBracketIntake": "2 a 3 tazas por día (16 - 24 fl oz / día)",
+			"foodItemGroupName": "Leche materna - Fórmula - Leche de vaca - Otro",
+			"imageUrl": "/assets/images/Breastmilk.jpg",
+			"secondBracketIntake": "1 ¼ a 3 ½ tazas por día (10 a 28 fl oz / día)",
+			"thirdBracketIntake": "1 a 2 ¼ tazas por día (8 - 18 fl oz / día)"
+		},
+		{
+			"description": "Los cereales integrales contienen el grano entero: el salvado, el germen y el endospermo. Algunos ejemplos de productos son 100% trigo integral, bulgur (trigo partido), avena, harina de maíz integral y arroz integral.",
+			"firstBracketIntake": "0 tazas por día (0 oz / día)",
+			"foodItemGroupName": "Cereales integrales",
+			"imageUrl": "/assets/images/Whole_Grains.jpg",
+			"secondBracketIntake": "1 cucharada a 1 ¾ tazas por día (0.1 - 3.5 oz / día)",
+			"thirdBracketIntake": "1 cucharada a 2 ¾ tazas por día (0.1 - 5.5 oz / día)"
+		},
+		{
+			"description": "Los granos refinados se han molido, un proceso que elimina el salvado, el germen, la fibra dietética, el hierro y muchas vitaminas B. Algunos ejemplos son el pan blanco, la harina sin blanquear, la pasta dura, la harina de maíz enriquecida y el arroz blanco.",
+			"firstBracketIntake": "0 tazas por día (0 oz / día)",
+			"foodItemGroupName": "Granos refinados",
+			"imageUrl": "/assets/images/Refined_Grains.jpg",
+			"secondBracketIntake": "0 a ¾ taza por día (0 - 1.5 oz / día)",
+			"thirdBracketIntake": "0 a ¾ taza por día (0 - 1.8 oz / día)"
+		},
+		{
+			"description": "Los alimentos elaborados con carne, aves, mariscos, frijoles, nueces, semillas, huevos, yogur, queso y productos de soya se consideran proteínas. Las opciones de carnes y aves deben ser magras o bajas en grasa. Sirva mariscos 2-3 veces a la semana.",
+			"firstBracketIntake": "0 tazas por día (0 oz / día)",
+			"foodItemGroupName": "Proteínas",
+			"imageUrl": "/assets/images/Proteins.jpg",
+			"secondBracketIntake": "½ cucharada a 1 ½ tazas por día (0.1 - 6 oz / día)",
+			"thirdBracketIntake": "½ cucharada a ¾ taza por día (0.1 - 3 oz / día)"
+		},
+		{
+			"description": "Las verduras pueden estar crudas o cocidas; frescos, congelados, enlatados o secos / deshidratados; y puede cortarse o machacarse. Algunos ejemplos son el brócoli, los tomates, las zanahorias, las batatas, el maíz, los plátanos y las judías verdes.",
+			"firstBracketIntake": "0 tazas por día (0 oz / día)",
+			"foodItemGroupName": "Vegetales",
+			"imageUrl": "/assets/images/Vegetables.jpg",
+			"secondBracketIntake": "¼ de taza o más por día (2 o más oz / día)",
+			"thirdBracketIntake": "1 taza o más por día (8 oz o más / día)"
+		},
+		{
+			"description": "Cualquier fruta cuenta como parte del grupo de frutas. Las frutas pueden ser frescas, enlatadas, congeladas o secas, y se pueden cortar o hacer puré. Algunos ejemplos son manzanas, plátanos, bayas, mangos, melones, peras y ciruelas pasas.",
+			"firstBracketIntake": "0 tazas por día (0 oz / día)",
+			"foodItemGroupName": "Frutas",
+			"imageUrl": "/assets/images/Fruits.jpg",
+			"secondBracketIntake": "¼ de taza o más por día (2 o más oz / día)",
+			"thirdBracketIntake": "1 taza o más por día (8 oz o más / día)"
+		},
+		{
+			"description": "Evite los jugos 100% naturales: no hay ningún beneficio nutricional para los bebés. Algunos ejemplos son los jugos hechos 100% de fruta o 100% vegetal, como manzana y zanahoria. En su lugar, sirva frutas y verduras enteras, cortadas o en puré.",
+			"firstBracketIntake": "0 tazas por día (0 fl oz / día)",
+			"foodItemGroupName": "Jugos 100%",
+			"imageUrl": "/assets/images/Juices.jpg",
+			"secondBracketIntake": "0 tazas por día (0 fl oz / día)",
+			"thirdBracketIntake": "0 a ½ taza por día (0 a 4 fl oz / día)"
+		},
+		{
+			"description": "Evite las bebidas azucaradas. Estos productos son ricos en calorías y no tienen ningún beneficio nutricional. Algunos ejemplos son refrescos, ponche de frutas, Kool-Aid, Tang, limonada, té helado y bebidas deportivas. En su lugar, sírvase leche o agua.",
+			"firstBracketIntake": "0 tazas por día (0 fl oz / día)",
+			"foodItemGroupName": "Bebidas azucaradas",
+			"imageUrl": "/assets/images/Sugary_Beverages.jpg",
+			"secondBracketIntake": "0 tazas por día (0 fl oz / día)",
+			"thirdBracketIntake": "0 tazas por día (0 fl oz / día)"
+		},
+		{
+			"description": "Evite los dulces. Algunos ejemplos son chocolates, piruletas, dulces, pasteles, muffins, donas, galletas, helados y azúcares agregados como miel, mermelada, agave y almíbar. En su lugar, sírvase yogur natural y frutas, en trozos o en puré.",
+			"firstBracketIntake": "0 tazas por día (0 oz / día)",
+			"foodItemGroupName": "Dulces",
+			"imageUrl": "/assets/images/Sweets.jpg",
+			"secondBracketIntake": "0 tazas por día (0 oz / día)",
+			"thirdBracketIntake": "0 tazas por día (0 oz / día)"
+		},
+		{
+			"description": "Evite los bocadillos salados. Estos productos también tienden a tener un alto contenido de calorías y grasas. Algunos ejemplos son las papas fritas, las patatas fritas y las carnes procesadas como jamón, tocino y salchichas. En su lugar, sírvase cereales integrales y proteínas.",
+			"firstBracketIntake": "0 tazas por día (0 oz / día)",
+			"foodItemGroupName": "Bocadillos salados",
+			"imageUrl": "/assets/images/Salty_Snacks.jpg",
+			"secondBracketIntake": "0 tazas por día (0 oz / día)",
+			"thirdBracketIntake": "0 tazas por día (0 oz / día)"
+		}
+	],
+	"userNamePlaceHolder": "Nombre de Usuario"
+}
