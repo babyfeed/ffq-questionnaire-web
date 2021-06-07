@@ -1394,6 +1394,18 @@
         <context context-type="linenumber">16</context>
       </context-group>
       </trans-unit>
+      <trans-unit id="RECOMMEND.CHILD.MESSAGE1">
+        <source>for child 0 to 5.9 months</source>
+      </trans-unit>
+      <trans-unit id="RECOMMEND.CHILD.MESSAGE2">
+        <source>for child 6 to 11.9 months</source>
+      </trans-unit>
+      <trans-unit id="RECOMMEND.CHILD.MESSAGE3">
+        <source>for child 12 to 24 months</source>
+      </trans-unit>
+      <trans-unit id="RECOMMEND.CHILD.MESSAGE">
+        <source>Please select infant age.</source>
+      </trans-unit>
    </body>
   </file>
 </xliff>

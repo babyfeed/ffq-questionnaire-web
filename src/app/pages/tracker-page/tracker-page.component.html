@@ -28,10 +28,10 @@
       <div class="trackeritem-container" *ngFor="let result of foodResults; let $index = index" [formGroupName]="$index">
         <mat-card class="tracker-card">
           <div style="float: left">
-            <label><strong>{{ result.foodItemGroupName }}</strong></label><br>
-            <label *ngIf="showBracketFirst">{{ result.firstBracketIntake }}</label>
-            <label *ngIf="showBracketSecond">{{ result.secondBracketIntake }}</label>
-            <label *ngIf="showBracketThird">{{ result.thirdBracketIntake }}</label>
+            <label><strong>{{ $index + '.foodItemGroupName' | translate }}</strong></label><br>
+            <label *ngIf="showBracketFirst">{{ $index + '.firstBracketIntake' | translate}}</label>
+            <label *ngIf="showBracketSecond">{{ $index + '.secondBracketIntake' | translate}}</label>
+            <label *ngIf="showBracketThird">{{ $index + '.thirdBracketIntake' | translate}}</label>
           </div>
           <div class="tracker-buttons">
             <mat-button-toggle-group formControlName="answer">

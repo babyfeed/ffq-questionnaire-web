@@ -1,7 +1,8 @@
 import { Component, LOCALE_ID, Inject } from '@angular/core';
-import { MatIconRegistry }  from '@angular/material/icon';
+import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import {TranslateService} from '@ngx-translate/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,12 +10,9 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 })
 export class AppComponent {
   title = 'ffq-questionnaire-web';
-  languageList = [
-    { code: 'en-US', label: 'English' },
-    { code: 'es', label: 'Español' }
-  ];
-  constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer, @Inject(LOCALE_ID) protected localeId: string)
+  constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer, @Inject(LOCALE_ID) protected localeId: string, public translate: TranslateService)
   {
+    translate.setDefaultLang('es');
     this.matIconRegistry.addSvgIcon(
       "up_arrow",
       this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/images/up_arrow.svg")
@@ -28,5 +26,7 @@ export class AppComponent {
       this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/images/equal_sign.svg")
     );
   }
-
+  useLanguage(language: string): void {
+    this.translate.use(language);
+  }
 }

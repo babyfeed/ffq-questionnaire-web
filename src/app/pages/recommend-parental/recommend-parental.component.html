@@ -10,18 +10,18 @@
     </mat-radio-group>
   </mat-card>
 
-  <mat-card *ngFor="let result of results; let i = index" >
+  <mat-card *ngFor="let result of results; let i = index">
     <div class="item-container">
-      <img class="image" src="{{ result.imageUrl}}">
+      <img class="image" src="{{ result.imageUrl }}" alt="DataBase Images">
       <div>
-        <label><strong>{{result.foodItemGroupName}}</strong></label><br>
-        <label><strong *ngIf="showBracketFirst">{{ result.firstBracketIntake }} {{ ageMessage }}</strong></label>
-        <label><strong *ngIf="showBracketSecond">{{ result.secondBracketIntake }} {{ ageMessage }}</strong></label>
-        <label><strong *ngIf="showBracketThird">{{ result.thirdBracketIntake }} {{ ageMessage }}</strong></label>
+        <label><strong>{{ i + '.foodItemGroupName'| translate }}</strong></label><br>
+        <label><strong *ngIf="showBracketFirst">{{ i + '.firstBracketIntake' | translate}} {{ ageMessage }}</strong></label>
+        <label><strong *ngIf="showBracketSecond">{{ i + '.secondBracketIntake' | translate}} {{ ageMessage }}</strong></label>
+        <label><strong *ngIf="showBracketThird">{{ i + '.thirdBracketIntake' | translate}} {{ ageMessage  }}</strong></label>
         <label><strong *ngIf="showNone">{{ ageMessage }}</strong></label>
         <br>
         <label>
-          {{result.description}}
+          {{i + '.description' | translate}}
         </label>
       </div>
     </div>

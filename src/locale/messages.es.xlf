@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+  <file datatype="plaintext" original="ng2.template" source-language="en-US" target-language="es">
     <body>
       <trans-unit id="ngb.alert.close" datatype="html">
         <source>Close</source>
@@ -27,7 +27,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="ngb.datepicker.previous-month" datatype="html">
-        <source>Previous Month</source>
+        <source>Previous month</source>
         <target>Mes Anterior</target>
         <context-group purpose="location">
           <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation.d.ts</context>
@@ -39,7 +39,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="ngb.datepicker.next-month" datatype="html">
-        <source>Next Month</source>
+        <source>Next month</source>
         <target>Próximo Mes</target>
         <context-group purpose="location">
           <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation.d.ts</context>
@@ -282,54 +282,6 @@
           <context context-type="linenumber">10</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="51f3cc2e625fe45eb5326e5996e118cccca367e4" datatype="html">
-        <source>Weekly Total</source>
-        <target>Total semanal</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/pages/results-page/results-page.component.html</context>
-          <context context-type="linenumber">7</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="410cf47a67c8d0c06a377c3cb868078a07e9a437" datatype="html">
-        <source>Weekly Caloric Summary</source>
-        <target>Resumen Calórico Semanal</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/pages/results-page/results-page.component.html</context>
-          <context context-type="linenumber">16</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="886aa070006c33a42b9051f7f8e08cee4339afec" datatype="html">
-        <source>Total Calories</source>
-        <target>Calorías Totales</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/pages/results-page/results-page.component.html</context>
-          <context context-type="linenumber">19</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="a0a099664fe815eae630c8134b7cc229cde07827" datatype="html">
-        <source>% of Fat</source>
-        <target>% de grasa</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/pages/results-page/results-page.component.html</context>
-          <context context-type="linenumber">20</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="dd6c9873b9c59e2d9444ef29ae8deb4622e55f1f" datatype="html">
-        <source>% of Carbs</source>
-        <target>% de Carbohidratos</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/pages/results-page/results-page.component.html</context>
-          <context context-type="linenumber">21</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="d2b5eded1a2d4cfde5427e984ede0f60fe89f139" datatype="html">
-        <source>% of Protein</source>
-        <target>% de Proteína</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/pages/results-page/results-page.component.html</context>
-          <context context-type="linenumber">22</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="310945509226ca13d30db6d5b04493ef0969fe17" datatype="html">
         <source>No questionnaires have been submitted yet!</source>
         <target>¡Aún no se han enviado cuestionarios!</target>
@@ -363,7 +315,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="882dfdb0556acd08b9e9567aaefe023da8a89bd6" datatype="html">
-        <source>Export Data</source>
+        <source> Export Data </source>
         <target>Exportar datos</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/quest-results/quest-results.component.html</context>
@@ -387,9 +339,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="223aa925c2bb93c24fc4d3fee23e3e0f630c27e5" datatype="html">
-        <source>
-          Parent Questionnaire Results for: <x id="INTERPOLATION" equiv-text="{{this.clinicAttributes.clinicname}}"/>
-        </source>
+        <source> Parent Questionnaire Results for: <x id="INTERPOLATION" equiv-text="{{this.clinicAttributes.clinicname}}"/></source>
         <target>
           Resultados del cuestionario para padres para: <x id="INTERPOLATION" equiv-text="{{this.clinicAttributes.clinicname}}"/>
         </target>
@@ -399,9 +349,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="c7758ea4b34fc0a331b9e92b6dd451d2218921d5" datatype="html">
-        <source>
-          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Questionnaire ID<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
-        </source>
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Questionnaire ID<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
         <target>
           <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>ID del Cuestionario<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
         </target>
@@ -421,17 +369,11 @@
           <context context-type="sourcefile">app/pages/quest-results/quest-results.component.html</context>
           <context context-type="linenumber">453</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/pages/history-parental/history-parental.component.html</context>
-          <context context-type="linenumber">16</context>
-        </context-group>
       </trans-unit>
       <trans-unit id="e29828866788d05aae15614ac728e0a9fc5cd5b4" datatype="html">
-        <source>
-          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Infant age (In months)<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
-        </source>
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Infant age (In months)<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
         <target>
-          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Edad infantil (en meses)<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
+          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Edad infantil (En Meses)<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
         </target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/quest-results/quest-results.component.html</context>
@@ -455,9 +397,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="2caa083230fd62c55e8ca8d3a940156f7b5aed88" datatype="html">
-        <source>
-          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Infant Gender<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
-        </source>
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Infant Gender<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
         <target>
           <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Género infantil<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
         </target>
@@ -479,9 +419,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="3f2bf1f16dafd05bdf6d4ac1f65c9ff305393615" datatype="html">
-        <source>
-          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Nutrient Results<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
-        </source>
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Nutrient Results<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
         <target>
           <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Resultados de Nutrientes<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
         </target>
@@ -503,9 +441,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="f0cdcaef796cc801b356ec9cb19fedba1811d2d5" datatype="html">
-        <source>
-          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Food Results<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
-        </source>
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Food Results<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
         <target>
           <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Resultados de Alimentos<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
         </target>
@@ -527,9 +463,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="69b518d2b638cfe4472bb4913424f9e1fe3aadd9" datatype="html">
-        <source>
-          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Name<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
-        </source>
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Name<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
         <target>
           <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Nombre<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
         </target>
@@ -551,9 +485,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="2dd55ee14052835c39aadc62e85885c62e566383" datatype="html">
-        <source>
-          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Frequency<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
-        </source>
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Frequency<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
         <target>
           <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Frecuencia<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
         </target>
@@ -579,9 +511,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="5927fc139bef19bd3d9a4cb3158620d2a10d7237" datatype="html">
-        <source>
-          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Frequency Type<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
-        </source>
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Frequency Type<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
         <target>
           <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Tipo de Frecuencia<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
         </target>
@@ -607,9 +537,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="7ea8c269422ff7d97e2d38e7736ed11bf9182d88" datatype="html">
-        <source>
-          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Servings<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
-        </source>
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Servings<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
         <target>
           <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Porciones<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
         </target>
@@ -635,9 +563,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="559ac5873c339c7e8e9cc546e8a9a7d80df98ff2" datatype="html">
-        <source>
-          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Sugar(g)<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
-        </source>
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Sugar(g)<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
         <target>
           <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Azúcar(g)<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
         </target>
@@ -663,9 +589,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="f91914c8aa73843cf214ed3e10c648159379b7e9" datatype="html">
-        <source>
-          Results
-        </source>
+        <source>Results</source>
         <target>
           Resultados
        </target>
@@ -675,9 +599,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="431cda9d1935fd08719a637e7a52c37ef4209ae2" datatype="html">
-        <source>
-          Delete
-        </source>
+        <source>Delete</source>
         <target>
           Borrar
         </target>
@@ -740,8 +662,8 @@
       </trans-unit>
       <trans-unit id="4e69f1bf4bfabf4d80ca9749f6aae1db0ac17439" datatype="html">
         <source>
-          <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/>Close Results<x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
-        </source>
+                  <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/> Close Results
+                </source>
         <target>
           <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/>Cerrar Resultados<x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
         </target>
@@ -751,9 +673,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="249c183e2933525068bab646728aff4711ecd3ff" datatype="html">
-        <source>
-          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Parent Username<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
-        </source>
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Parent Username<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
         <target>
           <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Nombre de Usuario Principal<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
         </target>
@@ -768,8 +688,8 @@
       </trans-unit>
       <trans-unit id="230e7850967b2aba96ef72e82702d66bbe27efc0" datatype="html">
         <source>
-          Results
-        </source>
+                                  Results
+                                </source>
         <target>
           Resultados
         </target>
@@ -780,8 +700,8 @@
       </trans-unit>
       <trans-unit id="93cdd6406a36cef7688d64c4bb36ee4168245bf5" datatype="html">
         <source>
-          Delete
-        </source>
+                                  Delete
+                                </source>
         <target>
           Borrar
         </target>
@@ -791,9 +711,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="21fe8971d1734fe71372d9bf2309431b12be9aff" datatype="html">
-        <source>
-          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>User choices<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
-        </source>
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>User choices<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> </source>
         <target>
           <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Opciones de usuario<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
         </target>
@@ -808,8 +726,8 @@
       </trans-unit>
       <trans-unit id="265d26ef089a36335c40687bbde900d63db144f3" datatype="html">
         <source>
-          <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/>Close Results<x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
-        </source>
+                                  <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/> Close Results
+                                </source>
         <target>
           <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/>Cerrar resultados<x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>
         </target>
@@ -819,7 +737,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="4cbdf28d2d1ec20584a3664be4dced80fa552a37" datatype="html">
-        <source>Participant Questionnaire Results </source>
+        <source> Participant Questionnaire Results </source>
         <target>Resultados del Cuestionario para Participantes</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/quest-results/quest-results.component.html</context>
@@ -828,8 +746,8 @@
       </trans-unit>
       <trans-unit id="31798a20e855e68ea93a7c74764fce276771ef1c" datatype="html">
         <source>
-          Results
-        </source>
+                     Results
+                  </source>
         <target>
           Resultados
         </target>
@@ -840,8 +758,8 @@
       </trans-unit>
       <trans-unit id="a29d476a4cbe5235faa81230c53acaffa03f4d06" datatype="html">
         <source>
-          Delete
-        </source>
+                    Delete
+                  </source>
         <target>
           Borrar
         </target>
@@ -870,15 +788,23 @@
         <source>Parent Portal</source>
         <target>Portal de Padres</target>
       </trans-unit>
+      <trans-unit id="8b0b6281df2e573dcbd2928dbc97ddc89cad024a" datatype="html">
+        <source><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/>Log Out<x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/></source>
+        <target><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/>Cerrar Sesión<x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/parental-header/parental-header.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/research-parental-header/research-parental-header.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="a3610afa5244d3e0c2ae5c88648d637f5080d0d5" datatype="html">
         <source>Questionnaire</source>
         <target>Cuestionario</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/parental-header/parental-header.component.html</context>
-          <context context-type="linenumber">11</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/pages/research-parental-header/research-parental-header.component.html</context>
           <context context-type="linenumber">11</context>
         </context-group>
       </trans-unit>
@@ -914,24 +840,18 @@
           <context context-type="linenumber">15</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="3d3c0152d9a2a94c4960743b6bbb134e3dcf4f05" datatype="html">
-        <source>Research Participant Portal</source>
-        <target>Portal del Participante de la Investigación</target>
+      <trans-unit id="5beb64846bb90513aaca319250b96f50b1570398" datatype="html">
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Select infant age range:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
+        <target>
+          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Seleccione el Rango de Edad del Bebé<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
+        </target>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/pages/research-parental-header/research-parental-header.component.html</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="8b0b6281df2e573dcbd2928dbc97ddc89cad024a" datatype="html">
-        <source><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/>Log Out<x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/></source>
-        <target><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/>Cerrar Sesión<x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/></target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/pages/research-parental-header/research-parental-header.component.html</context>
-          <context context-type="linenumber">7</context>
+          <context context-type="sourcefile">app/pages/recommend-parental/recommend-parental.component.html</context>
+          <context context-type="linenumber">6</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8be1935e86b1d3da9a2ab5ca3f8ba99580642cde" datatype="html">
-        <source>0 to 5.9 Months</source>
+        <source>0 to 5.9 months</source>
         <target>0 a 5.9 Meses</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/recommend-parental/recommend-parental.component.html</context>
@@ -952,53 +872,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/recommend-parental/recommend-parental.component.html</context>
           <context context-type="linenumber">9</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="a853fb84e3cbe84894f3a2e43890ab92735622c0" datatype="html">
-        <source>
-          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>
-          <x id="INTERPOLATION" equiv-text="{{ result.firstBracketIntake }}"/>
-          <x id="INTERPOLATION_1" equiv-text="{{ ageMessage }}"/>
-          <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
-        </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/pages/recommend-parental/recommend-parental.component.html</context>
-          <context context-type="linenumber">18</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="c860a58e65d403a18277612b48f89edf9697aefe" datatype="html">
-        <source>
-          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>
-          <x id="INTERPOLATION" equiv-text="{{ result.secondBracketIntake }}"/>
-          <x id="INTERPOLATION_1" equiv-text="{{ ageMessage }}"/>
-          <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
-        </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/pages/recommend-parental/recommend-parental.component.html</context>
-          <context context-type="linenumber">19</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="5c7161b3d5d021de212c3326cc0faa51f8b55bf0" datatype="html">
-        <source>
-          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>
-          <x id="INTERPOLATION" equiv-text="{{ result.thirdBracketIntake }}"/>
-          <x id="INTERPOLATION_1" equiv-text="{{ ageMessage }}"/>
-          <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
-        </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/pages/recommend-parental/recommend-parental.component.html</context>
-          <context context-type="linenumber">20</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="7046df73bf1ffa4dae314d471dcdaa4593bb682f" datatype="html">
-        <source>
-          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>
-          <x id="INTERPOLATION" equiv-text="{{ ageMessage }}"/>
-          <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
-        </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/pages/recommend-parental/recommend-parental.component.html</context>
-          <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2ced4e3a9d77080b56a771a8cde5bd557cfa0b13" datatype="html">
@@ -1066,8 +939,8 @@
         </context-group>
       </trans-unit>
       <trans-unit id="e985143f8b68d05f40072fa42a393a9ebae49deb" datatype="html">
-        <source>Review the food groups in the &quot;Recommendations&quot; tab to help you plan your baby&apos;s menu for this week.</source>
-        <target>Revise los grupos de alimentos en el &quot;Recomendaciones&quot; pestaña para ayudarte a planificar a tu bebé&apos;s menú para esta semana.</target>
+        <source>Review the food groups in the &quot;Recommendations&quot; tab to help you plan your baby's menu for this week.</source>
+        <target>Revise los grupos de alimentos en el &quot;Recomendaciones&quot; pestaña para ayudarte a planificar a tu bebé's menú para esta semana.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/tracker-history-page/tracker-history-page.component.html</context>
           <context context-type="linenumber">12</context>
@@ -1085,9 +958,6 @@
         <source>
           <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Nutrients<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
         </source>
-        <target>
-          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Nutrientes<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
-        </target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/history-parental/history-parental.component.html</context>
           <context context-type="linenumber">30</context>
@@ -1097,9 +967,6 @@
         <source>
           <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Food Items<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
         </source>
-        <target>
-          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Alimentos<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
-        </target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/history-parental/history-parental.component.html</context>
           <context context-type="linenumber">33</context>
@@ -1121,9 +988,6 @@
         <source>
           <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Additional Recommendations and Feedback<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
         </source>
-        <target>
-          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Recomendaciones y comentarios adicionales<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
-        </target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/history-parental/history-parental.component.html</context>
           <context context-type="linenumber">76</context>
@@ -1161,34 +1025,8 @@
           <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="5beb64846bb90513aaca319250b96f50b1570398" datatype="html">
-        <source>
-          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Select Infant Age Range:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
-        </source>
-        <target>
-          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Seleccione el Rango de Edad del Bebé<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
-        </target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/pages/recommend-parental/recommend-parental.component.html</context>
-          <context context-type="linenumber">6</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="e29828866788d05aae15614ac728e0a9fc5cd5b4" datatype="html">
-        <source>
-          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Infant age (In months)<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
-        </source>
-        <target>
-          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Edad infantil (En Meses)<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
-        </target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/pages/history-parental/history-parental.component.html</context>
-          <context context-type="linenumber">24</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="d32c6b42d83b44ce29d5c1285aa3160d2abe244f" datatype="html">
-        <source>
-          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Nutrients<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
-        </source>
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Nutrients<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
         <target>
           <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Nutrientes<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
         </target>
@@ -1198,91 +1036,13 @@
         </context-group>
       </trans-unit>
       <trans-unit id="dc83fe97ec5af1e88baf0acd2e86effbd4299de9" datatype="html">
-        <source>
-          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Food Items<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
-        </source>
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Food Items<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
         <target>
           <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Alimentos<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
         </target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/history-parental/history-parental.component.html</context>
           <context context-type="linenumber">33</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="69b518d2b638cfe4472bb4913424f9e1fe3aadd9" datatype="html">
-        <source>
-          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Name<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
-        </source>
-        <target>
-          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Nombre<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
-        </target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/pages/history-parental/history-parental.component.html</context>
-          <context context-type="linenumber">90</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="2dd55ee14052835c39aadc62e85885c62e566383" datatype="html">
-        <source>
-          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Frequency<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
-        </source>
-        <target>
-          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Frecuencia<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
-        </target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/pages/history-parental/history-parental.component.html</context>
-          <context context-type="linenumber">93</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="5927fc139bef19bd3d9a4cb3158620d2a10d7237" datatype="html">
-        <source>
-          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Frequency Type<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
-        </source>
-        <target>
-          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Tipo de Frecuencia<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
-        </target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/pages/history-parental/history-parental.component.html</context>
-          <context context-type="linenumber">96</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="7ea8c269422ff7d97e2d38e7736ed11bf9182d88" datatype="html">
-        <source>
-          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Servings<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
-        </source>
-        <target>
-          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Porciones<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
-        </target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/pages/history-parental/history-parental.component.html</context>
-          <context context-type="linenumber">99</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="559ac5873c339c7e8e9cc546e8a9a7d80df98ff2" datatype="html">
-        <source>
-          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Sugar(g)<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
-        </source>
-        <target>
-          <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Azúcar(g)<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>
-        </target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/pages/history-parental/history-parental.component.html</context>
-          <context context-type="linenumber">102</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="1ebf3856a3d50ac8c97c4cd6bbf9a355b4210e0c" datatype="html">
-        <source>Nutrient</source>
-        <target>Nutritivo</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/pages/history-parental/history-parental.component.html</context>
-          <context context-type="linenumber">132</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="5f01fd5595ff555874e075521211e14b865057d3" datatype="html">
-        <source>Daily Average</source>
-        <target>Promedio Diario</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/pages/history-parental/history-parental.component.html</context>
-          <context context-type="linenumber">133</context>
         </context-group>
       </trans-unit>
       <trans-unit id="424520923f541f8e4f06e6b0bbe34c7300a83ac1" datatype="html">
@@ -1319,14 +1079,14 @@
       </trans-unit>
       <trans-unit id="MAINMESSAGE.PARTICIPANT">
         <source>In the last 7 days and nights, how many times did your baby eat or drink the following?
-          Include those foods and drinks given to the baby by you and others, such as grandparents, babysitters, etc.
-        </source>
+        Include those foods and drinks given to the baby by you and others, such as grandparents, babysitters, etc.
+      </source>
         <target>En los últimos 7 días y noches, ¿cuántas veces comió o bebió su bebé lo siguiente?
           Incluya los alimentos y bebidas que usted y otras personas le dieron al bebé, como abuelos, niñeras, etc.
         </target>
       </trans-unit>
       <trans-unit id="INSTRUCTIONSTITLE.PARTICIPANT">
-        <source>Instructions:</source>
+        <source>Instructions: \n</source>
         <target>Instrucciones:</target>
       </trans-unit>
       <trans-unit id="BULLETEDINSTRUCTIONS.1">
@@ -1379,7 +1139,6 @@
       </trans-unit>
       <trans-unit id="41fa81806d59c3640bd2d33bb09858be7533fe74" datatype="html">
         <source>
-
           <x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input/&gt;"/>
           Male
           <x id="TAG_INPUT_1" ctype="x-input" equiv-text="&lt;input/&gt;"/>
@@ -1455,17 +1214,13 @@
       </trans-unit>
       <trans-unit id="962c0b2a3ce1c9b5fd44e54b624186c73cefe0f3" datatype="html">
         <source>
-          Age cannot have decimal
+          Age cannot haave decimal
         </source>
         <target>
           La edad no puede tener decimales
         </target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/pages/questionnaire-page/questionnaire-page.component.html</context>
-          <context context-type="linenumber">26</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/pages/history-parental/history-parental.component.html</context>
           <context context-type="linenumber">26</context>
         </context-group>
       </trans-unit>
@@ -1594,12 +1349,12 @@
         <target>Página de Inicio de Sesión</target>
       </trans-unit>
       <trans-unit id="b244c3b6b6645ab3d916a6488ff9accaa1874eb9" datatype="html">
-      <source>Parental Portal Login</source>
-      <target>Inicio de Sesión en el Portal Padres</target>
-      <context-group purpose="location">
-        <context context-type="sourcefile">src/app/pages/login-page/login-page.component.ts</context>
-        <context context-type="linenumber">31,42</context>
-      </context-group>
+        <source>Parental Portal Login</source>
+        <target>Inicio de Sesión en el Portal Padres</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/login-page/login-page.component.ts</context>
+          <context context-type="linenumber">31,42</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="6bab6d326fd080437975e7bbc7a2895ffd80872e" datatype="html">
         <source>
@@ -1864,12 +1619,28 @@
         </context-group>
       </trans-unit>
       <trans-unit id="75499d4acfe7bee781078c9e49052c670e5c9b77" datatype="html">
-      <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Date<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
-      <target><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Fecha<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></target>
-      <context-group purpose="location">
-        <context context-type="sourcefile">app/pages/history-parental/history-parental.component.html</context>
-        <context context-type="linenumber">16</context>
-      </context-group>
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Date<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
+        <target><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Fecha<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/pages/history-parental/history-parental.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="RECOMMEND.CHILD.MESSAGE1">
+        <source>for child 0 to 5.9 months</source>
+        <target>para niños de 0 a 5,9 meses</target>
+      </trans-unit>
+      <trans-unit id="RECOMMEND.CHILD.MESSAGE2">
+        <source>for child 6 to 11.9 months</source>
+        <target>para niños de 6 a 11,9 meses</target>
+      </trans-unit>
+      <trans-unit id="RECOMMEND.CHILD.MESSAGE3">
+        <source>for child 12 to 24 months</source>
+        <target>para niño de 12 a 24 meses</target>
+      </trans-unit>
+      <trans-unit id="RECOMMEND.CHILD.MESSAGE">
+        <source>Please select infant age.</source>
+        <target>Seleccione la edad del bebé.</target>
       </trans-unit>
     </body>
   </file>
