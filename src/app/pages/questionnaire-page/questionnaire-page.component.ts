@@ -15,7 +15,7 @@ import {FFQResult} from '../../models/FFQResult';
 import {NutrientConstants} from '../../models/NutrientConstants';
 import { Validators, FormControl } from '@angular/forms';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
-import {MatDialog} from "@angular/material/dialog";
+import {MatDialog} from '@angular/material/dialog';
 import { isInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
 
 
@@ -26,16 +26,14 @@ import { isInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
 })
 export class QuestionnairePageComponent implements OnInit {
 
-  TITLE = $localize`:@@TITLEQUEST:Food Frequency Questionnaire`;
-  MAIN_MESSAGE = $localize`:@@MAINMESSAGE.PARTICIPANT:In the last 7 days and nights, how many times did your baby eat or drink the following?\n
-Include those foods and drinks given to the baby by you and others, such as grandparents, babysitters, etc.`;
-  INSTRUCTIONS_TITLE = $localize`:@@INSTRUCTIONSTITLE.PARTICIPANT:Instructions: \n`;
+  TITLE = 'Food Frequency Questionnaire';
+  MAIN_MESSAGE = 'In the last 7 days and nights, how many times did your baby eat or drink the following?\n Include those foods and drinks given to the baby by you and others, such as grandparents, babysitters, etc.';
+  INSTRUCTIONS_TITLE = 'Instructions: \n';
   BULLETED_INSTRUCTIONS = [
-    $localize`:@@BULLETEDINSTRUCTIONS.1:For each entry, enter the number of times a food was consumed by your baby and
-    specify whether this was per week or per day.`,
-    $localize`:@@BULLETEDINSTRUCTIONS.2:If your baby did not eat this food in the last week, hit 'x' for not applicable`,
-    $localize`:@@BULLETEDINSTRUCTIONS.3:All open question blocks must be completely filled out before submitting the questionnaire.`,
-    $localize`:@@BULLETEDINSTRUCTIONS.4:Click the submit button at the bottom of the form when finished.`
+    'For each entry, enter the number of times a food was consumed by your baby and specify whether this was per week or per day.',
+    'If your baby did not eat this food in the last week, hit \'x\' for not applicable',
+    'All open question blocks must be completely filled out before submitting the questionnaire.',
+    'Click the submit button at the bottom of the form when finished.'
   ];
 
 
@@ -65,12 +63,12 @@ Include those foods and drinks given to the baby by you and others, such as gran
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(params => {
         this.userId = this.authenticationService.currentUserId;
-        this.id = params.get('id');   
-        
-        //use the usertype to determine what collection to store the questionnaire  
+        this.id = params.get('id');
+
+        // use the usertype to determine what collection to store the questionnaire
         this.userType =  this.authenticationService.currentUserValue[0].usertype;
-        
-        
+
+
       });
     this.loadFoodItems();
   }
@@ -80,17 +78,17 @@ Include those foods and drinks given to the baby by you and others, such as gran
 
     let pageHasErrors = false;
 
-    if(!this.gender)
+    if (!this.gender)
     {
       pageHasErrors = true;
     }
 
-    //Typecheck to only receive Integers. Without this we get a submit error and exits the page.
+    // Typecheck to only receive Integers. Without this we get a submit error and exits the page.
     if (this.infantage % 1 != 0)
     {
       pageHasErrors = true;
     }
-    
+
 
     for (const foodItem of this.foodItems) {
       if (this.hideSecondaryItems && !foodItem.isPrimary) {
@@ -111,7 +109,7 @@ Include those foods and drinks given to the baby by you and others, such as gran
       dialogRef.componentInstance.message = $localize `:@@QUESTIONNAIRE.INCOMPLETE.MESSAGE:Please ensure all required fields are completed.`;
       this.submitting = false;
 
-    } else { //here is where the questionnaire is submitted**
+    } else { // here is where the questionnaire is submitted**
 
       log('Questionnaire submitted successfully.');
       const itemList: FFQItemCalcRequest[] = [];
@@ -121,8 +119,8 @@ Include those foods and drinks given to the baby by you and others, such as gran
           itemList.push(request);
         }
       }
-      
-      
+
+
       this.foodService.calculateNutrientBreakdown(this.userId, this.id, this.userType, this.infantage, this.gender, itemList)
         .subscribe( (results) => {
             const dailyMap: Map<string, number> = new Map();
@@ -167,11 +165,11 @@ Include those foods and drinks given to the baby by you and others, such as gran
   }
 
 // returns a FFQ item with the itemPosition equal to the position param
-private getFoodItemByPosition (arr:FFQItem[] ): FFQItem[]{
-  var sortedArray = arr.sort(function(a,b){
-    return a.itemPosition >b.itemPosition?1:a.itemPosition <b.itemPosition?-1:0
-   })
-   return sortedArray;
+private getFoodItemByPosition(arr: FFQItem[] ): FFQItem[]{
+  let sortedArray = arr.sort(function(a, b){
+    return a.itemPosition > b.itemPosition ? 1 : a.itemPosition < b.itemPosition ? -1 : 0;
+   });
+  return sortedArray;
 }
 
   private handleFoodServiceError(error: HttpErrorResponse) {
