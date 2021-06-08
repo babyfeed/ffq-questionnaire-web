@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "localize": true,
+            "localize": false,
             "aot": true,
             "outputPath": "dist/ffq-questionnaire-web",
             "index": "src/index.html",
