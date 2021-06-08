@@ -9,7 +9,7 @@
         <mat-card class="qb-card">
             <mat-label style="text-align:center" class="qb-row-item" i18n><strong>Infant age</strong></mat-label>
             <mat-form-field>
-                <input matInput value="infantage" class="qb-row-item" [(ngModel)]=infantage type="number" min="1" max="24" placeholder=" In months " autocomplete="off" required i18n>
+                <input matInput value="infantage" class="qb-row-item" [(ngModel)]=infantage type="number" min="1" max="24" placeholder=" In months " autocomplete="off" required i18n-placeholder>
             </mat-form-field>
             <mat-error *ngIf="" i18n>
                 Age (in months) of the infant is required.
@@ -23,7 +23,7 @@
             <label class="radio-inline">
 
               <input type="radio" value="male" [(ngModel)]="gender" name="gender" required i18n>
-              Male     
+              Male
               <input type="radio" value="female" [(ngModel)]="gender" name="gender" required i18n>
               Female
           </label>

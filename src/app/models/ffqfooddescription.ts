@@ -8,7 +8,7 @@ export class Description {
   description: string;
 
   constructor(_id: any, imageUrl: string, foodItemGroupName: string, firstBracketIntake: string, secondBracketIntake: string,
-    thirdBracketIntake: string, description: string) {
+              thirdBracketIntake: string, description: string) {
     this._id = _id;
     this.imageUrl = imageUrl;
     this.foodItemGroupName = foodItemGroupName;

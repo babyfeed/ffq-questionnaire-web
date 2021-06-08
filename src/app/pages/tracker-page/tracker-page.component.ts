@@ -20,9 +20,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class TrackerPageComponent implements OnInit {
 
-  TITLE = $localize`:@@NUTRITION.TITLE: Nutrition Tracker`;
-  MAIN_MESSAGE = $localize`:@@NUTRITION.MESSAGE: Message`;
-  INSTRUCTIONS_TITLE = $localize `:@@NUTRITION.INSTRUCTIONS:Instructions: \n`;
+  TITLE = 'Nutrition Tracker';
+  MAIN_MESSAGE =  'Message';
+  INSTRUCTIONS_TITLE = 'Instructions: \n';
   BULLETED_INSTRUCTIONS = [
     $localize`:@@NUTRITION.MESSAGE.1:For each food item select the appropriate answer`,
     $localize `:@@NUTRITION.MESSAGE.2:If your baby consumed more than the recommended amount select the up arrow`,

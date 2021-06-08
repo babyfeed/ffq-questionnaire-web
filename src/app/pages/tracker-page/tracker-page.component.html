@@ -2,21 +2,21 @@
 
 <div class="tracker-container">
     <!-- header message -->
-    <h2 matDialogTitle>{{TITLE}}</h2><br>
-    <text-card *ngIf="showItems" mainMessage="{{MAIN_MESSAGE}}" [bulletedMessages]="BULLETED_INSTRUCTIONS" [instructionsTitle]="INSTRUCTIONS_TITLE"></text-card>
+    <h2 matDialogTitle>{{'NUTRITION.TITLE' | translate}}</h2><br>
+    <text-card *ngIf="showItems" mainMessage="{{ 'NUTRITION.MESSAGE' | translate }}" [bulletedMessages]="BULLETED_INSTRUCTIONS" [instructionsTitle]="'NUTRITION.INSTRUCTIONS' | translate "></text-card>
     <br>
 
     <!-- age form -->
     <div *ngIf="showAgeForm" class="qb-container">
         <mat-card class="qb-card">
-            <div style="font-style: italic; color:Blue;" i18n>Please complete the tracking once a week</div>
-            <mat-label style="text-align:center" class="qb-row-item" i18n><strong>Infant age</strong></mat-label>
+            <div style="font-style: italic; color:Blue;">{{'Please complete the tracking once a week' | translate}}</div>
+            <mat-label style="text-align:center" class="qb-row-item"><strong>{{'Infant age' | translate}}</strong></mat-label>
             <mat-form-field>
-                <input #ageValue matInput value="infantage" class="qb-row-item" type="number" min="1" max="24" placeholder=" In months " autocomplete="off" required i18n-placeholder>
+                <input #ageValue matInput value="infantage" class="qb-row-item" type="number" min="1" max="24" placeholder=" {{'In months' | translate }}" autocomplete="off" required translate>
             </mat-form-field>
             <mat-card-actions>
                 <div class="qb-button">
-                    <button mat-raised-button (click)="enterAge(ageValue.value)" color="primary" i18n>Enter Age</button>
+                    <button mat-raised-button (click)="enterAge(ageValue.value)" color="primary" >{{'Enter Age' | translate}}</button>
                 </div>
             </mat-card-actions>
         </mat-card>
@@ -28,10 +28,10 @@
       <div class="trackeritem-container" *ngFor="let result of foodResults; let $index = index" [formGroupName]="$index">
         <mat-card class="tracker-card">
           <div style="float: left">
-            <label><strong>{{ result.foodItemGroupName }}</strong></label><br>
-            <label *ngIf="showBracketFirst">{{ result.firstBracketIntake }}</label>
-            <label *ngIf="showBracketSecond">{{ result.secondBracketIntake }}</label>
-            <label *ngIf="showBracketThird">{{ result.thirdBracketIntake }}</label>
+            <label><strong>{{ 'result.' + $index + '.foodItemGroupName' | translate }}</strong></label><br>
+            <label *ngIf="showBracketFirst">{{ 'result.'+ $index + '.firstBracketIntake' | translate}}</label>
+            <label *ngIf="showBracketSecond">{{ 'result.' + $index + '.secondBracketIntake' | translate}}</label>
+            <label *ngIf="showBracketThird">{{ 'result.' + $index + '.thirdBracketIntake' | translate}}</label>
           </div>
           <div class="tracker-buttons">
             <mat-button-toggle-group formControlName="answer">

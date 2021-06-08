@@ -11,7 +11,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {first} from 'rxjs/operators';
 import {AuthenticationService} from 'src/app/services/authentication/authentication.service';
-
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -37,7 +37,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private translate: TranslateService
   ) {
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue) {
@@ -55,6 +56,9 @@ export class LoginComponent implements OnInit {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
+  useLanguage(language: string): void {
+    this.translate.use(language);
+  }
   // convenience getter for easy access to form fields
   get f() {
     return this.loginForm.controls;

@@ -8,6 +8,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {QuestionnaireResponse} from '../../models/questionnaire-response';
 import {Observable} from 'rxjs';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'quest-id-input',
@@ -22,7 +23,11 @@ export class QuestIdInputComponent {
     private router: Router,
     private errorDialog: MatDialog,
     private questService: QuestionnaireValidatorService,
-    private authenticationService: AuthenticationService) {
+    private authenticationService: AuthenticationService,
+    private translate: TranslateService){}
+
+    useLanguage(language: string): void {
+    this.translate.use(language);
   }
 
   validateQuestionnaireId(id: string) {

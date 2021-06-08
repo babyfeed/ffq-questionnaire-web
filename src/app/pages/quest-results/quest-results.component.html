@@ -3,7 +3,7 @@ o questionnaires have been submitted yet!<!--Questionnaire results added by Dayk
 <div class="container_page">
     <div class="container" *ngIf="results.length === 0">
         <mat-card class="quest-id-card">
-            <h2 matDialogTitle i18n>No questionnaires have been submitted yet!</h2>
+            <h2 matDialogTitle>{{'No questionnaires have been submitted yet!' | translate}}</h2>
         </mat-card>
     </div>
 
@@ -22,7 +22,7 @@ o questionnaires have been submitted yet!<!--Questionnaire results added by Dayk
     <div align="center" *ngIf="results.length != 0" >
       <div [hidden]="bySite">
         <mat-form-field>
-          <mat-label appearance="fill" i18n>Choose Clinic...</mat-label>
+          <mat-label appearance="fill">Choose Clinic...</mat-label>
           <mat-select matNativeControl name="assignedclinic" [(ngModel)]="selectedClinic" (click)="showByClinic = true; showParent=true;showParticipant = true; " (selectionChange)="sortByClinic($event)">
             <mat-option *ngFor="let c of (ffqclinicList$| async)" [value]="c.clinicId">
               {{ c.clinicname }}
@@ -33,7 +33,7 @@ o questionnaires have been submitted yet!<!--Questionnaire results added by Dayk
 
       <div [hidden]="byClinic">
         <mat-form-field>
-          <mat-label appearance="fill" i18n>Choose Site...</mat-label>
+          <mat-label appearance="fill">Choose Site...</mat-label>
           <mat-select matNativeControl name="assignedsite" [(ngModel)]="selectedSite" (click)="showBySite = true; showParticipant=true;showParent=true" (selectionChange)="sortBySite($event)">
             <mat-option *ngFor="let c of (ffqSiteList$| async)" [value]="c.researchInstitutionId">
               {{ c.institutionName }}

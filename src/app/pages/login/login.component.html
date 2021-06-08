@@ -2,16 +2,16 @@
 
 <div class="container_page">
     <mat-card class="card">
-        <h1 matDialogTitle i18n>User Login</h1>
+        <h1 matDialogTitle translate>User Login</h1>
         <mat-card-content class="card-body">
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                 <div class="form-group" >
-                    <mat-error *ngIf="submitted && loginForm.get('username').hasError('required')" i18n>Username is required</mat-error>
-                    <input type="text" formControlName="username" placeholder="Username" class="form-control" [(ngModel)]="username" i18n-placeholder/>
+                    <mat-error *ngIf="submitted && loginForm.get('username').hasError('required')" translate>Username is required</mat-error>
+                    <input type="text" formControlName="username" placeholder="{{'userNamePlaceHolder' | translate}}" class="form-control" [(ngModel)]="username" translate/>
                 </div>
                 <div class="form-group">
-                    <mat-error *ngIf="submitted && loginForm.get('password').hasError('required')">Password is required</mat-error>
-                    <input type="password" formControlName="password" placeholder="Password" class="form-control" [(ngModel)]="password" i18n-placeholder/>
+                    <mat-error *ngIf="submitted && loginForm.get('password').hasError('required')" translate>Password is required</mat-error>
+                    <input type="password" formControlName="password" placeholder="{{'passwordPlaceHolder' | translate}}" class="form-control" [(ngModel)]="password" translate/>
                 </div>
                 <div class="form-group">
                   <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
@@ -30,13 +30,16 @@
                     </mat-select>
                   </mat-form-field>
                   -->
-                <button mat-raised-button class="login-button" i18n>Login</button>
+                <button mat-raised-button class="login-button">{{'Login' | translate}}</button>
               <!--  <mat-checkbox>Keep me signed in</mat-checkbox> -->
 
 
             </form>
-            <a href="../es/" mat-raised-button class="button">Para Español</a>
-            <a href="../en-US/" mat-raised-button class="button">English Version</a>
+          <!-- Commented this out for testing out Locale -->
+            <!--<a href="../es/" mat-raised-button class="button">Para Español</a>-->
+            <a (click)="useLanguage('es')" mat-raised-button class="button">Para Español</a>
+            <!--<a href="../en-US/" mat-raised-button class="button">English Version</a>-->
+            <a (click)="useLanguage('en-US')" mat-raised-button class="button">English Version</a>
         </mat-card-content>
     </mat-card>
 </div>
