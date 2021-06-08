@@ -2,8 +2,8 @@
 
 <div class="tracker-container">
     <!-- header message -->
-    <h2 matDialogTitle>{{TITLE}}</h2><br>
-    <text-card *ngIf="showItems" mainMessage="{{MAIN_MESSAGE}}" [bulletedMessages]="BULLETED_INSTRUCTIONS" [instructionsTitle]="INSTRUCTIONS_TITLE"></text-card>
+    <h2 matDialogTitle>{{'NUTRITION.TITLE' | translate}}</h2><br>
+    <text-card *ngIf="showItems" mainMessage="{{ 'NUTRITION.MESSAGE' | translate }}" [bulletedMessages]="BULLETED_INSTRUCTIONS" [instructionsTitle]="'NUTRITION.INSTRUCTIONS' | translate "></text-card>
     <br>
 
     <!-- age form -->
@@ -12,7 +12,7 @@
             <div style="font-style: italic; color:Blue;">{{'Please complete the tracking once a week' | translate}}</div>
             <mat-label style="text-align:center" class="qb-row-item"><strong>{{'Infant age' | translate}}</strong></mat-label>
             <mat-form-field>
-                <input #ageValue matInput value="infantage" class="qb-row-item" type="number" min="1" max="24" placeholder=" In months " autocomplete="off" required i18n-placeholder>
+                <input #ageValue matInput value="infantage" class="qb-row-item" type="number" min="1" max="24" placeholder=" {{'In months' | translate }}" autocomplete="off" required translate>
             </mat-form-field>
             <mat-card-actions>
                 <div class="qb-button">

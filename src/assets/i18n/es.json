@@ -14,6 +14,8 @@
 	"Goal Setting": "El Establecimiento de Metas",
 	"If your baby consumed above or below the recommended amount, pick 1 food group to improve this week": "Si su bebé consumió por encima o por debajo de la cantidad recomendada, elija 1 grupo de alimentos para mejorar esta semana.",
 	"If your baby does not like a food, try again another day. It can take up to 15 times before they accept a new food": "Si a su bebé no le gusta la comida, vuelva a intentarlo otro día. Pueden pasar hasta 15 veces antes de que acepten un nuevo alimento.",
+	"In months": "En meses",
+	"Infant age": "Edad infantil",
 	"Infant age (In months)": "Edad infantil (en meses)",
 	"Infant gender": "Género infantil",
 	"LOGINPAGE": {
@@ -25,6 +27,25 @@
 	"Log out": "Cerrar sesión",
 	"Login": "Iniciar sesión",
 	"Months": "Meses",
+	"NUTRITION": {
+		"INSTRUCTIONS": "Instrucciones:",
+		"MESSAGE": "Mensaje",
+		"MESSAGES": [
+			{
+				"MESSAGE": "Para cada alimento, seleccione la respuesta adecuada."
+			},
+			{
+				"MESSAGE": "Si su bebé consumió más de la cantidad recomendada, seleccione la flecha hacia arriba"
+			},
+			{
+				"MESSAGE": "Si su bebé consumió la cantidad recomendada seleccione el signo igual"
+			},
+			{
+				"MESSAGE": "Si su bebé consumió menos de la cantidad recomendada, seleccione la flecha hacia abajo"
+			}
+		],
+		"TITLE": "Rastreador de Nutrición"
+	},
 	"Name": "Nombre",
 	"No responses have been submitted yet": "Aún no se han enviado respuestas.",
 	"Nutrient": "Nutritivo",
