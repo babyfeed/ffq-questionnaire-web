@@ -15,7 +15,8 @@ import {FFQResult} from '../../models/FFQResult';
 import {NutrientConstants} from '../../models/NutrientConstants';
 import { Validators, FormControl } from '@angular/forms';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
-import {MatDialog} from "@angular/material/dialog";
+import {MatDialog} from '@angular/material/dialog';
+import  {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-questionnaire-page',
@@ -24,16 +25,16 @@ import {MatDialog} from "@angular/material/dialog";
 })
 export class QuestionnairePageComponent implements OnInit {
 
-  TITLE = $localize`:@@TITLEPARTICIPANT:Food Frequency Questionnaire`;
-  MAIN_MESSAGE = $localize `:@@MAINMESSAGE.Participant: In the last 7 days and nights, how many times did your baby eat or drink the following?\n' +
-    'Include those foods and drinks given to the baby by you and others, such as grandparents, babysitters, etc.\n\n' `;
-  INSTRUCTIONS_TITLE = $localize `Instructions: \n`;
-  BULLETED_INSTRUCTIONS =  [$localize `:@@BULLETED.INSTRUCTIONS.1:
+  TITLE = 'Food Frequency Questionnaire';
+  MAIN_MESSAGE = 'In the last 7 days and nights, how many times did your baby eat or drink the following?\n' +
+    'Include those foods and drinks given to the baby by you and others, such as grandparents, babysitters, etc.\n\n';
+  INSTRUCTIONS_TITLE = 'Instructions: \n';
+  BULLETED_INSTRUCTIONS =  [
     'For each entry, enter the number of times a food was consumed by your baby and\n' +
-    ' specify whether this was per week or per day.'`,
-    $localize `:@@BULLETED.INSTRUCTIONS.2: If your baby did not eat this food in the last week, hit 'x' for not applicable",
-    'All open question blocks must be completely filled out before submitting the questionnaire.'`,
-    $localize `:@@BULLETED.INSTRUCTIONS.3: Click the submit button at the bottom of the from when finished.'`
+    ' specify whether this was per week or per day.',
+    'If your baby did not eat this food in the last week, hit \'x\' for not applicable"' +
+    'All open question blocks must be completely filled out before submitting the questionnaire.',
+    'Click the submit button at the bottom of the from when finished.'
   ];
 
 
@@ -62,7 +63,8 @@ export class QuestionnairePageComponent implements OnInit {
               private successDialog: MatDialog,
               private router: Router,
               private modalService: NgbModal,
-              private authenticationService: AuthenticationService) {}
+              private authenticationService: AuthenticationService,
+              private translate: TranslateService) {}
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(params => {
@@ -93,8 +95,8 @@ export class QuestionnairePageComponent implements OnInit {
     if (pageHasErrors) {
       log('Errors on page. Questionnaire incomplete.');
       const  dialogRef  = this.submissionErrorDialog.open(ErrorDialogPopupComponent);
-      dialogRef.componentInstance.title = $localize`:@@ERRORDIALOG.1: Questionnaire Incomplete`;
-      dialogRef.componentInstance.message = $localize`:@@ERRORDIALOG.2: Please ensure all required fields are completed.`;
+      dialogRef.componentInstance.title = 'Questionnaire Incomplete';
+      dialogRef.componentInstance.message = 'Please ensure all required fields are completed.';
       this.submitting = false;
 
     } else {
@@ -136,8 +138,8 @@ export class QuestionnairePageComponent implements OnInit {
             this.questService.submitQuestionnaire(this.id).subscribe((data: Questionnaire) => {
             this.router.navigateByUrl('/');
               const dialogRef = this.successDialog.open(ErrorDialogPopupComponent);
-            dialogRef.componentInstance.title = $localize`:@@SUCCESSDIALOG.1: Questionnaire submitted successfully.`;
-            dialogRef.componentInstance.message = $localize`:@@SUCCESSDIALOG.2: The questionnaire has been sent to the issuer.`;
+            dialogRef.componentInstance.title = 'Questionnaire submitted successfully.';
+            dialogRef.componentInstance.message = 'The questionnaire has been sent to the issuer.';
             this.submitting = false;
             }, (error: HttpErrorResponse) => this.handleSubmissionError(error));
 

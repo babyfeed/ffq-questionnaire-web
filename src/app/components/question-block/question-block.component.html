@@ -9,12 +9,12 @@
       </button>
       <button class="block-activator" [hidden]="!foodItem.disabled" (click)="toggleDisable()">
         <mat-icon color="accent">{{'refresh' | translate}}</mat-icon>
-        <mat-label style="text-align: center" class="qb-row-item">{{foodItem.name}}</mat-label>
+        <mat-label style="text-align: center" class="qb-row-item">{{foodItem.name | translate}}</mat-label>
       </button>
     </div>
     <!--Required row, Item name, frequency input, and frequency type (Weekly or Daily)-->
     <tr [hidden]="foodItem.disabled">
-      <label><strong>{{foodItem.name}}</strong></label>
+      <label><strong>{{foodItem.name | translate}}</strong></label>
       <br>
       <mat-form-field>
         <input matInput
