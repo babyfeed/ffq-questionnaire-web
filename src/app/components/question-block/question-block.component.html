@@ -57,7 +57,7 @@
     <tr [hidden]="foodItem.disabled" *ngIf="foodItem.types.length > 1">
       <mat-radio-group id="type" class="qb-radio-group" [(ngModel)]="foodItem.input.type" required>
         <mat-radio-button class="qb-row-item padding" *ngFor="let type of foodItem.types" [value]="type">{{type}}</mat-radio-button>
-      </mat-radio-group>`
+      </mat-radio-group>
       <mat-error *ngIf="foodItem.isSubmitted && foodItem.getErrorState().includes('type')">
         {{'Type selection is required' | translate}}
       </mat-error>

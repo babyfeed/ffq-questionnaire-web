@@ -1586,73 +1586,142 @@
 	"here": "aquí",
 	"nutrientItem": [
 		{
-			"nutrientName": "Energía (Kcal)"
+			"name": "Energía (Kcal)"
 		},
 		{
-			"nutrientName": "Proteína (g)"
+			"name": "Proteína (g)"
 		},
 		{
-			"nutrientName": "Carbohidrato (g)"
+			"name": "Carbohidrato (g)"
 		},
 		{
-			"nutrientName": "Grasa (g)"
+			"name": "Grasa (g)"
 		},
 		{
-			"nutrientName": "Vitamina A (retinol) (mcg)"
+			"name": "% Calorías de proteínas"
 		},
 		{
-			"nutrientName": "Vitamina D (mcg)"
+			"name": "% Calorías de carbohidratos"
 		},
 		{
-			"nutrientName": "Vitamina E (mg)"
+			"name": "% Calorías de grasa"
 		},
 		{
-			"nutrientName": "Vitamina K (mcg)"
+			"name": "Proteína animal (g)"
 		},
 		{
-			"nutrientName": "Vitamina C (ácido ascórbico) (mg)"
+			"name": "Proteína vegetal (g)"
 		},
 		{
-			"nutrientName": "Vitamina B1 (tiamina) (mg)"
+			"name": "Fibra dietética total (g)"
 		},
 		{
-			"nutrientName": "Vitamina B2 (riboflavina) (mg)"
+			"name": "Azúcares totales (g)"
 		},
 		{
-			"nutrientName": "Vitamina B3 (niacina) (mg)"
+			"name": "Azúcares añadidos (por azúcares totales) (g)"
 		},
 		{
-			"nutrientName": "Vitamina B5 (ácido pantoténico) (mg)"
+			"name": "Fructosa (g)"
 		},
 		{
-			"nutrientName": "Vitamina B6 (mg)"
+			"name": "Lactosa (g)"
 		},
 		{
-			"nutrientName": "Vitamina B9 (folato) (mcg)"
+			"name": "Almidón (g)"
 		},
 		{
-			"nutrientName": "Vitamina B12 (cobalamina) (mcg)"
+			"name": "Granos totales (equivalentes a onzas)"
 		},
 		{
-			"nutrientName": "Calcio (mg)"
+			"name": "Granos integrales (equivalentes a onzas)"
 		},
 		{
-			"nutrientName": "Cobre (mg)"
+			"name": "Granos refinados (equivalentes a onzas)"
 		},
 		{
-			"nutrientName": "Hierro (mg)"
+			"name": "Ácidos grasos saturados totales (AGS) (g)"
 		},
 		{
-			"nutrientName": "Magnesio (mg)"
+			"name": "Ácidos grasos monoinsaturados totales (MUFA) (g)"
 		},
 		{
-			"nutrientName": "Fósforo (mg)"
+			"name": "Ácidos grasos poliinsaturados totales (PUFA) (g)"
 		},
 		{
-			"nutrientName": "Potasio (mg)"
+			"name": "Ácidos grasos omega-3 (g)"
 		},
 		{
-			"nutrientName": "Zinc (mg)"
+			"name": "Agua (g)"
+		},
+		{
+			"name": "Cafeína (mg)"
+		},
+		{
+			"name": "Vitamina B1 (tiamina) (mg)"
+		},
+		{
+			"name": "Vitamina B2 (riboflavina) (mg)"
+		},
+		{
+			"name": "Vitamina B3 (niacina) (mg)"
+		},
+		{
+			"name": "Vitamina B5 (ácido pantoténico) (mg)"
+		},
+		{
+			"name": "Vitamina B6 (mg)"
+		},
+		{
+			"name": "Vitamina B9 (folato) (mcg)"
+		},
+		{
+			"name": "Vitamina B12 (cobalamina) (mcg)"
+		},
+		{
+			"name": "Vitamina C (ácido ascórbico) (mg)"
+		},
+		{
+			"name": "Vitamina A (retinol) (mcg)"
+		},
+		{
+			"name": "Vitamina D (mcg)"
+		},
+		{
+			"name": "Vitamina E (mg)"
+		},
+		{
+			"name": "Vitamina K (mcg)"
+		},
+		{
+			"name": "Calcio (mg)"
+		},
+		{
+			"name": "Cobre (mg)"
+		},
+		{
+			"name": "Hierro (mg)"
+		},
+		{
+			"name": "Manganeso (mg)"
+		},
+		{
+			"name": "Magnesio (mg)"
+		},
+		{
+			"name": "Fósforo (mg)"
+		},
+		{
+			"name": "Potasio (mg)"
+		},
+		{
+			"name": "Selenio (mcg)"
+		},
+		{
+			"name": "Sodio (mg)"
+		},
+		{
+			"name": "Zinc (mg)"
 		}
 	],
 	"passwordPlaceHolder": "Contraseña",

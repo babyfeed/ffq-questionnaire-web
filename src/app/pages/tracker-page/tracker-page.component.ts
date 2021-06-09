@@ -87,20 +87,20 @@ export class TrackerPageComponent implements OnInit {
 
       this.trackerResponseService.submitTracker(this.trackerResponse).subscribe(() => {
         const dialogRef = this.successDialog.open(ErrorDialogPopupComponent);
-        dialogRef.componentInstance.title = $localize `:@@NUTRITION.SUBMIT.TITLE:Submitted Successfully`;
-        dialogRef.componentInstance.message = $localize`:@@NUTRITION.SUBMIT.MESSAGE:Your submission has been recorded.`;
+        dialogRef.componentInstance.title = this.translate.instant('Submitted Successfully');
+        dialogRef.componentInstance.message = this.translate.instant('Your submission has been recorded.');
         this.router.navigate(['parent/tracker-history']);
       }, (error: HttpErrorResponse) => {
         const  dialogRef  = this.submissionErrorDialog.open(ErrorDialogPopupComponent);
-        dialogRef.componentInstance.title = $localize `:@@NUTRITION.SUBMIT.ERROR.TITLE:Submission Error`;
+        dialogRef.componentInstance.title = this.translate.instant('Submission Error');
         dialogRef.componentInstance.message = error.message;
         this.router.navigate(['parent/tracker-history']);
       });
 
     } else {
       const  dialogRef  = this.submissionErrorDialog.open(ErrorDialogPopupComponent);
-      dialogRef.componentInstance.title = $localize`:@@NUTRITION.TRACKER.ERROR.TITLE:Tracker Incomplete`;
-      dialogRef.componentInstance.message = $localize`:@@NUTRITION.TRACKER.ERROR.MESSAGE:Please ensure all required fields are completed.`;
+      dialogRef.componentInstance.title = this.translate.instant('Tracker Incomplete');
+      dialogRef.componentInstance.message = this.translate.instant('Please ensure all required fields are completed.');
     }
   }
 
