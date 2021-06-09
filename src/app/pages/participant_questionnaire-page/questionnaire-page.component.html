@@ -1,33 +1,33 @@
 <div class="questionnaire-container" *ngIf="(dataLoaded | async)">
     <div align="center"><i> <img src="assets/images/logo.png" alt="" height="80" width="80"> </i></div>
-    <h2 matDialogTitle i18n>{{TITLE}}</h2><br>
-    <text-card mainMessage="{{MAIN_MESSAGE}}" [bulletedMessages]="BULLETED_INSTRUCTIONS" [instructionsTitle]="INSTRUCTIONS_TITLE" i18n></text-card>
+    <h2 matDialogTitle>{{TITLE}}</h2><br>
+    <text-card mainMessage="{{MAIN_MESSAGE}}" [bulletedMessages]="BULLETED_INSTRUCTIONS" [instructionsTitle]="INSTRUCTIONS_TITLE"></text-card>
     <br>
     <!--Question block per food item before button-->
 
     <div class="qb-container">
         <mat-card class="qb-card">
-            <mat-label style="text-align:center" class="qb-row-item" i18n><strong>Infant age</strong></mat-label>
+            <mat-label style="text-align:center" class="qb-row-item"><strong>Infant age</strong></mat-label>
             <mat-form-field>
-                <input matInput value="infantage" class="qb-row-item" [(ngModel)]=infantage type="number" min="1" max="24" placeholder=" In months " autocomplete="off" required i18n-placeholder>
+                <input matInput value="infantage" class="qb-row-item" [(ngModel)]=infantage type="number" min="1" max="24" placeholder=" In months " autocomplete="off" required>
             </mat-form-field>
-            <mat-error *ngIf="" i18n>
+            <mat-error *ngIf="!(infantage)">
                 Age (in months) of the infant is required.
             </mat-error>
         </mat-card>
     </div>
     <div class="qb-container">
         <mat-card class="qb-card">
-            <mat-label style="text-align:center" class="qb-row-item" i18n><strong>Infant gender</strong></mat-label>
+            <mat-label style="text-align:center" class="qb-row-item"><strong>Infant gender</strong></mat-label>
 
             <label class="radio-inline">
 
-              <input type="radio" value="male" [(ngModel)]="gender" name="gender" required i18n>
+              <input type="radio" value="male" [(ngModel)]="gender" name="gender" required>
               Male
-              <input type="radio" value="female" [(ngModel)]="gender" name="gender" required i18n>
+              <input type="radio" value="female" [(ngModel)]="gender" name="gender" required>
               Female
           </label>
-            <mat-error *ngIf="" i18n>
+            <mat-error *ngIf="">
                 Gender is required.
             </mat-error>
         </mat-card>
@@ -37,11 +37,11 @@
     </div>
     <!--Hide foods button-->
     <div *ngIf="!hideSecondaryItems" class="skip-foods-div">
-        <mat-label i18n>If your baby did not eat any additional foods, click to skip.</mat-label>
-        <button mat-raised-button class="skip-foods-button" (click)="toggleHideSecondaryItems()" color="primary" i18n>Skip Additional Foods</button>
+        <mat-label>If your baby did not eat any additional foods, click to skip.</mat-label>
+        <button mat-raised-button class="skip-foods-button" (click)="toggleHideSecondaryItems()" color="primary">Skip Additional Foods</button>
     </div>
     <div *ngIf="hideSecondaryItems" class="skip-foods-div">
-        <button class="reenable-foods-button" (click)="toggleHideSecondaryItems()" i18n>View additional food items</button>
+        <button class="reenable-foods-button" (click)="toggleHideSecondaryItems()">View additional food items</button>
     </div>
     <!--Question block per food item after button-->
     <div *ngFor="let item of foodItems">
@@ -49,12 +49,12 @@
     </div>
     <!--Submit button-->
     <div class="questionnaire-footer" *ngIf="foodItems.length > 0">
-        <button mat-raised-button (click)="submitQuestionnaire()" color="primary" [disabled]="submitting" i18n>Submit</button>
+        <button mat-raised-button (click)="submitQuestionnaire()" color="primary" [disabled]="submitting">Submit</button>
     </div>
     <div class="questionnaire-footer" *ngIf="foodItems.length < 1">
-        <mat-label style="color: red" i18n>Server returned 0 food items. Please contact administrator.</mat-label>
+        <mat-label style="color: red">Server returned 0 food items. Please contact administrator.</mat-label>
     </div>
     <div class="fixed-bottom">
-        <mat-progress-bar mode="indeterminate" *ngIf="submitting" i18n></mat-progress-bar>
+        <mat-progress-bar mode="indeterminate" *ngIf="submitting"></mat-progress-bar>
     </div>
 </div>
