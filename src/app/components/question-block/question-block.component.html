@@ -4,11 +4,11 @@
     <div style="float: right">
 
       <button class="block-activator" [hidden]="foodItem.disabled" (click)="toggleDisable()">
-        <p style="font-size:10">Not applicable..</p>
+        <p style="font-size:10">{{'Not applicable' | translate}}..</p>
         <mat-icon color="primary">cancel</mat-icon>
       </button>
       <button class="block-activator" [hidden]="!foodItem.disabled" (click)="toggleDisable()">
-        <mat-icon color="accent">refresh</mat-icon>
+        <mat-icon color="accent">{{'refresh' | translate}}</mat-icon>
         <mat-label style="text-align: center" class="qb-row-item">{{foodItem.name}}</mat-label>
       </button>
     </div>
@@ -21,36 +21,36 @@
                [(ngModel)]="foodItem.input.frequency"
                class="qb-row-item"
                type="number" min="1"
-               placeholder="Number of.." autocomplete="off" required>
+               placeholder="{{'Number of' | translate}}.." autocomplete="off" required>
       </mat-form-field>
-      <mat-label>time(s) per</mat-label>
+      <mat-label>{{'time(s) per' | translate}}</mat-label>
       <mat-form-field style="padding-left: 10px">
-        <mat-select placeholder="week or day..." [(ngModel)]="foodItem.input.frequencyType" required>
+        <mat-select placeholder="{{'week or day' | translate}}..." [(ngModel)]="foodItem.input.frequencyType" required>
           <mat-option *ngFor="let type of FREQUENCY_TYPES" [value]="type">
             {{ type }}
           </mat-option>
         </mat-select>
       </mat-form-field>
       <mat-error *ngIf="(foodItem.isSubmitted || foodItem.isSubmitted === null) && foodItem.getErrorState().includes('frequency')">
-        Please enter the number servings per week or per day.
+        {{'Please enter the number servings per week or per day' | translate}}.
       </mat-error>
       <mat-error *ngIf="foodItem.isSubmitted
         && foodItem.getErrorState().includes('frequency-range')
         && !foodItem.getErrorState().includes('frequency')">
-        Opps!..number of times must be greated than zero.
+        {{'Oops number of times must be greater than zero' | translate}}
       </mat-error>
     </tr>
     <!--Servings option row, contingent on there being more than 1 option-->
     <tr [hidden]="foodItem.disabled" *ngIf="foodItem.servingOptions.length > 1">
       <mat-form-field class="qb-row-item">
-        <mat-select id="serving" placeholder="Size of each serving" [(ngModel)]="foodItem.input.serving" required>
+        <mat-select id="serving" placeholder="{{'Size of each serving' | translate}}" [(ngModel)]="foodItem.input.serving" required>
           <mat-option *ngFor="let option of foodItem.servingOptions" [value]="option">
             {{ option }}
           </mat-option>
         </mat-select>
       </mat-form-field>
       <mat-error *ngIf="foodItem.isSubmitted && foodItem.getErrorState().includes('serving')">
-        Serving selection is required.
+        {{'Serving selection is required' | translate}}
       </mat-error>
     </tr>
     <!--Food Type selection row, contingent on there being more than one food type (other than default)-->
@@ -59,18 +59,18 @@
         <mat-radio-button class="qb-row-item padding" *ngFor="let type of foodItem.types" [value]="type">{{type}}</mat-radio-button>
       </mat-radio-group>`
       <mat-error *ngIf="foodItem.isSubmitted && foodItem.getErrorState().includes('type')">
-        Type selection is required.
+        {{'Type selection is required' | translate}}
       </mat-error>
     </tr>
     <!--Extra sugar added row, contingent if extra sugar is applicable for this food type-->
     <tr [hidden]="foodItem.disabled" class="qb-row" *ngIf="foodItem.hasSugarSetting">
-      <mat-label class="qb-row-item">Sugar added: </mat-label>
+      <mat-label class="qb-row-item">{{'Sugar added' | translate}} </mat-label>
       <mat-form-field>
         <input matInput id="sugar"
                class="qb-row-item"
                type="number" min="1"
                [(ngModel)]="foodItem.input.sugar"
-               placeholder="Extra Sugar" autocomplete="off">
+               placeholder="{{'Extra Sugar' | translate}}" autocomplete="off">
       </mat-form-field>
       <mat-label class="qb-row-item">tsp(s)</mat-label>
     </tr>

@@ -12,6 +12,7 @@ import { TrackerResultsResponse } from 'src/app/models/trackerresultsresponse';
 import { TrackerItems } from 'src/app/models/trackeritems';
 import { TrackerResponseService } from 'src/app/services/tracker-response/tracker-response.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-tracker-page',
@@ -24,11 +25,11 @@ export class TrackerPageComponent implements OnInit {
   MAIN_MESSAGE =  'Message';
   INSTRUCTIONS_TITLE = 'Instructions: \n';
   BULLETED_INSTRUCTIONS = [
-    $localize`:@@NUTRITION.MESSAGE.1:For each food item select the appropriate answer`,
-    $localize `:@@NUTRITION.MESSAGE.2:If your baby consumed more than the recommended amount select the up arrow`,
-    $localize `:@@NUTRITION.MESSAGE.3:If your baby consumed the recommended amount select the equal sign`,
-    $localize `:@@NUTRITION.MESSAGE.4:If your baby consumed less than the recommended amount select the down arrow`,
-    $localize `:@@NUTRITION.MESSAGE.5:Click the submit button when finished.`
+    this.translate.instant('For each food item select the appropriate answer'),
+    this.translate.instant('If your baby consumed more than the recommended amount select the up arrow'),
+    this.translate.instant('If your baby consumed the recommended amount select the equal sign'),
+    this.translate.instant('If your baby consumed less than the recommended amount select the down arrow'),
+    this.translate.instant('Click the submit button when finished')
   ];
 
   showBracketFirst = false;
@@ -49,7 +50,8 @@ export class TrackerPageComponent implements OnInit {
               private authenticationService: AuthenticationService,
               private submissionErrorDialog: MatDialog,
               private successDialog: MatDialog,
-              private trackerResponseService: TrackerResponseService) {}
+              private trackerResponseService: TrackerResponseService,
+              private translate: TranslateService) {}
 
   ngOnInit() {
     this.getAllResults();
