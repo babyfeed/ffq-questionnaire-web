@@ -9,14 +9,14 @@
     <div class="container mt-3" *ngIf="results.length != 0">
         <label style="font-weight:bold"> Questionnaire Results </label>
         <div style="display: flex; align-items: stretch; justify-content: space-between">
-          <input style="width: 25%" placeholder="Search by Parent Username" type="text" class="form-control" name="search" [(ngModel)]="search" />
+          <input style="width: 25%" placeholder="Search by Parent Username" type="text" class="form-control" name="search" [(ngModel)]="search"/>
           <div align="right">
             <button mat-raised-button type="button" (click)="export()">
               Download Results
             </button>
           </div>
         </div>
-        <div *ngFor="let result of resultInfo| resultsFilter: resultMap: search ; let i = index">
+        <div *ngFor="let result of resultInfo | resultsFilter: resultMap :search; let i = index">
             <div class="container">
                 <mat-card class="quest-id-card">
                     <mat-card-content>
@@ -74,9 +74,11 @@
 
                         <div class="row" style="padding: 15px">
                             <div class="col-12 offset-10">
+<!--                              the button to show result list-->
                                 <button mat-raised-button [hidden]="result.ffqresult.show" (click)="toggle(i)" [hidden]="result.ffqresult.showFeedback" (click)="toggleFeedback(i)">
                     <i class="fa fa-plus-square-o"></i> Results
                   </button>
+<!--                              the button to hidden result list-->
                                 <button mat-raised-button [hidden]="!result.ffqresult.show" (click)="toggle(i)" [hidden]="!result.ffqresult.showFeedback" (click)="toggleFeedback(i)">
                     <i class="fa fa-minus-square-o"></i> Results
                   </button>

@@ -59,7 +59,7 @@ export class ClinicQuestResultsComponent implements OnInit {
   parentNames: string[] = [];
   resultMap: Map<string, FFQParentResult> = new Map<string, FFQParentResult>();
   resultInfo: FFQParentResult[] = [];
-
+  backUpResult: FFQParentResult[] = [];
 //
 
 
@@ -83,7 +83,6 @@ export class ClinicQuestResultsComponent implements OnInit {
     this.feedbackForm = this.formBuilder.group({
       feedback: ['', Validators.required]
     });
-
     this.getClinicId();
   }
 
@@ -123,17 +122,17 @@ export class ClinicQuestResultsComponent implements OnInit {
       this.results = m.reverse();
       this.parentNames = this.parentNames.reverse();
       for (let i = 0; i < this.parentNames.length; i++) {
-        let object: FFQParentResult = new FFQParentResult(
+        const object: FFQParentResult = new FFQParentResult(
           this.results[i],
           this.parentNames[i]
         );
         this.resultInfo.push(object);
+        this.backUpResult.push(object);
         this.resultMap.set(this.results[i].userId, object);
       }
     });
 
   }
-
   // convenience getter for easy access to form fields
   get f() {
     return this.feedbackForm.controls;
@@ -216,15 +215,23 @@ export class ClinicQuestResultsComponent implements OnInit {
   private returnZero() {
     return 0;
   }
-
+  // searchChange() {
+  //   // this.resultInfo = this.backUpResult;
+  // }
   // function used in HTML in order to display and hide questionnaire results
   toggle(index) {
+    if (this.search) {
+      // the Questionnaire Results list is using both resultMap and resultInfo
+      // but the resultInfo does not change along with the search, so I put this filter to change the resultInfo
+      this.resultInfo = [...this.resultInfo.values()].filter((item) => item.ffqresult.userSearchName === this.search);
+    }
     this.resultInfo[index].ffqresult.show = !this.resultInfo[index].ffqresult.show;
   }
 
   toggleFeedback(index) {
     // ffqfeedback
     this.resultInfo[index].ffqresult.showFeedback = !this.resultInfo[index].ffqresult.showFeedback;
+    this.resultInfo = this.backUpResult;
   }
 
   /////////////////////////////////////////////////////////////////////////////////
@@ -274,11 +281,14 @@ export class ClinicQuestResultsComponent implements OnInit {
 
   getParentUsernameById(userId: string) {
     // Clinician portal need search by userName, but there is no this item in results; the student who designed before
-    // get it by using another function, kind of weird, but in case
+    // get it by using another function, kind of weird, but in case cause something wrong potentially,
+    // I add the 'userSearchName' &
+    // use the same function
+    // to solve this problem.
     let i = 0;
     for (i = 0; i < this.results.length; i++) {
-      this.results[i].userSearchName = this.parentList.find(parent => parent.userId === this.results[i].userId)?.username ?? "[not found]";
+      this.results[i].userSearchName = this.parentList.find(parent => parent.userId === this.results[i].userId)?.username ?? '[not found]';
     }
-    return this.parentList.find(parent => parent.userId === userId)?.username ?? "[not found]";
+    return this.parentList.find(parent => parent.userId === userId)?.username ?? '[not found]';
   }
 }
