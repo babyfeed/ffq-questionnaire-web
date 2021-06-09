@@ -27,6 +27,9 @@
         <mat-error *ngIf="infantage % 1 != 0">
           {{'Age cannot be in decimal' | translate}}
         </mat-error>
+        <mat-error *ngIf="infantage < 0">
+          {{'Age cannot be negative' | translate}}
+        </mat-error>
 
       </mat-card>
     </div>

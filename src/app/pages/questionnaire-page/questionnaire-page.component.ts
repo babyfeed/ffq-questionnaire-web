@@ -91,6 +91,11 @@ export class QuestionnairePageComponent implements OnInit {
       pageHasErrors = true;
     }
 
+    if (this.infantage < 0)
+    {
+      pageHasErrors = true;
+    }
+
 
     for (const foodItem of this.foodItems) {
       if (this.hideSecondaryItems && !foodItem.isPrimary) {
@@ -108,7 +113,7 @@ export class QuestionnairePageComponent implements OnInit {
       log('Errors on page. Questionnaire incomplete.');
       const  dialogRef  = this.submissionErrorDialog.open(ErrorDialogPopupComponent);
       dialogRef.componentInstance.title = this.translate.instant('Questionnaire Incomplete');
-      dialogRef.componentInstance.message = this.translate.instant('Please ensure all required fields are completed.');
+      dialogRef.componentInstance.message = this.translate.instant('Please ensure all required fields are completed');
       this.submitting = false;
 
     } else { // here is where the questionnaire is submitted**
@@ -168,7 +173,7 @@ export class QuestionnairePageComponent implements OnInit {
 
 // returns a FFQ item with the itemPosition equal to the position param
 private getFoodItemByPosition(arr: FFQItem[] ): FFQItem[]{
-  let sortedArray = arr.sort(function(a, b){
+  const sortedArray = arr.sort(function(a, b){
     return a.itemPosition > b.itemPosition ? 1 : a.itemPosition < b.itemPosition ? -1 : 0;
    });
   return sortedArray;
