@@ -17,6 +17,7 @@ import { Validators, FormControl } from '@angular/forms';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import {MatDialog} from '@angular/material/dialog';
 import { isInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
+import {TranslateService} from '@ngx-translate/core';
 
 
 @Component({
@@ -30,10 +31,10 @@ export class QuestionnairePageComponent implements OnInit {
   MAIN_MESSAGE = 'In the last 7 days and nights, how many times did your baby eat or drink the following?\n Include those foods and drinks given to the baby by you and others, such as grandparents, babysitters, etc.';
   INSTRUCTIONS_TITLE = 'Instructions: \n';
   BULLETED_INSTRUCTIONS = [
-    'For each entry, enter the number of times a food was consumed by your baby and specify whether this was per week or per day.',
-    'If your baby did not eat this food in the last week, hit \'x\' for not applicable',
-    'All open question blocks must be completely filled out before submitting the questionnaire.',
-    'Click the submit button at the bottom of the form when finished.'
+    this.translate.instant('For each entry, enter the number of times a food was consumed by your baby and specify whether this was per week or per day'),
+    this.translate.instant('If your baby did not eat this food in the last week, hit \'x\' for not applicable'),
+    this.translate.instant('All open question blocks must be completely filled out before submitting the questionnaire'),
+    this.translate.instant('Click the submit button at the bottom of the form when finished')
   ];
 
 
@@ -58,7 +59,8 @@ export class QuestionnairePageComponent implements OnInit {
               private successDialog: MatDialog,
               private router: Router,
               private modalService: NgbModal,
-              private authenticationService: AuthenticationService) {}
+              private authenticationService: AuthenticationService,
+              private translate: TranslateService) {}
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(params => {
@@ -89,6 +91,11 @@ export class QuestionnairePageComponent implements OnInit {
       pageHasErrors = true;
     }
 
+    if (this.infantage < 0)
+    {
+      pageHasErrors = true;
+    }
+
 
     for (const foodItem of this.foodItems) {
       if (this.hideSecondaryItems && !foodItem.isPrimary) {
@@ -105,8 +112,8 @@ export class QuestionnairePageComponent implements OnInit {
     if (pageHasErrors) {
       log('Errors on page. Questionnaire incomplete.');
       const  dialogRef  = this.submissionErrorDialog.open(ErrorDialogPopupComponent);
-      dialogRef.componentInstance.title = $localize `:@@QUESTIONNAIRE.INCOMPLETE.TITLE:Questionnaire Incomplete`;
-      dialogRef.componentInstance.message = $localize `:@@QUESTIONNAIRE.INCOMPLETE.MESSAGE:Please ensure all required fields are completed.`;
+      dialogRef.componentInstance.title = this.translate.instant('Questionnaire Incomplete');
+      dialogRef.componentInstance.message = this.translate.instant('Please ensure all required fields are completed');
       this.submitting = false;
 
     } else { // here is where the questionnaire is submitted**
@@ -138,8 +145,8 @@ export class QuestionnairePageComponent implements OnInit {
             this.questService.submitQuestionnaire(this.id).subscribe((data: Questionnaire) => {
             this.router.navigateByUrl('/');
             const dialogRef = this.successDialog.open(ErrorDialogPopupComponent);
-            dialogRef.componentInstance.title = $localize `:@@QUESTIONNAIRE.COMPLETE.TITLE:Submitted Successfully`;
-            dialogRef.componentInstance.message = $localize `:@@QUESTIONNAIRE.COMPLETE.MESSAGE:The questionnaire has been sent to the issuer.`;
+            dialogRef.componentInstance.title = this.translate.instant('Submitted Successfully');
+            dialogRef.componentInstance.message = this.translate.instant('The questionnaire has been sent to the issuer');
             this.submitting = false;
             }, (error: HttpErrorResponse) => this.handleSubmissionError(error));
 
@@ -166,7 +173,7 @@ export class QuestionnairePageComponent implements OnInit {
 
 // returns a FFQ item with the itemPosition equal to the position param
 private getFoodItemByPosition(arr: FFQItem[] ): FFQItem[]{
-  let sortedArray = arr.sort(function(a, b){
+  const sortedArray = arr.sort(function(a, b){
     return a.itemPosition > b.itemPosition ? 1 : a.itemPosition < b.itemPosition ? -1 : 0;
    });
   return sortedArray;
@@ -175,7 +182,7 @@ private getFoodItemByPosition(arr: FFQItem[] ): FFQItem[]{
   private handleFoodServiceError(error: HttpErrorResponse) {
     console.error('Error occurred.\n' + error.message);
     const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-    dialogRef.componentInstance.title = 'Error Fetching Food Items';
+    dialogRef.componentInstance.title = this.translate.instant('Error Fetching Food Items');
     dialogRef.componentInstance.message = error.message;
     dialogRef.componentInstance.router = this.router;
     dialogRef.afterClosed().subscribe(() => {
@@ -187,7 +194,7 @@ private getFoodItemByPosition(arr: FFQItem[] ): FFQItem[]{
     this.router.navigateByUrl('/');
     console.error('Error occurred: ' + error.message);
     const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-    dialogRef.componentInstance.title = 'Error Validating Id';
+    dialogRef.componentInstance.title = this.translate.instant('Error Validating Id');
     dialogRef.componentInstance.message = error.message;
   }
 
@@ -195,7 +202,7 @@ private getFoodItemByPosition(arr: FFQItem[] ): FFQItem[]{
     this.router.navigateByUrl('/');
     console.error('Error occurred: ' + error.message);
     const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-    dialogRef.componentInstance.title = 'Error Submitting Questionnaire';
+    dialogRef.componentInstance.title = this.translate.instant('Error Submitting Questionnaire');
     dialogRef.componentInstance.message = error.message + '. Try again or contact administrator.';
     this.submitting = false;
   }

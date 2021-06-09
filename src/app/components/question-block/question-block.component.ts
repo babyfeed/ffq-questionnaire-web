@@ -1,6 +1,8 @@
 import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {FFQItem} from '../../models/ffqitem';
 import {FormControl, Validator, Validators} from '@angular/forms';
+import {TranslateService} from '@ngx-translate/core';
+
 @Component({
   selector: 'question-block',
   templateUrl: './question-block.component.html',

@@ -6,21 +6,31 @@
 	"After age 6 months, your baby should eat a variety of healthy foods because good eating habits start early": "After age 6 months, your baby should eat a variety of healthy foods because good eating habits start early.",
 	"Age (in months) of the infant is required": "Age (in months) of the infant is required",
 	"Age cannot be in decimal": "Age cannot be in decimal",
+	"Age cannot be negative": "Age cannot be negative",
 	"All open question blocks must be completely filled out before submitting the questionnaire": "All open question blocks must be completely filled out before submitting the questionnaire",
 	"Begin Questionnaire": "Begin Questionnaire",
 	"Click the submit button at the bottom of the form when finished": "Click the submit button at the bottom of the form when finished",
+	"Click the submit button when finished": "Click the submit button when finished.",
 	"Daily Average": "Daily Average",
 	"Date": "Date",
 	"Enter Age": "Enter Age",
+	"Error Fetching Food Items": "Error Fetching Food Items",
+	"Error Submitting Questionnaire": "Error Submitting Questionnaire",
+	"Error Validating Id": "Error Validating Id",
+	"Extra Sugar": "Extra Sugar",
 	"Female": "Female",
 	"Food Frequency Questionnaire": "Food Frequency Questionnaire",
 	"Food Items": "Food Items",
 	"For each entry, enter the number of times a food was consumed by your baby and specify whether this was per week or per day": "For each entry, enter the number of times a food was consumed by your baby and specify whether this was per week or per day.",
+	"For each food item select the appropriate answer": "For each food item select the appropriate answer.",
 	"Frequency": "Frequency",
 	"Frequency Type": "Frequency Type",
 	"Gender is required": "Gender is required.",
 	"Goal Setting": "Goal Setting",
 	"If your baby consumed above or below the recommended amount, pick 1 food group to improve this week": "If your baby consumed above or below the recommended amount, pick 1 food group to improve this week.",
+	"If your baby consumed less than the recommended amount select the down arrow": "If your baby consumed less than the recommended amount select the down arrow.",
+	"If your baby consumed more than the recommended amount select the up arrow": "If your baby consumed more than the recommended amount select the up arrow.",
+	"If your baby consumed the recommended amount select the equal sign": "If your baby consumed the recommended amount select the equal sign.",
 	"If your baby did not eat any additional foods, click to skip": "If your baby did not eat any additional foods, click to skip.",
 	"If your baby did not eat this food in the last week, hit 'x' for not applicable": "If your baby did not eat this food in the last week, hit 'x' for not applicable",
 	"If your baby does not like a food, try again another day. It can take up to 15 times before they accept a new food": "If your baby does not like a food, try again another day. It can take up to 15 times before they accept a new food.",
@@ -62,9 +72,12 @@
 	"Name": "Name",
 	"No questionnaires have been submitted yet": "No questionnaires have been submitted yet!",
 	"No responses have been submitted yet": "No responses have been submitted yet.",
+	"Not applicable": "Not applicable",
+	"Number of": "Number of",
 	"Nutrient": "Nutrient",
 	"Nutrient Breakdown": "Nutrient Breakdown",
 	"Nutrients": "Nutrients",
+	"Oops number of times must be greater than zero": "Oops!..number of times must be greater than zero.",
 	"PARENTPORTAL": {
 		"TITLE": "Parent Portal"
 	},
@@ -74,8 +87,11 @@
 	"Parent Username": "Parent Username",
 	"Password is required": "Password is required",
 	"Please complete the tracking once a week": "Please complete the tracking once a week.",
+	"Please ensure all required fields are completed": "Please ensure all required fields are completed.",
+	"Please enter the number servings per week or per day": "Please enter the number servings per week or per day",
 	"Questionnaire": "Questionnaire",
 	"Questionnaire ID": "Questionnaire ID",
+	"Questionnaire Incomplete": "Questionnaire Incomplete",
 	"RECOMMEND": {
 		"CHILD": {
 			"MESSAGE1": "Please select infant age",
@@ -92,13 +108,19 @@
 		"Please contact administrator": ""
 	},
 	"Server returned 0 food items Please contact administrator": "Server returned 0 food items. Please contact administrator.",
+	"Serving selection is required": "Serving selection is required.",
 	"Serving sizes for the questionnaire are reviewed": "Serving sizes for the questionnaire are reviewed",
 	"Servings": "Servings",
+	"Size of each serving": "Size of each serving",
 	"Skip Additional Foods": "Skip Additional Foods",
 	"Submit": "Submit",
+	"Submitted Successfully": "Submitted Successfully",
+	"Sugar added": "Sugar added:",
 	"Sugar(g)": "Sugar(g)",
+	"The questionnaire has been sent to the issuer": "The questionnaire has been sent to the issuer.",
 	"Tracking": "Tracking",
 	"Tracking History": "Tracking History",
+	"Type selection is required": "Type selection is required.",
 	"User Login": "User Login",
 	"User choices": "User choices",
 	"Username is required": "Username is required",
@@ -108,6 +130,7 @@
 	"ageMessage2": "for child 6 to 11.9 months",
 	"ageMessage3": "for child 12 to 24 months",
 	"buttonName": "Results",
+	"cancel": "Cancel",
 	"foodChoice": [
 		{
 			"foodTypes": [
@@ -1715,5 +1738,7 @@
 			"thirdBracketIntake": "0 cups per day (0 oz / day)"
 		}
 	],
-	"userNamePlaceHolder": "Username"
+	"time(s) per": "time(s) per",
+	"userNamePlaceHolder": "Username",
+	"week or day": "Week or Day"
 }
