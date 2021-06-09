@@ -1,27 +1,27 @@
-import { Component, OnInit } from "@angular/core";
-import { FFQResultsResponse } from "src/app/models/ffqresultsresponse";
-import { Observable } from "rxjs";
-import { ResultsService } from "src/app/services/results/results.service";
-import { AuthenticationService } from "src/app/services/authentication/authentication.service";
-import { NutrientConstants } from "src/app/models/NutrientConstants";
+import { Component, OnInit } from '@angular/core';
+import { FFQResultsResponse } from 'src/app/models/ffqresultsresponse';
+import { Observable } from 'rxjs';
+import { ResultsService } from 'src/app/services/results/results.service';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import { NutrientConstants } from 'src/app/models/NutrientConstants';
 ///
 
 /////////// added imports from recommend.component.ts/////////////////////
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { RecommendModalComponent } from "src/app/components/recommend-modal/recommend-modal.component";
-import { MatDialog } from "@angular/material/dialog";
-import { NutrientsRecommendationsService } from "src/app/services/nutrients-recommendations/nutrients-recommendations.service";
-import { FFQNutrientsRecommendations } from "src/app/models/ffqnutrients-recommendations";
-import { ErrorDialogPopupComponent } from "src/app/components/error-dialog-popup/error-dialog-popup.component";
-import { Router } from "@angular/router";
-import { FoodRecommendModalComponent } from "src/app/components/food-recommend-modal/food-recommend-modal.component";
-import { FoodRecommendationsService } from "src/app/services/food-recommendation-service/food-recommendations.service";
-import { FoodDescriptionService } from "src/app/services/food-description/food-description.service";
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { RecommendModalComponent } from 'src/app/components/recommend-modal/recommend-modal.component';
+import { MatDialog } from '@angular/material/dialog';
+import { NutrientsRecommendationsService } from 'src/app/services/nutrients-recommendations/nutrients-recommendations.service';
+import { FFQNutrientsRecommendations } from 'src/app/models/ffqnutrients-recommendations';
+import { ErrorDialogPopupComponent } from 'src/app/components/error-dialog-popup/error-dialog-popup.component';
+import { Router } from '@angular/router';
+import { FoodRecommendModalComponent } from 'src/app/components/food-recommend-modal/food-recommend-modal.component';
+import { FoodRecommendationsService } from 'src/app/services/food-recommendation-service/food-recommendations.service';
+import { FoodDescriptionService } from 'src/app/services/food-description/food-description.service';
 
 @Component({
-  selector: "app-history-parental",
-  templateUrl: "./history-parental.component.html",
-  styleUrls: ["./history-parental.component.css"]
+  selector: 'app-history-parental',
+  templateUrl: './history-parental.component.html',
+  styleUrls: ['./history-parental.component.css']
 })
 export class HistoryParentalComponent implements OnInit {
   public show = false;
@@ -30,7 +30,7 @@ export class HistoryParentalComponent implements OnInit {
   public buttonName: any = 'Results';
 
 
-  MESSAGE = $localize`:@@MESSAGE.PARENT:No questionnaires have been submitted yet!`;
+  MESSAGE = 'No questionnaires have been submitted yet!';
 
   results: FFQResultsResponse[] = [];
 
@@ -85,7 +85,7 @@ export class HistoryParentalComponent implements OnInit {
       });
 
       this.results = m.reverse();
-      this.results = this.results.filter(t => t.userType === "parent");
+      this.results = this.results.filter(t => t.userType === 'parent');
     });
   }
 
@@ -130,7 +130,7 @@ export class HistoryParentalComponent implements OnInit {
 
   getUserName() {
     // <BF-S2021-74>add column with date and username in parent portal
-    const local = localStorage.getItem("currentUser");
+    const local = localStorage.getItem('currentUser');
     const formatLocal = JSON.parse(local);
     const userName = formatLocal[0].username;
     return userName;
