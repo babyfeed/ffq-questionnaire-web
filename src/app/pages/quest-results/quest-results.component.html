@@ -8,13 +8,13 @@
     </div>
 
     <div align="center" *ngIf="results.length != 0">
-      <button [hidden]='participantResults.length == 0 || parentResults.length == 0' (click)="showParticipant = false; showParent = false; showByClinic = false; showBySite = false; bySite=true; byClinic=true"  mat-raised-button i18n>Show all...</button>
+      <button [hidden]='participantResults.length == 0 || parentResults.length == 0' (click)="showParticipant = false; showParent = false; showByClinic = false; showBySite = false; bySite=true; byClinic=true"  mat-raised-button>Show all...</button>
       <span style="margin: 40px"></span>
-      <button [hidden]='participantResults.length == 0 || parentResults.length == 0' (click)="showParent = false; showParticipant = true; showByClinic = false; showBySite=false; bySite=false; byClinic=true" mat-raised-button i18n>Parents...</button>
+      <button [hidden]='participantResults.length == 0 || parentResults.length == 0' (click)="showParent = false; showParticipant = true; showByClinic = false; showBySite=false; bySite=false; byClinic=true" mat-raised-button>Parents...</button>
       <span style="margin: 40px"></span>
-      <button [hidden]='participantResults.length == 0 || parentResults.length == 0'  (click)="showParticipant = false; showParent = true; showByClinic = false; showBySite=false; bySite=true; byClinic=false"  mat-raised-button i18n>Participants...</button>
+      <button [hidden]='participantResults.length == 0 || parentResults.length == 0'  (click)="showParticipant = false; showParent = true; showByClinic = false; showBySite=false; bySite=true; byClinic=false"  mat-raised-button>Participants...</button>
       <span style="margin: 40px"></span>
-      <button type="button" (click)="export()" class="btn btn-danger" i18n> Export Data </button>
+      <button type="button" (click)="export()" class="btn btn-danger"> Export Data </button>
     </div>
 
   <br>
@@ -44,7 +44,7 @@
     </div>
 
     <div class="container mt-3" *ngIf="parentResultsByClinicId.length != 0" [hidden]="!showByClinic">
-      <label style="font-weight:bold" i18n> Parent Questionnaire Results for: {{this.clinicAttributes.clinicname}}</label>
+      <label style="font-weight:bold"> Parent Questionnaire Results for: {{this.clinicAttributes.clinicname}}</label>
       <div *ngFor="let byClinicresult of parentResultsByClinicId; let i = index">
         <div class="container">
           <mat-card class="quest-id-card">
@@ -52,19 +52,19 @@
               <!--Labels for questionnaire results-->
               <div class="row">
                 <div class="col-2" style="text-align:center">
-                  <label i18n><strong>Questionnaire ID</strong></label>
+                  <label><strong>Questionnaire ID</strong></label>
                 </div>
                 <div class="col-2" style="text-align:center">
-                  <label i18n><strong>Infant age (In months)</strong></label>
+                  <label><strong>Infant age (In months)</strong></label>
                 </div>
                 <div class="col-1" style="text-align:center">
-                  <label i18n><strong>Infant Gender</strong></label>
+                  <label><strong>Infant Gender</strong></label>
                 </div>
                 <div class="col-2" style="text-align:center">
-                  <label i18n><strong>Nutrient Results</strong></label>
+                  <label><strong>Nutrient Results</strong></label>
                 </div>
                 <div class="col-2" style="text-align:center">
-                  <label i18n><strong>Food Results</strong></label>
+                  <label><strong>Food Results</strong></label>
                 </div>
               </div>
 
@@ -88,7 +88,7 @@
 
 
                 <div class="col-12 offset-10">
-                  <button mat-raised-button (click)="toggleParentResults(i)" i18n>
+                  <button mat-raised-button (click)="toggleParentResults(i)">
                     Results
                   </button>
 
@@ -104,19 +104,19 @@
                 <hr />
                 <div class="row mt-3">
                   <div class="col-3" style="text-align:center">
-                    <label i18n><strong>Name</strong></label>
+                    <label><strong>Name</strong></label>
                   </div>
                   <div class="col-2" style="text-align:center">
-                    <label i18n><strong>Frequency</strong></label>
+                    <label><strong>Frequency</strong></label>
                   </div>
                   <div class="col-2" style="text-align:center">
-                    <label i18n><strong>Frequency Type</strong></label>
+                    <label><strong>Frequency Type</strong></label>
                   </div>
                   <div class="col-2" style="text-align:center">
-                    <label i18n><strong>Servings</strong></label>
+                    <label><strong>Servings</strong></label>
                   </div>
                   <div class="col-2" style="text-align:center">
-                    <label i18n><strong>Sugar(g)</strong></label>
+                    <label><strong>Sugar(g)</strong></label>
                   </div>
                 </div>
                 <div *ngFor="let choice of byClinicresult.userChoices">
@@ -161,7 +161,7 @@
                 <br>
                 <div style="text-align:center">
                   <button mat-raised-button (click)="toggleParentResults(i)">
-                    <i class="fa fa-minus-square-o" i18n></i> Close Results
+                    <i class="fa fa-minus-square-o"></i> Close Results
                   </button>
                 </div>
               </ng-container>
@@ -180,19 +180,19 @@
             <!--Labels for questionnaire results-->
             <div class="row">
               <div class="col-2" style="text-align:center">
-                <label i18n><strong>Questionnaire ID</strong></label>
+                <label ><strong>Questionnaire ID</strong></label>
               </div>
               <div class="col-2" style="text-align:center">
-                <label i18n><strong>Infant age (In months)</strong></label>
+                <label ><strong>Infant age (In months)</strong></label>
               </div>
               <div class="col-1" style="text-align:center">
-                <label i18n><strong>Infant Gender</strong></label>
+                <label ><strong>Infant Gender</strong></label>
               </div>
               <div class="col-2" style="text-align:center">
-                <label i18n><strong>Nutrient Results</strong></label>
+                <label ><strong>Nutrient Results</strong></label>
               </div>
               <div class="col-2" style="text-align:center">
-                <label i18n><strong>Food Results</strong></label>
+                <label ><strong>Food Results</strong></label>
               </div>
             </div>
 
@@ -216,11 +216,11 @@
 
 
               <div class="col-12 offset-10">
-                <button mat-raised-button (click)="toggleParentResults(i)" i18n>
+                <button mat-raised-button (click)="toggleParentResults(i)" >
                   Results
                 </button>
 
-                <button mat-raised-button class="btn btn-danger" (click)="deleteQuestionnaire(byParticipantresult.questionnaireId)" i18n>
+                <button mat-raised-button class="btn btn-danger" (click)="deleteQuestionnaire(byParticipantresult.questionnaireId)" >
                   Delete
                 </button>
               </div>
@@ -232,19 +232,19 @@
               <hr />
               <div class="row mt-3">
                 <div class="col-3" style="text-align:center">
-                  <label i18n><strong>Name</strong></label>
+                  <label><strong>Name</strong></label>
                 </div>
                 <div class="col-2" style="text-align:center">
-                  <label i18n><strong>Frequency</strong></label>
+                  <label><strong>Frequency</strong></label>
                 </div>
                 <div class="col-2" style="text-align:center">
-                  <label i18n><strong>Frequency Type</strong></label>
+                  <label><strong>Frequency Type</strong></label>
                 </div>
                 <div class="col-2" style="text-align:center">
-                  <label i18n><strong>Servings</strong></label>
+                  <label><strong>Servings</strong></label>
                 </div>
                 <div class="col-2" style="text-align:center">
-                  <label i18n><strong>Sugar(g)</strong></label>
+                  <label><strong>Sugar(g)</strong></label>
                 </div>
               </div>
               <div *ngFor="let choice of byParticipantresult.userChoices">
@@ -270,12 +270,12 @@
 
               <!-- Calculations breakdown -->
               <div class="tableDiv">
-                <h6 i18n>Nutrient Breakdown</h6>
+                <h6>Nutrient Breakdown</h6>
                 <div class="row">
                   <table class="col-12">
                     <tr>
-                      <th i18n>Nutrient</th>
-                      <th i18n>Daily Average</th>
+                      <th>Nutrient</th>
+                      <th>Daily Average</th>
                     </tr>
                     <!-- Below code changed to show requested digits by PO-->
                     <tr *ngFor="let item of byParticipantresult.dailyAverages | keyvalue : returnZero; let i=index">
@@ -288,7 +288,7 @@
               </div>
               <br>
               <div style="text-align:center">
-                <button mat-raised-button (click)="toggleParentResults(i)" i18n>
+                <button mat-raised-button (click)="toggleParentResults(i)">
                   <i class="fa fa-minus-square-o"></i> Close Results
                 </button>
               </div>
@@ -315,22 +315,22 @@
                         <!--Labels for questionnaire results-->
                         <div class="row">
                             <div class="col-2" style="text-align:center">
-                              <label i18n><strong>Parent Username</strong></label>
+                              <label><strong>Parent Username</strong></label>
                             </div>
                             <div class="col-2" style="text-align:center">
-                                <label i18n><strong>Questionnaire ID</strong></label>
+                                <label><strong>Questionnaire ID</strong></label>
                             </div>
                             <div class="col-2" style="text-align:center">
-                                <label i18n><strong>Infant age (In months)</strong></label>
+                                <label><strong>Infant age (In months)</strong></label>
                             </div>
                             <div class="col-1" style="text-align:center">
-                                <label i18n><strong>Infant Gender</strong></label>
+                                <label><strong>Infant Gender</strong></label>
                             </div>
                             <div class="col-2" style="text-align:center">
-                                <label i18n><strong>Nutrient Results</strong></label>
+                                <label><strong>Nutrient Results</strong></label>
                             </div>
                             <div class="col-2" style="text-align:center">
-                                <label i18n><strong>Food Results</strong></label>
+                                <label><strong>Food Results</strong></label>
                             </div>
                         </div>
 
@@ -357,11 +357,11 @@
 
 
                             <div class="col-12 offset-10">
-                                <button mat-raised-button type="button" (click)="toggleParentResults(i)" i18n>
+                                <button mat-raised-button type="button" (click)="toggleParentResults(i)">
                                   Results
                                 </button>
 
-                                <button mat-raised-button class="btn btn-danger" (click)="deleteQuestionnaire(result.questionnaireId)" i18n>
+                                <button mat-raised-button class="btn btn-danger" (click)="deleteQuestionnaire(result.questionnaireId)">
                                   Delete
                                 </button>
                             </div>
@@ -369,23 +369,23 @@
 
                         <!--User choice results-->
                         <ng-container *ngIf="result.show">
-                            <label class="mt-3 mb-0 ml-3" i18n><strong>User choices</strong> </label>
+                            <label class="mt-3 mb-0 ml-3"><strong>User choices</strong> </label>
                             <hr />
                             <div class="row mt-3">
                                 <div class="col-3" style="text-align:center">
-                                    <label i18n><strong>Name</strong></label>
+                                    <label><strong>Name</strong></label>
                                 </div>
                                 <div class="col-2" style="text-align:center">
-                                    <label i18n><strong>Frequency</strong></label>
+                                    <label><strong>Frequency</strong></label>
                                 </div>
                                 <div class="col-2" style="text-align:center">
-                                    <label i18n><strong>Frequency Type</strong></label>
+                                    <label><strong>Frequency Type</strong></label>
                                 </div>
                                 <div class="col-2" style="text-align:center">
-                                    <label i18n><strong>Servings</strong></label>
+                                    <label><strong>Servings</strong></label>
                                 </div>
                                 <div class="col-2" style="text-align:center">
-                                    <label i18n><strong>Sugar(g)</strong></label>
+                                    <label><strong>Sugar(g)</strong></label>
                                 </div>
                             </div>
                             <div *ngFor="let choice of result.userChoices">
@@ -411,12 +411,12 @@
 
                             <!-- Calculations breakdown -->
                             <div class="tableDiv">
-                                <h6 i18n>Nutrient Breakdown</h6>
+                                <h6>Nutrient Breakdown</h6>
                                 <div class="row">
                                     <table class="col-12">
                                         <tr>
-                                            <th i18n>Nutrient</th>
-                                            <th i18n>Daily Average</th>
+                                            <th>Nutrient</th>
+                                            <th>Daily Average</th>
                                         </tr>
                                         <!-- Below code changed to show requested digits by PO-->
                                         <tr *ngFor="let item of result.dailyAverages | keyvalue : returnZero; let i=index">
@@ -429,7 +429,7 @@
                             </div>
                             <br>
                             <div style="text-align:center">
-                                <button mat-raised-button (click)="toggleParentResults(i)" i18n>
+                                <button mat-raised-button (click)="toggleParentResults(i)">
                                   <i class="fa fa-minus-square-o"></i> Close Results
                                 </button>
                             </div>
@@ -442,7 +442,7 @@
 
 
     <div [hidden]="showParticipant" class="container mt-3" *ngIf="participantResults.length != 0">
-      <label style="font-weight:bold" i18n> Participant Questionnaire Results </label>
+      <label style="font-weight:bold"> Participant Questionnaire Results </label>
       <div *ngFor="let result of participantResults; let i = index">
         <div class="container">
           <mat-card class="quest-id-card">
@@ -450,19 +450,19 @@
               <!--Labels for questionnaire results-->
               <div class="row">
                 <div class="col-2" style="text-align:center">
-                  <label i18n><strong>Questionnaire ID</strong></label>
+                  <label><strong>Questionnaire ID</strong></label>
                 </div>
                 <div class="col-2" style="text-align:center">
-                  <label i18n><strong>Infant age (In months)</strong></label>
+                  <label ><strong>Infant age (In months)</strong></label>
                 </div>
                 <div class="col-1" style="text-align:center">
-                  <label i18n><strong>Infant Gender</strong></label>
+                  <label><strong>Infant Gender</strong></label>
                 </div>
                 <div class="col-2" style="text-align:center">
-                  <label i18n><strong>Nutrient Results</strong></label>
+                  <label><strong>Nutrient Results</strong></label>
                 </div>
                 <div class="col-2" style="text-align:center">
-                  <label i18n><strong>Food Results</strong></label>
+                  <label><strong>Food Results</strong></label>
                 </div>
               </div>
 
@@ -486,11 +486,11 @@
 
 
                 <div class="col-12 offset-10">
-                  <button mat-raised-button (click)="toggleParticipantResults(i)" i18n>
+                  <button mat-raised-button (click)="toggleParticipantResults(i)">
                      Results
                   </button>
 
-                  <button mat-raised-button class="btn btn-danger" (click)="deleteQuestionnaire(result.questionnaireId)" i18n>
+                  <button mat-raised-button class="btn btn-danger" (click)="deleteQuestionnaire(result.questionnaireId)">
                     Delete
                   </button>
                 </div>
@@ -498,23 +498,23 @@
 
               <!--User choice results-->
               <ng-container *ngIf="result.show">
-                <label class="mt-3 mb-0 ml-3" i18n><strong>User choices</strong> </label>
+                <label class="mt-3 mb-0 ml-3"><strong>User choices</strong> </label>
                 <hr />
                 <div class="row mt-3">
                   <div class="col-3" style="text-align:center">
-                    <label><strong i18n>Name</strong></label>
+                    <label><strong>Name</strong></label>
                   </div>
                   <div class="col-2" style="text-align:center">
-                    <label i18n><strong>Frequency</strong></label>
+                    <label><strong>Frequency</strong></label>
                   </div>
                   <div class="col-2" style="text-align:center">
-                    <label i18n><strong>Frequency Type</strong></label>
+                    <label><strong>Frequency Type</strong></label>
                   </div>
                   <div class="col-2" style="text-align:center">
-                    <label i18n><strong>Servings</strong></label>
+                    <label><strong>Servings</strong></label>
                   </div>
                   <div class="col-2" style="text-align:center">
-                    <label i18n><strong>Sugar(g)</strong></label>
+                    <label><strong>Sugar(g)</strong></label>
                   </div>
                 </div>
                 <div *ngFor="let choice of result.userChoices">
@@ -544,8 +544,8 @@
                   <div class="row">
                     <table class="col-12">
                       <tr>
-                        <th i18n>Nutrient</th>
-                        <th i18n>Daily Average</th>
+                        <th>Nutrient</th>
+                        <th>Daily Average</th>
                       </tr>
                       <!-- Below code changed to show requested digits by PO-->
                       <tr *ngFor="let item of result.dailyAverages | keyvalue : returnZero; let i=index">
@@ -559,7 +559,7 @@
                 <br>
                 <div style="text-align:center">
                   <button mat-raised-button (click)="toggleParticipantResults(i)">
-                    <i class="fa fa-minus-square-o" i18n></i> Close Results
+                    <i class="fa fa-minus-square-o"></i> Close Results
                   </button>
                 </div>
               </ng-container>

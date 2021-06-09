@@ -113,11 +113,13 @@
 	"Servings": "Servings",
 	"Size of each serving": "Size of each serving",
 	"Skip Additional Foods": "Skip Additional Foods",
+	"Submission Error": "Submission Error",
 	"Submit": "Submit",
 	"Submitted Successfully": "Submitted Successfully",
 	"Sugar added": "Sugar added:",
 	"Sugar(g)": "Sugar(g)",
 	"The questionnaire has been sent to the issuer": "The questionnaire has been sent to the issuer.",
+	"Tracker Incomplete": "Tracker Incomplete",
 	"Tracking": "Tracking",
 	"Tracking History": "Tracking History",
 	"Type selection is required": "Type selection is required.",
@@ -125,6 +127,7 @@
 	"User choices": "User choices",
 	"Username is required": "Username is required",
 	"View additional food items": "View additional food items",
+	"Your submission has been recorded": "Your submission has been recorded.",
 	"ageMessage": "Please select infant age",
 	"ageMessage1": "for child 0 to 5.9 months",
 	"ageMessage2": "for child 6 to 11.9 months",
@@ -1586,73 +1589,142 @@
 	"here": "here",
 	"nutrientItem": [
 		{
-			"nutrientName": "Energy (kcal)"
+			"name": "Energy (kcal)"
 		},
 		{
-			"nutrientName": "Protein (g)"
+			"name": "Protein (g)"
 		},
 		{
-			"nutrientName": "Carbohydrate (g)"
+			"name": "Carbohydrate (g)"
 		},
 		{
-			"nutrientName": "Fat (g)"
+			"name": "Fat (g)"
 		},
 		{
-			"nutrientName": "Vitamin A (Retinol) (mcg)"
+			"name": "% Calories from Protein"
 		},
 		{
-			"nutrientName": "Vitamin D (mcg)"
+			"name": "% Calories from Carbs"
 		},
 		{
-			"nutrientName": "Vitamin E (mg)"
+			"name": "% Calories from Fat"
 		},
 		{
-			"nutrientName": "Vitamin K (mcg)"
+			"name": "Animal Protein (g)"
 		},
 		{
-			"nutrientName": "Vitamin C (Ascorbic acid) (mg)"
+			"name": "Vegetable Protein (g)"
 		},
 		{
-			"nutrientName": "Vitamin B1 (Thiamin) (mg)"
+			"name": "Total Dietary Fiber (g)"
 		},
 		{
-			"nutrientName": "Vitamin B2 (Riboflavin) (mg)"
+			"name": "Total Sugars (g)"
 		},
 		{
-			"nutrientName": "Vitamin B3 (Niacin) (mg)"
+			"name": "Added Sugars (by Total Sugars) (g)"
 		},
 		{
-			"nutrientName": "Vitamin B5 (Pantothenic acid) (mg)"
+			"name": "Fructose (g)"
 		},
 		{
-			"nutrientName": "Vitamin B6 (mg)"
+			"name": "Lactose (g)"
 		},
 		{
-			"nutrientName": "Vitamin B9 (Folate) (mcg)"
+			"name": "Starch (g)"
 		},
 		{
-			"nutrientName": "Vitamin B12 (Cobalamin) (mcg)"
+			"name": "Total Grains (ounce equivalents)"
 		},
 		{
-			"nutrientName": "Calcium (mg)"
+			"name": "Whole Grains (ounce equivalents)"
 		},
 		{
-			"nutrientName": "Copper (mg)"
+			"name": "Refined Grains (ounce equivalents)"
 		},
 		{
-			"nutrientName": "Iron (mg)"
+			"name": "Total Saturated Fatty Acids (SFA) (g)"
 		},
 		{
-			"nutrientName": "Magnesium (mg)"
+			"name": "Total Monounsaturated Fatty Acids (MUFA) (g)"
 		},
 		{
-			"nutrientName": "Phosphorus (mg)"
+			"name": "Total Polyunsaturated Fatty Acids (PUFA) (g)"
 		},
 		{
-			"nutrientName": "Potassium (mg)"
+			"name": "Omega-3 Fatty Acids (g)"
 		},
 		{
-			"nutrientName": "Zinc (mg)"
+			"name": "Water (g)"
+		},
+		{
+			"name": "Caffeine (mg)"
+		},
+		{
+			"name": "Vitamin B1 (Thiamin) (mg)"
+		},
+		{
+			"name": "Vitamin B2 (Riboflavin) (mg)"
+		},
+		{
+			"name": "Vitamin B3 (Niacin) (mg)"
+		},
+		{
+			"name": "Vitamin B5 (Pantothenic acid) (mg)"
+		},
+		{
+			"name": "Vitamin B6 (mg)"
+		},
+		{
+			"name": "Vitamin B9 (Folate) (mcg)"
+		},
+		{
+			"name": "Vitamin B12 (Cobalamin) (mcg)"
+		},
+		{
+			"name": "Vitamin C (Ascorbic acid) (mg)"
+		},
+		{
+			"name": "Vitamin A (Retinol) (mcg)"
+		},
+		{
+			"name": "Vitamin D (mcg)"
+		},
+		{
+			"name": "Vitamin E (mg)"
+		},
+		{
+			"name": "Vitamin K (mcg)"
+		},
+		{
+			"name": "Calcium (mg)"
+		},
+		{
+			"name": "Copper (mg)"
+		},
+		{
+			"name": "Iron (mg)"
+		},
+		{
+			"name": "Manganese (mg)"
+		},
+		{
+			"name": "Magnesium (mg)"
+		},
+		{
+			"name": "Phosphorus (mg)"
+		},
+		{
+			"name": "Potassium (mg)"
+		},
+		{
+			"name": "Selenium (mcg)"
+		},
+		{
+			"name": "Sodium (mg)"
+		},
+		{
+			"name": "Zinc (mg)"
 		}
 	],
 	"passwordPlaceHolder": "Password",

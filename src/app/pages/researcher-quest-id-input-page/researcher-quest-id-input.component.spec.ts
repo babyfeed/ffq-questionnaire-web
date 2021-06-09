@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+// @ts-ignore
 import { QuestIdInputComponent } from './researcher-quest-id-input.component';
 
 describe('QuestIdInputComponent', () => {
