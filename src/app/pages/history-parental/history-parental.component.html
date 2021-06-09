@@ -3,7 +3,7 @@
 <div class="container_page">
   <div class="container" *ngIf="results.length === 0">
     <mat-card class="quest-id-card">
-      <h2 matDialogTitle>{{ MESSAGE }}</h2>
+      <h2 matDialogTitle>{{ 'No questionnaires have been submitted yet' | translate }}</h2>
     </mat-card>
   </div>
   <div *ngFor="let result of results; let i = index">
@@ -94,7 +94,7 @@
 
           <!--User choice results-->
           <ng-container *ngIf="result.show">
-            <label class="mt-3 mb-0 ml-3"><strong>User choices</strong> </label>
+            <label class="mt-3 mb-0 ml-3"><strong>{{'User choices' | translate}}</strong> </label>
             <hr />
             <div class="row mt-3">
               <div class="col-4" style="text-align:center">
@@ -113,10 +113,10 @@
                 <label i18n><strong translate>Sugar(g)</strong></label>
               </div>
             </div>
-            <div *ngFor="let choice of result.userChoices">
+            <div *ngFor="let choice of result.userChoices; let i = index">
               <div class="row" style="text-align:center">
                 <div class="col-4">
-                  {{ choice.name }}
+                  {{ 'foodChoice.' + i +'.name' | translate }}
                 </div>
                 <div class="col-2">
                   {{ choice.frequency }}
@@ -151,6 +151,7 @@
                     "
                   >
                     <!--td *ngIf="i != 0 && i != 1 && i != 2"-->
+                    <!-- This item.key is really random with each result, Its really hard to dynamically translate this. -->
                     <td>{{ item.key }}</td>
                     <!--Khalid, changed item.value to display 3 digits-->
                     <!--td *ngIf="i != 0 && i != 1 && i != 2"-->
