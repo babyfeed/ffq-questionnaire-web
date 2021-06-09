@@ -88,7 +88,7 @@ export class TrackerPageComponent implements OnInit {
       this.trackerResponseService.submitTracker(this.trackerResponse).subscribe(() => {
         const dialogRef = this.successDialog.open(ErrorDialogPopupComponent);
         dialogRef.componentInstance.title = this.translate.instant('Submitted Successfully');
-        dialogRef.componentInstance.message = this.translate.instant('Your submission has been recorded.');
+        dialogRef.componentInstance.message = this.translate.instant('Your submission has been recorded');
         this.router.navigate(['parent/tracker-history']);
       }, (error: HttpErrorResponse) => {
         const  dialogRef  = this.submissionErrorDialog.open(ErrorDialogPopupComponent);
@@ -100,7 +100,7 @@ export class TrackerPageComponent implements OnInit {
     } else {
       const  dialogRef  = this.submissionErrorDialog.open(ErrorDialogPopupComponent);
       dialogRef.componentInstance.title = this.translate.instant('Tracker Incomplete');
-      dialogRef.componentInstance.message = this.translate.instant('Please ensure all required fields are completed.');
+      dialogRef.componentInstance.message = this.translate.instant('Please ensure all required fields are completed');
     }
   }
 
