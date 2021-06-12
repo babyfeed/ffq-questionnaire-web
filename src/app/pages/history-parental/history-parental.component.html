@@ -55,7 +55,7 @@
               {{ result.ageInMonths }}
             </div>
             <div class="col-1" style="text-align:center">
-              {{ result.gender }}
+              {{ result.gender | translate }}
             </div>
             <div class="col-2" style="text-align:center; cursor:pointer">
               <a (click)="getNutrientsRecommendations(result.questionnaireId)"
