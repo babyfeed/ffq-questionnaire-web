@@ -8,6 +8,7 @@ import { ErrorDialogPopupComponent } from '../error-dialog-popup/error-dialog-po
 import { FFQNutrientsRecommendations, Recommendation } from 'src/app/models/ffqnutrients-recommendations';
 import { FoodRecommendationsService } from 'src/app/services/food-recommendation-service/food-recommendations.service';
 import { FFQFoodRecommendations } from 'src/app/models/ffqfood-recommendations';
+import { TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-recommend-modal',
@@ -22,7 +23,8 @@ export class FoodRecommendModalComponent {
     public foodRecommendationsService: FoodRecommendationsService,
     private modalService: NgbModal,
     private errorDialog: MatDialog,
-    private router: Router, ) { }
+    private router: Router,
+    private translate: TranslateService) { }
 
   recommendedFood: FFQFoodRecommendations[] = [];
 
@@ -41,9 +43,9 @@ export class FoodRecommendModalComponent {
   color(label: string) {
     let colorLabel;
      switch (label.toLowerCase()) {
-      case 'below': colorLabel = 'yellow'; break;
-      case 'above': colorLabel = 'red'; break;
-      case 'little above': colorLabel = 'red'; break;
+      case this.translate.instant('below'): colorLabel = 'yellow'; break;
+      case this.translate.instant('above'): colorLabel = 'red'; break;
+      case this.translate.instant('little above'): colorLabel = 'red'; break;
       default: colorLabel = 'green'; break;
     }
     return colorLabel;

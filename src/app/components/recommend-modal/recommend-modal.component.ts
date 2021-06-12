@@ -6,6 +6,7 @@ import { MatDialog } from "@angular/material/dialog";
 import {
   FFQNutrientsRecommendations,
 } from "src/app/models/ffqnutrients-recommendations";
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: "app-recommend-modal",
