@@ -48,5 +48,7 @@ h2 {
 .need-help {
   position: page;
   margin-top: 30px;
+  background-color: white;
+  color: black;
 
 }

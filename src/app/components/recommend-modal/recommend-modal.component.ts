@@ -40,13 +40,16 @@ export class RecommendModalComponent {
   color(a: string) {
     const b = a.split(" ", 1);
     if (b[0] === "Below") {
-      return "below";
+      return 'below';
     } else if (b[0] === "Above") {
-      return "above";
+      return 'above';
     } else if (b[0] === "Normal") {
-      return "normal";
-    } else if (b[0] == "Adequate") {
-      return "adequate";
+      return 'normal';
+    } else if (b[0] === "Adequate") {
+      return 'adequate';
+    }else if (b[0] === "Little" && b[1] === "below")
+    {
+      return 'littlebelow';
     }
   }
 }

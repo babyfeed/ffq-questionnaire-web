@@ -9,8 +9,8 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class QuestionBlockComponent implements OnChanges {
   FREQUENCY_TYPES = [
-    this.translate.instant('Week'),
-    this.translate.instant('Day')
+    'Week',
+    'Day',
   ];
   @Input() foodItem: FFQItem;
 
