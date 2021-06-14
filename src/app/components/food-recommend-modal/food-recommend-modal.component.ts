@@ -42,10 +42,10 @@ export class FoodRecommendModalComponent {
 
   color(label: string) {
     let colorLabel;
-     switch (label.toLowerCase()) {
-      case this.translate.instant('below'): colorLabel = 'yellow'; break;
-      case this.translate.instant('above'): colorLabel = 'red'; break;
-      case this.translate.instant('little above'): colorLabel = 'red'; break;
+    switch (label.toLowerCase()) {
+      case 'below': colorLabel = 'yellow'; break;
+      case 'above': colorLabel = 'red'; break;
+      case 'little above': colorLabel = 'red'; break;
       default: colorLabel = 'green'; break;
     }
     return colorLabel;
