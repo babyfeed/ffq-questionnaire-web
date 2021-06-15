@@ -1,4 +1,7 @@
 {
+	"% Calories from Carbs": "% Calories from Carbs",
+	"% Calories from Fat": "% Calories from Fat",
+	"% Calories from Protein": "% Calories from Protein",
 	"0 to 5.9 Months": "0 to 5.9 Months",
 	"0.25 OZ or a quarter of a bag": "0.25 OZ or a quarter of a bag",
 	"0.25 piece of cake, muffin, donut": "0.25 piece of cake, muffin, donut",
@@ -60,6 +63,7 @@
 	"8 OZ (1 cup)": "8 OZ (1 cup)",
 	"8 tsp": "8 tsp",
 	"Above": "Above",
+	"Added Sugars (by Total Sugars) (g)": "Added Sugars (by Total Sugars) (g)",
 	"Additional Recommendations and Feedback": "Additional Recommendations and Feedback",
 	"Adequate": "Adequate",
 	"After age 6 months, your baby should eat a variety of healthy foods because good eating habits start early": "After age 6 months, your baby should eat a variety of healthy foods because good eating habits start early.",
@@ -67,6 +71,7 @@
 	"Age cannot be in decimal": "Age cannot be in decimal",
 	"Age cannot be negative": "Age cannot be negative",
 	"All open question blocks must be completely filled out before submitting the questionnaire": "All open question blocks must be completely filled out before submitting the questionnaire",
+	"Animal Protein (g)": "Animal Protein (g)",
 	"Apple": "Apple",
 	"Baby food": "Baby food",
 	"Baby juice": "Baby juice",
@@ -77,10 +82,13 @@
 	"Below": "Below",
 	"Bread (examples: sandwich bread, dinner roll, bagel, French bread, tortilla...)": "Bread (examples: sandwich bread, dinner roll, bagel, French bread, tortilla...)",
 	"Breast milk": "Breast milk",
+	"Caffeine (mg)": "Caffeine (mg)",
 	"Cake, muffins, donuts, etc.": "Cake, muffins, donuts, etc.",
+	"Calcium (mg)": "Calcium (mg)",
 	"Calculated Amount (Oz)": "Calculated Amount (Oz)",
 	"Candies (chocolate, gummies, M&Ms, lollipop, etc.)": "Candies (chocolate, gummies, M&Ms, lollipop, etc.)",
 	"Canned": "Canned",
+	"Carbohydrate (g)": "Carbohydrate (g)",
 	"Carrot": "Carrot",
 	"Cereal added to milk (examples: rice, wheat, mixed cereals, etc.)": "Cereal added to milk (examples: rice, wheat, mixed cereals, etc.)",
 	"Cheese": "Cheese",
@@ -90,6 +98,7 @@
 	"Click the submit button at the bottom of the form when finished": "Click the submit button at the bottom of the form when finished",
 	"Click the submit button when finished": "Click the submit button when finished.",
 	"Cookies (sugar cookies, chocolate chips, oats, vanilla, etc.)": "Cookies (sugar cookies, chocolate chips, oats, vanilla, etc.)",
+	"Copper (mg)": "Copper (mg)",
 	"Corn": "Corn",
 	"Cows milk (white milk, alone, without flavor)": "Cows milk (white milk, alone, without flavor)",
 	"Crackers (examples: soda, Ritz, Cheese-it, etc.)": "Crackers (examples: soda, Ritz, Cheese-it, etc.)",
@@ -97,12 +106,14 @@
 	"Date": "Date",
 	"Day": "Day",
 	"Egg": "Egg",
+	"Energy (kcal)": "Energy (kcal)",
 	"Enter Age": "Enter Age",
 	"Equal": "Equal",
 	"Error Fetching Food Items": "Error Fetching Food Items",
 	"Error Submitting Questionnaire": "Error Submitting Questionnaire",
 	"Error Validating Id": "Error Validating Id",
 	"Extra Sugar": "Extra Sugar",
+	"Fat (g)": "Fat (g)",
 	"Female": "Female",
 	"Fish": "Fish",
 	"Food Frequency Questionnaire": "Food Frequency Questionnaire",
@@ -117,6 +128,7 @@
 	"Frequency Type": "Frequency Type",
 	"Fresh": "Fresh",
 	"From (Oz)": "From (Oz)",
+	"Fructose (g)": "Fructose (g)",
 	"Gender is required": "Gender is required.",
 	"Goal Setting": "Goal Setting",
 	"Green beans": "Green beans",
@@ -137,6 +149,7 @@
 	"Infant age (In months)": "Infant age (In months)",
 	"Infant gender": "Infant gender",
 	"Instructions": "Instructions:",
+	"Iron (mg)": "Iron (mg)",
 	"Jar/Canned": "Jar / Canned",
 	"Jar/Canned/Frozen": "Jar/Canned/Frozen",
 	"Kool-Aid, Tang, Iced Tea (examples: Nestea, Lipton, etc.)": "Kool-Aid, Tang, Iced Tea (examples: Nestea, Lipton, etc.)",
@@ -147,14 +160,18 @@
 		}
 	},
 	"Label": "Label",
+	"Lactose (g)": "Lactose (g)",
+	"Little above": "Little above",
 	"Little below": "Little below",
 	"Log out": "Log out",
 	"Login": "Login",
+	"Magnesium (mg)": "Magnesium (mg)",
 	"Male": "Male",
+	"Manganese (mg)": "Manganese (mg)",
 	"Mango and papaya": "Mango and papaya",
 	"Margarine/Butter": "Margarine/Butter",
 	"Melon": "Melon",
-	"Milk with chocolate/strawberry or vanilla (include frozen beverages, shakes, hot chocolate, etc.)": "Milk with chocolate/strawberry or vanilla (include frozen beverages, shakes, hot chocolate, etc.)",
+	"Milk with chocolate, strawberry, or vanilla (include Nido, frozen beverages, milk shakes, hot chocolate, etc.)": "Milk with chocolate, strawberry, or vanilla (include Nido, frozen beverages, milk shakes, hot chocolate, etc.)",
 	"Months": "Months",
 	"NUTRITION": {
 		"INSTRUCTIONS": "Instructions:",
@@ -188,6 +205,7 @@
 	"Nutrient name": "Nutrient name",
 	"Nutrients": "Nutrients",
 	"Oil": "Oil",
+	"Omega-3 Fatty Acids (g)": "Omega-3 Fatty Acids (g)",
 	"Oops number of times must be greater than zero": "Oops!..number of times must be greater than zero.",
 	"Orange juice 100% (not orange beverage)": "Orange juice 100% (not orange beverage)",
 	"Other": "Other",
@@ -208,12 +226,15 @@
 	"Peanuts, peanut butter and other nuts": "Peanuts, peanut butter and other nuts",
 	"Pear": "Pear",
 	"PediaSure (Grow & Gain Shakes)": "PediaSure (Grow & Gain Shakes)",
+	"Phosphorus (mg)": "Phosphorus (mg)",
 	"Pizza, turnovers, tacos, other fried foods, etc": "Pizza, turnovers, tacos, other fried foods, etc",
 	"Plantain": "Plantain",
 	"Please complete the tracking once a week": "Please complete the tracking once a week.",
 	"Please ensure all required fields are completed": "Please ensure all required fields are completed.",
 	"Please enter the number servings per week or per day": "Please enter the number servings per week or per day",
+	"Potassium (mg)": "Potassium (mg)",
 	"Potato or sweet potato": "Potato or sweet potato",
+	"Protein (g)": "Protein (g)",
 	"Pumpkin/Squash": "Pumpkin/Squash",
 	"Questionnaire": "Questionnaire",
 	"Questionnaire ID": "Questionnaire ID",
@@ -231,15 +252,14 @@
 	"Ready to eat breakfast cereals with sugar (examples: Corn Pops, Fruity Pebbles, Frosted Flakes, Trix, Lucky Charms, Cocoa Puffs, Froot Loops, etc.)": "Ready to eat breakfast cereals with sugar (examples: Corn Pops, Fruity Pebbles, Frosted Flakes, Trix, Lucky Charms, Cocoa Puffs, Froot Loops, etc.)",
 	"Recommendations": "Recommendations",
 	"Recommended value": "Recommended value",
+	"Refined Grains (ounce equivalents)": "Refined Grains (ounce equivalents)",
 	"Regular": "Regular",
 	"Regular juice": "Regular juice",
 	"Results": "Results",
 	"Review the food groups in the \"Recommendations\" tab to help you plan your baby's menu for this week": "Review the food groups in the \"Recommendations\" tab to help you plan your baby's menu for this week",
 	"Rice and Pasta": "Rice and Pasta",
 	"Select infant age range:": "Select infant age range:",
-	"Server returned 0 food items": {
-		"Please contact administrator": ""
-	},
+	"Selenium (mcg)": "Selenium (mcg)",
 	"Server returned 0 food items Please contact administrator": "Server returned 0 food items. Please contact administrator.",
 	"Serving selection is required": "Serving selection is required.",
 	"Serving sizes for the questionnaire are reviewed": "Serving sizes for the questionnaire are reviewed",
@@ -247,7 +267,9 @@
 	"Size of each serving": "Size of each serving",
 	"Skip Additional Foods": "Skip Additional Foods",
 	"Sodas (examples: Coca-Cola, Pepsi, 7-Up, Fanta, Malta, etc.)": "Sodas (examples: Coca-Cola, Pepsi, 7-Up, Fanta, Malta, etc.)",
+	"Sodium (mg)": "Sodium (mg)",
 	"Soy products: tofu, soy frozen desserts, etc.": "Soy products: tofu, soy frozen desserts, etc.",
+	"Starch (g)": "Starch (g)",
 	"Submission Error": "Submission Error",
 	"Submit": "Submit",
 	"Submitted Successfully": "Submitted Successfully",
@@ -255,6 +277,12 @@
 	"Sugar(g)": "Sugar(g)",
 	"The questionnaire has been sent to the issuer": "The questionnaire has been sent to the issuer.",
 	"To (Oz)": "To (Oz)",
+	"Total Dietary Fiber (g)": "Total Dietary Fiber (g)",
+	"Total Grains (ounce equivalents)": "Total Grains (ounce equivalents)",
+	"Total Monounsaturated Fatty Acids (MUFA) (g)": "Total Monounsaturated Fatty Acids (MUFA) (g)",
+	"Total Polyunsaturated Fatty Acids (PUFA) (g)": "Total Polyunsaturated Fatty Acids (PUFA) (g)",
+	"Total Saturated Fatty Acids (SFA) (g)": "Total Saturated Fatty Acids (SFA) (g)",
+	"Total Sugars (g)": "Total Sugars (g)",
 	"Tracker Incomplete": "Tracker Incomplete",
 	"Tracking": "Tracking",
 	"Tracking History": "Tracking History",
@@ -263,12 +291,27 @@
 	"User choices": "User choices",
 	"User input calculations": "User input calculations",
 	"Username is required": "Username is required",
+	"Vegetable Protein (g)": "Vegetable Protein (g)",
 	"View additional food items": "View additional food items",
+	"Vitamin A (Retinol) (mcg)": "Vitamin A (Retinol) (mcg)",
+	"Vitamin B1 (Thiamin) (mg)": "Vitamin B1 (Thiamin) (mg)",
+	"Vitamin B12 (Cobalamin) (mcg)": "Vitamin B12 (Cobalamin) (mcg)",
+	"Vitamin B2 (Riboflavin) (mg)": "Vitamin B2 (Riboflavin) (mg)",
+	"Vitamin B3 (Niacin) (mg)": "Vitamin B3 (Niacin) (mg)",
+	"Vitamin B5 (Pantothenic acid) (mg)": "Vitamin B5 (Pantothenic acid) (mg)",
+	"Vitamin B6 (mg)": "Vitamin B6 (mg)",
+	"Vitamin B9 (Folate) (mcg)": "Vitamin B9 (Folate) (mcg)",
+	"Vitamin C (Ascorbic acid) (mg)": "Vitamin C (Ascorbic acid) (mg)",
+	"Vitamin D (mcg)": "Vitamin D (mcg)",
+	"Vitamin E (mg)": "Vitamin E (mg)",
 	"Water": "Water",
+	"Water (g)": "Water (g)",
 	"Week": "Week",
+	"Whole Grains (ounce equivalents)": "Whole Grains (ounce equivalents)",
 	"Whole grain": "Whole grain",
 	"Yogurt": "Yogurt",
 	"Your submission has been recorded": "Your submission has been recorded.",
+	"Zinc (mg)": "Zinc (mg)",
 	"ageMessage": "Please select infant age",
 	"ageMessage1": "for child 0 to 5.9 months",
 	"ageMessage2": "for child 6 to 11.9 months",
@@ -276,1601 +319,8 @@
 	"buttonName": "Results",
 	"cancel": "Cancel",
 	"female": "female",
-	"foodChoice": [
-		{
-			"foodTypes": [
-				{
-					"category": "Breastmilk/Formula/Cows Milk/Other milks",
-					"nutrientListID": "brea"
-				}
-			],
-			"name": "Breast milk"
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Breastmilk/Formula/Cows Milk/Other milks",
-					"nutrientListID": "form"
-				}
-			],
-			"name": "Formula",
-			"servingsList": [
-				{
-					"servingName": "1 OZ"
-				},
-				{
-					"servingName": "2 OZ"
-				},
-				{
-					"servingName": "3 OZ"
-				},
-				{
-					"servingName": "4 OZ"
-				},
-				{
-					"servingName": "5 OZ"
-				},
-				{
-					"servingName": "6 OZ"
-				},
-				{
-					"servingName": "7 OZ"
-				},
-				{
-					"servingName": "8 OZ"
-				},
-				{
-					"servingName": "9 OZ"
-				},
-				{
-					"servingName": "10 OZ"
-				},
-				{
-					"servingName": "11 OZ"
-				},
-				{
-					"servingName": "12 OZ"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "N/A",
-					"nutrientListID": "wate"
-				}
-			],
-			"name": "Water"
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Breastmilk/Formula/Cows Milk/Other milks",
-					"nutrientListID": "milkcow"
-				}
-			],
-			"name": "Cows milk (white milk, alone, without flavor)",
-			"servingsList": [
-				{
-					"servingName": "4 OZ or less"
-				},
-				{
-					"servingName": "6 OZ"
-				},
-				{
-					"servingName": "8 OZ"
-				},
-				{
-					"servingName": "10 OZ"
-				},
-				{
-					"servingName": "12 OZ or more"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Breastmilk/Formula/Cows Milk/Other milks",
-					"nutrientListID": "milkchoc"
-				}
-			],
-			"name": "Milk with chocolate/strawberry or vanilla (include frozen beverages, shakes, hot chocolate, etc.)",
-			"servingsList": [
-				{
-					"servingName": "4 OZ or less"
-				},
-				{
-					"servingName": "6 OZ"
-				},
-				{
-					"servingName": "8 OZ"
-				},
-				{
-					"servingName": "10 OZ"
-				},
-				{
-					"servingName": "12 OZ or more"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Breastmilk/Formula/Cows Milk/Other milks",
-					"nutrientListID": "milkothe"
-				}
-			],
-			"name": "Other milks (example: soy, rice, almond, goat, etc.)",
-			"servingsList": [
-				{
-					"servingName": "4 OZ or less"
-				},
-				{
-					"servingName": "6 OZ"
-				},
-				{
-					"servingName": "8 OZ"
-				},
-				{
-					"servingName": "10 OZ"
-				},
-				{
-					"servingName": "12 OZ or more"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Breastmilk/Formula/Cows Milk/Other milks",
-					"nutrientListID": "pds"
-				}
-			],
-			"name": "PediaSure (Grow & Gain Shakes)",
-			"servingsList": [
-				{
-					"servingName": "2 OZ"
-				},
-				{
-					"servingName": "4 OZ"
-				},
-				{
-					"servingName": "6 OZ"
-				},
-				{
-					"servingName": "8 OZ"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Proteins",
-					"nutrientListID": "chee"
-				}
-			],
-			"name": "Cheese"
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Sweet",
-					"nutrientListID": "icec"
-				}
-			],
-			"name": "Ice Cream"
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Proteins",
-					"nutrientListID": "yogu"
-				}
-			],
-			"name": "Yogurt",
-			"servingsList": [
-				{
-					"servingName": "0.5 cup"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Proteins",
-					"nutrientListID": "soyp"
-				}
-			],
-			"name": "Soy products: tofu, soy frozen desserts, etc."
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Sugary Beverages",
-					"nutrientListID": "oranjuic"
-				}
-			],
-			"name": "Orange juice 100% (not orange beverage)"
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "100% Juices",
-					"nutrientListID": "fruireg",
-					"typeName": "Regular juice"
-				},
-				{
-					"category": "100% Juices",
-					"nutrientListID": "fruibaby",
-					"typeName": "Baby juice"
-				}
-			],
-			"name": "100% fruit juice (examples: apple, pear, grape, cranberry, etc.)",
-			"servingsList": [
-				{
-					"servingName": "2 OZ"
-				},
-				{
-					"servingName": "4 OZ"
-				},
-				{
-					"servingName": "6 OZ"
-				},
-				{
-					"servingName": "8 OZ"
-				},
-				{
-					"servingName": "10 OZ or more"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "100% Juices",
-					"nutrientListID": "vegereg",
-					"typeName": "Regular juice"
-				},
-				{
-					"category": "100% Juices",
-					"nutrientListID": "vegejbaby",
-					"typeName": "Baby juice"
-				}
-			],
-			"name": "100% vegetable juice (examples: carrot, tomato, etc.)",
-			"servingsList": [
-				{
-					"servingName": "2 OZ"
-				},
-				{
-					"servingName": "4 OZ"
-				},
-				{
-					"servingName": "6 OZ"
-				},
-				{
-					"servingName": "8 OZ"
-				},
-				{
-					"servingName": "10 OZ or more"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Sugary Beverages",
-					"nutrientListID": "fruidrin"
-				}
-			],
-			"name": "Other fruit beverages (examples: Hi-C, Space gang, Sunny D, etc.)",
-			"servingsList": [
-				{
-					"servingName": "2 OZ"
-				},
-				{
-					"servingName": "4 OZ"
-				},
-				{
-					"servingName": "6 OZ"
-				},
-				{
-					"servingName": "8 OZ"
-				},
-				{
-					"servingName": "10 OZ"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Sugary Beverages",
-					"nutrientListID": "soda"
-				}
-			],
-			"name": "Sodas (examples: Coca-Cola, Pepsi, 7-Up, Fanta, Malta, etc.)",
-			"servingsList": [
-				{
-					"servingName": "2 OZ"
-				},
-				{
-					"servingName": "4 OZ"
-				},
-				{
-					"servingName": "6 OZ"
-				},
-				{
-					"servingName": "8 OZ"
-				},
-				{
-					"servingName": "10 OZ"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Sugary Beverages",
-					"nutrientListID": "kool"
-				}
-			],
-			"name": "Kool-Aid, Tang, Iced Tea (examples: Nestea, Lipton, etc.)",
-			"servingsList": [
-				{
-					"servingName": "2 OZ"
-				},
-				{
-					"servingName": "4 OZ"
-				},
-				{
-					"servingName": "6 OZ"
-				},
-				{
-					"servingName": "8 OZ"
-				},
-				{
-					"servingName": "10 OZ"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Refined Grains",
-					"nutrientListID": "cererefi",
-					"typeName": "Regular"
-				},
-				{
-					"category": "Whole Grains",
-					"nutrientListID": "cerewhol",
-					"typeName": "Whole grain"
-				}
-			],
-			"name": "Hot cereal (examples: rice cereal, cream of wheat, oatmeal, corn mush, etc.)",
-			"servingsList": [
-				{
-					"servingName": "1 OZ (2 tbsp.)"
-				},
-				{
-					"servingName": "2.5 OZ (5 tbsp.)"
-				},
-				{
-					"servingName": "4 OZ (0.5 cup/8 tbsp)"
-				},
-				{
-					"servingName": "6 OZ (0.75 cup/10tbsp)"
-				},
-				{
-					"servingName": "8 OZ (1 cup)"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Whole Grains",
-					"nutrientListID": "ceremilk"
-				}
-			],
-			"name": "Cereal added to milk (examples: rice, wheat, mixed cereals, etc.)",
-			"servingsList": [
-				{
-					"servingName": "1 tsp or less"
-				},
-				{
-					"servingName": "2 tsp"
-				},
-				{
-					"servingName": "3 tsp"
-				},
-				{
-					"servingName": "4 tsp"
-				},
-				{
-					"servingName": "5 tsp"
-				},
-				{
-					"servingName": "6 tsp"
-				},
-				{
-					"servingName": "7 tsp"
-				},
-				{
-					"servingName": "8 tsp"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Refined Grains",
-					"nutrientListID": "breahigh"
-				}
-			],
-			"name": "Ready to eat breakfast cereals with sugar (examples: Corn Pops, Fruity Pebbles, Frosted Flakes, Trix, Lucky Charms, Cocoa Puffs, Froot Loops, etc.)",
-			"servingsList": [
-				{
-					"servingName": "1 OZ (2 tbsp.)"
-				},
-				{
-					"servingName": "2.5 OZ (5 tbsp.)"
-				},
-				{
-					"servingName": "4 OZ (0.5 cup/8 tbsp)"
-				},
-				{
-					"servingName": "6 OZ (0.75 cup/10tbsp)"
-				},
-				{
-					"servingName": "8 OZ (1 cup)"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Whole Grains",
-					"nutrientListID": "brealow"
-				}
-			],
-			"name": "Ready to eat breakfast cereals low in sugar (examples: Corn flakes, regular Cheerios, Life, Corn or Rice Chex, Grape nuts, etc.)",
-			"servingsList": [
-				{
-					"servingName": "1 OZ (2 tbsp.)"
-				},
-				{
-					"servingName": "2.5 OZ (5 tbsp.)"
-				},
-				{
-					"servingName": "4 OZ (0.5 cup/8 tbsp)"
-				},
-				{
-					"servingName": "6 OZ (0.75 cup/10tbsp)"
-				},
-				{
-					"servingName": "8 OZ (1 cup)"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Refined Grains",
-					"nutrientListID": "ricerefi",
-					"typeName": "Regular"
-				},
-				{
-					"category": "Whole Grains",
-					"nutrientListID": "ricewhol",
-					"typeName": "Whole grain"
-				}
-			],
-			"name": "Rice and Pasta",
-			"servingsList": [
-				{
-					"servingName": "1 OZ (2 tbsp.)"
-				},
-				{
-					"servingName": "2.5 OZ (5 tbsp.)"
-				},
-				{
-					"servingName": "4 OZ (0.5 cup/8 tbsp)"
-				},
-				{
-					"servingName": "6 OZ (0.75 cup/10tbsp)"
-				},
-				{
-					"servingName": "8 OZ (1 cup)"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Refined Grains",
-					"nutrientListID": "brearef",
-					"typeName": "Regular"
-				},
-				{
-					"category": "Whole Grains",
-					"nutrientListID": "breawhol",
-					"typeName": "Whole grain"
-				}
-			],
-			"name": "Bread (examples: sandwich bread, dinner roll, bagel, French bread, tortilla...)",
-			"servingsList": [
-				{
-					"servingName": "0.5 slice/roll/piece"
-				},
-				{
-					"servingName": "0.75 slice/roll/piece"
-				},
-				{
-					"servingName": "1 slice/roll/piece"
-				},
-				{
-					"servingName": "1.5 slices/rolls/pieces"
-				},
-				{
-					"servingName": "2 slices/rolls/pieces"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Refined Grains",
-					"nutrientListID": "pancrefi",
-					"typeName": "Regular"
-				},
-				{
-					"category": "Whole Grains",
-					"nutrientListID": "pancwhol",
-					"typeName": "Whole Grain"
-				}
-			],
-			"name": "Pancake, waffles, French toast, cinammon rolls, etc.",
-			"servingsList": [
-				{
-					"servingName": "0.5 pancake/waffle/toast/roll"
-				},
-				{
-					"servingName": "0.75 pancake/waffle/toast/roll"
-				},
-				{
-					"servingName": "1 pancake/waffle/toast/roll"
-				},
-				{
-					"servingName": "1.5 pancake/waffle/toast/roll"
-				},
-				{
-					"servingName": "2 pancake/waffle/toast/roll"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Refined Grains",
-					"nutrientListID": "cracrefi",
-					"typeName": "Regular"
-				},
-				{
-					"category": "Whole Grains",
-					"nutrientListID": "cracwhol",
-					"typeName": "Whole grain"
-				}
-			],
-			"name": "Crackers (examples: soda, Ritz, Cheese-it, etc.)",
-			"servingsList": [
-				{
-					"servingName": "1 cracker/4 Ritz/0.5 oz Cheese-it"
-				},
-				{
-					"servingName": "2 crackers/8 Ritz/1 oz Cheese-it"
-				},
-				{
-					"servingName": "3 crackers/12 Ritz/1.5 oz Cheese-it"
-				},
-				{
-					"servingName": "4 crackers/16 Ritz/2 oz Cheese-it"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Refined Grains",
-					"nutrientListID": "pizz"
-				}
-			],
-			"name": "Pizza, turnovers, tacos, other fried foods, etc.",
-			"servingsList": [
-				{
-					"servingName": "0.25 slice of medium pizza/taco/turnover"
-				},
-				{
-					"servingName": "0.5 slice of medium pizza/taco/turnover"
-				},
-				{
-					"servingName": "1 slice of medium pizza/taco/turnover"
-				},
-				{
-					"servingName": "1.5 slices of medium pizza/taco/turnover"
-				},
-				{
-					"servingName": "2 slices of medium pizza/taco/turnover"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Fruits",
-					"nutrientListID": "banafres",
-					"typeName": "Fresh"
-				},
-				{
-					"category": "Fruits",
-					"nutrientListID": "banababy",
-					"typeName": "Baby food"
-				}
-			],
-			"name": "Banana",
-			"servingsList": [
-				{
-					"servingName": "1 OZ (2 tbsp.)"
-				},
-				{
-					"servingName": "2.5 OZ (5 tbsp.)"
-				},
-				{
-					"servingName": "4 OZ (0.5 cup/8 tbsp.)"
-				},
-				{
-					"servingName": "6 OZ (0.75 cup/10 tbsp.)"
-				},
-				{
-					"servingName": "8 OZ (1 cup)"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Fruits",
-					"nutrientListID": "applfres",
-					"typeName": "Fresh"
-				},
-				{
-					"category": "Fruits",
-					"nutrientListID": "applbaby",
-					"typeName": "Baby food"
-				},
-				{
-					"category": "Fruits",
-					"nutrientListID": "appljar",
-					"typeName": "Jar/Canned"
-				}
-			],
-			"name": "Apple",
-			"servingsList": [
-				{
-					"servingName": "1 OZ (2 tbsp.)"
-				},
-				{
-					"servingName": "2.5 OZ (5 tbsp.)"
-				},
-				{
-					"servingName": "4 OZ (0.5 cup/8 tbsp.)"
-				},
-				{
-					"servingName": "6 OZ (0.75 cup/10 tbsp.)"
-				},
-				{
-					"servingName": "8 OZ (1 cup)"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Fruits",
-					"nutrientListID": "pearfres",
-					"typeName": "Fresh"
-				},
-				{
-					"category": "Fruits",
-					"nutrientListID": "pearbaby",
-					"typeName": "Baby food"
-				},
-				{
-					"category": "Fruits",
-					"nutrientListID": "pearjar",
-					"typeName": "Jar/Canned"
-				}
-			],
-			"name": "Pear",
-			"servingsList": [
-				{
-					"servingName": "1 OZ (2 tbsp.)"
-				},
-				{
-					"servingName": "2.5 OZ (5 tbsp.)"
-				},
-				{
-					"servingName": "4 OZ (0.5 cup/8 tbsp.)"
-				},
-				{
-					"servingName": "6 OZ (0.75 cup/10 tbsp.)"
-				},
-				{
-					"servingName": "8 OZ (1 cup)"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Fruits",
-					"nutrientListID": "citrfres",
-					"typeName": "Fresh"
-				},
-				{
-					"category": "Fruits",
-					"nutrientListID": "citrjar",
-					"typeName": "Jar/Canned"
-				}
-			],
-			"name": "Citrus fruits (examples: orange, mandarin, etc.)",
-			"servingsList": [
-				{
-					"servingName": "1 OZ (2 tbsp.)"
-				},
-				{
-					"servingName": "2.5 OZ (5 tbsp.)"
-				},
-				{
-					"servingName": "4 OZ (0.5 cup/8 tbsp.)"
-				},
-				{
-					"servingName": "6 OZ (0.75 cup/10 tbsp.)"
-				},
-				{
-					"servingName": "8 OZ (1 cup)"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Fruits",
-					"nutrientListID": "melofre",
-					"typeName": "Fresh"
-				}
-			],
-			"name": "Melon",
-			"servingsList": [
-				{
-					"servingName": "1 OZ (2 tbsp.)"
-				},
-				{
-					"servingName": "2.5 OZ (5 tbsp.)"
-				},
-				{
-					"servingName": "4 OZ (0.5 cup/8 tbsp.)"
-				},
-				{
-					"servingName": "6 OZ (0.75 cup/10 tbsp.)"
-				},
-				{
-					"servingName": "8 OZ (1 cup)"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Fruits",
-					"nutrientListID": "mangfres",
-					"typeName": "Fresh"
-				},
-				{
-					"category": "Fruits",
-					"nutrientListID": "mangbaby",
-					"typeName": "Baby food"
-				}
-			],
-			"name": "Mango and papaya",
-			"servingsList": [
-				{
-					"servingName": "1 OZ (2 tbsp.)"
-				},
-				{
-					"servingName": "2.5 OZ (5 tbsp.)"
-				},
-				{
-					"servingName": "4 OZ (0.5 cup/8 tbsp.)"
-				},
-				{
-					"servingName": "6 OZ (0.75 cup/10 tbsp.)"
-				},
-				{
-					"servingName": "8 OZ (1 cup)"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Fruits",
-					"nutrientListID": "othefres",
-					"typeName": "Fresh"
-				},
-				{
-					"category": "Fruits",
-					"nutrientListID": "othebaby",
-					"typeName": "Baby food"
-				},
-				{
-					"category": "Fruits",
-					"nutrientListID": "othejar",
-					"typeName": "Jar/Canned"
-				}
-			],
-			"name": "Other fruits",
-			"servingsList": [
-				{
-					"servingName": "1 OZ (2 tbsp.)"
-				},
-				{
-					"servingName": "2.5 OZ (5 tbsp.)"
-				},
-				{
-					"servingName": "4 OZ (0.5 cup/8 tbsp.)"
-				},
-				{
-					"servingName": "6 OZ (0.75 cup/10 tbsp.)"
-				},
-				{
-					"servingName": "8 OZ (1 cup)"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Vegetables",
-					"nutrientListID": "carrfres",
-					"typeName": "Raw or cooked at home"
-				},
-				{
-					"category": "Vegetables",
-					"nutrientListID": "carrbaby",
-					"typeName": "Baby food"
-				},
-				{
-					"category": "Vegetables",
-					"nutrientListID": "carrjar",
-					"typeName": "Jar/Canned/Frozen"
-				}
-			],
-			"name": "Carrot",
-			"servingsList": [
-				{
-					"servingName": "1 OZ (2 tbsp.)"
-				},
-				{
-					"servingName": "2.5 OZ (5 tbsp.)"
-				},
-				{
-					"servingName": "4 OZ (0.5 cup/8 tbsp.)"
-				},
-				{
-					"servingName": "6 OZ (0.75 cup/10 tbsp.)"
-				},
-				{
-					"servingName": "8 OZ (1 cup)"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Vegetables",
-					"nutrientListID": "greefres",
-					"typeName": "Raw or cooked at home"
-				},
-				{
-					"category": "Vegetables",
-					"nutrientListID": "greebaby",
-					"typeName": "Baby food"
-				},
-				{
-					"category": "Vegetables",
-					"nutrientListID": "greejar",
-					"typeName": "Jar/Canned/Frozen"
-				}
-			],
-			"name": "Green beans",
-			"servingsList": [
-				{
-					"servingName": "1 OZ (2 tbsp.)"
-				},
-				{
-					"servingName": "2.5 OZ (5 tbsp.)"
-				},
-				{
-					"servingName": "4 OZ (0.5 cup/8 tbsp.)"
-				},
-				{
-					"servingName": "6 OZ (0.75 cup/10 tbsp.)"
-				},
-				{
-					"servingName": "8 OZ (1 cup)"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Vegetables",
-					"nutrientListID": "cornfres",
-					"typeName": "Raw or cooked at home"
-				},
-				{
-					"category": "Vegetables",
-					"nutrientListID": "cornbaby",
-					"typeName": "Baby food"
-				},
-				{
-					"category": "Vegetables",
-					"nutrientListID": "cornjar",
-					"typeName": "Jar/Canned/Frozen"
-				}
-			],
-			"name": "Corn",
-			"servingsList": [
-				{
-					"servingName": "1 OZ (2 tbsp.)"
-				},
-				{
-					"servingName": "2.5 OZ (5 tbsp.)"
-				},
-				{
-					"servingName": "4 OZ (0.5 cup/8 tbsp.)"
-				},
-				{
-					"servingName": "6 OZ (0.75 cup/10 tbsp.)"
-				},
-				{
-					"servingName": "8 OZ (1 cup)"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Vegetables",
-					"nutrientListID": "pumpfres",
-					"typeName": "Raw or cooked at home"
-				},
-				{
-					"category": "Vegetables",
-					"nutrientListID": "pumpbaby",
-					"typeName": "Baby food"
-				},
-				{
-					"category": "Vegetables",
-					"nutrientListID": "pumpjar",
-					"typeName": "Jar/Canned/Frozen"
-				}
-			],
-			"name": "Pumpkin/Squash",
-			"servingsList": [
-				{
-					"servingName": "1 OZ (2 tbsp.)"
-				},
-				{
-					"servingName": "2.5 OZ (5 tbsp.)"
-				},
-				{
-					"servingName": "4 OZ (0.5 cup/8 tbsp.)"
-				},
-				{
-					"servingName": "6 OZ (0.75 cup/10 tbsp.)"
-				},
-				{
-					"servingName": "8 OZ (1 cup)"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Vegetables",
-					"nutrientListID": "vegefres",
-					"typeName": "Raw or cooked at home"
-				},
-				{
-					"category": "Vegetables",
-					"nutrientListID": "vegebaby",
-					"typeName": "Baby food"
-				},
-				{
-					"category": "Vegetables",
-					"nutrientListID": "vegejar",
-					"typeName": "Jar/Canned/Frozen"
-				}
-			],
-			"name": "Other vegetables (examples: tomato, lettuce, broccoli, etc.)",
-			"servingsList": [
-				{
-					"servingName": "1 OZ (2 tbsp.)"
-				},
-				{
-					"servingName": "2.5 OZ (5 tbsp.)"
-				},
-				{
-					"servingName": "4 OZ (0.5 cup/8 tbsp.)"
-				},
-				{
-					"servingName": "6 OZ (0.75 cup/10 tbsp.)"
-				},
-				{
-					"servingName": "8 OZ (1 cup)"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Vegetables",
-					"nutrientListID": "pota"
-				}
-			],
-			"name": "Potato or sweet potato",
-			"servingsList": [
-				{
-					"servingName": "1 OZ (2 tbsp.)"
-				},
-				{
-					"servingName": "2.5 OZ (5 tbsp.)"
-				},
-				{
-					"servingName": "4 OZ (0.5 cup/8 tbsp.)"
-				},
-				{
-					"servingName": "6 OZ (0.75 cup/10 tbsp.)"
-				},
-				{
-					"servingName": "8 OZ (1 cup)"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Salty Snacks",
-					"nutrientListID": "fren"
-				}
-			],
-			"name": "French fries",
-			"servingsList": [
-				{
-					"servingName": "1 OZ (2 tbsp.)"
-				},
-				{
-					"servingName": "2.5 OZ (5 tbsp.)"
-				},
-				{
-					"servingName": "4 OZ (0.5 cup/8 tbsp.)"
-				},
-				{
-					"servingName": "6 OZ (0.75 cup/10 tbsp.)"
-				},
-				{
-					"servingName": "8 OZ (1 cup)"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Vegetables",
-					"nutrientListID": "plan"
-				}
-			],
-			"name": "Plantain",
-			"servingsList": [
-				{
-					"servingName": "1 OZ (2 tbsp.)"
-				},
-				{
-					"servingName": "2.5 OZ (5 tbsp.)"
-				},
-				{
-					"servingName": "4 OZ (0.5 cup/8 tbsp.)"
-				},
-				{
-					"servingName": "6 OZ (0.75 cup/10 tbsp.)"
-				},
-				{
-					"servingName": "8 OZ (1 cup)"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Vegetables",
-					"nutrientListID": "othestar"
-				}
-			],
-			"name": "Other starchy vegetables (yucca, yautia, celery, breafruit)",
-			"servingsList": [
-				{
-					"servingName": "1 OZ (2 tbsp.)"
-				},
-				{
-					"servingName": "2.5 OZ (5 tbsp.)"
-				},
-				{
-					"servingName": "4 OZ (0.5 cup/8 tbsp.)"
-				},
-				{
-					"servingName": "6 OZ (0.75 cup/10 tbsp.)"
-				},
-				{
-					"servingName": "8 OZ (1 cup)"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Proteins",
-					"nutrientListID": "bean"
-				}
-			],
-			"name": "Beans, pigeon beans, chickpeas, etc.",
-			"servingsList": [
-				{
-					"servingName": "1 OZ (2 tbsp.)"
-				},
-				{
-					"servingName": "2.5 OZ (5 tbsp.)"
-				},
-				{
-					"servingName": "4 OZ (0.5 cup/8 tbsp.)"
-				},
-				{
-					"servingName": "6 OZ (0.75 cup/10 tbsp.)"
-				},
-				{
-					"servingName": "8 OZ (1 cup)"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Proteins",
-					"nutrientListID": "beefreg",
-					"typeName": "Regular"
-				},
-				{
-					"category": "Proteins",
-					"nutrientListID": "beefbaby",
-					"typeName": "Baby food"
-				}
-			],
-			"name": "Beef or pork (includes ground beef, steak, ribs, hot dogs, sausage, ham)",
-			"servingsList": [
-				{
-					"servingName": "1 OZ (2 tbsp.)"
-				},
-				{
-					"servingName": "2.5 OZ (5 tbsp.)"
-				},
-				{
-					"servingName": "4 OZ (0.5 cup/8 tbsp.)"
-				},
-				{
-					"servingName": "6 OZ (0.75 cup/10 tbsp.)"
-				},
-				{
-					"servingName": "8 OZ (1 cup)"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Proteins",
-					"nutrientListID": "chicregu",
-					"typeName": "Regular"
-				},
-				{
-					"category": "Proteins",
-					"nutrientListID": "chicbaby",
-					"typeName": "Baby food"
-				}
-			],
-			"name": "Chicken or turkey (includes breast, thighs, wings, ground or ham)",
-			"servingsList": [
-				{
-					"servingName": "1 OZ (2 tbsp.)"
-				},
-				{
-					"servingName": "2.5 OZ (5 tbsp.)"
-				},
-				{
-					"servingName": "4 OZ (0.5 cup/8 tbsp.)"
-				},
-				{
-					"servingName": "6 OZ (0.75 cup/10 tbsp.)"
-				},
-				{
-					"servingName": "8 OZ (1 cup)"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Proteins",
-					"nutrientListID": "fishcann",
-					"typeName": "Canned"
-				},
-				{
-					"category": "Proteins",
-					"nutrientListID": "fishothe",
-					"typeName": "Other"
-				}
-			],
-			"name": "Fish",
-			"servingsList": [
-				{
-					"servingName": "1 OZ (2 tbsp.)"
-				},
-				{
-					"servingName": "2.5 OZ (5 tbsp.)"
-				},
-				{
-					"servingName": "4 OZ (0.5 cup/8 tbsp.)"
-				},
-				{
-					"servingName": "6 OZ (0.75 cup/10 tbsp.)"
-				},
-				{
-					"servingName": "8 OZ (1 cup)"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Proteins",
-					"nutrientListID": "pean"
-				}
-			],
-			"name": "Peanuts, peanut butter and other nuts",
-			"servingsList": [
-				{
-					"servingName": "1 OZ (2 tbsp.)"
-				},
-				{
-					"servingName": "2.5 OZ (5 tbsp.)"
-				},
-				{
-					"servingName": "4 OZ (0.5 cup/8 tbsp.)"
-				},
-				{
-					"servingName": "6 OZ (0.75 cup/10 tbsp.)"
-				},
-				{
-					"servingName": "8 OZ (1 cup)"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Proteins",
-					"nutrientListID": "egg"
-				}
-			],
-			"name": "Egg"
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Sweets",
-					"nutrientListID": "cand"
-				}
-			],
-			"name": "Candies (chocolate, gummies, M&Ms, lollipop, etc.)",
-			"servingsList": [
-				{
-					"servingName": "0.5 OZ"
-				},
-				{
-					"servingName": "1 OZ"
-				},
-				{
-					"servingName": "1.5 OZ"
-				},
-				{
-					"servingName": "2 OZ"
-				},
-				{
-					"servingName": "2.5 OZ"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Sweets",
-					"nutrientListID": "cake"
-				}
-			],
-			"name": "Cake, muffins, donuts, etc.",
-			"servingsList": [
-				{
-					"servingName": "0.25 piece of cake, muffin, donut"
-				},
-				{
-					"servingName": "0.5 piece of cake, muffin, donut"
-				},
-				{
-					"servingName": "0.75 piece of cake, muffin, donut"
-				},
-				{
-					"servingName": "1 piece of cake, muffin, donut"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Sweets",
-					"nutrientListID": "cook"
-				}
-			],
-			"name": "Cookies (sugar cookies, chocolate chips, oats, vanilla, etc.)",
-			"servingsList": [
-				{
-					"servingName": "1 cookie"
-				},
-				{
-					"servingName": "2 cookies"
-				},
-				{
-					"servingName": "3 cookies"
-				},
-				{
-					"servingName": "4 cookies"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Sweets",
-					"nutrientListID": "hone"
-				}
-			],
-			"name": "Honey, jam, syrup, agave",
-			"servingsList": [
-				{
-					"servingName": "0.5 tsps. (0.25 oz)"
-				},
-				{
-					"servingName": "1 tsp. (0.5 oz)"
-				},
-				{
-					"servingName": "2 tsp. (1 oz)"
-				},
-				{
-					"servingName": "3 tsp. (1.5 oz)"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "Salty Snacks",
-					"nutrientListID": "chip"
-				}
-			],
-			"name": "Chips (examples: Doritos, Lays, Cheetos, Tostitos, etc.)",
-			"servingsList": [
-				{
-					"servingName": "0.25 OZ or a quarter of a bag"
-				},
-				{
-					"servingName": "0.5 OZ or half of a bag"
-				},
-				{
-					"servingName": "1 OZ or 1 bag"
-				},
-				{
-					"servingName": "2 OZ or a medium bag"
-				},
-				{
-					"servingName": "3 OZ or 30 chips"
-				},
-				{
-					"servingName": "4 OZ or 40 chips"
-				}
-			]
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "N/A",
-					"nutrientListID": "marg"
-				}
-			],
-			"name": "Margarine/Butter"
-		},
-		{
-			"foodTypes": [
-				{
-					"category": "N/A",
-					"nutrientListID": "oil"
-				}
-			],
-			"name": "Oil"
-		}
-	],
 	"here": "here",
-	"Little above": "Little above",
 	"male": "male",
-	"nutrientItem": [
-		{
-			"name": "Energy (kcal)"
-		},
-		{
-			"name": "Protein (g)"
-		},
-		{
-			"name": "Carbohydrate (g)"
-		},
-		{
-			"name": "Fat (g)"
-		},
-		{
-			"name": "% Calories from Protein"
-		},
-		{
-			"name": "% Calories from Carbs"
-		},
-		{
-			"name": "% Calories from Fat"
-		},
-		{
-			"name": "Animal Protein (g)"
-		},
-		{
-			"name": "Vegetable Protein (g)"
-		},
-		{
-			"name": "Total Dietary Fiber (g)"
-		},
-		{
-			"name": "Total Sugars (g)"
-		},
-		{
-			"name": "Added Sugars (by Total Sugars) (g)"
-		},
-		{
-			"name": "Fructose (g)"
-		},
-		{
-			"name": "Lactose (g)"
-		},
-		{
-			"name": "Starch (g)"
-		},
-		{
-			"name": "Total Grains (ounce equivalents)"
-		},
-		{
-			"name": "Whole Grains (ounce equivalents)"
-		},
-		{
-			"name": "Refined Grains (ounce equivalents)"
-		},
-		{
-			"name": "Total Saturated Fatty Acids (SFA) (g)"
-		},
-		{
-			"name": "Total Monounsaturated Fatty Acids (MUFA) (g)"
-		},
-		{
-			"name": "Total Polyunsaturated Fatty Acids (PUFA) (g)"
-		},
-		{
-			"name": "Omega-3 Fatty Acids (g)"
-		},
-		{
-			"name": "Water (g)"
-		},
-		{
-			"name": "Caffeine (mg)"
-		},
-		{
-			"name": "Vitamin B1 (Thiamin) (mg)"
-		},
-		{
-			"name": "Vitamin B2 (Riboflavin) (mg)"
-		},
-		{
-			"name": "Vitamin B3 (Niacin) (mg)"
-		},
-		{
-			"name": "Vitamin B5 (Pantothenic acid) (mg)"
-		},
-		{
-			"name": "Vitamin B6 (mg)"
-		},
-		{
-			"name": "Vitamin B9 (Folate) (mcg)"
-		},
-		{
-			"name": "Vitamin B12 (Cobalamin) (mcg)"
-		},
-		{
-			"name": "Vitamin C (Ascorbic acid) (mg)"
-		},
-		{
-			"name": "Vitamin A (Retinol) (mcg)"
-		},
-		{
-			"name": "Vitamin D (mcg)"
-		},
-		{
-			"name": "Vitamin E (mg)"
-		},
-		{
-			"name": "Vitamin K (mcg)"
-		},
-		{
-			"name": "Calcium (mg)"
-		},
-		{
-			"name": "Copper (mg)"
-		},
-		{
-			"name": "Iron (mg)"
-		},
-		{
-			"name": "Manganese (mg)"
-		},
-		{
-			"name": "Magnesium (mg)"
-		},
-		{
-			"name": "Phosphorus (mg)"
-		},
-		{
-			"name": "Potassium (mg)"
-		},
-		{
-			"name": "Selenium (mcg)"
-		},
-		{
-			"name": "Sodium (mg)"
-		},
-		{
-			"name": "Zinc (mg)"
-		}
-	],
 	"passwordPlaceHolder": "Password",
 	"result": [
 		{

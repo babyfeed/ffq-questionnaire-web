@@ -10,7 +10,7 @@
           <th style="text-align: center">{{'Indicator' | translate}}</th>
         </tr>
         <tr *ngFor="let nutrient of result.recommendationsList; let i = index">
-          <td>{{'nutrientItem.' + i + '.name' | translate}}</td>
+          <td>{{nutrient.nutrientName | translate}}</td>
           <td style="text-align: center">{{nutrient.calculatedAmount| resultRound}}</td>
           <td style="text-align: center">{{nutrient.recommendedAmount| resultRound}}</td>
           <td [ngClass]="color(nutrient.status)"
