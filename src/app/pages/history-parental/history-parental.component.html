@@ -116,7 +116,7 @@
             <div *ngFor="let choice of result.userChoices; let i = index">
               <div class="row" style="text-align:center">
                 <div class="col-4">
-                  {{ 'foodChoice.' + i +'.name' | translate }}
+                  {{choice.name | translate}}
                 </div>
                 <div class="col-2">
                   {{ choice.frequency }}
@@ -152,7 +152,7 @@
                   >
                     <!--td *ngIf="i != 0 && i != 1 && i != 2"-->
                     <!-- This item.key is really random with each result, Its really hard to dynamically translate this. -->
-                    <td>{{ 'nutrientItem.' + i + '.name' | translate }}</td>
+                    <td>{{ item.key | translate}}</td>
                     <!--Khalid, changed item.value to display 3 digits-->
                     <!--td *ngIf="i != 0 && i != 1 && i != 2"-->
                     <td>{{ item.value | resultRound }}</td>

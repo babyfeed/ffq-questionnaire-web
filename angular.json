@@ -13,7 +13,6 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "localize": false,
             "aot": true,
             "outputPath": "dist/ffq-questionnaire-web",
             "index": "src/index.html",
@@ -64,12 +63,6 @@
                   "maximumWarning": "6kb"
                 }
               ]
-            },
-            "es": {
-              "localize": ["es"]
-            },
-            "en-US": {
-              "localize": ["en-US"]
             }
           }
         },
@@ -81,19 +74,7 @@
           "configurations": {
             "production": {
               "browserTarget": "ffq-questionnaire-web:build:production"
-            },
-            "en-US": {
-              "browserTarget": "ffq-questionnaire-web:build:en-US"
-            },
-            "es": {
-              "browserTarget": "ffq-questionnaire-web:build:es"
             }
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "ffq-questionnaire-web:build"
           }
         },
         "test": {
@@ -135,15 +116,6 @@
             "host": "Azure",
             "type": "static",
             "config": "azure.json"
-          }
-        }
-      },
-      "i18n": {
-        "sourceLocale": "en-US",
-        "locales": {
-          "es": {
-            "translation": "src/locale/messages.es.xlf",
-            "baseHref": "/es/"
           }
         }
       }
