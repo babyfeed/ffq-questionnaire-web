@@ -14,7 +14,7 @@
           <td style="text-align: center">{{nutrient.calculatedAmount| resultRound}}</td>
           <td style="text-align: center">{{nutrient.recommendedAmount| resultRound}}</td>
           <td [ngClass]="color(nutrient.status)"
-              style="text-align: center">{{ nutrient.status.split(" ",1)[0] | translate}} {{nutrient.status.split(" ")[1]}} by {{nutrient.calculatedAmount - nutrient.recommendedAmount|resultRound}}</td>
+              style="text-align: center">{{ nutrient.status.split(" ",1)[0] | translate}} {{nutrient.status.split(" ")[1]}}</td>
         </tr>
       </table>
     </div>
