@@ -143,10 +143,10 @@ export class QuestionnairePageComponent implements OnInit {
               }
 
             this.questService.submitQuestionnaire(this.id).subscribe((data: Questionnaire) => {
-            this.router.navigateByUrl('/');
             const dialogRef = this.successDialog.open(ErrorDialogPopupComponent);
             dialogRef.componentInstance.title = this.translate.instant('Submitted Successfully');
             dialogRef.componentInstance.message = this.translate.instant('The questionnaire has been sent to the issuer');
+            dialogRef.afterClosed().subscribe(() => this.router.navigateByUrl('/'));
             this.submitting = false;
             }, (error: HttpErrorResponse) => this.handleSubmissionError(error));
 
