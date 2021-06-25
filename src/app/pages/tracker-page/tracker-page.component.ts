@@ -84,12 +84,16 @@ export class TrackerPageComponent implements OnInit {
                                                         this.age,
                                                         formatDate(new Date(), 'MM/dd/yyyy', 'en'),
                                                         this.trackerItems);
-
       this.trackerResponseService.submitTracker(this.trackerResponse).subscribe(() => {
         const dialogRef = this.successDialog.open(ErrorDialogPopupComponent);
         dialogRef.componentInstance.title = this.translate.instant('Submitted Successfully');
         dialogRef.componentInstance.message = this.translate.instant('Your submission has been recorded');
-        this.router.navigate(['parent/tracker-history']);
+        // Created this afterclosed code snipet so users can see they are done with the tracking AND THEN redirect them to the proper page
+        // This snippet fixes the page bug that doesnt scroll all the way to the top.
+        // Created by Alberto Canete and Henry Labrada
+        dialogRef.afterClosed().subscribe(() => {
+          this.router.navigate(['parent/tracker-history']);
+        });
       }, (error: HttpErrorResponse) => {
         const  dialogRef  = this.submissionErrorDialog.open(ErrorDialogPopupComponent);
         dialogRef.componentInstance.title = this.translate.instant('Submission Error');
@@ -103,7 +107,6 @@ export class TrackerPageComponent implements OnInit {
       dialogRef.componentInstance.message = this.translate.instant('Please ensure all required fields are completed');
     }
   }
-
   private getAllResults() {
      const list: Observable<Description[]> = this.foodDescriptionService.getAllFoodItems();
      list.subscribe(m => {
