@@ -55,7 +55,7 @@ export class TrackerPageComponent implements OnInit {
 
   ngOnInit() {
     this.getAllResults();
-    //build form
+    // build form
     this.trackerForm = this.formBuilder.group({
       userId: [this.authenticationService.currentUserId],
       responses: this.formBuilder.array([
@@ -63,22 +63,22 @@ export class TrackerPageComponent implements OnInit {
           answer: [null, [Validators.required]]
         })
       ])
-    })
+    });
   }
 
   public submitTracker() {
-    //check if complete
+    // check if complete
     let completed = true;
-    for(const response of this.trackerForm.controls.responses.value) {
-      if(!response.answer) {
+    for (const response of this.trackerForm.controls.responses.value) {
+      if (!response.answer) {
         completed = false;
       }
     }
-    //create response object and submit to service
-    if(completed) {
-      for(let i = 0; i < this.foodResults.length; i++) {
+    // create response object and submit to service
+    if (completed) {
+      for (let i = 0; i < this.foodResults.length; i++) {
         this.trackerItems.push(new TrackerItems(this.foodResults[i].foodItemGroupName,
-                                                this.trackerForm.controls.responses.value[i].answer))
+                                                this.trackerForm.controls.responses.value[i].answer));
       }
       this.trackerResponse = new TrackerResultsResponse(this.authenticationService.currentUserId,
                                                         this.age,
@@ -88,7 +88,7 @@ export class TrackerPageComponent implements OnInit {
         const dialogRef = this.successDialog.open(ErrorDialogPopupComponent);
         dialogRef.componentInstance.title = this.translate.instant('Submitted Successfully');
         dialogRef.componentInstance.message = this.translate.instant('Your submission has been recorded');
-        // Created this afterclosed code snipet so users can see they are done with the tracking AND THEN redirect them to the proper page
+        // Created this afterClosed code snippet so users can see they are done with the tracking AND THEN redirect them to the proper page
         // This snippet fixes the page bug that doesnt scroll all the way to the top.
         // Created by Alberto Canete and Henry Labrada
         dialogRef.afterClosed().subscribe(() => {
@@ -98,7 +98,9 @@ export class TrackerPageComponent implements OnInit {
         const  dialogRef  = this.submissionErrorDialog.open(ErrorDialogPopupComponent);
         dialogRef.componentInstance.title = this.translate.instant('Submission Error');
         dialogRef.componentInstance.message = error.message;
-        this.router.navigate(['parent/tracker-history']);
+        dialogRef.afterClosed().subscribe(() => {
+          this.router.navigate(['parent/tracker-history']);
+        });
       });
 
     } else {
@@ -111,15 +113,15 @@ export class TrackerPageComponent implements OnInit {
      const list: Observable<Description[]> = this.foodDescriptionService.getAllFoodItems();
      list.subscribe(m => {
        this.foodResults = m;
-       //create room in form for all items
-       for(let i = 1; i < this.foodResults.length; i++) {
+       // create room in form for all items
+       for (let i = 1; i < this.foodResults.length; i++) {
         this.addResponseRow();
       }
      });
   }
 
   private addResponseRow() {
-    const responsesArray = <FormArray>this.trackerForm.controls['responses'];
+    const responsesArray = this.trackerForm.controls.responses as FormArray;
     responsesArray.push(
       this.formBuilder.group({
         answer: [null, [Validators.required]]
@@ -127,17 +129,17 @@ export class TrackerPageComponent implements OnInit {
   }
 
   public enterAge(age: number) {
-    if(age) {
+    if (age) {
       this.showAgeForm = false;
       this.showItems = true;
       this.age = age;
 
-      if(age < 6) {
+      if (age < 6) {
         this.showBracketFirst = true;
         this.showBracketSecond = false;
         this.showBracketThird = false;
       }
-      else if(age >= 6 && age < 12) {
+      else if (age >= 6 && age < 12) {
         this.showBracketFirst = false;
         this.showBracketSecond = true;
         this.showBracketThird = false;
@@ -149,5 +151,4 @@ export class TrackerPageComponent implements OnInit {
       }
     }
   }
-
 }
