@@ -49,6 +49,7 @@ export class QuestionnairePageComponent implements OnInit {
   foodItems: FFQItem[] = [];
   tmpfoodItems: FFQItem[] = [];
   submitting = false;
+  patientName: string;
 
   constructor(public foodService: FoodItemService,
               public questService: QuestionnaireValidatorService,
@@ -66,6 +67,7 @@ export class QuestionnairePageComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe(params => {
         this.userId = this.authenticationService.currentUserId;
         this.id = params.get('id');
+        this.patientName = JSON.parse(localStorage.getItem('currentUser'))[0].username;
 
         // use the usertype to determine what collection to store the questionnaire
         this.userType =  this.authenticationService.currentUserValue[0].usertype;
@@ -128,7 +130,7 @@ export class QuestionnairePageComponent implements OnInit {
       }
 
 
-      this.foodService.calculateNutrientBreakdown(this.userId, this.id, this.userType, this.infantage, this.gender, itemList)
+      this.foodService.calculateNutrientBreakdown(this.userId, this.id, this.userType, this.infantage, this.gender, this.patientName, itemList)
         .subscribe( (results) => {
             const dailyMap: Map<string, number> = new Map();
             const weeklyMap: Map<string, number> = new Map();

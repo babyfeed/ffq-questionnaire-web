@@ -17,7 +17,8 @@ export class FFQResultsResponse {
   username?: string; // question mark means it's an optional parameter, here means it may not exist
   userSearchName: string; // create userSearchName for clinian portal Questionnaire Results
 
-  constructor(id: string, userId: string, userType: string, date: string, name: string, age: number, userChoices: any, weeklyTotals: Map<string, number>, dailyAverages: any, feedback: string, gender: string) {
+  // tslint:disable-next-line:max-line-length
+  constructor(id: string, userId: string, userType: string, date: string, name: string, age: number, userChoices: any, weeklyTotals: Map<string, number>, dailyAverages: any, feedback: string, gender: string, patientName: string) {
     this.questionnaireId = id;
     this.userId = userId;
     this.userType = userType;
@@ -29,5 +30,6 @@ export class FFQResultsResponse {
     this.dailyAverages = dailyAverages;
     this.feedback = feedback;
     this.gender = gender;
+    this.patientName = patientName;
   }
 }

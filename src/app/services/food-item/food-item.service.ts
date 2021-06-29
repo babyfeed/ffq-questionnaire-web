@@ -6,7 +6,7 @@ import {map} from 'rxjs/operators';
 import {FFQItemCalcRequest} from '../../models/ffqitem-calc-request';
 import {FFQFoodNutrientsResponse} from 'src/app/models/ffqfoodnutrients-response';
 import {FFQFoodItemResponse} from 'src/app/models/ffqfooditem-response';
-import {FFQFoodItem} from 'src/app/models/ffqfooditem'
+import {FFQFoodItem} from 'src/app/models/ffqfooditem';
 import {environment} from 'src/environments/environment';
 
 @Injectable({
@@ -79,8 +79,8 @@ export class FoodItemService {
       }));
   }
 
-  calculateNutrientBreakdown(userId:string, id:string, userType:string, infantage:number, gender:string, items: FFQItemCalcRequest[]): Observable<any> {
-    return this.http.post(`${this.endpoint}/calculate/` + id +`/`+ infantage +`/`+ userType + '/' + userId +`/`+ gender, items).pipe(map(data => {
+  calculateNutrientBreakdown(userId: string, id: string, userType: string, infantage: number, gender: string, patientName: string, items: FFQItemCalcRequest[]): Observable<any> {
+    return this.http.post(`${this.endpoint}/calculate/` + id + `/` + infantage + `/` + userType + '/' + userId + `/` + gender + '/' + patientName, items).pipe(map(data => {
         return data;
       }
     ));
@@ -88,7 +88,7 @@ export class FoodItemService {
 
   /*DELETE: delete food item from the database */
   deleteItem(objectId: string): Observable<any> {
-    return this.http.delete(this.endpoint + "/delete?id=" + objectId, {responseType: 'text'});
+    return this.http.delete(this.endpoint + '/delete?id=' + objectId, {responseType: 'text'});
   }
 
 
