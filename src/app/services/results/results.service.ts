@@ -34,7 +34,8 @@ export class ResultsService {
             item.weeklyTotals,
             item.dailyAverages,
             item.feedback,
-            item.gender
+            item.gender,
+            item.patientName
           );
         });
       }));
@@ -55,7 +56,8 @@ export class ResultsService {
               item.weeklyTotals,
               item.dailyAverages,
               item.feedback,
-              item.gender
+              item.gender,
+              item.patientName
             );
           });
         }));
@@ -76,7 +78,8 @@ export class ResultsService {
                 item.weeklyTotals,
                 item.dailyAverages,
                 item.feedback,
-                item.gender
+                item.gender,
+                item.patientName
               );
             });
           }));
@@ -93,6 +96,6 @@ export class ResultsService {
       }
 
   deleteItemsByParentId(parentId: string): Observable<any> {
-    return this.http.delete(this.endpoint + "/delete?parentId=" + parentId, {responseType: 'text'})
+    return this.http.delete(this.endpoint + '/delete?parentId=' + parentId, {responseType: 'text'});
   }
   }
