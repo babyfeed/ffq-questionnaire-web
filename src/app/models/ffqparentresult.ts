@@ -1,4 +1,4 @@
-// Class used to store questionnaire result added to it the parentName associated with their respective questionnaires in order
+//Class used to store questionnaire result added to it the parentName associated with their respective questionnaires in order
 // to display it in the clinic-quest-result and clinic-recommend components
 
 import {FFQResultsResponse} from './ffqresultsresponse';

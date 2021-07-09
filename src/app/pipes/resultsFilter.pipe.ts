@@ -11,7 +11,6 @@ import {Pipe, PipeTransform} from '@angular/core';
 import {FFQParent} from '../models/ffqparent';
 import {ParentService} from '../services/parent/parent-service';
 import {FFQParentResult} from '../models/ffqparentresult';
-// import {ClinicQuestResultsComponent} from '../../app/pages/clinic-quest-results/clinic-quest-results.component';
 import {TrackerParentResultsResponse} from '../models/ffqparentresulttracker';
 
 @Pipe({
@@ -21,15 +20,15 @@ import {TrackerParentResultsResponse} from '../models/ffqparentresulttracker';
 
 export class ResultsPipe implements PipeTransform {
 
-  transform(list: any, resultMap: Map<string, FFQParentResult>, term: any ): any {
+  transform(list: any, resultMap: Map<string, FFQParentResult>, term: any): any {
     if (term === undefined) {
       return list;
     }
     return list.filter(function (result) {
-      const theID = result.ffqresult.userId;
-      const userSearchName = result.ffqresult.userSearchName;
-      [...resultMap.values()].filter((item) => item.ffqresult.userId === theID);
+      var userSearchName = result.ffqresult.userSearchName;
       return userSearchName.toLowerCase().includes(term.toLowerCase());
     });
   }
+
+
 }
