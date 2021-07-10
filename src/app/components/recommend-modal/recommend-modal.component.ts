@@ -43,8 +43,6 @@ export class RecommendModalComponent {
       return 'below';
     } else if (b[0] === "Above") {
       return 'above';
-    } else if (b[0] === "Normal") {
-      return 'normal';
     } else if (b[0] === "Adequate") {
       return 'adequate';
     }else if (b[0] === "Little" && b[1] === "below")
