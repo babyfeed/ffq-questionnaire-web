@@ -326,7 +326,7 @@
 		{
 			"description": "Se recomienda leche materna o fórmula infantil fortificada con hierro hasta los 12 meses de edad. No use leche baja en hierro, como la de vaca o de soya, ni siquiera en cereales para bebés. No sirva leches al 1% (bajas en grasa) o descremadas (sin grasa) antes de los 24 meses.",
 			"firstBracketIntake": "2 a 3 tazas por día (16 - 24 fl oz / día)",
-			"foodItemGroupName": "Leche materna - Fórmula - Leche de vaca - Otro",
+			"foodItemGroupName": "Leche",
 			"imageUrl": "/assets/images/Breastmilk.jpg",
 			"secondBracketIntake": "1 ¼ a 3 ½ tazas por día (10 a 28 fl oz / día)",
 			"thirdBracketIntake": "1 a 2 ¼ tazas por día (8 - 18 fl oz / día)"
