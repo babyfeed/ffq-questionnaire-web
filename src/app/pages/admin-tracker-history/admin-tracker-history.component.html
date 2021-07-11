@@ -21,7 +21,7 @@
             <div style="float: right">
                 <tr *ngFor="let item of result.responses" [ngClass]="{
           'top' : item.response == 'Above',
-          'med' : item.response == 'Equal',
+          'med' : item.response == 'Adequate',
           'bot' : item.response == 'Below'
         }">{{item.response}}</tr>
             </div>
