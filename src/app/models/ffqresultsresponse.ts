@@ -15,7 +15,7 @@ export class FFQResultsResponse {
   gender: string;
   assignedClinicOrSiteId: string;
   username?: string; // question mark means it's an optional parameter, here means it may not exist
-  userSearchName: string; // create userSearchName for clinian portal Questionnaire Results
+  // userSearchName: string; // create userSearchName for clinian portal Questionnaire Results
 
   // tslint:disable-next-line:max-line-length
   constructor(id: string, userId: string, userType: string, date: string, name: string, age: number, userChoices: any, weeklyTotals: Map<string, number>, dailyAverages: any, feedback: string, gender: string, patientName: string) {
