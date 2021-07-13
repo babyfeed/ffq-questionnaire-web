@@ -271,14 +271,15 @@ export class ClinicQuestResultsComponent implements OnInit {
     modalRef.componentInstance.id = id;
   }
 
-
-  getParentUsernameById(userId: string) {
-    // Clinician portal need search by userName, but there is no this item in results; the student who designed before
-    // get it by using another function, kind of weird, but in case
-    let i = 0;
-    for (i = 0; i < this.results.length; i++) {
-      this.results[i].userSearchName = this.parentList.find(parent => parent.userId === this.results[i].userId)?.username ?? "[not found]";
-    }
-    return this.parentList.find(parent => parent.userId === userId)?.username ?? "[not found]";
-  }
+  //
+  // getParentUsernameById(userId: string) {
+  //   // Clinician portal need search by userName, but there is no this item in results; the student who designed before
+  //   // get it by using another function, kind of weird, but in case
+  //   let i = 0;
+  //   for (i = 0; i < this.results.length; i++) {
+  // tslint:disable-next-line:max-line-length
+  //     this.results[i].userSearchName = this.parentList.find(parent => parent.userId === this.results[i].userId)?.username ?? "[not found]";
+  //   }
+  //   return this.parentList.find(parent => parent.userId === userId)?.username ?? "[not found]";
+  // }
 }

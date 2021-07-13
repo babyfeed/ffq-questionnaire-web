@@ -25,8 +25,8 @@ export class ResultsPipe implements PipeTransform {
       return list;
     }
     return list.filter(function (result) {
-      var userSearchName = result.ffqresult.userSearchName;
-      return userSearchName.toLowerCase().includes(term.toLowerCase());
+      const patientName = result.ffqresult.patientName;
+      return patientName.toLowerCase().includes(term.toLowerCase());
     });
   }
 
