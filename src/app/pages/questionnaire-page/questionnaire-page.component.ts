@@ -193,7 +193,7 @@ private getFoodItemByPosition(arr: FFQItem[] ): FFQItem[]{
   }
 
   private handleQuestionnaireError(error: Error) {
-    this.router.navigateByUrl('/');
+    //this.router.navigateByUrl('/');
     console.error('Error occurred: ' + error.message);
     const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
     dialogRef.componentInstance.title = this.translate.instant('Error Validating Id');
@@ -201,7 +201,7 @@ private getFoodItemByPosition(arr: FFQItem[] ): FFQItem[]{
   }
 
   private handleSubmissionError(error: Error) {
-    this.router.navigateByUrl('/');
+    //this.router.navigateByUrl('/');
     console.error('Error occurred: ' + error.message);
     const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
     dialogRef.componentInstance.title = this.translate.instant('Error Submitting Questionnaire');
