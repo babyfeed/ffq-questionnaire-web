@@ -20,7 +20,7 @@ import {TrackerParentResultsResponse} from '../models/ffqparentresulttracker';
 
 export class ResultsPipe implements PipeTransform {
 
-  transform(list: any, resultInfo: any, term: any): any {
+  transform(list: any, resultMap: Map<string, FFQParentResult>, term: any): any {
     if (term === undefined) {
       return list;
     }
