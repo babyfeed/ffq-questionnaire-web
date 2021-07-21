@@ -24,10 +24,11 @@ export class ResultsPipe implements PipeTransform {
     if (term === undefined) {
       return list;
     }
-    return list.filter(function (result) {
+    const res = list.filter(function (result) {
       const patientName = result.ffqresult.patientName;
       return patientName.toLowerCase().includes(term.toLowerCase());
     });
+    return res;
   }
 
 

@@ -59,8 +59,10 @@ export class ClinicQuestResultsComponent implements OnInit {
   parentNames: string[] = [];
   resultMap: Map<string, FFQParentResult> = new Map<string, FFQParentResult>();
   resultInfo: FFQParentResult[] = [];
-
-//
+  questionnaireIdArr: string[] = []; // put all the questionnaire results questionnaireId into this array
+  // Use this array to compare the QID with it to get the original index of the results
+  // cause the pipeline just filters the resultInfo for the table
+  // doesn't filter the [+Results] button list
 
 
   constructor(
@@ -129,6 +131,7 @@ export class ClinicQuestResultsComponent implements OnInit {
         );
         this.resultInfo.push(object);
         this.resultMap.set(this.results[i].userId, object);
+        this.questionnaireIdArr.push(object.ffqresult.questionnaireId);
       }
     });
 
@@ -218,12 +221,14 @@ export class ClinicQuestResultsComponent implements OnInit {
   }
 
   // function used in HTML in order to display and hide questionnaire results
-  toggle(index) {
+  toggle(QID) {
+    const index = this.questionnaireIdArr.indexOf(QID);
     this.resultInfo[index].ffqresult.show = !this.resultInfo[index].ffqresult.show;
   }
 
-  toggleFeedback(index) {
+  toggleFeedback(QID) {
     // ffqfeedback
+    const index = this.questionnaireIdArr.indexOf(QID);
     this.resultInfo[index].ffqresult.showFeedback = !this.resultInfo[index].ffqresult.showFeedback;
   }
 

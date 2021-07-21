@@ -74,10 +74,10 @@
 
                         <div class="row" style="padding: 15px">
                             <div class="col-12 offset-10">
-                                <button mat-raised-button [hidden]="result.ffqresult.show" (click)="toggle(i)" [hidden]="result.ffqresult.showFeedback" (click)="toggleFeedback(i)">
+                                <button mat-raised-button [hidden]="result.ffqresult.show" (click)="toggle(result.ffqresult.questionnaireId)" [hidden]="result.ffqresult.showFeedback" (click)="toggleFeedback(result.ffqresult.questionnaireId)">
                     <i class="fa fa-plus-square-o"></i> Results
                   </button>
-                                <button mat-raised-button [hidden]="!result.ffqresult.show" (click)="toggle(i)" [hidden]="!result.ffqresult.showFeedback" (click)="toggleFeedback(i)">
+                                <button mat-raised-button [hidden]="!result.ffqresult.show" (click)="toggle(result.ffqresult.questionnaireId)" [hidden]="!result.ffqresult.showFeedback" (click)="toggleFeedback(result.ffqresult.questionnaireId)">
                     <i class="fa fa-minus-square-o"></i> Results
                   </button>
                             </div>
