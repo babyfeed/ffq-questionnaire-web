@@ -20,14 +20,15 @@ import {TrackerParentResultsResponse} from '../models/ffqparentresulttracker';
 
 export class ResultsPipe implements PipeTransform {
 
-  transform(list: any, resultMap: Map<string, FFQParentResult>, term: any): any {
+  transform(list: any, resultInfo: any, term: any): any {
     if (term === undefined) {
       return list;
     }
-    return list.filter(function (result) {
+    const res = list.filter(function (result) {
       const patientName = result.ffqresult.patientName;
       return patientName.toLowerCase().includes(term.toLowerCase());
     });
+    return res;
   }
 
 
