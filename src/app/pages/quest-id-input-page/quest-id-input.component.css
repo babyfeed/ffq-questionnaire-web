@@ -9,8 +9,8 @@
   display: inline-flex;
   justify-content: center;
   align-content: center;
-  padding: 50px;
-  height: 200px;
+  padding: 10px;
+  height: 220px;
 }
 .quest-id-input {
   padding-right: 30px;
@@ -36,4 +36,9 @@
   margin: 10px auto;
   margin-top: 100px;
   background-color: cornflowerblue;
+}
+.home-greeting {
+  color: red;
+  margin: 10px auto;
+  margin-bottom: 20px;
 }
