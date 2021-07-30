@@ -91,6 +91,7 @@ import {TranslateModule, TranslateLoader, TranslateCompiler} from '@ngx-translat
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 // import ngx-translate-messageformat-compiler
 import {TranslateMessageFormatCompiler} from 'ngx-translate-messageformat-compiler';
+import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 
 @NgModule({
   declarations: [
@@ -197,6 +198,7 @@ import {TranslateMessageFormatCompiler} from 'ngx-translate-messageformat-compil
         useClass: TranslateMessageFormatCompiler
       }
     }),
+    NgIdleKeepaliveModule.forRoot()
   ],
   bootstrap: [AppComponent],
   entryComponents: [
