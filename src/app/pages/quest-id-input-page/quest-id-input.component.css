@@ -15,8 +15,13 @@
 .quest-id-input {
   padding-right: 30px;
 }
-.quest-id-button {
+
+.quest-id-button-div {
   text-align: center;
+  /*padding-left: 85px;*/
+}
+.quest-id-button {
+  top: 40px;
   /*padding-left: 85px;*/
 }
 .quest-id-reference {
@@ -29,30 +34,18 @@
   font-size: large;
 }
 
-.lang-button {
+.lang-button-div {
   text-align: center; 
 }
 
-.button {
+.lang-button {
   background-color: #35a2a6;
-  top: 40px;
+  top: 60px;
   color: white;
 }
 
-.home-greeting {
-  color: red;
-  margin: 10px auto;
-  margin-bottom: 20px;
-  font-size: 32px;
-}
-
 @media (max-width: 500px) {
-  .home-greeting {
-     font-size: 16px;
-  }
-  .button {
-     width: 100px;
-     height: 32px;
-     font-size:12px;
+  .lang-button {
+     top: 90px;
   }
 }
