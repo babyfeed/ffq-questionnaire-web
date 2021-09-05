@@ -56,6 +56,12 @@ mat-button-toggle-group {
   width: 50px;
 }
 
+@media (max-width: 500px) {
+  .tracker-card {
+    width: 90%;
+  } 
+}
+
 /* .mat-button-toggle-checked {
   background-color: #6880EE;
 } */
