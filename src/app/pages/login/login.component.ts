@@ -56,8 +56,13 @@ export class LoginComponent implements OnInit {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
-  useLanguage(language: string): void {
-    this.translate.use(language);
+  toggleLanguage(): void {
+    if (this.translate.currentLang == 'es') {
+      this.translate.use('en-US');
+    }
+    else {
+      this.translate.use('es');
+    }
   }
   // convenience getter for easy access to form fields
   get f() {

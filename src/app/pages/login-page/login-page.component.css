@@ -1,3 +1,9 @@
 h1 {
     text-align: center;
   }
+
+@media (max-width: 10000px) {
+  .form-group {
+     width: 5vw;
+  }
+}
