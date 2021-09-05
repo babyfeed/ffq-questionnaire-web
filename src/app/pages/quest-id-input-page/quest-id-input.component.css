@@ -16,7 +16,8 @@
   padding-right: 30px;
 }
 .quest-id-button {
-  padding-left: 85px;
+  text-align: center;
+  /*padding-left: 85px;*/
 }
 .quest-id-reference {
   padding-top: 20px;
@@ -27,16 +28,17 @@
 .quest-id-textfield {
   font-size: large;
 }
-.spanish-button {
-  margin: 10px auto;
-  margin-top: 100px;
-  background-color: cornflowerblue;
+
+.lang-button {
+  text-align: center; 
 }
-.english-button {
-  margin: 10px auto;
-  margin-top: 100px;
-  background-color: cornflowerblue;
+
+.button {
+  background-color: #35a2a6;
+  top: 40px;
+  color: white;
 }
+
 .home-greeting {
   color: red;
   margin: 10px auto;

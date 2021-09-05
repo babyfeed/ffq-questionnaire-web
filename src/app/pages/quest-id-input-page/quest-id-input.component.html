@@ -14,20 +14,12 @@
               mat-raised-button
               (click)="startQuestionnaire()"
               color="primary"
-              translate
             >
               {{ "Begin Questionnaire" | translate }}
             </button>
           </div>
-          <div style="position:relative; left:40px; top:40px">
-            <!--<a href="../es/" color="primary" mat-raised-button class="spanish-button">Para Español</a>-->
-            <a (click)="useLanguage('es')" mat-raised-button class="button"
-              >Para Español</a
-            >
-            <!--<a href="../en-US/" color="primary" mat-raised-button class="english-button">English Version</a>-->
-            <a (click)="useLanguage('en-US')" mat-raised-button class="button"
-              >English Version</a
-            >
+          <div class="lang-button">
+            <button (click)="toggleLanguage()" mat-raised-button class="button">{{'For English' | translate}}</button>
           </div>
           <div class="quest-id-reference"></div>
         </mat-card-actions>
