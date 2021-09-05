@@ -43,4 +43,16 @@
   color: red;
   margin: 10px auto;
   margin-bottom: 20px;
+  font-size: 32px;
+}
+
+@media (max-width: 500px) {
+  .home-greeting {
+     font-size: 16px;
+  }
+  .button {
+     width: 100px;
+     height: 32px;
+     font-size:12px;
+  }
 }
