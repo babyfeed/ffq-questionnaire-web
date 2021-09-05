@@ -26,8 +26,15 @@ export class QuestIdInputComponent {
     private authenticationService: AuthenticationService,
     private translate: TranslateService){}
 
-    useLanguage(language: string): void {
-    this.translate.use(language);
+  toggleLanguage(): void {
+    // If page is currently spanish go to english
+    if (this.translate.currentLang == 'es') {
+      this.translate.use('en-US');
+    }
+    // Else if page is not spanish go to spanish
+    else {
+      this.translate.use('es');
+    }
   }
 
   validateQuestionnaireId(id: string) {

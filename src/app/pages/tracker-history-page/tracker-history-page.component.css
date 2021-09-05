@@ -40,3 +40,12 @@ li.GoalList{
 h2.GoalTitle{
     font-size: 28px;
 }
+
+@media (max-width: 500px) {
+  .tracker-card {
+     width: 90%;
+  }
+  .tracker-card2 {
+    width: 90%;
+  }
+}

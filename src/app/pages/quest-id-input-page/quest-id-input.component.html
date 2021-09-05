@@ -4,30 +4,17 @@
     <mat-card-content>
       <span class="quest-id-span">
         <mat-card-actions>
-          <div class="home-greeting">
-            <h2>
-              {{ "Welcome to Baby Feed!" | translate }}
-            </h2>
-          </div>
-          <div class="quest-id-button">
+          <div class="quest-id-button-div">
             <button
-              mat-raised-button
+              mat-raised-button class="quest-id-button"
               (click)="startQuestionnaire()"
               color="primary"
-              translate
             >
               {{ "Begin Questionnaire" | translate }}
             </button>
           </div>
-          <div style="position:relative; left:40px; top:40px">
-            <!--<a href="../es/" color="primary" mat-raised-button class="spanish-button">Para Español</a>-->
-            <a (click)="useLanguage('es')" mat-raised-button class="button"
-              >Para Español</a
-            >
-            <!--<a href="../en-US/" color="primary" mat-raised-button class="english-button">English Version</a>-->
-            <a (click)="useLanguage('en-US')" mat-raised-button class="button"
-              >English Version</a
-            >
+          <div class="lang-button-div">
+            <button (click)="toggleLanguage()" mat-raised-button class="lang-button">{{'For English' | translate}}</button>
           </div>
           <div class="quest-id-reference"></div>
         </mat-card-actions>
