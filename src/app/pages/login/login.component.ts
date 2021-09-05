@@ -56,10 +56,13 @@ export class LoginComponent implements OnInit {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
+  // Method for lang button
   toggleLanguage(): void {
+    // If page is currently spanish go to english
     if (this.translate.currentLang == 'es') {
       this.translate.use('en-US');
     }
+    // Else if page is not spanish go to spanish
     else {
       this.translate.use('es');
     }
