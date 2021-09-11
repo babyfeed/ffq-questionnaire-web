@@ -16,6 +16,7 @@ import {NutrientConstants} from '../../models/NutrientConstants';
 import { Validators, FormControl } from '@angular/forms';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import {MatDialog} from '@angular/material/dialog';
+// tslint:disable-next-line:import-spacing
 import  {TranslateService} from '@ngx-translate/core';
 
 @Component({

@@ -119,7 +119,7 @@ export class ResearchHistoryComponent implements OnInit {
 
         m.forEach(element => {
 
-          if (element.userId == participant.userId){
+          if (element.userId === participant.userId){
 
             this.results.push(element);
           }

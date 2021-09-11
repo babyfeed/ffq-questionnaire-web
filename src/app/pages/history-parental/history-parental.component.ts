@@ -1,32 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import { FFQResultsResponse } from 'src/app/models/ffqresultsresponse';
-import { Observable } from 'rxjs';
-import { ResultsService } from 'src/app/services/results/results.service';
-import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
-import { NutrientConstants } from 'src/app/models/NutrientConstants';
+import {Component, OnInit} from '@angular/core';
+import {FFQResultsResponse} from 'src/app/models/ffqresultsresponse';
+import {Observable} from 'rxjs';
+import {ResultsService} from 'src/app/services/results/results.service';
+import {AuthenticationService} from 'src/app/services/authentication/authentication.service';
+import {NutrientConstants} from 'src/app/models/NutrientConstants';
 ///
 
 /////////// added imports from recommend.component.ts/////////////////////
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { RecommendModalComponent } from 'src/app/components/recommend-modal/recommend-modal.component';
-import { MatDialog } from '@angular/material/dialog';
-import { NutrientsRecommendationsService } from 'src/app/services/nutrients-recommendations/nutrients-recommendations.service';
-import { FFQNutrientsRecommendations } from 'src/app/models/ffqnutrients-recommendations';
-import { ErrorDialogPopupComponent } from 'src/app/components/error-dialog-popup/error-dialog-popup.component';
-import { Router } from '@angular/router';
-import { FoodRecommendModalComponent } from 'src/app/components/food-recommend-modal/food-recommend-modal.component';
-import { FoodRecommendationsService } from 'src/app/services/food-recommendation-service/food-recommendations.service';
-import { FoodDescriptionService } from 'src/app/services/food-description/food-description.service';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {RecommendModalComponent} from 'src/app/components/recommend-modal/recommend-modal.component';
+import {MatDialog} from '@angular/material/dialog';
+import {NutrientsRecommendationsService} from 'src/app/services/nutrients-recommendations/nutrients-recommendations.service';
+import {FFQNutrientsRecommendations} from 'src/app/models/ffqnutrients-recommendations';
+import {ErrorDialogPopupComponent} from 'src/app/components/error-dialog-popup/error-dialog-popup.component';
+import {Router} from '@angular/router';
+import {FoodRecommendModalComponent} from 'src/app/components/food-recommend-modal/food-recommend-modal.component';
+import {FoodRecommendationsService} from 'src/app/services/food-recommendation-service/food-recommendations.service';
+import {FoodDescriptionService} from 'src/app/services/food-description/food-description.service';
 
 @Component({
   selector: 'app-history-parental',
   templateUrl: './history-parental.component.html',
   styleUrls: ['./history-parental.component.css']
 })
+
 export class HistoryParentalComponent implements OnInit {
   public show = false;
   public showFeedback = false;
-
+  breastMilkFlag = new Map();
   public buttonName: any = 'Results';
 
 
@@ -44,7 +45,8 @@ export class HistoryParentalComponent implements OnInit {
     private modalService: NgbModal,
     private errorDialog: MatDialog,
     private router: Router
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     this.getResultsByUser(this.authenticationService.currentUserId);
@@ -53,8 +55,11 @@ export class HistoryParentalComponent implements OnInit {
   toggle(index) {
     this.results[index].show = !this.results[index].show;
 
-    if (this.results[index].show) { this.buttonName = 'Results'; }
-    else { this.buttonName = 'Results'; }
+    if (this.results[index].show) {
+      this.buttonName = 'Results';
+    } else {
+      this.buttonName = 'Results';
+    }
 
   }
 
@@ -83,9 +88,17 @@ export class HistoryParentalComponent implements OnInit {
         element.weeklyTotals = newWeeklyMap;
         element.dailyAverages = newDailyMap;
       });
-
       this.results = m.reverse();
       this.results = this.results.filter(t => t.userType === 'parent');
+      // set breastMilkFlag for food-recommend-model
+      // if there is breast milk for the baby, then set flag to true
+      this.results.forEach(item => {
+        let flag = false;
+        if (item.userChoices[0].name === 'Breast milk') {
+          flag = true;
+        }
+        this.breastMilkFlag.set(item.questionnaireId, flag);
+      });
     });
   }
 
@@ -142,7 +155,11 @@ export class HistoryParentalComponent implements OnInit {
   }
 
   onModalRequestFood(id: string): void {
-    const modalRef = this.errorDialog.open(FoodRecommendModalComponent);
+    const modalRef = this.errorDialog.open(FoodRecommendModalComponent, {
+      // the FoodRecommendModalComponent is independent component, in order to access the data which I can only get in current component,
+      // pass the data by this method
+     data: this.breastMilkFlag
+    });
     modalRef.componentInstance.id = id;
   }
 }
