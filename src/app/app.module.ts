@@ -29,7 +29,6 @@ import { ClinicalPortalComponent } from './pages/clinical-portal/clinical-portal
 import { ClinicalHeaderComponent } from './pages/clinical-header/clinical-header.component';
 import { ParentalHeaderComponent } from './pages/parental-header/parental-header.component';
 import { ResearchParentalHeaderComponent } from './pages/research-parental-header/research-parental-header.component';
-import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { RecommendParentalComponent } from './pages/recommend-parental/recommend-parental.component';
 import { TrackerPageComponent } from './pages/tracker-page/tracker-page.component';
 import { TrackerBlockComponent } from './components/tracker-block/tracker-block.component';
@@ -126,7 +125,6 @@ import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
     ClinicNewUserComponent,
     ParentalHeaderComponent,
     ResearchParentalHeaderComponent,
-    LoginPageComponent,
     RecommendParentalComponent,
     UpdateResearchInstitutionComponent,
     UpdateResearcherComponent,
