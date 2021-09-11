@@ -12,7 +12,6 @@ import { FooditemComponent } from './pages/fooditem/fooditem.component';
 import { QuestResultsComponent } from './pages/quest-results/quest-results.component';
 import { RecommendComponent } from './pages/recommend/recommend.component';
 import { ClinicalPortalComponent } from './pages/clinical-portal/clinical-portal.component';
-import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { AuthGuard } from './services/authentication/auth.guard';
 import { RecommendParentalComponent } from './pages/recommend-parental/recommend-parental.component';
 import { TrackerPageComponent } from './pages/tracker-page/tracker-page.component';
@@ -56,10 +55,6 @@ const routes: Routes = [
   {
     path: 'logout',
     component: LogoutComponent
-  },
-  {
-    path: 'login-page',
-    component: LoginPageComponent
   },
   {
     path: 'admin/fooditem/:id',
