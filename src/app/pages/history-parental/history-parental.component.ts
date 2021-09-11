@@ -27,7 +27,7 @@ import {FoodDescriptionService} from 'src/app/services/food-description/food-des
 export class HistoryParentalComponent implements OnInit {
   public show = false;
   public showFeedback = false;
-  breastMilkFlag = new Map();
+  breastMilkFlag = [];
   public buttonName: any = 'Results';
 
 
@@ -93,11 +93,9 @@ export class HistoryParentalComponent implements OnInit {
       // set breastMilkFlag for food-recommend-model
       // if there is breast milk for the baby, then set flag to true
       this.results.forEach(item => {
-        let flag = false;
         if (item.userChoices[0].name === 'Breast milk') {
-          flag = true;
+          this.breastMilkFlag.push(item.questionnaireId);
         }
-        this.breastMilkFlag.set(item.questionnaireId, flag);
       });
     });
   }
