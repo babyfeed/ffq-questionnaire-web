@@ -43,7 +43,6 @@ import {FFQFoodRecommendations} from '../../models/ffqfood-recommendations';
 export class ClinicQuestResultsComponent implements OnInit {
   public show = false;
   public showFeedback = false;
-  breastMilkFlag = [];
   feedbackForm: FormGroup;
   loading = false;
   submitted = false;
@@ -126,7 +125,7 @@ export class ClinicQuestResultsComponent implements OnInit {
       this.results = m.reverse();
       this.parentNames = this.parentNames.reverse();
       for (let i = 0; i < this.parentNames.length; i++) {
-        const object: FFQParentResult = new FFQParentResult(
+        let object: FFQParentResult = new FFQParentResult(
           this.results[i],
           this.parentNames[i]
         );
@@ -156,13 +155,12 @@ export class ClinicQuestResultsComponent implements OnInit {
   // Function used to obtain the clinicId for the currently logged in clinician, in order to later display results based only for this specific clinic
   private getClinicId() {
 
-    const clinicListObervable: Observable<FFQClinicResponse[]> = this.clinicService.getAllClinics();
+    let clinicListObervable: Observable<FFQClinicResponse[]> = this.clinicService.getAllClinics();
     const loggedInUser = this.authenticationService.currentUserValue;
-    // tslint:disable-next-line:prefer-const
     let clinicId: string;
 
     clinicListObervable.subscribe(clinicList => {
-      const clinic = clinicList.find(a => a.clinicId === loggedInUser[0].assignedclinic);
+      let clinic = clinicList.find(a => a.clinicId == loggedInUser[0].assignedclinic);
       if (clinic) {
         this.clinicId = clinic.clinicId;
         this.currentClinicName = clinic.clinicname;
@@ -174,7 +172,7 @@ export class ClinicQuestResultsComponent implements OnInit {
 
   // Function used to filter the parent list to hold only the parents that are assigned to that specific clinic
   private getParentList() {
-    const parentListObervable: Observable<FFQParentResponse[]> = this.parentService.getAllParents();
+    let parentListObervable: Observable<FFQParentResponse[]> = this.parentService.getAllParents();
 
     parentListObervable.subscribe(parentList => {
       parentList.forEach(parent => {
@@ -195,11 +193,8 @@ export class ClinicQuestResultsComponent implements OnInit {
         allResults.forEach(result => {
           if (result.userId === parent.userId && parent.prefix === this.loggedInUser[0].prefix) {
             this.resultList.push(result);
-            const parentName = parent.firstname + ' ' + parent.lastname;
+            let parentName = parent.firstname + ' ' + parent.lastname;
             this.parentNames.push(parentName);
-            if (result.userChoices[0].name === 'Breast milk') {
-              this.breastMilkFlag.push(result.questionnaireId);
-            }
           }
         });
       });
@@ -211,7 +206,7 @@ export class ClinicQuestResultsComponent implements OnInit {
 
   private setFoodList() {
     this.results.forEach(result => {
-      const recommendedFood: FFQFoodRecommendations[] = [];
+      let recommendedFood: FFQFoodRecommendations[] = [];
       this.foodRecommendationsService.getFoodRecommendationsByQuestionnaireId(result.questionnaireId).subscribe(
         data => {
           recommendedFood.push(data);
@@ -277,11 +272,7 @@ export class ClinicQuestResultsComponent implements OnInit {
 
   // functions used in HTML to display the food recommendation after clicking on the button
   onModalRequestFood(id: string): void {
-    const modalRef = this.errorDialog.open(FoodRecommendModalComponent, {
-      // the FoodRecommendModalComponent is independent component, in order to access the data which I can only get in current component,
-      // pass the data by this method
-      data: this.breastMilkFlag
-    });
+    const modalRef = this.errorDialog.open(FoodRecommendModalComponent);
     modalRef.componentInstance.id = id;
   }
 
