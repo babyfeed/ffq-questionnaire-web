@@ -33,4 +33,7 @@ export class TrackerHistoryPageComponent implements OnInit {
     });
   };
 
+  public submitGoal() {
+    console.log('Submit goal')
+  }
 }
