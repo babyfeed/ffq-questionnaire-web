@@ -4,6 +4,8 @@ import { TrackerResultsService } from 'src/app/services/tracker-results/tracker-
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { TrackerItems } from 'src/app/models/trackeritems';
 
+import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
+
 @Component({
   selector: 'app-tracker-history-page',
   templateUrl: './tracker-history-page.component.html',
@@ -12,13 +14,20 @@ import { TrackerItems } from 'src/app/models/trackeritems';
 export class TrackerHistoryPageComponent implements OnInit {
 
   results: TrackerResultsResponse[] = [];
+  goal: string;
+  trackerForm: FormGroup;
   
-  constructor(private trackerResultsService: TrackerResultsService,
+  constructor(private formBuilder: FormBuilder,
+              private trackerResultsService: TrackerResultsService,
               private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
     this.getResultsByUser(this.authenticationService.currentUserId);
-    
+
+    this.trackerForm = this.formBuilder.group({
+      userId: [this.authenticationService.currentUserId],
+      goal: ['', Validators.required]
+    });
     // test items
     // for(let i = 0; i < 10; i++) {
     //   this.results[i] = new TrackerResultsResponse("1", i, "4/"+i+"/20", [new TrackerItems("food1", "Above"),
@@ -34,6 +43,6 @@ export class TrackerHistoryPageComponent implements OnInit {
   };
 
   public submitGoal() {
-    console.log('Submit goal')
+    console.log(this.trackerForm.value.goal)
   }
 }
