@@ -39,6 +39,7 @@ import {FFQInstitution} from '../../models/ffqinstitution';
 export class QuestResultsComponent implements OnInit {
   public show = false;
   public showFeedback = false;
+  breastMilkFlag = [];
   results: FFQResultsResponse[] = [];
   parentResults: FFQResultsResponse[] = [];
   parentResultsByClinicId: FFQResultsResponse[] = [];
@@ -124,6 +125,13 @@ export class QuestResultsComponent implements OnInit {
       }));
       this.participantResults = this.results.filter(t => t.userType === 'participant');
       this.setFoodList();
+      // set breastMilkFlag for food-recommend-model
+      // if there is breast milk for the baby, then set flag to true
+      this.results.forEach(item => {
+        if (item.userChoices[0].name === 'Breast milk') {
+          this.breastMilkFlag.push(item.questionnaireId);
+        }
+      });
     }
 
    );
@@ -232,7 +240,11 @@ export class QuestResultsComponent implements OnInit {
   }
 
   onModalRequestFood(id: string): void {
-    const modalRef = this.errorDialog.open(FoodRecommendModalComponent);
+    const modalRef = this.errorDialog.open(FoodRecommendModalComponent, {
+      // the FoodRecommendModalComponent is independent component, in order to access the data which I can only get in current component,
+      // pass the data by this method
+      data: this.breastMilkFlag
+    });
     modalRef.componentInstance.id = id;
   }
 
