@@ -17,4 +17,7 @@ export class TrackerResponseService {
     return this.http.post(this.endpoint + '/tracker', results);
   }
 
+  submitGoal(goal: any): Observable<any> {
+    return this.http.put(this.endpoint + '/tracker/update', goal);
+  }
 }

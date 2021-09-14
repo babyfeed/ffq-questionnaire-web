@@ -5,6 +5,13 @@ import { AuthenticationService } from 'src/app/services/authentication/authentic
 import { TrackerItems } from 'src/app/models/trackeritems';
 
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
+import { TrackerResponseService } from 'src/app/services/tracker-response/tracker-response.service';
+
+import { HttpErrorResponse } from '@angular/common/http';
+import { ErrorDialogPopupComponent } from 'src/app/components/error-dialog-popup/error-dialog-popup.component';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-tracker-history-page',
@@ -16,6 +23,13 @@ export class TrackerHistoryPageComponent implements OnInit {
   results: TrackerResultsResponse[] = [];
   goal: string;
   trackerForm: FormGroup;
+  trackerResponseService: TrackerResponseService;
+
+  successDialog: MatDialog;
+  submissionErrorDialog: MatDialog;
+  translate: TranslateService;
+  router: Router;
+
   
   constructor(private formBuilder: FormBuilder,
               private trackerResultsService: TrackerResultsService,
@@ -43,6 +57,23 @@ export class TrackerHistoryPageComponent implements OnInit {
   };
 
   public submitGoal() {
+    this.goal = this.trackerForm.value.goal;
     console.log(this.trackerForm.value.goal)
+
+    this.trackerResponseService.submitGoal(this.goal).subscribe(() => {
+      const dialogRef = this.successDialog.open(ErrorDialogPopupComponent);
+      dialogRef.componentInstance.title = this.translate.instant('Submitted Successfully');
+      dialogRef.componentInstance.message = this.translate.instant('Your submission has been recorded');
+      dialogRef.afterClosed().subscribe(() => {
+        this.router.navigate(['parent/tracker-history']);
+      });
+    }, (error: HttpErrorResponse) => {
+      const dialogRef = this.submissionErrorDialog.open(ErrorDialogPopupComponent);
+      dialogRef.componentInstance.title = this.translate.instant('Submission Error');
+      dialogRef.componentInstance.message = error.message;
+      dialogRef.afterClosed().subscribe(() => {
+        this.router.navigate(['parent/tracker-history']);
+      });
+    });
   }
 }

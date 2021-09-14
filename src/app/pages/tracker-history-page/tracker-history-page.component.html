@@ -40,7 +40,7 @@
   </div>
   <form (ngSubmit)="submitGoal()" [formGroup]="trackerForm">
     <div class="form-group">
-      <textarea type="usertype" class="form-control" formControlName="goal"></textarea>
+      <textarea type="usertype" class="form-control" formControlName="goal" placeholder={{goal}}></textarea>
     </div>
 
     <!-- submit button -->
