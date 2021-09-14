@@ -71,7 +71,8 @@ export class ExportService {
       var resultCol = {
         'Participant Username': parentList[parentIndex++],
         'Date': result.date,
-        'Age(Months)': result.age
+        'Age(Months)': result.age,
+        'Goal': result.goal
       };
 
       for(let item of result.responses){
@@ -79,6 +80,7 @@ export class ExportService {
       }
       
       resultRows.push(resultCol)
+
 
     });
 
