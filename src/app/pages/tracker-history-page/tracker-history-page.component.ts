@@ -23,17 +23,16 @@ export class TrackerHistoryPageComponent implements OnInit {
   results: TrackerResultsResponse[] = [];
   goal: string;
   trackerForm: FormGroup;
-  trackerResponseService: TrackerResponseService;
-
-  successDialog: MatDialog;
-  submissionErrorDialog: MatDialog;
-  translate: TranslateService;
-  router: Router;
 
   
   constructor(private formBuilder: FormBuilder,
               private trackerResultsService: TrackerResultsService,
-              private authenticationService: AuthenticationService) { }
+              private authenticationService: AuthenticationService,
+              private router: Router,
+              private submissionErrorDialog: MatDialog,
+              private successDialog: MatDialog,
+              private trackerResponseService: TrackerResponseService,
+              private translate: TranslateService  ) { }
 
   ngOnInit() {
     this.getResultsByUser(this.authenticationService.currentUserId);
@@ -58,7 +57,7 @@ export class TrackerHistoryPageComponent implements OnInit {
 
   public submitGoal() {
     this.goal = this.trackerForm.value.goal;
-    console.log(this.trackerForm.value.goal)
+    console.log(this.goal)
 
     this.trackerResponseService.submitGoal(this.goal).subscribe(() => {
       const dialogRef = this.successDialog.open(ErrorDialogPopupComponent);
