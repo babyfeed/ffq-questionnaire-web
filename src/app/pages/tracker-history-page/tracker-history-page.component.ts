@@ -22,6 +22,7 @@ export class TrackerHistoryPageComponent implements OnInit {
 
   results: TrackerResultsResponse[] = [];
   goal: string;
+  _id: string;
   trackerForm: FormGroup;
 
   
@@ -39,7 +40,8 @@ export class TrackerHistoryPageComponent implements OnInit {
 
     this.trackerForm = this.formBuilder.group({
       userId: [this.authenticationService.currentUserId],
-      goal: ['', Validators.required]
+      goal: ['', Validators.required],
+      _id: ['', Validators.required]
     });
     // test items
     // for(let i = 0; i < 10; i++) {
@@ -55,24 +57,35 @@ export class TrackerHistoryPageComponent implements OnInit {
     });
   };
 
-  public submitGoal() {
-    this.goal = this.trackerForm.value.goal;
-    console.log(this.goal)
+  public test(result: any) {
+    console.log(result);
+  }
 
-    this.trackerResponseService.submitGoal(this.goal).subscribe(() => {
-      const dialogRef = this.successDialog.open(ErrorDialogPopupComponent);
-      dialogRef.componentInstance.title = this.translate.instant('Submitted Successfully');
-      dialogRef.componentInstance.message = this.translate.instant('Your submission has been recorded');
-      dialogRef.afterClosed().subscribe(() => {
-        this.router.navigate(['parent/tracker-history']);
-      });
-    }, (error: HttpErrorResponse) => {
-      const dialogRef = this.submissionErrorDialog.open(ErrorDialogPopupComponent);
-      dialogRef.componentInstance.title = this.translate.instant('Submission Error');
-      dialogRef.componentInstance.message = error.message;
-      dialogRef.afterClosed().subscribe(() => {
-        this.router.navigate(['parent/tracker-history']);
-      });
+  public submitGoal(_id: string) {
+    this.goal = this.trackerForm.controls.goal.value;
+    console.log(this.goal)
+    console.log(_id)
+    this.trackerResponseService.submitGoal(_id, this.goal).subscribe((data: null) => {
     });
+
+    //this.goal = this.trackerForm.value.goal;
+    //console.log(this.goal)
+    //console.log(_id)
+
+    //this.trackerResponseService.submitGoal(this.goal, _id).subscribe(() => {
+    //  const dialogRef = this.successDialog.open(ErrorDialogPopupComponent);
+    //  dialogRef.componentInstance.title = this.translate.instant('Submitted Successfully');
+    //  dialogRef.componentInstance.message = this.translate.instant('Your submission has been recorded');
+    //  dialogRef.afterClosed().subscribe(() => {
+    //    this.router.navigate(['parent/tracker-history']);
+    //  });
+    //}, (error: HttpErrorResponse) => {
+    //  const dialogRef = this.submissionErrorDialog.open(ErrorDialogPopupComponent);
+    //  dialogRef.componentInstance.title = this.translate.instant('Submission Error');
+    //  dialogRef.componentInstance.message = error.message;
+    //  dialogRef.afterClosed().subscribe(() => {
+    //    this.router.navigate(['parent/tracker-history']);
+    //  });
+    //});
   }
 }

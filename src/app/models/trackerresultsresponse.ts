@@ -1,4 +1,5 @@
 export class TrackerResultsResponse {
+  _id: string;
   userId: string;
   age: number;
   date: string;

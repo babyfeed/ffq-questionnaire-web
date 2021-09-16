@@ -11,8 +11,9 @@ import { environment } from 'src/environments/environment';
 export class TrackerResultsService {
 
   endpoint = environment.foodServiceUrl + '/ffq';
-
-  constructor(private http: HttpClient) { }
+  public trackerResult: TrackerResultsResponse
+  constructor(private http: HttpClient,
+               ) { }
 
   getAllResults(): Observable<TrackerResultsResponse[]> {
     return this.http.get(this.endpoint + '/tracker/all').pipe(
@@ -32,12 +33,14 @@ export class TrackerResultsService {
     return this.http.get(this.endpoint + '/tracker/user/' + userId).pipe(
       map((res: any) => {
         return res.map(item => {
-          return new TrackerResultsResponse(
+            this.trackerResult = new TrackerResultsResponse(
             item.userId,
             item.age,
             item.date,
             item.responses
           );
+          this.trackerResult._id = item.id;
+          return this.trackerResult;
         });
       }));
   }
