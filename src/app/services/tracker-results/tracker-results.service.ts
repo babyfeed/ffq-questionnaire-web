@@ -19,12 +19,14 @@ export class TrackerResultsService {
     return this.http.get(this.endpoint + '/tracker/all').pipe(
       map((res: any) => {
         return res.map(item => {
-          return new TrackerResultsResponse(
+          this.trackerResult = new TrackerResultsResponse(
             item.userId,
             item.age,
             item.date,
-            item.responses
+            item.responses,
           );
+          this.trackerResult.goal = item.goal;
+          return this.trackerResult
         });
       }));
   }
@@ -40,6 +42,7 @@ export class TrackerResultsService {
             item.responses
           );
           this.trackerResult._id = item.id;
+          this.trackerResult.goal = item.goal;
           return this.trackerResult;
         });
       }));

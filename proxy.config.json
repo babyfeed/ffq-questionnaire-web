@@ -1,6 +1,10 @@
 {
-    "ffq/*": {
-      "target": "http://localhost:9070",
-      "secure": false
-    }
+  "/ffq/tracker/*": {
+    "target": "http://localhost:9090",
+    "secure": false
+  },
+  "ffq/*": {
+    "target": "http://localhost:9070",
+    "secure": false
+  }
 }

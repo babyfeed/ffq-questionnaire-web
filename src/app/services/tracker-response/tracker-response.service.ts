@@ -22,8 +22,8 @@ export class TrackerResponseService {
   //    { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) });
   //}
   submitGoal(_id: string, goal: string): Observable<any> {
-    return this.http.put(this.endpoint + '/update', {
-      _id: _id,
+    return this.http.put(this.endpoint + '/tracker/update', {
+      id: _id,
       goal: goal
     },{ headers: new HttpHeaders({ 'Content-Type': 'application/json' }) });
   }
