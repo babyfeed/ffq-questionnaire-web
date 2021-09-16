@@ -17,10 +17,10 @@ export class TrackerResponseService {
     return this.http.post(this.endpoint + '/tracker', results);
   }
 
-  //submitGoal(goal: String, id: String) {
-  //  return this.http.put(this.endpoint + '/tracker/update/' + id, goal,
-  //    { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) });
-  //}
+
+  /* Function used when setting "Goal for next week"
+     Makes a PUT request to /tracker/update which is picked up in the Tracker Results Controller
+  */
   submitGoal(_id: string, goal: string): Observable<any> {
     return this.http.put(this.endpoint + '/tracker/update', {
       id: _id,

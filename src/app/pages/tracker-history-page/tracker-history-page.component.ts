@@ -61,31 +61,13 @@ export class TrackerHistoryPageComponent implements OnInit {
     console.log(result);
   }
 
+  /* Function used when setting "Goal for next week"
+    Takes in the tracker result's ID to know which one to specifically update
+    And reads the goal using trackerForm
+  */
   public submitGoal(_id: string) {
     this.goal = this.trackerForm.controls.goal.value;
-    console.log(this.goal)
-    console.log(_id)
     this.trackerResponseService.submitGoal(_id, this.goal).subscribe((data: null) => {
     });
-
-    //this.goal = this.trackerForm.value.goal;
-    //console.log(this.goal)
-    //console.log(_id)
-
-    //this.trackerResponseService.submitGoal(this.goal, _id).subscribe(() => {
-    //  const dialogRef = this.successDialog.open(ErrorDialogPopupComponent);
-    //  dialogRef.componentInstance.title = this.translate.instant('Submitted Successfully');
-    //  dialogRef.componentInstance.message = this.translate.instant('Your submission has been recorded');
-    //  dialogRef.afterClosed().subscribe(() => {
-    //    this.router.navigate(['parent/tracker-history']);
-    //  });
-    //}, (error: HttpErrorResponse) => {
-    //  const dialogRef = this.submissionErrorDialog.open(ErrorDialogPopupComponent);
-    //  dialogRef.componentInstance.title = this.translate.instant('Submission Error');
-    //  dialogRef.componentInstance.message = error.message;
-    //  dialogRef.afterClosed().subscribe(() => {
-    //    this.router.navigate(['parent/tracker-history']);
-    //  });
-    //});
   }
 }
