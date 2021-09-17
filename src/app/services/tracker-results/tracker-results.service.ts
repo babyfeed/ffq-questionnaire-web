@@ -23,7 +23,7 @@ export class TrackerResultsService {
             item.userId,
             item.age,
             item.date,
-            item.responses,
+            item.responses
           );
           // Goal is not apart of the contructor of a tracker result response object so set them after creating
           this.trackerResult.goal = item.goal;
