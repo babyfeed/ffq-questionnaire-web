@@ -67,6 +67,7 @@ export class TrackerHistoryPageComponent implements OnInit {
   */
   public submitGoal(_id: string) {
     this.goal = this.trackerForm.controls.goal.value;
+    this.trackerForm.controls.goal.setValue("");
     this.trackerResponseService.submitGoal(_id, this.goal).subscribe((data: null) => {
     });
   }
