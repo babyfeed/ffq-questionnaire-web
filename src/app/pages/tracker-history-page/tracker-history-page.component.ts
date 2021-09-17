@@ -67,8 +67,21 @@ export class TrackerHistoryPageComponent implements OnInit {
   */
   public submitGoal(_id: string) {
     this.goal = this.trackerForm.controls.goal.value;
-    this.trackerForm.controls.goal.setValue("");
-    this.trackerResponseService.submitGoal(_id, this.goal).subscribe((data: null) => {
+    this.trackerResponseService.submitGoal(_id, this.goal).subscribe(() => {
+      // Used to provide feedback when submitting
+      const dialogRef = this.successDialog.open(ErrorDialogPopupComponent);
+      dialogRef.componentInstance.title = this.translate.instant('Submitted Successfully');
+      dialogRef.componentInstance.message = this.translate.instant('Your submission has been recorded');
+      dialogRef.afterClosed().subscribe(() => {
+        this.router.navigate(['parent/tracker-history']);
+      });
+    }, (error: HttpErrorResponse) => {
+      const dialogRef = this.submissionErrorDialog.open(ErrorDialogPopupComponent);
+      dialogRef.componentInstance.title = this.translate.instant('Submission Error');
+      dialogRef.componentInstance.message = error.message;
+      dialogRef.afterClosed().subscribe(() => {
+        this.router.navigate(['parent/tracker-history']);
+      });
     });
   }
 }
