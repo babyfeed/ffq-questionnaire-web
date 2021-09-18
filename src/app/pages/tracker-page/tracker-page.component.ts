@@ -52,6 +52,18 @@ export class TrackerPageComponent implements OnInit {
               private successDialog: MatDialog,
               private trackerResponseService: TrackerResponseService,
               private translate: TranslateService) {}
+              
+ toggleLanguage(): void {
+    // If page is currently spanish go to english
+    if (this.translate.currentLang == 'es') {
+      this.translate.use('en-US');
+    }
+    // Else if page is not spanish go to spanish
+    else {
+      this.translate.use('es');
+    }
+  }
+
 
   ngOnInit() {
     this.getAllResults();
