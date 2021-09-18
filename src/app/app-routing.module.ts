@@ -193,7 +193,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'parent/home',
+    path: 'parent/questionnaire',
     component: QuestIdInputComponent,
     canActivate: [AuthGuard]
   },
@@ -203,7 +203,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'parent/tracker',
+    path: 'parent/home',
     component: TrackerPageComponent,
     canActivate: [AuthGuard]
   },
