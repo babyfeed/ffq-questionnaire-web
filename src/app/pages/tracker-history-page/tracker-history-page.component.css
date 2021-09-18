@@ -41,6 +41,10 @@ h2.GoalTitle{
     font-size: 28px;
 }
 
+textarea[name=goal] {
+  resize: none;
+}
+
 @media (max-width: 500px) {
   .tracker-card {
      width: 90%;
