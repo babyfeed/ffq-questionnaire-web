@@ -3,16 +3,19 @@
 <div class="tracker-container">
     <!-- header message -->
     <h2 matDialogTitle>{{'NUTRITION.TITLE' | translate}}</h2><br>
+  
     <text-card *ngIf="showItems" mainMessage="{{ 'NUTRITION.MESSAGE' | translate }}" [bulletedMessages]="BULLETED_INSTRUCTIONS" [instructionsTitle]="'NUTRITION.INSTRUCTIONS' | translate "></text-card>
     <br>
-<div style="color:red;" class="home-greeting">
-            <h2>
-              {{ "Welcome to Baby Feed!" | translate }}
-            </h2>
-          </div>
+    
     <!-- age form -->
-    <div *ngIf="showAgeForm" class="qb-container">
+<div *ngIf="showAgeForm" class="qb-container">
         <mat-card class="qb-card">
+             <div style="color:red;" class="home-greeting">
+            <h2>
+              {{ 'Welcome to Baby Feed!' | translate }}
+            </h2>
+         <br>
+          </div>
             <div style="font-style: italic; color:Blue;">{{'Please complete the tracking once a week' | translate}}</div>
             <mat-label style="text-align:center" class="qb-row-item"><strong>{{'Infant age' | translate}}</strong></mat-label>
             <mat-form-field>
