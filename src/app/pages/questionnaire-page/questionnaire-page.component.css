@@ -63,3 +63,19 @@ h2 {
   margin-bottom: 5px;
   cursor: pointer;
 }
+mat-error {
+  font-size:  x-large;
+  background-color: yellow;
+}
+@media (max-width: 500px) {
+  .skip-foods-div {
+    font-size: smaller;
+  }
+  .skip-foods-button {
+    white-space: normal;
+    margin-left: 0px;
+    line-height: 10px;
+    font-size: 11px;
+    cursor: pointer;
+  }
+}

@@ -109,11 +109,13 @@ export class ExportService {
       var resultCol = {
         'Participant Username': parentList.find(parent => parent.userId === result.userId)?.username ?? "[not found]",
         'Questionnaire ID': result.questionnaireId,
-        'Date': result.date,};
+        'Date': result.date,
+        'Name': result.patientName,
+        'Age': result.ageInMonths      };
 
       // Add columns with nurient data
       for (let key of result.dailyAverages.keys()) {
-        resultCol[key] = result.dailyAverages.get(key).toFixed(2);
+          resultCol[key] = result.dailyAverages.get(key).toFixed(2);       
       }
 
       // Push columns to array of rows
@@ -174,7 +176,7 @@ export class ExportService {
 
       // Add columns with nurient data
       result.foodRecList.forEach( res => {
-        res.foodCategoryRecList.forEach( food => {
+        res.foodCategoryRecList.forEach(food => {
           resultCol[food.categoryName] = food.calculatedAmount.toFixed(2);
         });
       });
