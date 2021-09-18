@@ -5,7 +5,11 @@
     <h2 matDialogTitle>{{'NUTRITION.TITLE' | translate}}</h2><br>
     <text-card *ngIf="showItems" mainMessage="{{ 'NUTRITION.MESSAGE' | translate }}" [bulletedMessages]="BULLETED_INSTRUCTIONS" [instructionsTitle]="'NUTRITION.INSTRUCTIONS' | translate "></text-card>
     <br>
-
+<div style="color:red;" class="home-greeting">
+            <h2>
+              {{ "Welcome to Baby Feed!" | translate }}
+            </h2>
+          </div>
     <!-- age form -->
     <div *ngIf="showAgeForm" class="qb-container">
         <mat-card class="qb-card">
@@ -17,11 +21,14 @@
             <mat-card-actions>
                 <div class="qb-button">
                     <button mat-raised-button (click)="enterAge(ageValue.value)" color="primary" >{{'Enter Age' | translate}}</button>
+                    
                 </div>
-            </mat-card-actions>
-        </mat-card>
+                <div class="lang-button-div">
+            <button (click)="toggleLanguage()" mat-raised-button class="lang-button">{{'For English' | translate}}</button>
+          </div>
+            </mat-card-actions>  
+        </mat-card>       
     </div>
-
     <form *ngIf="showItems" [formGroup]="trackerForm" (ngSubmit)="submitTracker()">
         <!-- tracker cards -->
         <span formArrayName="responses">
@@ -43,12 +50,9 @@
         </mat-card>
       </div>
     </span>
-
         <!-- submit button -->
         <div class="footer">
             <button mat-raised-button color="primary">{{'Submit' | translate}}</button>
         </div>
-
     </form>
-
 </div>
