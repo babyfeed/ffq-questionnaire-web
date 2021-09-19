@@ -109,7 +109,9 @@ export class ExportService {
       var resultCol = {
         'Participant Username': parentList.find(parent => parent.userId === result.userId)?.username ?? "[not found]",
         'Questionnaire ID': result.questionnaireId,
-        'Date': result.date,};
+        'Date': result.date,
+        'Name': result.patientName,
+        'Age': result.ageInMonths      };
 
       // Add columns with nurient data
       for (let key of result.dailyAverages.keys()) {
