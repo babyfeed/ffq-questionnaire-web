@@ -42,6 +42,11 @@ mat-error {
   .qb-card {
     font-size: smaller;
   }
+  .qb-radio-group {
+    padding-top: 10px;
+    width: 100%;
+    display: block;
+  }
 }
 
 
