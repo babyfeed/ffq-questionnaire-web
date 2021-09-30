@@ -313,59 +313,65 @@
                 <mat-card class="quest-id-card">
                     <mat-card-content>
                         <!--Labels for questionnaire results-->
-                        <div class="row">
-                            <div class="col-2" style="text-align:center">
-                              <label><strong>Parent Username</strong></label>
-                            </div>
-                            <div class="col-2" style="text-align:center">
-                                <label><strong>Questionnaire ID</strong></label>
-                            </div>
-                            <div class="col-2" style="text-align:center">
-                                <label><strong>Infant age (In months)</strong></label>
-                            </div>
-                            <div class="col-1" style="text-align:center">
-                                <label><strong>Infant Gender</strong></label>
-                            </div>
-                            <div class="col-2" style="text-align:center">
-                                <label><strong>Nutrient Results</strong></label>
-                            </div>
-                            <div class="col-2" style="text-align:center">
-                                <label><strong>Food Results</strong></label>
-                            </div>
+                      <div class="row">
+                        <div class="col" style="text-align:center">
+                          <label><strong>Parent Username</strong></label>
                         </div>
+                        <div class="col" style="text-align:center">
+                          <label><strong>Date</strong></label>
+                        </div>
+                        <div  class="col" style="text-align:center">
+                          <label><strong>Questionnaire ID</strong></label>
+                        </div>
+                        <div  class="col" style="text-align:center">
+                          <label><strong>Infant age (In months)</strong></label>
+                        </div>
+                        <div  class="col" style="text-align:center">
+                          <label><strong>Infant Gender</strong></label>
+                        </div>
+                        <div  class="col" style="text-align:center">
+                          <label><strong>Nutrient Results</strong></label>
+                        </div>
+                        <div  class="col" style="text-align:center">
+                          <label><strong>Food Results</strong></label>
+                        </div>
+                      </div>
 
                         <!--Questionnaire results-->
-                        <div class="row mb-3">
-                            <div class="col-1" style="text-align:center">
-                                {{result.username}}
-                            </div>
-                            <div class="col-2" style="text-align:center">
-                                {{result.questionnaireId}}
-                            </div>
-                            <div class="col-2" style="text-align:center">
-                                {{result.ageInMonths}}
-                            </div>
-                            <div class="col-1" style="text-align:center">
-                                {{result.gender}}
-                            </div>
-                            <div class="col-2" style="text-align:center; cursor:pointer">
-                                <a (click)="getNutrientsRecommendations(result.questionnaireId)"><i title="nutrients" class="fa fa-flask"></i></a>
-                            </div>
-                            <div class="col-2" style="text-align:center; cursor:pointer">
-                                <a (click)="getFoodRecommendations(result.questionnaireId)"><i title="fooditems" class="fa fa-cutlery"></i></a>
-                            </div>
-
-
-                            <div class="col-12 offset-10">
-                                <button mat-raised-button type="button" (click)="toggleParentResults(i)">
-                                  Results
-                                </button>
-
-                                <button mat-raised-button class="btn btn-danger" (click)="deleteQuestionnaire(result.questionnaireId)">
-                                  Delete
-                                </button>
-                            </div>
+                      <div class="row mb-3">
+                        <div class="col" style="text-align:center">
+                          {{result.username}}
                         </div>
+                        <div class="col" style="text-align:center">
+                          {{result.date}}
+                        </div>
+                        <div class="col" style="text-align:center">
+                          {{result.questionnaireId}}
+                        </div>
+                        <div class="col" style="text-align:center">
+                          {{result.ageInMonths}}
+                        </div>
+                        <div class="col" style="text-align:center">
+                          {{result.gender}}
+                        </div>
+                        <div class="col" style="text-align:center; cursor:pointer">
+                          <a (click)="getNutrientsRecommendations(result.questionnaireId)"><i title="nutrients" class="fa fa-flask"></i></a>
+                        </div>
+                        <div class="col" style="text-align:center; cursor:pointer">
+                          <a (click)="getFoodRecommendations(result.questionnaireId)"><i title="fooditems" class="fa fa-cutlery"></i></a>
+                        </div>
+
+
+                        <div class="col-12 offset-10" style="padding-top: 30px;">
+                          <button mat-raised-button type="button" (click)="toggleParentResults(i)">
+                            Results
+                          </button>
+
+                          <button mat-raised-button class="btn btn-danger" (click)="deleteQuestionnaire(result.questionnaireId)">
+                            Delete
+                          </button>
+                        </div>
+                      </div>
 
                         <!--User choice results-->
                         <ng-container *ngIf="result.show">
