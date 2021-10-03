@@ -150,9 +150,15 @@ export class ResearchHistoryComponent implements OnInit {
       const weeklyMap = element.weeklyTotals;
       const dailyMap = element.dailyAverages;
 
-      reqList.forEach(a =>  {
-          newWeeklyMap.set(a, weeklyMap[a]);
-          newDailyMap.set(a, dailyMap[a]);
+        reqList.forEach(a => {
+          if (typeof weeklyMap[a] == 'number')
+          { newWeeklyMap.set(a, weeklyMap[a]); }
+          else
+          { newWeeklyMap.set(a, 0); }
+          if (typeof dailyMap[a] == 'number')
+          { newDailyMap.set(a, dailyMap[a]); }
+          else
+          { newDailyMap.set(a, 0); }
       });
 
       element.weeklyTotals = newWeeklyMap;

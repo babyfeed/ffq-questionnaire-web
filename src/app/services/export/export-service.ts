@@ -115,15 +115,7 @@ export class ExportService {
 
       // Add columns with nurient data
       for (let key of result.dailyAverages.keys()) {
-        if (typeof result.dailyAverages.get(key) != 'string')
-        {
-          resultCol[key] = result.dailyAverages.get(key).toFixed(2);
-        }
-        else
-        {
-          resultCol[key] = 0;
-        }
-        
+          resultCol[key] = result.dailyAverages.get(key).toFixed(2);       
       }
 
       // Push columns to array of rows
@@ -185,14 +177,7 @@ export class ExportService {
       // Add columns with nurient data
       result.foodRecList.forEach( res => {
         res.foodCategoryRecList.forEach(food => {
-          if (typeof food.calculatedAmount != 'string') {
-            resultCol[food.categoryName] = food.calculatedAmount.toFixed(2);
-          }
-          else
-          {
-            resultCol[food.categoryName] = 0;
-          }
-          
+          resultCol[food.categoryName] = food.calculatedAmount.toFixed(2);
         });
       });
 
