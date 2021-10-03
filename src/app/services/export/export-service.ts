@@ -121,7 +121,7 @@ export class ExportService {
         }
         else
         {
-          resultCol[key] = result.dailyAverages.get(key);
+          resultCol[key] = 0;
         }
         
       }
