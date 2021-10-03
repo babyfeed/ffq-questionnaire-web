@@ -185,7 +185,14 @@ export class ExportService {
       // Add columns with nurient data
       result.foodRecList.forEach( res => {
         res.foodCategoryRecList.forEach(food => {
-          resultCol[food.categoryName] = food.calculatedAmount.toFixed(2);
+          if (typeof food.calculatedAmount != 'string') {
+            resultCol[food.categoryName] = food.calculatedAmount.toFixed(2);
+          }
+          else
+          {
+            resultCol[food.categoryName] = 0;
+          }
+          
         });
       });
 
