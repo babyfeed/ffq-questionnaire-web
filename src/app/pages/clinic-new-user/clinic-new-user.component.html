@@ -33,14 +33,14 @@
               <td>{{ numParents }}</td>
               <td>{{ limit - numParents}}</td>
               <td>{{ limit }}</td>
-              
+
             </tr>
           </table>
           <div [hidden]="clicked" class="form-group col-12">
             <label style="font-weight: bold"> Account Type </label>
             <br>
             <mat-radio-group  aria-label="Select an option" [(ngModel)]="userType" name="userType">
-              <mat-radio-button (click)="countParents()" value="userTypes.parent" >Parent</mat-radio-button>
+              <mat-radio-button (click)="countParents(); clicked = true; intialLoad = false;" [value]="userTypes.parent" color="primary" >Parent</mat-radio-button>
               <br>
               <mat-radio-button [hidden]="true" [value]="userTypes.clinician" color="primary" >Clinician</mat-radio-button>
             </mat-radio-group>
