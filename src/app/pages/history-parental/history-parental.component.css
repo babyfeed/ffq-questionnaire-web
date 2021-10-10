@@ -6,7 +6,7 @@
 .container_page{
   padding-top: 200px;
   margin-bottom: 50px;
-  overflow-x: hidden;
+  
 }
 .container-choices{
   padding-top: 30px;
@@ -36,7 +36,6 @@ tr:nth-child(even) {
 
 @media (max-width: 500px) {
   .quest-id-card {
-    min-width: 600px;
-    overflow-x: auto;
+    width: 600px;
   }
 }
