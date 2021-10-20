@@ -33,7 +33,7 @@
 
 mat-error {
   font-size:  x-large;
-   background-color: yellow;
+  background-color: yellow;
 }
 
 @media (max-width: 500px) {
