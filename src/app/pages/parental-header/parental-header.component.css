@@ -109,4 +109,9 @@ body, html {
 
   }
 
+.center {
+  display: block;
+  margin:auto;  
+}
+
 
