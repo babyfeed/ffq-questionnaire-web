@@ -27,9 +27,18 @@ export class ResearchQuestIdInputComponent {
     private translate: TranslateService) {
   }
 
-  useLanguage(language: string): void {
-    this.translate.use(language);
+  // Method for lang button
+  toggleLanguage(): void {
+    // If page is currently spanish go to english
+    if (this.translate.currentLang == 'es') {
+      this.translate.use('en-US');
+    }
+    // Else if page is not spanish go to spanish
+    else {
+      this.translate.use('es');
+    }
   }
+
   validateQuestionnaireId(id: string) {
     this.questService.getQuestionnaireId(id).subscribe((data: QuestionnaireResponse) => {
       if (data.exists) {
