@@ -41,7 +41,8 @@
               <label>Number of participants:</label>
               <input [(ngModel)]="numToAdd" name="numToAdd" type="number" min="1" max={{limit}} />
               <br>
-              <angular2csv [hidden]="!dissabled" class="btn btn-danger" [data]="data" filename="ResearcherLoginInfo" [options]="options"></angular2csv>
+              <p style="color:grey;"><small>Current limit: {{limit - numParticipants}}</small></p>
+              <p style="color:red;" *ngIf="noMoreRoom">Exceeded limit, no participants added</p>
             </div>
           </div>
           <!-- Add Research Institution ends here -->

@@ -186,6 +186,7 @@ export class ParticipantUserComponent implements OnInit {
       });
     this.ffqparticipantList = this.selectedParticipants.concat(this.ffqParticipants)
     this.selectedParticipants = this.selectedParticipants.concat(this.ffqParticipants)
+    this.handleChange()
   }
 
   /*
