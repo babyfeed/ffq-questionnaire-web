@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { ErrorDialogPopupComponent } from 'src/app/components/error-dialog-popup/error-dialog-popup.component';
 import { combineLatest, Observable } from 'rxjs';
 import { ParticipantService } from 'src/app/services/participant/participant-service';
 import { ResearchService } from 'src/app/services/research/research-service';
@@ -35,11 +36,21 @@ export class ParticipantUserComponent implements OnInit {
   // List for ALL institutions and ALL participants
   ffqinstitutionList: FFQInstitution[] = [];
   ffqparticipantList: FfqParticipant[] = [];
+  selectedParticipants: FfqParticipant[] = [];
 
-  // The institution's ID selected from dropdown
+  ffqParticipant: FfqParticipant;
+
+  // The institution's ID and name selected from dropdown
   selectedId: string;
+  selectedName: string;
 
+  // Number of participants to add
   numToAdd: number;
+
+  prefix;
+  suffix;
+  lastUserId;
+  participantName;
 
   constructor(
     public participantService: ParticipantService,
@@ -71,12 +82,23 @@ export class ParticipantUserComponent implements OnInit {
     });
   }
 
+  /*
+    A method that updates values when an instiution is selected
+
+    It sets the limit given from the selected institution
+    It sets selectedName to the selected institutions
+    It sets numParticipants to the number of participants for selected instituion
+    It makes an array of all the participants for selected institution
+    It sets prefix to the first part the institutions name
+  */
   handleChange() {
     this.numParticipants = 0;
+    this.selectedParticipants = [];
 
     for (let i = 0; i < this.ffqinstitutionList.length; i++) {
       if (this.selectedId === this.ffqinstitutionList[i].researchInstitutionId) {
         this.limit = this.ffqinstitutionList[i].participantsLimit;
+        this.selectedName = this.ffqinstitutionList[i].institutionName;
         break;
       }
     }
@@ -84,11 +106,22 @@ export class ParticipantUserComponent implements OnInit {
     for (let i = 0; i < this.ffqparticipantList.length; i++) {
       if (this.selectedId === this.ffqparticipantList[i].assignedResearcherInst) {
         this.numParticipants++;
+        this.selectedParticipants.push(this.ffqparticipantList[i])
       }
     }
 
+    this.prefix = this.selectedName.substr(0, this.selectedName.indexOf(" "))
   }
 
+  /*
+    A method to ensure the participant(s) being add do not go over institutions limit
+
+    numParticipants is the number of participants the instutions currently has
+    numToAdd to the number set on the page, the number of participant account to make
+    limit is the limit set by the institution
+
+    noMoreRoom is set to true IF the number to be added will go over the limit and false otherwise
+  */
   verifyLimit() {
     if (this.numParticipants + this.numToAdd > this.limit) {
       this.noMoreRoom = true;
@@ -99,15 +132,47 @@ export class ParticipantUserComponent implements OnInit {
   }
 
   addParticipant() {
-    console.log(this.ffqinstitutionList)
-    console.log(this.ffqparticipantList)
-    console.log(this.selectedId)
     this.verifyLimit()
-    console.log(this.numParticipants)
-    console.log(this.numToAdd)
-    console.log(this.limit)
-    console.log(this.noMoreRoom)
-    
+    if (!this.noMoreRoom && !(this.selectedName === null)) {
+      for (let i = 0; i < this.numToAdd; i++) {
+        this.createParticipants()
+        console.log(this.selectedParticipants)
+      }
+    }    
+  }
+
+  createParticipants() {
+    this.createName()
+    this.generatePassword()
+    this.ffqParticipant = new FfqParticipant(this.suffix.toString(), this.participantName, this.userPassword,
+      'participant', '', '', this.selectedId,
+      [this.loggedInUser[0].userId], [''], true, this.prefix);
+
+    this.participantService.addParticipant(this.ffqParticipant).subscribe(participant => {
+      const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+      dialogRef.componentInstance.title = participant.username + ' was added!';
+    },
+      error => {
+        const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+        dialogRef.componentInstance.title = error.error.message;
+        this.router.navigateByUrl('/admin/participant');
+      });
+    this.selectedParticipants.push(this.ffqParticipant);
+  }
+
+  createName() {
+    this.getSuffix();
+    this.participantName = this.prefix + "_" + this.suffix;
+  }
+
+  getSuffix() {
+    if (this.selectedParticipants.length === 0) {
+      this.suffix = 1;
+    }
+    else {
+      this.lastUserId = this.selectedParticipants[this.selectedParticipants.length - 1].userId;
+      this.suffix = parseInt(this.lastUserId, 10) + 1;
+    }
   }
 
   generatePassword() {
