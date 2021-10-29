@@ -38,7 +38,9 @@ export class ParticipantUserComponent implements OnInit {
   ffqparticipantList: FfqParticipant[] = [];
   selectedParticipants: FfqParticipant[] = [];
 
+  // Current participant created and list of participants to be added
   ffqParticipant: FfqParticipant;
+  ffqParticipants: FfqParticipant[] = [];
 
   // The institution's ID and name selected from dropdown
   selectedId: string;
@@ -131,40 +133,66 @@ export class ParticipantUserComponent implements OnInit {
     }
   }
 
+  /*
+    The method called by "Add Participant(s)" button
+
+    First verifies that it will not exceed limit
+    Then calls createParticipants if it does not exceed limit AND there is a selected instituion
+  */
   addParticipant() {
     this.verifyLimit()
     if (!this.noMoreRoom && !(this.selectedName === null)) {
-      for (let i = 0; i < this.numToAdd; i++) {
-        this.createParticipants()
-        console.log(this.selectedParticipants)
-      }
-    }    
+      this.createParticipants()
+    }
+  
   }
 
-  createParticipants() {
-    this.createName()
-    this.generatePassword()
-    this.ffqParticipant = new FfqParticipant(this.suffix.toString(), this.participantName, this.userPassword,
-      'participant', '', '', this.selectedId,
-      [this.loggedInUser[0].userId], [''], true, this.prefix);
+  /*
+    Once verified participants are created
 
-    this.participantService.addParticipant(this.ffqParticipant).subscribe(participant => {
+    First clear list of all participants that were added
+    Get the initial suffix
+
+    Loop for the number needed to be added
+        - First generate a random password for participant
+        - Second create participant object using suffix for userId, prefix + _ + suffix for username, and generated password
+        - Third add new participant object to list of participants to be added
+        - Finally incrememnt suffix for next participant object to be made
+
+    AFTER loop use participant service to add all participants on list
+    Have a pop-up confirming number of participants added
+  */
+  createParticipants() {
+    this.ffqParticipants = [] 
+    this.getSuffix()
+    for (let i = 0; i < this.numToAdd; i++) {
+      this.generatePassword()
+      this.ffqParticipant = new FfqParticipant(this.suffix.toString(), this.prefix + "_" + this.suffix, this.userPassword,
+        'participant', '', '', this.selectedId,
+        [this.loggedInUser[0].userId], [''], true, this.prefix);
+      this.ffqParticipants.push(this.ffqParticipant)
+      this.suffix++;
+    }
+
+
+    this.participantService.addMultipleParticipants(this.ffqParticipants).subscribe(participant => {
       const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-      dialogRef.componentInstance.title = participant.username + ' was added!';
+      dialogRef.componentInstance.title = this.numToAdd + ' participants(s) were added!';
     },
       error => {
         const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
         dialogRef.componentInstance.title = error.error.message;
         this.router.navigateByUrl('/admin/participant');
       });
-    this.selectedParticipants.push(this.ffqParticipant);
+    this.ffqparticipantList = this.selectedParticipants.concat(this.ffqParticipants)
+    this.selectedParticipants = this.selectedParticipants.concat(this.ffqParticipants)
   }
 
-  createName() {
-    this.getSuffix();
-    this.participantName = this.prefix + "_" + this.suffix;
-  }
-
+  /*
+    A method to get the suffix for the participant user
+    If there are no other participants for the selected institution then set to 1
+    Otherwise set to last participant on list +1
+  */
   getSuffix() {
     if (this.selectedParticipants.length === 0) {
       this.suffix = 1;
@@ -175,6 +203,9 @@ export class ParticipantUserComponent implements OnInit {
     }
   }
 
+  /*
+    A method used to make a random password
+  */
   generatePassword() {
     this.userPassword = Math.random().toString(36).slice(-10);
   }
