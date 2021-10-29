@@ -17,7 +17,6 @@ export class ParticipantService {
   }
 
   addParticipant(user: FfqParticipant): Observable<FfqParticipant> {
-
     return this.http.post<FfqParticipant>(this.endpoint + '/createparticipant', user,
       {headers: new HttpHeaders({'Content-Type': 'application/json'})});
   }
