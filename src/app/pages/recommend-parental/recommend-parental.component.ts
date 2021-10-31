@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import { Description } from 'src/app/models/ffqfooddescription';
 import { FoodDescriptionService } from 'src/app/services/food-description/food-description.service';
 import { AuthenticationService } from '../../services/authentication/authentication.service';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -33,9 +34,13 @@ export class RecommendParentalComponent implements OnInit {
   loggedInUser = this.authenticationService.currentUserValue;
   username: string;
 
+  // Used later when clinican has to GET username / times
+  clinicianID
+
   constructor(
     public foodDescriptionService: FoodDescriptionService,
-    private authenticationService: AuthenticationService  ) { }
+    private authenticationService: AuthenticationService,
+    private translate: TranslateService  ) { }
 
   ngOnInit() {
     this.getAllResults();
@@ -70,8 +75,16 @@ export class RecommendParentalComponent implements OnInit {
 
   submitTime() {
     this.username = this.loggedInUser[0].username
+    this.clinicianID = this.loggedInUser[0].assignedclinician
 
     console.log(this.username)
+    console.log(this.clinicianID)
     console.log(this.today)
+    if (this.translate.currentLang == "es") {
+      alert("Presentado con éxito en " + this.today.toLocaleString("es"))      
+    }
+    else {
+      alert("Sucessfully submitted at " + this.today.toLocaleString("en-US"))
+    }
   }
 }
