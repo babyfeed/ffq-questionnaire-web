@@ -31,3 +31,20 @@ mat-card {
 mat-radio-button {
     margin: 10px;
 }
+
+.submit-btn {
+  color: red;
+  background-color: white;
+  border-color: red;
+
+  float: left;
+  margin-right: 20px;
+
+  font-size: larger;
+}
+
+.instructions {
+  float: right;
+
+  font-size: larger;
+}
