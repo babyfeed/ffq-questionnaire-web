@@ -55,4 +55,8 @@ export class RecommendParentalComponent implements OnInit {
     this.ageMessage = this.ageRange3;
     this.showNone = false;
   }
+
+  submitTime() {
+    console.log("Submitting time")
+  }
 }
