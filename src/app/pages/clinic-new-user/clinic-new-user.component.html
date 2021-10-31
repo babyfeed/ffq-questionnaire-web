@@ -40,7 +40,7 @@
             <label style="font-weight: bold"> Account Type </label>
             <br>
             <mat-radio-group  aria-label="Select an option" [(ngModel)]="userType" name="userType">
-              <mat-radio-button (click)="countParents(); clicked = true; intialLoad = false;" [value]="userTypes.parent" color="primary" >Parent</mat-radio-button>
+              <mat-radio-button (click)="countParents(); clicked = true; intialLoad = false;" [value]="userType.parent" color="primary" >Parent</mat-radio-button>
               <br>
               <mat-radio-button [hidden]="true" [value]="userTypes.clinician" color="primary" >Clinician</mat-radio-button>
             </mat-radio-group>
