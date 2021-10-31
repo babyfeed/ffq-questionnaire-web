@@ -24,7 +24,10 @@ export class RecommendParentalComponent implements OnInit {
   ageRange3 = 'for child 12 to 24 months';
 
   results: Description[] = [];
-  constructor(public foodDescriptionService: FoodDescriptionService) {}
+  constructor(public foodDescriptionService: FoodDescriptionService) { }
+
+  today = new Date();
+
   ngOnInit() {
     this.getAllResults();
   }
@@ -57,6 +60,6 @@ export class RecommendParentalComponent implements OnInit {
   }
 
   submitTime() {
-    console.log("Submitting time")
+    console.log(this.today)
   }
 }
