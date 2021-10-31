@@ -4,6 +4,8 @@ import { FFQResultsResponse } from 'src/app/models/ffqresultsresponse';
 import {Observable} from 'rxjs';
 import { Description } from 'src/app/models/ffqfooddescription';
 import { FoodDescriptionService } from 'src/app/services/food-description/food-description.service';
+import { AuthenticationService } from '../../services/authentication/authentication.service';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -24,7 +26,22 @@ export class RecommendParentalComponent implements OnInit {
   ageRange3 = 'for child 12 to 24 months';
 
   results: Description[] = [];
-  constructor(public foodDescriptionService: FoodDescriptionService) {}
+
+  // Used to get current day and time for when submitting
+  today = new Date();
+
+  // Used to get logged in person's name for when submitting
+  loggedInUser = this.authenticationService.currentUserValue;
+  username: string;
+
+  // Used later when clinican has to GET username / times
+  clinicianID
+
+  constructor(
+    public foodDescriptionService: FoodDescriptionService,
+    private authenticationService: AuthenticationService,
+    private translate: TranslateService  ) { }
+
   ngOnInit() {
     this.getAllResults();
   }
@@ -54,5 +71,20 @@ export class RecommendParentalComponent implements OnInit {
     this.showBracketThird = true;
     this.ageMessage = this.ageRange3;
     this.showNone = false;
+  }
+
+  submitTime() {
+    this.username = this.loggedInUser[0].username
+    this.clinicianID = this.loggedInUser[0].assignedclinician
+
+    console.log(this.username)
+    console.log(this.clinicianID)
+    console.log(this.today)
+    if (this.translate.currentLang == "es") {
+      alert("Presentado con éxito en " + this.today.toLocaleString("es"))      
+    }
+    else {
+      alert("Sucessfully submitted at " + this.today.toLocaleString("en-US"))
+    }
   }
 }
