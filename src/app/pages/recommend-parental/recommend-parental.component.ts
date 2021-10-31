@@ -4,6 +4,7 @@ import { FFQResultsResponse } from 'src/app/models/ffqresultsresponse';
 import {Observable} from 'rxjs';
 import { Description } from 'src/app/models/ffqfooddescription';
 import { FoodDescriptionService } from 'src/app/services/food-description/food-description.service';
+import { AuthenticationService } from '../../services/authentication/authentication.service';
 
 
 @Component({
@@ -24,9 +25,17 @@ export class RecommendParentalComponent implements OnInit {
   ageRange3 = 'for child 12 to 24 months';
 
   results: Description[] = [];
-  constructor(public foodDescriptionService: FoodDescriptionService) { }
 
+  // Used to get current day and time for when submitting
   today = new Date();
+
+  // Used to get logged in person's name for when submitting
+  loggedInUser = this.authenticationService.currentUserValue;
+  username: string;
+
+  constructor(
+    public foodDescriptionService: FoodDescriptionService,
+    private authenticationService: AuthenticationService  ) { }
 
   ngOnInit() {
     this.getAllResults();
@@ -60,6 +69,9 @@ export class RecommendParentalComponent implements OnInit {
   }
 
   submitTime() {
+    this.username = this.loggedInUser[0].username
+
+    console.log(this.username)
     console.log(this.today)
   }
 }
