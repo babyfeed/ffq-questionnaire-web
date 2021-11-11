@@ -111,7 +111,8 @@ export class ExportService {
         'Questionnaire ID': result.questionnaireId,
         'Date': result.date,
         'Name': result.patientName,
-        'Age': result.ageInMonths      };
+        'Age': result.ageInMonths,
+        'ReadRecommend': parentList.find(parent => parent.userId === result.userId) ?.lastReadRecommend };
 
       // Add columns with nurient data
       for (let key of result.dailyAverages.keys()) {

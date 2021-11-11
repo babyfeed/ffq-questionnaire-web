@@ -13,6 +13,7 @@ import {FFQParent} from "../../models/ffqparent";
 export class ParentService {
 
   endpoint = environment.userServiceUrl + '/ffq/parents';
+  public parent: FFQParentResponse;
 
   constructor(private http: HttpClient) {
   }
@@ -53,7 +54,7 @@ export class ParentService {
     return this.http.get(this.endpoint + '/all').pipe(
       map((res: any) => {
         return res.map(item => {
-          return new FFQParentResponse(
+          this.parent = new FFQParentResponse(
             item.userId,
             item.username,
             item.userpassword,
@@ -66,6 +67,9 @@ export class ParentService {
             item.isactive,
             item.prefix
           );
+          // lastReadRecommend is not apart of constructor, so it is set here
+          this.parent.lastReadRecommend = item.lastReadRecommend;
+          return this.parent;
         });
       })
     );
@@ -81,5 +85,12 @@ export class ParentService {
     return this.http.post<FFQParent[]>(this.endpoint + '/createManyParents', parents,
       {headers: new HttpHeaders({'Content-Type': 'application/json'})});
 
+  }
+
+  submitRecommend(userId: String, date: String): Observable<any> {
+    return this.http.put(this.endpoint + '/updaterecommend', {
+      userId: userId,
+      lastReadRecommend: date
+    });
   }
 }
