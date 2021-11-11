@@ -34,7 +34,7 @@ export class RecommendParentalComponent implements OnInit {
   results: Description[] = [];
 
   // Used to get current day and time for when submitting
-  today = new Date();
+  today: Date;
 
   // Used to get logged in person's user ID for when submitting
   loggedInUser = this.authenticationService.currentUserValue;
@@ -82,6 +82,7 @@ export class RecommendParentalComponent implements OnInit {
 
   submitTime() {
     this.userId = this.loggedInUser[0].userId
+    this.today = new Date();
 
     console.log(this.userId)
     console.log(this.today)
