@@ -82,4 +82,12 @@ export class ParentService {
       {headers: new HttpHeaders({'Content-Type': 'application/json'})});
 
   }
+
+  submitRecommend(userId: String, date: String): Observable<any> {
+    console.log("Submitting");
+    return this.http.put(this.endpoint + '/updaterecommend', {
+      userId: userId,
+      lastReadRecommend: date
+    });
+  }
 }
