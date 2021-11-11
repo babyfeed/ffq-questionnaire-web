@@ -83,17 +83,6 @@ export class RecommendParentalComponent implements OnInit {
   submitTime() {
     this.userId = this.loggedInUser[0].userId
     this.today = new Date();
-
-    console.log(this.userId)
-    console.log(this.today)
-
-    if (this.translate.currentLang == "es") {
-      console.log("Presentado con éxito en " + this.today.toLocaleString("es"))      
-    }
-    else {
-      console.log("Sucessfully submitted at " + this.today.toLocaleString("en-US"))
-    }
-
     this.parentService.submitRecommend(this.userId, this.today.toLocaleString("en-US")).subscribe(() => {
       // Used to provide feedback when submitting
       const dialogRef = this.successDialog.open(ErrorDialogPopupComponent);

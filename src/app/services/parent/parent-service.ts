@@ -67,6 +67,7 @@ export class ParentService {
             item.isactive,
             item.prefix
           );
+          // lastReadRecommend is not apart of constructor, so it is set here
           this.parent.lastReadRecommend = item.lastReadRecommend;
           return this.parent;
         });
@@ -87,7 +88,6 @@ export class ParentService {
   }
 
   submitRecommend(userId: String, date: String): Observable<any> {
-    console.log("Submitting");
     return this.http.put(this.endpoint + '/updaterecommend', {
       userId: userId,
       lastReadRecommend: date
