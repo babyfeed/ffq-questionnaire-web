@@ -17,6 +17,7 @@ export class FFQParentResponse {
   isactive: boolean;
   prefix: string;
   assignedClinicOrSiteId: string;
+  lastReadRecommend: string;
 
 
   constructor(userId: string, username: string, userpassword: string, usertype:string, firstname: string,
@@ -32,6 +33,7 @@ export class FFQParentResponse {
     this.childrennames = childrennames;
     this.isactive = isactive;
     this.prefix = prefix;
+    this.lastReadRecommend = "";
   }
 
 }
