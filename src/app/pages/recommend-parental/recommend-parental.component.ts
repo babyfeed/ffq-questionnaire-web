@@ -89,7 +89,7 @@ export class RecommendParentalComponent implements OnInit {
       dialogRef.componentInstance.title = this.translate.instant('Submitted Successfully');
       dialogRef.componentInstance.message = this.translate.instant('Your submission has been recorded');
       dialogRef.afterClosed().subscribe(() => {
-        this.router.navigate(['parent/recommend']);
+        this.router.navigate(['parent/recommend'],);
       });
     }, (error: HttpErrorResponse) => {
       const dialogRef = this.submissionErrorDialog.open(ErrorDialogPopupComponent);
@@ -99,5 +99,7 @@ export class RecommendParentalComponent implements OnInit {
         this.router.navigate(['parent/recommend']);
       });
     });
+
+    window.scrollTo(0, 0)
   }
 }
