@@ -19,7 +19,7 @@
         <mat-form-field>
           <input matInput value="infantage" class="qb-row-item" [(ngModel)]=infantage type="number" min="1" max="24" step="1" pattern="\d+" placeholder=" {{'In months' | translate}} " autocomplete="off" required>
         </mat-form-field>
-        <mat-error *ngIf="decimalError">
+        <mat-error *ngIf="ageRequiredError">
           {{'Age (in months) of the infant is required' | translate}}.
         </mat-error>
         <!--Added this mat-error to let the user know that they need to input integers only-->

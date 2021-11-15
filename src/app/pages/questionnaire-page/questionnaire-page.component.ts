@@ -51,8 +51,10 @@ export class QuestionnairePageComponent implements OnInit {
   submitting = false;
   patientName: string;
 
+  // Used to display and hide error messages
   decimalError = false;
   genderError = false;
+  ageRequiredError = false;
 
   constructor(public foodService: FoodItemService,
               public questService: QuestionnaireValidatorService,
@@ -83,11 +85,14 @@ export class QuestionnairePageComponent implements OnInit {
   submitQuestionnaire() {
     this.submitting = true;
 
+    // Reset error messages
     this.genderError = false;
     this.decimalError = false;
+    this.ageRequiredError = false;
 
     let pageHasErrors = false;
 
+    // If there is no gender, display error
     if (!this.gender)
     {
       pageHasErrors = true;
@@ -98,12 +103,21 @@ export class QuestionnairePageComponent implements OnInit {
     if (this.infantage % 1 != 0)
     {
       pageHasErrors = true;
+      // If age is not a whole number, display error
       this.decimalError = true;
     }
 
     if (this.infantage < 0)
     {
       pageHasErrors = true;
+    }
+
+    // If age is left blank display only required error
+    if (this.infantage == null)
+    {
+      pageHasErrors = true;
+      this.ageRequiredError = true;
+      this.decimalError = false;
     }
 
 
