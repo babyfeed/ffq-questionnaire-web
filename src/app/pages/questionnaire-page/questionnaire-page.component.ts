@@ -51,6 +51,9 @@ export class QuestionnairePageComponent implements OnInit {
   submitting = false;
   patientName: string;
 
+  decimalError = false;
+  genderError = false;
+
   constructor(public foodService: FoodItemService,
               public questService: QuestionnaireValidatorService,
               private activatedRoute: ActivatedRoute,
@@ -80,17 +83,22 @@ export class QuestionnairePageComponent implements OnInit {
   submitQuestionnaire() {
     this.submitting = true;
 
+    this.genderError = false;
+    this.decimalError = false;
+
     let pageHasErrors = false;
 
     if (!this.gender)
     {
       pageHasErrors = true;
+      this.genderError = true;
     }
 
     // Typecheck to only receive Integers. Without this we get a submit error and exits the page.
     if (this.infantage % 1 != 0)
     {
       pageHasErrors = true;
+      this.decimalError = true;
     }
 
     if (this.infantage < 0)
