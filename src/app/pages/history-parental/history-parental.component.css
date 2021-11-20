@@ -38,11 +38,3 @@ tr:nth-child(even) {
   text-align: center;
 }
 
-@media (max-width: 500px) {
-  .quest-id-card {
-    width: calc(100px * 7);
-  }
-  .col {
-    width: 100px;
-  }
-}
