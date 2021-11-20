@@ -6,21 +6,40 @@
       <h2 matDialogTitle>{{ 'No questionnaires have been submitted yet' | translate }}</h2>
     </mat-card>
   </div>
+
   <div *ngFor="let result of results; let i = index">
     <div class="container">
       <mat-card class="quest-id-card">
         <mat-card-content>
           <!--Labels for questionnaire results-->
           <div class="row">
+            <div class="w-100"></div>
+
             <div class="col">
-              <label><strong translate>Date</strong></label>
+            <label><strong translate>Date</strong></label>
             </div>
+             <div class="col" >
+              {{ result.date }}
+            </div>
+            <div class="w-100"></div>
+           
             <div class="col">
               <label><strong translate>Parent Username</strong></label>
             </div>
+            <div class="col" >
+              {{ getUserName() }}
+            </div>
+            <div class="w-100"></div>
+
             <div class="col">
               <label><strong translate>Questionnaire ID</strong></label>
             </div>
+             <div class="col" >
+              {{ result.questionnaireId }}
+            </div>
+            <div class="w-100"></div>
+
+           
             <!--
                         <div class="col-2" >
                             <label><strong>Patient name</strong></label>
@@ -29,46 +48,46 @@
             <div class="col">
               <label><strong translate>Infant age (In months)</strong></label>
             </div>
+             <div class="col" >
+              {{ result.ageInMonths }}
+            </div>
+            <div class="w-100"></div>
+
+            
             <div class="col">
               <label><strong translate>Infant gender</strong></label>
             </div>
             <div class="col" >
+              {{ result.gender | translate}}
+            </div>
+            <div class="w-100"></div>
+
+            
+            <div class="col" >
               <label><strong translate>Nutrients</strong></label>
             </div>
             <div class="col" >
+                  <a (click)="getNutrientsRecommendations(result.questionnaireId)">
+                  <i title="nutrients" class="fa fa-flask"></i></a>
+            </div>
+            <div class="w-100"></div>
+
+
+            <div class="col" >
               <label><strong translate>Food Items</strong></label>
             </div>
+             <div class="col" >
+              <a (click)="getFoodRecommendations(result.questionnaireId)">
+              <i title="fooditems" class="fa fa-cutlery"></i></a>
+            </div>
+            <div class="w-100"></div>
+
+
           </div>
 
           <!--Questionnaire results-->
-          <div class="row mb-3">
-            <div class="col" >
-              {{ result.date }}
-            </div>
-            <div class="col" >
-              {{ getUserName() }}
-            </div>
-            <div class="col" >
-              {{ result.questionnaireId }}
-            </div>
-            <div class="col" >
-              {{ result.ageInMonths }}
-            </div>
-            <div class="col" >
-              {{ result.gender | translate }}
-            </div>
-            <div class="col" style="text-align:center; cursor:pointer">
-              <a (click)="getNutrientsRecommendations(result.questionnaireId)"
-              ><i title="nutrients" class="fa fa-flask"></i
-              ></a>
-            </div>
-            <div class="col" style="text-align:center; cursor:pointer">
-              <a (click)="getFoodRecommendations(result.questionnaireId)"
-              ><i title="fooditems" class="fa fa-cutlery"></i
-              ></a>
-            </div>
-          </div>
-            <div class="offset-10" style="padding-top:10px;">
+          
+            <div class="offset-10" style="padding-top:15px;">
               <button class="btn btn-info" (click)="toggle(i)" id="bt">
                 {{ 'buttonName' | translate }}
               </button>

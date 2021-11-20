@@ -262,7 +262,7 @@
   "Results": "Results",
   "Review the food groups in the \"Recommendations\" tab to help you plan your baby's menu for this week": "Review the food groups in the \"Recommendations\" tab to help you plan your baby's menu for this week",
   "Rice and Pasta": "Rice and Pasta",
-  "Select infant age range:": "Select infant age range:",
+  "Select infant age range:": "Instructions: Select your infant’s age range and read the recommendations",
   "Selenium (mcg)": "Selenium (mcg)",
   "Server returned 0 food items Please contact administrator": "Server returned 0 food items. Please contact administrator.",
   "Serving selection is required": "Serving selection is required.",
@@ -329,7 +329,7 @@
   "passwordPlaceHolder": "Password",
   "result": [
     {
-      "description": "Breastmilk or iron-fortified infant formula is recommended until age 12 months. Do not use low-iron milk, such as cow or soy, even in infant cereal. Do not serve 1% (low-fat) or skim (non-fat) milks before age 24 months.",
+      "description": "Breastmilk or iron-fortified infant formula is recommended until age 12 months. Do not use low-iron milk, such as cow or soy, even in infant cereal. Do not add cereal in the bottle. Do not serve 1% (low-fat) or skim (non-fat) milks before age 24 months.",
       "firstBracketIntake": "2 to 3 cups per day (16 - 24 fl oz / day)",
       "foodItemGroupName": "Milk",
       "imageUrl": "/assets/images/Breastmilk.jpg",
@@ -337,7 +337,7 @@
       "thirdBracketIntake": "1 to 2 ¼ cups per day (8 – 18 fl oz / day)"
     },
     {
-      "description": "Whole grains contain the entire grain kernel - the bran, germ, and endosperm. Some examples of products are 100% whole wheat, bulgur (cracked wheat), oatmeal, whole cornmeal, and brown rice.",
+      "description": "Whole grains contain the entire grain kernel - the bran, germ, and endosperm. Some examples of products are 100% whole wheat, bulgur (cracked wheat), oatmeal, whole cornmeal, quinoa, and brown rice.",
       "firstBracketIntake": "0 cups per day (0 oz / day)",
       "foodItemGroupName": "Whole Grains",
       "imageUrl": "/assets/images/Whole_Grains.jpg",
@@ -369,7 +369,7 @@
       "thirdBracketIntake": "1 cup or more per day (8 or more oz / day)"
     },
     {
-      "description": "Any fruit counts as part of the Fruit Group. Fruits may be fresh, canned, frozen, or dried, and may be cut-up or pureed. Some examples are apples, bananas, berries, mangos, melons, pears, and prunes.",
+      "description": "Any fruit counts as part of the Fruit Group. Fruits may be fresh, canned, frozen, or dried, and may be cut-up or pureed. Some examples are apples, bananas, berries, mangos, melons, oranges, pears, and prunes.",
       "firstBracketIntake": "0 cups per day (0 oz / day)",
       "foodItemGroupName": "Fruits",
       "imageUrl": "/assets/images/Fruits.jpg",
@@ -401,7 +401,7 @@
       "thirdBracketIntake": "0 cups per day (0 oz / day)"
     },
     {
-      "description": "Avoid salty snacks. These products also tend to be high in calories and fat. Some examples are french fries, chips, and processed meats such as ham, bacon, and hot dogs. Instead serve whole grains and proteins.",
+      "description": "Avoid salty snacks. These products also tend to be high in calories and fat. Some examples are french fries, chips, and processed meats such as ham, bacon, and hot dogs. Instead serve whole grains and protein foods.",
       "firstBracketIntake": "0 cups per day (0 oz / day)",
       "foodItemGroupName": "Salty Snacks",
       "imageUrl": "/assets/images/Salty_Snacks.jpg",
