@@ -4,6 +4,7 @@
   <mat-card>
     <mat-radio-group aria-label="Select an option">
       <label style="text-align: left;"><strong>{{'Select infant age range:' | translate}}</strong></label>
+      <br/>
       <mat-radio-button (click)="showFirst()" color="primary" value="1">{{'0 to 5\.9 Months' | translate}}</mat-radio-button>
       <mat-radio-button (click)="showSecond()" color="primary" value="2">{{'6 to 11\.9 Months' | translate}}</mat-radio-button>
       <mat-radio-button (click)="showThird()" color="primary" value="3">{{'12 to 24 Months' | translate}}</mat-radio-button>
