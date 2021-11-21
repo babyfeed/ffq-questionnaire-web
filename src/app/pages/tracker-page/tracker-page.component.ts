@@ -24,14 +24,7 @@ export class TrackerPageComponent implements OnInit {
   TITLE = 'Nutrition Tracker';
   MAIN_MESSAGE =  'Message';
   INSTRUCTIONS_TITLE = 'Instructions: \n';
-  BULLETED_INSTRUCTIONS = [
-    this.translate.instant('For each food item select the appropriate answer'),
-    this.translate.instant('If your baby consumed more than the recommended amount select the up arrow'),
-    this.translate.instant('If your baby consumed the recommended amount select the equal sign'),
-    this.translate.instant('If your baby consumed less than the recommended amount select the down arrow'),
-    this.translate.instant('Click the submit button when finished')
-  ];
-
+  
   showBracketFirst = false;
   showBracketSecond = false;
   showBracketThird = false;

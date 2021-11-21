@@ -2,20 +2,21 @@
 
 <div class="research-quest-id-container">
   <mat-card  class="research-quest-id-card">
-    <mat-card-content>
-      <span class="research-quest-id-span">
-        <mat-card-actions>
-          <div class="research-quest-id-button">
-            <button mat-raised-button
-                    (click)="startQuestionnaireResearch()"
-                    color="primary" >{{'Begin Questionnaire' | translate}}</button>
-          </div>
-          <div class="language-Buttons">
-            <a (click)="useLanguage('es')" mat-raised-button class="button">Para Español</a>
-            <a (click)="useLanguage('en-US')" mat-raised-button class="button">English Version</a>
-          </div>
-        </mat-card-actions>
-      </span>
-    </mat-card-content>
+        <div style="color:red;">
+          <h2>
+            {{ 'Welcome to Baby Feed!' | translate }}
+          </h2>
+          <br>
+        </div>
+        <div>
+          <button mat-raised-button
+                  (click)="startQuestionnaireResearch()"
+                  color="primary">
+            {{'Begin Questionnaire' | translate}}
+          </button>
+        </div>
+        <div class="language-padding">
+          <a (click)="toggleLanguage()" mat-raised-button class="language-button">{{'For English' | translate}}</a>
+        </div>
   </mat-card>
 </div>

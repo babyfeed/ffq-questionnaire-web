@@ -23,6 +23,7 @@ import { ClinicRecommendComponent } from './pages/clinic-recommend';
 import { AdminUsersComponent } from './pages/admin-users';
 import { AdminResearchUsersComponent } from './pages/research-admin-users/research-admin-users.component';
 import { AdminResearcherUserComponent } from './pages/admin-research-user/admin-research-user.component';
+import { ParticipantUserComponent } from './pages/admin-participant/admin-participant.component';
 import { ResearchInstitutionComponent } from './pages/research-institution/research-institution.component';
 import { UserComponent } from './pages/user/user.component';
 import { ClinicUserComponent } from './pages/clinic-user/clinic-user.component';
@@ -110,6 +111,11 @@ const routes: Routes = [
   {
     path: 'admin/researcher',
     component: AdminResearcherUserComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'admin/participant',
+    component: ParticipantUserComponent,
     canActivate: [AuthGuard]
   },
   {

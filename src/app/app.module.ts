@@ -42,6 +42,7 @@ import { ClinicQuestResultsComponent } from './pages/clinic-quest-results';
 import { ClinicRecommendComponent } from './pages/clinic-recommend';
 import { AdminUsersComponent } from './pages/admin-users';
 import { AdminResearchUsersComponent } from './pages/research-admin-users/research-admin-users.component';
+import { ParticipantUserComponent } from './pages/admin-participant/admin-participant.component';
 import { UserComponent } from './pages/user/user.component';
 import { ClinicUserComponent } from './pages/clinic-user/clinic-user.component';
 import { AdminClinicsComponent } from './pages/admin-clinics/';
@@ -110,6 +111,7 @@ import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
     ResearchQuestionnaireComponent,
     ResearchQuestIdInputComponent,
     AdminResearchUsersComponent,
+    ParticipantUserComponent,
     ResearchHistoryComponent,
     QuestResultsComponent,
     RecommendComponent,

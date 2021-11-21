@@ -3,9 +3,23 @@
 <div class="tracker-container">
     <!-- header message -->
     <h2 matDialogTitle>{{'NUTRITION.TITLE' | translate}}</h2><br>
-  
-    <text-card *ngIf="showItems" mainMessage="{{ 'NUTRITION.MESSAGE' | translate }}" [bulletedMessages]="BULLETED_INSTRUCTIONS" [instructionsTitle]="'NUTRITION.INSTRUCTIONS' | translate "></text-card>
-    <br>
+   <div class="trackeritem-container">
+    <mat-card class="tracker-card"*ngIf="showItems">
+      <div >
+        <h2 matDialogTitle class="GoalTitle">{{'NUTRITION.MESSAGE' | translate}}</h2>
+        <h2 matDialogTitle class="Insta">{{'NUTRITION.INSTRUCTIONS' | translate}}</h2>
+         
+          </div>
+      <ul>
+          
+         <li class="GoalList">{{'For each food item select the appropriate answer' | translate}}</li>
+         <li class="GoalList">{{'If your baby consumed more than the recommended amount select the up arrow' | translate}}</li>
+         <li class="GoalList">{{'If your baby consumed the recommended amount select the equal sign' | translate}}</li>
+         <li class="GoalList">{{'If your baby consumed less than the recommended amount select the down arrow' | translate}}</li>
+         <li class="GoalList">{{'Click the submit button when finished' | translate}}</li>
+      </ul>
+    </mat-card>
+  </div>
     
     <!-- age form -->
 <div *ngIf="showAgeForm" class="qb-container">

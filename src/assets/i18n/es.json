@@ -134,6 +134,7 @@
   "Goal for next week": "Meta para la próxima semana",
   "Goal Setting": "El Establecimiento de Metas",
   "Green beans": "Judías verdes",
+  "History": "Historia",
   "Honey, jam, syrup, agave": "Miel, mermelada, almíbar, agave",
   "Hot cereal (examples: rice cereal, cream of wheat, oatmeal, corn mush, etc.)": "Cereal caliente (ejemplos: cereal de arroz, crema de trigo, avena, papilla de maíz, etc.)",
   "Ice Cream": "Helado",
@@ -151,6 +152,7 @@
   "Infant age (In months)": "Edad infantil (en meses)",
   "Infant gender": "Género infantil",
   "Instructions": "Instrucciones:",
+  "Instructions (Rec)": "Instrucciones: Haga clic en el botón enviar cada vez que lea las recomendaciones",
   "Iron (mg)": "Hierro (mg)",
   "Jar/Canned": "Tarro /  Enlatado",
   "Jar/Canned/Frozen": "Tarro / Enlatado / Congelado",
@@ -260,7 +262,7 @@
   "Results": "Resultados",
   "Review the food groups in the \"Recommendations\" tab to help you plan your baby's menu for this week": "Revise los grupos de alimentos en la pestaña \"Recomendaciones\" para ayudarlo a planificar el menú de su bebé para esta semana.",
   "Rice and Pasta": "Arroz y Pasta",
-  "Select infant age range:": "Seleccione el rango de edad del bebé:",
+  "Select infant age range:": "Instrucciones: Seleccione el rango de edad de su bebé y lea las recomendaciones",
   "Selenium (mcg)": "Selenio (mcg)",
   "Server returned 0 food items Please contact administrator": "El servidor devolvió 0 alimentos. Comuníquese con el administrador.",
   "Serving selection is required": "Se requiere una selección de porciones.",
@@ -327,7 +329,7 @@
   "passwordPlaceHolder": "Contraseña",
   "result": [
     {
-      "description": "Se recomienda leche materna o fórmula infantil fortificada con hierro hasta los 12 meses de edad. No use leche baja en hierro, como la de vaca o de soya, ni siquiera en cereales para bebés. No sirva leches al 1% (bajas en grasa) o descremadas (sin grasa) antes de los 24 meses.",
+      "description": "Se recomienda leche materna o fórmula infantil fortificada con hierro hasta los 12 meses de edad. No use leche baja en hierro, como la de vaca o de soya, ni siquiera en cereales para bebés. No agregue cereal en el biberón. No sirva leches al 1% (bajas en grasa) o descremadas (sin grasa) antes de los 24 meses.",
       "firstBracketIntake": "2 a 3 tazas por día (16 - 24 fl oz / día)",
       "foodItemGroupName": "Leche",
       "imageUrl": "/assets/images/Breastmilk.jpg",
@@ -335,9 +337,9 @@
       "thirdBracketIntake": "1 a 2 ¼ tazas por día (8 - 18 fl oz / día)"
     },
     {
-      "description": "Los cereales integrales contienen el grano entero: el salvado, el germen y el endospermo. Algunos ejemplos de productos son 100% trigo integral, bulgur (trigo partido), avena, harina de maíz integral y arroz integral.",
+      "description": "Los granos integrales contienen el grano entero: el salvado, el germen y el endospermo. Algunos ejemplos de productos son pan 100% trigo integral, bulgur (trigo partido), avena, harina de maíz, quinua y arroz integral.",
       "firstBracketIntake": "0 tazas por día (0 oz / día)",
-      "foodItemGroupName": "Cereales integrales",
+      "foodItemGroupName": "Granos integrales",
       "imageUrl": "/assets/images/Whole_Grains.jpg",
       "secondBracketIntake": "1 cucharada a 1 ¾ tazas por día (0.1 - 3.5 oz / día)",
       "thirdBracketIntake": "1 cucharada a 2 ¾ tazas por día (0.1 - 5.5 oz / día)"
@@ -351,7 +353,7 @@
       "thirdBracketIntake": "0 a ¾ taza por día (0 - 1.8 oz / día)"
     },
     {
-      "description": "Los alimentos elaborados con carne, aves, mariscos, frijoles, nueces, semillas, huevos, yogur, queso y productos de soya se consideran proteínas. Las opciones de carnes y aves deben ser magras o bajas en grasa. Sirva mariscos 2-3 veces a la semana.",
+      "description": "Los alimentos hechos con carne, pollo o pavo, frijoles, nueces, semillas, huevos, yogur, queso y productos de soya se consideran proteínas. Las opciones de carnes y pollo deben ser magras o bajas en grasa. Sirva pescado y mariscos 2-3 veces a la semana.",
       "firstBracketIntake": "0 tazas por día (0 oz / día)",
       "foodItemGroupName": "Proteínas",
       "imageUrl": "/assets/images/Proteins.jpg",
@@ -359,15 +361,15 @@
       "thirdBracketIntake": "½ cucharada a ¾ taza por día (0.1 - 3 oz / día)"
     },
     {
-      "description": "Las verduras pueden estar crudas o cocidas; frescos, congelados, enlatados o secos / deshidratados; y puede cortarse o machacarse. Algunos ejemplos son el brócoli, los tomates, las zanahorias, las batatas, el maíz, los plátanos y las judías verdes.",
+      "description": "Las verduras pueden estar crudas o cocidas; frescos, congelados, enlatados o secos / deshidratados; y puede cortarse o machacarse. Algunos ejemplos son el brócoli, los tomates, las zanahorias, las batatas, el maíz, los plátanos y las habichuelas tiernas / vainitas.",
       "firstBracketIntake": "0 tazas por día (0 oz / día)",
-      "foodItemGroupName": "Vegetales",
+      "foodItemGroupName": "Verudas",
       "imageUrl": "/assets/images/Vegetables.jpg",
       "secondBracketIntake": "¼ de taza o más por día (2 o más oz / día)",
       "thirdBracketIntake": "1 taza o más por día (8 oz o más / día)"
     },
     {
-      "description": "Cualquier fruta cuenta como parte del grupo de frutas. Las frutas pueden ser frescas, enlatadas, congeladas o secas, y se pueden cortar o hacer puré. Algunos ejemplos son manzanas, plátanos, bayas, mangos, melones, peras y ciruelas pasas.",
+      "description": "Cualquier fruta cuenta como parte del grupo de frutas. Las frutas pueden ser frescas, enlatadas, congeladas o secas, y se pueden cortar o hacer puré. Algunos ejemplos son manzanas, plátanos, bayas, mangos, melones, naranjas, peras y ciruelas pasas.",
       "firstBracketIntake": "0 tazas por día (0 oz / día)",
       "foodItemGroupName": "Frutas",
       "imageUrl": "/assets/images/Fruits.jpg",
@@ -383,7 +385,7 @@
       "thirdBracketIntake": "0 a ½ taza por día (0 a 4 fl oz / día)"
     },
     {
-      "description": "Evite las bebidas azucaradas. Estos productos son ricos en calorías y no tienen ningún beneficio nutricional. Algunos ejemplos son refrescos, ponche de frutas, Kool-Aid, Tang, limonada, té helado y bebidas deportivas. En su lugar, sírvase leche o agua.",
+      "description": "Evite las bebidas azucaradas. Estos productos son altos en calorías y no tienen ningún beneficio nutricional. Algunos ejemplos son refrescos, ponche de frutas, Kool-Aid, Tang, limonada, té helado y bebidas deportivas. En su lugar, sírvase leche o agua.",
       "firstBracketIntake": "0 tazas por día (0 fl oz / día)",
       "foodItemGroupName": "Bebidas azucaradas",
       "imageUrl": "/assets/images/Sugary_Beverages.jpg",
@@ -391,7 +393,7 @@
       "thirdBracketIntake": "0 tazas por día (0 fl oz / día)"
     },
     {
-      "description": "Evite los dulces. Algunos ejemplos son chocolates, piruletas, dulces, pasteles, muffins, donas, galletas, helados y azúcares agregados como miel, mermelada, agave y almíbar. En su lugar, sírvase yogur natural y frutas, en trozos o en puré.",
+      "description": "Evite los dulces. Algunos ejemplos son chocolates, piruletas, caramelos, pasteles, muffins, donas, galletas, helados y azúcares agregados como la miel, mermelada, jarabe y sirope. En su lugar, sírvase yogur natural y frutas, en trozos o en puré.",
       "firstBracketIntake": "0 tazas por día (0 oz / día)",
       "foodItemGroupName": "Dulces",
       "imageUrl": "/assets/images/Sweets.jpg",
@@ -399,9 +401,9 @@
       "thirdBracketIntake": "0 tazas por día (0 oz / día)"
     },
     {
-      "description": "Evite los bocadillos salados. Estos productos también tienden a tener un alto contenido de calorías y grasas. Algunos ejemplos son las papas fritas, las patatas fritas y las carnes procesadas como jamón, tocino y salchichas. En su lugar, sírvase cereales integrales y proteínas.",
+      "description": "Evite las meriendas saladas. Estos productos también tienden a tener un alto contenido de calorías y grasas. Algunos ejemplos son las papas fritas, las papitas fritas (chips) y las carnes procesadas como jamón, tocino y salchichas. En su lugar, sírvase alimentos de granos integrales y proteínas.",
       "firstBracketIntake": "0 tazas por día (0 oz / día)",
-      "foodItemGroupName": "Bocadillos salados",
+      "foodItemGroupName": "Meriendas Saladas",
       "imageUrl": "/assets/images/Salty_Snacks.jpg",
       "secondBracketIntake": "0 tazas por día (0 oz / día)",
       "thirdBracketIntake": "0 tazas por día (0 oz / día)"
