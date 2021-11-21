@@ -12,7 +12,23 @@ h2 {
   justify-content: center;
   margin-bottom: 10px;
 }
-
+li.GoalList{
+    font-size: 22px;
+    opacity: 0.8;
+    
+}
+h2.GoalTitle{
+    font-size: 22px;
+    text-align: left;
+    opacity: 0.7;
+    line-height: 40%;
+}
+h2.Insta{
+    font-size: 22px;
+    text-align: left;
+    opacity: 0.7;
+    font-weight: bold;
+}
 .qb-row-item {
   padding: 0 20px;
   width: 100%;

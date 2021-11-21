@@ -41,7 +41,7 @@ export class ClinicNewUserComponent implements OnInit {
   };
   data = [];
   selectedClinic: FFQClinic;
-  userType = Usertype.parent;
+  userType
   userTypes = Usertype;
   ffqParent: FFQParent;
   ffqclinicList$: Observable<FFQClinic[]>;
@@ -119,7 +119,8 @@ export class ClinicNewUserComponent implements OnInit {
     }
 
   }
-  countParents(){
+  countParents() {
+    this.userType = Usertype.parent
     for (let i = 0; i < this.ffqclinicList.length; i++){
       if (this.loggedInUser[0].assignedclinic === this.ffqclinicList[i].clinicId) {
         this.limit = this.ffqclinicList[i].parentsLimit;

@@ -7,28 +7,17 @@
 
 .research-quest-id-card {
     width: 60%;
-    display: inline-flex;
-    justify-content: center;
-    align-content: center;
-    padding: 50px;
-    height: 200px;
+    display: block;
+    text-align:center;
+    padding-top: 50px;
+    height: 250px;
 }
 
-.research-quest-id-input {
-    padding-right: 30px;
+.language-button {
+  background-color: #35a2a6;
+  color: white;
 }
 
-.research-quest-id-button {
-    padding-left: 30px;
-}
-
-.research-quest-id-span {
-    display: inline-flex;
-}
-
-.research-quest-id-textfield {
-    font-size: large;
-}
-.language-Buttons {
+.language-padding {
   padding-top: 20px;
 }

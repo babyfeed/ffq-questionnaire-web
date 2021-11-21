@@ -69,7 +69,6 @@ body, html {
 
   /* Style tab links */
   .tab-link {
-    margin-top: 10px;
     background-color: #4d79ff;
     color: white;
     float: left;
@@ -108,5 +107,10 @@ body, html {
 
 
   }
+
+.center {
+  display: block;
+  margin:auto;  
+}
 
 

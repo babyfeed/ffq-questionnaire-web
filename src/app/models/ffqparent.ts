@@ -14,6 +14,8 @@ export class FFQParent {
   isactive: boolean;
   prefix: string;
   assignedClinicOrSiteId: string;
+  // Used to keep track of when parent last read recommend
+  lastReadRecommend: string;
 
 
   constructor(userId: string, username: string, userpassword: string, usertype: string, firstname: string,
@@ -29,6 +31,9 @@ export class FFQParent {
     this.childrennames = childrennames;
     this.isactive = isactive;
     this.prefix = prefix;
+    // Upon parent creation lastReadRecommend is set to empty
+    this.lastReadRecommend = "";
+
   }
 
 }
