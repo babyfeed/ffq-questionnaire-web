@@ -27,7 +27,7 @@
         <!-- <tr *ngFor="let item of result.responses">{{item.food}}</tr> -->
       <tr *ngFor="let item of result.responses; let i = index">{{'result.'+ i + '.foodItemGroupName' | translate}}</tr>
       <br>
-      <b>{{'Goal for next week' | translate}}</b>
+      <b>{{'Instructions: Type a goal for next week and click submit.' | translate}}</b>
 </div>
   <div style="float: right">
     <tr *ngFor="let item of result.responses" [ngClass]="{
