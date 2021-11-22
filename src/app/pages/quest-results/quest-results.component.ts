@@ -118,8 +118,19 @@ export class QuestResultsComponent implements OnInit {
           const dailyMap = element.dailyAverages;
 
           reqList.forEach(a => {
-            newWeeklyMap.set(a, weeklyMap[a]);
-            newDailyMap.set(a, dailyMap[a]);
+            if (dailyMap[a]) {
+              newDailyMap.set(a, dailyMap[a]);
+            }
+            else {
+              newDailyMap.set(a, 0);
+            }
+            if (weeklyMap[a]) {
+              newWeeklyMap.set(a, weeklyMap[a]);
+            }
+            else {
+              newWeeklyMap.set(a, 0);
+            }
+            
           });
 
           element.weeklyTotals = newWeeklyMap;
