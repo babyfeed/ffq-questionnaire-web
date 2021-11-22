@@ -116,7 +116,14 @@ export class ExportService {
 
       // Add columns with nurient data
       for (let key of result.dailyAverages.keys()) {
-          resultCol[key] = result.dailyAverages.get(key).toFixed(2);       
+        // Protection against undefined daily averages
+        if (result.dailyAverages.get(key)) {
+          resultCol[key] = result.dailyAverages.get(key).toFixed(2);
+        }
+        else {
+          resultCol[key] = 0;
+        }
+             
       }
 
       // Push columns to array of rows
