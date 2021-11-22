@@ -117,13 +117,13 @@ export class ExportService {
       // Add columns with nurient data
       for (let key of result.dailyAverages.keys()) {
         // Protection against undefined daily averages
-        if (result.dailyAverages.get(key) != null) {
-          resultCol[key] = result.dailyAverages.get(key).toFixed(2);
+        resultCol[key] = result.dailyAverages.get(key);
+        if (typeof resultCol[key] == 'number') {
+          resultCol[key] = resultCol[key].toFixed(2);
         }
         else {
-          resultCol[key] = 0;
-        }
-             
+           resultCol[key] = 0.0
+        }             
       }
 
       // Push columns to array of rows
