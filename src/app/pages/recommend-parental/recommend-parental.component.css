@@ -33,14 +33,12 @@ mat-radio-button {
 }
 
 .submit-btn {
-  float: left;
+  align-content: center;
   margin-right: 20px;
 
   font-size: larger;
 }
 
 .instructions {
-  float: right;
-
   font-size: larger;
 }
