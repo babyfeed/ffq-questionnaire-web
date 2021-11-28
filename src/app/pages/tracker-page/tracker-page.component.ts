@@ -21,8 +21,6 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class TrackerPageComponent implements OnInit {
 
-  TITLE = 'Nutrition Tracker';
-  MAIN_MESSAGE =  'Message';
   INSTRUCTIONS_TITLE = 'Instructions: \n';
   
   showBracketFirst = false;

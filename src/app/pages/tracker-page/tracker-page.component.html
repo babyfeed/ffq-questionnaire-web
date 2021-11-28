@@ -2,17 +2,15 @@
 
 <div class="tracker-container">
     <!-- header message -->
-    <h2 matDialogTitle>{{'NUTRITION.TITLE' | translate}}</h2><br>
+    
    <div class="trackeritem-container">
     <mat-card class="tracker-card"*ngIf="showItems">
       <div >
-       <h2 matDialogTitle class="GoalTitle">{{'NUTRITION.MESSAGE' | translate}}</h2>
+       
        <h2 matDialogTitle class="Insta">{{'NUTRITION.INSTRUCTIONS' | translate}}</h2>
          
           </div>
       <ul>
-          
-        <li class="GoalList">{{'For each food item select the appropriate answer' | translate}}</li>
         <li class="GoalList">{{'If your baby consumed more than the recommended amount select the up arrow' | translate}}</li>
         <li class="GoalList">{{'If your baby consumed the recommended amount select the equal sign' | translate}}</li>
         <li class="GoalList">{{'If your baby consumed less than the recommended amount select the down arrow' | translate}}</li>
@@ -28,9 +26,11 @@
             <h2>
               {{ 'Welcome to Baby Feed!' | translate }}
             </h2>
+            
          <br>
           </div>
-            <div style="font-style: italic; color:Blue;">{{'Please complete the tracking once a week' | translate}}</div>
+            <mat-label style="text-align:center" class="qb-row-item"><strong>{{"Type your baby's age and click enter age." | translate}}</strong></mat-label>
+            <div style="text-align:center" class="qb-row-item"><strong>{{'Please complete the tracking once a week' | translate}}</strong></div>
             <mat-label style="text-align:center" class="qb-row-item"><strong>{{'Infant age' | translate}}</strong></mat-label>
             <mat-form-field>
                 <input #ageValue matInput value="infantage" class="qb-row-item" type="number" min="1" max="24" placeholder=" {{'In months' | translate }}" autocomplete="off" required translate>
