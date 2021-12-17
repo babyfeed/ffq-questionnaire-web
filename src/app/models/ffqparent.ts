@@ -34,8 +34,8 @@ export class FFQParent {
     this.isactive = isactive;
     this.prefix = prefix;
     // Upon parent creation lastReadRecommend is set to empty
-    this.lastReadRecommend = lastReadRecommend;
-    this.timesOfReading = timesOfReading;
+    this.lastReadRecommend = '';
+    this.timesOfReading = 0;
 
   }
 
