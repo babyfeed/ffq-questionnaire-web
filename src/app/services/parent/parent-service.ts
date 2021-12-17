@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {FFQParentResponse} from 'src/app/models/ffqparent-response';
 import {environment} from 'src/environments/environment';
-import {FFQParent} from "../../models/ffqparent";
+import {FFQParent} from '../../models/ffqparent';
 
 @Injectable({
   providedIn: 'root'
@@ -44,7 +44,9 @@ export class ParentService {
           item.assignedclinician,
           item.childrennames,
           item.isactive,
-          item.prefix
+          item.prefix,
+          item.lastReadRecommend,
+          item.timesOfReading
         );
       })
     );
@@ -65,7 +67,9 @@ export class ParentService {
             item.assignedclinician,
             item.childrennames,
             item.isactive,
-            item.prefix
+            item.prefix,
+            item.lastReadRecommend,
+            item.timesOfReading
           );
           // lastReadRecommend is not apart of constructor, so it is set here
           this.parent.lastReadRecommend = item.lastReadRecommend;
@@ -77,7 +81,7 @@ export class ParentService {
 
   /*DELETE: delete parent from the database */
   deletePatient(userId: string): Observable<any> {
-    return this.http.delete(this.endpoint + "/delete?userId=" + userId, {responseType: 'text'})
+    return this.http.delete(this.endpoint + '/delete?userId=' + userId, {responseType: 'text'});
   }
 
 
@@ -87,9 +91,9 @@ export class ParentService {
 
   }
 
-  submitRecommend(userId: String, date: String): Observable<any> {
+  submitRecommend(userId: string, date: string): Observable<any> {
     return this.http.put(this.endpoint + '/updaterecommend', {
-      userId: userId,
+      userId,
       lastReadRecommend: date
     });
   }

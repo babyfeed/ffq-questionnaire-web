@@ -37,7 +37,7 @@ export class ClinicNewUserComponent implements OnInit {
     titles: 'User Info',
     useBom: false,
     removeNewLines: true,
-    keys: ['userName', 'password' ]
+    keys: ['userName', 'password']
   };
   data = [];
   selectedClinic: FFQClinic;
@@ -111,32 +111,35 @@ export class ClinicNewUserComponent implements OnInit {
       this.ffqclinicList = a;
     });
   }
+
   getCliName() {
     for (const item of this.ffqclinicList) {
-      if ( this.loggedInUser[0].assignedclinic === item.clinicId){
+      if (this.loggedInUser[0].assignedclinic === item.clinicId) {
         this.loggedInCliName = item.clinicname;
       }
     }
 
   }
+
   countParents() {
     this.userType = Usertype.parent
-    for (let i = 0; i < this.ffqclinicList.length; i++){
+    for (let i = 0; i < this.ffqclinicList.length; i++) {
       if (this.loggedInUser[0].assignedclinic === this.ffqclinicList[i].clinicId) {
         this.limit = this.ffqclinicList[i].parentsLimit;
       }
     }
 
-    for (let i = 0; i < this.ffqparentList.length; i++){
-      if (this.loggedInUser[0].assignedclinic === this.ffqparentList[i].assignedclinic){
-        this.numParents ++;
+    for (let i = 0; i < this.ffqparentList.length; i++) {
+      if (this.loggedInUser[0].assignedclinic === this.ffqparentList[i].assignedclinic) {
+        this.numParents++;
       }
     }
-    if (this.limit - this.numParents <= 0){
+    if (this.limit - this.numParents <= 0) {
       this.noMoreRoom = true;
     }
     this.newLimit = this.limit - this.numParents;
   }
+
   addUser() {
     switch (this.userType) {
       case Usertype.clinician: {
@@ -174,7 +177,8 @@ export class ClinicNewUserComponent implements OnInit {
   addMultipleClinicians() {
     const newClinicians = [];
     for (let i = 0; i < this.usersQuantity; i++) {
-      newClinicians.push(new FFQClinician('', '', '', '', '', '', this.selectedClinic.clinicId, [], true, this.parentLimitForClinician, this.prefix));
+      newClinicians.push(new FFQClinician('', '', '', '', '', '',
+        this.selectedClinic.clinicId, [], true, this.parentLimitForClinician, this.prefix));
     }
 
     this.clinicianService.addMultipleClinicians(newClinicians).subscribe(clinicians => {
@@ -187,20 +191,23 @@ export class ClinicNewUserComponent implements OnInit {
       });
   }
 
-  getSuffix(){
-    if (this.ffqparentList.length === 0){
+  getSuffix() {
+    if (this.ffqparentList.length === 0) {
       this.suffix = 1;
     } else {
       this.lastUserId = this.ffqparentList[this.ffqparentList.length - 1].userId;
       this.suffix = parseInt(this.lastUserId, 10) + 1;
-    }}
+    }
+  }
 
   addParent() {
     this.generatePassword();
     if (this.ffqparentList.length === 0) {
       this.parentName = this.prefix + '_1';
       this.ffqParent = new FFQParent('', this.parentName, this.userPassword, 'parent', '', '',
-        this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true, this.loggedInUser[0].prefix);
+        this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true, this.loggedInUser[0].prefix,
+        // fix-bug: lastRead and times should be added to the data when a parent record is created.
+        '', 0);
       this.noUsers = true;
     }
     if (!this.noUsers) {
@@ -208,14 +215,16 @@ export class ClinicNewUserComponent implements OnInit {
         this.prefix = 'parent';
         this.parentName = this.prefix.replace(/\s/g, '') + '_' + this.suffix.toString();
         this.ffqParent = new FFQParent('', '', this.userPassword, 'parent', '',
-          '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true, this.prefix);
+          '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true, this.prefix,
+          '', 0);
       } else {
         this.userNameCreator();
         this.ffqParent = new FFQParent('', this.parentName, this.userPassword, 'parent', '', '',
-          this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true, this.loggedInUser[0].prefix);
+          this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true, this.loggedInUser[0].prefix,
+          '', 0);
       }
     }
-    this.parentService.addParent(this.ffqParent).subscribe(parent  => {
+    this.parentService.addParent(this.ffqParent).subscribe(parent => {
         const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
         dialogRef.componentInstance.title = parent.username + ' was added!';
         this.save2csvSingleParent();
@@ -227,8 +236,9 @@ export class ClinicNewUserComponent implements OnInit {
         this.router.navigateByUrl('/clinic/home');
       });
   }
-  dataLoop(){
-    for (let i = 0; i < 7; i++){
+
+  dataLoop() {
+    for (let i = 0; i < 7; i++) {
       this.data[i] = [
         {
           userName: '',
@@ -237,6 +247,7 @@ export class ClinicNewUserComponent implements OnInit {
       ];
     }
   }
+
   save2csvSingleParent() {
     this.getCliName();
     this.dataLoop();
@@ -256,6 +267,7 @@ export class ClinicNewUserComponent implements OnInit {
     this.data[6].userName = this.parentName;
     this.data[6].password = this.userPassword;
   }
+
   dataLoopMultiple() {
     for (let i = 0; i < this.newParents.length + 6; i++) {
       this.data[i] = [
@@ -266,6 +278,7 @@ export class ClinicNewUserComponent implements OnInit {
       ];
     }
   }
+
   save2csvMultipleParent() {
     this.getCliName();
     this.dataLoopMultiple();
@@ -282,24 +295,26 @@ export class ClinicNewUserComponent implements OnInit {
     this.data[5].userName = '';
     this.data[5].password = '';
 
-    for (let i = 0; i < this.newParents.length; i++){
+    for (let i = 0; i < this.newParents.length; i++) {
       this.data[i + 6].userName = this.newParents[i].username;
       this.data[i + 6].password = this.newParents[i].userpassword;
     }
   }
+
   userNameCreator() {
-    for (let i = 0; i <= this.ffqparentList.length - 1; i++){
-      if (this.ffqparentList[i].assignedclinic === this.loggedInUser[0].assignedclinic && this.ffqparentList[i].prefix === this.loggedInUser[0].prefix){
+    for (let i = 0; i <= this.ffqparentList.length - 1; i++) {
+      if (this.ffqparentList[i].assignedclinic ===
+        this.loggedInUser[0].assignedclinic && this.ffqparentList[i].prefix === this.loggedInUser[0].prefix) {
         this.notFound = false;
         this.toStrip = this.prefix + '_';
         this.newNumber = parseInt(this.ffqparentList[i].username.replace(this.toStrip, ''), 10);
 
-        if (this.newNumber > this.max){
+        if (this.newNumber > this.max) {
           this.max = this.newNumber;
         }
         this.parentName = this.prefix + '_' + (this.max + 1).toString();
       }
-      if (this.ffqparentList.length - 1 === i && this.notFound){
+      if (this.ffqparentList.length - 1 === i && this.notFound) {
         // multiple parents added
         this.toStrip = this.prefix + '_';
         // one parent added
@@ -307,8 +322,9 @@ export class ClinicNewUserComponent implements OnInit {
       }
     }
   }
+
   addMultipleParents() {
-    if (this.usersQuantity <= this.newLimit){
+    if (this.usersQuantity <= this.newLimit) {
       if (this.ffqparentList.length === 0) {
         this.parentName = this.prefix + '_1';
         this.toStrip = this.prefix + '_';
@@ -316,7 +332,8 @@ export class ClinicNewUserComponent implements OnInit {
           this.generatePassword();
 
           this.newParents.push(new FFQParent('', this.parentName, this.userPassword, 'parent', '',
-            '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true, this.prefix));
+            '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true, this.prefix,
+            '', 0));
           this.newNumber = parseInt(this.parentName.replace(this.toStrip, ''), 10) + 1;
           this.parentName = this.toStrip + this.newNumber.toString();
         }
@@ -328,7 +345,8 @@ export class ClinicNewUserComponent implements OnInit {
             this.prefix = 'parent';
             this.generatePassword();
             this.newParents.push(new FFQParent('', this.parentName, this.userPassword, 'parent', '',
-              '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true, this.prefix));
+              '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true, this.prefix,
+              '', 0));
             this.suffix++;
           }
         } else {
@@ -337,7 +355,8 @@ export class ClinicNewUserComponent implements OnInit {
             this.generatePassword();
 
             this.newParents.push(new FFQParent('', this.parentName, this.userPassword, 'parent', '',
-              '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true, this.prefix));
+              '', this.selectedClinic.clinicId, this.loggedInUser[0].userId, [''], true, this.prefix,
+              '', 0));
             this.newNumber = parseInt(this.parentName.replace(this.toStrip, ''), 10) + 1;
             this.parentName = this.toStrip + this.newNumber.toString();
           }
@@ -356,13 +375,13 @@ export class ClinicNewUserComponent implements OnInit {
           dialogRef.componentInstance.title = error.error.message;
           this.router.navigateByUrl('/clinic/home');
         });
-    }
-    else {
+    } else {
       const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
       dialogRef.componentInstance.title = '<center>Cannot add more Parents than allowed limit<br/> ' +
         'Contact admin if this is an error or to increase limit<br/></center>';
     }
   }
+
   generatePassword() {
     this.userPassword = Math.random().toString(36).slice(-10);
   }
