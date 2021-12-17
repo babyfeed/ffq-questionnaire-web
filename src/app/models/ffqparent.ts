@@ -1,4 +1,4 @@
-//Classed to store parent user data in components
+// Classed to store parent user data in components
 
 export class FFQParent {
   id: string;
@@ -21,7 +21,7 @@ export class FFQParent {
 
   constructor(userId: string, username: string, userpassword: string, usertype: string, firstname: string,
               lastname: string, assignedclinic: string, assignedclinician: string, childrennames: any, isactive: boolean, prefix: string,
-              lastReadRecommend: string,   timesOfReading: number) {
+              lastReadRecommend: string, timesOfReading: number) {
     this.userId = userId;
     this.username = username;
     this.userpassword = userpassword;

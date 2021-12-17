@@ -73,6 +73,7 @@ export class ParentService {
           );
           // lastReadRecommend is not apart of constructor, so it is set here
           this.parent.lastReadRecommend = item.lastReadRecommend;
+          this.parent.timesOfReading = item.timesOfReading;
           return this.parent;
         });
       })
