@@ -107,7 +107,6 @@ export class ExportService {
     const resultRows = [];
     const parentListData = parentList;
     results.forEach(result => {
-      console.log("result",result);
       // Initialize columns with general result information
       const resultCol = {
         'Participant Username': parentList.find(parent => parent.userId === result.userId)?.username ?? '[not found]',
