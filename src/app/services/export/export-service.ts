@@ -114,6 +114,7 @@ export class ExportService {
         Date: result.date,
         Name: result.patientName,
         Age: result.ageInMonths,
+        Gender: result.gender,
         ReadRecommend: parentList.find(parent => parent.userId === result.userId)?.lastReadRecommend,
         TimesOfReading: parentList.find(parent => parent.userId === result.userId)?.timesOfReading,
       };
