@@ -6,7 +6,7 @@
 .trackeritem-container {
     display: flex;
     justify-content: center;
-    
+
   }
 
 .tracker-card {
@@ -52,4 +52,15 @@ textarea[name=goal] {
   .tracker-card2 {
     width: 90%;
   }
+}
+
+.flex-parent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.box {
+  width: 100%;
 }
