@@ -130,7 +130,7 @@ export class QuestResultsComponent implements OnInit {
             else {
               newWeeklyMap.set(a, 0);
             }
-            
+
           });
 
           element.weeklyTotals = newWeeklyMap;
@@ -251,7 +251,7 @@ export class QuestResultsComponent implements OnInit {
   }
 
   onModalRequestFood(id: string): void {
-    console.log('this.breastMilkFlag', this.breastMilkFlag);
+    console.log('this.breastMilkFlag');
     const modalRef = this.errorDialog.open(FoodRecommendModalComponent, {
       // the FoodRecommendModalComponent is independent component, in order to access the data which I can only get in current component,
       // pass the data by this method
