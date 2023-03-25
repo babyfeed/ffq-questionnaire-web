@@ -112,7 +112,7 @@ export class AdminUsersComponent implements OnInit {
   }
 
   /* Loads all users from the databases and pushes them into their respective lists to be displayed */
-  /*testcomment*/
+
   private loadAllUsers() {
     const clinicianList: Observable<
       FFQClinicianResponse[]
