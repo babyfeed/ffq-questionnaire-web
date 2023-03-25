@@ -14,22 +14,9 @@ export class FfqParticipant {
   isactive: boolean;
   prefix: string;
   assignedClinicOrSiteId: string;
-  children: any;
 
-  constructor(
-    userId: string,
-    username: string,
-    userpassword: string,
-    usertype: string,
-    firstname: string,
-    lastname: string,
-    assignedResearcherInst: string,
-    assignedResearcherUsers: string[],
-    childrennames: string[],
-    isactive: boolean,
-    prefix: string,
-    children: any
-  ) {
+
+  constructor(userId: string, username: string, userpassword: string, usertype: string, firstname: string, lastname: string, assignedResearcherInst: string, assignedResearcherUsers: string[], childrennames: string[], isactive: boolean, prefix: string){
     this.userId = userId;
     this.username = username;
     this.userpassword = userpassword;
@@ -40,7 +27,7 @@ export class FfqParticipant {
     this.assignedResearcherUsers = assignedResearcherUsers;
     this.childrennames = childrennames;
     this.isactive = isactive;
-    this.prefix = prefix;
-    this.children = children;
+	  this.prefix = prefix;
   }
+
 }

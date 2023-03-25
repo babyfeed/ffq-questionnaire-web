@@ -5,7 +5,6 @@ h2 {
 
 a {
   text-decoration: none;
-  color: inherit;
 }
 
 .links{
@@ -22,12 +21,12 @@ body, html {
 
 
 .active{
-  background-color: #1048c2;
+  background-color: #2C387E;
   color: white;
 }
 .tab-link:hover {
   background-color: #B2B9E1;
-  color: #0612ba;
+  color: #2C387E;
   font-weight: bold;
 }
 
@@ -51,7 +50,7 @@ body, html {
   }
 
   .header{
-    background-color: #0039E6;
+    background-color: #0039e6;
     width: 100%;
     height: auto;
     position: fixed;
@@ -78,7 +77,7 @@ body, html {
     cursor: pointer;
     padding: 10px 16px;
     font-size: 17px;
-    width: 16.667%;
+    width: 20%;
     text-align:center;
   }
 
@@ -112,10 +111,6 @@ body, html {
 .center {
   display: block;
   margin:auto;  
-}
-
-.header-logo {
-  cursor: pointer;
 }
 
 

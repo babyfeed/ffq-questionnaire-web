@@ -1,6 +1,6 @@
-import { FFQItemInput } from './ffqitem-input';
-import { FFQItemResponse, FoodType } from './ffqitem-response';
-import { Serving } from './ffqitem-response';
+import {FFQItemInput} from './ffqitem-input';
+import {FFQItemResponse, FoodType} from './ffqitem-response';
+import {Serving} from './ffqitem-response';
 
 export class FFQItem {
   name: string;
@@ -39,9 +39,9 @@ export class FFQItem {
       item.hasSugarSetting = response.sugar.additionalSugar;
     }
     item.isPrimary = response.primary;
-    /////
+     /////
     item.itemPosition = response.itemPosition;
-    /////
+     /////
     return item;
   }
 
@@ -97,8 +97,7 @@ export class FFQItem {
   public getErrorState(): string[] {
     const errorStates: string[] = [];
 
-    if (this.input.frequency !== null && this.input.frequency < 1 
-      || (this.input.frequency > 12 && this.name === 'Breast milk' ) || (this.input.frequency > 12 && this.name === 'Infant Formula')) {
+    if (this.input.frequency !== null && this.input.frequency < 1) {
       errorStates.push('frequency-range');
     }
 
@@ -118,15 +117,4 @@ export class FFQItem {
 
     return errorStates;
   }
-
-  /** 
-  public limitFrequency(): string[]{
-    const errorStates: string[] = [];
-    if(this.input.frequency !== null && this.input.frequency > 12){
-      errorStates.push('frequency-range');
-    }
-    return errorStates;
-  }
-  */
-
 }
