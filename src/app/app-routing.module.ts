@@ -39,6 +39,9 @@ import { ResearchNewUserComponent } from './pages/research-new-user/research-new
 import { UpdateResearchInstitutionComponent } from './pages/modify-research-institution/modify-research-institution.component';
 import { UpdateResearcherComponent } from './pages/modify-researcher/modify-researcher.component';
 import { ClinicQuestionnaireComponent } from './pages/clinic-questionnaire/clinic-questionnaire.component';
+import { GrowthChartsPageComponent } from './pages/growth-charts-page/growth-charts-page.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
+import { OtherComponent } from './pages/other/other.component';
 const routes: Routes = [
   {
     path: '',
@@ -209,7 +212,17 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'parent/growth-charts-page',
+    component: GrowthChartsPageComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'parent/home',
+    component: HomePageComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'parent/tracker',
     component: TrackerPageComponent,
     canActivate: [AuthGuard]
   },
@@ -257,11 +270,18 @@ const routes: Routes = [
   {
     path: 'participant/questionnaire/:id',
     component: QuestionnairePageComponent
+  },
+  {
+    path: 'parent/other',
+    component: OtherComponent,
+    canActivate: [AuthGuard]
   }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })],
   exports: [RouterModule]
+
+  
 })
 export class AppRoutingModule {}
