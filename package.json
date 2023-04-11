@@ -2,6 +2,7 @@
   "name": "ffq-questionnaire-web",
   "version": "1.0.0",
   "scripts": {
+    "build-prod": "ng build --prod",
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.config.json",
     "build": "ng build",
