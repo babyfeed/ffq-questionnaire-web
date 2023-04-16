@@ -7,7 +7,7 @@ trigger:
   - master
 
 pool:
-  vmImage: "windows-latest"
+  vmImage: "ubuntu-latest"
 
 steps:
   - task: NodeTool@0
@@ -22,7 +22,7 @@ steps:
 
   - task: PublishBuildArtifacts@1
     inputs:
-      PathtoPublish: "/home/vsts/work/1/s/dist/ffq-questionnaire-web"
+      PathtoPublish: "dist/ffq-questionnaire-web"
       ArtifactName: "ffq-questionnaire-web"
       publishLocation: "Container"
     displayName: "Publish Artifacts"
