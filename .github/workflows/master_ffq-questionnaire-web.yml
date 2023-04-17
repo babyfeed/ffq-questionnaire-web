@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: "ffq-questionnaire-web"
           slot-name: "Production"
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_nE98Q~PsB-mL8qI2ea3XmaxMEocWCPVPRNvoYayk }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A8FD6A14F0A24C8EA8B00890BB0925FB }}
           package: .
