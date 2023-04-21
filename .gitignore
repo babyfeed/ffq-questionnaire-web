@@ -188,4 +188,3 @@ nbdist/
 debug.log
 /.vs/
 /nbproject/
-node_modules
