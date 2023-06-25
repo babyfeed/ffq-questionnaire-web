@@ -16,12 +16,12 @@ import {TranslateService} from '@ngx-translate/core';
 import { User } from 'src/app/services/authentication/temp-user';
 
 @Component({
-  selector: 'app-other',
-  templateUrl: './other.component.html',
-  styleUrls: ['./other.component.css']
+  selector: 'app-educational-resources',
+  templateUrl: './educational-resources.component.html',
+  styleUrls: ['./educational-resources.component.css']
 
 })
-export class OtherComponent {
+export class EducationalResourcesComponent {
   TITLE = this.translate.instant('Parent Portal');
   currentUser: User;
     router: Router;

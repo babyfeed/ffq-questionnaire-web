@@ -113,7 +113,7 @@ import { InterpretationGrowthChartsDialogComponent } from "./components/interpre
 import { GrowthChartsHelpComponent } from "./components/growth-charts-help/growth-charts-help.component";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { HomePageComponent } from "./pages/home-page/home-page.component";
-import { OtherComponent } from './pages/other/other.component';
+import { EducationalResourcesComponent } from './pages/educational-resources/educational-resources.component';
 
 import { NgApexchartsModule } from "ng-apexcharts";
 
@@ -190,7 +190,7 @@ import { NgApexchartsModule } from "ng-apexcharts";
     InterpretationGrowthChartsDialogComponent,
     GrowthChartsHelpComponent,
     HomePageComponent,
-    OtherComponent
+    EducationalResourcesComponent
   ],
   imports: [
     BrowserModule,
