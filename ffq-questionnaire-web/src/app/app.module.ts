@@ -103,6 +103,7 @@ import { NgIdleKeepaliveModule } from "@ng-idle/keepalive";
 import { FeedingFrequencyComponent } from "./components/feeding-frequency/feeding-frequency.component";
 import { MatTableModule } from "@angular/material/table";
 import { GrowthChartsPageComponent } from "./pages/growth-charts-page/growth-charts-page.component";
+import { ResearchParentalChartComponent } from "./pages/research-parental-chart/research-parental-chart.component";
 import { NgxChartsModule } from "@swimlane/ngx-charts";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from "@angular/material/core";
@@ -185,6 +186,7 @@ import { NgApexchartsModule } from "ng-apexcharts";
     FeedingFrequencyComponent,
     ServingSizePicturesComponent,
     GrowthChartsPageComponent,
+    ResearchParentalChartComponent,
     InterpretationGrowthChartsDialogComponent,
     GrowthChartsHelpComponent,
     HomePageComponent,

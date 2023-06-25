@@ -42,6 +42,8 @@ import { ClinicQuestionnaireComponent } from './pages/clinic-questionnaire/clini
 import { GrowthChartsPageComponent } from './pages/growth-charts-page/growth-charts-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { OtherComponent } from './pages/other/other.component';
+import { componentFactoryName } from '@angular/compiler';
+import { ResearchParentalChartComponent } from './pages/research-parental-chart/research-parental-chart.component';
 const routes: Routes = [
   {
     path: '',
@@ -261,7 +263,6 @@ const routes: Routes = [
     component: ResearchHistoryComponent,
     canActivate: [AuthGuard]
   },
-
   {
     path: 'participant/home',
     component: ResearchQuestIdInputComponent,
@@ -274,6 +275,11 @@ const routes: Routes = [
   {
     path: 'parent/other',
     component: OtherComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'participant/research-parental-chart',
+    component: ResearchParentalChartComponent,
     canActivate: [AuthGuard]
   }
 ];
