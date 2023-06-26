@@ -204,6 +204,8 @@ import { NgForm, NgModel } from "@angular/forms";
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import { stringify } from "querystring";
+import { FfqParticipant } from "src/app/models/ffq-participant";
+import { ParticipantService } from "src/app/services/participant/participant-service";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 class DataManipulation {
@@ -308,7 +310,7 @@ export class ResearchParentalChartComponent implements OnInit {
   childrenList: FFQChildren[] = [];
 
   // current parent, data retrived from db
-  currentParent: FFQParentResponse;
+  currentParent: FfqParticipant;
 
   //interpretation message
   interMessage: string = " ";
@@ -379,7 +381,7 @@ export class ResearchParentalChartComponent implements OnInit {
   */
 
   constructor(
-    private parentService: ParentService,
+    private participantService: ParticipantService,
     private authenticationService: AuthenticationService,
     private translate: TranslateService,
     private dialog: MatDialog
@@ -415,21 +417,19 @@ export class ResearchParentalChartComponent implements OnInit {
       */
     });
 
-    this.currentParent = new FFQParentResponse(
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      [] as string[],
-      true,
-      "",
-      "",
-      0,
-      [] as FFQChildren[]
+    this.currentParent = new FfqParticipant(
+      "", /*id*/
+      "", /*Uname*/
+      "", /*password*/
+      "", /*type*/
+      "", /*first*/
+      "", /*last*/
+      "", /**assignedCReasercherInst*/
+      [] as string[], /*assignedReasercherUser*/
+      [] as string[], /*childrenNames*/
+      true, /*isactive*/
+      "", /*prefix*/
+      [] as FFQChildren[] /*children array*/
     );
 
     this.currentChild = new FFQChildren("", [] as FFQChildData[]);
@@ -619,8 +619,8 @@ export class ResearchParentalChartComponent implements OnInit {
     } else {
       this, this.currentParent.children.push(this.currentChild);
     }
-    this.parentService
-      .updateParent(<FFQParentResponse>this.currentParent)
+    this.participantService
+      .updateParticipant(<FfqParticipant>this.currentParent)
       .subscribe();
     this.dataWasAdded = true;
   }
@@ -1959,7 +1959,7 @@ export class ResearchParentalChartComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const parent: Observable<FFQParentResponse> = this.parentService.getParent(
+    const parent: Observable<FfqParticipant> = this.participantService.getParticipant(
       this.authenticationService.currentUserId
     );
     parent.subscribe((parent) => {
