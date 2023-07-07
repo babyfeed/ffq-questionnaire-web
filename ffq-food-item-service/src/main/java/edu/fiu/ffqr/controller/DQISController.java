@@ -313,7 +313,7 @@ public class DQISController {
             for (SysFoodRecommendation sysFoodItemRecommendation : SysFoodItemRecommendations) {
                         FoodCategoryRecommendation foodItemRec = new FoodCategoryRecommendation();
                         foodItemRec.setCategoryName(sysFoodItemRecommendation.getCategoryName());
-                        foodItemRec.setLabel("");
+                        //foodItemRec.setLabel("");
                         calculatedPoints = categoryValueMap.get(sysFoodItemRecommendation.getCategoryName());
                         foodItemRec.setCalculatedAmount(calculatedPoints);
 
