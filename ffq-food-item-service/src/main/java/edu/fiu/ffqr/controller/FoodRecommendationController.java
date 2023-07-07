@@ -280,7 +280,6 @@ public class FoodRecommendationController {
             }
             foodItemRecommendation.getFoodCategoryRecList().add(foodItemRec);
         }
-
         return foodItemRecommendation;
     }
 
@@ -386,4 +385,5 @@ public class FoodRecommendationController {
         }
         return finalAmount;
     }
+
 }
