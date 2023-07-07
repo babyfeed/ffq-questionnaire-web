@@ -5,9 +5,9 @@
       <table *ngFor="let result of dqis">
         <tr>
           <th> {{'Food Item' | translate}} </th>
-          <th> {{'Calculated Amount (Oz)' | translate}} </th>
+          <th> {{'Points' | translate}} </th>
         </tr>
-        <tr *ngFor="let food of result.foodCategoryRecList; let i = index">
+        <tr *ngFor="let dqis of result.foodCategoryRecList; let i = index">
           <td>{{'result.' + i + '.foodItemGroupName' | translate}}</td>
           <td style="text-align: center" >{{food.calculatedPoints | resultRound}}</td>
         </tr>
