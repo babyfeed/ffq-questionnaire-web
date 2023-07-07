@@ -26,7 +26,7 @@ export class DQISService {
   }
 
   /* Return the nutrients recommendations given a questionnaire id*/
-  getFoodRecommendationsByQuestionnaireId(questionnaireId: string): Observable<FFQDQIS> {
+  getDQISByQuestionnaireId(questionnaireId: string): Observable<FFQDQIS> {
     return this.http.get(this.endpoint + '/DQIS/calculate/' + questionnaireId).pipe(
       map(((item: FFQDQIS) => {
         return new FFQDQIS(

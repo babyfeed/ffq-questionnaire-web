@@ -28,6 +28,7 @@ import { DeletePopupComponent } from "./components/delete-popup/delete-popup.com
 import { FlashMessagesModule } from "angular2-flash-messages";
 import { RecommendModalComponent } from "./components/recommend-modal/recommend-modal.component";
 import { FoodRecommendModalComponent } from "./components/food-recommend-modal/food-recommend-modal.component";
+import { DQISModalComponent } from "./components/dqis-modal/dqis-modal.component";
 import { FoodItemsTableComponent } from "./components/food-items-table/food-items-table.component";
 import { ClinicalPortalComponent } from "./pages/clinical-portal/clinical-portal.component";
 import { ClinicalHeaderComponent } from "./pages/clinical-header/clinical-header.component";
@@ -144,6 +145,7 @@ import { NgApexchartsModule } from "ng-apexcharts";
     PopupComponent,
     RecommendModalComponent,
     FoodRecommendModalComponent,
+    DQISModalComponent,
     FoodItemsTableComponent,
     ClinicalPortalComponent,
     ClinicalHeaderComponent,
@@ -249,6 +251,7 @@ import { NgApexchartsModule } from "ng-apexcharts";
     PopupComponent,
     RecommendModalComponent,
     FoodRecommendModalComponent,
+    DQISModalComponent,
     DeletePopupComponent,
     CreateParticipantModalComponent,
     FeedingFrequencyComponent,

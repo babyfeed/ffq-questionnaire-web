@@ -31,24 +31,21 @@ export class DQISModalComponent {
     private translate: TranslateService) {
   }
 
-  recommendedFood: FFQDQIS[] = [];
+  dqis: FFQDQIS[] = [];
 
   ngOnInit() {
-    this.getFoodRecommendations(this.id);
+    this.getDQIS(this.id);
   }
 
-  private getFoodRecommendations(questionnaireId: string) {
-    this.DQISService.getFoodRecommendationsByQuestionnaireId(questionnaireId).subscribe(
+  private getDQIS(questionnaireId: string) {
+    this.DQISService.getDQISByQuestionnaireId(questionnaireId).subscribe(
       data => {
         // The 1st version I'm using is to set a map to save key questionnaireId and the value as key/value pair
         // but the data passed by @INJECT method is an object with {{}},
         // so the 'get' method is still working, but there will be es-lint warning
         // if a baby is having both breast milk and formula, then it never little below, because breast milk will be provided enough
         // put all the questionnaireID that has breast milk
-        if (Object.values(this.flagData).indexOf(data.questionnaireId) > -1 && data.foodCategoryRecList[0].label === 'Little below') {
-          data.foodCategoryRecList[0].label = 'Adequate';
-        }
-        this.recommendedFood.push(data);
+        this.dqis.push(data);
       },
     );
   }

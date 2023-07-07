@@ -58,7 +58,7 @@ public class DQISController {
         int infantAge = 0;
         String gender = "";
         String ageRange = "";
-        Double calculatedAmount = 0.0;
+        Double calculatedPoints = 0.0;
         boolean breastMilkFlag = false; // set breastMilkFlag, if baby is taking breast milk, true
         boolean proteinFlag = false;
         Double formulaMilkAmount = 0.0;
@@ -162,8 +162,8 @@ public class DQISController {
                             categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentPoints);
                         }
 
-                        dqis.setPoints(currentPoints);
                     }
+                    
 
                     /*
                      * if (infantAge >= 6 && infantAge < 12) {
@@ -310,7 +310,15 @@ public class DQISController {
                 }
 
             }
+            for (SysFoodRecommendation sysFoodItemRecommendation : SysFoodItemRecommendations) {
+                        FoodCategoryRecommendation foodItemRec = new FoodCategoryRecommendation();
+                        foodItemRec.setCategoryName(sysFoodItemRecommendation.getCategoryName());
+                        foodItemRec.setLabel("");
+                        calculatedPoints = categoryValueMap.get(sysFoodItemRecommendation.getCategoryName());
+                        foodItemRec.setCalculatedAmount(calculatedPoints);
 
+                        dqis.getFoodCategoryRecList().add(foodItemRec);
+                        }            
         }
         return dqis;
     }
