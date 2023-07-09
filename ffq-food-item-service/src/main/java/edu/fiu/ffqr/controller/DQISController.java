@@ -58,7 +58,8 @@ public class DQISController {
         int infantAge = 0;
         String gender = "";
         String ageRange = "";
-        double totalPoints = 60.0;
+        double totalPoints = 0.0;
+        Double calculatedAmount = 0.0;
         boolean breastMilkFlag = false; // set breastMilkFlag, if baby is taking breast milk, true
         boolean proteinFlag = false;
         boolean wGrainsFlag = false;
@@ -69,6 +70,10 @@ public class DQISController {
         boolean sBeveragesFlag = false;
         boolean sweetsFlag = false;
         boolean snacksFlag = false;
+        boolean otherMilkFlag = false;
+        boolean enteredPartial = false;
+        boolean enteredOther = false;
+        boolean enteredBreast = false;
         Double formulaMilkAmount = 0.0;
         boolean labelAdequate = false; // if the baby is having both breastmilk & formula but amount is still equal to
                                        // recommmendation, then true
@@ -95,18 +100,18 @@ public class DQISController {
             if(infantAge >=6 && infantAge < 12){
                 if(sysFoodItemRecommendation.getCategoryName().equalsIgnoreCase("Whole Grains")){
                     categoryValueMap.replace(sysFoodItemRecommendation.getCategoryName(), categoryValueMap.get("Whole Grains"), 2.5);                
-                    }
+                }
                 if(sysFoodItemRecommendation.getCategoryName().equalsIgnoreCase("Refined Grains")){
-                categoryValueMap.replace(sysFoodItemRecommendation.getCategoryName(), categoryValueMap.get("Refined Grains"), 2.5);                
+                    categoryValueMap.replace(sysFoodItemRecommendation.getCategoryName(), categoryValueMap.get("Refined Grains"), 2.5);                
                 }
                 if(sysFoodItemRecommendation.getCategoryName().equalsIgnoreCase("Proteins")){
-                categoryValueMap.replace(sysFoodItemRecommendation.getCategoryName(), categoryValueMap.get("Proteins"), 0.0);                
+                    categoryValueMap.replace(sysFoodItemRecommendation.getCategoryName(), categoryValueMap.get("Proteins"), 0.0);                
                 }
                 if(sysFoodItemRecommendation.getCategoryName().equalsIgnoreCase("Vegetables")){
-                categoryValueMap.replace(sysFoodItemRecommendation.getCategoryName(), categoryValueMap.get("Vegetables"), 0.0);                
+                    categoryValueMap.replace(sysFoodItemRecommendation.getCategoryName(), categoryValueMap.get("Vegetables"), 0.0);                
                 }
                 if(sysFoodItemRecommendation.getCategoryName().equalsIgnoreCase("Fruits")){
-                categoryValueMap.replace(sysFoodItemRecommendation.getCategoryName(), categoryValueMap.get("Fruits"), 0.0);                
+                    categoryValueMap.replace(sysFoodItemRecommendation.getCategoryName(), categoryValueMap.get("Fruits"), 0.0);                
                 }
 
             }
@@ -135,135 +140,6 @@ public class DQISController {
 
                 if (category.equalsIgnoreCase(categoryName)) {
                     double currentTotal = 0.0;
-                    /*
-                     * if (foodItem.getServing() == null) {
-                     * if (nutrientListID.equalsIgnoreCase("brea")) {
-                     * breastMilkFlag = true;
-                     * }
-                     * if (nutrientListID.equalsIgnoreCase("chee")) {
-                     * 
-                     * totalPoints = (25.2 * foodItem.getFrequency() / 28.35);
-                     * 
-                     * if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
-                     * totalPoints = totalPoints / 7;
-                     * }
-                     * exclusivelyBreastfed = false;
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) +
-                     * totalPoints);
-                     * } else if (nutrientListID.equalsIgnoreCase("yogu")) {
-                     * 
-                     * totalPoints = (113.4 * foodItem.getFrequency() / 28.35);
-                     * 
-                     * if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
-                     * totalPoints = totalPoints / 7;
-                     * }
-                     * exclusivelyBreastfed = false;
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) +
-                     * totalPoints);
-                     * } else if (nutrientListID.equalsIgnoreCase("soyp")) {
-                     * 
-                     * totalPoints = (28.4 * foodItem.getFrequency() / 28.35);
-                     * 
-                     * if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
-                     * totalPoints = totalPoints / 7;
-                     * }
-                     * exclusivelyBreastfed = false;
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) +
-                     * totalPoints);
-                     * } else if (nutrientListID.equalsIgnoreCase("icec")) {
-                     * 
-                     * totalPoints = (29.5 * foodItem.getFrequency() *
-                     * Double.parseDouble(foodItem.getServing().split(" ")[0]) / 28.35); // 1 ice
-                     * cream serving = 29.5 grams, defined by PO
-                     * 
-                     * if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
-                     * totalPoints = totalPoints / 7;
-                     * }
-                     * exclusivelyBreastfed = false;
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) +
-                     * totalPoints);
-                     * } else if (nutrientListID.equalsIgnoreCase("brea")) {
-                     * totalPoints = foodItem.getFrequency() * 3;
-                     * if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
-                     * totalPoints /= 7;
-                     * }
-                     * formulaMilkAmount = totalPoints; // temporarily save bresatmilk amount here
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) +
-                     * totalPoints);
-                     * } else {
-                     * totalPoints = foodItem.getFrequency();
-                     * if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
-                     * totalPoints = totalPoints / 7;
-                     * }
-                     * exclusivelyBreastfed = false;
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) +
-                     * totalPoints);
-                     * }
-                     * } else {
-                     * if (nutrientListID.equalsIgnoreCase("pancrefi")) {
-                     * 
-                     * totalPoints = (45.8 * foodItem.getFrequency() *
-                     * Double.parseDouble(foodItem.getServing().split(" ")[0]) / 28.35); // 1
-                     * refined pancake = 45.8 grams, defined by PO
-                     * 
-                     * if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
-                     * totalPoints = totalPoints / 7;
-                     * }
-                     * 
-                     * exclusivelyBreastfed = false;
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) +
-                     * totalPoints);
-                     * } else if (nutrientListID.equalsIgnoreCase("pancwhol")) {
-                     * 
-                     * totalPoints = (49.7 * foodItem.getFrequency() *
-                     * Double.parseDouble(foodItem.getServing().split(" ")[0]) / 28.35); // 1 whole
-                     * pancake = 49.7 grams, defined by PO
-                     * 
-                     * if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
-                     * totalPoints = totalPoints / 7;
-                     * }
-                     * exclusivelyBreastfed = false;
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) +
-                     * totalPoints);
-                     * } else if (nutrientListID.equalsIgnoreCase("hone")) {
-                     * 
-                     * totalPoints = (0.5 * foodItem.getFrequency() *
-                     * Double.parseDouble(foodItem.getServing().split(" ")[0])); //
-                     * 
-                     * if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
-                     * totalPoints = totalPoints / 7;
-                     * }
-                     * exclusivelyBreastfed = false;
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) +
-                     * totalPoints);
-                     * } else if (nutrientListID.equalsIgnoreCase("cook")) {
-                     * 
-                     * totalPoints = (10.8 * foodItem.getFrequency() *
-                     * Double.parseDouble(foodItem.getServing().split(" ")[0]) / 28.35); //
-                     * 
-                     * if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
-                     * totalPoints = totalPoints / 7;
-                     * }
-                     * exclusivelyBreastfed = false;
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) +
-                     * totalPoints);
-                     * } else {
-                     * totalPoints = (foodItem.getFrequency() *
-                     * Double.parseDouble(foodItem.getServing().split(" ")[0])); //
-                     * 
-                     * if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
-                     * totalPoints = totalPoints / 7;
-                     * }
-                     * exclusivelyBreastfed = false;
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) +
-                     * totalPoints);
-                     * }
-                     * }
-                     * }
-                     * }
-                     * }
-                     */
-
                     /*if (infantAge > 0 && infantAge < 6) {
                         // Milk
                         if (nutrientListID.equalsIgnoreCase("brea")) {
@@ -321,10 +197,7 @@ public class DQISController {
                             totalPoints -= 5;
                             snacksFlag = true;
                             categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) -5);
-                        }*/
-
-                    
-                    
+                        }*/             
                         /*// Milk
                         if (nutrientListID.equalsIgnoreCase("brea")) {
                             categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 10);
@@ -386,6 +259,9 @@ public class DQISController {
 
                             if (nutrientListID.equalsIgnoreCase("brea")) {
                                 breastMilkFlag = true;
+                            }
+                            if (category.equalsIgnoreCase("Breastmilk/Formula/Cows Milk/Other milks")&&!nutrientListID.equalsIgnoreCase("brea")) {
+                                otherMilkFlag = true;
                             }
                             if (nutrientListID.equalsIgnoreCase("chee")) {
     
@@ -496,14 +372,30 @@ public class DQISController {
                         }
                         if (infantAge > 5 && infantAge < 12) {
                             //Milk
-                            if(category.equalsIgnoreCase("Breastmilk/Formula/Cows Milk/Other milks") && (currentTotal >= 0.1 && currentTotal<= 3.5)){
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 2.5);
-                            }
-                            else if (category.equalsIgnoreCase("Breastmilk/Formula/Cows Milk/Other milks") && (currentTotal >= 3.6 && currentTotal <= 8.0)){
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 1.25);
-                            }
-                            else if (category.equalsIgnoreCase("Breastmilk/Formula/Cows Milk/Other milks") && (currentTotal == 0.0 || currentTotal > 8.0)){
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 0);
+                            if(category.equalsIgnoreCase("Breastmilk/Formula/Cows Milk/Other milks")){
+                                    /*if(category.equalsIgnoreCase("Breastmilk/Formula/Cows Milk/Other milks") && (currentTotal >= 0.1 && currentTotal<= 3.5)){
+                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 10);
+                                }
+                                else if (category.equalsIgnoreCase("Breastmilk/Formula/Cows Milk/Other milks") && (currentTotal >= 3.6 && currentTotal <= 8.0)){
+                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 5);
+                                }
+                                else if (category.equalsIgnoreCase("Breastmilk/Formula/Cows Milk/Other milks") && (currentTotal == 0.0 || currentTotal > 8.0)){
+                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 0);
+                                }*/
+                                if(otherMilkFlag && breastMilkFlag && !enteredPartial && !exclusivelyBreastfed){ //partial
+                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 10.0 );
+                                    enteredPartial = true;
+                                }
+                                if(otherMilkFlag && !breastMilkFlag && !enteredOther){ //other
+
+                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName)+ 0 );
+                                    enteredOther = true;
+                                }
+                                if (exclusivelyBreastfed && !enteredBreast){ //breast
+                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName)  + 5.0);
+                                    enteredBreast = true;
+                                }
+
                             }
                             //Whole Grains
                             if(category.equalsIgnoreCase("Whole Grains") && !(wGrainsFlag)){
@@ -782,7 +674,7 @@ public class DQISController {
             FoodCategoryRecommendation foodItemRec = new FoodCategoryRecommendation();
             foodItemRec.setCategoryName(sysFoodItemRecommendation.getCategoryName());
             foodItemRec.setLabel("");
-            totalPoints = categoryValueMap.get(sysFoodItemRecommendation.getCategoryName());
+            calculatedAmount = categoryValueMap.get(sysFoodItemRecommendation.getCategoryName());
             // 2/20/2022 WENJIA update
             // SET breastMilkFlag
             // if the baby is taking breast milk, then the calculated amount should be the
@@ -792,14 +684,15 @@ public class DQISController {
             // standdard, ex. 6 month baby is having formula > 28.9
             // then the total number of milk = formula + breastmilk + cow milk
             double recommendAmount = setCalculatedAmountForBreastMilk(infantAge);
-            formulaMilkAmount = totalPoints - formulaMilkAmount;
-            if (breastMilkFlag && sysFoodItemRecommendation.getCategoryName().equalsIgnoreCase(
+            formulaMilkAmount = calculatedAmount - formulaMilkAmount;
+            /*if (breastMilkFlag && sysFoodItemRecommendation.getCategoryName().equalsIgnoreCase(
                     "Breastmilk/Formula/Cows Milk/Other milks") && formulaMilkAmount <= recommendAmount) {
                 foodItemRec.setCalculatedAmount(recommendAmount);
                 labelAdequate = true;
-            } else {
-                foodItemRec.setCalculatedAmount(totalPoints);
-            }
+            } else { */
+            foodItemRec.setCalculatedAmount(calculatedAmount);
+            //}
+
             if (infantAge >= 0 && infantAge <= 5) {
                 ageRange = "0-5";
             } else if (infantAge >= 6 && infantAge <= 12) {
