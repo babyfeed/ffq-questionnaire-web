@@ -256,13 +256,6 @@ public class DQISController {
                             categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) -5);
                         }*/
                         if (foodItem.getServing() == null) {
-
-                            if (nutrientListID.equalsIgnoreCase("brea")) {
-                                breastMilkFlag = true;
-                            }
-                            if (category.equalsIgnoreCase("Breastmilk/Formula/Cows Milk/Other milks")&&!nutrientListID.equalsIgnoreCase("brea")) {
-                                otherMilkFlag = true;
-                            }
                             if (nutrientListID.equalsIgnoreCase("chee")) {
     
                                 currentTotal = (25.2 * foodItem.getFrequency() / 28.35);
@@ -300,6 +293,7 @@ public class DQISController {
                                 exclusivelyBreastfed = false;
                                 //categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentTotal);
                             } else if (nutrientListID.equalsIgnoreCase("brea")) {
+                                breastMilkFlag = true;
                                 currentTotal = foodItem.getFrequency() * 3;
                                 if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
                                     currentTotal /= 7;
@@ -373,30 +367,23 @@ public class DQISController {
                         if (infantAge > 5 && infantAge < 12) {
                             //Milk
                             if(category.equalsIgnoreCase("Breastmilk/Formula/Cows Milk/Other milks")){
-                                    /*if(category.equalsIgnoreCase("Breastmilk/Formula/Cows Milk/Other milks") && (currentTotal >= 0.1 && currentTotal<= 3.5)){
-                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 10);
+                                    if (!nutrientListID.equalsIgnoreCase("brea")) {
+                                    otherMilkFlag = true;
+                                    }
+                                    if(otherMilkFlag && breastMilkFlag && !enteredPartial){ //partial
+                                        categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName), 10.0 );
+                                        enteredPartial = true;
+                                    }
+                                    else if(otherMilkFlag && !breastMilkFlag && !enteredOther){ //other
+                                        categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName), 5.0 );
+                                        enteredOther = true;
+                                    }
+                                    else if (exclusivelyBreastfed && !otherMilkFlag && !enteredPartial){ //breast
+                                        categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName), 15.0);
+                                        enteredBreast = true;
+                                    }
                                 }
-                                else if (category.equalsIgnoreCase("Breastmilk/Formula/Cows Milk/Other milks") && (currentTotal >= 3.6 && currentTotal <= 8.0)){
-                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 5);
-                                }
-                                else if (category.equalsIgnoreCase("Breastmilk/Formula/Cows Milk/Other milks") && (currentTotal == 0.0 || currentTotal > 8.0)){
-                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 0);
-                                }*/
-                                if(otherMilkFlag && breastMilkFlag && !enteredPartial && !exclusivelyBreastfed){ //partial
-                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 10.0 );
-                                    enteredPartial = true;
-                                }
-                                if(otherMilkFlag && !breastMilkFlag && !enteredOther){ //other
-
-                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName)+ 0 );
-                                    enteredOther = true;
-                                }
-                                if (exclusivelyBreastfed && !enteredBreast){ //breast
-                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName)  + 5.0);
-                                    enteredBreast = true;
-                                }
-
-                            }
+                            
                             //Whole Grains
                             if(category.equalsIgnoreCase("Whole Grains") && !(wGrainsFlag)){
                                 wGrainsFlag =true;
