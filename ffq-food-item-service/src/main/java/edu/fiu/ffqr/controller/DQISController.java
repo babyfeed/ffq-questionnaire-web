@@ -91,8 +91,27 @@ public class DQISController {
 
         // populate the category-value map with the food item categories
         for (SysFoodRecommendation sysFoodItemRecommendation : SysFoodItemRecommendations) {
-            categoryValueMap.put(sysFoodItemRecommendation.getCategoryName(), 0.0);
+            categoryValueMap.put(sysFoodItemRecommendation.getCategoryName(), 5.0);
+            if(infantAge >=6 && infantAge < 12){
+                if(sysFoodItemRecommendation.getCategoryName().equalsIgnoreCase("Whole Grains")){
+                    categoryValueMap.replace(sysFoodItemRecommendation.getCategoryName(), categoryValueMap.get("Whole Grains"), 2.5);                
+                    }
+                if(sysFoodItemRecommendation.getCategoryName().equalsIgnoreCase("Refined Grains")){
+                categoryValueMap.replace(sysFoodItemRecommendation.getCategoryName(), categoryValueMap.get("Refined Grains"), 2.5);                
+                }
+                if(sysFoodItemRecommendation.getCategoryName().equalsIgnoreCase("Proteins")){
+                categoryValueMap.replace(sysFoodItemRecommendation.getCategoryName(), categoryValueMap.get("Proteins"), 0.0);                
+                }
+                if(sysFoodItemRecommendation.getCategoryName().equalsIgnoreCase("Vegetables")){
+                categoryValueMap.replace(sysFoodItemRecommendation.getCategoryName(), categoryValueMap.get("Vegetables"), 0.0);                
+                }
+                if(sysFoodItemRecommendation.getCategoryName().equalsIgnoreCase("Fruits")){
+                categoryValueMap.replace(sysFoodItemRecommendation.getCategoryName(), categoryValueMap.get("Fruits"), 0.0);                
+                }
+
+            }
         }
+        
 
         for (FoodItemInput foodItem : userChoices) {
 
@@ -490,97 +509,123 @@ public class DQISController {
                             if(category.equalsIgnoreCase("Whole Grains") && !(wGrainsFlag)){
                                 wGrainsFlag =true;
                                 if((currentTotal >= 0.1 && currentTotal<= 3.5)){
-                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 2.5);
+                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) - 0.0);
                                 }
                                 else if (category.equalsIgnoreCase("Whole Grains") && (currentTotal >= 3.6 && currentTotal <= 8.0)){
-                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 1.25);
+                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) - 1.25);
                                 }
                                 else if (category.equalsIgnoreCase("Whole Grains") && (currentTotal == 0.0 || currentTotal > 8.0)){
-                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 0);
+                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) - 2.5);
                                 }
                             }
                             //Refined Grains
-                            if(category.equalsIgnoreCase("Refined Grains") && (currentTotal >= 0.0 && currentTotal<= 1.5)){
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 2.5);
-                            }
-                            else if (category.equalsIgnoreCase("Refined Grains") && (currentTotal >= 1.6 && currentTotal <= 3.5)){
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 1.25);
-                            }
-                            else if (category.equalsIgnoreCase("Refined Grains") && (currentTotal > 3.5)){
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 0);
+                            if(category.equalsIgnoreCase("Refined Grains") && !(rGrainsFlag)){
+                                rGrainsFlag =true;
+                                if((currentTotal >= 0.0 && currentTotal<= 1.5)){
+                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) - 0.0);
+                                }
+                                else if ((currentTotal >= 1.6 && currentTotal <= 3.5)){
+                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) - 1.25);
+                                }
+                                else if ((currentTotal > 3.5)){
+                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) -2.5);
+                                }
                             }
                             //Proteins
-                            if(category.equalsIgnoreCase("Proteins") && (currentTotal > 0.0 && currentTotal<= 6.0)){
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 5);
-                            }
-                            else if (category.equalsIgnoreCase("Proteins") && (currentTotal > 6.0 && currentTotal <= 10.0)){
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) +2.5);
-                            }
-                            else if (category.equalsIgnoreCase("Proteins") && (currentTotal == 0.0 || currentTotal > 10.0)){
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 0);
+                            if(category.equalsIgnoreCase("Proteins") && !(proteinFlag )){
+                                proteinFlag =true;
+                                if((currentTotal > 0.0 && currentTotal<= 6.0)){
+                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 5.0);
+                                }
+                                else if ((currentTotal > 6.0 && currentTotal <= 10.0)){
+                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 2.5);
+                                }
+                                else if ((currentTotal == 0.0 || currentTotal > 10.0)){
+                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 0);
+                                }
                             }
                             //Vegetables
-                            if(category.equalsIgnoreCase("Vegetables") && (currentTotal >= 2.0)){
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 5);
-                            }
-                            else if (category.equalsIgnoreCase("Vegetables") && (currentTotal > 0.0 && currentTotal < 2.0)){
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) +2.5);
-                            }
-                            else if (category.equalsIgnoreCase("Vegetables") && (currentTotal == 0.0)){
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 0);
+                            if(category.equalsIgnoreCase("Vegetables") && !(vegetableFlag )){
+                                vegetableFlag =true;
+                                if((currentTotal >= 2.0)){
+                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 5.0);
+                                }
+                                else if ((currentTotal > 0.0 && currentTotal < 2.0)){
+                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 2.5);
+                                }
+                                else if ((currentTotal == 0.0)){
+                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 0);
+                                }
                             }
                             //Fruits
-                            if(category.equalsIgnoreCase("Fruits") && (currentTotal >= 2.0)){
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 5);
-                            }
-                            else if (category.equalsIgnoreCase("Fruits") && (currentTotal > 0.0 && currentTotal < 2.0)){
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) +2.5);
-                            }
-                            else if (category.equalsIgnoreCase("Fruits") && (currentTotal == 0.0)){
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 0);
+                            if(category.equalsIgnoreCase("Fruits") && !(fruitsFlag )){
+                                fruitsFlag =true;
+                                if((currentTotal >= 2.0)){
+                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 5.0);
+                                }
+                                else if ((currentTotal > 0.0 && currentTotal < 2.0)){
+                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 2.5);
+                                }
+                                else if ((currentTotal == 0.0)){
+                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 0);
+                                }
                             }
                             //Juices
-                            if(category.equalsIgnoreCase("100% Juices") && (currentTotal == 0.0)){
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 5);
-                            }
-                            else if (category.equalsIgnoreCase("100% Juices") && (currentTotal > 0.0 && currentTotal <= 6.0)){
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) +2.5);
-                            }
-                            else if (category.equalsIgnoreCase("100% Juices") && (currentTotal > 6.0)){
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 0);
+                            if(category.equalsIgnoreCase("100% Juices") && !(juicesFlag )){
+                                juicesFlag =true;
+                                if((currentTotal == 0.0)){
+                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) - 0);
+                                }
+                                else if ((currentTotal > 0.0 && currentTotal <= 6.0)){
+                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) - 2.5);
+                                }
+                                else if ((currentTotal > 6.0)){
+                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) -5);
+                                }
                             }
                             //Sugary Bevs
-                            if(category.equalsIgnoreCase("Sugary Beverages") && (currentTotal == 0.0)){
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 5);
-                            }
-                            else if (category.equalsIgnoreCase("Sugary Beverages") && (currentTotal > 0.0 && currentTotal <= 4.0)){
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) +2.5);
-                            }
-                            else if (category.equalsIgnoreCase("Sugary Beverages") && (currentTotal > 4.0)){
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 0);
+                            if(category.equalsIgnoreCase("Sugary Beverages") && !(sBeveragesFlag )){
+                                sBeveragesFlag =true;
+                                if((currentTotal == 0.0)){
+                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) - 0);
+                                }
+                                else if ((currentTotal > 0.0 && currentTotal <= 4.0)){
+                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) - 2.5);
+                                }
+                                else if ((currentTotal > 4.0)){
+                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) - 5.0);
+                                }
                             }
                             //Sweets
-                            if(category.equalsIgnoreCase("Sweets") && (currentTotal == 0.0)){
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 5);
-                            }
-                            else if (category.equalsIgnoreCase("Sweets") && (currentTotal > 0.0 && currentTotal <= 1.0)){
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) +2.5);
-                            }
-                            else if (category.equalsIgnoreCase("Sweets") && (currentTotal > 1.0)){
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 0);
+                            if(category.equalsIgnoreCase("Sweets") && !(sweetsFlag)){
+                                sweetsFlag = true;
+                                if((currentTotal == 0.0)){
+                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) - 0.0); 
+                                }
+                                if (category.equalsIgnoreCase("Sweets") && (currentTotal > 0.0 && currentTotal <= 1.0)){
+                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) - 2.5);
+                                    sweetsFlag = true;
+                                }
+                                else if (category.equalsIgnoreCase("Sweets") && (currentTotal > 1.0)){
+                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) - 5.0);
+                                    sweetsFlag = true;
+                                }
                             }
                             //Salty Snacks
-                            if(category.equalsIgnoreCase("Salty Snacks") && (currentTotal == 0.0)){
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 5);
-                            }
-                            else if (category.equalsIgnoreCase("Salty Snacks") && (currentTotal > 0 && currentTotal <= 1.0)){
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) +2.5);
-                            }
-                            else if (category.equalsIgnoreCase("Salty Snacks") && (currentTotal > 1.0)){
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 0);
+                            if(category.equalsIgnoreCase("Salty Snacks") && !(snacksFlag)){
+                                snacksFlag =true;
+                                if((currentTotal == 0.0)){
+                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) - 0);
+                                }
+                                else if ((currentTotal > 0 && currentTotal <= 1.0)){
+                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) - 2.5);
+                                }
+                                else if ((currentTotal > 1.0)){
+                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) - 5.0);
+                                }
                             }
                         }
-                    }//end of main i
+                    }//end of main if
                 }//end of loop
             }                
                 
