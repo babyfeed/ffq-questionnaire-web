@@ -61,8 +61,8 @@ public class DQISController {
         Double calculatedPoints = 0.0;
         boolean breastMilkFlag = false; // set breastMilkFlag, if baby is taking breast milk, true
         boolean proteinFlag = false;
-        boolean wGrainsFlag = false;
-        boolean rGrainsFlag = false;
+        boolean wGrainsFlag = true;
+        boolean rGrainsFlag = true;
         boolean vegetableFlag = false;
         boolean fruitsFlag = false;
         boolean juicesFlag = false;
@@ -91,7 +91,7 @@ public class DQISController {
 
         // populate the category-value map with the food item categories
         for (SysFoodRecommendation sysFoodItemRecommendation : SysFoodItemRecommendations) {
-            categoryValueMap.put(sysFoodItemRecommendation.getCategoryName(), 0.0);
+            categoryValueMap.put(sysFoodItemRecommendation.getCategoryName(), 5.0);
         }
 
         for (FoodItemInput foodItem : userChoices) {
@@ -115,496 +115,580 @@ public class DQISController {
                 String categoryName = sysFoodItemRecommendation.getCategoryName();
 
                 if (category.equalsIgnoreCase(categoryName)) {
-                    double currentPoints = 0;
-                    /* 
-                            if (foodItem.getServing() == null) {
-                            if (nutrientListID.equalsIgnoreCase("brea")) {
-                                breastMilkFlag = true;
-                            }
-                            if (nutrientListID.equalsIgnoreCase("chee")) {
-    
-                                currentPoints = (25.2 * foodItem.getFrequency() / 28.35);
-    
-                                if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
-                                    currentPoints = currentPoints / 7;
-                                }
-                                exclusivelyBreastfed = false;
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentPoints);
-                            } else if (nutrientListID.equalsIgnoreCase("yogu")) {
-    
-                                currentPoints = (113.4 * foodItem.getFrequency() / 28.35);
-    
-                                if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
-                                    currentPoints = currentPoints / 7;
-                                }
-                                exclusivelyBreastfed = false;
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentPoints);
-                            } else if (nutrientListID.equalsIgnoreCase("soyp")) {
-    
-                                currentPoints = (28.4 * foodItem.getFrequency() / 28.35);
-    
-                                if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
-                                    currentPoints = currentPoints / 7;
-                                }
-                                exclusivelyBreastfed = false;
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentPoints);
-                            } else if (nutrientListID.equalsIgnoreCase("icec")) {
-    
-                                currentPoints = (29.5 * foodItem.getFrequency() * Double.parseDouble(foodItem.getServing().split(" ")[0]) / 28.35); // 1 ice cream serving = 29.5 grams, defined by PO
-    
-                                if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
-                                    currentPoints = currentPoints / 7;
-                                }
-                                exclusivelyBreastfed = false;
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentPoints);
-                            } else if (nutrientListID.equalsIgnoreCase("brea")) {
-                                currentPoints = foodItem.getFrequency() * 3;
-                                if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
-                                    currentPoints /= 7;
-                                }
-                                formulaMilkAmount = currentPoints; // temporarily save bresatmilk amount here
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentPoints);
-                            } else {
-                                currentPoints = foodItem.getFrequency();
-                                if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
-                                    currentPoints = currentPoints / 7;
-                                }
-                                exclusivelyBreastfed = false;
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentPoints);
-                            }
-                        } else {
-                            if (nutrientListID.equalsIgnoreCase("pancrefi")) {
-    
-                                currentPoints = (45.8 * foodItem.getFrequency() * Double.parseDouble(foodItem.getServing().split(" ")[0]) / 28.35); // 1 refined pancake = 45.8 grams, defined by PO
-    
-                                if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
-                                    currentPoints = currentPoints / 7;
-                                }
-    
-                                exclusivelyBreastfed = false;
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentPoints);
-                            } else if (nutrientListID.equalsIgnoreCase("pancwhol")) {
-    
-                                currentPoints = (49.7 * foodItem.getFrequency() * Double.parseDouble(foodItem.getServing().split(" ")[0]) / 28.35); // 1 whole pancake = 49.7 grams, defined by PO
-    
-                                if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
-                                    currentPoints = currentPoints / 7;
-                                }
-                                exclusivelyBreastfed = false;
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentPoints);
-                            } else if (nutrientListID.equalsIgnoreCase("hone")) {
-    
-                                currentPoints = (0.5 * foodItem.getFrequency() * Double.parseDouble(foodItem.getServing().split(" ")[0])); //
-    
-                                if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
-                                    currentPoints = currentPoints / 7;
-                                }
-                                exclusivelyBreastfed = false;
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentPoints);
-                            } else if (nutrientListID.equalsIgnoreCase("cook")) {
-    
-                                currentPoints = (10.8 * foodItem.getFrequency() * Double.parseDouble(foodItem.getServing().split(" ")[0]) / 28.35); //
-    
-                                if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
-                                    currentPoints = currentPoints / 7;
-                                }
-                                exclusivelyBreastfed = false;
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentPoints);
-                            } else {
-                                currentPoints = (foodItem.getFrequency() * Double.parseDouble(foodItem.getServing().split(" ")[0])); //
-    
-                                if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
-                                    currentPoints = currentPoints / 7;
-                                }
-                                exclusivelyBreastfed = false;
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentPoints);
-                            }
-                        }
-                    }
-                }
-            } */
-                    
-                if (infantAge > 0 && infantAge < 6) {
+                    double currentPoints = 60;
+                    /*
+                     * if (foodItem.getServing() == null) {
+                     * if (nutrientListID.equalsIgnoreCase("brea")) {
+                     * breastMilkFlag = true;
+                     * }
+                     * if (nutrientListID.equalsIgnoreCase("chee")) {
+                     * 
+                     * currentPoints = (25.2 * foodItem.getFrequency() / 28.35);
+                     * 
+                     * if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
+                     * currentPoints = currentPoints / 7;
+                     * }
+                     * exclusivelyBreastfed = false;
+                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) +
+                     * currentPoints);
+                     * } else if (nutrientListID.equalsIgnoreCase("yogu")) {
+                     * 
+                     * currentPoints = (113.4 * foodItem.getFrequency() / 28.35);
+                     * 
+                     * if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
+                     * currentPoints = currentPoints / 7;
+                     * }
+                     * exclusivelyBreastfed = false;
+                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) +
+                     * currentPoints);
+                     * } else if (nutrientListID.equalsIgnoreCase("soyp")) {
+                     * 
+                     * currentPoints = (28.4 * foodItem.getFrequency() / 28.35);
+                     * 
+                     * if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
+                     * currentPoints = currentPoints / 7;
+                     * }
+                     * exclusivelyBreastfed = false;
+                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) +
+                     * currentPoints);
+                     * } else if (nutrientListID.equalsIgnoreCase("icec")) {
+                     * 
+                     * currentPoints = (29.5 * foodItem.getFrequency() *
+                     * Double.parseDouble(foodItem.getServing().split(" ")[0]) / 28.35); // 1 ice
+                     * cream serving = 29.5 grams, defined by PO
+                     * 
+                     * if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
+                     * currentPoints = currentPoints / 7;
+                     * }
+                     * exclusivelyBreastfed = false;
+                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) +
+                     * currentPoints);
+                     * } else if (nutrientListID.equalsIgnoreCase("brea")) {
+                     * currentPoints = foodItem.getFrequency() * 3;
+                     * if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
+                     * currentPoints /= 7;
+                     * }
+                     * formulaMilkAmount = currentPoints; // temporarily save bresatmilk amount here
+                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) +
+                     * currentPoints);
+                     * } else {
+                     * currentPoints = foodItem.getFrequency();
+                     * if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
+                     * currentPoints = currentPoints / 7;
+                     * }
+                     * exclusivelyBreastfed = false;
+                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) +
+                     * currentPoints);
+                     * }
+                     * } else {
+                     * if (nutrientListID.equalsIgnoreCase("pancrefi")) {
+                     * 
+                     * currentPoints = (45.8 * foodItem.getFrequency() *
+                     * Double.parseDouble(foodItem.getServing().split(" ")[0]) / 28.35); // 1
+                     * refined pancake = 45.8 grams, defined by PO
+                     * 
+                     * if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
+                     * currentPoints = currentPoints / 7;
+                     * }
+                     * 
+                     * exclusivelyBreastfed = false;
+                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) +
+                     * currentPoints);
+                     * } else if (nutrientListID.equalsIgnoreCase("pancwhol")) {
+                     * 
+                     * currentPoints = (49.7 * foodItem.getFrequency() *
+                     * Double.parseDouble(foodItem.getServing().split(" ")[0]) / 28.35); // 1 whole
+                     * pancake = 49.7 grams, defined by PO
+                     * 
+                     * if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
+                     * currentPoints = currentPoints / 7;
+                     * }
+                     * exclusivelyBreastfed = false;
+                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) +
+                     * currentPoints);
+                     * } else if (nutrientListID.equalsIgnoreCase("hone")) {
+                     * 
+                     * currentPoints = (0.5 * foodItem.getFrequency() *
+                     * Double.parseDouble(foodItem.getServing().split(" ")[0])); //
+                     * 
+                     * if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
+                     * currentPoints = currentPoints / 7;
+                     * }
+                     * exclusivelyBreastfed = false;
+                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) +
+                     * currentPoints);
+                     * } else if (nutrientListID.equalsIgnoreCase("cook")) {
+                     * 
+                     * currentPoints = (10.8 * foodItem.getFrequency() *
+                     * Double.parseDouble(foodItem.getServing().split(" ")[0]) / 28.35); //
+                     * 
+                     * if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
+                     * currentPoints = currentPoints / 7;
+                     * }
+                     * exclusivelyBreastfed = false;
+                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) +
+                     * currentPoints);
+                     * } else {
+                     * currentPoints = (foodItem.getFrequency() *
+                     * Double.parseDouble(foodItem.getServing().split(" ")[0])); //
+                     * 
+                     * if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
+                     * currentPoints = currentPoints / 7;
+                     * }
+                     * exclusivelyBreastfed = false;
+                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) +
+                     * currentPoints);
+                     * }
+                     * }
+                     * }
+                     * }
+                     * }
+                     */
+
+                    if (infantAge > 0 && infantAge < 6) {
                         // Milk
                         if (nutrientListID.equalsIgnoreCase("brea")) {
-                            currentPoints += 15;
-                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 15);
+                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 10);
                         }
                         // Grains
-                        if (nutrientListID.equalsIgnoreCase("cerewhol")) {
-                            wGrainsFlag = true;
-                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 1);
+                        if (category.equalsIgnoreCase("Whole Grains") && !(wGrainsFlag) ) {
+                            wGrainsFlag = false;
+                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) - 5);
                         }
-                        if ( categoryName.equalsIgnoreCase("Grains") && !wGrainsFlag){
-                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 2);
+                        if (category.equalsIgnoreCase("Refined Grains")&& !(rGrainsFlag)) {
+                            rGrainsFlag = false;
+                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) - 5);
                         }
-                        if (nutrientListID.equalsIgnoreCase("cererefi")) {
-                            rGrainsFlag = true;
-                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 0);
-                        }
-                        if ( categoryName.equalsIgnoreCase("Grains") && !rGrainsFlag){
-                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName)+ 4);
-                        }
-                        
+
                         // Proteins
-                        if (categoryName.equalsIgnoreCase("proteins") && !wGrainsFlag) {
-                            currentPoints += 5;
-                            proteinFlag= true;
-                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 5);
+                        if (categoryName.equalsIgnoreCase("Proteins")&& !(proteinFlag)) {
+                            currentPoints -= 5;
+                            proteinFlag = false;
+                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) -5);
 
                         }
                         // Vegetables
-                        if (categoryName.equalsIgnoreCase("vegetables") && !vegetableFlag) {
-                            currentPoints += 5;
+                        if (categoryName.equalsIgnoreCase("vegetables") && !(vegetableFlag)) {
+                            currentPoints -= 5;
                             vegetableFlag = true;
-                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentPoints);
+                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) -5);
                         }
                         // Fruits
-                        if (categoryName.equalsIgnoreCase("Fruits") && !fruitsFlag) {
-                            currentPoints += 5;
+                        if (categoryName.equalsIgnoreCase("Fruits")&& !(fruitsFlag)) {
+                            currentPoints -= 5;
                             fruitsFlag = true;
-                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentPoints);
+                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) -5);
                         }
                         // 100% Juices
-                        if (categoryName.equalsIgnoreCase("100% Juices") && !juicesFlag) {
-                            currentPoints += 5;
+                        if (categoryName.equalsIgnoreCase("100% Juices") && !(juicesFlag)) {
+                            currentPoints -= 5;
                             juicesFlag = true;
-                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentPoints);
+                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) -5);
                         }
                         // Sugary Beverages
-                        if (categoryName.equalsIgnoreCase("Sugary Beverages")&& !sBeveragesFlag) {
-                            currentPoints += 5;
+                        if (categoryName.equalsIgnoreCase("Sugary Beverages") && !(sBeveragesFlag)){
+                            currentPoints -= 5;
                             sBeveragesFlag = true;
-                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentPoints);
+                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) -5);
                         }
                         // Sweets
-                        if (categoryName.equalsIgnoreCase("Sweets")&& !sweetsFlag) {
-                            currentPoints += 5;
+                        if (categoryName.equalsIgnoreCase("Sweets")&& !(sweetsFlag)) {
+                            currentPoints -= 5;
                             sweetsFlag = true;
-                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentPoints);
+                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) -5);
                         }
                         // Salty snacks
-                        if (categoryName.equalsIgnoreCase("Salty Snacks")&& !snacksFlag) {
-                            currentPoints += 5;
+                        if (categoryName.equalsIgnoreCase("Salty Snacks")  && !(snacksFlag)) {
+                            currentPoints -= 5;
                             snacksFlag = true;
-                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentPoints);
+                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) -5);
                         }
 
                     }
+
+                    if (infantAge >= 6 && infantAge <= 12) {
+                        // Milk
+                        if (nutrientListID.equalsIgnoreCase("brea")) {
+                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 10);
+                        }
+                        // Grains
+                        if (category.equalsIgnoreCase("Whole Grains") && !(wGrainsFlag) ) {
+                            wGrainsFlag = false;
+                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) - 5);
+                        }
+                        if (category.equalsIgnoreCase("Refined Grains")&& !(rGrainsFlag)) {
+                            rGrainsFlag = false;
+                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) - 5);
+                        }
+
+                        // Proteins
+                        if (categoryName.equalsIgnoreCase("Proteins")&& !(proteinFlag)) {
+                            currentPoints -= 5;
+                            proteinFlag = false;
+                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) -5);
+
+                        }
+                        // Vegetables
+                        if (categoryName.equalsIgnoreCase("vegetables") && !(vegetableFlag)) {
+                            currentPoints -= 5;
+                            vegetableFlag = true;
+                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) -5);
+                        }
+                        // Fruits
+                        if (categoryName.equalsIgnoreCase("Fruits")&& !(fruitsFlag)) {
+                            currentPoints -= 5;
+                            fruitsFlag = true;
+                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) -5);
+                        }
+                        // 100% Juices
+                        if (categoryName.equalsIgnoreCase("100% Juices") && !(juicesFlag)) {
+                            currentPoints -= 5;
+                            juicesFlag = true;
+                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) -5);
+                        }
+                        // Sugary Beverages
+                        if (categoryName.equalsIgnoreCase("Sugary Beverages") && !(sBeveragesFlag)){
+                            currentPoints -= 5;
+                            sBeveragesFlag = true;
+                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) -5);
+                        }
+                        // Sweets
+                        if (categoryName.equalsIgnoreCase("Sweets")&& !(sweetsFlag)) {
+                            currentPoints -= 5;
+                            sweetsFlag = true;
+                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) -5);
+                        }
+                        // Salty snacks
+                        if (categoryName.equalsIgnoreCase("Salty Snacks")  && !(snacksFlag)) {
+                            currentPoints -= 5;
+                            snacksFlag = true;
+                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) -5);
+                        }
                 }
             }
         }
-                    
 
-                    /*
-                     * if (infantAge >= 6 && infantAge < 12) {
-                     * // Milk
-                     * if (breastMilkConsumed > 0 && otherMilkConsumed == 0) {
-                     * dietQualityScore += 15;
-                     * } else if (breastMilkConsumed > 0) {
-                     * dietQualityScore += 5;
-                     * 
-                     * if (otherMilkConsumed > 0 && otherMilkConsumed <= 28) {
-                     * dietQualityScore += 5;
-                     * } else if (otherMilkConsumed > 28 && otherMilkConsumed <= 35) {
-                     * dietQualityScore += 2.5;
-                     * }
-                     * }
-                     * // Grains
-                     * if (wholeGrainConsumed > 0 && wholeGrainConsumed <= 3.5) {
-                     * dietQualityScore += 2.5;
-                     * } else if (wholeGrainConsumed > 3.5 && wholeGrainConsumed <= 8.0) {
-                     * dietQualityScore += 1.25;
-                     * }
-                     * 
-                     * if (refinedGrainConsumed >= 0 && refinedGrainConsumed <= 1.5) {
-                     * dietQualityScore += 2.5;
-                     * } else if (refinedGrainConsumed > 1.5 && refinedGrainConsumed <= 3.5) {
-                     * dietQualityScore += 1.25;
-                     * }
-                     * // Proteins
-                     * if (proteinConsumed > 0 && proteinConsumed <= 6.0) {
-                     * dietQualityScore += 5;
-                     * } else if (proteinConsumed > 6 && proteinConsumed <= 10) {
-                     * dietQualityScore += 2.5;
-                     * }
-                     * // Vegetables
-                     * if (vegetablesConsumed >= 2.0) {
-                     * dietQualityScore += 5;
-                     * } else if (vegetablesConsumed > 0 && vegetablesConsumed < 2.0) {
-                     * dietQualityScore += 2.5;
-                     * }
-                     * // Fruits
-                     * if (fruitsConsumed >= 2.0) {
-                     * dietQualityScore += 5;
-                     * } else if (fruitsConsumed > 0 && fruitsConsumed < 2.0) {
-                     * dietQualityScore += 2.5;
-                     * }
-                     * // 100% Juices
-                     * if (juiceConsumed == 0) {
-                     * dietQualityScore += 5;
-                     * } else if (juiceConsumed > 0 && juiceConsumed <= 6.0) {
-                     * dietQualityScore += 2.5;
-                     * }
-                     * // Sugary Beverages
-                     * if (sugaryBeveragesConsumed == 0) {
-                     * dietQualityScore += 5;
-                     * } else if (sugaryBeveragesConsumed > 0 && sugaryBeveragesConsumed <= 4.0) {
-                     * dietQualityScore += 2.5;
-                     * }
-                     * // Sweets
-                     * if (sweetsConsumed == 0) {
-                     * dietQualityScore += 5;
-                     * } else if (sweetsConsumed > 0 && sweetsConsumed <= 1.0) {
-                     * dietQualityScore += 2.5;
-                     * }
-                     * // Salty snacks
-                     * if (saltySnacksConsumed == 0) {
-                     * dietQualityScore += 5;
-                     * } else if (saltySnacksConsumed > 0 && saltySnacksConsumed <= 1.0) {
-                     * dietQualityScore += 2.5;
-                     * }
-                     * }
-                     * 
-                     * if (infantAge >= 12 && infantAge <= 36) {
-                     * // Milk
-                     * if (breastMilkConsumed > 0 && otherMilkConsumed == 0) {
-                     * dietQualityScore += 15;
-                     * } else if (breastMilkConsumed > 0) {
-                     * dietQualityScore += 5;
-                     * 
-                     * if (otherMilkConsumed > 0 && otherMilkConsumed <= 18) {
-                     * dietQualityScore += 5;
-                     * } else if (otherMilkConsumed > 18 && otherMilkConsumed <= 24) {
-                     * dietQualityScore += 2.5;
-                     * }
-                     * }
-                     * // Grains
-                     * if (wholeGrainConsumed > 0 && wholeGrainConsumed <= 5.5) {
-                     * dietQualityScore += 2.5;
-                     * } else if (wholeGrainConsumed > 5.5 && wholeGrainConsumed <= 8.0) {
-                     * dietQualityScore += 1.25;
-                     * }
-                     * 
-                     * if (refinedGrainConsumed >= 0 && refinedGrainConsumed <= 1.8) {
-                     * dietQualityScore += 2.5;
-                     * } else if (refinedGrainConsumed > 1.8 && refinedGrainConsumed <= 4.2) {
-                     * dietQualityScore += 1.25;
-                     * }
-                     * // Proteins
-                     * if (proteinConsumed > 0 && proteinConsumed <= 3.0) {
-                     * dietQualityScore += 5;
-                     * } else if (proteinConsumed > 3.0 && proteinConsumed <= 6.0) {
-                     * dietQualityScore += 2.5;
-                     * }
-                     * // Vegetables
-                     * if (vegetablesConsumed >= 8.0) {
-                     * dietQualityScore += 5;
-                     * } else if (vegetablesConsumed > 0 && vegetablesConsumed < 8.0) {
-                     * dietQualityScore += 2.5;
-                     * }
-                     * // Fruits
-                     * if (fruitsConsumed >= 8.0) {
-                     * dietQualityScore += 5;
-                     * } else if (fruitsConsumed > 0 && fruitsConsumed < 8.0) {
-                     * dietQualityScore += 2.5;
-                     * }
-                     * // 100% Juices
-                     * if (juiceConsumed >= 0 && juiceConsumed <= 4.0) {
-                     * dietQualityScore += 5;
-                     * } else if (juiceConsumed > 4.0 && juiceConsumed <= 6.0) {
-                     * dietQualityScore += 2.5;
-                     * }
-                     * // Sugary Beverages
-                     * if (sugaryBeveragesConsumed == 0) {
-                     * dietQualityScore += 5;
-                     * } else if (sugaryBeveragesConsumed > 0 && sugaryBeveragesConsumed <= 4.0) {
-                     * dietQualityScore += 2.5;
-                     * }
-                     * // Sweets
-                     * if (sweetsConsumed == 0) {
-                     * dietQualityScore += 5;
-                     * } else if (sweetsConsumed > 0 && sweetsConsumed <= 1.0) {
-                     * dietQualityScore += 2.5;
-                     * }
-                     * // Salty snacks
-                     * if (saltySnacksConsumed == 0) {
-                     * dietQualityScore += 5;
-                     * } else if (saltySnacksConsumed > 0 && saltySnacksConsumed <= 1.0) {
-                     * dietQualityScore += 2.5;
-                     * 
-                     * }
-                     * }
-                     * }
-                     *}
-                     
-*/
-                     for (SysFoodRecommendation sysFoodItemRecommendation : SysFoodItemRecommendations) {
+        /*
+         * if (infantAge >= 6 && infantAge < 12) {
+         * // Milk
+         * if (breastMilkConsumed > 0 && otherMilkConsumed == 0) {
+         * dietQualityScore += 15;
+         * } else if (breastMilkConsumed > 0) {
+         * dietQualityScore += 5;
+         * 
+         * if (otherMilkConsumed > 0 && otherMilkConsumed <= 28) {
+         * dietQualityScore += 5;
+         * } else if (otherMilkConsumed > 28 && otherMilkConsumed <= 35) {
+         * dietQualityScore += 2.5;
+         * }
+         * }
+         * // Grains
+         * if (wholeGrainConsumed > 0 && wholeGrainConsumed <= 3.5) {
+         * dietQualityScore += 2.5;
+         * } else if (wholeGrainConsumed > 3.5 && wholeGrainConsumed <= 8.0) {
+         * dietQualityScore += 1.25;
+         * }
+         * 
+         * if (refinedGrainConsumed >= 0 && refinedGrainConsumed <= 1.5) {
+         * dietQualityScore += 2.5;
+         * } else if (refinedGrainConsumed > 1.5 && refinedGrainConsumed <= 3.5) {
+         * dietQualityScore += 1.25;
+         * }
+         * // Proteins
+         * if (proteinConsumed > 0 && proteinConsumed <= 6.0) {
+         * dietQualityScore += 5;
+         * } else if (proteinConsumed > 6 && proteinConsumed <= 10) {
+         * dietQualityScore += 2.5;
+         * }
+         * // Vegetables
+         * if (vegetablesConsumed >= 2.0) {
+         * dietQualityScore += 5;
+         * } else if (vegetablesConsumed > 0 && vegetablesConsumed < 2.0) {
+         * dietQualityScore += 2.5;
+         * }
+         * // Fruits
+         * if (fruitsConsumed >= 2.0) {
+         * dietQualityScore += 5;
+         * } else if (fruitsConsumed > 0 && fruitsConsumed < 2.0) {
+         * dietQualityScore += 2.5;
+         * }
+         * // 100% Juices
+         * if (juiceConsumed == 0) {
+         * dietQualityScore += 5;
+         * } else if (juiceConsumed > 0 && juiceConsumed <= 6.0) {
+         * dietQualityScore += 2.5;
+         * }
+         * // Sugary Beverages
+         * if (sugaryBeveragesConsumed == 0) {
+         * dietQualityScore += 5;
+         * } else if (sugaryBeveragesConsumed > 0 && sugaryBeveragesConsumed <= 4.0) {
+         * dietQualityScore += 2.5;
+         * }
+         * // Sweets
+         * if (sweetsConsumed == 0) {
+         * dietQualityScore += 5;
+         * } else if (sweetsConsumed > 0 && sweetsConsumed <= 1.0) {
+         * dietQualityScore += 2.5;
+         * }
+         * // Salty snacks
+         * if (saltySnacksConsumed == 0) {
+         * dietQualityScore += 5;
+         * } else if (saltySnacksConsumed > 0 && saltySnacksConsumed <= 1.0) {
+         * dietQualityScore += 2.5;
+         * }
+         * }
+         * 
+         * if (infantAge >= 12 && infantAge <= 36) {
+         * // Milk
+         * if (breastMilkConsumed > 0 && otherMilkConsumed == 0) {
+         * dietQualityScore += 15;
+         * } else if (breastMilkConsumed > 0) {
+         * dietQualityScore += 5;
+         * 
+         * if (otherMilkConsumed > 0 && otherMilkConsumed <= 18) {
+         * dietQualityScore += 5;
+         * } else if (otherMilkConsumed > 18 && otherMilkConsumed <= 24) {
+         * dietQualityScore += 2.5;
+         * }
+         * }
+         * // Grains
+         * if (wholeGrainConsumed > 0 && wholeGrainConsumed <= 5.5) {
+         * dietQualityScore += 2.5;
+         * } else if (wholeGrainConsumed > 5.5 && wholeGrainConsumed <= 8.0) {
+         * dietQualityScore += 1.25;
+         * }
+         * 
+         * if (refinedGrainConsumed >= 0 && refinedGrainConsumed <= 1.8) {
+         * dietQualityScore += 2.5;
+         * } else if (refinedGrainConsumed > 1.8 && refinedGrainConsumed <= 4.2) {
+         * dietQualityScore += 1.25;
+         * }
+         * // Proteins
+         * if (proteinConsumed > 0 && proteinConsumed <= 3.0) {
+         * dietQualityScore += 5;
+         * } else if (proteinConsumed > 3.0 && proteinConsumed <= 6.0) {
+         * dietQualityScore += 2.5;
+         * }
+         * // Vegetables
+         * if (vegetablesConsumed >= 8.0) {
+         * dietQualityScore += 5;
+         * } else if (vegetablesConsumed > 0 && vegetablesConsumed < 8.0) {
+         * dietQualityScore += 2.5;
+         * }
+         * // Fruits
+         * if (fruitsConsumed >= 8.0) {
+         * dietQualityScore += 5;
+         * } else if (fruitsConsumed > 0 && fruitsConsumed < 8.0) {
+         * dietQualityScore += 2.5;
+         * }
+         * // 100% Juices
+         * if (juiceConsumed >= 0 && juiceConsumed <= 4.0) {
+         * dietQualityScore += 5;
+         * } else if (juiceConsumed > 4.0 && juiceConsumed <= 6.0) {
+         * dietQualityScore += 2.5;
+         * }
+         * // Sugary Beverages
+         * if (sugaryBeveragesConsumed == 0) {
+         * dietQualityScore += 5;
+         * } else if (sugaryBeveragesConsumed > 0 && sugaryBeveragesConsumed <= 4.0) {
+         * dietQualityScore += 2.5;
+         * }
+         * // Sweets
+         * if (sweetsConsumed == 0) {
+         * dietQualityScore += 5;
+         * } else if (sweetsConsumed > 0 && sweetsConsumed <= 1.0) {
+         * dietQualityScore += 2.5;
+         * }
+         * // Salty snacks
+         * if (saltySnacksConsumed == 0) {
+         * dietQualityScore += 5;
+         * } else if (saltySnacksConsumed > 0 && saltySnacksConsumed <= 1.0) {
+         * dietQualityScore += 2.5;
+         * 
+         * }
+         * }
+         * }
+         * }
+         * 
+         */
+        for (SysFoodRecommendation sysFoodItemRecommendation : SysFoodItemRecommendations) {
 
-                        FoodCategoryRecommendation foodItemRec = new FoodCategoryRecommendation();
-                        foodItemRec.setCategoryName(sysFoodItemRecommendation.getCategoryName());
-                        foodItemRec.setLabel("");
-                        calculatedPoints = categoryValueMap.get(sysFoodItemRecommendation.getCategoryName());
-                        // 2/20/2022 WENJIA update
-                        // SET breastMilkFlag
-                        // if the baby is taking breast milk, then the calculated amount should be the standard amount
-                        // 4/18/2022 wenjia update
-                        // add new logic: if a baby is having formula more than the maximum of standdard, ex. 6 month baby is having formula > 28.9
-                        // then the total number of milk = formula + breastmilk + cow milk
-                        double recommendAmount = setCalculatedAmountForBreastMilk(infantAge);
-                        formulaMilkAmount = calculatedPoints - formulaMilkAmount;
-                        if (breastMilkFlag && sysFoodItemRecommendation.getCategoryName().equalsIgnoreCase("Breastmilk/Formula/Cows Milk/Other milks") && formulaMilkAmount <= recommendAmount) {
-                            foodItemRec.setCalculatedAmount(recommendAmount);
-                            labelAdequate = true;
-                        } else {
-                            foodItemRec.setCalculatedAmount(calculatedPoints);
-                        }
-                        if (infantAge >= 0 && infantAge <= 5) {
-                            ageRange = "0-5";
-                        } else if (infantAge >= 6 && infantAge <= 12) {
-                            ageRange = "6-12";
-                        } else if (infantAge >= 13 && infantAge <= 24) {
-                            ageRange = "13-24";
-                        } else
-                            throw new Exception("There are no recommendations available for infants of age over 24 months");
-            
-                        List<FoodRecommendationRange> rangeList = sysFoodItemRecommendation.getRecommendationsByAge().get(ageRange);
-            
-                        boolean notFound = true;
-                        double compareValue = Math.floor(foodItemRec.getCalculatedAmount() * 10) / 10.0;
-                        //compareValue is used to account for the grey areas in the payload. it rounds down the calculated amount to 1 decimal place
-                        //so all food categories will get a proper label
-                        for (FoodRecommendationRange range : rangeList) {
-                            if (compareValue >= range.getFrom() && compareValue <= range.getTo() && notFound) {
-                                //if statement checks first to see if exclusively breastfed is true. if so, it will manually make the label 'adequate'
-                                //since babies that are exclusively breastfed are always getting adequate milk according to the PO
-                                if (exclusivelyBreastfed && (sysFoodItemRecommendation.getCategoryName().equalsIgnoreCase("Breastmilk/Formula/Cows Milk/Other milks")) || labelAdequate) {
-                                    foodItemRec.setLabel("Adequate");
-                                } else {
-                                    foodItemRec.setLabel(range.getLabel());
-                                }
-                                foodItemRec.setRangeFrom(range.getFrom());
-                                foodItemRec.setRangeTo(range.getTo());
-                                notFound = false;
-                            }
-                        }
-                        dqis.getFoodCategoryRecList().add(foodItemRec);
+            FoodCategoryRecommendation foodItemRec = new FoodCategoryRecommendation();
+            foodItemRec.setCategoryName(sysFoodItemRecommendation.getCategoryName());
+            foodItemRec.setLabel("");
+            calculatedPoints = categoryValueMap.get(sysFoodItemRecommendation.getCategoryName());
+            // 2/20/2022 WENJIA update
+            // SET breastMilkFlag
+            // if the baby is taking breast milk, then the calculated amount should be the
+            // standard amount
+            // 4/18/2022 wenjia update
+            // add new logic: if a baby is having formula more than the maximum of
+            // standdard, ex. 6 month baby is having formula > 28.9
+            // then the total number of milk = formula + breastmilk + cow milk
+            double recommendAmount = setCalculatedAmountForBreastMilk(infantAge);
+            formulaMilkAmount = calculatedPoints - formulaMilkAmount;
+            if (breastMilkFlag && sysFoodItemRecommendation.getCategoryName().equalsIgnoreCase(
+                    "Breastmilk/Formula/Cows Milk/Other milks") && formulaMilkAmount <= recommendAmount) {
+                foodItemRec.setCalculatedAmount(recommendAmount);
+                labelAdequate = true;
+            } else {
+                foodItemRec.setCalculatedAmount(calculatedPoints);
+            }
+            if (infantAge >= 0 && infantAge <= 5) {
+                ageRange = "0-5";
+            } else if (infantAge >= 6 && infantAge <= 12) {
+                ageRange = "6-12";
+            } else if (infantAge >= 13 && infantAge <= 24) {
+                ageRange = "13-24";
+            } else
+                throw new Exception("There are no recommendations available for infants of age over 24 months");
+
+            List<FoodRecommendationRange> rangeList = sysFoodItemRecommendation.getRecommendationsByAge().get(ageRange);
+
+            boolean notFound = true;
+            double compareValue = Math.floor(foodItemRec.getCalculatedAmount() * 10) / 10.0;
+            // compareValue is used to account for the grey areas in the payload. it rounds
+            // down the calculated amount to 1 decimal place
+            // so all food categories will get a proper label
+            for (FoodRecommendationRange range : rangeList) {
+                if (compareValue >= range.getFrom() && compareValue <= range.getTo() && notFound) {
+                    // if statement checks first to see if exclusively breastfed is true. if so, it
+                    // will manually make the label 'adequate'
+                    // since babies that are exclusively breastfed are always getting adequate milk
+                    // according to the PO
+                    if (exclusivelyBreastfed && (sysFoodItemRecommendation.getCategoryName()
+                            .equalsIgnoreCase("Breastmilk/Formula/Cows Milk/Other milks")) || labelAdequate) {
+                        foodItemRec.setLabel("Adequate");
+                    } else {
+                        foodItemRec.setLabel(range.getLabel());
                     }
-                    return dqis;
+                    foodItemRec.setRangeFrom(range.getFrom());
+                    foodItemRec.setRangeTo(range.getTo());
+                    notFound = false;
                 }
-                
-                public static double setCalculatedAmountForBreastMilk(int babyAgeInMonth) {
-                    double oneMonthInfantBreastMilkVolume = 21.1;
-                    double twoMonthInfantBreastMilkVolume = 23.8;
-                    double threeMonthInfantBreastMilkVolume = 24.9;
-                    double fourMonthInfantBreastMilkVolume = 25.1;
-                    double fiveMonthInfantBreastMilkVolume = 25.9;
-                    double sixMonthInfantBreastMilkVolume = 24.7;
-                    double sevenMonthInfantBreastMilkVolume = 24.1;
-                    double eightMonthInfantBreastMilkVolume = 23.5;
-                    double nineMonthInfantBreastMilkVolume = 22.7;
-                    double tenMonthInfantBreastMilkVolume = 21.9;
-                    double elevenMonthInfantBreastMilkVolume = 21.0;
-                    double twelveMonthInfantBreastMilkVolume = 20.1;
-                    double thirteenMonthInfantBreastMilkVolume = 19.0;
-                    double fourteenMonthInfantBreastMilkVolume = 18.0;
-                    double fifteenMonthInfantBreastMilkVolume = 17.0;
-                    double sixteenMonthInfantBreastMilkVolume = 15.9;
-                    double seveteenMonthInfantBreastMilkVolume = 14.8;
-                    double eighteenMonthInfantBreastMilkVolume = 13.7;
-                    double nineteenMonthInfantBreastMilkVolume = 12.5;
-                    double twentyMonthInfantBreastMilkVolume = 11.4;
-                    double twentyoneMonthInfantBreastMilkVolume = 10.2;
-                    double twentytwoMonthInfantBreastMilkVolume = 9.0;
-                    double twentythreeMonthInfantBreastMilkVolume = 7.8;
-                    double twentyfourMonthInfantBreastMilkVolume = 6.6;
-            //		static final double ouncesToMilliliter = 29.5735;
-                    double finalAmount = 0.0;
-                    switch (babyAgeInMonth) {
-                        case 1:
-                            finalAmount = oneMonthInfantBreastMilkVolume;
-                            break;
-                        case 2:
-                            finalAmount = twoMonthInfantBreastMilkVolume;
-                            break;
-                        case 3:
-                            finalAmount = threeMonthInfantBreastMilkVolume;
-                            break;
-                        case 4:
-                            finalAmount = fourMonthInfantBreastMilkVolume;
-                            break;
-                        case 5:
-                            finalAmount = fiveMonthInfantBreastMilkVolume;
-                            break;
-                        case 6:
-                            finalAmount = sixMonthInfantBreastMilkVolume;
-                            break;
-                        case 7:
-                            finalAmount = sevenMonthInfantBreastMilkVolume;
-                            break;
-                        case 8:
-                            finalAmount = eightMonthInfantBreastMilkVolume;
-                            break;
-                        case 9:
-                            finalAmount = nineMonthInfantBreastMilkVolume;
-                            break;
-                        case 10:
-                            finalAmount = tenMonthInfantBreastMilkVolume;
-                            break;
-                        case 11:
-                            finalAmount = elevenMonthInfantBreastMilkVolume;
-                            break;
-                        case 12:
-                            finalAmount = twelveMonthInfantBreastMilkVolume;
-                            break;
-                        case 13:
-                            finalAmount = thirteenMonthInfantBreastMilkVolume;
-                            break;
-                        case 14:
-                            finalAmount = fourteenMonthInfantBreastMilkVolume;
-                            break;
-                        case 15:
-                            finalAmount = fifteenMonthInfantBreastMilkVolume;
-                            break;
-                        case 16:
-                            finalAmount = sixteenMonthInfantBreastMilkVolume;
-                            break;
-                        case 17:
-                            finalAmount = seveteenMonthInfantBreastMilkVolume;
-                            break;
-                        case 18:
-                            finalAmount = eighteenMonthInfantBreastMilkVolume;
-                            break;
-                        case 19:
-                            finalAmount = nineteenMonthInfantBreastMilkVolume;
-                            break;
-                        case 20:
-                            finalAmount = twentyMonthInfantBreastMilkVolume;
-                            break;
-                        case 21:
-                            finalAmount = twentyoneMonthInfantBreastMilkVolume;
-                            break;
-                        case 22:
-                            finalAmount = twentytwoMonthInfantBreastMilkVolume;
-                            break;
-                        case 23:
-                            finalAmount = twentythreeMonthInfantBreastMilkVolume;
-                            break;
-                        default:
-                            finalAmount = twentyfourMonthInfantBreastMilkVolume;
-                    }
-                    return finalAmount;
-                }
-            /*for (SysFoodRecommendation sysFoodItemRecommendation : SysFoodItemRecommendations) {
-                        FoodCategoryRecommendation foodItemRec = new FoodCategoryRecommendation();
-                        foodItemRec.setCategoryName(sysFoodItemRecommendation.getCategoryName());
-                        //foodItemRec.setLabel("");
-                        calculatedPoints = categoryValueMap.get(sysFoodItemRecommendation.getCategoryName());
-                        foodItemRec.setCalculatedAmount(calculatedPoints);
-
-                        dqis.getFoodCategoryRecList().add(foodItemRec);
-                        }            
-        
+            }
+            dqis.getFoodCategoryRecList().add(foodItemRec);
+        }
+    }
         return dqis;
-    }*/
-} 
+    }
+
+    public static double setCalculatedAmountForBreastMilk(int babyAgeInMonth) {
+        double oneMonthInfantBreastMilkVolume = 21.1;
+        double twoMonthInfantBreastMilkVolume = 23.8;
+        double threeMonthInfantBreastMilkVolume = 24.9;
+        double fourMonthInfantBreastMilkVolume = 25.1;
+        double fiveMonthInfantBreastMilkVolume = 25.9;
+        double sixMonthInfantBreastMilkVolume = 24.7;
+        double sevenMonthInfantBreastMilkVolume = 24.1;
+        double eightMonthInfantBreastMilkVolume = 23.5;
+        double nineMonthInfantBreastMilkVolume = 22.7;
+        double tenMonthInfantBreastMilkVolume = 21.9;
+        double elevenMonthInfantBreastMilkVolume = 21.0;
+        double twelveMonthInfantBreastMilkVolume = 20.1;
+        double thirteenMonthInfantBreastMilkVolume = 19.0;
+        double fourteenMonthInfantBreastMilkVolume = 18.0;
+        double fifteenMonthInfantBreastMilkVolume = 17.0;
+        double sixteenMonthInfantBreastMilkVolume = 15.9;
+        double seveteenMonthInfantBreastMilkVolume = 14.8;
+        double eighteenMonthInfantBreastMilkVolume = 13.7;
+        double nineteenMonthInfantBreastMilkVolume = 12.5;
+        double twentyMonthInfantBreastMilkVolume = 11.4;
+        double twentyoneMonthInfantBreastMilkVolume = 10.2;
+        double twentytwoMonthInfantBreastMilkVolume = 9.0;
+        double twentythreeMonthInfantBreastMilkVolume = 7.8;
+        double twentyfourMonthInfantBreastMilkVolume = 6.6;
+        // static final double ouncesToMilliliter = 29.5735;
+        double finalAmount = 0.0;
+        switch (babyAgeInMonth) {
+            case 1:
+                finalAmount = oneMonthInfantBreastMilkVolume;
+                break;
+            case 2:
+                finalAmount = twoMonthInfantBreastMilkVolume;
+                break;
+            case 3:
+                finalAmount = threeMonthInfantBreastMilkVolume;
+                break;
+            case 4:
+                finalAmount = fourMonthInfantBreastMilkVolume;
+                break;
+            case 5:
+                finalAmount = fiveMonthInfantBreastMilkVolume;
+                break;
+            case 6:
+                finalAmount = sixMonthInfantBreastMilkVolume;
+                break;
+            case 7:
+                finalAmount = sevenMonthInfantBreastMilkVolume;
+                break;
+            case 8:
+                finalAmount = eightMonthInfantBreastMilkVolume;
+                break;
+            case 9:
+                finalAmount = nineMonthInfantBreastMilkVolume;
+                break;
+            case 10:
+                finalAmount = tenMonthInfantBreastMilkVolume;
+                break;
+            case 11:
+                finalAmount = elevenMonthInfantBreastMilkVolume;
+                break;
+            case 12:
+                finalAmount = twelveMonthInfantBreastMilkVolume;
+                break;
+            case 13:
+                finalAmount = thirteenMonthInfantBreastMilkVolume;
+                break;
+            case 14:
+                finalAmount = fourteenMonthInfantBreastMilkVolume;
+                break;
+            case 15:
+                finalAmount = fifteenMonthInfantBreastMilkVolume;
+                break;
+            case 16:
+                finalAmount = sixteenMonthInfantBreastMilkVolume;
+                break;
+            case 17:
+                finalAmount = seveteenMonthInfantBreastMilkVolume;
+                break;
+            case 18:
+                finalAmount = eighteenMonthInfantBreastMilkVolume;
+                break;
+            case 19:
+                finalAmount = nineteenMonthInfantBreastMilkVolume;
+                break;
+            case 20:
+                finalAmount = twentyMonthInfantBreastMilkVolume;
+                break;
+            case 21:
+                finalAmount = twentyoneMonthInfantBreastMilkVolume;
+                break;
+            case 22:
+                finalAmount = twentytwoMonthInfantBreastMilkVolume;
+                break;
+            case 23:
+                finalAmount = twentythreeMonthInfantBreastMilkVolume;
+                break;
+            default:
+                finalAmount = twentyfourMonthInfantBreastMilkVolume;
+        }
+        return finalAmount;
+    }
+    /*
+     * for (SysFoodRecommendation sysFoodItemRecommendation :
+     * SysFoodItemRecommendations) {
+     * FoodCategoryRecommendation foodItemRec = new FoodCategoryRecommendation();
+     * foodItemRec.setCategoryName(sysFoodItemRecommendation.getCategoryName());
+     * //foodItemRec.setLabel("");
+     * calculatedPoints =
+     * categoryValueMap.get(sysFoodItemRecommendation.getCategoryName());
+     * foodItemRec.setCalculatedAmount(calculatedPoints);
+     * 
+     * dqis.getFoodCategoryRecList().add(foodItemRec);
+     * }
+     * 
+     * return dqis;
+     * }
+     */
+}
