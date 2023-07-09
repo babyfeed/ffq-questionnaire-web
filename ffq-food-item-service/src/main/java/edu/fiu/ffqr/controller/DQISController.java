@@ -61,8 +61,8 @@ public class DQISController {
         Double calculatedPoints = 0.0;
         boolean breastMilkFlag = false; // set breastMilkFlag, if baby is taking breast milk, true
         boolean proteinFlag = false;
-        boolean wGrainsFlag = true;
-        boolean rGrainsFlag = true;
+        boolean wGrainsFlag = false;
+        boolean rGrainsFlag = false;
         boolean vegetableFlag = false;
         boolean fruitsFlag = false;
         boolean juicesFlag = false;
@@ -252,18 +252,18 @@ public class DQISController {
                         }
                         // Grains
                         if (category.equalsIgnoreCase("Whole Grains") && !(wGrainsFlag) ) {
-                            wGrainsFlag = false;
+                            wGrainsFlag = true;
                             categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) - 5);
                         }
                         if (category.equalsIgnoreCase("Refined Grains")&& !(rGrainsFlag)) {
-                            rGrainsFlag = false;
+                            rGrainsFlag = true;
                             categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) - 5);
                         }
 
                         // Proteins
                         if (categoryName.equalsIgnoreCase("Proteins")&& !(proteinFlag)) {
                             currentPoints -= 5;
-                            proteinFlag = false;
+                            proteinFlag = true;
                             categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) -5);
 
                         }
@@ -305,8 +305,11 @@ public class DQISController {
                         }
 
                     }
+                }
+            }
+        }
 
-                    if (infantAge >= 6 && infantAge <= 12) {
+                   /*  if (infantAge > 5 && infantAge < 11) {
                         // Milk
                         if (nutrientListID.equalsIgnoreCase("brea")) {
                             categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 10);
@@ -511,6 +514,7 @@ public class DQISController {
          * }
          * 
          */
+        
         for (SysFoodRecommendation sysFoodItemRecommendation : SysFoodItemRecommendations) {
 
             FoodCategoryRecommendation foodItemRec = new FoodCategoryRecommendation();
@@ -569,7 +573,6 @@ public class DQISController {
             }
             dqis.getFoodCategoryRecList().add(foodItemRec);
         }
-    }
         return dqis;
     }
 
