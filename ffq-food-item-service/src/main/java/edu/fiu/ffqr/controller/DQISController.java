@@ -228,52 +228,65 @@ public class DQISController {
                         // Milk
                         if (nutrientListID.equalsIgnoreCase("brea")) {
                             currentPoints += 15;
-                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentPoints);
+                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 15);
                         }
                         // Grains
-                        if ((nutrientListID.equalsIgnoreCase("cerewhol"))) {
-                            currentPoints += 5;
-                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentPoints);
+                        if (nutrientListID.equalsIgnoreCase("cerewhol")) {
+                            wGrainsFlag = true;
+                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 1);
                         }
-
-                        if ((nutrientListID.equalsIgnoreCase("cererefi"))) {
-                            currentPoints += 5;
-                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentPoints);
+                        if ( categoryName.equalsIgnoreCase("Grains") && !wGrainsFlag){
+                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 2);
                         }
+                        if (nutrientListID.equalsIgnoreCase("cererefi")) {
+                            rGrainsFlag = true;
+                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 0);
+                        }
+                        if ( categoryName.equalsIgnoreCase("Grains") && !rGrainsFlag){
+                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName)+ 4);
+                        }
+                        
                         // Proteins
-                        if (categoryName.equalsIgnoreCase("proteins")) {
+                        if (categoryName.equalsIgnoreCase("proteins") && !wGrainsFlag) {
                             currentPoints += 5;
-                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentPoints);
+                            proteinFlag= true;
+                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 5);
 
                         }
                         // Vegetables
-                        if (categoryName.equalsIgnoreCase("vegetables")) {
+                        if (categoryName.equalsIgnoreCase("vegetables") && !vegetableFlag) {
                             currentPoints += 5;
+                            vegetableFlag = true;
                             categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentPoints);
                         }
                         // Fruits
-                        if (categoryName.equalsIgnoreCase("Fruits")) {
+                        if (categoryName.equalsIgnoreCase("Fruits") && !fruitsFlag) {
                             currentPoints += 5;
+                            fruitsFlag = true;
                             categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentPoints);
                         }
                         // 100% Juices
-                        if (categoryName.equalsIgnoreCase("100% Juices")) {
+                        if (categoryName.equalsIgnoreCase("100% Juices") && !juicesFlag) {
                             currentPoints += 5;
+                            juicesFlag = true;
                             categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentPoints);
                         }
                         // Sugary Beverages
-                        if (categoryName.equalsIgnoreCase("Sugary Beverages")) {
+                        if (categoryName.equalsIgnoreCase("Sugary Beverages")&& !sBeveragesFlag) {
                             currentPoints += 5;
+                            sBeveragesFlag = true;
                             categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentPoints);
                         }
                         // Sweets
-                        if (categoryName.equalsIgnoreCase("Sweets")) {
+                        if (categoryName.equalsIgnoreCase("Sweets")&& !sweetsFlag) {
                             currentPoints += 5;
+                            sweetsFlag = true;
                             categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentPoints);
                         }
                         // Salty snacks
-                        if (categoryName.equalsIgnoreCase("Salty Snacks")) {
+                        if (categoryName.equalsIgnoreCase("Salty Snacks")&& !snacksFlag) {
                             currentPoints += 5;
+                            snacksFlag = true;
                             categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentPoints);
                         }
 
