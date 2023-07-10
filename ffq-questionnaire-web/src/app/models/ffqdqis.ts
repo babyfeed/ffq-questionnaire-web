@@ -13,12 +13,12 @@ export class FFQDQIS {
   
   export class Recommendation {
     categoryName: string;
-    calculatedPoints: number;
+    calculatedAmount: number;
   
-    constructor(categoryName: string, calculatedPoints: number) {
+    constructor(categoryName: string, calculatedAmount: number) {
       this.categoryName = categoryName;
      
-      this.calculatedPoints = calculatedPoints;
+      this.calculatedAmount = calculatedAmount;
     }
   }
   

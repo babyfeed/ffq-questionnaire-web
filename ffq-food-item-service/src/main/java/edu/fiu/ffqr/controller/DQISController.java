@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import edu.fiu.ffqr.models.DQISCategory;
 import edu.fiu.ffqr.models.FoodCategoryRecommendation;
 import edu.fiu.ffqr.models.FoodItem;
 
@@ -248,354 +249,13 @@ public class DQISController {
                                     currentTotal);
                         }
                     }
-                    if (infantAge > 0 && infantAge < 6) {
-                        if (category.equalsIgnoreCase("Proteins") && (currentTotal == 0.0)) {
-                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 5);
-                        } else {
-                            categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName));
-                        }
-                    }
-                    /*
-                     * if (infantAge > 5 && infantAge < 12) {
-                     * // Milk
-                     * if (category.equalsIgnoreCase("Breastmilk/Formula/Cows Milk/Other milks")) {
-                     * if (!nutrientListID.equalsIgnoreCase("brea")) {
-                     * otherMilkFlag = true;
-                     * }
-                     * if (otherMilkFlag && breastMilkFlag && !enteredPartial) { // partial
-                     * enteredPartial = true;
-                     * if (currentTotal > 0.0 && currentTotal <= 28.0) {
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName),
-                     * currentTotal);
-                     * } else if (currentTotal > 28.0 && currentTotal <= 35.0) {
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName),
-                     * 7.5);
-                     * } else if (currentTotal == 0 || currentTotal > 35.0) {
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName),
-                     * 5.0);
-                     * }
-                     * } else if (otherMilkFlag && !breastMilkFlag && !enteredOther) { // other
-                     * enteredOther = true;
-                     * if (currentTotal > 0.0 && currentTotal <= 28.0) {
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName),
-                     * 5.0);
-                     * } else if (currentTotal > 28.0 && currentTotal <= 35.0) {
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName),
-                     * 2.5);
-                     * } else if (currentTotal == 0 || currentTotal > 35.0) {
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName),
-                     * 0.0);
-                     * }
-                     * } else if (exclusivelyBreastfed && !otherMilkFlag && !enteredPartial) { //
-                     * breast
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName),
-                     * 15.0);
-                     * enteredBreast = true;
-                     * }
-                     * }
-                     * 
-                     * // Whole Grains
-                     * if (category.equalsIgnoreCase("Whole Grains") && !(wGrainsFlag)) {
-                     * wGrainsFlag = true;
-                     * if ((currentTotal >= 0.1 && currentTotal <= 3.5)) {
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName),
-                     * 2.5);
-                     * 
-                     * } else if (category.equalsIgnoreCase("Whole Grains")
-                     * && (currentTotal >= 3.6 && currentTotal <= 8.0)) {
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName),
-                     * 1.25);
-                     * } else if (category.equalsIgnoreCase("Whole Grains")
-                     * && (currentTotal == 0 || currentTotal > 8.0)) {
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName),
-                     * 0.0);
-                     * }
-                     * }
-                     * // Refined Grains
-                     * if (category.equalsIgnoreCase("Refined Grains") && !(rGrainsFlag)) {
-                     * rGrainsFlag = true;
-                     * if ((currentTotal >= 0.0 && currentTotal <= 1.5)) {
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName),
-                     * 2.5);
-                     * } else if ((currentTotal >= 1.6 && currentTotal <= 3.5)) {
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName),
-                     * 1.25);
-                     * } else if ((currentTotal > 3.5)) {
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName),
-                     * 0.0);
-                     * }
-                     * }
-                     * // Proteins
-                     * if (category.equalsIgnoreCase("Proteins") && !(proteinFlag)) {
-                     * proteinFlag = true;
-                     * if ((currentTotal > 0.1 && currentTotal <= 6.0)) {
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) +
-                     * 5.0);
-                     * } else if ((currentTotal > 6.0 && currentTotal <= 10.0)) {
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) +
-                     * 2.5);
-                     * } else if ((currentTotal == 0.0 || currentTotal > 10.0)) {
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) +
-                     * 0);
-                     * }
-                     * }
-                     * // Vegetables
-                     * if (category.equalsIgnoreCase("Vegetables") && !(vegetableFlag)) {
-                     * vegetableFlag = true;
-                     * if ((currentTotal >= 2.0)) {
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) +
-                     * 5.0);
-                     * } else if ((currentTotal > 0.0 && currentTotal < 2.0)) {
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) +
-                     * 2.5);
-                     * } else if ((currentTotal == 0.0)) {
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) +
-                     * 0);
-                     * }
-                     * }
-                     * // Fruits
-                     * if (category.equalsIgnoreCase("Fruits") && !(fruitsFlag)) {
-                     * fruitsFlag = true;
-                     * if ((currentTotal >= 2.0)) {
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) +
-                     * 5.0);
-                     * } else if ((currentTotal > 0.0 && currentTotal < 2.0)) {
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) +
-                     * 2.5);
-                     * } else if ((currentTotal == 0.0)) {
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) +
-                     * 0);
-                     * }
-                     * }
-                     * // Juices
-                     * if (category.equalsIgnoreCase("100% Juices") && !(juicesFlag)) {
-                     * juicesFlag = true;
-                     * if ((currentTotal == 0.0)) {
-                     * //categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) -
-                     * 0);
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName),
-                     * currentTotal);
-                     * } else if ((currentTotal > 0.0 && currentTotal <= 6.0)) {
-                     * //categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) -
-                     * 2.5);
-                     * categoryValueMap.replace(categoryName,
-                     * categoryValueMap.get(categoryName),currentTotal);
-                     * } else if ((currentTotal > 6.0)) {
-                     * //categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) -
-                     * 5);
-                     * categoryValueMap.replace(categoryName,
-                     * categoryValueMap.get(categoryName),currentTotal);
-                     * }
-                     * }
-                     * // Sugary Bevs
-                     * if (category.equalsIgnoreCase("Sugary Beverages") && !(sBeveragesFlag)) {
-                     * sBeveragesFlag = true;
-                     * if ((currentTotal == 0.0)) {
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) -
-                     * 0);
-                     * } else if ((currentTotal > 0.0 && currentTotal <= 4.0)) {
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) -
-                     * 2.5);
-                     * } else if ((currentTotal > 4.0)) {
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) -
-                     * 5.0);
-                     * }
-                     * }
-                     * // Sweets
-                     * if (category.equalsIgnoreCase("Sweets") && !(sweetsFlag)) {
-                     * sweetsFlag = true;
-                     * if ((currentTotal == 0.0)) {
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) -
-                     * 5.0);
-                     * }
-                     * if (category.equalsIgnoreCase("Sweets") && (currentTotal > 0.0 &&
-                     * currentTotal <= 1.0)) {
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) -
-                     * 2.5);
-                     * 
-                     * } else if (category.equalsIgnoreCase("Sweets") && (currentTotal > 1.0)) {
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) -
-                     * 5.0);
-                     * 
-                     * }
-                     * }
-                     * // Salty Snacks
-                     * if (category.equalsIgnoreCase("Salty Snacks") && !(snacksFlag)) {
-                     * snacksFlag = true;
-                     * if ((currentTotal == 0.0)) {
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName),
-                     * 5.0);
-                     * } else if ((currentTotal > 0 && currentTotal <= 1.0)) {
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) -
-                     * 2.5);
-                     * } else if ((currentTotal > 1.0)) {
-                     * categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName),
-                     * 0.0);
-                     * }
-                     * }
-                     * }
-                     */
-                    /*if (infantAge >= 12 && infantAge <= 36) {
-                        // Milk
-                        if (category.equalsIgnoreCase("Breastmilk/Formula/Cows Milk/Other milks")) {
-                            if (!nutrientListID.equalsIgnoreCase("brea")) {
-                                otherMilkFlag = true;
-                            }
-                            if (otherMilkFlag && breastMilkFlag && !enteredPartial) { // partial
-                                enteredPartial = true;
-                                if (currentTotal > 0.0 && currentTotal <= 18.0) {
-                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName),
-                                            currentTotal);
-                                } else if (currentTotal > 18.0 && currentTotal <= 24.0) {
-                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName), 7.5);
-                                } else if (currentTotal == 0 || currentTotal > 24.0) {
-                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName), 5.0);
-                                }
-                            } else if (otherMilkFlag && !breastMilkFlag && !enteredOther) { // other
-                                enteredOther = true;
-                                if (currentTotal > 0.0 && currentTotal <= 18.0) {
-                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName), 5.0);
-                                } else if (currentTotal > 28.0 && currentTotal <= 24.0) {
-                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName), 2.5);
-                                } else if (currentTotal == 0 || currentTotal > 24.0) {
-                                    categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName), 0.0);
-                                }
-                            } else if (exclusivelyBreastfed && !otherMilkFlag && !enteredPartial) { // breast
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName), 15.0);
-                                enteredBreast = true;
-                            }
-                        }
-
-                        // Whole Grains
-                        if (category.equalsIgnoreCase("Whole Grains")) {
-                            wGrainsFlag = true;
-                            if ((currentTotal >= 0.1 && currentTotal < 5.6)) {
-                                // categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName),
-                                // 2.5);
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName),
-                                        currentTotal);
-                            } else if (category.equalsIgnoreCase("Whole Grains")
-                                    && (currentTotal > 5.6 && currentTotal < 8.1)) {
-                                // categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName),
-                                // 1.25);
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName),
-                                        currentTotal);
-                            } else if (category.equalsIgnoreCase("Whole Grains")
-                                    && (currentTotal == 0 || currentTotal > 8.0)) {
-                                // categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName),
-                                // 0.0);
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName),
-                                        currentTotal);
-                            }
-                        }
-                        // Refined Grains
-                        if (category.equalsIgnoreCase("Refined Grains")) {
-                            rGrainsFlag = true;
-                            if ((currentTotal >= 0.0 && currentTotal < 1.9)) {
-                                // categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName),
-                                // 2.5);
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName),
-                                        currentTotal);
-                            } else if ((currentTotal >= 1.9 && currentTotal < 4.3)) {
-                                // categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName),
-                                // 1.25);
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName),
-                                        currentTotal);
-                            } else if ((currentTotal > 4.2)) {
-                                // categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName),
-                                // 0.0);
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName),
-                                        currentTotal);
-                            }
-                        }
-                        // Proteins
-                        if (category.equalsIgnoreCase("Proteins") && !(proteinFlag)) {
-                            proteinFlag = true;
-                            if ((currentTotal > 0.01 && currentTotal < 3.1)) {
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 5.0);
-                            } else if ((currentTotal > 3.1 && currentTotal < 6.1)) {
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 2.5);
-                            } else if ((currentTotal == 0.0 || currentTotal > 6.0)) {
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 0);
-                            }
-                        }
-                        // Vegetables
-                        if (category.equalsIgnoreCase("Vegetables") && !(vegetableFlag)) {
-                            vegetableFlag = true;
-                            if ((currentTotal >= 8.0)) {
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 5.0);
-                            } else if ((currentTotal > 0.1 && currentTotal < 8.0)) {
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 2.5);
-                            } else if ((currentTotal == 0.0)) {
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 0);
-                            }
-                        }
-                        // Fruits
-                        if (category.equalsIgnoreCase("Fruits") && !(fruitsFlag)) {
-                            fruitsFlag = true;
-                            if ((currentTotal >= 8.0)) {
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 5.0);
-                            } else if ((currentTotal > 0.0 && currentTotal < 8.0)) {
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 2.5);
-                            } else if ((currentTotal == 0.0)) {
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + 0);
-                            }
-                        }
-                        // Juices
-                        if (category.equalsIgnoreCase("100% Juices") && !(juicesFlag)) {
-                            juicesFlag = true;
-                            if ((currentTotal == 0.0) || currentTotal <= 4.0) {
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) - 0);
-                            } else if ((currentTotal > 4.1 && currentTotal <= 6.0)) {
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) - 2.5);
-                            } else if ((currentTotal > 6.0)) {
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) - 5);
-                            }
-                        }
-                        // Sugary Bevs
-                        if (category.equalsIgnoreCase("Sugary Beverages") && !(sBeveragesFlag)) {
-                            sBeveragesFlag = true;
-                            if ((currentTotal == 0.0)) {
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) - 0);
-                            } else if ((currentTotal > 0.0 && currentTotal <= 4.0)) {
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) - 2.5);
-                            } else if ((currentTotal > 4.0)) {
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) - 5.0);
-                            }
-                        }
-                        // Sweets
-                        if (category.equalsIgnoreCase("Sweets") && !(sweetsFlag)) {
-                            sweetsFlag = true;
-                            if ((currentTotal == 0.0)) {
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) - 5.0);
-                            }
-                            if (category.equalsIgnoreCase("Sweets") && (currentTotal > 0.0 && currentTotal <= 1.0)) {
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) - 2.5);
-
-                            } else if (category.equalsIgnoreCase("Sweets") && (currentTotal > 1.0)) {
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) - 5.0);
-
-                            }
-                        }
-                        // Salty Snacks
-                        if (category.equalsIgnoreCase("Salty Snacks") && !(snacksFlag)) {
-                            snacksFlag = true;
-                            if ((currentTotal == 0.0)) {
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName), 5.0);
-                            } else if ((currentTotal > 0 && currentTotal <= 1.0)) {
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) - 2.5);
-                            } else if ((currentTotal > 1.0)) {
-                                categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName), 0.0);
-                            }
-                        }
-                    }*/
                 } // end of main if
             } // end of loop
         }
         for (SysFoodRecommendation sysFoodItemRecommendation : SysFoodItemRecommendations) {
             String categoryName = sysFoodItemRecommendation.getCategoryName();
 
-            FoodCategoryRecommendation foodItemRec = new FoodCategoryRecommendation();
+            DQISCategory foodItemRec = new DQISCategory();
             foodItemRec.setCategoryName(sysFoodItemRecommendation.getCategoryName());
             foodItemRec.setLabel("");
             calculatedAmount = categoryValueMap.get(sysFoodItemRecommendation.getCategoryName());
@@ -627,13 +287,16 @@ public class DQISController {
                     if (otherMilkFlag && breastMilkFlag && !enteredPartial) { // partial
                         enteredPartial = true;
                             foodItemRec.setCalculatedAmount(15.0);
+                            totalPoints += 15.0;
                         }
                     else if (otherMilkFlag && !breastMilkFlag && !enteredOther) { // other
                         enteredOther = true;
                             foodItemRec.setCalculatedAmount(5.0);
+                            totalPoints += 5.0;
                         }
                     else if (exclusivelyBreastfed && !otherMilkFlag && !enteredPartial) { // breast
                         foodItemRec.setCalculatedAmount(15.0);
+                        totalPoints += 15.0;
                         enteredBreast = true;
                     }
                 }
@@ -641,6 +304,7 @@ public class DQISController {
                     wGrainsFlag = true;
                     if ((foodItemRec.getCalculatedAmount() == 0.00)) {
                         foodItemRec.setCalculatedAmount(5.0);
+                        totalPoints += 5.0;
                     }
                     else{
                         foodItemRec.setCalculatedAmount(0.0);
@@ -650,6 +314,7 @@ public class DQISController {
                     rGrainsFlag = true;
                     if ((foodItemRec.getCalculatedAmount() == 0.00)) {
                         foodItemRec.setCalculatedAmount(5.0);
+                        totalPoints += 5.0;
                     }
                     else{
                         foodItemRec.setCalculatedAmount(0.0);
@@ -981,12 +646,10 @@ public class DQISController {
                     if ((foodItemRec.getCalculatedAmount() == 0.00)) {
                         foodItemRec.setCalculatedAmount(5.0);
                     }
-                    if (category.equalsIgnoreCase("Sweets")
-                            && (foodItemRec.getCalculatedAmount() > 0.00 && foodItemRec.getCalculatedAmount() <= 1.0)) {
+                    if ((foodItemRec.getCalculatedAmount() > 0.00 && foodItemRec.getCalculatedAmount() <= 1.0)) {
                         foodItemRec.setCalculatedAmount(2.5);
 
-                    } else if (category.equalsIgnoreCase("Sweets") &&
-                            (foodItemRec.getCalculatedAmount() > 1.00)) {
+                    } else if ((foodItemRec.getCalculatedAmount() > 1.00)) {
                         foodItemRec.setCalculatedAmount(0.0);
                     }
                 }
@@ -1003,6 +666,7 @@ public class DQISController {
                     }
                 }
             }
+            foodItemRec.setTotalPoints(totalPoints);
             if (infantAge >= 0 && infantAge <= 5) {
                 ageRange = "0-5";
             } else if (infantAge >= 6 && infantAge <= 12) {

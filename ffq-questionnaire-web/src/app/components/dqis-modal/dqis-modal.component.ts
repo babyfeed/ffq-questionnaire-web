@@ -49,6 +49,16 @@ export class DQISModalComponent {
       },
     );
   }
+  calculateTotalPoints(): number {
+    let totalPoints = 0;
+    for (const result of this.dqis) {
+      for (const food of result.foodCategoryRecList) {
+        totalPoints += food.calculatedAmount;
+      }
+    }
+    return totalPoints;
+  }
+
 
   color(label: string) {
     let colorLabel;

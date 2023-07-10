@@ -16,9 +16,10 @@ public class DQIS implements Serializable {
 	@JsonProperty("patientAge")
 	int patientAgeInMonths;	
 	@JsonProperty("foodCategoryRecList")
-	List <FoodCategoryRecommendation> foodCategoryRecList;
+	List <DQISCategory> foodCategoryRecList;
 	@JsonProperty("gender")
 	String gender;
+	@JsonProperty
 	double points;
 
 	public DQIS() {
@@ -49,7 +50,7 @@ public class DQIS implements Serializable {
 		this.gender = gender;
 	}
 	
-	public List<FoodCategoryRecommendation> getFoodCategoryRecList() {
+	public List<DQISCategory> getFoodCategoryRecList() {
 		return foodCategoryRecList;
 	}
 	public double getPoints(){
@@ -59,7 +60,7 @@ public class DQIS implements Serializable {
 		this.points = points;
 	}
 
-	public void setFoodCategoryRecList(List<FoodCategoryRecommendation> foodCategoryRecList) {
+	public void setFoodCategoryRecList(List<DQISCategory> foodCategoryRecList) {
 		this.foodCategoryRecList = foodCategoryRecList;
 	}
 }
