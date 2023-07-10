@@ -4,6 +4,7 @@ import * as XLSX from 'xlsx';
 
 import {FFQResultsResponse} from 'src/app/models/ffqresultsresponse';
 import {FoodRecommendationsService} from 'src/app/services/food-recommendation-service/food-recommendations.service';
+import { DQISService } from '../dqis-service/dqis.service';
 import {FFQFoodRecommendations} from 'src/app/models/ffqfood-recommendations';
 import {createHostListener} from '@angular/compiler/src/core';
 import {FFQParent} from "../../models/ffqparent";
@@ -19,6 +20,8 @@ export class ExportService {
     public foodRecommendationsService: FoodRecommendationsService
   ) {
   }
+
+  
 
   fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
   fileExtension = '.xlsx';
@@ -92,9 +95,10 @@ export class ExportService {
     const nutrients: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.getNutrientJson(results, parentList));
     const foodGroups: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.getFoodGroupsJson(results, parentList));
     const foods: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.getFoodsJson(results, parentList));
+    const dqis: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.getDQISJson(results, parentList))
     const wb: XLSX.WorkBook = {
-      Sheets: {Nutrients: nutrients, FoodGroups: foodGroups, Foods: foods},
-      SheetNames: ['Nutrients', 'FoodGroups', 'Foods']
+      Sheets: {Nutrients: nutrients, FoodGroups: foodGroups, Foods: foods, DQIS:dqis},
+      SheetNames: ['Nutrients', 'FoodGroups', 'Foods','DQIS']
     };
     const excelBuffer: any = XLSX.write(wb, {bookType: 'xlsx', type: 'array'});
     this.saveExcelFile(excelBuffer, fileName);
@@ -204,6 +208,37 @@ export class ExportService {
 
     return resultRows;
   }
+  
+  //DQIS JSON METHOD
+  private getDQISJson(results:FFQResultsResponse[], parentList: FFQParent[]): any {
+    var resultRows = [];
+
+    results.forEach(result => {
+
+      // Initialize columns with general result information
+      var resultCol = {
+        'Participant Username': parentList.find(parent => parent.userId === result.userId)?.username ?? "[not found]",
+        'Questionnaire ID': result.questionnaireId,
+        Date: result.date,
+        Name: result.patientName,
+        Age: result.ageInMonths
+      };
+
+      // Add columns with nurient data
+      result.foodRecList.forEach(res => {
+        res.foodCategoryRecList.forEach(dqis => {
+          resultCol[dqis.categoryName] = dqis.calculatedAmount.toFixed(2);
+        });
+      });
+
+      // Push columns to array of rows
+      resultRows.push(resultCol);
+
+    });
+
+    return resultRows;
+  }
+  
 
 
   public exportExcel(jsonData: any[], fileName: string): void {
