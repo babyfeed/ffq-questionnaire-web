@@ -394,7 +394,19 @@ public class DQISController {
             if (infantAge > 5 && infantAge < 12) {
                 if (sysFoodItemRecommendation.getCategoryName()
                         .equalsIgnoreCase("Breastmilk/Formula/Cows Milk/Other milks")) {
-                    if (!nutrientListID.equalsIgnoreCase("brea")) {
+                    if (nutrientListID.equalsIgnoreCase("form")) {
+                        otherMilkFlag = true;
+                    }
+                    if (nutrientListID.equalsIgnoreCase("milkcow")) {
+                        otherMilkFlag = true;
+                    }
+                    if (nutrientListID.equalsIgnoreCase("milkchoc")) {
+                        otherMilkFlag = true;
+                    }
+                    if (nutrientListID.equalsIgnoreCase("milkothe")) {
+                        otherMilkFlag = true;
+                    }
+                    if (nutrientListID.equalsIgnoreCase("pds")) {
                         otherMilkFlag = true;
                     }
                     if (otherMilkFlag && breastMilkFlag && !enteredPartial) { // partial
@@ -410,14 +422,14 @@ public class DQISController {
                     } else if (otherMilkFlag && !breastMilkFlag && !enteredOther) { // other
                         enteredOther = true;
                         if (foodItemRec.getCalculatedAmount() > 0.00 && foodItemRec.getCalculatedAmount() <= 28.0) {
-                            foodItemRec.setCalculatedAmount(2.00);
+                            foodItemRec.setCalculatedAmount(5.00);
                         } else if (foodItemRec.getCalculatedAmount() > 28.0
                                 && foodItemRec.getCalculatedAmount() <= 35.0) {
                             foodItemRec.setCalculatedAmount(2.5);
                         } else if (foodItemRec.getCalculatedAmount() == 0.00 || foodItemRec.getCalculatedAmount() > 35.0) {
                             foodItemRec.setCalculatedAmount(0.0);
                         }
-                    } else if (exclusivelyBreastfed && !otherMilkFlag && !enteredPartial) { // breast
+                    } else if (breastMilkFlag && !otherMilkFlag && !enteredPartial) { // breast
                         foodItemRec.setCalculatedAmount(15.0);
                         enteredBreast = true;
                     }
@@ -549,7 +561,7 @@ public class DQISController {
                     } else if (otherMilkFlag && !breastMilkFlag && !enteredOther) { // other
                         enteredOther = true;
                         if (foodItemRec.getCalculatedAmount() > 0.00 && foodItemRec.getCalculatedAmount() <= 18.0) {
-                            foodItemRec.setCalculatedAmount(2.00);
+                            foodItemRec.setCalculatedAmount(5.00);
                         } else if (foodItemRec.getCalculatedAmount() > 18.0
                                 && foodItemRec.getCalculatedAmount() <= 24.0) {
                             foodItemRec.setCalculatedAmount(2.5);
