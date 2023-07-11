@@ -179,7 +179,7 @@ export class ExportService {
   }
 
   private getFoodGroupsJson(results: FFQResultsResponse[], parentList: FFQParent[]): any {
-
+    
     // Array of rows of data
     var resultRows = [];
 
@@ -225,10 +225,13 @@ export class ExportService {
       };
 
       // Add columns with nurient data
-      result.foodRecList.forEach(res => {
+      let total: number = 0;
+      result.dqis.forEach(res => {
         res.foodCategoryRecList.forEach(dqis => {
           resultCol[dqis.categoryName] = dqis.calculatedAmount.toFixed(2);
+          total = total + +dqis.calculatedAmount;
         });
+        resultCol['TOTAL'] = total;
       });
 
       // Push columns to array of rows

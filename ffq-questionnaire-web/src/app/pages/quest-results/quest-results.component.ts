@@ -299,17 +299,28 @@ export class QuestResultsComponent implements OnInit {
 
   export() {
     this.exportService.exportFFQResults(this.results, this.ffqparentList, 'FFQ_Results');
+    
   }
 
   private setFoodList() {
     this.results.forEach(result => {
       const recommendedFood: FFQFoodRecommendations[] = [];
+      const dqisScore: FFQDQIS[] = [];
+
       this.foodRecommendationsService.getFoodRecommendationsByQuestionnaireId(result.questionnaireId).subscribe(
         data => {
           recommendedFood.push(data);
         },
       );
+      this.dqisService.getDQISByQuestionnaireId(result.questionnaireId).subscribe(
+        data => {
+          dqisScore.push(data);
+        },
+      );
       result.foodRecList = recommendedFood;
+      result.dqis = dqisScore;
+      
+
     });
   }
 
