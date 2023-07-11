@@ -62,6 +62,7 @@ public class DQISController {
         double totalPoints = 0.0;
         Double calculatedAmount = 0.0;
         boolean breastMilkFlag = false; // set breastMilkFlag, if baby is taking breast milk, true
+        boolean breastMilkCheck = false;
         boolean proteinFlag = false;
         boolean wGrainsFlag = false;
         boolean rGrainsFlag = false;
@@ -123,6 +124,21 @@ public class DQISController {
                 if (category.equalsIgnoreCase(categoryName)) {
                     double currentTotal = 0.0;
                     if (foodItem.getServing() == null) {
+                        if (nutrientListID.equalsIgnoreCase("form")) {
+                            otherMilkFlag = true;
+                        }
+                        if (nutrientListID.equalsIgnoreCase("milkcow")) {
+                            otherMilkFlag = true;
+                        }
+                        if (nutrientListID.equalsIgnoreCase("milkchoc")) {
+                            otherMilkFlag = true;
+                        }
+                        if (nutrientListID.equalsIgnoreCase("milkothe")) {
+                            otherMilkFlag = true;
+                        }
+                        if (nutrientListID.equalsIgnoreCase("pds")) {
+                            otherMilkFlag = true;
+                        }
                         if (nutrientListID.equalsIgnoreCase("chee")) {
 
                             currentTotal = (25.2 * foodItem.getFrequency() / 28.35);
@@ -186,6 +202,21 @@ public class DQISController {
                                     currentTotal);
                         }
                     } else {
+                        if (nutrientListID.equalsIgnoreCase("form")) {
+                            otherMilkFlag = true;
+                        }
+                        if (nutrientListID.equalsIgnoreCase("milkcow")) {
+                            otherMilkFlag = true;
+                        }
+                        if (nutrientListID.equalsIgnoreCase("milkchoc")) {
+                            otherMilkFlag = true;
+                        }
+                        if (nutrientListID.equalsIgnoreCase("milkothe")) {
+                            otherMilkFlag = true;
+                        }
+                        if (nutrientListID.equalsIgnoreCase("pds")) {
+                            otherMilkFlag = true;
+                        }
                         if (nutrientListID.equalsIgnoreCase("pancrefi")) {
 
                             currentTotal = (45.8 * foodItem.getFrequency()
@@ -519,13 +550,9 @@ public class DQISController {
                     sweetsFlag = true;
                     if ((foodItemRec.getCalculatedAmount() == 0.00)) {
                         foodItemRec.setCalculatedAmount(5.0);
-                    }
-                    if (category.equalsIgnoreCase("Sweets")
-                            && (foodItemRec.getCalculatedAmount() > 0.00 && foodItemRec.getCalculatedAmount() <= 1.0)) {
+                    } else if ((foodItemRec.getCalculatedAmount() > 0.00 && foodItemRec.getCalculatedAmount() <= 1.0)) {
                         foodItemRec.setCalculatedAmount(2.5);
-
-                    } else if (category.equalsIgnoreCase("Sweets") &&
-                            (foodItemRec.getCalculatedAmount() > 1.0)) {
+                    } else if ((foodItemRec.getCalculatedAmount() > 1.0)) {
                         foodItemRec.setCalculatedAmount(0.0);
 
                     }
@@ -543,13 +570,10 @@ public class DQISController {
                     }
                 }
             }
+            //System.out.print(nutrientListID + " ");
             if (infantAge >= 12 && infantAge <= 36) {
                 if (sysFoodItemRecommendation.getCategoryName().equalsIgnoreCase("Breastmilk/Formula/Cows Milk/Other milks")) {
-                    if (!nutrientListID.equalsIgnoreCase("brea")) {
-                        otherMilkFlag = true;
-                    }
-                    if (otherMilkFlag && breastMilkFlag && !enteredPartial) { // partial
-                        enteredPartial = true;
+                    if (otherMilkFlag && breastMilkFlag && !enteredPartial){ // partial
                         if (foodItemRec.getCalculatedAmount() > 0.00 && foodItemRec.getCalculatedAmount() <= 18.0) {
                             foodItemRec.setCalculatedAmount(10.0);
                         } else if (foodItemRec.getCalculatedAmount() > 18.0
@@ -568,7 +592,8 @@ public class DQISController {
                         } else if (foodItemRec.getCalculatedAmount() == 0.00 || foodItemRec.getCalculatedAmount() > 24.0) {
                             foodItemRec.setCalculatedAmount(0.0);
                         }
-                    } else if (exclusivelyBreastfed && !otherMilkFlag && !enteredPartial) { // breast
+                    } else if (breastMilkFlag && !otherMilkFlag && !enteredPartial) { // breast
+                        
                         foodItemRec.setCalculatedAmount(15.0);
                         enteredBreast = true;
                     }
@@ -658,7 +683,7 @@ public class DQISController {
                     if ((foodItemRec.getCalculatedAmount() == 0.00)) {
                         foodItemRec.setCalculatedAmount(5.0);
                     }
-                    if ((foodItemRec.getCalculatedAmount() > 0.00 && foodItemRec.getCalculatedAmount() <= 1.0)) {
+                    else if ((foodItemRec.getCalculatedAmount() > 0.00 && foodItemRec.getCalculatedAmount() <= 1.0)) {
                         foodItemRec.setCalculatedAmount(2.5);
 
                     } else if ((foodItemRec.getCalculatedAmount() > 1.00)) {
