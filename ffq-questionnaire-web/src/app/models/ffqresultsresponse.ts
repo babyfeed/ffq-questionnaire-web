@@ -14,6 +14,7 @@ export class FFQResultsResponse {
   showFeedback: boolean;
   gender: string;
   assignedClinicOrSiteId: string;
+  dqis: any;
   username?: string; // question mark means it's an optional parameter, here means it may not exist
   // userSearchName: string; // create userSearchName for clinian portal Questionnaire Results
 

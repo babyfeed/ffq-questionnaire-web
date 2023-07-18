@@ -9,8 +9,8 @@
       },
       "azureHosting": {
         "subscription": "2ff8158d-3d56-4949-921b-c10ff2c7470b",
-        "resourceGroupName": "ffq-questionnaire-web-static-deploy",
-        "account": "ffqquestionnairewestatic"
+        "resourceGroupName": "baby_feed",
+        "account": "babyfeedweb"
       }
     }
   ]
