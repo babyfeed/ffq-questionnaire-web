@@ -20,13 +20,16 @@
 }
 
 .home-component-container .homeitem-container:hover {
-    background-color: #B2B9E1;
-    color: #2C387E;
+    background-color: #ebecf2;
+    color: #edeef3;
 }
 
 .homeitem-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 
     background-color: #0039E6;
 
@@ -41,12 +44,15 @@
 .homeitem-container h1 {
     font-size: 1.5em;
     text-align: center;
+    color: #f3f3f3;
 }
 
 .homeitem-container p {
-    /* align-items: left !important; */
-    /* text-align: left; */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     font-size: 1em;
+    color: #fffcfc;
 }
 
 .homeitem-2-container {
@@ -57,12 +63,15 @@
 
 .homeitem-content {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     flex-direction: row;
 }
 
 .homeitem-title h1, .homeitem-title h2, .homeitem-title p {
     text-align: left;
-    color: aliceblue;
+    color: rgb(243, 246, 248);
 }
 
 .homeitem-title {
@@ -75,7 +84,7 @@
 }
 
 .homeitem-title h2 {
-    font-size: 2em;
+    font-size: 1.5em;
     line-height: .75em;
 }
 
@@ -101,6 +110,21 @@
     align-items: center;
 }
 
-.home-component-container a {
+.my-button {
+    margin: 0 10px;
+    background-color: #4CAF50; /* Green background color */
+    border: none; /* Remove border */
+    color: white; /* White text color */
+    padding: 14px 24px; /* Add padding */
+    text-align: center; /* Center text */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Make button inline */
+    font-size: 16px; /* Set font size */
+    font-weight: bold; /* Set font weight */
+    border-radius: 25px; /* Round edges */
+    transition: all 0.3s ease-in-out; /* Add hover effect */
+  }
 
-}
+  .my-button:hover {
+    background-color: #3e8e41; /* Darker green background color */
+  }

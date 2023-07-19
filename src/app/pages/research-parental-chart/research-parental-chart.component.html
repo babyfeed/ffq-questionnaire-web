@@ -1,10 +1,10 @@
-<app-parental-header></app-parental-header>
+<researchparental-header></researchparental-header>
 
 <div id="qb-container">
   <mat-card class="qb-card">
-    <mat-card-title> {{ "Growth Charts" | translate }} </mat-card-title>
+    <mat-card-title> {{ "Chart" | translate }} </mat-card-title>
     <mat-card-actions>
-      <button
+      <!--<button     //hide "help" button
         mat-icon-button
         class="help-button"
         cdkFocusInitial
@@ -17,7 +17,7 @@
         (click)="onHelp()"
       >
         {{ "Info" | translate }}
-      </button>
+      </button>-->
 
       <button
         mat-icon-button
@@ -33,7 +33,7 @@
       >
         {{ "En" | translate }}
       </button>
-      <button
+      <!--<button       //hide download button
         mat-icon-button
         class="download-button"
         cdkFocusInitial
@@ -46,7 +46,7 @@
         (click)="onDownloadSave()"
       >
         <mat-icon>download</mat-icon>
-      </button>
+      </button>-->
 
       <br />
       <br />
@@ -256,16 +256,16 @@
             {{ "Save" | translate }}
           </button>
         </mat-expansion-panel>
-        <mat-expansion-panel #chartOptionsPanel hideToggle>
+        <!--<mat-expansion-panel #chartOptionsPanel hideToggle>     
           <mat-expansion-panel-header>
-            <mat-panel-title>{{ "Chart Options" | translate }}</mat-panel-title>
+            <mat-panel-title>{{ "Chart Options" | translate }}</mat-panel-title> -->
             <!--<mat-panel-description
               >{{
                 "BMI, Height - Age, Weight - Age, and Weight - Height charts"
                   | translate
               }}.
             </mat-panel-description>-->
-          </mat-expansion-panel-header>
+         <!--</mat-expansion-panel-header>
           <p>{{ "Please select a chart option" | translate }}.</p>
           <form>
             <mat-button-toggle-group
@@ -275,7 +275,7 @@
               [disabled]="childPersonalInformationForm.invalid"
               [(ngModel)]="chosenChartOption"
               (change)="onTypeChartChange($event.value)"
-            >
+            >     -->
             <!----  
               <mat-button-toggle value="BMI">{{
                 "BMI" | translate
@@ -288,12 +288,12 @@
                 </mat-button-toggle>
               </mat-button-toggle>
               ---->
-              <mat-button-toggle value="Weight-Length"
+              <!--<mat-button-toggle value="Weight-Length"
                 >{{ "Weight-Length" | translate }}
               </mat-button-toggle>
             </mat-button-toggle-group>
           </form>
-        </mat-expansion-panel>
+        </mat-expansion-panel> -->
       </mat-accordion>
     </mat-card-actions>
   </mat-card>

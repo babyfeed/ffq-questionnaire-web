@@ -50,11 +50,11 @@
   width: 100%;
 }
 
-.chart-container {
+/*.chart-container {
   padding-left: 10px;
   padding-right: 10px;
   margin: 5% auto;
-}
+}*/
 
 .chart-title {
   text-align: center;
@@ -97,14 +97,14 @@ tr:hover {
   background-color: #ddd;
 }
 
-.message-box {
+/*.message-box {
   padding: 10px;
   border-radius: 5px;
   font-size: 16px;
   font-weight: bold;
 }
 
-.green {
+.green {  //hides color message
   background-color: #b4e8b4;
   color: #006400;
 }
@@ -117,4 +117,4 @@ tr:hover {
 .yellow {
   background-color: #fff2cc;
   color: #9f6000;
-}
+}*/

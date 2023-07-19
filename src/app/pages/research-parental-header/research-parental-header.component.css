@@ -46,7 +46,8 @@ body, html {
 }
 .tab-link:hover {
   background-color: #B2B9E1;
-  color: #2C387E;
+  /*color: #2C387E;*/
+  color: #0612ba;
   font-weight: bold;
 }
 
@@ -128,5 +129,11 @@ body, html {
 
 
   }
-
+  .center {
+    display: block;
+    margin:auto;  
+  }
+  .header-logo {
+    cursor: pointer;
+  }
 

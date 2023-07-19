@@ -29,6 +29,19 @@ import {FFQResearchInstitution} from '../../models/ffq-research-institution';
 import {ResearchInstitutionService} from '../../services/research-institution-service/research-institution-service';
 import {FFQClinicResponse} from '../../models/ffqclinic-response';
 import {FFQInstitution} from '../../models/ffqinstitution';
+import { DQISService } from 'src/app/services/dqis-service/dqis.service';
+import { FFQDQIS } from 'src/app/models/ffqdqis';
+import { DQISModalComponent } from 'src/app/components/dqis-modal/dqis-modal.component';
+
+window.addEventListener("load", () => {
+  const loader = document.querySelector(".loader");
+
+  loader.classList.add("loader--hidden");
+
+  loader.addEventListener("transitionend", () => {
+    document.body.removeChild(loader);
+  });
+});
 
 // Questionnaire reesults page added by Daykel Muro 09/30/2019
 @Component({
@@ -67,6 +80,7 @@ export class QuestResultsComponent implements OnInit {
   constructor(public resultsService: ResultsService, ////////////////////////////////////////
               public nutrientsRecommendationsService: NutrientsRecommendationsService,
               public foodRecommendationsService: FoodRecommendationsService,
+              public dqisService: DQISService,
               private parentService: ParentService,
               private participantService: ParticipantService,
               public foodDescriptionService: FoodDescriptionService,
@@ -244,6 +258,19 @@ export class QuestResultsComponent implements OnInit {
       }
     );
   }
+  private getDQIS(questionnaireId: string) {
+    this.dqisService.getDQISByQuestionnaireId(questionnaireId).subscribe(
+      data => {
+        this.onModalRequestDQIS(questionnaireId);
+      },
+      error => {
+        const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+        dialogRef.componentInstance.title = error.error.message;
+        dialogRef.componentInstance.router = this.router;
+      }
+    );
+  }
+
 
   onModalRequest(id: string): void {
     const modalRef = this.errorDialog.open(RecommendModalComponent);
@@ -259,20 +286,41 @@ export class QuestResultsComponent implements OnInit {
     });
     modalRef.componentInstance.id = id;
   }
+  onModalRequestDQIS(id: string): void {
+    console.log('this.breastMilkFlag');
+    const modalRef = this.errorDialog.open(DQISModalComponent, {
+      // the FoodRecommendModalComponent is independent component, in order to access the data which I can only get in current component,
+      // pass the data by this method
+      data: this.breastMilkFlag
+    });
+    modalRef.componentInstance.id = id;
+  }
+
 
   export() {
     this.exportService.exportFFQResults(this.results, this.ffqparentList, 'FFQ_Results');
+    
   }
 
   private setFoodList() {
     this.results.forEach(result => {
       const recommendedFood: FFQFoodRecommendations[] = [];
+      const dqisScore: FFQDQIS[] = [];
+
       this.foodRecommendationsService.getFoodRecommendationsByQuestionnaireId(result.questionnaireId).subscribe(
         data => {
           recommendedFood.push(data);
         },
       );
+      this.dqisService.getDQISByQuestionnaireId(result.questionnaireId).subscribe(
+        data => {
+          dqisScore.push(data);
+        },
+      );
       result.foodRecList = recommendedFood;
+      result.dqis = dqisScore;
+      
+
     });
   }
 

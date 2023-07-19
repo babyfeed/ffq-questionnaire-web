@@ -28,6 +28,7 @@ import { DeletePopupComponent } from "./components/delete-popup/delete-popup.com
 import { FlashMessagesModule } from "angular2-flash-messages";
 import { RecommendModalComponent } from "./components/recommend-modal/recommend-modal.component";
 import { FoodRecommendModalComponent } from "./components/food-recommend-modal/food-recommend-modal.component";
+import { DQISModalComponent } from "./components/dqis-modal/dqis-modal.component";
 import { FoodItemsTableComponent } from "./components/food-items-table/food-items-table.component";
 import { ClinicalPortalComponent } from "./pages/clinical-portal/clinical-portal.component";
 import { ClinicalHeaderComponent } from "./pages/clinical-header/clinical-header.component";
@@ -103,6 +104,7 @@ import { NgIdleKeepaliveModule } from "@ng-idle/keepalive";
 import { FeedingFrequencyComponent } from "./components/feeding-frequency/feeding-frequency.component";
 import { MatTableModule } from "@angular/material/table";
 import { GrowthChartsPageComponent } from "./pages/growth-charts-page/growth-charts-page.component";
+import { ResearchParentalChartComponent } from "./pages/research-parental-chart/research-parental-chart.component";
 import { NgxChartsModule } from "@swimlane/ngx-charts";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from "@angular/material/core";
@@ -112,7 +114,7 @@ import { InterpretationGrowthChartsDialogComponent } from "./components/interpre
 import { GrowthChartsHelpComponent } from "./components/growth-charts-help/growth-charts-help.component";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { HomePageComponent } from "./pages/home-page/home-page.component";
-import { OtherComponent } from './pages/other/other.component';
+import { EducationalResourcesComponent } from './pages/educational-resources/educational-resources.component';
 
 import { NgApexchartsModule } from "ng-apexcharts";
 
@@ -143,6 +145,7 @@ import { NgApexchartsModule } from "ng-apexcharts";
     PopupComponent,
     RecommendModalComponent,
     FoodRecommendModalComponent,
+    DQISModalComponent,
     FoodItemsTableComponent,
     ClinicalPortalComponent,
     ClinicalHeaderComponent,
@@ -185,10 +188,11 @@ import { NgApexchartsModule } from "ng-apexcharts";
     FeedingFrequencyComponent,
     ServingSizePicturesComponent,
     GrowthChartsPageComponent,
+    ResearchParentalChartComponent,
     InterpretationGrowthChartsDialogComponent,
     GrowthChartsHelpComponent,
     HomePageComponent,
-    OtherComponent
+    EducationalResourcesComponent
   ],
   imports: [
     BrowserModule,
@@ -247,6 +251,7 @@ import { NgApexchartsModule } from "ng-apexcharts";
     PopupComponent,
     RecommendModalComponent,
     FoodRecommendModalComponent,
+    DQISModalComponent,
     DeletePopupComponent,
     CreateParticipantModalComponent,
     FeedingFrequencyComponent,
