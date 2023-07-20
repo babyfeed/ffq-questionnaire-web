@@ -193,6 +193,9 @@
               <div class="col-2" style="text-align:center">
                 <label ><strong>Food Results</strong></label>
               </div>
+              <div class="col-2" style="text-align:center">
+                <label><strong>DQIS</strong></label>
+              </div>
             </div>
 
             <!--Questionnaire results-->
@@ -211,6 +214,9 @@
               </div>
               <div class="col-2" style="text-align:center; cursor:pointer">
                 <a (click)="getFoodRecommendations(byParticipantresult.questionnaireId)"><i title="fooditems" class="fa fa-cutlery"></i></a>
+              </div>
+              <div class="col" style="text-align:center; cursor:pointer">
+                <a (click)="getDQIS(byParticipantresult.questionnaireId)"><i title="dqis" class="fa fa-cutlery"></i></a>
               </div>
 
 
@@ -475,6 +481,9 @@
                 <div class="col-2" style="text-align:center">
                   <label><strong>Food Results</strong></label>
                 </div>
+                <div class="col-2" style="text-align:center">
+                  <label><strong>DQIS</strong></label>
+                </div>
               </div>
 
               <!--Questionnaire results-->
@@ -494,8 +503,10 @@
                 <div class="col-2" style="text-align:center; cursor:pointer">
                   <a (click)="getFoodRecommendations(result.questionnaireId)"><i title="fooditems" class="fa fa-cutlery"></i></a>
                 </div>
-
-
+                <div class="col" style="text-align:center; cursor:pointer">
+                  <a (click)="getDQIS(result.questionnaireId)"><i title="dqis" class="fa fa-cutlery"></i></a>
+                </div>
+                
                 <div class="col-12 offset-10">
                   <button mat-raised-button (click)="toggleParticipantResults(i)">
                      Results
