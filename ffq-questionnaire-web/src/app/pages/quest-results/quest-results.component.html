@@ -1,7 +1,7 @@
 <!--Questionnaire results added by Daykel Muro  on 09/30/2019 MOdified 10/13/2019-->
 <admin-header></admin-header>
 <div class="container_page">
-  <div class="loader"></div>
+  <div class="loader" *ngIf="show"></div>
     <div class="container" *ngIf="results.length === 0">
         <mat-card class="quest-id-card">
             <h2 matDialogTitle>{{'No questionnaires have been submitted yet' | translate}}</h2>
