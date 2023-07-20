@@ -9,6 +9,16 @@ import { FFQClinicResponse } from 'src/app/models/ffqclinic-response';
 import { ClinicService } from 'src/app/services/clinic/clinic-service';
 import { ExportService } from '../../services/export/export-service';
 
+window.addEventListener("load", () => {
+  const loader = document.querySelector(".loader");
+
+  loader.classList.add("loader--hidden");
+
+  loader.addEventListener("transitionend", () => {
+    document.body.removeChild(loader);
+  });
+});
+
 @Component({
   templateUrl: './admin-tracker-history.component.html',
   styleUrls: ['./admin-tracker-history.component.css']

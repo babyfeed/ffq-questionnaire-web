@@ -18,6 +18,16 @@ import {ClinicService} from 'src/app/services/clinic/clinic-service';
 import {TrackerParentResultsResponse} from 'src/app/models/ffqparentresulttracker';
 import { ExportService } from '../../services/export/export-service';
 
+window.addEventListener("load", () => {
+  const loader = document.querySelector(".loader");
+
+  loader.classList.add("loader--hidden");
+
+  loader.addEventListener("transitionend", () => {
+    document.body.removeChild(loader);
+  });
+});
+
 @Component({
   templateUrl: './clinic-tracker-history.component.html',
   styleUrls: ['./clinic-tracker-history.component.css']

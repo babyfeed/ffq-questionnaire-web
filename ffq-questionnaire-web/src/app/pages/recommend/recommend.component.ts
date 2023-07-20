@@ -6,18 +6,29 @@ import { Description } from 'src/app/models/ffqfooddescription';
 import { FoodDescriptionService } from 'src/app/services/food-description/food-description.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+window.addEventListener("load", () => {
+  const loader = document.querySelector(".loader");
+
+  loader.classList.add("loader--hidden");
+
+  loader.addEventListener("transitionend", () => {
+    document.body.removeChild(loader);
+  });
+});
+
 @Component({
   selector: 'app-recommend-parental',
   templateUrl: './recommend.component.html',
   styleUrls: ['./recommend.component.css']
 })
 
+
 export class RecommendComponent implements OnInit {
 
   showBracketFirst = true;
   showBracketSecond = false;
   showBracketThird = false;
-
+  
   results: Description[] = [];
   show: any = [];
   constructor(public foodDescriptionService: FoodDescriptionService) {}

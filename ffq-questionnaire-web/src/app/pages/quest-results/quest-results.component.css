@@ -12,7 +12,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #ffffff;
+  background: #ffffff00;
   transition: opacity 0.75s, visibility 0.75s;
 }
 

@@ -18,11 +18,23 @@ import {FoodRecommendModalComponent} from 'src/app/components/food-recommend-mod
 import {FoodRecommendationsService} from 'src/app/services/food-recommendation-service/food-recommendations.service';
 import {FoodDescriptionService} from 'src/app/services/food-description/food-description.service';
 
+window.addEventListener("load", () => {
+  const loader = document.querySelector(".loader");
+
+  loader.classList.add("loader--hidden");
+
+  loader.addEventListener("transitionend", () => {
+    document.body.removeChild(loader);
+  });
+});
+
 @Component({
   selector: 'app-history-parental',
   templateUrl: './history-parental.component.html',
   styleUrls: ['./history-parental.component.css']
 })
+
+
 
 export class HistoryParentalComponent implements OnInit {
   public show = false;

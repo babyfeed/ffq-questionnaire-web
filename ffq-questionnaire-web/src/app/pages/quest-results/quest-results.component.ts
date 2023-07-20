@@ -33,15 +33,7 @@ import { DQISService } from 'src/app/services/dqis-service/dqis.service';
 import { FFQDQIS } from 'src/app/models/ffqdqis';
 import { DQISModalComponent } from 'src/app/components/dqis-modal/dqis-modal.component';
 
-window.addEventListener("load", () => {
-  const loader = document.querySelector(".loader");
 
-  loader.classList.add("loader--hidden");
-
-  loader.addEventListener("transitionend", () => {
-    document.body.removeChild(loader);
-  });
-});
 
 // Questionnaire reesults page added by Daykel Muro 09/30/2019
 @Component({
@@ -328,3 +320,13 @@ export class QuestResultsComponent implements OnInit {
     return this.ffqparentList.find(parent => parent.userId === userId)?.username ?? "[not found]";
   }
 }
+
+window.addEventListener("load", () => {
+  const loader = document.querySelector(".loader");
+
+  loader.classList.add("loader--hidden");
+
+  loader.addEventListener("transitionend", () => {
+    document.body.removeChild(loader);
+  });
+});
