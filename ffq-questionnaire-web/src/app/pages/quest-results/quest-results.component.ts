@@ -34,18 +34,6 @@ import { FFQDQIS } from 'src/app/models/ffqdqis';
 import { DQISModalComponent } from 'src/app/components/dqis-modal/dqis-modal.component';
 
 
-window.addEventListener("load", () => {
-  const loader = document.querySelector(".loader");
-
-  loader.classList.add("loader--hidden");
-
-  loader.addEventListener("transitionend", () => {
-    const parentElement = loader.parentElement;
-    if (parentElement) {
-      parentElement.removeChild(loader);
-    }
-  });
-});
 // Questionnaire reesults page added by Daykel Muro 09/30/2019
 @Component({
   selector: 'app-quest-results',
