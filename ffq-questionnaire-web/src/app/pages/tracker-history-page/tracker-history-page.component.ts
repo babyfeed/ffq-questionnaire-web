@@ -13,16 +13,6 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 
-window.addEventListener("load", () => {
-  const loader = document.querySelector(".loader");
-
-  loader.classList.add("loader--hidden");
-
-  loader.addEventListener("transitionend", () => {
-    document.body.removeChild(loader);
-  });
-});
-
 @Component({
   selector: 'app-tracker-history-page',
   templateUrl: './tracker-history-page.component.html',
