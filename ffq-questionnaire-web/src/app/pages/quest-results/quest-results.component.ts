@@ -110,23 +110,8 @@ export class QuestResultsComponent implements OnInit {
     });
 
     this.getAllResults();
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationStart) {
-        // Show the loader when navigation starts
-        this.showLoader();
-      } else if (event instanceof NavigationEnd) {
-        // Hide the loader when navigation ends
-        this.hideLoader();
-      }
-    });
-  }
-  showLoader() {
-    this.show = true; // Or any other property you use to control the visibility of the loader in the template
-  }
-  
-  hideLoader() {
-    this.show = false; // Or set the property to false to hide the loader
-  }
+    ;}
+
 
   // (Khalid)Changed below code to sort the list in the nutient view page
   private getAllResults() {
