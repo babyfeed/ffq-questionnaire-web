@@ -24,6 +24,8 @@ import {FoodDescriptionService} from 'src/app/services/food-description/food-des
   styleUrls: ['./history-parental.component.css']
 })
 
+
+
 export class HistoryParentalComponent implements OnInit {
   public show = false;
   public showFeedback = false;

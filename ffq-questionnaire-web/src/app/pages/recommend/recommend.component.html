@@ -1,5 +1,4 @@
 <admin-header></admin-header>
-
 <div class="rec-container">
   <mat-card>
      <mat-radio-group aria-label="Select an option">
@@ -9,7 +8,7 @@
           <mat-radio-button (click)="showThird()" value="3">12 to 24 Months</mat-radio-button>
      </mat-radio-group>
   </mat-card>
-
+ 
   <mat-card *ngFor="let result of results; let i = index">
     <div class="item-container">
       <img class="image" src="{{result.imageUrl}}">
