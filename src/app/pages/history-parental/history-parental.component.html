@@ -1,12 +1,11 @@
 <app-parental-header></app-parental-header>
-
 <div class="container_page">
   <div class="container" *ngIf="results.length === 0">
     <mat-card class="quest-id-card">
       <h2 matDialogTitle>{{ 'No questionnaires have been submitted yet' | translate }}</h2>
     </mat-card>
   </div>
-
+  
   <div *ngFor="let result of results; let i = index">
     <div class="container">
       <mat-card class="quest-id-card">

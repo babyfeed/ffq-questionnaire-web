@@ -11,7 +11,7 @@ import {RecommendModalComponent} from 'src/app/components/recommend-modal/recomm
 import {MatDialog} from '@angular/material/dialog';
 import {NutrientsRecommendationsService} from 'src/app/services/nutrients-recommendations/nutrients-recommendations.service';
 import {ErrorDialogPopupComponent} from 'src/app/components/error-dialog-popup/error-dialog-popup.component';
-import {Router} from '@angular/router';
+import { Router, NavigationStart, NavigationEnd } from '@angular/router';
 import {FoodRecommendModalComponent} from 'src/app/components/food-recommend-modal/food-recommend-modal.component';
 import {FoodRecommendationsService} from 'src/app/services/food-recommendation-service/food-recommendations.service';
 import {FoodDescriptionService} from 'src/app/services/food-description/food-description.service';
@@ -33,15 +33,6 @@ import { DQISService } from 'src/app/services/dqis-service/dqis.service';
 import { FFQDQIS } from 'src/app/models/ffqdqis';
 import { DQISModalComponent } from 'src/app/components/dqis-modal/dqis-modal.component';
 
-window.addEventListener("load", () => {
-  const loader = document.querySelector(".loader");
-
-  loader.classList.add("loader--hidden");
-
-  loader.addEventListener("transitionend", () => {
-    document.body.removeChild(loader);
-  });
-});
 
 // Questionnaire reesults page added by Daykel Muro 09/30/2019
 @Component({
@@ -107,7 +98,8 @@ export class QuestResultsComponent implements OnInit {
     });
 
     this.getAllResults();
-  }
+    ;}
+
 
   // (Khalid)Changed below code to sort the list in the nutient view page
   private getAllResults() {
@@ -328,3 +320,4 @@ export class QuestResultsComponent implements OnInit {
     return this.ffqparentList.find(parent => parent.userId === userId)?.username ?? "[not found]";
   }
 }
+
