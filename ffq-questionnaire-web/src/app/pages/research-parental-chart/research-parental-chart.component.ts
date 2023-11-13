@@ -2,29 +2,29 @@
 author: Vladimir Chavez
 
 I will assume that every parent will have the following property: childrennames which cannot be empty or null, in case
-of being empty or null will give an error. To avoid this, it is necessary to add the capability of adding names of 
+of being empty or null will give an error. To avoid this, it is necessary to add the capability of adding names of
 children which is not implemented.
-This (childrennames) property will have the first name of all children of the current parent. I will add an 
+This (childrennames) property will have the first name of all children of the current parent. I will add an
 ArrayList of type Children to the db (database) to save the data to plot the growth charts
-, so the previous data needs to be modify later on. However, the implementation of the 
+, so the previous data needs to be modify later on. However, the implementation of the
 growth-chart tab will not give any error for missing the children property.
-the children property will be added once the data is saved. Children has the following structure 
+the children property will be added once the data is saved. Children has the following structure
 {name: string; childData:{weight: string; height: string; age: string} where the property
-name will be copied from the property childrennames to identify each child. In addition, 
-childData will be provided from the user input. 
+name will be copied from the property childrennames to identify each child. In addition,
+childData will be provided from the user input.
 
-To select a specific child a menu will show the children names of the property childrennames. 
+To select a specific child a menu will show the children names of the property childrennames.
 
-currentParent: FFQParentResponse <---> the data from current logged in parent 
+currentParent: FFQParentResponse <---> the data from current logged in parent
 will be retrieved from the db and saved to currentParent. method: ngOnInit(). FFQParentResponse is a class used to save
-the data to the db. That being said, the following case will be explained to clarify the use of the 
-ArrayList childrenList. For example, the childrennames has all the names of the parent's children while the arraylist 
+the data to the db. That being said, the following case will be explained to clarify the use of the
+ArrayList childrenList. For example, the childrennames has all the names of the parent's children while the arraylist
 children will have all the data of the parent's inputs. So, it might be possible that there are children
 that does not have any data saved in the children arraylist because the parent has not saved it yet,
-so it is easy to create a children list where all the children are created using the names of the 
-childrennames arraylist and the data from the arraylist children is mapped using the names. 
-Note that a parent cannot have two children with the same name otherwise will give errors, and childID will need to be 
-added. 
+so it is easy to create a children list where all the children are created using the names of the
+childrennames arraylist and the data from the arraylist children is mapped using the names.
+Note that a parent cannot have two children with the same name otherwise will give errors, and childID will need to be
+added.
 
 Hence, the childrenlist will have chidren without any data and children with data. Example:
 
@@ -56,31 +56,26 @@ Hence, the childrenlist will have chidren without any data and children with dat
   "_class": "edu.fiu.ffqr.models.Parent"
 }
 
+db
 
-{
-  "userId": "3",
-  "username": "FIU_1",
-  "userpassword": "parent1",
-  "usertype": "parent",
-  "firstname": "",
-  "lastname": "",
-  "assignedclinic": "2",
-  "assignedclinician": "2",
-  "childrennames": ["Abagail"],
-  "isactive": true,
-  "prefix": "FIU"
-}
-
-currentChild: FFQChildren <---> when a specific child is selected from the menu. the data of the child will be retrieved 
+currentChild: FFQChildren <---> when a specific child is selected from the menu. the data of the child will be retrieved
 from childList arraylist. method: onChildrenChange()
 
 
-childrenList: FFQChildren[] <---> contains all the children with or without data. For creating the childrenlist 
+childrenList: FFQChildren[] <---> contains all the children with or without data. For creating the childrenlist
 the names will be taken from childrennames and the data from the children arraylist.
- 
+
 
 */
 
+import {ExportService} from '../../services/export/export-service';
+import { DQISService } from 'src/app/services/dqis-service/dqis.service';
+import {FoodRecommendationsService} from 'src/app/services/food-recommendation-service/food-recommendations.service';
+import { FFQDQIS } from 'src/app/models/ffqdqis';
+import {FFQFoodRecommendations} from '../../models/ffqfood-recommendations';
+import {ResultsService} from 'src/app/services/results/results.service';
+import {NutrientConstants} from 'src/app/models/NutrientConstants';
+import {FFQResultsResponse} from 'src/app/models/ffqresultsresponse';
 import { Component, OnInit, ViewChild} from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { Observable } from "rxjs";
@@ -122,9 +117,9 @@ import {
 } from "ng-apexcharts";
 
 
-/* 
+/*
   The information needed to plot the charts are imported from the following directory:
-  assets/growth-charts-data/who 
+  assets/growth-charts-data/who
 
 */
 
@@ -228,7 +223,7 @@ export type ChartOptions = {
   legend: ApexLegend;
   title: ApexTitleSubtitle;
   annotations: ApexAnnotations;
-};  
+};
 
 @Component({
   selector: "app-research-parental-chart",
@@ -238,6 +233,12 @@ export type ChartOptions = {
 export class ResearchParentalChartComponent implements OnInit {
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
+
+  breastMilkFlag = [];
+
+  results: FFQResultsResponse[] = [];
+
+  participantResults: FFQResultsResponse[] = [];
 
 
   //who
@@ -325,18 +326,18 @@ export class ResearchParentalChartComponent implements OnInit {
   value = 65;
 
 
-  /* CHART UPDATE 8: Delete the following chart resources comment and replace it with the following comment 
-  providing resources about the new chart library 
+  /* CHART UPDATE 8: Delete the following chart resources comment and replace it with the following comment
+  providing resources about the new chart library
 
 
   charts options
   example: https://apexcharts.com/angular-chart-demos/
   documentation: https://apexcharts.com/docs/chart-types/area-chart/#
-  
+
   */
 
 
-  /* 
+  /*
   charts options
   example: https://swimlane.github.io/ngx-charts/#/ngx-charts/bar-vertical
   documentation: https://swimlane.gitbook.io/ngx-charts/
@@ -369,12 +370,12 @@ export class ResearchParentalChartComponent implements OnInit {
   yaxis: any;
 
   /* CHART UPDATE 9: Add the chart options to create the combo-area-line chart as done in Jada's dummy graph
-  
+
         Things to figure out related to this:
 
               - Will this code need to be in the constructor or outside of the constructor?
 
-              - How will we need to change the dummy example code to be able accept the values for the x-axis and 
+              - How will we need to change the dummy example code to be able accept the values for the x-axis and
                 y-axis chosen based on the units (kg & cm, kg & in, lbs & cm, or lbs & in) selected by the user
                 rather than using the hard-coded values for the x-axis and y-axis that appear in the dummy example
                 code (ex:   data: [44, 55, 31, 47, 31, 43, 26, 41, 31, 47, 33]  as in series with name Team A)?
@@ -384,7 +385,11 @@ export class ResearchParentalChartComponent implements OnInit {
     private participantService: ParticipantService,
     private authenticationService: AuthenticationService,
     private translate: TranslateService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    public resultsService: ResultsService,
+    public foodRecommendationsService: FoodRecommendationsService,
+    public dqisService: DQISService,
+    private exportService: ExportService
   ) {
     // assigns the data to be used on the charts
     Object.assign(this, {
@@ -447,7 +452,48 @@ export class ResearchParentalChartComponent implements OnInit {
       stroke: {
         show: false
       }
-    };    
+    };
+
+  }
+
+  private setFoodList() {
+    this.results.forEach(result => {
+      const recommendedFood: FFQFoodRecommendations[] = [];
+      const dqisScore: FFQDQIS[] = [];
+
+      this.foodRecommendationsService.getFoodRecommendationsByQuestionnaireId(result.questionnaireId).subscribe(
+        data => {
+          recommendedFood.push(data);
+        },
+      );
+      this.dqisService.getDQISByQuestionnaireId(result.questionnaireId).subscribe(
+        data => {
+          dqisScore.push(data);
+        },
+      );
+      result.foodRecList = recommendedFood;
+      result.dqis = dqisScore;
+
+
+    });
+  }
+
+  getAllDates() {
+
+    let indexes = 0;
+
+    let dates = []
+
+    for(let i = this.participantResults.length-1; i >= 0; i--) {
+
+        if(this.participantResults[i].patientName == this.currentParent.username) {
+          dates[indexes++] = this.participantResults[i].date;
+        }
+
+
+    }
+
+    return dates;
 
   }
 
@@ -536,10 +582,10 @@ export class ResearchParentalChartComponent implements OnInit {
     // if percentileDataCode = 3, then use BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM
 
     let i = 0;
-   
+
     let xLeft: number;
     let xRight: number;
-    
+
     do
     {
       xLeft = percentileData[0].data[i][0];
@@ -555,7 +601,7 @@ export class ResearchParentalChartComponent implements OnInit {
   checkIfPointInQuadrilateral(ptOfInterest: [number, number], upperLeftPt: [number, number], upperRightPt: [number, number],
     lowerLeftPt: [number, number], lowerRightPt: [number, number]) : number
   {
-    // prior to running this, ensure that the baby data point is within the x bounds of the 4 points of the quadrilateral passed to this function 
+    // prior to running this, ensure that the baby data point is within the x bounds of the 4 points of the quadrilateral passed to this function
 
     let baby_x = ptOfInterest[0];
     let baby_y = ptOfInterest[1];
@@ -566,7 +612,7 @@ export class ResearchParentalChartComponent implements OnInit {
     let lowerLeftPt_y = lowerLeftPt[1];
     let lowerRightPt_y = lowerRightPt[1];
 
-    if((baby_x >= left_x) && (baby_x <= right_x)) 
+    if((baby_x >= left_x) && (baby_x <= right_x))
     {
       // in x range of the quadrilateral
       let slopeUpperLine = (upperRightPt_y - upperLeftPt_y) / (right_x - left_x);
@@ -578,25 +624,25 @@ export class ResearchParentalChartComponent implements OnInit {
       let yIntLowerLine = lowerRightPt_y - (slopeLowerLine * right_x);
       let yLowerBound = (slopeLowerLine * baby_x) + yIntLowerLine;
 
-      if((baby_y <= yUpperBound) && (baby_y >= yLowerBound)) 
+      if((baby_y <= yUpperBound) && (baby_y >= yLowerBound))
       {
         // baby data point lies inside the quadrilateral
         return 1;
       }
 
-      else if(baby_y > yUpperBound) 
+      else if(baby_y > yUpperBound)
       {
         // baby data point lies above the quadrilateral
         return 2;
       }
 
-      else if(baby_y < yLowerBound) 
+      else if(baby_y < yLowerBound)
       {
         // baby data point lies below the quadrilateral
         return 3;
       }
 
-      else 
+      else
       {
         // unknown case
         return 0;
@@ -671,7 +717,7 @@ export class ResearchParentalChartComponent implements OnInit {
   }
 
   /*
-    Adds points to the charts. The points are saved using the metric system, 
+    Adds points to the charts. The points are saved using the metric system,
     so that is why the data is converted to the metric system. The WHO data is provided using the metric system.
     To plot the data with different units of measurements the data is converted from the metric system
     to us customary system in case of inches and pounds. After adding the data the method plottingData()
@@ -762,23 +808,23 @@ export class ResearchParentalChartComponent implements OnInit {
   /*
   It is easier to copy the data from the original charts and add all the data entered by
   the user than modify the data from the charts adding and updating the data entered by the user. In other words,
-  redoing the data using the original charts and the data from the current children (childdata) is easier than 
+  redoing the data using the original charts and the data from the current children (childdata) is easier than
   create a data a structure to handle the necessary changes. By question of time the data structure
-  is not implemented. The speed to process and handle the data is not significant in 
+  is not implemented. The speed to process and handle the data is not significant in
   the presented magnitud. However, an improvement can be avoid an intensive use of
   ram copying constantly the same data.
   */
   // plottingData() {
   //   let newResult = [];
 
-  //   /* depending on the type of charts we will choose the correct chart taking into 
+  //   /* depending on the type of charts we will choose the correct chart taking into
   //   account unit of measurements and gender */
   //   switch (this.currentGrowthChartData) {
   //     case GrowthChartData.BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM:
   //       if (this.currentChild.childData.length !== 0) {
-  //         /* 
+  //         /*
   //         the data needs to be copy using a deep copy method to avoid a reference
-  //         modification of the data by mistake 
+  //         modification of the data by mistake
   //         */
   //         newResult = DataManipulation.getDeepCopy(
   //           BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM
@@ -1065,10 +1111,10 @@ export class ResearchParentalChartComponent implements OnInit {
     let yellowUnderweightResult: number;
 
    if(this.currentChildGender != Gender.NotAssigned) {
-    switch (this.currentChildGender) 
+    switch (this.currentChildGender)
     {
       case (Gender.Female)://if gender is female
-      
+
         if(this.weightUnitOptions === UnitsOfMeasurement.kg){
           seriesData = this.extractFemaleMetricSeries(babyData, babyName);//use female metric data for percentiles
           babyChartYAxisTitle = "Weight (Kg)";
@@ -1100,19 +1146,19 @@ export class ResearchParentalChartComponent implements OnInit {
           yellowOverweightResult = this.checkIfPointInQuadrilateral(ptOfInterest, upperLeftPt, upperRightPt, lowerLeftPt, lowerRightPt); // checking if baby point in yellow overweight section
           console.log("Result of check pt in quad yellow overweight: " + yellowOverweightResult);
 
-          /*if(yellowOverweightResult == 2) 
+          /*if(yellowOverweightResult == 2)
           {
             chartInterpretation = "Your baby is NOT following a healthy growth pattern. She could be overweight. Follow up with your pediatrician soon.";
             this.interMessageColor = 'r';
           }
 
-          else if(yellowOverweightResult == 1) 
+          else if(yellowOverweightResult == 1)
           {
             chartInterpretation = "Your baby is moving towards an overweight pattern. Please discuss with your pediatrician.";
             this.interMessageColor = 'y';
           }
 
-          else if(yellowOverweightResult == 3) 
+          else if(yellowOverweightResult == 3)
           {
             upperLeftPt = [percentileData[3].data[xBounds[0]][0], percentileData[3].data[xBounds[0]][1]]; // point with x <= baby_x on 90th percentile line
             upperRightPt = [percentileData[3].data[xBounds[1]][0], percentileData[3].data[xBounds[0]][1]]; // point with x >= baby_x on 90th percentile line
@@ -1128,7 +1174,7 @@ export class ResearchParentalChartComponent implements OnInit {
             greenResult = this.checkIfPointInQuadrilateral(ptOfInterest, upperLeftPt, upperRightPt, lowerLeftPt, lowerRightPt); // checking if baby point in green section
             console.log("Result of check pt in quad green: " + greenResult);
 
-            if(greenResult == 1) 
+            if(greenResult == 1)
             {
               chartInterpretation = "Great job! Your baby is following a healthy growth pattern.";
               this.interMessageColor = 'g';
@@ -1149,18 +1195,18 @@ export class ResearchParentalChartComponent implements OnInit {
             yellowUnderweightResult = this.checkIfPointInQuadrilateral(ptOfInterest, upperLeftPt, upperRightPt, lowerLeftPt, lowerRightPt); // checking if baby point in green section
             console.log("Result of check pt in quad green: " + yellowUnderweightResult);
 
-            if(yellowUnderweightResult == 1) 
+            if(yellowUnderweightResult == 1)
             {
               chartInterpretation = "Your baby is moving towards an underweight pattern. Please discuss with your pediatrician.";
               this.interMessageColor = 'y';
             }
 
-            else if(yellowUnderweightResult == 3) 
+            else if(yellowUnderweightResult == 3)
             {
               chartInterpretation = "Your baby is NOT following a healthy growth pattern. She could be underweight. Follow up with your pediatrician soon."
               this.interMessageColor = 'r';
             }
-            
+
           }
 
           console.log("Chart Interpretation: " + chartInterpretation);
@@ -1202,13 +1248,13 @@ export class ResearchParentalChartComponent implements OnInit {
           this.interMessageColor = 'r';
         }
 
-        else if(yellowOverweightResult == 1) 
+        else if(yellowOverweightResult == 1)
         {
           chartInterpretation = "Your baby is moving towards an overweight pattern. Please discuss with your pediatrician.";
           this.interMessageColor = 'y';
         }
 
-        else if(yellowOverweightResult == 3) 
+        else if(yellowOverweightResult == 3)
         {
           upperLeftPt = [percentileData[3].data[xBounds[0]][0], percentileData[3].data[xBounds[0]][1]]; // point with x <= baby_x on 90th percentile line
           upperRightPt = [percentileData[3].data[xBounds[1]][0], percentileData[3].data[xBounds[0]][1]]; // point with x >= baby_x on 90th percentile line
@@ -1224,7 +1270,7 @@ export class ResearchParentalChartComponent implements OnInit {
           greenResult = this.checkIfPointInQuadrilateral(ptOfInterest, upperLeftPt, upperRightPt, lowerLeftPt, lowerRightPt); // checking if baby point in green section
           console.log("Result of check pt in quad green: " + greenResult);
 
-          if(greenResult == 1) 
+          if(greenResult == 1)
           {
             chartInterpretation = "Great job! Your baby is following a healthy growth pattern.";
             this.interMessageColor = 'g';
@@ -1245,18 +1291,18 @@ export class ResearchParentalChartComponent implements OnInit {
           yellowUnderweightResult = this.checkIfPointInQuadrilateral(ptOfInterest, upperLeftPt, upperRightPt, lowerLeftPt, lowerRightPt); // checking if baby point in green section
           console.log("Result of check pt in quad green: " + yellowUnderweightResult);
 
-          if(yellowUnderweightResult == 1) 
+          if(yellowUnderweightResult == 1)
           {
             chartInterpretation = "Your baby is moving towards an underweight pattern. Please discuss with your pediatrician.";
             this.interMessageColor = 'y';
           }
 
-          else if(yellowUnderweightResult == 3) 
+          else if(yellowUnderweightResult == 3)
           {
             chartInterpretation = "Your baby is NOT following a healthy growth pattern. She could be underweight. Follow up with your pediatrician soon."
             this.interMessageColor = 'r';
           }
-            
+
           }
 
           console.log("Chart Interpretation: " + chartInterpretation);*/
@@ -1304,13 +1350,13 @@ export class ResearchParentalChartComponent implements OnInit {
             this.interMessageColor = 'r';
           }
 
-          else if(yellowOverweightResult == 1) 
+          else if(yellowOverweightResult == 1)
           {
             chartInterpretation = "Your baby is moving towards an overweight pattern. Please discuss with your pediatrician.";
             this.interMessageColor = 'y';
           }
 
-          else if(yellowOverweightResult == 3) 
+          else if(yellowOverweightResult == 3)
           {
             upperLeftPt = [percentileData[3].data[xBounds[0]][0], percentileData[3].data[xBounds[0]][1]]; // point with x <= baby_x on 90th percentile line
             upperRightPt = [percentileData[3].data[xBounds[1]][0], percentileData[3].data[xBounds[0]][1]]; // point with x >= baby_x on 90th percentile line
@@ -1326,7 +1372,7 @@ export class ResearchParentalChartComponent implements OnInit {
             greenResult = this.checkIfPointInQuadrilateral(ptOfInterest, upperLeftPt, upperRightPt, lowerLeftPt, lowerRightPt); // checking if baby point in green section
             console.log("Result of check pt in quad green: " + greenResult);
 
-            if(greenResult == 1) 
+            if(greenResult == 1)
             {
               chartInterpretation = "Great job! Your baby is following a healthy growth pattern.";
               this.interMessageColor = 'g';
@@ -1347,18 +1393,18 @@ export class ResearchParentalChartComponent implements OnInit {
             yellowUnderweightResult = this.checkIfPointInQuadrilateral(ptOfInterest, upperLeftPt, upperRightPt, lowerLeftPt, lowerRightPt); // checking if baby point in green section
             console.log("Result of check pt in quad green: " + yellowUnderweightResult);
 
-            if(yellowUnderweightResult == 1) 
+            if(yellowUnderweightResult == 1)
             {
               chartInterpretation = "Your baby is moving towards an underweight pattern. Please discuss with your pediatrician.";
               this.interMessageColor = 'y';
             }
 
-            else if(yellowUnderweightResult == 3) 
+            else if(yellowUnderweightResult == 3)
             {
               chartInterpretation = "Your baby is NOT following a healthy growth pattern. He could be underweight. Follow up with your pediatrician soon."
               this.interMessageColor = 'r';
             }
-              
+
             }
 
             console.log("Chart Interpretation: " + chartInterpretation);*/
@@ -1400,13 +1446,13 @@ export class ResearchParentalChartComponent implements OnInit {
             this.interMessageColor = 'r';
           }
 
-          else if(yellowOverweightResult == 1) 
+          else if(yellowOverweightResult == 1)
           {
             chartInterpretation = "Your baby is moving towards an overweight pattern. Please discuss with your pediatrician.";
             this.interMessageColor = 'y';
           }
 
-          else if(yellowOverweightResult == 3) 
+          else if(yellowOverweightResult == 3)
           {
             upperLeftPt = [percentileData[3].data[xBounds[0]][0], percentileData[3].data[xBounds[0]][1]]; // point with x <= baby_x on 90th percentile line
             upperRightPt = [percentileData[3].data[xBounds[1]][0], percentileData[3].data[xBounds[0]][1]]; // point with x >= baby_x on 90th percentile line
@@ -1422,7 +1468,7 @@ export class ResearchParentalChartComponent implements OnInit {
             greenResult = this.checkIfPointInQuadrilateral(ptOfInterest, upperLeftPt, upperRightPt, lowerLeftPt, lowerRightPt); // checking if baby point in green section
             console.log("Result of check pt in quad green: " + greenResult);
 
-            if(greenResult == 1) 
+            if(greenResult == 1)
             {
               chartInterpretation = "Great job! Your baby is following a healthy growth pattern.";
               this.interMessageColor = 'g';
@@ -1443,18 +1489,18 @@ export class ResearchParentalChartComponent implements OnInit {
             yellowUnderweightResult = this.checkIfPointInQuadrilateral(ptOfInterest, upperLeftPt, upperRightPt, lowerLeftPt, lowerRightPt); // checking if baby point in green section
             console.log("Result of check pt in quad green: " + yellowUnderweightResult);
 
-            if(yellowUnderweightResult == 1) 
+            if(yellowUnderweightResult == 1)
             {
               chartInterpretation = "Your baby is moving towards an underweight pattern. Please discuss with your pediatrician.";
               this.interMessageColor = 'y';
             }
 
-            else if(yellowUnderweightResult == 3) 
+            else if(yellowUnderweightResult == 3)
             {
               chartInterpretation = "Your baby is NOT following a healthy growth pattern. He could be underweight. Follow up with your pediatrician soon."
               this.interMessageColor = 'r';
             }
-              
+
             }
 
             console.log("Chart Interpretation: " + chartInterpretation);*/
@@ -1599,7 +1645,7 @@ export class ResearchParentalChartComponent implements OnInit {
           fontFamily:  undefined
         }
     },
-  
+
       tooltip: {
         shared: true,
         intersect: false,
@@ -1624,13 +1670,13 @@ export class ResearchParentalChartComponent implements OnInit {
    }
    this.interMessage = chartInterpretation;
 
-    
+
   }
 
   /*
     When the parent select the child to work on his data it is necessary to have into account different cases:
     There is not data available for any child. There is  data from others children but there is not data to the
-    child in question or there is data available from the child. 
+    child in question or there is data available from the child.
   */
   onChildrenChange() {
     // there is not data at all
@@ -1965,9 +2011,68 @@ export class ResearchParentalChartComponent implements OnInit {
     parent.subscribe((parent) => {
       this.currentParent = parent;
     });
+
+    this.getAllResults();
+
   }
 
-  /* 
+  savePdf() {
+
+    this.exportService.exportFFQGrowthParticipant(this.currentParent,this.getAllDates(),"Growth_Chart");
+
+  }
+
+
+
+  private getAllResults() {
+    const oldList: Observable<FFQResultsResponse[]> = this.resultsService.getAllResults();
+    const reqList: string[] = NutrientConstants.NUTRIENT_NAMES;
+
+    oldList.subscribe(m => {
+
+        m.forEach(element => {
+
+          if (element.userChoices.length > 0) {
+            if (element.userChoices[0].name === 'Breast milk') {
+              this.breastMilkFlag.push(element.questionnaireId);
+            }
+          }
+          const newWeeklyMap = new Map<string, number>();
+          const newDailyMap = new Map<string, number>();
+          const weeklyMap = element.weeklyTotals;
+          const dailyMap = element.dailyAverages;
+
+          reqList.forEach(a => {
+            if (dailyMap[a]) {
+              newDailyMap.set(a, dailyMap[a]);
+            }
+            else {
+              newDailyMap.set(a, 0);
+            }
+            if (weeklyMap[a]) {
+              newWeeklyMap.set(a, weeklyMap[a]);
+            }
+            else {
+              newWeeklyMap.set(a, 0);
+            }
+
+          });
+
+          element.weeklyTotals = newWeeklyMap;
+          element.dailyAverages = newDailyMap;
+        });
+
+        this.results = m.reverse();
+        // this.parentResults = this.results.filter(t => t.userType === 'parent').map(result => ({
+        //   ...result,
+        //   username: this.getParentUsernameById(result.userId)
+        // }));
+        this.participantResults = this.results.filter(t => t.userType === 'participant');
+        this.setFoodList();
+      }
+    );
+  }
+  /*
     Due the fact that we don't have a bmi data from the who webside for the us customary system,
     an approach to solve the issue is to convert the units of measurements from lb to kg and from
      in to meters to calculate the bmi data provided by the parent
@@ -1981,7 +2086,7 @@ export class ResearchParentalChartComponent implements OnInit {
         GrowthChartData.GIRLS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
     }
   }
-  /* 
+  /*
     Gets the correct data for MBI charts depending on gender
   */
   getHeightAgeChart(childGender: Gender) {
@@ -2007,7 +2112,7 @@ export class ResearchParentalChartComponent implements OnInit {
     }
   }
 
-  /* 
+  /*
     Gets the correct data for MBI charts depending on gender
   */
   getWeightAgeChart(childGender: Gender) {
@@ -2033,8 +2138,8 @@ export class ResearchParentalChartComponent implements OnInit {
     }
   }
 
-  /* 
-  Gets the correct data for Weight_vs_Height charts depending on gender and units of measurements. 
+  /*
+  Gets the correct data for Weight_vs_Height charts depending on gender and units of measurements.
   The data for WEIGHT_FOR_LENGTH_BIRTH_TO_TWO_YEARS for male and female has to many points to plot.
   So, to obtain more pleasant visual effects will be trimmed to a maximum 24 points (MAX_RANGE_MONTHS) when
   there is no point or at least one where the avg of the values of the child will be the media of the graph
@@ -2082,7 +2187,7 @@ export class ResearchParentalChartComponent implements OnInit {
     }
   }
 
-  /* 
+  /*
     Finds an optimal interval where pointX is centered and the range is total number of point in the interval
   */
   trimChartData(pointX: string, range: number, chartData: any[]) {

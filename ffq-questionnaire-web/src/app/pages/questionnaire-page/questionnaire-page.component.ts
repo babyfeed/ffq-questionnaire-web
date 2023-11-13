@@ -213,6 +213,9 @@ export class QuestionnairePageComponent implements OnInit {
           (error: HttpErrorResponse) => this.handleSubmissionError(error)
         );
     }
+
+    console.log(this.infantage)
+
   }
 
   public toggleHideSecondaryItems() {

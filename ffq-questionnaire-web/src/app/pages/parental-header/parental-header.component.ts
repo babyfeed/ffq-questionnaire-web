@@ -4,6 +4,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { User } from 'src/app/services/authentication/temp-user';
 import {TranslateService} from '@ngx-translate/core';
+// let clickable = document.querySelector("bx-menu");
+
+// clickable.addEventListener('click',() => {
+
+//   clickable.classList.toggle('bxs-x-circle')
+
+// })
 
 @Component({
   selector: 'app-parental-header',
@@ -26,4 +33,24 @@ export class ParentalHeaderComponent {
         this.router.navigate(['/login']);
     }
 
+    change() {
+
+        let clickable = document.querySelector("#menus");
+
+        const tabLinks = document.querySelectorAll('.tab-link')
+
+        clickable.classList.toggle('bxs-x-circle');
+
+        tabLinks.forEach((tab) => {
+          tab.classList.toggle('superactive')
+        })
+
+        let header = document.querySelector('.header');
+
+        header.classList.toggle('changed')
+
+    }
+
 }
+
+

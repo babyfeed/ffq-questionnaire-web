@@ -39,7 +39,7 @@ html {
     cursor: pointer;
     padding: 10px 16px;
     font-size: 17px;
-    width: 16.5%;
+    width: 14.26%;
     text-align: center;
 }
 
@@ -78,4 +78,32 @@ html {
 .mat-pseudo-checkbox-checked,
 .mat-pseudo-checkbox-indeterminate {
     background-color: #2C387E;
+}
+
+
+@media(max-width:1391px) {
+
+.tab-link {
+  font-size:90%;
+}
+
+
+
+}
+
+@media(max-width:1144px) {
+  .tab-link {
+    height:58px;
+  }
+}
+
+@media(max-width:1024px) {
+
+  .tab-link {
+    font-size:90%;
+  }
+
+
+
+
 }

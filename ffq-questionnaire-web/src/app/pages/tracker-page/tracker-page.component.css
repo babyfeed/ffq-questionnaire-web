@@ -117,3 +117,24 @@ mat-button-toggle-group {
 .bot{
   color: #ffcc5c;
 }*/
+
+@media(max-width:693px) {
+
+  .qb-container{
+    margin-left:125px;
+    margin-top:210px;
+    width:85px;
+    /* border:1px solid black; */
+  }
+
+  .qb-row-item {
+    /* border: 1px solid black; */
+    /* width:340px; */
+    width:160px;
+  }
+
+  .qb-row-item strong {
+    font-size:75%;
+  }
+
+}

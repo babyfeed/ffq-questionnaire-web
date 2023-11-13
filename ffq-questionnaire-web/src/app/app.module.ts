@@ -117,6 +117,10 @@ import { HomePageComponent } from "./pages/home-page/home-page.component";
 import { EducationalResourcesComponent } from './pages/educational-resources/educational-resources.component';
 
 import { NgApexchartsModule } from "ng-apexcharts";
+// possibly to be deleted below
+import {AdminresultsComponent} from './pages/adminresults/adminresults.component';
+
+// possibly to be deleted above
 
 @NgModule({
   declarations: [
@@ -192,7 +196,9 @@ import { NgApexchartsModule } from "ng-apexcharts";
     InterpretationGrowthChartsDialogComponent,
     GrowthChartsHelpComponent,
     HomePageComponent,
-    EducationalResourcesComponent
+    EducationalResourcesComponent,
+    AdminresultsComponent
+
   ],
   imports: [
     BrowserModule,

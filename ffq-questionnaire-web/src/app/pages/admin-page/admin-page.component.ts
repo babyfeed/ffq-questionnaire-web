@@ -20,7 +20,6 @@ import {FFQFoodItemResponse} from 'src/app/models/ffqfooditem-response';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {environment} from 'src/environments/environment';
 
-
 @Component({
   selector: 'app-questionnaire-page',
   templateUrl: './admin-page.component.html',

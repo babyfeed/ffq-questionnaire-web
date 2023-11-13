@@ -1,161 +1,61 @@
-/*
-author: Vladimir Chavez
-
-I will assume that every parent will have the following property: childrennames which cannot be empty or null, in case
-of being empty or null will give an error. To avoid this, it is necessary to add the capability of adding names of
-children which is not implemented.
-This (childrennames) property will have the first name of all children of the current parent. I will add an
-ArrayList of type Children to the db (database) to save the data to plot the growth charts
-, so the previous data needs to be modify later on. However, the implementation of the
-growth-chart tab will not give any error for missing the children property.
-the children property will be added once the data is saved. Children has the following structure
-{name: string; childData:{weight: string; height: string; age: string} where the property
-name will be copied from the property childrennames to identify each child. In addition,
-childData will be provided from the user input.
-
-To select a specific child a menu will show the children names of the property childrennames.
-
-currentParent: FFQParentResponse <---> the data from current logged in parent
-will be retrieved from the db and saved to currentParent. method: ngOnInit(). FFQParentResponse is a class used to save
-the data to the db. That being said, the following case will be explained to clarify the use of the
-ArrayList childrenList. For example, the childrennames has all the names of the parent's children while the arraylist
-children will have all the data of the parent's inputs. So, it might be possible that there are children
-that does not have any data saved in the children arraylist because the parent has not saved it yet,
-so it is easy to create a children list where all the children are created using the names of the
-childrennames arraylist and the data from the arraylist children is mapped using the names.
-Note that a parent cannot have two children with the same name otherwise will give errors, and childID will need to be
-added.
-
-Hence, the childrenlist will have chidren without any data and children with data. Example:
-
-{
-  "assignedclinic": "1",
-  "assignedclinician": "1",
-  "childrennames": ["Sarah","Tom"],
-  "prefix": "Borinquen",
-  "children": [
-    {
-      "name": "Tom",
-      "childData": [
-        {
-          "weight": "48",
-          "height": "52",
-          "age": "12"
-        }
-      ]
-    }
-  ],
-  "timesOfReading": 0,
-  "userId": "1",
-  "username": "Borinquen_1",
-  "userpassword": "parent1",
-  "usertype": "parent",
-  "firstname": "John",
-  "lastname": "Doe",
-  "isactive": true,
-  "_class": "edu.fiu.ffqr.models.Parent"
-}
-
-
-{
-  "userId": "3",
-  "username": "FIU_1",
-  "userpassword": "parent1",
-  "usertype": "parent",
-  "firstname": "",
-  "lastname": "",
-  "assignedclinic": "2",
-  "assignedclinician": "2",
-  "childrennames": ["Abagail"],
-  "isactive": true,
-  "prefix": "FIU"
-}
-
-currentChild: FFQChildren <---> when a specific child is selected from the menu. the data of the child will be retrieved
-from childList arraylist. method: onChildrenChange()
-
-
-childrenList: FFQChildren[] <---> contains all the children with or without data. For creating the childrenlist
-the names will be taken from childrennames and the data from the children arraylist.
-
-
-*/
-import {ExportService} from '../../services/export/export-service';
-import { DQISService } from 'src/app/services/dqis-service/dqis.service';
-import {FoodRecommendationsService} from 'src/app/services/food-recommendation-service/food-recommendations.service';
-import {NutrientConstants} from 'src/app/models/NutrientConstants';
-import {FFQFoodRecommendations} from '../../models/ffqfood-recommendations';
-import { FFQDQIS } from 'src/app/models/ffqdqis';
+import {Component,OnInit,ViewChild,AfterViewInit} from '@angular/core';
 import {ResultsService} from 'src/app/services/results/results.service';
 import {FFQResultsResponse} from 'src/app/models/ffqresultsresponse';
-import { Component, OnInit, ViewChild} from "@angular/core";
-import { MatDialog } from "@angular/material/dialog";
-import { Observable } from "rxjs";
-import { TranslateService } from "@ngx-translate/core";
-import { ThemePalette } from "@angular/material/core";
-import { ProgressSpinnerMode } from "@angular/material/progress-spinner";
-import html2canvas from "html2canvas";
-import {FormsModule} from '@angular/forms';
-import { ParentService } from "src/app/services/parent/parent-service";
-import { AuthenticationService } from "../../services/authentication/authentication.service";
-import { FFQParentResponse } from "src/app/models/ffqparent-response";
-
+import {Observable} from 'rxjs';
+import {NutrientConstants} from 'src/app/models/NutrientConstants';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {RecommendModalComponent} from 'src/app/components/recommend-modal/recommend-modal.component';
+import {MatDialog} from '@angular/material/dialog';
+import {NutrientsRecommendationsService} from 'src/app/services/nutrients-recommendations/nutrients-recommendations.service';
+import {ErrorDialogPopupComponent} from 'src/app/components/error-dialog-popup/error-dialog-popup.component';
+import { Router, NavigationStart, NavigationEnd } from '@angular/router';
+import {FoodRecommendModalComponent} from 'src/app/components/food-recommend-modal/food-recommend-modal.component';
+import {FoodRecommendationsService} from 'src/app/services/food-recommendation-service/food-recommendations.service';
+import {FoodDescriptionService} from 'src/app/services/food-description/food-description.service';
+import {DeletePopupComponent} from '../../components/delete-popup/delete-popup.component';
+import {ExportService} from '../../services/export/export-service';
+import {FFQFoodRecommendations} from '../../models/ffqfood-recommendations';
+import {FFQClinic} from '../../models/ffqclinic';
+import {ClinicService} from 'src/app/services/clinic/clinic-service';
+import {FFQParent} from '../../models/ffqparent';
+import {ParentService} from '../../services/parent/parent-service';
+import {FFQParentResponse} from '../../models/ffqparent-response';
+import {FfqParticipant} from '../../models/ffq-participant';
+import {ParticipantService} from '../../services/participant/participant-service';
+import {FFQResearchInstitution} from '../../models/ffq-research-institution';
+import {ResearchInstitutionService} from '../../services/research-institution-service/research-institution-service';
+import {FFQClinicResponse} from '../../models/ffqclinic-response';
+import {FFQInstitution} from '../../models/ffqinstitution';
+import { DQISService } from 'src/app/services/dqis-service/dqis.service';
+import { FFQDQIS } from 'src/app/models/ffqdqis';
+import { DQISModalComponent } from 'src/app/components/dqis-modal/dqis-modal.component';
 import { FFQChildren } from "src/app/models/ffqchildren";
 import { FFQChildData } from "src/app/models/ffq-childData";
-
-import {
-  UnitsOfMeasurement,
-  Gender,
-  ChartOption,
-  GrowthChartData,
-} from "src/app/models/Enums";
-
-import 'apexcharts';
-
-import {
-  ChartComponent,
-  ApexAxisChartSeries,
-  ApexChart,
-  ApexFill,
-  ApexStroke,
-  ApexYAxis,
-  ApexGrid,
-  ApexTooltip,
-  ApexMarkers,
-  ApexXAxis,
-  ApexLegend,
-  ApexTitleSubtitle,
-  ApexAnnotations
-} from "ng-apexcharts";
-
-
-/*
-  The information needed to plot the charts are imported from the following directory:
-  assets/growth-charts-data/who
-
-*/
-
-//boys/bmi
-
-//bmi
+import { AuthenticationService } from "../../services/authentication/authentication.service";
 import { BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM } from "../../../assets/growth-charts-data/who/boys/metric system/bmi/BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM";
-
+import { ThemePalette } from "@angular/material/core";
+import { ProgressSpinnerMode } from "@angular/material/progress-spinner";
 //boys/metric system
+import { NgForm, NgModel } from "@angular/forms";
+import { GrowthChartsHelpComponent } from "src/app/components/growth-charts-help/growth-charts-help.component";
+import { InterpretationGrowthChartsDialogComponent } from "src/app/components/interpretation-growth-charts-dialog/interpretation-growth-charts-dialog.component";
 
 //height - age
 import { BOYS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM } from "../../../assets/growth-charts-data/who/boys/metric system/height - age/BOYS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM";
 
 //weight - age
 import { BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM } from "../../../assets/growth-charts-data/who/boys/metric system/weight - age/BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM";
+import html2canvas from "html2canvas";
 
 //weight - height
 import { BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM } from "../../../assets/growth-charts-data/who/boys/metric system/weight - height/BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM";
-
+import { TranslateService } from "@ngx-translate/core";
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
 //girls/bmi
 
 //bmi
 import { GIRLS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM } from "../../../assets/growth-charts-data/who/girls/metric system/bmi/GIRLS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM";
-import {FFQParent} from '../../models/ffqparent';
 
 //girls/metric system
 
@@ -205,20 +105,25 @@ import { GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM } from "src
 
 //weight - height
 import { GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM } from "src/assets/growth-charts-data/who/girls/US customary system/weight - height/GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM";
-import { InterpretationGrowthChartsDialogComponent } from "src/app/components/interpretation-growth-charts-dialog/interpretation-growth-charts-dialog.component";
-import { GrowthChartsHelpComponent } from "src/app/components/growth-charts-help/growth-charts-help.component";
-import { NgForm, NgModel } from "@angular/forms";
 
-import pdfMake from "pdfmake/build/pdfmake";
-import pdfFonts from "pdfmake/build/vfs_fonts";
-import { stringify } from "querystring";
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
+import 'apexcharts';
 
-class DataManipulation {
-  static getDeepCopy(data: any) {
-    return JSON.parse(JSON.stringify(data));
-  }
-}
+import {
+  ChartComponent,
+  ApexAxisChartSeries,
+  ApexChart,
+  ApexFill,
+  ApexStroke,
+  ApexYAxis,
+  ApexGrid,
+  ApexTooltip,
+  ApexMarkers,
+  ApexXAxis,
+  ApexLegend,
+  ApexTitleSubtitle,
+  ApexAnnotations
+} from "ng-apexcharts";
+
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -236,174 +141,115 @@ export type ChartOptions = {
   annotations: ApexAnnotations;
 };
 
+
+
+
+
+// import { GrowthChartsPageComponent } from '../growth-charts-page/growth-charts-page.component';
+import {
+  UnitsOfMeasurement,
+  Gender,
+  ChartOption,
+  GrowthChartData,
+} from "src/app/models/Enums";
+
+
 @Component({
-  selector: "app-growth-charts-page",
-  templateUrl: "./growth-charts-page.component.html",
-  styleUrls: ["./growth-charts-page.component.css"],
+  selector: 'app-growth',
+  templateUrl: './adminresults.component.html',
+  styleUrls: ['./adminresults.component.css']
 })
-export class GrowthChartsPageComponent implements OnInit {
-  @ViewChild("chart") chart: ChartComponent;
-  public chartOptions: Partial<ChartOptions>;
 
-  public ffqparentList: FFQParent[] = [];
+export class AdminresultsComponent implements OnInit{
 
-  //who
-
-  //boys
-  //bmi
-  BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM: any[];
-
-  //height - age
-  BOYS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM: any[];
-  BOYS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM: any[];
-
-  //weight - age
-  BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM: any[];
-  BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM: any[];
-
-  //weight - height
-  BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM: any[];
-  BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM: any[];
-
-  //weight - height - mixed
-  BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_KG_VS_IN: any[];
-  BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_CM: any[];
-
-  //girls
-
-  //bmi
-  GIRLS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM: any[];
-
-  //height - age
-  GIRLS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM: any[];
-  GIRLS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM: any[];
-
-  //weight - age
-  GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM: any[];
-  GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM: any[];
-
-  //weight - height
-  GIRLS_WEIGHT_FOR_LENGTH_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM: any[];
-  GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM: any[];
-
-  //weight - height - mixed
-  GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_CM: any[];
-  GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_KG_VS_IN: any[];
-
-  // constant to validate the max and min values allowed
-  readonly MAX_AGE_MONTHS = 24;
-  readonly MIN_AGE_MONTHS = 0;
-  // these are mutable depends on the units of measurements, by default they are in metric system.
-  MAX_HEIGHT = 110;
-  MIN_HEIGHT = 40;
-  MAX_WEIGHT = 30;
-  MIN_WEIGHT = 1;
-
-  // determines the measurement units selected by the user
-  heightUnitOptions: UnitsOfMeasurement = UnitsOfMeasurement.cm;
-  weightUnitOptions: UnitsOfMeasurement = UnitsOfMeasurement.kg;
-
-  // curent child data entered by the user
-  currentChildName: string = "";
-  currentChildHeight: string = "";
-  currentChildWeight: string = "";
-  currentChildAge: string = "";
-  currentChildGender: Gender.NotAssigned;
-
+  public show = false;
+  public showFeedback = false;
   breastMilkFlag = [];
-
-  // current child
-  currentChild: FFQChildren = {} as FFQChildren;
-
-  // children list to avoid working with currentParent.children
-  childrenList: FFQChildren[] = [];
-
-  // current parent, data retrived from db
-  currentParent: FFQParentResponse;
-
   results: FFQResultsResponse[] = [];
   parentResults: FFQResultsResponse[] = [];
+  // to be deleted below
+
+  dude:any;
+
+  // to be uncommented below
+  // currentParent: FfqParticipant;
+
+  // to be uncommented above
+
+  currentParent: FFQParentResponse;
+
+  childrenList: FFQChildren[] = [];
+
+  // currentChildName: string = "";
+
+  // childInfo: FFQParent[] = [];
+
+  // to be deleted above
+  childrenPerParentList: [] = [];
+  parentList : ParentService;
+  parentResultsByClinicId: FFQResultsResponse[] = [];
+  participantResults: FFQResultsResponse[] = [];
+  participantResultsByClinicId: FFQResultsResponse[] = [];
+  questionnaireId: string;
+  showParent = false;
+  bySite = true;
+  byClinic = true;
+  showParticipant = false;
+  selectedClinic: string;
+  selectedSite: string;
+  public ffqclinicList$: Observable<FFQClinic[]>;
+  public ffqSiteList$: Observable<FFQResearchInstitution[]>;
+  clinicId: string;
+  public ffqparentList: FFQParent[] = [];
+  public ffqParticipantList: FfqParticipant[] = [];
+  showByClinic = true;
+  showBySite = true;
+  private clinic = [];
+  private site = [];
+  clinicAttributes: FFQClinic;
+  siteAttributes: FFQInstitution;
+  id: string;
+  userId: string;
+  username: string;
+  userpassword: string;
+  usertype: string;
+  firstname: string;
+  lastname: string;
+  assignedclinic: string;
+  assignedclinician: string;
+  childrennames: any;
+  isactive: boolean;
+  prefix: string;
+  assignedClinicOrSiteId: string;
+  // Used to keep track of when parent last read recommend
+  lastReadRecommend: string;
+  timesOfReading: number;
+  children: FFQChildren[];
+  tally_num:number = 0;
 
 
-  //interpretation message
-  interMessage: string = " ";
+  constructor(public resultsService: ResultsService,
+              public nutrientsRecommendationsService: NutrientsRecommendationsService,
+              public foodRecommendationsService: FoodRecommendationsService,
+              public dqisService: DQISService,
+              public parentService: ParentService,
+              private participantService: ParticipantService,
+              public foodDescriptionService: FoodDescriptionService,
+              private modalService: NgbModal,
+              public clinicService: ClinicService,
+              public researchInstitutionService: ResearchInstitutionService,
+              private errorDialog: MatDialog,
+              private router: Router,
+              private exportService: ExportService,
+              private authenticationService: AuthenticationService,
+              private dialog: MatDialog,
+              private translate: TranslateService
 
-  //message color y= yellow, g= green, r= red
-  interMessageColor: string = " ";
+              // public ffqparentresponse : FFQParentResponse,
 
-  myDocDefinition: any;
-  loading: boolean = false;
-  color: ThemePalette = "primary";
-  mode: ProgressSpinnerMode = "indeterminate";
-  value = 65;
-
-
-  /* CHART UPDATE 8: Delete the following chart resources comment and replace it with the following comment
-  providing resources about the new chart library
-
-
-  charts options
-  example: https://apexcharts.com/angular-chart-demos/
-  documentation: https://apexcharts.com/docs/chart-types/area-chart/#
-
-  */
-
-
-  /*
-  charts options
-  example: https://swimlane.github.io/ngx-charts/#/ngx-charts/bar-vertical
-  documentation: https://swimlane.gitbook.io/ngx-charts/
-  */
-
-  // legend: boolean = true;
-  // showLabels: boolean = true;
-  // animations: boolean = true;
-  // xAxis: boolean = true;
-  // yAxis: boolean = true;
-  // showYAxisLabel: boolean = true;
-  // showXAxisLabel: boolean = true;
-  // xAxisLabel: string = "";
-  // yAxisLabel: string = "";
-  // timeline: boolean = true;
-  // view: any[] = [1400, 1400];
-  // results: any[] = [];
-  // position: string = "right";
-
-  // to determine the chart selected by the user
-  chosenChartOption: ChartOption = ChartOption.NotAssigned;
-
-  // to determine the kind of chart selected by the user depending on gender and units of measurements
-  currentGrowthChartData: GrowthChartData = GrowthChartData.NONE;
-
-  lang: boolean = true;
-
-  dataWasAdded: boolean = true;
-  xaxis: any;
-  yaxis: any;
-
-  /* CHART UPDATE 9: Add the chart options to create the combo-area-line chart as done in Jada's dummy graph
-
-        Things to figure out related to this:
-
-              - Will this code need to be in the constructor or outside of the constructor?
-
-              - How will we need to change the dummy example code to be able accept the values for the x-axis and
-                y-axis chosen based on the units (kg & cm, kg & in, lbs & cm, or lbs & in) selected by the user
-                rather than using the hard-coded values for the x-axis and y-axis that appear in the dummy example
-                code (ex:   data: [44, 55, 31, 47, 31, 43, 26, 41, 31, 47, 33]  as in series with name Team A)?
-  */
-
-  constructor(
-    private parentService: ParentService,
-    private authenticationService: AuthenticationService,
-    private translate: TranslateService,
-    private dialog: MatDialog,
-    public resultsService: ResultsService,
-    public foodRecommendationsService: FoodRecommendationsService,
-    public dqisService: DQISService,
-    private exportService: ExportService
   ) {
-    // assigns the data to be used on the charts
+    this.ffqclinicList$ = this.clinicService.getAllClinics();
+    this.ffqSiteList$ = this.researchInstitutionService.getAllResearchInstitutions();
     Object.assign(this, {
       /*
       BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM,
@@ -468,7 +314,863 @@ export class GrowthChartsPageComponent implements OnInit {
       }
     };
 
+
   }
+
+
+
+
+
+  ngOnInit() {
+    const parentList: Observable<FFQParentResponse[]> = this.parentService.getAllParents();
+    parentList.subscribe(a => {
+      this.ffqparentList = a;
+    });
+
+    const participantList: Observable<FfqParticipant[]> = this.participantService.getAllParticipants();
+    participantList.subscribe(a => {
+      this.ffqParticipantList = a;
+    });
+
+    this.getAllResults();
+
+    const parent: Observable<FFQParentResponse> = this.parentService.getParent(
+      this.authenticationService.currentUserId
+    );
+    parent.subscribe((parent) => {
+      this.currentParent = parent;
+    });
+
+
+    }
+
+
+  private getAllResults() {
+    const oldList: Observable<FFQResultsResponse[]> = this.resultsService.getAllResults();
+    const reqList: string[] = NutrientConstants.NUTRIENT_NAMES;
+
+    oldList.subscribe(m => {
+
+        m.forEach(element => {
+
+          if (element.userChoices.length > 0) {
+            if (element.userChoices[0].name === 'Breast milk') {
+              this.breastMilkFlag.push(element.questionnaireId);
+            }
+          }
+          const newWeeklyMap = new Map<string, number>();
+          const newDailyMap = new Map<string, number>();
+          const weeklyMap = element.weeklyTotals;
+          const dailyMap = element.dailyAverages;
+
+          reqList.forEach(a => {
+            if (dailyMap[a]) {
+              newDailyMap.set(a, dailyMap[a]);
+            }
+            else {
+              newDailyMap.set(a, 0);
+            }
+            if (weeklyMap[a]) {
+              newWeeklyMap.set(a, weeklyMap[a]);
+            }
+            else {
+              newWeeklyMap.set(a, 0);
+            }
+
+          });
+
+          element.weeklyTotals = newWeeklyMap;
+          element.dailyAverages = newDailyMap;
+        });
+
+        this.results = m.reverse();
+        this.parentResults = this.results.filter(t => t.userType === 'parent').map(result => ({
+          ...result,
+          username: this.getParentUsernameById(result.userId)
+        }));
+        this.participantResults = this.results.filter(t => t.userType === 'participant');
+        this.setFoodList();
+      }
+    );
+
+
+  }
+
+  sortByClinic(event: any) {
+    this.clinic.push(this.clinicService.getClinic(event.value).subscribe(data => {
+      this.clinicAttributes = data;
+    }));
+
+    // manually adding assignedClinicOrSite id field to result since it doesn't get added when parent takes ffq
+    for (let i = 0; i <= this.ffqparentList.length - 1; i++) {
+      for (let j = 0; j <= this.parentResults.length - 1; j++) {
+        if (this.parentResults[j].userId === this.ffqparentList[i].userId) {
+          this.parentResults[j].assignedClinicOrSiteId = this.ffqparentList[i].assignedclinic;
+        }
+      }
+    }
+    this.parentResultsByClinicId = this.parentResults.filter(t => t.assignedClinicOrSiteId === event.value);
+
+    const matSelect: any = event.source;
+    matSelect.writeValue(null);
+  }
+
+  sortBySite(event: any) {
+    this.site.push(this.researchInstitutionService.getResearchInstitution(event.value).subscribe(data => {
+      this.siteAttributes = data;
+    }));
+
+    for (let i = 0; i <= this.ffqParticipantList.length - 1; i++) {
+      for (let j = 0; j <= this.participantResults.length - 1; j++) {
+        if (this.participantResults[j].userId === this.ffqParticipantList[i].userId) {
+          this.participantResults[j].assignedClinicOrSiteId = this.ffqParticipantList[i].assignedResearcherInst;
+        }
+      }
+    }
+    this.participantResultsByClinicId = this.participantResults.filter(t => t.assignedClinicOrSiteId === event.value);
+
+    const matSelect: any = event.source;
+    matSelect.writeValue(null);
+  }
+
+  setShowByParticipant(bool:boolean):void {
+    this.showParticipant = true;
+  }
+
+  deleteQuestionnaire(questionnaireId: string) {
+    for (const item of this.results) {
+      if (item.questionnaireId === questionnaireId) {
+        const confirmDelete = this.modalService.open(DeletePopupComponent);
+        confirmDelete.componentInstance.service = 'Questionnaire';
+        confirmDelete.componentInstance.attributes = item;
+        break;
+      }
+    }
+  }
+
+  private returnZero() {
+    return 0;
+  }
+
+  toggleParentResults(index) {
+    this.parentResults[index].show = !this.parentResults[index].show;
+  }
+
+  toggleParticipantResults(index) {
+    this.participantResults[index].show = !this.participantResults[index].show;
+  }
+
+  searchResults: string;
+
+  private getNutrientsRecommendations(questionnaireId: string) {
+    this.nutrientsRecommendationsService.getNutrientsRecommendationsByQuestionnaireId(questionnaireId).subscribe(
+      data => {
+        this.onModalRequest(questionnaireId);
+      },
+      error => {
+        const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+        dialogRef.componentInstance.title = error.error.message;
+        dialogRef.componentInstance.router = this.router;
+      }
+    );
+  }
+
+  private getFoodRecommendations(questionnaireId: string) {
+    this.foodRecommendationsService.getFoodRecommendationsByQuestionnaireId(questionnaireId).subscribe(
+      data => {
+        this.onModalRequestFood(questionnaireId);
+      },
+      error => {
+        const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+        dialogRef.componentInstance.title = error.error.message;
+        dialogRef.componentInstance.router = this.router;
+      }
+    );
+  }
+  private getDQIS(questionnaireId: string) {
+    this.dqisService.getDQISByQuestionnaireId(questionnaireId).subscribe(
+      data => {
+        this.onModalRequestDQIS(questionnaireId);
+      },
+      error => {
+        const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+        dialogRef.componentInstance.title = error.error.message;
+        dialogRef.componentInstance.router = this.router;
+      }
+    );
+  }
+
+
+  onModalRequest(id: string): void {
+    const modalRef = this.errorDialog.open(RecommendModalComponent);
+    modalRef.componentInstance.id = id;
+  }
+
+  onModalRequestFood(id: string): void {
+    console.log('this.breastMilkFlag');
+    const modalRef = this.errorDialog.open(FoodRecommendModalComponent, {
+      // the FoodRecommendModalComponent is independent component, in order to access the data which I can only get in current component,
+      // pass the data by this method
+      data: this.breastMilkFlag
+    });
+    modalRef.componentInstance.id = id;
+  }
+  onModalRequestDQIS(id: string): void {
+    console.log('this.breastMilkFlag');
+    const modalRef = this.errorDialog.open(DQISModalComponent, {
+      // the FoodRecommendModalComponent is independent component, in order to access the data which I can only get in current component,
+      // pass the data by this method
+      data: this.breastMilkFlag
+    });
+    modalRef.componentInstance.id = id;
+  }
+
+  ALLIDS = [];
+
+  ALLDATES = [];
+
+  ALLAGES = [];
+
+  ALLWEIGHTS = [];
+
+  ALLLENGTHS = [];
+
+  ALLGENDERS = [];
+
+  percentileCalculator20(height:number,weight:number,gender:string) : string {
+
+    let percentileData = BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
+
+    let percentileDataTwo = GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
+
+    let minimumDifference = 1000000;
+
+    let percentileToReturn = "";
+
+      // console.log("this.currentChildGender: "+this.currentChildGender);
+
+      switch(gender) {
+
+        case "male":
+
+          for(let i = 0; i < 11; i++) {
+
+            // console.log("Another time?");
+            // console.log("percentileData[i].data: "+percentileData[i].data);
+
+            for(let j = 0; j < percentileData[i].data.length; j++) {
+
+            //   console.log("percentileData[i].data[j][0]: ",percentileData[i].data[j][0]);
+            // console.log("height: "+height);
+            // console.log("weight: "+weight);
+            // console.log("percentileData[i].data[j][1]: "+percentileData[i].data[j][1]);
+
+
+              if(percentileData[i].data[j][0] == height) {
+                  if(Math.abs(weight-percentileData[i].data[j][1]) < minimumDifference) {
+                    minimumDifference = Math.abs(weight-percentileData[i].data[j][1]);
+                    percentileToReturn = percentileData[i].name;
+                  }
+              }
+
+            }
+
+        }
+
+          break;
+
+        case "female":
+
+          for(let i = 0; i < 11; i++) {
+
+              for(let j = 0; j < percentileDataTwo[i].data.length; j++) {
+
+                if(percentileData[i].data[j][0] == height) {
+                    if(Math.abs(weight-percentileDataTwo[i].data[j][1]) < minimumDifference) {
+                    minimumDifference = Math.abs(weight-percentileData[i].data[j][1]);
+                    percentileToReturn = percentileData[i].name;
+                    }
+                }
+
+              }
+
+          }
+
+          break;
+
+
+    }
+
+      return percentileToReturn;
+
+  }
+
+  ALLGENDERSPARENT = [];
+
+  ALLGENDERSPARTICIPANT = [];
+
+  returnable = [];
+
+  loadAllData() {
+
+    this.ALLGENDERSPARENT = this.getAllGenders(this.parentResults);
+
+    this.ALLGENDERSPARTICIPANT = this.getAllGenders(this.participantResults);
+
+    console.log("This went here");
+
+    console.log("this.ALLGENDERSPARENT: ",this.ALLGENDERSPARENT);
+
+    let j = 0;
+
+    let z = 0;
+
+    let index = 0;
+
+    // let returnable = [];
+
+  console.log("this.ffqparentList.length: ",this.ffqparentList.length);
+
+    for(let parent of this.ffqparentList) {
+
+      for(let a of this.create(this.ffqparentList,j)) {
+
+        for(let dog of this.createArray(a)) {
+
+          console.log("a[z].childData[0].age: ",a[z].childData[0].age);
+
+          const pushable = {
+            ID:this.ffqparentList[j].userId,
+            Date:this.checker(this.ffqparentList[j].username,a[z].childData[0].age,this.parentResults),
+            "Infant age (months)": a[z].childData[0].age,
+            "Infant weight (kg)": a[z].childData[0].weight,
+            "Infant length (cm)":a[z].childData[0].height,
+            Percentile: this.percentileCalculator20(a[z].childData[0].height,a[z].childData[0].weight,this.ALLGENDERSPARENT[index++])
+          }
+
+          this.returnable.push(pushable);
+          z++;
+
+          // this.ALLIDS[index] = this.ffqparentList[j].userId;
+
+          // this.ALLDATES[index] = this.checker(this.ffqparentList[j].username,a[z].childData[0].age,parentResults);
+          // this.ALLAGES[index] = a[z].childData[0].age;
+          // this.ALLWEIGHTS[index] = a[z].childData[0].weight;
+          // this.ALLLENGTHS[index] = a[z].childData[0].height;
+          
+
+
+        }
+
+        z = 0;
+
+
+
+      }
+
+      j++;
+
+    }
+
+    console.log("this.returnable: ",this.returnable);
+
+  }
+
+
+  exportAllAnotherAttempt() {
+
+    this.exportService.exportingAllParent(this.returnable,"Growth_ChartResults");
+
+  }
+
+
+  export(ffqparent:any,j:number,z:number,a:any) {
+    // this.exportService.exportFFQAlternative4(this.results[i], this.ffqparentList[i].children[this.ffqparentList[i].children.length-i-1].childData[0],this.results[i].gender,'Growth_Chart');
+    this.exportService.exportFFQAlternative4(ffqparent,this.checker(this.ffqparentList[j].username,a[z].childData[0].age,this.parentResults),a[z].childData[0],this.getGender(ffqparent,this.parentResults),'Growth_Chart');
+
+    // this.getGender(this.ffqparentList[0],this.parentResults);
+
+
+  }
+
+  export2(ffqparticipant:any,j:number,z:number,a:any) {
+    // this.exportService.exportFFQAlternative4(this.results[i], this.ffqparentList[i].children[this.ffqparentList[i].children.length-i-1].childData[0],this.results[i].gender,'Growth_Chart');
+    this.exportService.exportFFQAlternative4(ffqparticipant,this.checker(this.ffqParticipantList[j].username,a[z].childData[0].age,this.participantResults),a[z].childData[0],this.getGender(ffqparticipant,this.participantResults),'Growth_Chart');
+
+  }
+
+  exportAll() {
+
+    for(let i = 0; i < this.ffqparentList.length; i++) {
+
+      for(let j = 0; j < this.ffqparentList[i].children.length; j++) {
+
+        this.exportService.exportFFQAlternative4(this.ffqparentList[i],this.checker(this.ffqparentList[i].username,parseInt(this.ffqparentList[i].children[j].childData[0].age),this.parentResults),this.ffqparentList[i].children[j].childData[0],this.currentChildGender,'Growth_Chart');
+
+      }
+
+    }
+
+
+  }
+
+  exportAll2() {
+
+    // this.exportService.exportFFQAlternative5(this.ffqparentList,)
+
+    // this.exportService.exportFFQAlternative5(this.ffqparentList,this.checkerArray(this.patientNames(this.parentResults),this.ages(this.ffqparentList),this.parentResults),this.allChildData(),this.allGenders(),"Growth_Chart");
+    this.exportService.exportFFQAll(this.allIDS(),this.checkerArray(this.patientNames(this.parentResults),this.ages(),this.parentResults),this.ages(),this.allWeights(),this.allHeights(),this.getAllGenders(this.parentResults),this.parentResults,"Growth_Chart")
+    // this.allIDS();
+    // console.log("this.parentResults: ",this.parentResults);
+    // console.log("this.ffqparentList: ",this.ffqparentList);
+
+  }
+
+  exportAll3() {
+
+    this.exportService.exportFFQAll(this.allIDS2(),this.checkerArray(this.patientNames(this.participantResults),this.ages2(),this.participantResults),this.ages2(),this.allWeights2(),this.allHeights2(),this.getAllGenders(this.participantResults),this.participantResults,"Growth_Chart_participants")
+
+
+  }
+
+  getGender(ffqparent:FFQParent,parentResults:FFQResultsResponse[]) {
+
+    // console.log("Hi?");
+
+    // console.log("parentResults.length: ",parentResults.length);
+
+    for(let i = 0; i < parentResults.length; i++) {
+
+      // console.log("ffqparent.username: ",ffqparent.username);
+      // console.log("parentResults[i].patientName: ",parentResults[i].patientName);
+
+      if(ffqparent.username == parentResults[i].patientName) {
+
+        // console.log("Hello?");
+
+        for(let j = 0; j < ffqparent.children.length; i++) {
+          // console.log("typeof(parentResults[i].ageInMonths): ",typeof(parentResults[i].ageInMonths));
+          // console.log("typeof(ffqparent.children[j].childData[0].age)",typeof(ffqparent.children[j].childData[0].age));
+          if(parentResults[i].ageInMonths == parseInt(ffqparent.children[j].childData[0].age)) {
+            return parentResults[i].gender;
+          }
+        }
+
+      }
+
+    }
+
+
+  }
+
+  getAllGenders(results:FFQResultsResponse[]) {
+
+    let returnable = [];
+
+    let wIndex = 0;
+
+    for(let i = results.length-1; i >= 0; i--) {
+
+
+        returnable[wIndex] = results[i].gender;
+
+         wIndex++;
+    }
+
+    return returnable;
+
+
+  }
+
+   allIDS2() {
+
+    let returnable = [];
+
+    for(let i = 0; i < this.ffqParticipantList.length; i++) {
+
+      for(let j = 0; j < this.ffqParticipantList[i].children.length; j++) {
+
+          returnable.push(this.ffqParticipantList[i].userId);
+
+      }
+
+    }
+
+    console.log("allIDS: "+returnable);
+
+    return returnable;
+
+  }
+
+  allIDS() {
+
+    let returnable = [];
+
+    for(let i = 0; i < this.ffqparentList.length; i++) {
+
+      for(let j = 0; j < this.ffqparentList[i].children.length; j++) {
+
+          returnable.push(this.ffqparentList[i].userId);
+
+      }
+
+    }
+
+    // console.log("allIDS: "+returnable);
+
+    return returnable;
+
+  }
+
+  allGenders2() {
+
+    let returnable = [];
+
+    for(let i = 0; i < this.participantResults.length; i++) {
+      returnable.push(this.participantResults[i].gender);
+    }
+
+    console.log("allGenders(): "+returnable);
+
+    return returnable;
+
+  }
+
+  allGenders() {
+
+    let returnable = [];
+
+    for(let i = 0; i < this.parentResults.length; i++) {
+      returnable.push(this.parentResults[i].gender);
+    }
+
+    // console.log("allGenders(): "+returnable);
+
+    return returnable;
+
+  }
+
+  allWeights2() {
+
+    let returnables = this.allChildData2();
+
+    let all_weights = [];
+
+    for(let i = 0; i < returnables.length; i++) {
+      all_weights[i] = returnables[i].weight;
+    }
+
+    return all_weights;
+
+  }
+
+  allWeights() {
+
+    let returnables = this.allChildData();
+
+    let all_weights = [];
+
+    for(let i = 0; i < returnables.length; i++) {
+      all_weights[i] = returnables[i].weight;
+    }
+
+    return all_weights;
+
+  }
+
+  allHeights2() {
+
+    let returnables = this.allChildData2();
+
+    let all_heights = [];
+
+    for(let i = 0; i < returnables.length; i++) {
+      all_heights[i] = returnables[i].height;
+    }
+
+    return all_heights;
+
+  }
+
+  allHeights() {
+
+    let returnables = this.allChildData();
+
+    let all_heights = [];
+
+    for(let i = 0; i < returnables.length; i++) {
+      all_heights[i] = returnables[i].height;
+    }
+
+    return all_heights;
+
+  }
+
+  allChildData2() {
+
+    let returnable:any[] = [];
+
+    for(let i = 0; i < this.ffqParticipantList.length; i++) {
+      for(let j = 0; j < this.ffqParticipantList[i].children.length; j++) {
+
+        returnable.push(this.ffqParticipantList[i].children[j].childData[0]);
+
+      }
+    }
+
+
+    // console.log("allChildData() blabla .weight : "+returnable[0].weight,returnable[1].weight,returnable[2].weight,returnable[3].weight);
+    // console.log("allChildData() blabla .height : "+returnable[0].height,returnable[1].height,returnable[2].height,returnable[3].height);
+
+
+    return returnable;
+
+
+
+  }
+
+  allChildData() {
+
+    let returnable:any[] = [];
+
+    for(let i = 0; i < this.ffqparentList.length; i++) {
+      for(let j = 0; j < this.ffqparentList[i].children.length; j++) {
+
+        returnable.push(this.ffqparentList[i].children[j].childData[0]);
+
+      }
+    }
+
+
+    // console.log("allChildData() blabla .weight : "+returnable[0].weight,returnable[1].weight,returnable[2].weight,returnable[3].weight);
+    // console.log("allChildData() blabla .height : "+returnable[0].height,returnable[1].height,returnable[2].height,returnable[3].height);
+
+
+    return returnable;
+
+  }
+
+  ages2() {
+
+    let returnable = [];
+
+    for(let i = 0; i < this.ffqParticipantList.length; i++) {
+
+        for(let j = 0; j < this.ffqParticipantList[i].children.length; j++) {
+          returnable.push(this.ffqParticipantList[i].children[j].childData[0].age);
+        }
+
+    }
+
+    // console.log("ages(): "+returnable);
+
+    return returnable;
+
+  }
+
+  ages() {
+
+    let returnable = [];
+
+    for(let i = 0; i < this.ffqparentList.length; i++) {
+
+        for(let j = 0; j < this.ffqparentList[i].children.length; j++) {
+          returnable.push(this.ffqparentList[i].children[j].childData[0].age);
+        }
+
+    }
+
+    // console.log("ages(): "+returnable);
+
+    return returnable;
+
+  }
+
+  patientNames(results:FFQResultsResponse[]) {
+
+      let returnable = [];
+
+      results.forEach(result => {
+
+        returnable.push(result.patientName);
+
+      })
+
+      console.log("patientNames() : "+returnable);
+
+      return returnable;
+
+  }
+
+  checkerArray(patientName:string[], age:number[],results:FFQResultsResponse[]) {
+
+    let returnable = [];
+
+    let i = 0;
+
+    let date = "";
+
+    // console.log("parentResults: "+results);
+
+    while(returnable.length < results.length) {
+
+    results.forEach(result => {
+
+      // console.log("result.ageInMonths: "+result.ageInMonths);
+      // console.log("result.patientName: "+result.patientName);
+      // console.log("age[i]:"+age[i]);
+      // console.log("patientName[i]: ",patientName[i]);
+
+      if(result.ageInMonths == age[age.length-i-1] && result.patientName == patientName[age.length-i-1]) {
+        date = result.date;
+        returnable.push(date);
+        i++;
+      }
+
+    })
+
+    }
+
+    console.log("checkerArray(): "+returnable);
+
+    return returnable;
+
+  }
+
+  type(input:any) {
+    return typeof(input);
+  }
+
+  private setFoodList() {
+    this.results.forEach(result => {
+      const recommendedFood: FFQFoodRecommendations[] = [];
+      const dqisScore: FFQDQIS[] = [];
+
+      this.foodRecommendationsService.getFoodRecommendationsByQuestionnaireId(result.questionnaireId).subscribe(
+        data => {
+          recommendedFood.push(data);
+        },
+      );
+      this.dqisService.getDQISByQuestionnaireId(result.questionnaireId).subscribe(
+        data => {
+          dqisScore.push(data);
+        },
+      );
+      result.foodRecList = recommendedFood;
+      result.dqis = dqisScore;
+
+
+    });
+  }
+
+  getParentUsernameById(userId: string) {
+    return this.ffqparentList.find(parent => parent.userId === userId)?.username ?? "[not found]";
+  }
+
+  getChildData(child: FFQChildren): FFQChildData[] {
+    return child.childData;
+  }
+
+  @ViewChild("chart") chart: ChartComponent;
+  public chartOptions: Partial<ChartOptions>;
+
+
+  //who
+
+  //boys
+  //bmi
+  BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM: any[];
+
+  //height - age
+  BOYS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM: any[];
+  BOYS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM: any[];
+
+  //weight - age
+  BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM: any[];
+  BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM: any[];
+
+  //weight - height
+  BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM: any[];
+  BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM: any[];
+
+  //weight - height - mixed
+  BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_KG_VS_IN: any[];
+  BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_CM: any[];
+
+  //girls
+
+  //bmi
+  GIRLS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM: any[];
+
+  //height - age
+  GIRLS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM: any[];
+  GIRLS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM: any[];
+
+  //weight - age
+  GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM: any[];
+  GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM: any[];
+
+  //weight - height
+  GIRLS_WEIGHT_FOR_LENGTH_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM: any[];
+  GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM: any[];
+
+  //weight - height - mixed
+  GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_CM: any[];
+  GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_KG_VS_IN: any[];
+
+  // constant to validate the max and min values allowed
+  readonly MAX_AGE_MONTHS = 24;
+  readonly MIN_AGE_MONTHS = 0;
+  // these are mutable depends on the units of measurements, by default they are in metric system.
+  MAX_HEIGHT = 110;
+  MIN_HEIGHT = 40;
+  MAX_WEIGHT = 30;
+  MIN_WEIGHT = 1;
+
+  // determines the measurement units selected by the user
+  heightUnitOptions: UnitsOfMeasurement = UnitsOfMeasurement.cm;
+  weightUnitOptions: UnitsOfMeasurement = UnitsOfMeasurement.kg;
+
+  // curent child data entered by the user
+  currentChildName: string = "";
+  currentChildHeight: string = "";
+  currentChildWeight: string = "";
+  currentChildAge: string = "";
+  // currentChildGender: Gender.NotAssigned;
+
+  currentChildGender = "a";
+
+  // current child
+  currentChild: FFQChildren = {} as FFQChildren;
+
+  // children list to avoid working with currentParent.children
+  // childrenList: FFQChildren[] = [];
+
+  // // current parent, data retrived from db
+  // currentParent: FFQParentResponse;
+
+  //interpretation message
+  interMessage: string = " ";
+
+  //message color y= yellow, g= green, r= red
+  interMessageColor: string = " ";
+
+  myDocDefinition: any;
+  loading: boolean = false;
+  color: ThemePalette = "primary";
+  mode: ProgressSpinnerMode = "indeterminate";
+  value = 65;
+
+  chosenChartOption: ChartOption = ChartOption.NotAssigned;
+
+  currentGrowthChartData: GrowthChartData = GrowthChartData.NONE;
+
+  lang: boolean = true;
+
+  dataWasAdded: boolean = true;
+  xaxis: any;
+  yaxis: any;
+
 
   public generateData(count, yrange) {
     var i = 0;
@@ -549,10 +1251,6 @@ export class GrowthChartsPageComponent implements OnInit {
 
   findXPointsOfQuadrilateral(babyX: number, percentileData: any): [number, number]
   {
-    // if percentileDataCode = 0, then use GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM
-    // if percentileDataCode = 1, then use GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM
-    // if percentileDataCode = 2, then use BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM
-    // if percentileDataCode = 3, then use BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM
 
     let i = 0;
 
@@ -574,7 +1272,6 @@ export class GrowthChartsPageComponent implements OnInit {
   checkIfPointInQuadrilateral(ptOfInterest: [number, number], upperLeftPt: [number, number], upperRightPt: [number, number],
     lowerLeftPt: [number, number], lowerRightPt: [number, number]) : number
   {
-    // prior to running this, ensure that the baby data point is within the x bounds of the 4 points of the quadrilateral passed to this function
 
     let baby_x = ptOfInterest[0];
     let baby_y = ptOfInterest[1];
@@ -587,7 +1284,6 @@ export class GrowthChartsPageComponent implements OnInit {
 
     if((baby_x >= left_x) && (baby_x <= right_x))
     {
-      // in x range of the quadrilateral
       let slopeUpperLine = (upperRightPt_y - upperLeftPt_y) / (right_x - left_x);
       let yIntUpperLine = upperRightPt_y - (slopeUpperLine * right_x);
       let yUpperBound = (slopeUpperLine * baby_x) + yIntUpperLine;
@@ -599,25 +1295,21 @@ export class GrowthChartsPageComponent implements OnInit {
 
       if((baby_y <= yUpperBound) && (baby_y >= yLowerBound))
       {
-        // baby data point lies inside the quadrilateral
         return 1;
       }
 
       else if(baby_y > yUpperBound)
       {
-        // baby data point lies above the quadrilateral
         return 2;
       }
 
       else if(baby_y < yLowerBound)
       {
-        // baby data point lies below the quadrilateral
         return 3;
       }
 
       else
       {
-        // unknown case
         return 0;
       }
     }
@@ -633,12 +1325,14 @@ export class GrowthChartsPageComponent implements OnInit {
     let index = this.currentParent.children.findIndex(
       (x) => x.name === this.currentChildName
     );
-    // console.log("this.currentParent: ",this.currentParent);
-    // console.log("this.currentParent.children: ",this.currentParent.children);
-    // console.log("this.currentChildName: ",this.currentChildName);
+    for(let i = 0; i < this.ffqparentList.length; i++) {
+      let index1 = this.ffqparentList[i].children.findIndex(
+        (x) => x.name == this.currentChildName
+      );
+    }
+
     if (index > -1) {
       this.currentParent.children[index] = this.currentChild;
-      alert(this.currentChild);
     } else {
       this, this.currentParent.children.push(this.currentChild);
     }
@@ -652,10 +1346,7 @@ export class GrowthChartsPageComponent implements OnInit {
     console.log("Working in progress submitting Chart options");
   }
 
-  /*
-    The min and max values of heigth and weight change depending on the units of measurements.
-    The charts need to update their labels that is why the method onTypeChartChange is called.
-  */
+
   onUnitsChange(typeOfChart: ChartOption) {
     if (
       this.heightUnitOptions === UnitsOfMeasurement.cm &&
@@ -690,16 +1381,9 @@ export class GrowthChartsPageComponent implements OnInit {
       this.MAX_WEIGHT = 30;
       this.MIN_WEIGHT = 1;
     }
-    this.onTypeChartChange(typeOfChart);
   }
 
-  /*
-    Adds points to the charts. The points are saved using the metric system,
-    so that is why the data is converted to the metric system. The WHO data is provided using the metric system.
-    To plot the data with different units of measurements the data is converted from the metric system
-    to us customary system in case of inches and pounds. After adding the data the method plottingData()
-    to plot the new data
-  */
+
   onAddingData(childBodyMeasurementsForm: NgForm) {
     let ageValue = Number.parseInt(
       childBodyMeasurementsForm.controls["ageControl"].value
@@ -782,288 +1466,6 @@ export class GrowthChartsPageComponent implements OnInit {
     }
   }
 
-  /*
-  It is easier to copy the data from the original charts and add all the data entered by
-  the user than modify the data from the charts adding and updating the data entered by the user. In other words,
-  redoing the data using the original charts and the data from the current children (childdata) is easier than
-  create a data a structure to handle the necessary changes. By question of time the data structure
-  is not implemented. The speed to process and handle the data is not significant in
-  the presented magnitud. However, an improvement can be avoid an intensive use of
-  ram copying constantly the same data.
-  */
-  // plottingData() {
-  //   let newResult = [];
-
-  //   /* depending on the type of charts we will choose the correct chart taking into
-  //   account unit of measurements and gender */
-  //   switch (this.currentGrowthChartData) {
-  //     case GrowthChartData.BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM:
-  //       if (this.currentChild.childData.length !== 0) {
-  //         /*
-  //         the data needs to be copy using a deep copy method to avoid a reference
-  //         modification of the data by mistake
-  //         */
-  //         newResult = DataManipulation.getDeepCopy(
-  //           BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM
-  //         );
-  //         newResult.push(this.currentChild.getBMIChartData());
-  //       } else newResult = BOYS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
-  //       break;
-  //     case GrowthChartData.BOYS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM:
-  //       if (this.currentChild.childData.length !== 0) {
-  //         newResult = DataManipulation.getDeepCopy(
-  //           BOYS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM
-  //         );
-  //         newResult.push(
-  //           this.currentChild.getHeightChartData(this.heightUnitOptions)
-  //         );
-  //       } else newResult = BOYS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
-  //       break;
-  //     case GrowthChartData.BOYS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM:
-  //       if (this.currentChild.childData.length !== 0) {
-  //         newResult = DataManipulation.getDeepCopy(
-  //           BOYS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM
-  //         );
-  //         newResult.push(
-  //           this.currentChild.getHeightChartData(this.heightUnitOptions)
-  //         );
-  //       } else
-  //         newResult =
-  //           BOYS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM;
-  //       break;
-  //     case GrowthChartData.BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM:
-  //       if (this.currentChild.childData.length !== 0) {
-  //         newResult = DataManipulation.getDeepCopy(
-  //           BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM
-  //         );
-
-  //         newResult.push(
-  //           this.currentChild.getWeightChartData(this.weightUnitOptions)
-  //         );
-  //       } else newResult = BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
-  //       break;
-  //     case GrowthChartData.BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM:
-  //       if (this.currentChild.childData.length !== 0) {
-  //         newResult = DataManipulation.getDeepCopy(
-  //           BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM
-  //         );
-  //         newResult.push(
-  //           this.currentChild.getWeightChartData(this.weightUnitOptions)
-  //         );
-  //       } else
-  //         newResult =
-  //           BOYS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM;
-  //       break;
-  //     case GrowthChartData.BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM:
-  //       if (this.currentChild.childData.length !== 0) {
-  //         newResult = DataManipulation.getDeepCopy(
-  //           BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM
-  //         );
-  //         newResult.push(
-  //           this.currentChild.getWeightHeightChartData(
-  //             this.heightUnitOptions,
-  //             this.weightUnitOptions
-  //           )
-  //         );
-  //       } else
-  //         newResult = BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
-  //       break;
-  //     case GrowthChartData.BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM:
-  //       if (this.currentChild.childData.length !== 0) {
-  //         newResult = DataManipulation.getDeepCopy(
-  //           BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM
-  //         );
-  //         newResult.push(
-  //           this.currentChild.getWeightHeightChartData(
-  //             this.heightUnitOptions,
-  //             this.weightUnitOptions
-  //           )
-  //         );
-  //       } else
-  //         newResult =
-  //           BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM;
-  //       break;
-  //     case GrowthChartData.BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_KG_VS_IN:
-  //       if (this.currentChild.childData.length !== 0) {
-  //         newResult = DataManipulation.getDeepCopy(
-  //           BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_KG_VS_IN
-  //         );
-  //         newResult.push(
-  //           this.currentChild.getWeightHeightChartData(
-  //             this.heightUnitOptions,
-  //             this.weightUnitOptions
-  //           )
-  //         );
-  //       } else
-  //         newResult =
-  //           BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_KG_VS_IN;
-  //       break;
-  //     case GrowthChartData.BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_CM:
-  //       if (this.currentChild.childData.length !== 0) {
-  //         newResult = DataManipulation.getDeepCopy(
-  //           BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_CM
-  //         );
-  //         newResult.push(
-  //           this.currentChild.getWeightHeightChartData(
-  //             this.heightUnitOptions,
-  //             this.weightUnitOptions
-  //           )
-  //         );
-  //       } else
-  //         newResult =
-  //           BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_CM;
-  //       break;
-  //     case GrowthChartData.BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM:
-  //       if (this.currentChild.childData.length !== 0) {
-  //         newResult = DataManipulation.getDeepCopy(
-  //           BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM
-  //         );
-  //         newResult.push(
-  //           this.currentChild.getWeightHeightChartData(
-  //             this.heightUnitOptions,
-  //             this.weightUnitOptions
-  //           )
-  //         );
-  //       } else
-  //         newResult =
-  //           BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM;
-  //       break;
-  //     case GrowthChartData.GIRLS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM:
-  //       if (this.currentChild.childData.length !== 0) {
-  //         newResult = DataManipulation.getDeepCopy(
-  //           GIRLS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM
-  //         );
-  //         newResult.push(this.currentChild.getBMIChartData());
-  //       } else newResult = GIRLS_BMI_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
-  //       break;
-  //     case GrowthChartData.GIRLS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM:
-  //       if (this.currentChild.childData.length !== 0) {
-  //         newResult = DataManipulation.getDeepCopy(
-  //           GIRLS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM
-  //         );
-  //         newResult.push(
-  //           this.currentChild.getHeightChartData(this.heightUnitOptions)
-  //         );
-  //       } else
-  //         newResult = GIRLS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
-  //       break;
-  //     case GrowthChartData.GIRLS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM:
-  //       if (this.currentChild.childData.length !== 0) {
-  //         newResult = DataManipulation.getDeepCopy(
-  //           GIRLS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM
-  //         );
-  //         newResult.push(
-  //           this.currentChild.getHeightChartData(this.heightUnitOptions)
-  //         );
-  //       } else
-  //         newResult =
-  //           GIRLS_HEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM;
-  //       break;
-  //     case GrowthChartData.GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM:
-  //       if (this.currentChild.childData.length !== 0) {
-  //         newResult = DataManipulation.getDeepCopy(
-  //           GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM
-  //         );
-  //         newResult.push(
-  //           this.currentChild.getWeightChartData(this.weightUnitOptions)
-  //         );
-  //       } else
-  //         newResult = GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
-  //       break;
-
-  //     case GrowthChartData.GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM:
-  //       if (this.currentChild.childData.length !== 0) {
-  //         newResult = DataManipulation.getDeepCopy(
-  //           GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM
-  //         );
-  //         newResult.push(
-  //           this.currentChild.getWeightChartData(this.weightUnitOptions)
-  //         );
-  //       } else
-  //         newResult =
-  //           GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM;
-  //       break;
-  //     case GrowthChartData.GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM:
-  //       if (this.currentChild.childData.length !== 0) {
-  //         newResult = DataManipulation.getDeepCopy(
-  //           GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM
-  //         );
-  //         newResult.push(
-  //           this.currentChild.getWeightHeightChartData(
-  //             this.heightUnitOptions,
-  //             this.weightUnitOptions
-  //           )
-  //         );
-  //       } else
-  //         newResult = GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
-  //       break;
-  //     case GrowthChartData.GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM:
-  //       if (this.currentChild.childData.length !== 0) {
-  //         newResult = DataManipulation.getDeepCopy(
-  //           GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM
-  //         );
-  //         newResult.push(
-  //           this.currentChild.getWeightHeightChartData(
-  //             this.heightUnitOptions,
-  //             this.weightUnitOptions
-  //           )
-  //         );
-  //       } else
-  //         newResult =
-  //           GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM;
-  //       break;
-  //     case GrowthChartData.GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_KG_VS_IN:
-  //       if (this.currentChild.childData.length !== 0) {
-  //         newResult = DataManipulation.getDeepCopy(
-  //           GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_KG_VS_IN
-  //         );
-  //         newResult.push(
-  //           this.currentChild.getWeightHeightChartData(
-  //             this.heightUnitOptions,
-  //             this.weightUnitOptions
-  //           )
-  //         );
-  //       } else
-  //         newResult =
-  //           GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_KG_VS_IN;
-  //       break;
-  //     case GrowthChartData.GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_CM:
-  //       if (this.currentChild.childData.length !== 0) {
-  //         newResult = DataManipulation.getDeepCopy(
-  //           GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_CM
-  //         );
-  //         newResult.push(
-  //           this.currentChild.getWeightHeightChartData(
-  //             this.heightUnitOptions,
-  //             this.weightUnitOptions
-  //           )
-  //         );
-  //       } else
-  //         newResult =
-  //           GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_MIXED_SYSTEM_LB_VS_CM;
-  //       break;
-  //     case GrowthChartData.GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM:
-  //       if (this.currentChild.childData.length !== 0) {
-  //         newResult = DataManipulation.getDeepCopy(
-  //           GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM
-  //         );
-  //         newResult.push(
-  //           this.currentChild.getWeightHeightChartData(
-  //             this.heightUnitOptions,
-  //             this.weightUnitOptions
-  //           )
-  //         );
-  //       } else
-  //         newResult =
-  //           GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM;
-  //       break;
-  //   }
-
-  //   this.results = newResult;
-  // }
-
-
-
   plottingData() {
     let babyData: [number, number][];
     let babyName = this.currentChild.name;
@@ -1075,11 +1477,7 @@ export class GrowthChartsPageComponent implements OnInit {
       this.weightUnitOptions
     );
 
-    console.log(rawBabyData);
-
     babyData = this.currentChild.extractBabyData(rawBabyData);
-
-    console.log(babyData);
     let seriesData = [];
     let babyChartTitle = "";
     let babyChartYAxisTitle = "";
@@ -1304,7 +1702,6 @@ export class GrowthChartsPageComponent implements OnInit {
           babyChartXAxisTooltip = " cm";
 
           percentileData = BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
-          console.log("babyData[babyData.length-1][0]"+babyData[babyData.length-1][0]);
           xBounds = this.findXPointsOfQuadrilateral( babyData[babyData.length - 1][0] , percentileData);
 
           let ptOfInterest : [number, number];
@@ -1314,11 +1711,6 @@ export class GrowthChartsPageComponent implements OnInit {
           let lowerRightPt : [number, number];
 
           ptOfInterest = babyData[babyData.length - 1];
-          console.log("ptOfInterest"+ptOfInterest);
-          console.log("percentileData[1].data: "+percentileData[1].data);
-          console.log("percentileData[1].data[i]: "+percentileData[1].data[0][0]);
-          console.log("percentileData[1].data[i]: "+percentileData[1].data[0][1]);
-
           upperLeftPt = [percentileData[1].data[xBounds[0]][0], percentileData[1].data[xBounds[0]][1]]; // point with x <= baby_x on 98th percentile line
           upperRightPt = [percentileData[1].data[xBounds[1]][0], percentileData[1].data[xBounds[0]][1]]; // point with x >= baby_x on 98th percentile line
           lowerLeftPt = [percentileData[3].data[xBounds[0]][0], percentileData[3].data[xBounds[0]][1]]; // point with x <= baby_x on 90th percentile line
@@ -1510,9 +1902,6 @@ export class GrowthChartsPageComponent implements OnInit {
         show: false
       },
       stroke: {
-        // curve: "straight",
-        // colors: ["#000"],
-        // width: [3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
         curve: "straight",
         colors: ["#000000"],
         width: [3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
@@ -1554,36 +1943,6 @@ export class GrowthChartsPageComponent implements OnInit {
           sizeOffset: 3
         }
       },
-      // yaxis: [
-      //   {
-      //     show: true,
-      //     tickAmount: 10,
-      //     labels: {
-      //       show: true,
-      //       align: 'right',
-      //       minWidth: 0,
-      //       maxWidth: 4,
-      //       style: {
-      //         colors: [],
-      //         fontSize: '12px',
-      //         fontFamily: 'Helvetica, Arial, sans-serif',
-      //         fontWeight: 400,
-      //         cssClass: 'apexcharts-yaxis-label',
-      //       }
-      //     },
-      //     title: {
-      //       text: babyChartYAxisTitle,
-      //       style: {
-      //         color: "000",
-      //         fontSize: '12px',
-      //         fontFamily: 'Helvetica, Arial, sans-serif',
-      //         fontWeight: 400,
-      //         cssClass: 'apexcharts-yaxis-title',
-      //       }
-      //       // forceNiceScale: true
-      //     }
-      //   }
-      // ],
       yaxis: [
         {
           title: {
@@ -1662,28 +2021,6 @@ export class GrowthChartsPageComponent implements OnInit {
 
   }
 
-  /*
-    When the parent select the child to work on his data it is necessary to have into account different cases:
-    There is not data available for any child. There is  data from others children but there is not data to the
-    child in question or there is data available from the child.
-  */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   onChildrenChange() {
     // there is not data at all
     if (this.childrenList.length === 0) {
@@ -1718,81 +2055,8 @@ export class GrowthChartsPageComponent implements OnInit {
         this.currentChild = this.childrenList[index];
       }
     }
-    this.onTypeChartChange(this.chosenChartOption);
+    // this.onTypeChartChange(this.chosenChartOption);
   }
-
-
-
-
-
-
-
-
-
-
-
-
-  // the event is triggered when the type of chart is changed
-
-
-
-
-
-  onTypeChartChange(typeOfChart: string) {
-    switch (typeOfChart) {
-      case ChartOption.BMI: {
-        this.getMBIChart(this.currentChildGender);
-        this.yaxis.title.text = this.translate.instant(
-          `${this.currentChildGender} BMI - Metric System`
-        );
-        this.xaxis.title.text = this.translate.instant("Age (month)");
-        break;
-      }
-      case ChartOption.HeightAge: {
-        this.getHeightAgeChart(this.currentChildGender);
-        this.xaxis.title.text = this.translate.instant("Age (month)");
-        this.yaxis.title.text =
-          this.translate.instant(`${this.currentChildGender} Height`) +
-          ` (${this.heightUnitOptions})`;
-        break;
-      }
-      case ChartOption.WeightAge: {
-        this.getWeightAgeChart(this.currentChildGender);
-        this.xaxis.title.text = this.translate.instant("Age (month)");
-        this.yaxis.title.text =
-          this.translate.instant(`${this.currentChildGender} Weight`) +
-          ` (${this.weightUnitOptions})`;
-        break;
-      }
-      case ChartOption.WeightHeight: {
-        this.getWeightHeightChart(this.currentChildGender);
-        this.xaxis.title.text =
-          this.translate.instant(`${this.currentChildGender} Height`) +
-          ` (${this.heightUnitOptions})`;
-        this.yaxis.title.text =
-          this.translate.instant(`${this.currentChildGender} Weight`) +
-          ` (${this.weightUnitOptions})`;
-        break;
-      }
-    }
-    this.plottingData();
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   onLangChange() {
@@ -2042,23 +2306,7 @@ export class GrowthChartsPageComponent implements OnInit {
     //console.log("Deactivate", JSON.parse(JSON.stringify(data)));
   }
 
-  ngOnInit(): void {
-    const parent: Observable<FFQParentResponse> = this.parentService.getParent(
-      this.authenticationService.currentUserId
-    );
-    parent.subscribe((parent) => {
-      this.currentParent = parent;
-    });
 
-    this.getAllResults();
-
-  }
-
-  /*
-    Due the fact that we don't have a bmi data from the who webside for the us customary system,
-    an approach to solve the issue is to convert the units of measurements from lb to kg and from
-     in to meters to calculate the bmi data provided by the parent
-   */
   getMBIChart(childGender: string) {
     if (childGender === Gender.Male) {
       this.currentGrowthChartData =
@@ -2244,109 +2492,143 @@ export class GrowthChartsPageComponent implements OnInit {
     }
     if (parseFloat(pointX) < parseFloat(dataChart[0].name)) return 0;
     if (parseFloat(pointX) > parseFloat(dataChart[dataChart.length - 1].name))
-      return dataChart.length - 1;
+      return dataChart.length-1;
   }
 
-  //temporary solution for getting the data of the children to the table
-  getChildData(child: FFQChildren): FFQChildData[] {
-    return child.childData;
+  myDataExt(ffqparentList:FFQParent[]): any {
+
+    // let returnableOne: [string];
+
+    // let returnableTwo: [string];
+
+    // for(let parent of ffqparentList) {
+
+    //   for(let j = 0; j < this.ffqparentList.length; j++) {
+    //     returnableOne.push(parent.children[parent.children.length-j-1].childData[0].weight);
+    //     returnableOne.push(parent.children[parent.children.length-j-1].childData[0].height);
+    //   }
+
+    // }
+
+
+    // let returnable = [returnableOne,returnableTwo];
+
+    // return returnable;
+
+
+    /*
+    let bro = [];
+
+    for(let i = 0; i < 10; i++) {
+        bro[i] = i;
+    }
+
+    return bro;
+
+    */
+
+    let parents = [];
+
+    let i = 0;
+
+    const info = {
+      name: 20,
+      information: 20
+    };
+
+    for(let parent of ffqparentList) {
+
+      for(let i = 0; i < parent.children.length; i++) {
+
+      }
+
+
+    }
+
+    for(let parent of ffqparentList) {
+      parents[i++] = parent;
+    }
+
+    return parents;
+
   }
 
-  private getAllResults() {
-    const oldList: Observable<FFQResultsResponse[]> = this.resultsService.getAllResults();
-    const reqList: string[] = NutrientConstants.NUTRIENT_NAMES;
+  setDudeVariable(ffqparentList:FFQParent[]):void {
 
-    oldList.subscribe(m => {
+      this.dude = this.myDataExt(this.ffqparentList);
 
-        m.forEach(element => {
+      console.log("Working!")
 
-          if (element.userChoices.length > 0) {
-            if (element.userChoices[0].name === 'Breast milk') {
-              this.breastMilkFlag.push(element.questionnaireId);
+  }
+
+  percentileCalculator(height:number,weight:number) : string {
+
+    let percentileData = BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
+
+    let percentileDataTwo = GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_METRIC_SYSTEM;
+
+    let minimumDifference = 1000000;
+
+    let percentileToReturn = "";
+
+    if(this.currentChildGender != Gender.NotAssigned) {
+
+      // console.log("this.currentChildGender: "+this.currentChildGender);
+
+      switch(this.currentChildGender) {
+
+        case "male":
+
+          for(let i = 0; i < 11; i++) {
+
+            // console.log("Another time?");
+            // console.log("percentileData[i].data: "+percentileData[i].data);
+
+            for(let j = 0; j < percentileData[i].data.length; j++) {
+
+            //   console.log("percentileData[i].data[j][0]: ",percentileData[i].data[j][0]);
+            // console.log("height: "+height);
+            // console.log("weight: "+weight);
+            // console.log("percentileData[i].data[j][1]: "+percentileData[i].data[j][1]);
+
+
+              if(percentileData[i].data[j][0] == height) {
+                  if(Math.abs(weight-percentileData[i].data[j][1]) < minimumDifference) {
+                    minimumDifference = Math.abs(weight-percentileData[i].data[j][1]);
+                    percentileToReturn = percentileData[i].name;
+                  }
+              }
+
             }
+
+        }
+
+          break;
+
+        case "female":
+
+          for(let i = 0; i < 11; i++) {
+
+              for(let j = 0; j < percentileDataTwo[i].data.length; j++) {
+
+                if(percentileData[i].data[j][0] == height) {
+                    if(Math.abs(weight-percentileDataTwo[i].data[j][1]) < minimumDifference) {
+                    minimumDifference = Math.abs(weight-percentileData[i].data[j][1]);
+                    percentileToReturn = percentileData[i].name;
+                    }
+                }
+
+              }
+
           }
-          const newWeeklyMap = new Map<string, number>();
-          const newDailyMap = new Map<string, number>();
-          const weeklyMap = element.weeklyTotals;
-          const dailyMap = element.dailyAverages;
 
-          reqList.forEach(a => {
-            if (dailyMap[a]) {
-              newDailyMap.set(a, dailyMap[a]);
-            }
-            else {
-              newDailyMap.set(a, 0);
-            }
-            if (weeklyMap[a]) {
-              newWeeklyMap.set(a, weeklyMap[a]);
-            }
-            else {
-              newWeeklyMap.set(a, 0);
-            }
+          break;
 
-          });
+    }
 
-          element.weeklyTotals = newWeeklyMap;
-          element.dailyAverages = newDailyMap;
-        });
+    }
 
-        this.results = m.reverse();
-        this.parentResults = this.results.filter(t => t.userType === 'parent').map(result => ({
-          ...result,
-          username: this.getParentUsernameById(result.userId)
-        }));
-        // this.participantResults = this.results.filter(t => t.userType === 'participant');
-        this.setFoodList();
-      }
-    );
-  }
-
-  getParentUsernameById(userId: string) {
-    return this.ffqparentList.find(parent => parent.userId === userId)?.username ?? "[not found]";
-  }
-
-  private setFoodList() {
-    this.results.forEach(result => {
-      const recommendedFood: FFQFoodRecommendations[] = [];
-      const dqisScore: FFQDQIS[] = [];
-
-      this.foodRecommendationsService.getFoodRecommendationsByQuestionnaireId(result.questionnaireId).subscribe(
-        data => {
-          recommendedFood.push(data);
-        },
-      );
-      this.dqisService.getDQISByQuestionnaireId(result.questionnaireId).subscribe(
-        data => {
-          dqisScore.push(data);
-        },
-      );
-      result.foodRecList = recommendedFood;
-      result.dqis = dqisScore;
-
-
-    });
-  }
-
-  checker(patientName:string, age:number,results:FFQResultsResponse[]):string {
-    let date1 = "";
-
-    results.forEach(result => {
-
-      // console.log("result.ageInMonths: "+result.ageInMonths);
-      // console.log("result.patientName: "+result.patientName);
-      // console.log("patientName: "+patientName);
-      // console.log("age: "+age);
-
-      if(result.ageInMonths == age && result.patientName == patientName) {
-        date1 = result.date;
-        this.setChildGender(result.gender);
-        return date1;
-      }
-
-    })
-
-    return date1;
-
+      return percentileToReturn;
   }
 
   setChildGender(setable):void {
@@ -2373,58 +2655,77 @@ export class GrowthChartsPageComponent implements OnInit {
     // console.log("This went here");
   }
 
-   getAllChildData():any {
-
-    let childData = [];
-
-    for(let i = 0; i < this.currentParent.children.length; i++) {
-      childData.push(this.currentParent.children[i].childData);
-    }
-
-    return childData;
-
+  floorMethod(a:number) {
+    return Math.floor(a);
   }
 
-  getAllDates() {
+  important(ffqparentList:FFQParent[]) : any{
+      let parentArray = [];
 
-    let indexes = 0;
-
-    let dates = []
-
-    for(let i = this.parentResults.length-1; i >= 0; i--) {
-
-        if(this.parentResults[i].patientName == this.currentParent.username) {
-          dates[indexes++] = this.parentResults[i].date;
-        }
-
-
-    }
-
-    return dates;
-
-  }
-
-  savePdf() {
-
-    this.exportService.exportFFQGrowthCharts(this.currentParent,this.getAllDates(),this.giveCurrentChildGenders(),"Growth_Chart");
-
-  }
-
-  giveCurrentChildGenders() {
-
-    let anotherIndex = 0;
-
-    let returnableGenders = [];
-
-    for(let i = 0; i < this.parentResults.length; i++) {
-      if(this.currentParent.userId == this.parentResults[i].userId) {
-        returnableGenders[anotherIndex++] = this.parentResults[i].gender;
+      for(let i = 0; i < ffqparentList.length; i++) {
+        parentArray[i] = ffqparentList[i].children.length;
       }
-    }
 
-    return returnableGenders;
+      console.log("parentArray: "+ffqparentList[0].children.length);
+      console.log("This went there");
+
+      return parentArray;
 
   }
+
+  importanttwo(ffqparent:FFQParent, k:number) : number {
+
+    let toReturn = 0;
+
+    console.log("k: "+k);
+    for(let i = 0; i < this.childrenPerParentList.length; i++) {
+      if(k >= 0 && k < this.childrenPerParentList.length) {
+        toReturn = this.childrenPerParentList[k];
+      }
+
+    }
+
+    return toReturn;
+
+  }
+
+  setChildPerParentList():void {
+    this.childrenPerParentList = this.important(this.ffqparentList);
+  }
+
+  create(ffqparentList:FFQParent[],j:number):any {
+    return [ffqparentList[j].children];
+  }
+
+  createArray(a:any):any {
+    let dude = new Array(a.length);
+    return dude;
+  }
+
+  checker(patientName:string, age:number,results:FFQResultsResponse[]):string {
+    let date1 = "";
+
+    results.forEach(result => {
+
+      // console.log("result.ageInMonths: "+result.ageInMonths);
+      // console.log("result.patientName: "+result.patientName);
+      // console.log("patientName: "+patientName);
+      // console.log("age: "+age);
+
+      if(result.ageInMonths == age && result.patientName == patientName) {
+        date1 = result.date;
+        this.setChildGender(result.gender);
+        return date1;
+      }
+
+    })
+
+    return date1;
+
+  }
+
+
+
 
 
 

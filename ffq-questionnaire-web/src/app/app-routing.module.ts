@@ -44,6 +44,8 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { EducationalResourcesComponent } from './pages/educational-resources/educational-resources.component';
 import { componentFactoryName } from '@angular/compiler';
 import { ResearchParentalChartComponent } from './pages/research-parental-chart/research-parental-chart.component';
+import {AdminresultsComponent} from './pages/adminresults/adminresults.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -127,6 +129,12 @@ const routes: Routes = [
     path: 'admin/results',
     component: QuestResultsComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path : 'admin/adminresults',
+    component: AdminresultsComponent,
+    canActivate : [AuthGuard]
+
   },
   {
     path: 'admin/recommend',
@@ -288,6 +296,6 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })],
   exports: [RouterModule]
 
-  
+
 })
 export class AppRoutingModule {}

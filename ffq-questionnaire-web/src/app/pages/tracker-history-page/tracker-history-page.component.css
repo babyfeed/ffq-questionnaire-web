@@ -45,6 +45,16 @@ textarea[name=goal] {
   resize: none;
 }
 
+@media(max-width:693px) {
+
+  .trackeritem-container {
+    margin-top:100px;
+  }
+
+
+
+}
+
 @media (max-width: 500px) {
   .tracker-card {
      width: 90%;

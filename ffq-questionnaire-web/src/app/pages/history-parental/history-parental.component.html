@@ -5,7 +5,7 @@
       <h2 matDialogTitle>{{ 'No questionnaires have been submitted yet' | translate }}</h2>
     </mat-card>
   </div>
-  
+
   <div *ngFor="let result of results; let i = index">
     <div class="container">
       <mat-card class="quest-id-card">
@@ -21,7 +21,7 @@
               {{ result.date }}
             </div>
             <div class="w-100"></div>
-           
+
             <div class="col">
               <label><strong translate>Parent Username</strong></label>
             </div>
@@ -30,15 +30,15 @@
             </div>
             <div class="w-100"></div>
 
-            <div class="col">
+            <div class="col" id = "questionnairesID">
               <label><strong translate>Questionnaire ID</strong></label>
             </div>
-             <div class="col" >
+             <div class="col" id = "responseq">
               {{ result.questionnaireId }}
             </div>
             <div class="w-100"></div>
 
-           
+
             <!--
                         <div class="col-2" >
                             <label><strong>Patient name</strong></label>
@@ -52,7 +52,7 @@
             </div>
             <div class="w-100"></div>
 
-            
+
             <div class="col">
               <label><strong translate>Infant gender</strong></label>
             </div>
@@ -61,7 +61,7 @@
             </div>
             <div class="w-100"></div>
 
-            
+
             <div class="col" >
               <label><strong translate>Nutrients</strong></label>
             </div>
@@ -85,7 +85,7 @@
           </div>
 
           <!--Questionnaire results-->
-          
+
             <div class="offset-10" style="padding-top:15px;">
               <button class="btn btn-info" (click)="toggle(i)" id="bt">
                 {{ 'buttonName' | translate }}

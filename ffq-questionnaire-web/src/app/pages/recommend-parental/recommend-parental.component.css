@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     padding-top: 200px;
-    
+
 }
 
 .image {
@@ -41,4 +41,14 @@ mat-radio-button {
 
 .instructions {
   font-size: larger;
+}
+
+
+@media(max-width:693px) {
+
+  .mattt {
+    margin-top:100px;
+  }
+
+
 }

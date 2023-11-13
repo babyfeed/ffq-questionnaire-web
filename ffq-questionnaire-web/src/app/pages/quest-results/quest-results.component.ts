@@ -33,7 +33,6 @@ import { DQISService } from 'src/app/services/dqis-service/dqis.service';
 import { FFQDQIS } from 'src/app/models/ffqdqis';
 import { DQISModalComponent } from 'src/app/components/dqis-modal/dqis-modal.component';
 
-
 // Questionnaire reesults page added by Daykel Muro 09/30/2019
 @Component({
   selector: 'app-quest-results',
@@ -88,6 +87,9 @@ export class QuestResultsComponent implements OnInit {
 
   ngOnInit() {
     const parentList: Observable<FFQParentResponse[]> = this.parentService.getAllParents();
+
+    console.log((this.parentService.getAllParents()).operator);
+
     parentList.subscribe(a => {
       this.ffqparentList = a;
     });
@@ -290,8 +292,7 @@ export class QuestResultsComponent implements OnInit {
 
 
   export() {
-    this.exportService.exportFFQResults(this.results, this.ffqparentList, 'FFQ_Results');
-    
+    this.exportService.exportFFQAlternative(this.results, this.ffqparentList, 'FFQ_Results');
   }
 
   private setFoodList() {
@@ -311,7 +312,7 @@ export class QuestResultsComponent implements OnInit {
       );
       result.foodRecList = recommendedFood;
       result.dqis = dqisScore;
-      
+
 
     });
   }
@@ -319,5 +320,7 @@ export class QuestResultsComponent implements OnInit {
   getParentUsernameById(userId: string) {
     return this.ffqparentList.find(parent => parent.userId === userId)?.username ?? "[not found]";
   }
+
+
 }
 
