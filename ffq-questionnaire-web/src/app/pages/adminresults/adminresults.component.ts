@@ -657,7 +657,7 @@ export class AdminresultsComponent implements OnInit{
           // this.ALLAGES[index] = a[z].childData[0].age;
           // this.ALLWEIGHTS[index] = a[z].childData[0].weight;
           // this.ALLLENGTHS[index] = a[z].childData[0].height;
-          
+
 
 
         }
@@ -719,7 +719,7 @@ export class AdminresultsComponent implements OnInit{
     // this.exportService.exportFFQAlternative5(this.ffqparentList,)
 
     // this.exportService.exportFFQAlternative5(this.ffqparentList,this.checkerArray(this.patientNames(this.parentResults),this.ages(this.ffqparentList),this.parentResults),this.allChildData(),this.allGenders(),"Growth_Chart");
-    this.exportService.exportFFQAll(this.allIDS(),this.checkerArray(this.patientNames(this.parentResults),this.ages(),this.parentResults),this.ages(),this.allWeights(),this.allHeights(),this.getAllGenders(this.parentResults),this.parentResults,"Growth_Chart")
+    this.exportService.exportFFQAll(this.allIDS(),this.checkerArray(this.patientNames(this.parentResults),this.ages(),this.parentResults),this.ages(),this.allWeights(),this.allHeights(),this.getAllGenders(this.parentResults),this.parentResults,"Growth_Chart");
     // this.allIDS();
     // console.log("this.parentResults: ",this.parentResults);
     // console.log("this.ffqparentList: ",this.ffqparentList);
@@ -728,7 +728,7 @@ export class AdminresultsComponent implements OnInit{
 
   exportAll3() {
 
-    this.exportService.exportFFQAll(this.allIDS2(),this.checkerArray(this.patientNames(this.participantResults),this.ages2(),this.participantResults),this.ages2(),this.allWeights2(),this.allHeights2(),this.getAllGenders(this.participantResults),this.participantResults,"Growth_Chart_participants")
+    this.exportService.exportFFQAll(this.allIDS2(),this.checkerArray(this.patientNames(this.participantResults),this.ages2(),this.participantResults),this.ages2(),this.allWeights2(),this.allHeights2(),this.getAllGenders(this.participantResults),this.participantResults,"Growth_Chart_participants");
 
 
   }
