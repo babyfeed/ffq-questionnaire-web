@@ -114,11 +114,13 @@ import { InterpretationGrowthChartsDialogComponent } from "./components/interpre
 import { GrowthChartsHelpComponent } from "./components/growth-charts-help/growth-charts-help.component";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { HomePageComponent } from "./pages/home-page/home-page.component";
-import { EducationalResourcesComponent } from './pages/educational-resources/educational-resources.component';
 
 import { NgApexchartsModule } from "ng-apexcharts";
 // possibly to be deleted below
-import {AdminresultsComponent} from './pages/adminresults/adminresults.component';
+import {AdminresultsComponent} from './pages/admin-results/adminresults.component';
+import { EducationalResourcesENComponent } from './pages/educational-resources-en/educational-resources-en.component';
+import { EducationalResourcesESComponent } from './pages/educational-resources-es/educational-resources-es.component';
+import { AdminExternalResourcesComponent } from "./pages/admin-resources/admin-resources.component";
 
 // possibly to be deleted above
 
@@ -196,8 +198,10 @@ import {AdminresultsComponent} from './pages/adminresults/adminresults.component
     InterpretationGrowthChartsDialogComponent,
     GrowthChartsHelpComponent,
     HomePageComponent,
-    EducationalResourcesComponent,
-    AdminresultsComponent
+    AdminresultsComponent,
+    EducationalResourcesENComponent,
+    EducationalResourcesESComponent,
+    AdminExternalResourcesComponent
 
   ],
   imports: [

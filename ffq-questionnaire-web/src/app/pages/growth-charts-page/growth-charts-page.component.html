@@ -186,7 +186,7 @@
               />
               <ng-container *ngIf="ageControl.invalid && ageControl.touched">
                 <mat-label *ngIf="ageControl.errors.required">
-                  {{ "You must enter an age in (mos)" | translate }}.</mat-label
+                  {{ "You must enter an age in (months)" | translate }}.</mat-label
                 >
               </ng-container>
             </mat-form-field>
@@ -471,3 +471,6 @@ parent results below
 <br>
 
 {{giveCurrentChildGenders()}} -->
+
+
+{{currentParent | json}}

@@ -39,8 +39,9 @@ html {
     cursor: pointer;
     padding: 10px 16px;
     font-size: 17px;
-    width: 14.26%;
+    width: 12.49%;
     text-align: center;
+    height:65px;
 }
 
 .active {

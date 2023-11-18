@@ -31,6 +31,18 @@ export class HomePageComponent {
       this.authenticationService = this.authenticationService;
     }
 
+    toggleLanguageAndNavigate() {
+      // Toggle between 'en' and 'es'
+      const newLanguage = this.translate.currentLang === 'en' ? 'es' : 'en';
+
+      // Use ngx-translate to switch the language
+      this.translate.use(newLanguage);
+
+      // Navigate to the appropriate route based on the language
+      const routeToNavigate = this.translate.currentLang === 'en' ? '/parent/educational-resources-en' : '/parent/educational-resources-es';
+      this.router.navigate([routeToNavigate]);
+    }
+
     logout() {
         this.authenticationService.logout();
         this.router.navigate(['/login']);
