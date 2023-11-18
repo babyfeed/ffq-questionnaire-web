@@ -25,6 +25,7 @@ export class AdminTrackerHistoryComponent implements OnInit {
               public parentService: ParentService,
               public clinicService: ClinicService,
               public exportService: ExportService,
+
               ) { }
 
   ngOnInit() {

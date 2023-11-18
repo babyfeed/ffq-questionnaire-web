@@ -119,7 +119,7 @@ export class AdminExternalResourcesComponent implements OnInit {
        , 'Open Alimentación complementaria a los 6 meses',
         'Open Baby-led weaning: Cómo empezar', 'Open Cómo preparar 9 papillas', 'Open Cuánto darle a mi bebé', 'Open Evita estos alimentos',
       'Open Haciendo de las comidas con su bebe una aventura: Guia de 6 a 9 meses', 'Open 10 de los mejores primeros alimentos'],
-          ['parent1', '2023-10-16', this.clickables.myArray[0], this.clickables.myArray[1], this.clickables.myArray[2], this.clickables.myArray[3], this.clickables.myArray[4], this.clickables.myArray[5], this.clickables.myArray[6], this.clickables.myArray[7], this.clickables.myArray[8], this.clickables.myArray[9], this.clickables.myArray[10], this.clickables.myArray[11]],
+          ['parent1', '2023-10-16', 'comeon', this.clickables.myArray[1], this.clickables.myArray[2], this.clickables.myArray[3], this.clickables.myArray[4], this.clickables.myArray[5], this.clickables.myArray[6], this.clickables.myArray[7], this.clickables.myArray[8], this.clickables.myArray[9], this.clickables.myArray[10], this.clickables.myArray[11]],
           ['parent1', '2023-10-16', '1', '1', '2', '0', '2', '2', '1', '1', '1', '1', '0', '0', '1', '1', '0'],
           ['parent1', '2023-10-09', '0', '0', '1', '0', '1', '2', '1', '1', '1', '0', '0', '1', '0', '0', '0'],
           ['parent1', '2023-10-07', '0', '2', '1', '0', '1', '1', '2', '1', '2', '0', '0', '0', '1', '0', '1'],

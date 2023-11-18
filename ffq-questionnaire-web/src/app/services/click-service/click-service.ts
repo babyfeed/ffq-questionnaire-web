@@ -101,7 +101,9 @@ export class ClickService {
 
   myEnglishArray: Array<number> = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
-  
+  initializeSpanishLinks() {
+    
+  }
 
   incrementCorrespondingClickCount(index:number) {
     this.myArray[index]++;
