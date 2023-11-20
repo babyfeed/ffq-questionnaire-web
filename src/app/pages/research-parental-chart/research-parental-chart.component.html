@@ -1,5 +1,9 @@
 <researchparental-header></researchparental-header>
 
+<br>
+<br>
+
+
 <div id="qb-container">
   <mat-card class="qb-card">
     <mat-card-title> {{ "Chart" | translate }} </mat-card-title>
@@ -18,6 +22,23 @@
       >
         {{ "Info" | translate }}
       </button>-->
+
+
+      <button
+        mat-icon-button
+        class="help-button"
+        cdkFocusInitial
+        style="
+          float: right;
+          border-radius: 50%;
+          border: 1px solid #6200ee;
+          color: #6200ee;
+        "
+        (click)="onHelp()"
+      >
+        {{ "Info" | translate }}
+      </button>
+
 
       <button
         mat-icon-button
@@ -47,6 +68,24 @@
       >
         <mat-icon>download</mat-icon>
       </button>-->
+
+      <!--Reintroduce Download Button done by David Melara-->
+
+      <button
+      mat-icon-button
+      class="download-button"
+      cdkFocusInitial
+      style="
+        float: right;
+        border: 1px solid #6200ee;
+        margin-right: 4px;
+        color: #6200ee;
+      "
+
+      (click) = "savePdf()"
+    >
+      <mat-icon>download</mat-icon>
+    </button>
 
       <br />
       <br />
@@ -256,16 +295,21 @@
             {{ "Save" | translate }}
           </button>
         </mat-expansion-panel>
-        <!--<mat-expansion-panel #chartOptionsPanel hideToggle>     
+
+
+        <!--To be commented below-->
+
+
+        <!-- <mat-expansion-panel #chartOptionsPanel hideToggle>
           <mat-expansion-panel-header>
-            <mat-panel-title>{{ "Chart Options" | translate }}</mat-panel-title> -->
-            <!--<mat-panel-description
+            <mat-panel-title>{{ "Chart Options" | translate }}</mat-panel-title>
+            <mat-panel-description
               >{{
                 "BMI, Height - Age, Weight - Age, and Weight - Height charts"
                   | translate
               }}.
-            </mat-panel-description>-->
-         <!--</mat-expansion-panel-header>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
           <p>{{ "Please select a chart option" | translate }}.</p>
           <form>
             <mat-button-toggle-group
@@ -275,8 +319,50 @@
               [disabled]="childPersonalInformationForm.invalid"
               [(ngModel)]="chosenChartOption"
               (change)="onTypeChartChange($event.value)"
-            >     -->
-            <!----  
+            >
+              <mat-button-toggle value="BMI">{{
+                "BMI" | translate
+              }}</mat-button-toggle>
+              <mat-button-toggle value="Height-Age">{{
+                "Length" | translate
+              }}</mat-button-toggle>
+              <mat-button-toggle value="Weight-Age"
+                >{{ "Weight" | translate }}
+                </mat-button-toggle>
+
+
+              <mat-button-toggle value="Weight-Length"
+                >{{ "Weight-Length" | translate }}
+              </mat-button-toggle>
+            </mat-button-toggle-group>
+          </form>
+        </mat-expansion-panel> -->
+
+        <!--To be commented above-->
+
+        <!--To be commented below (possibly)-->
+
+        <mat-expansion-panel #chartOptionsPanel hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title>{{ "Chart Options" | translate }}</mat-panel-title>
+            <!--<mat-panel-description
+              >{{
+                "BMI, Height - Age, Weight - Age, and Weight - Height charts"
+                  | translate
+              }}.
+            </mat-panel-description>-->
+          </mat-expansion-panel-header>
+          <p>{{ "Please select a chart option" | translate }}.</p>
+          <form>
+            <mat-button-toggle-group
+              id="chart-options"
+              #chartOptionsGroup="matButtonToggleGroup"
+              name="chartOptionsControl"
+              [disabled]="childPersonalInformationForm.invalid"
+              [(ngModel)]="chosenChartOption"
+              (change)="onTypeChartChange($event.value)"
+            >
+            <!----
               <mat-button-toggle value="BMI">{{
                 "BMI" | translate
               }}</mat-button-toggle>
@@ -288,12 +374,16 @@
                 </mat-button-toggle>
               </mat-button-toggle>
               ---->
-              <!--<mat-button-toggle value="Weight-Length"
+              <mat-button-toggle value="Weight-Length"
                 >{{ "Weight-Length" | translate }}
               </mat-button-toggle>
             </mat-button-toggle-group>
           </form>
-        </mat-expansion-panel> -->
+        </mat-expansion-panel>
+
+        <!--To be commented above (possibly)-->
+
+
       </mat-accordion>
     </mat-card-actions>
   </mat-card>
@@ -320,9 +410,9 @@
     <!-- {{ currentChildGender + " " + chosenChartOption + " Chart" | translate }} -->
   </h3>
   <div #containerRef id="chart-line"> <!---- CHART UPDATE 1: Change "chart-line" to "combo-line-area"---->
-    <!---- CHART UPDATE 2 (STARTS HERE): 
+    <!---- CHART UPDATE 2 (STARTS HERE):
                   Delete ngx-charts-line-chart section and replace it with:
-                  
+
                               <apx-chart
                               [series]="chartOptions.series"
                               [chart]="chartOptions.chart"
@@ -371,6 +461,38 @@
     >
     </ngx-charts-line-chart> -->
     <!---- CHART UPDATE 2 (ENDS HERE) ---->
+
+
+    <!--To be deleted possibly below-->
+
+    <div style="text-align:center">
+      <apx-chart #chart
+      *ngIf="
+            !childPersonalInformationForm.invalid
+          "
+        [series]="chartOptions.series"
+        [chart]="chartOptions.chart"
+        [xaxis]="chartOptions.xaxis"
+        [yaxis]="chartOptions.yaxis"
+        [legend]="chartOptions.legend"
+        [grid]="chartOptions.grid"
+        [labels]="chartOptions.labels"
+        [stroke]="chartOptions.stroke"
+        [markers]="chartOptions.markers"
+        [fill]="chartOptions.fill"
+        [tooltip]="chartOptions.tooltip"
+        [title]="chartOptions.title"
+        [annotations]="chartOptions.annotations"
+      ></apx-chart>
+    </div>
+
+
+
+
+
+    <!-- To be deleted possibly above-->
+
+
   </div>
 </div>
 
@@ -388,7 +510,7 @@
 <div style="text-align:center">
   <apx-chart #chart
   *ngIf="
-        !childPersonalInformationForm.invalid 
+        !childPersonalInformationForm.invalid
       "
     [series]="chartOptions.series"
     [chart]="chartOptions.chart"
@@ -415,7 +537,7 @@
     <tr>
       <th>Name</th>
       <th>Age</th>
-      <th>Height</th>
+      <th>Length</th>
       <th>Weight</th>
     </tr>
   </thead>
@@ -432,3 +554,19 @@
     </ng-container>
   </tbody>
 </table>
+
+<!-- dude
+{{currentParent | json}}
+<br>
+dude
+
+-->
+
+<br>
+
+<!-- {{getAllDates()}}
+
+bro
+{{participantResults | json}}
+
+bro -->
