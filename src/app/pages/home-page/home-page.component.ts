@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { Description } from 'src/app/models/ffqfooddescription';
 import { Observable } from 'rxjs';
@@ -29,6 +30,18 @@ export class HomePageComponent {
     constructor(router: Router, private authenticationService: AuthenticationService, private translate: TranslateService) {
       this.router = router;
       this.authenticationService = this.authenticationService;
+    }
+
+    toggleLanguageAndNavigate() {
+      // Toggle between 'en' and 'es'
+      const newLanguage = this.translate.currentLang === 'en' ? 'es' : 'en';
+
+      // Use ngx-translate to switch the language
+      this.translate.use(newLanguage);
+
+      // Navigate to the appropriate route based on the language
+      const routeToNavigate = this.translate.currentLang === 'en' ? '/parent/educational-resources-en' : '/parent/educational-resources-es';
+      this.router.navigate([routeToNavigate]);
     }
 
     logout() {

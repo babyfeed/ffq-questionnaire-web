@@ -43,7 +43,7 @@
           margin-right: 4px;
           color: #6200ee;
         "
-        (click)="onDownloadSave()"
+        (click)="savePdf()"
       >
         <mat-icon>download</mat-icon>
       </button>
@@ -88,6 +88,13 @@
                 >
               </mat-select>
             </mat-form-field>
+
+            <!-- {{getAllDates() | json}} -->
+            <!-- {{parentResults | json}}
+            {{getAllChildData()[0] | json}} -->
+            <!-- {{this.parentResults.length}} -->
+            <!-- {{currentParent | json}} -->
+            <!--{{currentParent.childrennames | json}} -->
             <mat-form-field class="example-full-width" appearance="fill">
               <mat-label>{{ "Gender" | translate }}</mat-label>
               <mat-select
@@ -106,6 +113,11 @@
             </mat-form-field>
           </form>
         </mat-expansion-panel>
+
+<!--
+        <h2>{{currentChildName | json}}</h2>
+        <h2>{{currentChild | json}}</h2> -->
+
         <mat-expansion-panel #childBodyMeasurementsPanel hideToggle>
           <mat-expansion-panel-header>
             <mat-panel-title>{{
@@ -174,7 +186,7 @@
               />
               <ng-container *ngIf="ageControl.invalid && ageControl.touched">
                 <mat-label *ngIf="ageControl.errors.required">
-                  {{ "You must enter an age in (mos)" | translate }}.</mat-label
+                  {{ "You must enter an age in (months)" | translate }}.</mat-label
                 >
               </ng-container>
             </mat-form-field>
@@ -276,7 +288,7 @@
               [(ngModel)]="chosenChartOption"
               (change)="onTypeChartChange($event.value)"
             >
-            <!----  
+            <!----
               <mat-button-toggle value="BMI">{{
                 "BMI" | translate
               }}</mat-button-toggle>
@@ -320,9 +332,9 @@
     <!-- {{ currentChildGender + " " + chosenChartOption + " Chart" | translate }} -->
   </h3>
   <div #containerRef id="chart-line"> <!---- CHART UPDATE 1: Change "chart-line" to "combo-line-area"---->
-    <!---- CHART UPDATE 2 (STARTS HERE): 
+    <!---- CHART UPDATE 2 (STARTS HERE):
                   Delete ngx-charts-line-chart section and replace it with:
-                  
+
                               <apx-chart
                               [series]="chartOptions.series"
                               [chart]="chartOptions.chart"
@@ -388,7 +400,7 @@
 <div style="text-align:center">
   <apx-chart #chart
   *ngIf="
-        !childPersonalInformationForm.invalid 
+        !childPersonalInformationForm.invalid
       "
     [series]="chartOptions.series"
     [chart]="chartOptions.chart"
@@ -406,6 +418,16 @@
   ></apx-chart>
 </div>
 
+<!-- <h1>{{chartOptions | json}}</h1>
+<br> -->
+<h1></h1>
+<!-- <h1>Boys Weight for Height</h1>
+<h1>{{BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM | json}}</h1>
+<h1>Length of Boys Weight for Height above</h1>
+<h1>{{BOYS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM.length}}</h1>
+<h1>Length of Girls Weight for Height above</h1>
+<h1>{{GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM.length}}</h1> -->
+
 <div class="message-box" [ngClass]="{'green': interMessageColor === 'g', 'yellow': interMessageColor === 'y' , 'red': interMessageColor === 'r'}">
   <p>{{ interMessage }}</p>
 </div>
@@ -415,7 +437,7 @@
     <tr>
       <th>Name</th>
       <th>Age</th>
-      <th>Height</th>
+      <th>Length</th>
       <th>Weight</th>
     </tr>
   </thead>
@@ -432,3 +454,23 @@
     </ng-container>
   </tbody>
 </table>
+
+<!--
+<h2>{{currentChild | json}}</h2>
+<h2>{{childrenList | json}}</h2>
+
+
+<h2>{{weightUnitOptions | json}}</h2> -->
+
+
+<!-- {{currentParent | json}}
+
+parent results below
+<br>
+{{parentResults | json}}
+<br>
+
+{{giveCurrentChildGenders()}} -->
+
+
+<!-- {{currentParent | json}} -->

@@ -41,9 +41,14 @@ import { UpdateResearcherComponent } from './pages/modify-researcher/modify-rese
 import { ClinicQuestionnaireComponent } from './pages/clinic-questionnaire/clinic-questionnaire.component';
 import { GrowthChartsPageComponent } from './pages/growth-charts-page/growth-charts-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
-import { EducationalResourcesComponent } from './pages/educational-resources/educational-resources.component';
 import { componentFactoryName } from '@angular/compiler';
 import { ResearchParentalChartComponent } from './pages/research-parental-chart/research-parental-chart.component';
+import {AdminresultsComponent} from './pages/admin-results/adminresults.component';
+import { EducationalResourcesENComponent } from './pages/educational-resources-en/educational-resources-en.component';
+import { EducationalResourcesESComponent } from './pages/educational-resources-es/educational-resources-es.component';
+import { AdminExternalResourcesComponent } from './pages/admin-resources/admin-resources.component';
+
+
 const routes: Routes = [
   {
     path: '',
@@ -127,6 +132,12 @@ const routes: Routes = [
     path: 'admin/results',
     component: QuestResultsComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path : 'admin/adminresults',
+    component: AdminresultsComponent,
+    canActivate : [AuthGuard]
+
   },
   {
     path: 'admin/recommend',
@@ -272,9 +283,19 @@ const routes: Routes = [
     path: 'participant/questionnaire/:id',
     component: QuestionnairePageComponent
   },
+   {
+    path: 'parent/educational-resources-en',
+    component: EducationalResourcesENComponent,
+    canActivate: [AuthGuard]
+  },
   {
-    path: 'parent/educational-resources',
-    component: EducationalResourcesComponent,
+    path: 'admin/resources',
+    component: AdminExternalResourcesComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'parent/educational-resources-es',
+    component: EducationalResourcesESComponent,
     canActivate: [AuthGuard]
   },
   {
@@ -288,6 +309,6 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })],
   exports: [RouterModule]
 
-  
+
 })
 export class AppRoutingModule {}
