@@ -35,13 +35,21 @@
 }
 
 .lang-button-div {
-  text-align: center; 
+  text-align: center;
 }
 
 .lang-button {
   background-color: #35a2a6;
   top: 60px;
   color: white;
+}
+
+@media(max-width:693px) {
+
+  .quest-id-card {
+    margin-top:100px;
+  }
+
 }
 
 @media (max-width: 500px) {

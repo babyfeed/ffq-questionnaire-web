@@ -9,7 +9,6 @@
 .home-container {
     display: flex;
     flex-direction: column;
-
     width: 80vw;
     align-items: center;
     margin: auto;
@@ -103,4 +102,52 @@
 
 .home-component-container a {
 
+}
+
+
+@media(max-width:450px) {
+
+    .home-component-container {
+        /* width:75%;
+        height:75%; */
+        padding-top: 300px;
+        /* border: 1px solid blue; */
+    }
+
+    #firstitem,
+    #seconditem,
+    #thirditem,
+    #fourthitem,
+    #fifthitem  {
+        position:relative;
+        /* border: 1px solid red; */
+        left:125px;
+   }
+
+   #firstitem {
+        top:0px;
+   }
+
+   #seconditem {
+    top:340px;
+    left:-115px;
+   }
+
+   #thirditem {
+    left:123px;
+    top:340px;
+   }
+
+   #fourthitem {
+    left:-115px;
+    padding-left:55px;
+    top:870px;
+   }
+
+   #fifthitem {
+    left:0px;
+    top:880px;
+   }
+    
+  
 }

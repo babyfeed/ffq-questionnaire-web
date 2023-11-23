@@ -31,3 +31,24 @@ a:hover {
     color: white;
     width: 200px;
   }
+
+  @media(max-width:940px) {
+
+    .container_page {
+      padding-top:400px;
+    }
+
+  }
+
+  @media(max-width:479px) {
+
+    .mat-raised-button{
+      width:150px;
+
+    }
+
+    tr th{
+      width:50%;
+    }
+
+  }

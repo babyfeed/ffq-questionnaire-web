@@ -35,3 +35,13 @@ a:hover {
 .cdk-drop-list-dragging {
   cursor: grabbing;
 }
+
+
+@media(max-width:940px) {
+
+  .container_page {
+    padding-top:400px;
+  }
+
+
+}

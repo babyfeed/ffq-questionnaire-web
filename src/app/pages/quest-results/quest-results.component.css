@@ -44,3 +44,13 @@ tr:nth-child(even) {
   background-color: #6573C3;
   color: white;
 }
+
+
+@media(max-width:940px) {
+
+  .container_page {
+    padding-bottom:600px;
+  }
+
+
+}

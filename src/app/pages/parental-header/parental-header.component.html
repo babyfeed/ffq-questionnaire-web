@@ -1,11 +1,16 @@
 <title>{{ "PARENTPORTAL.TITLE" | translate }}</title>
 <div class="header">
-  <h2 matDialogTitle><a routerLink="/parent/home">{{ "PARENTPORTAL.TITLE" | translate }}</a></h2>
-  <div align="center">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <!-- <i class='bx bxs-x-circle'></i> -->
+
+  <i class='bx bx-menu' id = "menus" (click) = "change()"></i>
+
+  <h2 matDialogTitle><a routerLink="/parent/home" class = "titles-logo">{{ "PARENTPORTAL.TITLE" | translate }}</a></h2>
+  <div align="center" class = "extendable">
     <i> <img class="header-logo" src="assets/images/logo.png" alt="" height="80" width="80" routerLink="/parent/home"/> </i>
   </div>
   <div class="login-button">
-    <button mat-raised-button (click)="logout()" translate>
+    <button class = "mybuttons" mat-raised-button (click)="logout()" translate>
       {{ "Log out" | translate
       }}<i class="fa fa-sign-out" aria-hidden="true"></i>
     </button>
