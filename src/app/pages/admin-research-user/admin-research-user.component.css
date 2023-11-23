@@ -93,3 +93,12 @@
       background-color: red;
       color: white;
     }
+
+    @media(max-width:940px) {
+
+      .container_page {
+        padding-bottom:400px;
+      }
+      
+      
+      }

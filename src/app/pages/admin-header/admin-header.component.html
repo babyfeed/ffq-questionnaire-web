@@ -22,13 +22,19 @@
 <div class="header">
   <h2 matDialogTitle>Admin Portal</h2>
   <div class="login-button">
-    <button mat-raised-button (click)="logout()">
+    <button mat-raised-button (click)="logout()" class = "logoutone">
       Log out <i class="fa fa-sign-out" aria-hidden="true"></i>
     </button>
   </div>
   <div align="center">
     <i style="color: white" class="fa fa-cog fa-3x" aria-hidden="true"></i>
   </div>
+
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+  <i class='bx bx-menu' id = "menus" (click) = "change()"></i>
+
+
   <a class="tab-link" routerLink="/admin/home" routerLinkActive="active"
     >Food Items</a
   >

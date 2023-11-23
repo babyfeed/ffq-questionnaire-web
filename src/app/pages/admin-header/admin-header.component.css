@@ -81,6 +81,19 @@ html {
     background-color: #2C387E;
 }
 
+.logoutone {
+    position:relative;
+    top: -10px;
+}
+
+
+#menus {
+    font-size:30px;
+    color:white;
+    position:relative;
+    top:-25px;
+    display:none;
+}
 
 @media(max-width:1391px) {
 
@@ -104,6 +117,121 @@ html {
     font-size:90%;
   }
 
+}
+
+
+@media(max-width:940px) {
+
+    .tab-link,
+    .tab-link.active {
+        opacity:0;
+    }
+
+    
+    .tab-link.superactive,
+    .tab-link.active.superactive {
+        opacity:1;
+        position:absolute;
+        display:block;
+        width:100%;
+        z-index:2;
+    }
+
+      .tab-link:nth-of-type(1).superactive {
+        top:-10px;
+      }
+    
+      .tab-link:nth-of-type(2).superactive {
+        top:45px;
+      }
+    
+      .tab-link:nth-of-type(3).superactive {
+        top:100px;
+      }
+    
+      .tab-link:nth-of-type(4).superactive {
+        top:155px;
+      }
+    
+      .tab-link:nth-of-type(5).superactive {
+        top:210px;
+      }
+
+      .tab-link:nth-of-type(6).superactive {
+        top:265px;
+      }
+
+      .tab-link:nth-of-type(7).superactive {
+        top:320px;
+      }
+    
+      .tab-link:nth-last-of-type(1).superactive {
+        top:370px;
+      }
+
+
+    #menus {
+        display:block;
+        left:850px;
+        font-size:40px;
+        z-index:10;
+    }
+
+    .header {
+        padding-bottom:100px;
+    }
+
+}
+
+
+
+@media(max-width:900px) {
+
+    #menus {
+        transform: translateX(-170px);
+        transition: transform 4.4s ease 0s;       
+    }
+
+}
+
+@media(max-width:750px) {
+
+    #menus {
+        transform: translateX(-250px);
+        transition: transform 4.4s ease 0s;  
+    }
+
+
+}
+
+@media(max-width:643px) {
+
+    #menus {
+        transform: translateX(-370px);
+        transition: transform 4.4s ease 0s;   
+    }
+
+
+
+}
+
+
+@media(max-width:527px) {
+
+    #menus {
+        transform: translateX(-530px);
+        transition: transform 7.4s ease-in-out;
+    }
+
+}
+
+
+@media(max-width:414px) {
+
+    .logoutone {
+        top: 110px;
+        left:-130px;
+    }
 
 
 

@@ -111,11 +111,171 @@ body, html {
 
 .center {
   display: block;
-  margin:auto;  
+  margin:auto;
 }
 
 .header-logo {
   cursor: pointer;
 }
 
+.bxs-x-circle {
+  /* position:absolute; */
+  position:relative;
+  left:500px;
+  top:100px;
+  z-index:100;
+  /* display:none; */
+}
 
+.bx-menu {
+  font-size:50px;
+  display:none;
+}
+
+
+@media(max-width:950px) {
+
+  .header a {
+    font-size:75%;
+  }
+
+}
+
+@media(max-width:693px) {
+
+  .header {
+    padding-bottom:70px;
+    /* margin-bottom:150px; */
+  }
+
+  .header .tab-link{
+    opacity:0;
+    /* display:inline; */
+  }
+
+  .header .tab-link.superactive {
+    /* margin-left:600px; */
+    opacity:1;
+    position:absolute;
+    display:block;
+    width:100%;
+  }
+
+  .header .tab-link.active.superactive {
+    opacity:1;
+    position:absolute;
+    display:block;
+    width:100%;
+  }
+
+  .header .tab-link:nth-of-type(1).superactive {
+    top:0px;
+  }
+
+  .header .tab-link:nth-of-type(2).superactive {
+    top:75px;
+  }
+
+  .header .tab-link:nth-of-type(3).superactive {
+    top:150px;
+  }
+
+  .header .tab-link:nth-of-type(4).superactive {
+    top:220px;
+  }
+
+  .header .tab-link:nth-of-type(5).superactive {
+    top:290px;
+  }
+
+  .header .tab-link:nth-last-of-type(1).superactive {
+    top:360px;
+  }
+
+  .header-logo {
+    width:50px;
+    height:50px;
+    position:relative;
+    top:-40px;
+  }
+
+  .titles-logo {
+    position:relative;
+    top:-30px;
+  }
+
+  .bx-menu {
+    display:block;
+    position:relative;
+    left:570px;
+    top:87px;
+    font-size:35px;
+    color:white;
+    transition: transform 4.4s ease 0s;
+  }
+
+  .extendable {
+    padding-bottom:0px;
+  }
+
+}
+
+@media(max-width:614px) {
+
+  .bx-menu {
+    transform: translateX(-120px);
+    /* left:460px; */
+  }
+
+
+}
+
+@media (max-width:490px) {
+
+  .bx-menu {
+    left:530px;
+    transition: transform 4.4s ease 0s;
+  }
+
+
+}
+
+@media(max-width:445px) {
+
+  .bx-menu {
+    transform: translateX(-200px);
+  }
+
+}
+
+@media(max-width:365px) {
+
+  .bx-menu {
+    /* left:480px; */
+    left:520px;
+  }
+
+  .mybuttons {
+    /* width:50px; */
+    position:relative;
+    top:100px;
+    left:-110px;
+  }
+
+
+}
+
+
+/* @media(max-width:280px) {
+
+  .bx-menu {
+    left:420px;
+  }
+
+  .mybuttons {
+    position:relative;
+    top:100px;
+    left:-70px;
+  }
+
+} */

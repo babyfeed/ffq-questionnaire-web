@@ -106,6 +106,8 @@ import { GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM } from "src
 
 //weight - height
 import { GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM } from "src/assets/growth-charts-data/who/girls/US customary system/weight - height/GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM";
+import {ChangeDetectorRef} from '@angular/core';
+
 
 
 @Component({
@@ -200,7 +202,8 @@ export class AdminresultsComponent{
               private exportService: ExportService,
               private authenticationService: AuthenticationService,
               private dialog: MatDialog,
-              private translate: TranslateService
+              private translate: TranslateService,
+              private changeDetector : ChangeDetectorRef
 
               // public ffqparentresponse : FFQParentResponse,
 
@@ -282,6 +285,10 @@ export class AdminresultsComponent{
     // });
 
 
+    }
+
+    ngAfterViewChecked() {
+      this.changeDetector.detectChanges();
     }
 
     private getAllResults() {
@@ -565,7 +572,14 @@ export class AdminresultsComponent{
     }
 
     createArray(a:any):any {
-      let dude = new Array(a.length);
+      let n = a?.length ? a.length : 0;
+      if(n !== undefined && n > 0) {
+        let dude = new Array(a.length);
+        return dude;
+      }
+
+      let dude = new Array(0);
+      
       return dude;
     }
 
@@ -585,7 +599,11 @@ export class AdminresultsComponent{
           return date1;
         }
 
-      })
+      });
+
+      if(date1 == "") {
+        return "[Not Found]";
+      }
 
       return date1;
 

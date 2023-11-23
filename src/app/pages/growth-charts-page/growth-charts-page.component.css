@@ -122,7 +122,8 @@ tr:hover {
 @media(max-width:693px) {
 
   #qb-container {
-    margin-top:190px;
+    padding-top:390px;
   }
 
 }
+
