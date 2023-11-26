@@ -230,9 +230,37 @@ html {
 
     .logoutone {
         top: 110px;
-        left:-130px;
+        left:-124px;
+        z-index:3;
     }
 
+    .tab-link,
+    .tab-link.active {
+        z-index:2;
+    }
+
+    .tab-link:nth-of-type(1).superactive,
+    .tab-link:nth-of-type(2).superactive,
+    .tab-link:nth-of-type(3).superactive,
+    .tab-link:nth-of-type(4).superactive,
+    .tab-link:nth-of-type(5).superactive,
+    .tab-link:nth-of-type(6).superactive,
+    .tab-link:nth-of-type(7).superactive,
+    .tab-link:nth-last-of-type(1).superactive {
+        z-index:4;
+    }
+
+
+
+}
+
+@media(max-width:380px) {
+
+    .logoutone {
+        top: 110px;
+        left:-118px;
+        z-index:3;
+    }
 
 
 }

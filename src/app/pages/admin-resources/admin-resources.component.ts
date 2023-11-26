@@ -14,7 +14,7 @@ declare var XLSX: any;
 export class AdminExternalResourcesComponent implements OnInit {
     ngOnInit(): void {
         this.loadSheetJSScript(() => {
-            throw new Error('Method not implemented.');
+            // throw new Error('Method not implemented.');
           });
     }
 
