@@ -46,6 +46,7 @@ export class QuestionnairePageComponent implements OnInit {
   questionnaire: QuestionnaireResponse;
   hideSecondaryItems = false;
   dataLoaded: Promise<boolean>;
+  patientName:string = "";
 
   foodItems: FFQItem[] = [];
   tmpfoodItems: FFQItem[] = [];
@@ -114,10 +115,11 @@ export class QuestionnairePageComponent implements OnInit {
       this.foodService
         .calculateNutrientBreakdown(
           this.userId,
-          this.userType,
           this.id,
+          this.userType,
           this.infantage,
           this.gender,
+          this.patientName,
           itemList
         )
         .subscribe(

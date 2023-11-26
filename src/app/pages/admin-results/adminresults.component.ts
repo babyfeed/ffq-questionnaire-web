@@ -106,7 +106,7 @@ import { GIRLS_WEIGHT_FOR_AGE_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM } from "src
 
 //weight - height
 import { GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM } from "src/assets/growth-charts-data/who/girls/US customary system/weight - height/GIRLS_WEIGHT_FOR_HEIGHT_BIRTH_TO_TWO_YEARS_US_CUSTOMARY_SYSTEM";
-import {ChangeDetectorRef} from '@angular/core';
+// import {ChangeDetectorRef} from '@angular/core';
 
 
 
@@ -203,7 +203,7 @@ export class AdminresultsComponent{
               private authenticationService: AuthenticationService,
               private dialog: MatDialog,
               private translate: TranslateService,
-              private changeDetector : ChangeDetectorRef
+              // private changeDetector : ChangeDetectorRef
 
               // public ffqparentresponse : FFQParentResponse,
 
@@ -287,9 +287,9 @@ export class AdminresultsComponent{
 
     }
 
-    ngAfterViewChecked() {
-      this.changeDetector.detectChanges();
-    }
+    // ngAfterViewChecked() {
+    //   this.changeDetector.detectChanges();
+    // }
 
     private getAllResults() {
       const oldList: Observable<FFQResultsResponse[]> = this.resultsService.getAllResults();

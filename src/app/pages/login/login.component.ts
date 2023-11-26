@@ -54,6 +54,16 @@ export class LoginComponent implements OnInit {
 
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+
+
+    // if(!sessionStorage.getItem("reloadables")) {
+    //   sessionStorage.setItem("reloadables","no longer");
+    //   location.reload();
+    // } else {
+    //   sessionStorage.removeItem("reloadables");
+    // }
+
+
   }
 
   // Method for lang button

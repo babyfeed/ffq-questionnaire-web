@@ -52,3 +52,37 @@ a:hover {
     }
 
   }
+
+  @media(max-width:380px) {
+
+    .mat-raised-button{
+      width:120px;
+
+    }
+
+    /* tr th{
+      width:5%;
+    } */
+
+    .firstone {
+     /* border:1px solid black; */
+     width:13%;
+     padding:0px;
+    }
+
+    .secondone {
+      /* border: 1px solid black; */
+      width:15%;
+      padding:0px;
+    }
+
+    tr th:nth-of-type(3) {
+      width:15%;
+      padding:0px;
+    }
+
+  
+
+
+
+  }
