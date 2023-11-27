@@ -115,11 +115,10 @@ export class QuestionnairePageComponent implements OnInit {
       this.foodService
         .calculateNutrientBreakdown(
           this.userId,
-          this.id,
           this.userType,
+          this.id,
           this.infantage,
           this.gender,
-          this.patientName,
           itemList
         )
         .subscribe(
