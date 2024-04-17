@@ -2051,7 +2051,7 @@ export class GrowthChartsPageComponent implements OnInit {
     });
 
     this.getAllResults();
-
+    // this.setupEventListeners();
   }
 
   /*
@@ -2358,7 +2358,6 @@ export class GrowthChartsPageComponent implements OnInit {
         case "male":
           this.currentChildGender = setable;
           break;
-
         case "female":
           this.currentChildGender = setable;
           break;
@@ -2423,9 +2422,6 @@ export class GrowthChartsPageComponent implements OnInit {
     }
 
     return returnableGenders;
-
+ 
   }
-
-
-
 }

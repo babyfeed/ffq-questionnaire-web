@@ -262,6 +262,26 @@ body, html {
     left:-110px;
   }
 
+  /*
+  .back-button {
+    background-color: #4d79ff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .back-button:hover {
+    background-color: #002699;
+  }
+  
+  .bx-arrow-back {
+    margin-right: 10px;
+  }
+*/
 
 }
 
