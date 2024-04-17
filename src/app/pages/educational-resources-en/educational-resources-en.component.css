@@ -1,16 +1,16 @@
 .home-component-container {
-    padding-top: 200px;
+    padding-top: 200px; /* 200px*/
   
     color: aliceblue;
   
-    align-items: center;
+    align-items: cen ter;
   }
   
   .home-container {
     display: flex;
     flex-direction: column;
   
-    width: 80vw;
+    width: 80vw;/* 80 px*/
     align-items: center;
     margin: auto;
   }
@@ -113,7 +113,7 @@
   
   .homeitem-title h1 {
     font-size: 2em;
-    margin-top: 20px;
+    margin-top: 300px; /* 20px */
   }
   
   .homeitem-title h2 {

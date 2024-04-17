@@ -10,7 +10,7 @@
   justify-content: center;
   align-content: center;
   padding: 10px;
-  height: 220px;
+  height: 545px; /* 220px */
 }
 .quest-id-input {
   padding-right: 30px;
@@ -22,6 +22,8 @@
 }
 .quest-id-button {
   top: 40px;
+  font-size: 1.5em;
+  padding:15px 30px;
   /*padding-left: 85px;*/
 }
 .quest-id-reference {
@@ -40,7 +42,7 @@
 
 .lang-button {
   background-color: #35a2a6;
-  top: 60px;
+  top: 60px;    /* 60px*/
   color: white;
 }
 

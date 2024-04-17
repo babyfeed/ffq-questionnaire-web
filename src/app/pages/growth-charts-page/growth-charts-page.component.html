@@ -63,7 +63,7 @@
             -->
           </mat-expansion-panel-header>
 
-          <p>{{ "Please, provide all the information asked" | translate }}.</p>
+          <p class="info-text">{{ "Please, provide all the information asked" | translate }}.</p>
 
           <form
             id="child-personal-information-form"
@@ -71,7 +71,7 @@
             ngNativeValidate
             (ngSubmit)="onSubmitChildPersonalInformationForm()"
           >
-            <mat-form-field class="example-full-width" appearance="fill">
+          <!-- <mat-form-field class="example-full-width" appearance="fill">
               <mat-label>{{ "Children" | translate }}</mat-label>
               <mat-select
                 name="children"
@@ -88,7 +88,7 @@
                 >
               </mat-select>
             </mat-form-field>
-
+    -->
             <!-- {{getAllDates() | json}} -->
             <!-- {{parentResults | json}}
             {{getAllChildData()[0] | json}} -->
@@ -258,6 +258,9 @@
               {{ "Add" | translate }}
             </button>
           </form>
+
+          <p>{{ "Please, click on Save before proceeding" | translate }}.</p>
+
           <button
             mat-stroked-button
             color="primary"
@@ -267,16 +270,16 @@
           >
             {{ "Save" | translate }}
           </button>
-        </mat-expansion-panel>
-        <mat-expansion-panel #chartOptionsPanel hideToggle>
+        <!-- </mat-expansion-panel> -->
+        <!-- <mat-expansion-panel #chartOptionsPanel hideToggle>
           <mat-expansion-panel-header>
-            <mat-panel-title>{{ "Chart Options" | translate }}</mat-panel-title>
-            <!--<mat-panel-description
+            <mat-panel-title>{{ "Chart Options" | translate }}</mat-panel-title> 
+            <mat-panel-description
               >{{
                 "BMI, Height - Age, Weight - Age, and Weight - Height charts"
                   | translate
               }}.
-            </mat-panel-description>-->
+            </mat-panel-description>
           </mat-expansion-panel-header>
           <p>{{ "Please select a chart option" | translate }}.</p>
           <form>
@@ -287,9 +290,9 @@
               [disabled]="childPersonalInformationForm.invalid"
               [(ngModel)]="chosenChartOption"
               (change)="onTypeChartChange($event.value)"
-            >
-            <!----
-              <mat-button-toggle value="BMI">{{
+            > 
+          -->
+              <!-- <mat-button-toggle value="BMI">{{
                 "BMI" | translate
               }}</mat-button-toggle>
               <mat-button-toggle value="Height-Age">{{
@@ -300,7 +303,7 @@
                 </mat-button-toggle>
               </mat-button-toggle>
               ---->
-              <mat-button-toggle value="Weight-Length"
+              <!-- <mat-button-toggle value="Weight-Length"
                 >{{ "Weight-Length" | translate }}
               </mat-button-toggle>
             </mat-button-toggle-group>
@@ -311,7 +314,7 @@
   </mat-card>
 </div>
 <br />
-
+-->
 <div class="spinner">
   <mat-progress-spinner
     *ngIf="loading"
@@ -435,7 +438,7 @@
 <table>
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Date</th>
       <th>Age</th>
       <th>Length</th>
       <th>Weight</th>
@@ -445,7 +448,7 @@
     <ng-container *ngFor="let child of currentParent.children">
       <ng-container *ngFor="let childData of getChildData(child)">
         <tr>
-          <td>{{ child.name }}</td>
+          <td>{{ childData.date }}</td>
           <td>{{ childData.age }}</td>
           <td>{{ childData.height }}</td>
           <td>{{ childData.weight }}</td>
@@ -472,5 +475,3 @@ parent results below
 
 {{giveCurrentChildGenders()}} -->
 
-
-<!-- {{currentParent | json}} -->
