@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { Component, Renderer2, ViewChild, ElementRef } from '@angular/core';
 
 import { GrowthChartsPageComponent } from "./growth-charts-page.component";
 
