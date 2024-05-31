@@ -30,9 +30,6 @@ export class HistoryParentalComponent implements OnInit {
   public show = false;
   public showFeedback = false;
   breastMilkFlag = [];
-  public buttonName: any = 'Results';
-
-
   MESSAGE = 'No questionnaires have been submitted yet!';
 
   results: FFQResultsResponse[] = [];
@@ -56,13 +53,6 @@ export class HistoryParentalComponent implements OnInit {
 
   toggle(index) {
     this.results[index].show = !this.results[index].show;
-
-    if (this.results[index].show) {
-      this.buttonName = 'Results';
-    } else {
-      this.buttonName = 'Results';
-    }
-
   }
 
   toggleFeedback(index) {
@@ -104,26 +94,6 @@ export class HistoryParentalComponent implements OnInit {
 
   returnZero() {
     return 0;
-  }
-
-  /////////////////////////////////////////////////////////////////////////////////
-  // (Francis) attempting to add Nutrients and Food Items buttons from recommend tab
-  //            copy/pasted from recommend.component.ts
-  /////////////////////////////////////////////////////////////////////////////////
-
-  private getNutrientsRecommendations(questionnaireId: string) {
-    this.nutrientsRecommendationsService
-      .getNutrientsRecommendationsByQuestionnaireId(questionnaireId)
-      .subscribe(
-        data => {
-          this.onModalRequest(questionnaireId);
-        },
-        error => {
-          const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-          dialogRef.componentInstance.title = error.error.message;
-          dialogRef.componentInstance.router = this.router;
-        }
-      );
   }
 
   private getFoodRecommendations(questionnaireId: string) {

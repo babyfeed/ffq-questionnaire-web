@@ -10,15 +10,12 @@ import { QuestionnaireResponse } from "../../models/questionnaire-response";
 import { Questionnaire } from "../../models/Questionnaire";
 import { FFQItemCalcRequest } from "../../models/ffqitem-calc-request";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { ResultsPageComponent } from "../results-page/results-page.component";
-import { FFQResult } from "../../models/FFQResult";
-import { NutrientConstants } from "../../models/NutrientConstants";
-import { Validators, FormControl } from "@angular/forms";
 import { AuthenticationService } from "src/app/services/authentication/authentication.service";
 import { MatDialog } from "@angular/material/dialog";
-import { isInteger } from "@ng-bootstrap/ng-bootstrap/util/util";
 import { TranslateService } from "@ngx-translate/core";
 import { FeedingFrequencyComponent } from "src/app/components/feeding-frequency/feeding-frequency.component";
+import { FoodRecommendationsService } from "src/app/services/food-recommendation-service/food-recommendations.service";
+import { FoodRecommendModalComponent } from "src/app/components/food-recommend-modal/food-recommend-modal.component";
 
 @Component({
   selector: "app-questionnaire-page",
@@ -63,6 +60,7 @@ export class QuestionnairePageComponent implements OnInit {
   constructor(
     public foodService: FoodItemService,
     public questService: QuestionnaireValidatorService,
+    public foodRecommendationsService: FoodRecommendationsService,
     private activatedRoute: ActivatedRoute,
     private errorDialog: MatDialog,
     private submissionErrorDialog: MatDialog,
@@ -175,22 +173,6 @@ export class QuestionnairePageComponent implements OnInit {
         )
         .subscribe(
           (results) => {
-            const dailyMap: Map<string, number> = new Map();
-            const weeklyMap: Map<string, number> = new Map();
-            for (const nutrient of NutrientConstants.NUTRIENT_NAMES) {
-              const dailyValue = results.dailyAverages[nutrient];
-              const weeklyValue = results.weeklyTotals[nutrient];
-              if (
-                dailyValue !== null &&
-                dailyValue !== undefined &&
-                weeklyValue !== null &&
-                weeklyValue !== undefined
-              ) {
-                dailyMap.set(nutrient, dailyValue);
-                weeklyMap.set(nutrient, weeklyValue);
-              }
-            }
-
             this.questService.submitQuestionnaire(this.id).subscribe(
               (data: Questionnaire) => {
                 const dialogRef = this.successDialog.open(
@@ -202,9 +184,9 @@ export class QuestionnairePageComponent implements OnInit {
                 dialogRef.componentInstance.message = this.translate.instant(
                   "The questionnaire has been sent to the issuer"
                 );
-                dialogRef
-                  .afterClosed()
-                  .subscribe(() => this.router.navigateByUrl("/"));
+                dialogRef.afterClosed().subscribe(() => {
+                  this.getFoodRecommendations();
+                });
                 this.submitting = false;
               },
               (error: HttpErrorResponse) => this.handleSubmissionError(error)
@@ -244,6 +226,30 @@ export class QuestionnairePageComponent implements OnInit {
         : 0;
     });
     return sortedArray;
+  }
+
+  private getFoodRecommendations() {
+    return this.foodRecommendationsService
+      .getFoodRecommendationsByQuestionnaireId(this.id)
+      .subscribe(
+        (data) => {
+          this.onModalRequestFood(this.id);
+        },
+        (error) => {
+          const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+          dialogRef.componentInstance.title = error.error.message;
+          dialogRef.componentInstance.router = this.router;
+        }
+      );
+  }
+  onModalRequestFood(id: string): void {
+    const modalRef = this.dialog.open(FoodRecommendModalComponent, {
+      data: [],
+    });
+    modalRef.componentInstance.id = id;
+    modalRef.afterClosed().subscribe(() => {
+      this.router.navigateByUrl("/");
+    });
   }
 
   private handleFoodServiceError(error: HttpErrorResponse) {

@@ -4,19 +4,30 @@
     <mat-card-content>
       <span class="quest-id-span">
         <mat-card-actions>
-          <div class="quest-id-button-div">
+          <div class="button-div">
             <button
-              mat-raised-button class="quest-id-button"
+              mat-raised-button
+              class="quest-id-button"
               (click)="startQuestionnaire()"
               color="primary"
             >
               {{ "Begin Food Questionnaire" | translate }}
             </button>
           </div>
-          <div class="lang-button-div">
-            <button (click)="toggleLanguage()" mat-raised-button class="lang-button">{{'For English' | translate}}</button>
+          <div class="button-div">
+            <a routerLink="/parent/history">
+              <button mat-raised-button color="primary">{{ "View Previous Results" | translate }}</button>
+            </a>
           </div>
-          <div class="quest-id-reference"></div>
+          <div class="button-div">
+            <button
+              (click)="toggleLanguage()"
+              mat-raised-button
+              class="lang-button"
+            >
+              {{ "For English" | translate }}
+            </button>
+          </div>
         </mat-card-actions>
       </span>
     </mat-card-content>

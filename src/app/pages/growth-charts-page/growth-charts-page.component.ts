@@ -2047,6 +2047,7 @@ export class GrowthChartsPageComponent implements OnInit {
       this.authenticationService.currentUserId
     );
     parent.subscribe((parent) => {
+      console.log(parent)
       this.currentParent = parent;
     });
 
@@ -2249,6 +2250,7 @@ export class GrowthChartsPageComponent implements OnInit {
 
   //temporary solution for getting the data of the children to the table
   getChildData(child: FFQChildren): FFQChildData[] {
+    console.log(child)
     return child.childData;
   }
 
