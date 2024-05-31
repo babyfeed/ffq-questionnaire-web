@@ -4,7 +4,7 @@
 }
 
 .container_page{
-  padding-top: 200px;
+  padding-top: 180px;
   margin-bottom: 50px;
 }
 
@@ -40,8 +40,8 @@ tr:nth-child(even) {
 
 
 @media(max-width:695px) {
-  .container {
-    margin-top:100px;
+  .container_page {
+    padding-top: 200px;
   }
 }
 
@@ -52,20 +52,6 @@ tr:nth-child(even) {
   }
 
 }
-
-
-
-@media(max-width:483px) {
-
-  .btn-info {
-    /* border: 1px solid black; */
-    margin-left:-280px;
-  }
-
-}
-
-
-
 
 @media(max-width:320px) {
 

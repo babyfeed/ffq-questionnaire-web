@@ -115,15 +115,15 @@ export class QuestionnairePageComponent implements OnInit {
       this.foodService
         .calculateNutrientBreakdown(
           this.userId,
-          this.userType,
           this.id,
+          this.userType,
           this.infantage,
           this.gender,
+          this.patientName,
           itemList
         )
         .subscribe(
           (results) => {
-            console.log(results);
             const dailyMap: Map<string, number> = new Map();
             const weeklyMap: Map<string, number> = new Map();
             for (const nutrient of NutrientConstants.NUTRIENT_NAMES) {
@@ -135,34 +135,27 @@ export class QuestionnairePageComponent implements OnInit {
                 weeklyValue !== null &&
                 weeklyValue !== undefined
               ) {
-                console.log(
-                  "Nutrient: " + nutrient + ", Daily Value: " + dailyValue
-                );
                 dailyMap.set(nutrient, dailyValue);
-                console.log(
-                  "Nutrient: " + nutrient + ", Weekly Value: " + weeklyValue
-                );
                 weeklyMap.set(nutrient, weeklyValue);
               }
-              console.log(this.infantage);
             }
-            const ffqResult = new FFQResult(dailyMap, weeklyMap);
-            /*
-            const modalRef = this.modalService.open(ResultsPageComponent);
-            modalRef.componentInstance.results = ffqResult;
-            console.log('OPENED MODAL');
-            */
 
             this.questService.submitQuestionnaire(this.id).subscribe(
               (data: Questionnaire) => {
-                this.router.navigateByUrl("/");
-                const dialogRef = this.successDialog.open(
-                  ErrorDialogPopupComponent
-                );
-                dialogRef.componentInstance.title =
-                  "Questionnaire submitted successfully.";
-                dialogRef.componentInstance.message =
-                  "The questionnaire has been sent to the issuer.";
+                // this.router.navigateByUrl("/");
+                // const dialogRef = this.successDialog.open(
+                //   ErrorDialogPopupComponent
+                // );
+                // dialogRef.componentInstance.title =
+                //   "Questionnaire submitted successfully.";
+                // dialogRef.componentInstance.message =
+                //   "The questionnaire has been sent to the issuer.";
+
+                const ffqResult = new FFQResult(dailyMap, weeklyMap);
+                const modalRef = this.modalService.open(ResultsPageComponent);
+                console.log(ffqResult, modalRef)
+                modalRef.componentInstance.results = ffqResult;
+
                 this.submitting = false;
               },
               (error: HttpErrorResponse) => this.handleSubmissionError(error)
