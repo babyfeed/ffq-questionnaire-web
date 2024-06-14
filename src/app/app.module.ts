@@ -103,7 +103,7 @@ import { TranslateMessageFormatCompiler } from "ngx-translate-messageformat-comp
 import { NgIdleKeepaliveModule } from "@ng-idle/keepalive";
 import { FeedingFrequencyComponent } from "./components/feeding-frequency/feeding-frequency.component";
 import { MatTableModule } from "@angular/material/table";
-import { GrowthChartsPageComponent } from "./pages/growth-charts-page/growth-charts-page.component";
+import { GrowthPageComponent } from "./pages/growth/growth-page.component";
 import { ResearchParentalChartComponent } from "./pages/research-parental-chart/research-parental-chart.component";
 import { NgxChartsModule } from "@swimlane/ngx-charts";
 import { MatDatepickerModule } from "@angular/material/datepicker";
@@ -114,12 +114,16 @@ import { InterpretationGrowthChartsDialogComponent } from "./components/interpre
 import { GrowthChartsHelpComponent } from "./components/growth-charts-help/growth-charts-help.component";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { HomePageComponent } from "./pages/home-page/home-page.component";
+import { GrowthNewRecordFormComponent } from "./components/growth/growth-new-record-form/growth-new-record-form.component";
+import { GrowthChartComponent } from "./components/growth/growth-chart/growth-chart.component";
+import { GrowthTableComponent } from "./components/growth/growth-table/growth-table.component";
+import { GrowthMessageComponent } from "./components/growth/growth-message/growth-message.component";
 
 import { NgApexchartsModule } from "ng-apexcharts";
 // possibly to be deleted below
-import {AdminresultsComponent} from './pages/admin-results/adminresults.component';
-import { EducationalResourcesENComponent } from './pages/educational-resources-en/educational-resources-en.component';
-import { EducationalResourcesESComponent } from './pages/educational-resources-es/educational-resources-es.component';
+import { AdminresultsComponent } from "./pages/admin-results/adminresults.component";
+import { EducationalResourcesENComponent } from "./pages/educational-resources-en/educational-resources-en.component";
+import { EducationalResourcesESComponent } from "./pages/educational-resources-es/educational-resources-es.component";
 import { AdminExternalResourcesComponent } from "./pages/admin-resources/admin-resources.component";
 
 // possibly to be deleted above
@@ -193,7 +197,8 @@ import { AdminExternalResourcesComponent } from "./pages/admin-resources/admin-r
     ClinicQuestionnaireComponent,
     FeedingFrequencyComponent,
     ServingSizePicturesComponent,
-    GrowthChartsPageComponent,
+    GrowthPageComponent,
+    GrowthChartComponent,
     ResearchParentalChartComponent,
     InterpretationGrowthChartsDialogComponent,
     GrowthChartsHelpComponent,
@@ -201,8 +206,10 @@ import { AdminExternalResourcesComponent } from "./pages/admin-resources/admin-r
     AdminresultsComponent,
     EducationalResourcesENComponent,
     EducationalResourcesESComponent,
-    AdminExternalResourcesComponent
-
+    AdminExternalResourcesComponent,
+    GrowthNewRecordFormComponent,
+    GrowthTableComponent,
+    GrowthMessageComponent,
   ],
   imports: [
     BrowserModule,
