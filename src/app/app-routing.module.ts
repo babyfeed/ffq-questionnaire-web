@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AppComponent } from './app.component';
 import { QuestionnairePageComponent } from './pages/questionnaire-page/questionnaire-page.component';
 import { QuestIdInputComponent } from './pages/quest-id-input-page/quest-id-input.component';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
-import { ResearchPageComponent } from './pages/research-page/research-page.component';
 import { ResearchQuestionnaireComponent } from './pages/research-questionnaire/research-questionnaire.component';
 import { ResearchUsersComponent } from './pages/research-users/research-users.component';
 import { ResearchHistoryComponent } from './pages/research-history/research-history.component';
@@ -39,9 +37,8 @@ import { ResearchNewUserComponent } from './pages/research-new-user/research-new
 import { UpdateResearchInstitutionComponent } from './pages/modify-research-institution/modify-research-institution.component';
 import { UpdateResearcherComponent } from './pages/modify-researcher/modify-researcher.component';
 import { ClinicQuestionnaireComponent } from './pages/clinic-questionnaire/clinic-questionnaire.component';
-import { GrowthChartsPageComponent } from './pages/growth-charts-page/growth-charts-page.component';
+import { GrowthPageComponent } from './pages/growth/growth-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
-import { componentFactoryName } from '@angular/compiler';
 import { ResearchParentalChartComponent } from './pages/research-parental-chart/research-parental-chart.component';
 import {AdminresultsComponent} from './pages/admin-results/adminresults.component';
 import { EducationalResourcesENComponent } from './pages/educational-resources-en/educational-resources-en.component';
@@ -225,8 +222,8 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'parent/growth-charts-page',
-    component: GrowthChartsPageComponent,
+    path: 'parent/growth',
+    component: GrowthPageComponent,
     canActivate: [AuthGuard]
   },
   {

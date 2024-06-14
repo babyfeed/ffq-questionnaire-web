@@ -1,0 +1,150 @@
+<mat-expansion-panel hideToggle [expanded]="true">
+  <mat-expansion-panel-header>
+    <mat-panel-title>{{ "Add New Measurements" | translate }}</mat-panel-title>
+  </mat-expansion-panel-header>
+  <p class="info-text">
+    {{ "Please, provide all the information asked" | translate }}.
+  </p>
+  <form
+    #childInformationForm="ngForm"
+    (ngSubmit)="onSubmitNewRecord(childInformationForm)"
+    class="form-fields"
+    ngNativeValidate
+  >
+    <mat-form-field class="form-field" appearance="fill">
+      <mat-label>{{ "Gender" | translate }}</mat-label>
+      <mat-select
+        name="genderControl"
+        #genderControl="ngModel"
+        required
+        [(ngModel)]="gender"
+        (selectionChange)="onGenderChange()"
+      >
+        <mat-option value="Male">{{ "Male" | translate }}</mat-option>
+        <mat-option value="Female">{{ "Female" | translate }}</mat-option>
+      </mat-select>
+      <ng-container *ngIf="genderControl.invalid && genderControl.touched">
+        <mat-error
+          *ngIf="genderControl.errors?.required"
+          class="error-container"
+        >
+          {{ "You must select a gender" | translate }}.</mat-error
+        >
+      </ng-container>
+    </mat-form-field>
+    <mat-form-field class="form-field" appearance="fill">
+      <mat-label>{{ "Child age in Months" | translate }}</mat-label>
+      <input
+        name="ageControl"
+        #ageControl="ngModel"
+        [(ngModel)]="age"
+        required
+        matInput
+        type="number"
+        placeholder="Ex. 2"
+        [min]="MIN_AGE_MONTHS"
+        [max]="MAX_AGE_MONTHS"
+      />
+      <ng-container *ngIf="ageControl.invalid && ageControl.touched">
+        <mat-error *ngIf="ageControl.errors.required" class="error-container">
+          {{ "You must enter an age in months" | translate }}.</mat-error
+        >
+      </ng-container>
+    </mat-form-field>
+
+    <div class="input-group">
+      <mat-form-field appearance="fill" class="form-field-80">
+        <mat-label
+          >{{ "Weight in" | translate }} ({{ weightUnitOptions }})</mat-label
+        >
+        <input
+          name="weightControl"
+          #weightControl="ngModel"
+          [(ngModel)]="weight"
+          required
+          matInput
+          type="number"
+          step="0.1"
+          placeholder="Ex. 20"
+          [min]="MIN_WEIGHT"
+          [max]="MAX_WEIGHT"
+        />
+        <ng-container *ngIf="weightControl.invalid && weightControl.touched">
+          <mat-error
+            *ngIf="weightControl.errors.required"
+            class="error-container"
+          >
+            {{ "You must enter a weight in" | translate }} ({{
+              weightUnitOptions | translate
+            }})</mat-error
+          >
+        </ng-container>
+      </mat-form-field>
+      <mat-button-toggle-group
+        #weightUnitOptionsGroup="matButtonToggleGroup"
+        name="weightUnitOptionsControl"
+        (change)="onWeightUnitChange(weightUnitOptionsGroup.value)"
+        class="form-toggle-button"
+      >
+        <mat-button-toggle value="kg" [checked]="weightUnitOptions === 'kg'"
+          >kg</mat-button-toggle
+        >
+        <mat-button-toggle value="lb" [checked]="weightUnitOptions === 'lb'"
+          >lb</mat-button-toggle
+        >
+      </mat-button-toggle-group>
+    </div>
+
+    <div class="input-group">
+      <mat-form-field appearance="fill" class="form-field-80">
+        <mat-label
+          >{{ "Length in" | translate }} ({{ heightUnitOptions }})</mat-label
+        >
+        <input
+          name="heightControl"
+          #heightControl="ngModel"
+          [(ngModel)]="height"
+          required
+          matInput
+          type="number"
+          step="0.1"
+          placeholder="Ex. 60.5"
+          [min]="MIN_HEIGHT"
+          [max]="MAX_HEIGHT"
+        />
+        <ng-container *ngIf="heightControl.invalid && heightControl.touched">
+          <mat-error
+            *ngIf="heightControl.errors.required"
+            class="error-container"
+          >
+            {{ "You must enter a length in" | translate }} ({{
+              heightUnitOptions
+            }})</mat-error
+          >
+        </ng-container>
+      </mat-form-field>
+      <mat-button-toggle-group
+        #heightUnitOptionsGroup="matButtonToggleGroup"
+        name="heightUnitOptionsControl"
+        (change)="onHeightUnitChange(heightUnitOptionsGroup.value)"
+        class="form-toggle-button"
+      >
+        <mat-button-toggle value="cm" [checked]="heightUnitOptions === 'cm'"
+          >cm</mat-button-toggle
+        >
+        <mat-button-toggle value="in" [checked]="heightUnitOptions === 'in'"
+          >in</mat-button-toggle
+        >
+      </mat-button-toggle-group>
+    </div>
+    <button
+      mat-stroked-button
+      color="primary"
+      name="addControl"
+      type="submit"
+      class="form-submit-button"
+    >
+      {{ "Add New Measurement" | translate }}
+    </button>
+  </form>
+</mat-expansion-panel>
