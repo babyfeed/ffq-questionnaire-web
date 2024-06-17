@@ -118,6 +118,7 @@ import { GrowthNewRecordFormComponent } from "./components/growth/growth-new-rec
 import { GrowthChartComponent } from "./components/growth/growth-chart/growth-chart.component";
 import { GrowthTableComponent } from "./components/growth/growth-table/growth-table.component";
 import { GrowthMessageComponent } from "./components/growth/growth-message/growth-message.component";
+import { ClinicGrowthPage } from "./pages/clinic-growth/clinic-growth-page.component";
 
 import { NgApexchartsModule } from "ng-apexcharts";
 // possibly to be deleted below
@@ -210,6 +211,7 @@ import { AdminExternalResourcesComponent } from "./pages/admin-resources/admin-r
     GrowthNewRecordFormComponent,
     GrowthTableComponent,
     GrowthMessageComponent,
+    ClinicGrowthPage,
   ],
   imports: [
     BrowserModule,

@@ -147,16 +147,16 @@
   "Carbohydrate (g)": "Carbohydrate (g)",
   "Carrot": "Carrot",
   "Baby Cereal added to formula or breastmilk (examples: rice, wheat, etc.)": "Baby Cereal added to formula or breastmilk (examples: rice, wheat, etc.)",
-  "Complete this questionnaire to learn if you are feeding your child the recommended amounts for each food group.":"Complete this questionnaire to learn if you are feeding your child the recommended amounts for each food group.",
-  "Complete this short form every week to monitor if you are feeding your child the recommended amounts for each food group.":"Complete this short form every week to monitor if you are feeding your child the recommended amounts for each food group.",
+  "Complete this questionnaire to learn if you are feeding your child the recommended amounts for each food group.": "Complete this questionnaire to learn if you are feeding your child the recommended amounts for each food group.",
+  "Complete this short form every week to monitor if you are feeding your child the recommended amounts for each food group.": "Complete this short form every week to monitor if you are feeding your child the recommended amounts for each food group.",
   "Cheese": "Cheese",
   "Chicken or turkey (includes breast, thighs, wings, ground or ham)": "Chicken or turkey (includes breast, thighs, wings, ground or ham)",
   "Chips (examples: Doritos, Lays, Cheetos, Tostitos, etc.)": "Chips (examples: Doritos, Lays, Cheetos, Tostitos, etc.)",
   "Citrus fruits (examples: orange, mandarin, etc.)": "Citrus fruits (examples: orange, mandarin, etc.)",
   "Click the submit button at the bottom of the form when finished": "Click the submit button at the bottom of the form when finished",
   "Click the submit button when finished": "Click the submit button when finished.",
-  "Click here to input the weight and length of your child from the last visit to the pediatric office to monitor his/her growth.":"Click here to input the weight and length of your child from the last visit to the pediatric office to monitor his/her growth.",
-  "Click here to access other resources (videos and websites) with information related to feeding your child.":"Click here to access other resources (videos and websites) with information related to feeding your child.",
+  "Click here to input the weight and length of your child from the last visit to the pediatric office to monitor his/her growth.": "Click here to input the weight and length of your child from the last visit to the pediatric office to monitor his/her growth.",
+  "Click here to access other resources (videos and websites) with information related to feeding your child.": "Click here to access other resources (videos and websites) with information related to feeding your child.",
   "Cookies (sugar cookies, chocolate chips, oats, vanilla, etc.)": "Cookies (sugar cookies, chocolate chips, oats, vanilla, etc.)",
   "Consumed More": "Consumed more",
   "Equal Amount": "Equal Amount",
@@ -168,7 +168,7 @@
   "Daily Average": "Daily Average",
   "Date": "Date",
   "Day": "Day",
-  "Each tab has a different tool, please see the descriptions below":"Each tab has a different tool, please see the descriptions below",
+  "Each tab has a different tool, please see the descriptions below": "Each tab has a different tool, please see the descriptions below",
   "Egg": "Egg",
   "Energy (kcal)": "Energy (kcal)",
   "Enter Age": "Enter Age",
@@ -507,8 +507,8 @@
   "For each food and drink, you can click the up or down arrows for the number of times a food and drink were consumed, the serving size, and if it was given weekly or daily.": "For each food and drink, you can click the up or down arrows for the number of times a food and drink were consumed, the serving size, and if it was given weekly or daily.",
   "You can click on the pictures to the right of each item to help you with the serving size and can also see the pictures larger.": "You can click on the pictures to the right of each item to help you with the serving size and can also see the pictures larger.",
   "Menus are composed from the following panels: Child Personal Information Panel, Child Body Measurements Panel, Chart Options Panel. The buttons located on top-right screen side are the Download, Language and Info buttons in the respectively order. The Download button allows you to save the visible current chart and their respectively data into a pdf file. The language button allows to change the language from English to Spanish and vice versa. The Info button allows gives a basic guideline to interact with the Graphical User Interface": "Menus are composed from the following panels: Child Personal Information Panel, Child Body Measurements Panel, Chart Options Panel. The buttons located on top-right screen side are the Download, Language and Info buttons in the respectively order. The Download button allows you to save the visible current chart and their respectively data into a pdf file. The language button allows to change the language from English to Spanish and vice versa. The Info button allows gives a basic guideline to interact with the Graphical User Interface",
-  "Welcome to Parent Portal":"Welcome to Parent Portal",
-  "Parental Portal":"Parental Portal",
+  "Welcome to Parent Portal": "Welcome to Parent Portal",
+  "Parental Portal": "Parental Portal",
   "result": [
     {
       "description": "Breastmilk or iron-fortified infant formula is recommended until age 12 months. Do not use low-iron milk, such as cow or soy, even in infant cereal. Do not add cereal in the bottle. Do not serve 1% (low-fat) or skim (non-fat) milks before age 24 months.",
@@ -604,5 +604,6 @@
   "No data available": "No data available",
   "Percentile": "Percentile",
   "Clinic": "Clinic",
-  "Parent": "Parent"
+  "Parent": "Parent",
+  "Growth Charts Results": "Growth Charts Results"
 }

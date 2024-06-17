@@ -67,6 +67,15 @@ export class GrowthService {
       })
       .subscribe(({ data }) => this.recordsSource.next(data));
   }
+  async getClinicRecords() {
+    const [user] = JSON.parse(localStorage.getItem("currentUser"));
+    this.token = user.token;
+    return this.http.get<any>(`${this.endpoint}/clinic`, {
+      headers: {
+        Authorization: `Bearer ${this.token}`,
+      },
+    }).toPromise();
+  }
   async getAdminRecords() {
     const [user] = JSON.parse(localStorage.getItem("currentUser"));
     this.token = user.token;
