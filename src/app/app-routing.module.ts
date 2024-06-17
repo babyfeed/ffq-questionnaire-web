@@ -44,6 +44,7 @@ import {AdminresultsComponent} from './pages/admin-results/adminresults.componen
 import { EducationalResourcesENComponent } from './pages/educational-resources-en/educational-resources-en.component';
 import { EducationalResourcesESComponent } from './pages/educational-resources-es/educational-resources-es.component';
 import { AdminExternalResourcesComponent } from './pages/admin-resources/admin-resources.component';
+import { ClinicGrowthPage } from './pages/clinic-growth/clinic-growth-page.component';
 
 
 const routes: Routes = [
@@ -209,6 +210,11 @@ const routes: Routes = [
   {
     path: 'clinic/home',
     component: ClinicalPortalComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'clinic/growth',
+    component: ClinicGrowthPage,
     canActivate: [AuthGuard]
   },
   {

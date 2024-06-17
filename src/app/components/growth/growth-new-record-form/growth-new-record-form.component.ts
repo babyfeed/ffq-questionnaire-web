@@ -33,10 +33,11 @@ export class GrowthNewRecordFormComponent implements OnInit {
   ngOnInit(): void {}
 
   getStandardUnitValue(value, unit) {
+    console.log(value, unit);
     if (unit === UnitsOfMeasurement.lb)
-      return Math.round(parseFloat(value) * FFQChildren.KG_TO_LB);
+      return Math.round((parseFloat(value) / FFQChildren.KG_TO_LB) * 100) / 100;
     if (unit === UnitsOfMeasurement.in)
-      return Math.round(parseFloat(value) * FFQChildren.IN_TO_CM);
+      return Math.round(parseFloat(value) * FFQChildren.IN_TO_CM * 100) / 100;
     return value;
   }
 

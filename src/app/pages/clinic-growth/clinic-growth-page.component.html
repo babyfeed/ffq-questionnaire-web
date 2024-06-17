@@ -1,4 +1,4 @@
-<admin-header></admin-header>
+<clinical-header></clinical-header>
 
 <div class="page-container">
   <section class="header">
@@ -10,7 +10,6 @@
   <table>
     <thead>
       <tr>
-        <th>{{ "Clinic" | translate }}</th>
         <th>{{ "Parent" | translate }}</th>
         <th>{{ "Date" | translate }}</th>
         <th>{{ "Age (months)" | translate }}</th>
@@ -22,7 +21,6 @@
     </thead>
     <tbody>
       <tr *ngFor="let record of records">
-        <td>{{ record.clinicName }}</td>
         <td>{{ record.parentUsername }}</td>
         <td>{{ record.timestamp | date : "medium" }}</td>
         <td>{{ record.age }}</td>
