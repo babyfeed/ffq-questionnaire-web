@@ -41,10 +41,9 @@ import { GrowthPageComponent } from './pages/growth/growth-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { ResearchParentalChartComponent } from './pages/research-parental-chart/research-parental-chart.component';
 import {AdminresultsComponent} from './pages/admin-results/adminresults.component';
-import { EducationalResourcesENComponent } from './pages/educational-resources-en/educational-resources-en.component';
-import { EducationalResourcesESComponent } from './pages/educational-resources-es/educational-resources-es.component';
 import { AdminExternalResourcesComponent } from './pages/admin-resources/admin-resources.component';
 import { ClinicGrowthPage } from './pages/clinic-growth/clinic-growth-page.component';
+import { EducationalResourcesPage } from './pages/educational-resources/educational-resources-page.component';
 
 
 const routes: Routes = [
@@ -287,18 +286,13 @@ const routes: Routes = [
     component: QuestionnairePageComponent
   },
    {
-    path: 'parent/educational-resources-en',
-    component: EducationalResourcesENComponent,
+    path: 'parent/educational-resources',
+    component: EducationalResourcesPage,
     canActivate: [AuthGuard]
   },
   {
     path: 'admin/resources',
     component: AdminExternalResourcesComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'parent/educational-resources-es',
-    component: EducationalResourcesESComponent,
     canActivate: [AuthGuard]
   },
   {

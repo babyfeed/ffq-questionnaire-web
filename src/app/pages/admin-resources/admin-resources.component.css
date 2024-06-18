@@ -1,47 +1,57 @@
-.container{
-    padding-top: 20px;
-    margin-bottom: 20px;
+.page-container {
+  width: 100%;
+  max-width: 1200px;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 16px;
+  padding-top: 182px;
+  @media (min-width: 693px) {
+    padding-top: 164px;
   }
-  .container_page{
-    padding-top: 200px;
-    margin-bottom: 50px;
-  }
-  .container-choices{
-    padding-top: 30px;
-    margin-bottom: 20px;
-    margin-left:40px;
-  }
-  
-  .quest-results-card {
-    width: 60%;
-    display: inline-flex;
-    justify-content: center;
-    align-content: center;
-    padding: 50px;
-    height: 200px;
-  }
-  table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  td, th {
-    border: 1px solid #000000;
-    text-align: left;
-    padding: 8px;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #dddddd;
-  }
-  
-  .tableDiv {
-    padding: 35px;
-  }
-  
-  .mat-raised-button{
-    background-color: #6573C3;
-    color: white;
-  }
-  
+}
+.page-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.header {
+  margin-top: 32px;
+  display: flex;
+  justify-content: space-between;
+}
+.header-title {
+  font-size: 24px;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 16px;
+  margin-bottom: 32px;
+}
+
+td,
+th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+tr:nth-child(even) {
+  background-color: #eee;
+}
+
+th {
+  background-color: #f4f4f4;
+}
+
+.empty-table-message {
+  width: 100%;
+  padding: 8px;
+  background-color: white;
+  border: 1px solid #ddd;
+  text-align: center;
+  color: #888
+}
