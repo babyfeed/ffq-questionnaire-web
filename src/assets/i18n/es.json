@@ -621,5 +621,8 @@
   "Clinic": "Clínica",
   "Parent": "Padre",
   "Growth Charts Results": "Resultados de gráficos de crecimiento",
-  "External Resources Events": "Eventos de Recursos Externos"
+  "External Resources Events": "Eventos de Recursos Externos",
+  "Category": "Categoría",
+  "Resource": "Recurso",
+  "Export Data": "Exportar Datos"
 }

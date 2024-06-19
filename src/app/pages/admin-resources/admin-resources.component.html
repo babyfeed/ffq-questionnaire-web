@@ -3,24 +3,29 @@
 <div class="page-container">
   <section class="header">
     <h1 class="header-title">{{ "External Resources Events" | translate }}</h1>
+    <div>
+    <button (click)="exportEvents()" mat-raised-button class="export-button">
+      {{ "Export Data" | translate }}
+    </button>
     <button (click)="toggleLanguage()" mat-raised-button class="lang-button">
       {{ "For English" | translate }}
     </button>
+    </div>
   </section>
   <section class="page-content">
   <table>
     <thead>
       <tr>
-        <th>{{ "Parent" | translate }}</th>
         <th>{{ "Date" | translate }}</th>
+        <th>{{ "Parent" | translate }}</th>
         <th>{{ "Category" | translate }}</th>
         <th>{{ "Resource" | translate }}</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let event of events">
-        <td>{{ event.parentUsername }}</td>
         <td>{{ event.timestamp | date : "medium" }}</td>
+        <td>{{ event.parentUsername }}</td>
         <td>{{ event.category }}</td>
         <td><a target="_blank" href={{event.properties.url}}>{{ event.title }}</a></td>
       </tr>

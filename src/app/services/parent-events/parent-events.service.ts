@@ -33,10 +33,22 @@ export class ParentEventsService {
     const [user] = JSON.parse(localStorage.getItem("currentUser"));
     this.token = user.token;
     return this.http
-      .get<any>(this.endpoint + '/admin', {
+      .get<any>(this.endpoint + "/admin", {
         headers: {
           Authorization: `Bearer ${this.token}`,
         },
+      })
+      .toPromise();
+  }
+  async exportEvents() {
+    const [user] = JSON.parse(localStorage.getItem("currentUser"));
+    this.token = user.token;
+    return this.http
+      .get<any>(this.endpoint + "/admin/export", {
+        headers: {
+          Authorization: `Bearer ${this.token}`,
+        },
+        responseType: "blob" as "json",
       })
       .toPromise();
   }
