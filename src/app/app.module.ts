@@ -119,12 +119,11 @@ import { GrowthChartComponent } from "./components/growth/growth-chart/growth-ch
 import { GrowthTableComponent } from "./components/growth/growth-table/growth-table.component";
 import { GrowthMessageComponent } from "./components/growth/growth-message/growth-message.component";
 import { ClinicGrowthPage } from "./pages/clinic-growth/clinic-growth-page.component";
+import { EducationalResourcesPage } from "./pages/educational-resources/educational-resources-page.component";
 
 import { NgApexchartsModule } from "ng-apexcharts";
 // possibly to be deleted below
 import { AdminresultsComponent } from "./pages/admin-results/adminresults.component";
-import { EducationalResourcesENComponent } from "./pages/educational-resources-en/educational-resources-en.component";
-import { EducationalResourcesESComponent } from "./pages/educational-resources-es/educational-resources-es.component";
 import { AdminExternalResourcesComponent } from "./pages/admin-resources/admin-resources.component";
 
 // possibly to be deleted above
@@ -205,13 +204,12 @@ import { AdminExternalResourcesComponent } from "./pages/admin-resources/admin-r
     GrowthChartsHelpComponent,
     HomePageComponent,
     AdminresultsComponent,
-    EducationalResourcesENComponent,
-    EducationalResourcesESComponent,
     AdminExternalResourcesComponent,
     GrowthNewRecordFormComponent,
     GrowthTableComponent,
     GrowthMessageComponent,
     ClinicGrowthPage,
+    EducationalResourcesPage,
   ],
   imports: [
     BrowserModule,
