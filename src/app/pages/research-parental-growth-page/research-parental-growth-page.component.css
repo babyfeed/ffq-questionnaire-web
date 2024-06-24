@@ -36,10 +36,6 @@
   @media (min-width: 900px) {
     width: 30%;
   }
-  .butons {
-    display: flex;
-    gap: 8px;
-  }
   .lang-button {
     display: none;
     width: 100%;
@@ -47,8 +43,5 @@
       display: block;
       flex: 1;
     }
-  }
-  .export-button {
-    flex: 1;
   }
 }
