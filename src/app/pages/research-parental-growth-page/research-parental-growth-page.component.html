@@ -14,22 +14,9 @@
     </div>
 
     <div class="right-side-container">
-      <div class="butons">
-        <button
-          (click)="exportRecords()"
-          mat-raised-button
-          class="export-button"
-        >
-          {{ "Export Data" | translate }}
-        </button>
-        <button
-          (click)="toggleLanguage()"
-          mat-raised-button
-          class="lang-button"
-        >
-          {{ "For English" | translate }}
-        </button>
-      </div>
+      <button (click)="toggleLanguage()" mat-raised-button class="lang-button">
+        {{ "For English" | translate }}
+      </button>
       <growth-new-record-form [isParticipant]="true"></growth-new-record-form>
     </div>
   </section>
