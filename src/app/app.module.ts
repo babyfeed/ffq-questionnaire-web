@@ -104,7 +104,6 @@ import { NgIdleKeepaliveModule } from "@ng-idle/keepalive";
 import { FeedingFrequencyComponent } from "./components/feeding-frequency/feeding-frequency.component";
 import { MatTableModule } from "@angular/material/table";
 import { GrowthPageComponent } from "./pages/growth/growth-page.component";
-import { ResearchParentalChartComponent } from "./pages/research-parental-chart/research-parental-chart.component";
 import { NgxChartsModule } from "@swimlane/ngx-charts";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from "@angular/material/core";
@@ -120,6 +119,7 @@ import { GrowthTableComponent } from "./components/growth/growth-table/growth-ta
 import { GrowthMessageComponent } from "./components/growth/growth-message/growth-message.component";
 import { ClinicGrowthPage } from "./pages/clinic-growth/clinic-growth-page.component";
 import { EducationalResourcesPage } from "./pages/educational-resources/educational-resources-page.component";
+import { ResearchParentalGrowthPageComponent } from "./pages/research-parental-growth-page/research-parental-growth-page.component";
 
 import { NgApexchartsModule } from "ng-apexcharts";
 // possibly to be deleted below
@@ -199,7 +199,6 @@ import { AdminExternalResourcesComponent } from "./pages/admin-resources/admin-r
     ServingSizePicturesComponent,
     GrowthPageComponent,
     GrowthChartComponent,
-    ResearchParentalChartComponent,
     InterpretationGrowthChartsDialogComponent,
     GrowthChartsHelpComponent,
     HomePageComponent,
@@ -210,6 +209,7 @@ import { AdminExternalResourcesComponent } from "./pages/admin-resources/admin-r
     GrowthMessageComponent,
     ClinicGrowthPage,
     EducationalResourcesPage,
+    ResearchParentalGrowthPageComponent
   ],
   imports: [
     BrowserModule,

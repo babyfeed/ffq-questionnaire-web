@@ -343,7 +343,7 @@
   "Starch (g)": "Almidón (g)",
   "Submission Error": "Error de envío",
   "Submit": "Enviar",
-  "Submitted Successfully": "Enviado Satisfactoriamente",
+  "Submitted Successfully": "Enviado Correctamente",
   "Sugar added": "Azúcar añadido:",
   "Sugar(g)": "Azúcar (g)",
   "The questionnaire has been sent to the issuer": "El cuestionario se ha enviado al emisor.",
@@ -624,5 +624,6 @@
   "External Resources Events": "Eventos de Recursos Externos",
   "Category": "Categoría",
   "Resource": "Recurso",
-  "Export Data": "Exportar Datos"
+  "Export Data": "Exportar Datos",
+  "Thanks for completing the food questionnaire": "Gracias por completar el cuestionario de alimentos"
 }

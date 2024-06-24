@@ -60,3 +60,6 @@ th {
   height: 16px;
   border-radius: 99px;
 }
+.export-button {
+  margin-right: 8px;
+}

@@ -56,11 +56,12 @@ export class GrowthService {
     }
   }
 
-  async loadRecords() {
+  async loadRecords(isParticipant = false) {
     const [user] = JSON.parse(localStorage.getItem("currentUser"));
     this.token = user.token;
+    const url = this.endpoint + (isParticipant ? "/participant" : "");
     this.http
-      .get<any>(this.endpoint, {
+      .get<any>(url, {
         headers: {
           Authorization: `Bearer ${this.token}`,
         },
@@ -70,22 +71,49 @@ export class GrowthService {
   async getClinicRecords() {
     const [user] = JSON.parse(localStorage.getItem("currentUser"));
     this.token = user.token;
-    return this.http.get<any>(`${this.endpoint}/clinic`, {
-      headers: {
-        Authorization: `Bearer ${this.token}`,
-      },
-    }).toPromise();
+    return this.http
+      .get<any>(`${this.endpoint}/clinic`, {
+        headers: {
+          Authorization: `Bearer ${this.token}`,
+        },
+      })
+      .toPromise();
+  }
+  async exportRecords(type) {
+    const [user] = JSON.parse(localStorage.getItem("currentUser"));
+    this.token = user.token;
+    return this.http
+      .get<any>(this.endpoint + "/export/" + type, {
+        headers: {
+          Authorization: `Bearer ${this.token}`,
+        },
+        responseType: "blob" as "json",
+      })
+      .toPromise();
+  }
+  downloadFile(data: Blob, filename: string) {
+    const blob = new Blob([data], { type: "text/csv" });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    window.URL.revokeObjectURL(url);
+    document.body.removeChild(a);
   }
   async getAdminRecords() {
     const [user] = JSON.parse(localStorage.getItem("currentUser"));
     this.token = user.token;
-    return this.http.get<any>(`${this.endpoint}/admin`, {
-      headers: {
-        Authorization: `Bearer ${this.token}`,
-      },
-    }).toPromise();
+    return this.http
+      .get<any>(`${this.endpoint}/admin`, {
+        headers: {
+          Authorization: `Bearer ${this.token}`,
+        },
+      })
+      .toPromise();
   }
-  addRecord(record: GrowthRecord) {
+  addRecord(record: GrowthRecord, isParticipant = false) {
     const [user] = JSON.parse(localStorage.getItem("currentUser"));
     this.token = user.token;
     const message =
@@ -106,8 +134,9 @@ export class GrowthService {
       percentile: message.percentile,
       color: message.color,
     };
+    const url = this.endpoint + (isParticipant ? "/participant" : "");
     this.http
-      .post<any>(this.endpoint, record, {
+      .post<any>(url, record, {
         headers: {
           Authorization: `Bearer ${this.token}`,
         },

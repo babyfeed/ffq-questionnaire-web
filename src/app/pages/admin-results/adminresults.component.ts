@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { TranslateService } from "@ngx-translate/core";
 import {
   GrowthRecord,
   GrowthService,
@@ -11,7 +12,7 @@ import {
 })
 export class AdminresultsComponent {
   records: GrowthRecord[] = [];
-  constructor(private growthService: GrowthService) {}
+  constructor(private growthService: GrowthService, private translate: TranslateService) {}
 
   ngOnInit() {
     this.loadRecords();
@@ -23,5 +24,17 @@ export class AdminresultsComponent {
   }
   toggleLanguage(): void {
     this.growthService.toggleLanguage();
+  }
+  async exportRecords() {
+    try {
+      const result = await this.growthService.exportRecords("admin");
+      const title =
+        this.translate.currentLang === "es"
+          ? "Resultados de gráficos de crecimiento.csv"
+          : "Growth Chart Results.csv";
+      this.growthService.downloadFile(result, title);
+    } catch (error) {
+      console.error("Error exporting events:", error);
+    }
   }
 }

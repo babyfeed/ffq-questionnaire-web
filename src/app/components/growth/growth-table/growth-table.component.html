@@ -6,7 +6,7 @@
       <th>{{ "Gender" | translate }}</th>
       <th>{{ "Weight (kg)" | translate }}</th>
       <th>{{ "Length (cm)" | translate }}</th>
-      <th>{{ "Percentile" | translate }}</th>
+      <th *ngIf="!hidePercentile">{{ "Percentile" | translate }}</th>
     </tr>
   </thead>
   <tbody>
@@ -16,12 +16,14 @@
       <td>{{ record.gender | translate }}</td>
       <td>{{ record.weight }}</td>
       <td>{{ record.height }}</td>
-      <td class="percentile-td">
-        <span
-          class="percentile-indicator"
-          [style.background]="record.percentile.color"
-        ></span>
-        {{ record.percentile.percentile }}
+      <td *ngIf="!hidePercentile">
+        <div class="percentile-td" >
+          <span
+            class="percentile-indicator"
+            [style.background]="record.percentile.color"
+          ></span>
+          {{ record.percentile.percentile }}
+        </div>
       </td>
     </tr>
     <tr *ngIf="records.length === 0">
