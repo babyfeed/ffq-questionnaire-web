@@ -181,11 +181,21 @@ export class QuestionnairePageComponent implements OnInit {
                 dialogRef.componentInstance.title = this.translate.instant(
                   "Submitted Successfully"
                 );
-                dialogRef.componentInstance.message = this.translate.instant(
-                  "The questionnaire has been sent to the issuer"
-                );
+                if (this.userType === "participant") {
+                  dialogRef.componentInstance.message = this.translate.instant(
+                    "Thanks for completing the food questionnaire"
+                  );
+                } else {
+                  dialogRef.componentInstance.message = this.translate.instant(
+                    "The questionnaire has been sent to the issuer"
+                  );
+                }
                 dialogRef.afterClosed().subscribe(() => {
-                  this.getFoodRecommendations();
+                  if (this.userType === "participant") {
+                    this.router.navigateByUrl("/");
+                  } else {
+                    this.getFoodRecommendations();
+                  }
                 });
                 this.submitting = false;
               },

@@ -1,4 +1,4 @@
-<app-parental-header></app-parental-header>
+<researchparental-header></researchparental-header>
 
 <div class="page-container">
   <section class="page-content">
@@ -9,9 +9,10 @@
     >
       {{ "For English" | translate }}
     </button>
-    <div class="chart-container">
-      <app-growth-chart></app-growth-chart>
+    <div class="left-side-container">
+      <app-growth-table [hidePercentile]="true"></app-growth-table>
     </div>
+
     <div class="right-side-container">
       <div class="butons">
         <button
@@ -29,11 +30,7 @@
           {{ "For English" | translate }}
         </button>
       </div>
-      <growth-new-record-form></growth-new-record-form>
+      <growth-new-record-form [isParticipant]="true"></growth-new-record-form>
     </div>
-  </section>
-  <section class="information-section">
-    <app-growth-message></app-growth-message>
-    <app-growth-table></app-growth-table>
   </section>
 </div>

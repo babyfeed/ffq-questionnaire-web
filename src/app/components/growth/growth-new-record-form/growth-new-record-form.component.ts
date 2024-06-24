@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, Input, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Gender, UnitsOfMeasurement } from "src/app/models/Enums";
 import { FFQChildren } from "src/app/models/ffqchildren";
@@ -10,6 +10,7 @@ import { GrowthService } from "src/app/services/growth/growth-service";
   styleUrls: ["./growth-new-record-form.component.css"],
 })
 export class GrowthNewRecordFormComponent implements OnInit {
+  @Input() isParticipant: boolean = false;
   weightUnitOptions: UnitsOfMeasurement = UnitsOfMeasurement.kg;
   heightUnitOptions: UnitsOfMeasurement = UnitsOfMeasurement.cm;
   gender: Gender = Gender.NotAssigned;
@@ -51,7 +52,7 @@ export class GrowthNewRecordFormComponent implements OnInit {
       timestamp: new Date(),
     };
 
-    this.growthService.addRecord(data);
+    this.growthService.addRecord(data, this.isParticipant);
     const { gender } = this;
     childInformationForm.resetForm();
     childInformationForm.form.patchValue({

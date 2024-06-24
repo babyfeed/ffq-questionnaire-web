@@ -3,21 +3,21 @@ import { TranslateService } from "@ngx-translate/core";
 import { GrowthService } from "src/app/services/growth/growth-service";
 
 @Component({
-  selector: "app-growth-page",
-  templateUrl: "./growth-page.component.html",
-  styleUrls: ["./growth-page.component.css"],
+  selector: "app-research-parental-growth-page",
+  templateUrl: "./research-parental-growth-page.component.html",
+  styleUrls: ["./research-parental-growth-page.component.css"],
 })
-export class GrowthPageComponent implements OnInit {
+export class ResearchParentalGrowthPageComponent implements OnInit {
   constructor(private growthService: GrowthService, private translate: TranslateService) {}
   ngOnInit(): void {
-    this.growthService.loadRecords();
+    this.growthService.loadRecords(true);
   }
   toggleLanguage(): void {
     this.growthService.toggleLanguage();
   }
   async exportRecords() {
     try {
-      const result = await this.growthService.exportRecords("parent");
+      const result = await this.growthService.exportRecords("participant");
       const title =
         this.translate.currentLang === "es"
           ? "Resultados de gráficos de crecimiento.csv"

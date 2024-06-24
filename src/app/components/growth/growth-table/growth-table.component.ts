@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { GrowthService, GrowthRecord } from 'src/app/services/growth/growth-service';  // Verifica la ruta
 
@@ -8,6 +8,7 @@ import { GrowthService, GrowthRecord } from 'src/app/services/growth/growth-serv
   styleUrls: ['./growth-table.component.css']
 })
 export class GrowthTableComponent implements OnInit, OnDestroy {
+  @Input() hidePercentile: boolean = false;
   records: GrowthRecord[] = [];
   private recordsSubscription: Subscription;
 

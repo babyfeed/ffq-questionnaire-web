@@ -39,7 +39,7 @@ import { UpdateResearcherComponent } from './pages/modify-researcher/modify-rese
 import { ClinicQuestionnaireComponent } from './pages/clinic-questionnaire/clinic-questionnaire.component';
 import { GrowthPageComponent } from './pages/growth/growth-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
-import { ResearchParentalChartComponent } from './pages/research-parental-chart/research-parental-chart.component';
+import { ResearchParentalGrowthPageComponent } from './pages/research-parental-growth-page/research-parental-growth-page.component';
 import {AdminresultsComponent} from './pages/admin-results/adminresults.component';
 import { AdminExternalResourcesComponent } from './pages/admin-resources/admin-resources.component';
 import { ClinicGrowthPage } from './pages/clinic-growth/clinic-growth-page.component';
@@ -297,7 +297,7 @@ const routes: Routes = [
   },
   {
     path: 'participant/research-parental-chart',
-    component: ResearchParentalChartComponent,
+    component: ResearchParentalGrowthPageComponent,
     canActivate: [AuthGuard]
   }
 ];
