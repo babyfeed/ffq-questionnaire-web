@@ -96,6 +96,7 @@ import {
   TranslateModule,
   TranslateLoader,
   TranslateCompiler,
+  TranslateService,
 } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 // import ngx-translate-messageformat-compiler
@@ -125,8 +126,6 @@ import { NgApexchartsModule } from "ng-apexcharts";
 // possibly to be deleted below
 import { AdminresultsComponent } from "./pages/admin-results/adminresults.component";
 import { AdminExternalResourcesComponent } from "./pages/admin-resources/admin-resources.component";
-
-// possibly to be deleted above
 
 @NgModule({
   declarations: [
@@ -209,7 +208,7 @@ import { AdminExternalResourcesComponent } from "./pages/admin-resources/admin-r
     GrowthMessageComponent,
     ClinicGrowthPage,
     EducationalResourcesPage,
-    ResearchParentalGrowthPageComponent
+    ResearchParentalGrowthPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -281,7 +280,12 @@ import { AdminExternalResourcesComponent } from "./pages/admin-resources/admin-r
     },
   ],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private translate: TranslateService) {
+    this.translate.setDefaultLang('en');
+    this.translate.use('en');
+  }
+}
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
