@@ -44,6 +44,8 @@ export class LoginComponent implements OnInit {
     if (this.authenticationService.currentUserValue) {
       this.router.navigate(['/']);
     }
+    this.translate.setDefaultLang('en');
+    this.translate.use('en');
   }
 
   ngOnInit() {
