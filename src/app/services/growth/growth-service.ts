@@ -17,6 +17,10 @@ export interface GrowthRecord {
   gender: Gender;
   clinicName?: string;
   parentUsername?: string;
+  percentile?: {
+    percentile: string;
+    color: string;
+  };
 }
 
 @Injectable({
