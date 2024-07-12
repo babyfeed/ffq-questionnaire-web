@@ -54,9 +54,7 @@ export class GrowthChartComponent implements AfterViewInit {
         if (this.chart) {
           const newSeries = [...this.currentSeries];
           newSeries[3].name =
-            this.currentLanguage === "es"
-              ? "Mediciones"
-              : "Measurements";
+            this.currentLanguage === "es" ? "Mediciones" : "Measurements";
           this.chart.updateOptions(
             {
               title: { text: this.getTitle() },
@@ -72,9 +70,7 @@ export class GrowthChartComponent implements AfterViewInit {
               yaxis: {
                 title: {
                   text:
-                    this.currentLanguage === "es"
-                      ? "Peso (kg)"
-                      : "Weight (cm)",
+                    this.currentLanguage === "es" ? "Peso (kg)" : "Weight (cm)",
                 },
                 labels: {
                   formatter: (value) => value?.toFixed?.(0) ?? value,
@@ -93,14 +89,6 @@ export class GrowthChartComponent implements AfterViewInit {
         name: "Measurements",
         data: [],
         color: "#000000",
-        dataLabels: {
-          enabled: true,
-          offsetY: -10,
-          style: {
-            fontSize: "12px",
-            colors: ["#fff"],
-          },
-        },
       },
     ];
     this.chartOptions = {
@@ -122,6 +110,7 @@ export class GrowthChartComponent implements AfterViewInit {
       .map((record) => ({
         x: record.height,
         y: record.weight,
+        percentile: record?.percentile,
       }))
       .sort(({ x: xl }, { x: xr }) => (xl > xr ? 1 : -1));
 

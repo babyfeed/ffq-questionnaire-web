@@ -53,7 +53,7 @@ export const EDUCATIONAL_RESOURCES_EN = [
       },
       {
         text: "How Much Should I Feed My Baby?",
-        url: "https://www.youtube.com/watch?v=3arYE01K4Fs",
+        url: "https://www.youtube.com/watch?v=CCaR8n0Qwk0",
       },
       {
         text: "Peanut Foods for Babies",

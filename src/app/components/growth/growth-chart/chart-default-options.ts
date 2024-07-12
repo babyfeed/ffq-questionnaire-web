@@ -19,14 +19,28 @@ const CHART_DEFAULT_OPTIONS = {
     width: [0, 0, 0, 3],
   },
   dataLabels: {
-    enabled: true,
-    formatter: function (val, opts) {
-      if (opts.seriesIndex === 3) {
-        return val;
-      } else {
-        return "";
-      }
+    enabled: false,
+  },
+  tooltip: {
+    custom: ({ series, seriesIndex, dataPointIndex, w }) => {
+      const data = w.globals.initialSeries[seriesIndex].data[dataPointIndex];
+      const percentileData = data.percentile;
+      if (seriesIndex !== 3) return null;
+      return (
+        '<div style="padding: 8px; display: flex; align-items: center;gap: 8px;"><div style="background-color: ' +
+        percentileData.color +
+        '; height: 16px; width: 16px; border-radius: 99px;">' +
+        "</div>" +
+        "<span>" +
+        percentileData.percentile +
+        "</span>" +
+        "</div>"
+      );
     },
+  },
+  markers: {
+    size: [0, 0, 0, 6],
+    strokeWidth: 1.5
   },
   title: {
     text: "Weight-for-length Percentiles (boys)",
