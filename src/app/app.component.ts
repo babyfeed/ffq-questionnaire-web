@@ -30,11 +30,6 @@ export class AppComponent {
       "down_arrow",
       this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/images/down_arrow.svg")
     );
-    this.matIconRegistry.addSvgIcon(
-      "equal_sign",
-      this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/images/equal_sign.svg")
-    );
-
 
     // sets an idle timeout of 5 minutes ( 5 * 60 seconds), for testing purposes.
     idle.setIdle(5 * 60);

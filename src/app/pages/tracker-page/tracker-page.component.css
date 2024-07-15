@@ -1,8 +1,4 @@
-
-​
-David Melara
-​
-h2 {
+​ David Melara ​ h2 {
   text-align: center;
 }
 
@@ -102,7 +98,7 @@ mat-button-toggle-group {
 
 #babyage strong {
   /* border: 1px solid black; */
-  font-size:12px;
+  font-size: 12px;
 }
 
 @media (max-width: 500px) {
@@ -127,23 +123,38 @@ mat-button-toggle-group {
   color: #ffcc5c;
 }*/
 
-@media(max-width:693px) {
-
-  .qb-container{
-    margin-left:125px;
-    margin-top:170px;
-    width:165px;
+@media (max-width: 693px) {
+  .qb-container {
+    margin-left: 125px;
+    margin-top: 170px;
+    width: 165px;
     /* border:1px solid black; */
   }
 
   .qb-row-item {
     /* border: 1px solid black; */
     /* width:340px; */
-    width:160px;
+    width: 160px;
   }
 
   .qb-row-item strong {
-    font-size:75%;
+    font-size: 75%;
   }
+}
 
+.equal_sign {
+  width: 24px;
+  height: 24px;
+  background-color: #3c4cb6;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  border-radius: 2px;
+}
+.equal-btn {
+  height: 48px;
+  display: flex;
+  align-items: center;
 }
