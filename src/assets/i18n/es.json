@@ -518,6 +518,8 @@
   "Growth charts": "Gráficos de crecimiento",
   "Parental Portal": "Portal de Padres",
   "Welcome to Parent Portal": "Bienvenido al Portal de Padres",
+  "Welcome to the": "Bienvenido(a) al",
+  "Parent/Caregiver portal": "portal del Padre o Cuidador",
   "Menus are composed from the following panels: Child Personal Information Panel, Child Body Measurements Panel, Chart Options Panel. The buttons located on top-right screen side are the Download, Language and Info buttons in the respectively order. The Download button allows you to save the visible current chart and their respectively data into a pdf file. The language button allows to change the language from English to Spanish and vice versa. The Info button allows gives a basic guideline to interact with the Graphical User Interface": "Los menús se componen de los siguientes paneles: Panel de información personal del niño, Panel de medidas corporales del niño, Panel de opciones de gráficos. Los botones ubicados en la parte superior derecha de la pantalla son los botones Descargar, Idioma y Ayuda en el orden respectivo. El botón Descargar le permite guardar el gráfico actual visible y sus respectivos datos en un archivo pdf. El botón de idioma permite cambiar el idioma de inglés a español y viceversa. El botón Ayuda permite dar una guía básica para interactuar con la interfaz gráfica de usuario",
   "result": [
     {
@@ -625,5 +627,9 @@
   "Category": "Categoría",
   "Resource": "Recurso",
   "Export Data": "Exportar Datos",
-  "Thanks for completing the food questionnaire": "Gracias por completar el cuestionario de alimentos"
+  "Thanks for completing the food questionnaire": "Gracias por completar el cuestionario de alimentos",
+  "Food questionnaire": "Cuestionario de alimentos",
+  "Food recommendations": "Recomendaciones de alimentos",
+  "Food tracking": "Monitoreo del consumo de alimentos",
+  "Educational Resources from Experts in Nutrition": "Recursos Educativos de Expertos en Nutrición"
 }

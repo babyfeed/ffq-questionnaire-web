@@ -508,6 +508,8 @@
   "You can click on the pictures to the right of each item to help you with the serving size and can also see the pictures larger.": "You can click on the pictures to the right of each item to help you with the serving size and can also see the pictures larger.",
   "Menus are composed from the following panels: Child Personal Information Panel, Child Body Measurements Panel, Chart Options Panel. The buttons located on top-right screen side are the Download, Language and Info buttons in the respectively order. The Download button allows you to save the visible current chart and their respectively data into a pdf file. The language button allows to change the language from English to Spanish and vice versa. The Info button allows gives a basic guideline to interact with the Graphical User Interface": "Menus are composed from the following panels: Child Personal Information Panel, Child Body Measurements Panel, Chart Options Panel. The buttons located on top-right screen side are the Download, Language and Info buttons in the respectively order. The Download button allows you to save the visible current chart and their respectively data into a pdf file. The language button allows to change the language from English to Spanish and vice versa. The Info button allows gives a basic guideline to interact with the Graphical User Interface",
   "Welcome to Parent Portal": "Welcome to Parent Portal",
+  "Welcome to the": "Welcome to the",
+  "Parent/Caregiver portal": "Parent/Caregiver portal",
   "Parental Portal": "Parental Portal",
   "result": [
     {
@@ -610,5 +612,9 @@
   "Category": "Category",
   "Resource": "Resource",
   "Export Data": "Export Data",
-  "Thanks for completing the food questionnaire": "Thanks for completing the food questionnaire"
+  "Thanks for completing the food questionnaire": "Thanks for completing the food questionnaire",
+  "Food questionnaire": "Food questionnaire",
+  "Food recommendations": "Food recommendations",
+  "Food tracking": "Food tracking",
+  "Educational Resources from Experts in Nutrition": "Educational Resources from Experts in Nutrition"
 }
