@@ -523,15 +523,15 @@
   "Menus are composed from the following panels: Child Personal Information Panel, Child Body Measurements Panel, Chart Options Panel. The buttons located on top-right screen side are the Download, Language and Info buttons in the respectively order. The Download button allows you to save the visible current chart and their respectively data into a pdf file. The language button allows to change the language from English to Spanish and vice versa. The Info button allows gives a basic guideline to interact with the Graphical User Interface": "Los menús se componen de los siguientes paneles: Panel de información personal del niño, Panel de medidas corporales del niño, Panel de opciones de gráficos. Los botones ubicados en la parte superior derecha de la pantalla son los botones Descargar, Idioma y Ayuda en el orden respectivo. El botón Descargar le permite guardar el gráfico actual visible y sus respectivos datos en un archivo pdf. El botón de idioma permite cambiar el idioma de inglés a español y viceversa. El botón Ayuda permite dar una guía básica para interactuar con la interfaz gráfica de usuario",
   "result": [
     {
-      "description": "Se recomienda leche materna o fórmula infantil fortificada con hierro hasta los 12 meses de edad. No use leche baja en hierro, como la de vaca o de soya, ni siquiera en cereales para bebés. No agregue cereal en el biberón. No sirva leches al 1% (bajas en grasa) o descremadas (sin grasa) antes de los 24 meses.",
+      "description": "Se recomienda lactancia materna exclusiva durante 6 meses, seguido de lactancia materna hasta los 2 años o hasta que ambos lo deseen, y/o se puede proporcionar fórmula infantil hasta el año de edad. Evite agregar cereales o purés infantiles al biberón. Cuando el bebé tenga 1 año, se le puede dar leche entera de vaca o alternativas lácteas fortificadas, como la soja, y después de los 2 años, se puede pasar a leche baja en grasa (2%, al 1% o descremada).",
       "firstBracketIntake": "2 a 3 tazas por día (16 - 24 fl oz / día)",
       "foodItemGroupName": "Leche",
       "imageUrl": "/assets/images/Breastmilk.jpg",
       "secondBracketIntake": "1 ¼ a 3 ½ tazas por día (10 a 28 fl oz / día)",
-      "thirdBracketIntake": "1 a 2 ¼ tazas por día (8 - 18 fl oz / día)"
+      "thirdBracketIntake": "1 a 2 ¼ tazas por día (8 a 18 fl oz / día)"
     },
     {
-      "description": "Los granos integrales contienen el grano entero: el salvado, el germen y el endospermo. Algunos ejemplos de productos son pan 100% trigo integral, bulgur (trigo partido), avena, harina de maíz, quinua y arroz integral.",
+      "description": "Los cereales integrales son beneficiosos para tu familia ya que contienen fibra, vitaminas y minerales. Algunos ejemplos de cereales integrales son: cereales de avena y cebada fortificados con hierro para bebés, pan 100% integral, avena, arroz integral y cereales cocidos como la quinua y el trigo sarraceno.",
       "firstBracketIntake": "0 tazas por día (0 oz / día)",
       "foodItemGroupName": "Granos integrales",
       "imageUrl": "/assets/images/Whole_Grains.jpg",
@@ -539,7 +539,7 @@
       "thirdBracketIntake": "1 cucharada a 2 ¾ tazas por día (0.1 - 5.5 oz / día)"
     },
     {
-      "description": "Los granos refinados se han molido, un proceso que elimina el salvado, el germen, la fibra dietética, el hierro y muchas vitaminas B. Algunos ejemplos son el pan blanco, la harina sin blanquear, la pasta dura, la harina de maíz enriquecida y el arroz blanco.",
+      "description": "Los cereales refinados son menos beneficiosos para su familia ya que el procesamiento disminuye la fibra dietética, el hierro y muchas vitaminas B. Evite ofrecer pan blanco, harinas refinadas, pasta refinada, harina de maíz y arroz blanco. En su lugar, reemplácelos con cereales integrales.",
       "firstBracketIntake": "0 tazas por día (0 oz / día)",
       "foodItemGroupName": "Granos refinados",
       "imageUrl": "/assets/images/Refined_Grains.jpg",
@@ -547,7 +547,7 @@
       "thirdBracketIntake": "0 a ¾ taza por día (0 - 1.8 oz / día)"
     },
     {
-      "description": "Los alimentos hechos con carne, pollo o pavo, frijoles, nueces, semillas, huevos, yogur, queso y productos de soya se consideran proteínas. Las opciones de carnes y pollo deben ser magras o bajas en grasa. Sirva pescado y mariscos 2-3 veces a la semana.",
+      "description": "Los alimentos con proteínas incluyen carne, aves, mariscos, frijoles, nueces, semillas, huevos, yogur, queso y productos de soya. Elija carnes y aves más magras, como pollo a la parrilla/grill y cortes de lomo de res y cerdo con menos grasa. El queso y el yogur también son buenas fuentes de proteínas. Se pueden ofrecer mariscos 2 o 3 veces por semana.",
       "firstBracketIntake": "0 tazas por día (0 oz / día)",
       "foodItemGroupName": "Proteínas",
       "imageUrl": "/assets/images/Proteins.jpg",
@@ -555,15 +555,15 @@
       "thirdBracketIntake": "½ cucharada a ¾ taza por día (0.1 - 3 oz / día)"
     },
     {
-      "description": "Las verduras pueden estar crudas o cocidas; frescos, congelados, enlatados o secos / deshidratados; y puede cortarse o machacarse. Algunos ejemplos son el brócoli, los tomates, las zanahorias, las batatas, el maíz, los plátanos y las habichuelas tiernas / vainitas.",
+      "description": "Las verduras pueden estar crudas o cocidas, frescas, congeladas, enlatadas (enjuague con agua antes de comer) y se pueden cortar, triturar o hacer puré. Algunos ejemplos son brócoli, calabaza o calabacín, zanahorias, batatas, judías verdes, etc.",
       "firstBracketIntake": "0 tazas por día (0 oz / día)",
-      "foodItemGroupName": "Verudas",
+      "foodItemGroupName": "Verduras",
       "imageUrl": "/assets/images/Vegetables.jpg",
       "secondBracketIntake": "¼ de taza o más por día (2 o más oz / día)",
       "thirdBracketIntake": "1 taza o más por día (8 oz o más / día)"
     },
     {
-      "description": "Cualquier fruta cuenta como parte del grupo de frutas. Las frutas pueden ser frescas, enlatadas, congeladas o secas, y se pueden cortar o hacer puré. Algunos ejemplos son manzanas, plátanos, bayas, mangos, melones, naranjas, peras y ciruelas pasas.",
+      "description": "Las frutas pueden estar crudas o cocidas, frescas, congeladas, enlatadas (enjuague con agua antes de comer) y se pueden cortar, triturar o hacer puré. Algunos ejemplos son manzanas o puré de manzana, plátanos/guineos, fresas, mangos, melones, naranjas, peras, etc.",
       "firstBracketIntake": "0 tazas por día (0 oz / día)",
       "foodItemGroupName": "Frutas",
       "imageUrl": "/assets/images/Fruits.jpg",
@@ -571,7 +571,7 @@
       "thirdBracketIntake": "1 taza o más por día (8 oz o más / día)"
     },
     {
-      "description": "Evite los jugos 100% naturales: no hay ningún beneficio nutricional para los bebés. Algunos ejemplos son los jugos hechos 100% de fruta o 100% vegetal, como manzana y zanahoria. En su lugar, sirva frutas y verduras enteras, cortadas o en puré.",
+      "description": "Antes de los 12 meses, no se deben ofrecer jugos/bebidas de frutas o verduras a los bebés. En el segundo año de vida, se deben limitar los jugos y bebidas de frutas. En su lugar, sirva agua. Se deben evitar los jugos que contienen azúcares añadidos.",
       "firstBracketIntake": "0 tazas por día (0 fl oz / día)",
       "foodItemGroupName": "Jugos 100%",
       "imageUrl": "/assets/images/Juices.jpg",
@@ -579,7 +579,7 @@
       "thirdBracketIntake": "0 a ½ taza por día (0 a 4 fl oz / día)"
     },
     {
-      "description": "Evite las bebidas azucaradas. Estos productos son altos en calorías y no tienen ningún beneficio nutricional. Algunos ejemplos son refrescos, ponche de frutas, Kool-Aid, Tang, limonada, té helado y bebidas deportivas. En su lugar, sírvase leche o agua.",
+      "description": "Evite ofrecer bebidas azucaradas como refrescos, ponche de frutas, Kool-Aid, Tang, limonada, té dulce y bebidas deportivas. Estos productos tienen un alto contenido calórico y no tienen beneficios nutricionales. En su lugar, sirva leche o agua.",
       "firstBracketIntake": "0 tazas por día (0 fl oz / día)",
       "foodItemGroupName": "Bebidas azucaradas",
       "imageUrl": "/assets/images/Sugary_Beverages.jpg",
@@ -587,7 +587,7 @@
       "thirdBracketIntake": "0 tazas por día (0 fl oz / día)"
     },
     {
-      "description": "Evite los dulces. Algunos ejemplos son chocolates, piruletas, caramelos, pasteles, muffins, donas, galletas, helados y azúcares agregados como la miel, mermelada, jarabe y sirope. En su lugar, sírvase yogur natural y frutas, en trozos o en puré.",
+      "description": "Evite ofrecer dulces como: chocolates, dulces, pasteles, muffins, donas, galletas, helados, gelatinas, almíbares, etc. Estos productos también suelen ser muy procesados ​​y con una nutrición mínima.",
       "firstBracketIntake": "0 tazas por día (0 oz / día)",
       "foodItemGroupName": "Dulces",
       "imageUrl": "/assets/images/Sweets.jpg",
@@ -595,7 +595,7 @@
       "thirdBracketIntake": "0 tazas por día (0 oz / día)"
     },
     {
-      "description": "Evite las meriendas saladas. Estos productos también tienden a tener un alto contenido de calorías y grasas. Algunos ejemplos son las papas fritas, las papitas fritas (chips) y las carnes procesadas como jamón, tocino y salchichas. En su lugar, sírvase alimentos de granos integrales y proteínas.",
+      "description": "Evite ofrecer bocadillos/alimentos salados como papas fritas, chips y carnes procesadas como jamón, tocino y salchichas. Estos productos también suelen ser muy procesados ​​y con una nutrición mínima.",
       "firstBracketIntake": "0 tazas por día (0 oz / día)",
       "foodItemGroupName": "Meriendas Saladas",
       "imageUrl": "/assets/images/Salty_Snacks.jpg",
