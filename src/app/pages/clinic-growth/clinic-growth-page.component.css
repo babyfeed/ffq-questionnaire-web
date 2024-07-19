@@ -62,4 +62,6 @@ th {
 }
 .export-button {
   margin-right: 8px;
+  background-color:#c82333;
+  color: white;
 }

@@ -30,8 +30,8 @@ export class AdminresultsComponent {
       const result = await this.growthService.exportRecords("admin");
       const title =
         this.translate.currentLang === "es"
-          ? "Resultados de gráficos de crecimiento.csv"
-          : "Growth Chart Results.csv";
+          ? "Resultados de gráficos de crecimiento.xlsx"
+          : "Growth Chart Results.xlsx";
       this.growthService.downloadFile(result, title);
     } catch (error) {
       console.error("Error exporting events:", error);

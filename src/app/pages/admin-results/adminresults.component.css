@@ -47,7 +47,7 @@ th {
   background-color: white;
   border: 1px solid #ddd;
   text-align: center;
-  color: #888
+  color: #888;
 }
 
 .percentile-td {
@@ -62,4 +62,6 @@ th {
 }
 .export-button {
   margin-right: 8px;
+  background-color:#c82333;
+  color: white;
 }

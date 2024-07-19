@@ -29,8 +29,8 @@ export class AdminExternalResourcesComponent implements OnInit {
       const result = await this.parentEventsService.exportEvents();
       const title =
         this.translate.currentLang === "es"
-          ? "Eventos de Recursos Externos.csv"
-          : "External Resources Events.csv";
+          ? "Eventos de Recursos Externos.xlsx"
+          : "Educational Resources Events.xlsx";
       this.parentEventsService.downloadFile(result, title);
     } catch (error) {
       console.error("Error exporting events:", error);

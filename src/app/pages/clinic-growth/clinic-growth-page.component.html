@@ -15,8 +15,8 @@
   <table>
     <thead>
       <tr>
-        <th>{{ "Parent" | translate }}</th>
         <th>{{ "Date" | translate }}</th>
+        <th>{{ "Participant ID" | translate }}</th>
         <th>{{ "Age (months)" | translate }}</th>
         <th>{{ "Gender" | translate }}</th>
         <th>{{ "Weight (kg)" | translate }}</th>
@@ -26,8 +26,14 @@
     </thead>
     <tbody>
       <tr *ngFor="let record of records">
-        <td>{{ record.parentUsername }}</td>
-        <td>{{ record.timestamp | date : "medium" }}</td>
+        <td>{{ record.timestamp }}</td>
+        <td>
+          {{
+            record.userType === "participant"
+              ? record.participantId
+              : record.parentId
+          }}
+        </td>
         <td>{{ record.age }}</td>
         <td>{{ record.gender | translate }}</td>
         <td>{{ record.weight }}</td>

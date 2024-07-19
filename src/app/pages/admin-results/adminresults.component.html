@@ -4,7 +4,11 @@
   <section class="header">
     <h1 class="header-title">{{ "Growth Charts Results" | translate }}</h1>
     <div>
-      <button (click)="exportRecords()" mat-raised-button class="export-button">
+      <button
+        (click)="exportRecords()"
+        mat-raised-button
+        class="export-button"
+      >
         {{ "Export Data" | translate }}
       </button>
       <button (click)="toggleLanguage()" mat-raised-button class="lang-button">
@@ -15,10 +19,8 @@
   <table>
     <thead>
       <tr>
-        <th>{{ "Clinic" | translate }}</th>
-        <th>{{ "User Type" | translate }}</th>
-        <th>{{ "Username" | translate }}</th>
         <th>{{ "Date" | translate }}</th>
+        <th>{{ "Username" | translate }}</th>
         <th>{{ "Age (months)" | translate }}</th>
         <th>{{ "Gender" | translate }}</th>
         <th>{{ "Weight (kg)" | translate }}</th>
@@ -28,10 +30,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let record of records">
-        <td>{{ record.clinicName || "-" }}</td>
-        <td>
-          {{ record.userType === "participant" ? "Participant" : "Parent" }}
-        </td>
+        <td>{{ record.timestamp }}</td>
         <td>
           {{
             record.userType === "participant"
@@ -39,7 +38,6 @@
               : record.parentUsername
           }}
         </td>
-        <td>{{ record.timestamp | date : "medium" }}</td>
         <td>{{ record.age }}</td>
         <td>{{ record.gender | translate }}</td>
         <td>{{ record.weight }}</td>
@@ -53,7 +51,7 @@
         </td>
       </tr>
       <tr *ngIf="records.length === 0">
-        <td colspan="9" class="empty-table-message">
+        <td colspan="7" class="empty-table-message">
           {{ "No data available" | translate }}
         </td>
       </tr>

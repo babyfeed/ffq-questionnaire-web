@@ -96,7 +96,7 @@ export class GrowthService {
       .toPromise();
   }
   downloadFile(data: Blob, filename: string) {
-    const blob = new Blob([data], { type: "text/csv" });
+    const blob = new Blob([data], { type: "text/xlsx" });
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
