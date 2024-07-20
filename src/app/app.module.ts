@@ -121,6 +121,7 @@ import { GrowthMessageComponent } from "./components/growth/growth-message/growt
 import { ClinicGrowthPage } from "./pages/clinic-growth/clinic-growth-page.component";
 import { EducationalResourcesPage } from "./pages/educational-resources/educational-resources-page.component";
 import { ResearchParentalGrowthPageComponent } from "./pages/research-parental-growth-page/research-parental-growth-page.component";
+import { ResearchParticipantHome } from "./pages/research-participant-home/research-participant-home.component";
 
 import { NgApexchartsModule } from "ng-apexcharts";
 // possibly to be deleted below
@@ -209,6 +210,7 @@ import { AdminExternalResourcesComponent } from "./pages/admin-resources/admin-r
     ClinicGrowthPage,
     EducationalResourcesPage,
     ResearchParentalGrowthPageComponent,
+    ResearchParticipantHome,
   ],
   imports: [
     BrowserModule,
@@ -282,8 +284,8 @@ import { AdminExternalResourcesComponent } from "./pages/admin-resources/admin-r
 })
 export class AppModule {
   constructor(private translate: TranslateService) {
-    this.translate.setDefaultLang('en');
-    this.translate.use('en');
+    this.translate.setDefaultLang("en");
+    this.translate.use("en");
   }
 }
 // required for AOT compilation

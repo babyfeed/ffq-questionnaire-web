@@ -1,311 +1,313 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { QuestionnairePageComponent } from './pages/questionnaire-page/questionnaire-page.component';
-import { QuestIdInputComponent } from './pages/quest-id-input-page/quest-id-input.component';
-import { AdminPageComponent } from './pages/admin-page/admin-page.component';
-import { ResearchQuestionnaireComponent } from './pages/research-questionnaire/research-questionnaire.component';
-import { ResearchUsersComponent } from './pages/research-users/research-users.component';
-import { ResearchHistoryComponent } from './pages/research-history/research-history.component';
-import { FooditemComponent } from './pages/fooditem/fooditem.component';
-import { QuestResultsComponent } from './pages/quest-results/quest-results.component';
-import { RecommendComponent } from './pages/recommend/recommend.component';
-import { ClinicalPortalComponent } from './pages/clinical-portal/clinical-portal.component';
-import { AuthGuard } from './services/authentication/auth.guard';
-import { RecommendParentalComponent } from './pages/recommend-parental/recommend-parental.component';
-import { TrackerPageComponent } from './pages/tracker-page/tracker-page.component';
-import { TrackerHistoryPageComponent } from './pages/tracker-history-page/tracker-history-page.component';
-import { HistoryParentalComponent } from './pages/history-parental/history-parental.component';
-import { LoginComponent } from './pages/login';
-import { ClinicQuestResultsComponent } from './pages/clinic-quest-results';
-import { ClinicRecommendComponent } from './pages/clinic-recommend';
-import { AdminUsersComponent } from './pages/admin-users';
-import { AdminResearchUsersComponent } from './pages/research-admin-users/research-admin-users.component';
-import { AdminResearcherUserComponent } from './pages/admin-research-user/admin-research-user.component';
-import { ParticipantUserComponent } from './pages/admin-participant/admin-participant.component';
-import { ResearchInstitutionComponent } from './pages/research-institution/research-institution.component';
-import { UserComponent } from './pages/user/user.component';
-import { ClinicUserComponent } from './pages/clinic-user/clinic-user.component';
-import { AdminClinicsComponent } from './pages/admin-clinics';
-import { ClinicComponent } from './pages/clinic/clinic.component';
-import { LogoutComponent } from './pages/logout/logout.component';
-import { ClinicTrackerHistoryComponent } from './pages/clinic-tracker-history/clinic-tracker-history.component';
-import { ResearchQuestIdInputComponent } from './pages/researcher-quest-id-input-page/researcher-quest-id-input.component';
-import { AdminTrackerHistoryComponent } from './pages/admin-tracker-history/admin-tracker-history.component';
-import { ClinicalUsersComponent } from './pages/clinical-users';
-import { ClinicNewUserComponent } from './pages/clinic-new-user/clinic-new-user.component';
-import { ResearchNewUserComponent } from './pages/research-new-user/research-new-user.component';
-import { UpdateResearchInstitutionComponent } from './pages/modify-research-institution/modify-research-institution.component';
-import { UpdateResearcherComponent } from './pages/modify-researcher/modify-researcher.component';
-import { ClinicQuestionnaireComponent } from './pages/clinic-questionnaire/clinic-questionnaire.component';
-import { GrowthPageComponent } from './pages/growth/growth-page.component';
-import { HomePageComponent } from './pages/home-page/home-page.component';
-import { ResearchParentalGrowthPageComponent } from './pages/research-parental-growth-page/research-parental-growth-page.component';
-import {AdminresultsComponent} from './pages/admin-results/adminresults.component';
-import { AdminExternalResourcesComponent } from './pages/admin-resources/admin-resources.component';
-import { ClinicGrowthPage } from './pages/clinic-growth/clinic-growth-page.component';
-import { EducationalResourcesPage } from './pages/educational-resources/educational-resources-page.component';
-
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
+import { QuestionnairePageComponent } from "./pages/questionnaire-page/questionnaire-page.component";
+import { QuestIdInputComponent } from "./pages/quest-id-input-page/quest-id-input.component";
+import { AdminPageComponent } from "./pages/admin-page/admin-page.component";
+import { ResearchQuestionnaireComponent } from "./pages/research-questionnaire/research-questionnaire.component";
+import { ResearchUsersComponent } from "./pages/research-users/research-users.component";
+import { ResearchHistoryComponent } from "./pages/research-history/research-history.component";
+import { FooditemComponent } from "./pages/fooditem/fooditem.component";
+import { QuestResultsComponent } from "./pages/quest-results/quest-results.component";
+import { RecommendComponent } from "./pages/recommend/recommend.component";
+import { ClinicalPortalComponent } from "./pages/clinical-portal/clinical-portal.component";
+import { AuthGuard } from "./services/authentication/auth.guard";
+import { RecommendParentalComponent } from "./pages/recommend-parental/recommend-parental.component";
+import { TrackerPageComponent } from "./pages/tracker-page/tracker-page.component";
+import { TrackerHistoryPageComponent } from "./pages/tracker-history-page/tracker-history-page.component";
+import { HistoryParentalComponent } from "./pages/history-parental/history-parental.component";
+import { LoginComponent } from "./pages/login";
+import { ClinicQuestResultsComponent } from "./pages/clinic-quest-results";
+import { ClinicRecommendComponent } from "./pages/clinic-recommend";
+import { AdminUsersComponent } from "./pages/admin-users";
+import { AdminResearchUsersComponent } from "./pages/research-admin-users/research-admin-users.component";
+import { AdminResearcherUserComponent } from "./pages/admin-research-user/admin-research-user.component";
+import { ParticipantUserComponent } from "./pages/admin-participant/admin-participant.component";
+import { ResearchInstitutionComponent } from "./pages/research-institution/research-institution.component";
+import { UserComponent } from "./pages/user/user.component";
+import { ClinicUserComponent } from "./pages/clinic-user/clinic-user.component";
+import { AdminClinicsComponent } from "./pages/admin-clinics";
+import { ClinicComponent } from "./pages/clinic/clinic.component";
+import { LogoutComponent } from "./pages/logout/logout.component";
+import { ClinicTrackerHistoryComponent } from "./pages/clinic-tracker-history/clinic-tracker-history.component";
+import { ResearchQuestIdInputComponent } from "./pages/researcher-quest-id-input-page/researcher-quest-id-input.component";
+import { AdminTrackerHistoryComponent } from "./pages/admin-tracker-history/admin-tracker-history.component";
+import { ClinicalUsersComponent } from "./pages/clinical-users";
+import { ClinicNewUserComponent } from "./pages/clinic-new-user/clinic-new-user.component";
+import { ResearchNewUserComponent } from "./pages/research-new-user/research-new-user.component";
+import { UpdateResearchInstitutionComponent } from "./pages/modify-research-institution/modify-research-institution.component";
+import { UpdateResearcherComponent } from "./pages/modify-researcher/modify-researcher.component";
+import { ClinicQuestionnaireComponent } from "./pages/clinic-questionnaire/clinic-questionnaire.component";
+import { GrowthPageComponent } from "./pages/growth/growth-page.component";
+import { HomePageComponent } from "./pages/home-page/home-page.component";
+import { ResearchParentalGrowthPageComponent } from "./pages/research-parental-growth-page/research-parental-growth-page.component";
+import { AdminresultsComponent } from "./pages/admin-results/adminresults.component";
+import { AdminExternalResourcesComponent } from "./pages/admin-resources/admin-resources.component";
+import { ClinicGrowthPage } from "./pages/clinic-growth/clinic-growth-page.component";
+import { EducationalResourcesPage } from "./pages/educational-resources/educational-resources-page.component";
+import { ResearchParticipantHome } from "./pages/research-participant-home/research-participant-home.component";
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'admin/home',
-    pathMatch: 'full'
+    path: "",
+    redirectTo: "admin/home",
+    pathMatch: "full",
   },
   {
-    path: '*',
-    redirectTo: 'login'
+    path: "*",
+    redirectTo: "login",
   },
   {
-    path: 'login',
-    component: LoginComponent
+    path: "login",
+    component: LoginComponent,
   },
   {
-    path: 'logout',
-    component: LogoutComponent
+    path: "logout",
+    component: LogoutComponent,
   },
   {
-    path: 'admin/fooditem/:id',
+    path: "admin/fooditem/:id",
     component: FooditemComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'admin/fooditem',
+    path: "admin/fooditem",
     component: FooditemComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'admin/user/:type/:id',
+    path: "admin/user/:type/:id",
     component: UserComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'admin/user/:id',
+    path: "admin/user/:id",
     component: UserComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'admin/home',
+    path: "admin/home",
     component: AdminPageComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'admin/users',
+    path: "admin/users",
     component: AdminUsersComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'admin/research/users',
+    path: "admin/research/users",
     component: AdminResearchUsersComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'admin/research/institution',
+    path: "admin/research/institution",
     component: ResearchInstitutionComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'admin/research/institution/:id',
+    path: "admin/research/institution/:id",
     component: UpdateResearchInstitutionComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'admin/researcher/user/:id',
+    path: "admin/researcher/user/:id",
     component: UpdateResearcherComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
 
   {
-    path: 'admin/researcher',
+    path: "admin/researcher",
     component: AdminResearcherUserComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'admin/participant',
+    path: "admin/participant",
     component: ParticipantUserComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'admin/results',
+    path: "admin/results",
     component: QuestResultsComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path : 'admin/adminresults',
+    path: "admin/adminresults",
     component: AdminresultsComponent,
-    canActivate : [AuthGuard]
-
+    canActivate: [AuthGuard],
   },
   {
-    path: 'admin/recommend',
+    path: "admin/recommend",
     component: RecommendComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'admin/clinics',
+    path: "admin/clinics",
     component: AdminClinicsComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'admin/clinic',
+    path: "admin/clinic",
     component: ClinicComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'admin/clinic/:id',
+    path: "admin/clinic/:id",
     component: ClinicComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'admin/tracker-history',
+    path: "admin/tracker-history",
     component: AdminTrackerHistoryComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'clinic/results',
+    path: "clinic/results",
     component: ClinicQuestResultsComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'clinic/recommend',
+    path: "clinic/recommend",
     component: ClinicRecommendComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'clinic/questionnaire',
+    path: "clinic/questionnaire",
     component: ClinicQuestionnaireComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'clinic/users',
+    path: "clinic/users",
     component: ClinicalUsersComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'clinic/user/:type/:id',
+    path: "clinic/user/:type/:id",
     component: ClinicUserComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'clinic/user',
+    path: "clinic/user",
     component: ClinicUserComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'clinic/user/:id',
+    path: "clinic/user/:id",
     component: ClinicNewUserComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'researcher/user/:id',
+    path: "researcher/user/:id",
     component: ResearchNewUserComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'clinic/tracker-history',
+    path: "clinic/tracker-history",
     component: ClinicTrackerHistoryComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'clinic/home',
+    path: "clinic/home",
     component: ClinicalPortalComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'clinic/growth',
+    path: "clinic/growth",
     component: ClinicGrowthPage,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'parent/questionnaire',
+    path: "parent/questionnaire",
     component: QuestIdInputComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'parent/questionnaire/:id',
+    path: "parent/questionnaire/:id",
     component: QuestionnairePageComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'parent/growth',
+    path: "parent/growth",
     component: GrowthPageComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'parent/home',
+    path: "parent/home",
     component: HomePageComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'parent/tracker',
+    path: "parent/tracker",
     component: TrackerPageComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'parent/tracker-history',
+    path: "parent/tracker-history",
     component: TrackerHistoryPageComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'parent/history',
+    path: "parent/history",
     component: HistoryParentalComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'parent/recommend',
+    path: "parent/recommend",
     component: RecommendParentalComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'researcher/home',
+    path: "researcher/home",
     component: ResearchUsersComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'researcher/questionnaire',
+    path: "researcher/questionnaire",
     component: ResearchQuestionnaireComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'researcher/users',
+    path: "researcher/users",
     component: ResearchUsersComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'researcher/history',
+    path: "researcher/history",
     component: ResearchHistoryComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'participant/home',
+    path: "participant/home",
+    component: ResearchParticipantHome,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "participant/questionnaire",
     component: ResearchQuestIdInputComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'participant/questionnaire/:id',
-    component: QuestionnairePageComponent
+    path: "participant/questionnaire/:id",
+    component: QuestionnairePageComponent,
   },
-   {
-    path: 'parent/educational-resources',
+  {
+    path: "parent/educational-resources",
     component: EducationalResourcesPage,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'admin/resources',
+    path: "admin/resources",
     component: AdminExternalResourcesComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'participant/research-parental-chart',
+    path: "participant/research-parental-chart",
     component: ResearchParentalGrowthPageComponent,
-    canActivate: [AuthGuard]
-  }
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })],
-  exports: [RouterModule]
-
-
+  imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: "reload" })],
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}
