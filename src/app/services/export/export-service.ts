@@ -85,7 +85,6 @@ export class ExportService {
     results.forEach(result => {
 
       const resultCol = {
-        'Participant Username': parentList[parentIndex++],
         Date: result.date,
         'Age(Months)': result.age,
         Goal: result.goal
@@ -527,10 +526,8 @@ export class ExportService {
     results.forEach(result => {
       // Initialize columns with general result information
       const resultCol = {
-        'Participant Username': parentList.find(parent => parent.userId === result.userId)?.username ?? '[not found]',
-        'Questionnaire ID': result.questionnaireId,
         Date: result.date,
-        Name: result.patientName,
+        Username: result.patientName,
         Age: result.ageInMonths,
         Gender: result.gender,
         ReadRecommend: parentList.find(parent => parent.userId === result.userId)?.lastReadRecommend,
@@ -588,10 +585,8 @@ export class ExportService {
 
       // Initialize columns with general result information
       var resultCol = {
-        'Participant Username': parentList.find(parent => parent.userId === result.userId)?.username ?? "[not found]",
-        'Questionnaire ID': result.questionnaireId,
         Date: result.date,
-        Name: result.patientName,
+        Username: result.patientName,
         Age: result.ageInMonths
       };
 
@@ -623,10 +618,8 @@ export class ExportService {
 
       // Initialize columns with general result information
       var resultCol = {
-        'Participant Username': parentList.find(parent => parent.userId === result.userId)?.username ?? "[not found]",
-        'Questionnaire ID': result.questionnaireId,
         Date: result.date,
-        Name: result.patientName,
+        Username: result.patientName,
         Age: result.ageInMonths
       };
 
@@ -653,10 +646,8 @@ export class ExportService {
 
       // Initialize columns with general result information
       var resultCol = {
-        'Participant Username': parentList.find(parent => parent.userId === result.userId)?.username ?? "[not found]",
-        'Questionnaire ID': result.questionnaireId,
         Date: result.date,
-        Name: result.patientName,
+        Username: result.patientName,
         Age: result.ageInMonths
       };
 
