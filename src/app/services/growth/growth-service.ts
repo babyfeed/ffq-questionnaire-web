@@ -120,24 +120,17 @@ export class GrowthService {
   addRecord(record: GrowthRecord, isParticipant = false) {
     const [user] = JSON.parse(localStorage.getItem("currentUser"));
     this.token = user.token;
-    const message =
-      record.gender === "Male"
-        ? this.getGrowthMessage(
-            record.height,
-            record.weight,
-            BOYS_GREEN_RANGE.data,
-            BOYS_YELLOW_RANGE.data
-          )
-        : this.getGrowthMessage(
-            record.height,
-            record.weight,
-            GIRLS_GREEN_RANGE.data,
-            GIRLS_YELLOW_RANGE.data
-          );
-    record["percentile"] = {
-      percentile: message.percentile,
-      color: message.color,
-    };
+    const MESSAGES = {
+      "2nd (2.3rd)": 'This growth chart provides standards on typical growth patterns among infants. Your baby is below optimal growth. Please discuss with your pediatrician as soon as possible.',
+      "5th": 'This growth chart provides standards on typical growth patterns among infants. Your baby may be trending below optimal growth. Please discuss with your pediatrician.',
+      "10th": 'This growth chart provides standards on typical growth patterns among infants. Your baby may be trending below optimal growth. Please discuss with your pediatrician.',
+      "25th": 'Great job! This growth chart provides standards on typical growth patterns among infants. Your baby is following a healthy growth pattern.',
+      "50th": 'Great job! This growth chart provides standards on typical growth patterns among infants. Your baby is following a healthy growth pattern.',
+      "75th": 'Great job! This growth chart provides standards on typical growth patterns among infants. Your baby is following a healthy growth pattern.',
+      "90th": 'This growth chart provides standards on typical growth patterns among infants. Your baby may be trending above optimal growth. Please discuss with your pediatrician.',
+      "95th": 'This growth chart provides standards on typical growth patterns among infants. Your baby may be trending above optimal growth. Please discuss with your pediatrician.',
+      "98th (97.7th)": 'This growth chart provides standards on typical growth patterns among infants. Your baby is above optimal growth. Please discuss with your pediatrician as soon as possible.',
+    }
     const url = this.endpoint + (isParticipant ? "/participant" : "");
     this.http
       .post<any>(url, record, {
@@ -145,78 +138,14 @@ export class GrowthService {
           Authorization: `Bearer ${this.token}`,
         },
       })
-      .subscribe((data) => {
-        this.messageSource.next(message);
+      .subscribe((res) => {
+        this.messageSource.next({
+          message: MESSAGES[res.data.percentile.percentile],
+          color: res.data.percentile.color,
+        });
 
         const currentRecords = this.recordsSource.value;
-        this.recordsSource.next([...currentRecords, record]);
+        this.recordsSource.next([res.data, ...currentRecords]);
       });
-  }
-
-  getGrowthMessage(length, weight, greenRange, yellowRange) {
-    let color = "red";
-    let message = "";
-    let percentile = "";
-
-    function isInRange(range, length, weight) {
-      for (let i = 0; i < range.length; i++) {
-        let dataPoint = range[i];
-        if (dataPoint.x === length) {
-          return weight >= dataPoint.y[0] && weight <= dataPoint.y[1];
-        }
-      }
-      return false;
-    }
-
-    function isAboveRange(range, length, weight) {
-      for (let i = 0; i < range.length; i++) {
-        let dataPoint = range[i];
-        if (dataPoint.x === length) {
-          return weight > dataPoint.y[1];
-        }
-      }
-      return false;
-    }
-
-    function isBelowRange(range, length, weight) {
-      for (let i = 0; i < range.length; i++) {
-        let dataPoint = range[i];
-        if (dataPoint.x === length) {
-          return weight < dataPoint.y[0];
-        }
-      }
-      return false;
-    }
-
-    if (isInRange(greenRange, length, weight)) {
-      color = "green";
-      message =
-        "Great job! This growth chart provides standards on typical growth patterns among infants. Your baby is following a healthy growth pattern.";
-      percentile = "10% - 90%";
-    } else if (isInRange(yellowRange, length, weight)) {
-      color = "yellow";
-      if (isAboveRange(greenRange, length, weight)) {
-        message =
-          "This growth chart provides standards on typical growth patterns among infants. Your baby may be trending above optimal growth. Please discuss with your pediatrician.";
-        percentile = ">90%";
-      } else if (isBelowRange(greenRange, length, weight)) {
-        message =
-          "This growth chart provides standards on typical growth patterns among infants. Your baby may be trending below optimal growth. Please discuss with your pediatrician.";
-        percentile = "<10%";
-      }
-    } else {
-      color = "red";
-      if (isAboveRange(yellowRange, length, weight)) {
-        message =
-          "This growth chart provides standards on typical growth patterns among infants. Your baby is above optimal growth. Please discuss with your pediatrician as soon as possible.";
-        percentile = ">98%";
-      } else if (isBelowRange(yellowRange, length, weight)) {
-        message =
-          "This growth chart provides standards on typical growth patterns among infants. Your baby is below optimal growth. Please discuss with your pediatrician as soon as possible.";
-        percentile = "<2%";
-      }
-    }
-
-    return { color, message, percentile };
   }
 }
