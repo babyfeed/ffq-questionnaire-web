@@ -13,6 +13,11 @@ const CHART_DEFAULT_OPTIONS = {
     toolbar: {
       autoSelected: "zoom",
     },
+    events: {
+      legendClick: (event, chartContext, config) => {
+        event.preventDefault();
+      }
+    }
   },
   stroke: {
     curve: "straight",
