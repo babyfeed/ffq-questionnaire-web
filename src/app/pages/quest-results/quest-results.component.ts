@@ -211,6 +211,10 @@ export class QuestResultsComponent implements OnInit {
     return 0;
   }
 
+  toggleResults(index) {
+    this.results[index].show = !this.results[index].show;
+  }
+
   toggleParentResults(index) {
     this.parentResults[index].show = !this.parentResults[index].show;
   }
@@ -290,6 +294,8 @@ export class QuestResultsComponent implements OnInit {
 
 
   export() {
+    // POINT
+    console.log(this.results, this.ffqparentList);
     this.exportService.exportFFQResults(this.results, this.ffqparentList, 'FFQ_Results');
     
   }

@@ -5,6 +5,11 @@ export enum UnitsOfMeasurement {
   kg = "kg",
 }
 
+export enum LbUnitsOfMeasurement {
+  pounds = "pounds",
+  ounces = "ounces",
+}
+
 export enum Gender {
   Male = "Male",
   Female = "Female",

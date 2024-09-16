@@ -22,3 +22,8 @@
   height: 48px;
   width: 100%;
 }
+.lb-unit-toggle-group {
+  margin-left: auto;
+  margin-bottom: 16px;
+  margin-top: -16px;
+}

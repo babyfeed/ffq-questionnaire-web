@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
-import { Gender, UnitsOfMeasurement } from "src/app/models/Enums";
+import { Gender, LbUnitsOfMeasurement, UnitsOfMeasurement } from "src/app/models/Enums";
 import { FFQChildren } from "src/app/models/ffqchildren";
 import { GrowthService } from "src/app/services/growth/growth-service";
 
@@ -12,6 +12,7 @@ import { GrowthService } from "src/app/services/growth/growth-service";
 export class GrowthNewRecordFormComponent implements OnInit {
   @Input() isParticipant: boolean = false;
   weightUnitOptions: UnitsOfMeasurement = UnitsOfMeasurement.kg;
+  lbWeightUnitOptions: LbUnitsOfMeasurement = LbUnitsOfMeasurement.pounds;
   heightUnitOptions: UnitsOfMeasurement = UnitsOfMeasurement.cm;
   gender: Gender = Gender.NotAssigned;
   height: string = "";
@@ -35,8 +36,13 @@ export class GrowthNewRecordFormComponent implements OnInit {
 
   getStandardUnitValue(value, unit) {
     console.log(value, unit);
-    if (unit === UnitsOfMeasurement.lb)
-      return Math.round((parseFloat(value) / FFQChildren.KG_TO_LB) * 100) / 100;
+    if (unit === UnitsOfMeasurement.lb) {
+      if(this.lbWeightUnitOptions === LbUnitsOfMeasurement.pounds) {
+        return Math.round((parseFloat(value) / FFQChildren.KG_TO_LB) * 100) / 100;
+      } else {
+        return Math.round((parseFloat(value) / FFQChildren.KG_TO_LB) * 100 / 16) / 100;
+      }
+    }
     if (unit === UnitsOfMeasurement.in)
       return Math.round(parseFloat(value) * FFQChildren.IN_TO_CM * 100) / 100;
     return value;
@@ -79,8 +85,17 @@ export class GrowthNewRecordFormComponent implements OnInit {
       this.MAX_WEIGHT = 30;
       this.MIN_WEIGHT = 1;
     } else if (newUnit === UnitsOfMeasurement.lb) {
+      this.onLbWeightUnitChange(this.lbWeightUnitOptions);
+    }
+  }
+  onLbWeightUnitChange(newUnit: LbUnitsOfMeasurement): void {
+    this.lbWeightUnitOptions = newUnit;
+    if (newUnit === 'pounds') {
       this.MAX_WEIGHT = Math.round(30 * FFQChildren.KG_TO_LB);
       this.MIN_WEIGHT = Math.round(1 * FFQChildren.KG_TO_LB);
+    } else {
+      this.MAX_WEIGHT = Math.round(30 * FFQChildren.KG_TO_LB * 16);
+      this.MIN_WEIGHT = Math.round(1 * FFQChildren.KG_TO_LB * 16);
     }
   }
   onUnitsChange(): void {
