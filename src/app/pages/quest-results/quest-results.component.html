@@ -472,7 +472,7 @@
 
             <div class="row mb-3">
               <div class="col" style="text-align: center">
-                {{ this.getParentUsernameById(result.userId) }}
+                {{ result.userType == 'parent' ? this.getParentUsernameById(result.userId) : this.getParticipantUsernameById(result.userId) }}
               </div>
               <div class="col" style="text-align: center">
                 {{ result.date }}

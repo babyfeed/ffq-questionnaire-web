@@ -294,8 +294,6 @@ export class QuestResultsComponent implements OnInit {
 
 
   export() {
-    // POINT
-    console.log(this.results, this.ffqparentList);
     this.exportService.exportFFQResults(this.results, this.ffqparentList, 'FFQ_Results');
     
   }
@@ -324,6 +322,11 @@ export class QuestResultsComponent implements OnInit {
 
   getParentUsernameById(userId: string) {
     return this.ffqparentList.find(parent => parent.userId === userId)?.username ?? "[not found]";
+  }
+
+  getParticipantUsernameById(userId: string) {
+    console.log(this.ffqParticipantList);
+    return this.ffqParticipantList.find(participant => participant.userId === userId)?.username ?? "[not found]";
   }
 }
 
