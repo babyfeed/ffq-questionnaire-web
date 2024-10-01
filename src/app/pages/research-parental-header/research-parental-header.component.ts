@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
@@ -14,6 +14,7 @@ export class ResearchParentalHeaderComponent {
     TITLE = this.translate.instant('Participant Portal');
     currentUser: User;
     router: Router;
+    @Input() title: string;
 
     constructor(router: Router, private authenticationService: AuthenticationService,private translate: TranslateService) {
       this.router = router;

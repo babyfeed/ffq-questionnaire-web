@@ -11,9 +11,15 @@ import { AuthenticationService } from 'src/app/services/authentication/authentic
 })
 export class ResearchHeaderComponent {
   currentUser: User;
+  viewConfiguration: any = null;
 
   constructor(private router: Router, private authenticationService: AuthenticationService) {
       this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+      this.authenticationService.viewConfigurationObservable.subscribe((viewConfiguration) => {
+        if(viewConfiguration) {
+          this.viewConfiguration = viewConfiguration;
+        }
+      })
   }
 
   logout() {

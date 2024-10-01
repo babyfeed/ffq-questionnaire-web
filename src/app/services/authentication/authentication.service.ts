@@ -14,10 +14,14 @@ export class AuthenticationService {
 
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
+  public viewConfiguration: BehaviorSubject<any>;
+  public viewConfigurationObservable: Observable<any>;
 
   constructor(private httpClient: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
+    this.viewConfiguration = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser'))[0]?.viewConfiguration);
+    this.viewConfigurationObservable = this.viewConfiguration.asObservable();
   }
 
   public get currentUserValue(): User {
@@ -34,6 +38,7 @@ export class AuthenticationService {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         localStorage.setItem('currentUser', JSON.stringify(user));
         this.currentUserSubject.next(user);
+        this.viewConfiguration.next(user[0].viewConfiguration);
         return user;
       }));
   }

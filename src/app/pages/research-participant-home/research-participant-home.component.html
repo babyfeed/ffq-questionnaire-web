@@ -1,4 +1,4 @@
-<researchparental-header></researchparental-header>
+<researchparental-header [title]="viewConfiguration?.homeTitle"></researchparental-header>
 
 <div class="home-container">
   <div class="home-component-container">
@@ -27,7 +27,7 @@
           </a>
         </div>
 
-        <div class="homeitem-container" id="secondItem">
+        <div class="homeitem-container" id="secondItem" *ngIf="!viewConfiguration?.hideGrowthCharts">
           <a routerLink="/participant/research-parental-chart">
             <h1>{{ "Growth Charts" | translate }}</h1>
             <div class="homeitem-content">

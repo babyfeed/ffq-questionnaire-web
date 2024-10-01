@@ -1,7 +1,9 @@
-<title> Research Portal </title>
+<title *ngIf="viewConfiguration?.homeTitle">{{ viewConfiguration.homeTitle }}</title>
+<title *ngIf="!viewConfiguration?.homeTitle"> Research Portal </title>
 
 <div class="header">
-    <h2 matDialogTitle>Research Portal</h2>
+    <h2 matDialogTitle *ngIf="viewConfiguration?.homeTitle">{{ viewConfiguration.homeTitle }}</h2>
+    <h2 matDialogTitle *ngIf="!viewConfiguration?.homeTitle">Research Portal</h2>
     <div class="login-button">
         <button mat-raised-button (click)="logout()">Log out <i class="fa fa-sign-out" aria-hidden="true"></i></button>
     </div>

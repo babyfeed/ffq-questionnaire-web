@@ -23,7 +23,7 @@ export class ResearchQuestIdInputComponent {
     private router: Router,
     private errorDialog: MatDialog,
     private questService: QuestionnaireValidatorService,
-    private authenticationService: AuthenticationService,
+    public authenticationService: AuthenticationService,
     private translate: TranslateService) {
   }
 

@@ -33,14 +33,10 @@
             <label for="participantsLimit" style="font-weight: bold"> Number of Participants Limit </label>
             <input placeholder="100" width="25" style="border-color: mediumblue; border-width: 0.05cm" type="number"
                    class="form-control" id="participantsLimit" name="participantsLimit" [(ngModel)]="researchInstitutionAttributes.participantsLimit" min="1" required/>
-
           </div>
         </div>
-
+        <app-institution-view-configuration [(viewConfiguration)]="viewConfiguration"></app-institution-view-configuration>
       </div>
-
-      <!-- Update Research Institution ends here -->
-
     </div>
   </div>
 </form>
