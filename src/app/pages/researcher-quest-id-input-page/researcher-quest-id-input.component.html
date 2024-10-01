@@ -1,4 +1,4 @@
-<researchparental-header></researchparental-header>
+<researchparental-header [title]="this.authenticationService.currentUserValue[0]?.viewConfiguration?.homeTitle"></researchparental-header>
 
 <div class="research-quest-id-container">
   <a routerLink="/parent/home"></a>
