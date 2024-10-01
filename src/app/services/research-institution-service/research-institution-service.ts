@@ -31,6 +31,7 @@ const httOptions = {
 })
 export class ResearchInstitutionService {
   endpoint = environment.userServiceUrl + "/ffq/research_institution";
+  apiUrl = environment.apiUrl + "/view-configurations/institution/";
 
   constructor(private http: HttpClient) {}
 
@@ -49,19 +50,24 @@ export class ResearchInstitutionService {
 
   //Still not implemented
   updateUser(researchInst: FFQResearchInstitution): Observable<any> {
-    return this.http
-      .put(this.endpoint + "/updateinstitution", researchInst, {
-        headers: new HttpHeaders({ "Content-Type": "application/json" })})
-  }
-
-
-  //To be implemented
-  getResearchInstitution(researchInstitutionId: string): Observable<FFQResearchInstitution> {
-    return this.http.get<FFQResearchInstitution>(this.endpoint + "/" + researchInstitutionId);
+    return this.http.put(this.endpoint + "/updateinstitution", researchInst, {
+      headers: new HttpHeaders({ "Content-Type": "application/json" }),
+    });
   }
 
   //To be implemented
-  getResearchInstitutionByName(institutionName: string): Observable<FFQResearchInstitution> {
+  getResearchInstitution(
+    researchInstitutionId: string
+  ): Observable<FFQResearchInstitution> {
+    return this.http.get<FFQResearchInstitution>(
+      this.endpoint + "/" + researchInstitutionId
+    );
+  }
+
+  //To be implemented
+  getResearchInstitutionByName(
+    institutionName: string
+  ): Observable<FFQResearchInstitution> {
     return this.http.get(this.endpoint + "/name/" + institutionName).pipe(
       map((item: any) => {
         return new FFQResearchInstitution(
@@ -82,11 +88,11 @@ export class ResearchInstitutionService {
       map((res: any) => {
         return res.map((item) => {
           return new FFQResearchInstitution(
-          item.researchInstitutionId,
-          item.address,
-          item.createdDate,
-          item.institutionName,
-          item.researchInstitution,
+            item.researchInstitutionId,
+            item.address,
+            item.createdDate,
+            item.institutionName,
+            item.researchInstitution,
             item.participantsLimit
           );
         });
@@ -95,9 +101,35 @@ export class ResearchInstitutionService {
   }
 
   deleteItem(researchInstitutionId: string): Observable<any> {
-    return this.http.delete(this.endpoint + "/delete?researchInstitutionId=" + researchInstitutionId, {
-      responseType: "text",
+    return this.http.delete(
+      this.endpoint + "/delete?researchInstitutionId=" + researchInstitutionId,
+      {
+        responseType: "text",
+      }
+    );
+  }
+
+  upsertViewConfiguration(
+    institutionId: string,
+    viewConfiguration: any
+  ): Observable<any> {
+    const [user] = JSON.parse(localStorage.getItem("currentUser"));
+    const endpoint = this.apiUrl + institutionId;
+    return this.http.put(endpoint, viewConfiguration, {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user.token}`,
+      }),
+    });
+  }
+  getInstitutionViewConfiguration(institutionId: string): Observable<any> {
+    const [user] = JSON.parse(localStorage.getItem("currentUser"));
+    const endpoint = this.apiUrl + institutionId;
+    return this.http.get(endpoint, {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user.token}`,
+      }),
     });
   }
 }
-
