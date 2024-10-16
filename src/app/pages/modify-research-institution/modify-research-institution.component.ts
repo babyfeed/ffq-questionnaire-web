@@ -25,6 +25,13 @@ export class UpdateResearchInstitutionComponent implements OnInit, OnDestroy {
   dataLoaded: Promise<boolean>;
   public selectedResearchInstitution:FFQResearchInstitution;
   researchInstitutionAttributes: FFQInstitution;
+  viewConfiguration: {
+    homeTitle: string,
+    hideGrowthCharts: boolean
+  } = {
+    homeTitle: '',
+    hideGrowthCharts: false
+  };
 
 
   constructor(
@@ -50,6 +57,13 @@ export class UpdateResearchInstitutionComponent implements OnInit, OnDestroy {
       this.name_of_research_institution = this.selectedResearchInstitution.institutionName;
       this.location = this.selectedResearchInstitution.address;
 
+      this.researchInstitutionService.getInstitutionViewConfiguration(this.selectedResearchInstitution.researchInstitutionId).subscribe(({ data }) => {
+        this.viewConfiguration = {
+          homeTitle: data.homeTitle,
+          hideGrowthCharts: data.hideGrowthCharts
+        };
+      });
+
       if(data != null)
       {
         this.dataLoaded = Promise.resolve(true);
@@ -72,9 +86,11 @@ export class UpdateResearchInstitutionComponent implements OnInit, OnDestroy {
 
     this.researchInstitutionService.updateUser(<FFQResearchInstitution>this.researchInstitutionAttributes).subscribe(
       data => {
-        this.router.navigateByUrl("/admin/research/users");
-        const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
-        dialogRef.componentInstance.title = 'Research Institution successfully updated!';
+        this.researchInstitutionService.upsertViewConfiguration(this.researchInstitutionAttributes.researchInstitutionId, this.viewConfiguration).subscribe(() => {
+          this.router.navigateByUrl("/admin/research/users");
+          const dialogRef = this.errorDialog.open(ErrorDialogPopupComponent);
+          dialogRef.componentInstance.title = 'Research Institution successfully updated!';
+        });
       }
     );
   }

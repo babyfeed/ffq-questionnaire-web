@@ -74,6 +74,7 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatOptionModule } from "@angular/material/core";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatIconModule } from "@angular/material/icon";
+import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MatListModule } from "@angular/material/list";
 import { ResearchPageComponent } from "./pages/research-page/research-page.component";
 import { ResearchQuestionnaireComponent } from "./pages/research-questionnaire/research-questionnaire.component";
@@ -122,11 +123,10 @@ import { ClinicGrowthPage } from "./pages/clinic-growth/clinic-growth-page.compo
 import { EducationalResourcesPage } from "./pages/educational-resources/educational-resources-page.component";
 import { ResearchParentalGrowthPageComponent } from "./pages/research-parental-growth-page/research-parental-growth-page.component";
 import { ResearchParticipantHome } from "./pages/research-participant-home/research-participant-home.component";
-
 import { NgApexchartsModule } from "ng-apexcharts";
-// possibly to be deleted below
 import { AdminresultsComponent } from "./pages/admin-results/adminresults.component";
 import { AdminExternalResourcesComponent } from "./pages/admin-resources/admin-resources.component";
+import { InstitutionViewConfigurationComponent } from "./components/view-customizations/institution-view-configuration/institution-view-configuration.component";
 
 @NgModule({
   declarations: [
@@ -211,6 +211,7 @@ import { AdminExternalResourcesComponent } from "./pages/admin-resources/admin-r
     EducationalResourcesPage,
     ResearchParentalGrowthPageComponent,
     ResearchParticipantHome,
+    InstitutionViewConfigurationComponent,
   ],
   imports: [
     BrowserModule,
@@ -237,6 +238,7 @@ import { AdminExternalResourcesComponent } from "./pages/admin-resources/admin-r
     MatOptionModule,
     MatRadioModule,
     MatIconModule,
+    MatSlideToggleModule,
     //FormsModule,
     HttpClientModule,
     NgbModule,
