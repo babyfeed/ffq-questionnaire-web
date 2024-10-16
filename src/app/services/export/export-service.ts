@@ -653,13 +653,15 @@ export class ExportService {
 
       // Add columns with nurient data
       let total: number = 0;
-      result.dqis.forEach(res => {
-        res.foodCategoryRecList.forEach(dqis => {
-          resultCol[dqis.categoryName] = dqis.calculatedAmount.toFixed(2);
-          total = total + +dqis.calculatedAmount;
+      if(result.dqis?.length > 0) {
+        result.dqis.forEach(res => {
+          res.foodCategoryRecList.forEach(dqis => {
+            resultCol[dqis.categoryName] = dqis.calculatedAmount.toFixed(2);
+            total = total + +dqis.calculatedAmount;
+          });
+          resultCol['TOTAL'] = total;
         });
-        resultCol['TOTAL'] = total;
-      });
+      }
 
       // Push columns to array of rows
       resultRows.push(resultCol);
