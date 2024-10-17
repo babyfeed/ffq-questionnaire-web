@@ -20,7 +20,8 @@ export class AuthenticationService {
   constructor(private httpClient: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
-    this.viewConfiguration = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser'))?.[0]?.viewConfiguration);
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.viewConfiguration = new BehaviorSubject<any>(currentUser ? currentUser[0].viewConfiguration : null);
     this.viewConfigurationObservable = this.viewConfiguration.asObservable();
   }
 
