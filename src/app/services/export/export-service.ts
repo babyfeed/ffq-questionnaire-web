@@ -653,6 +653,7 @@ export class ExportService {
 
       // Add columns with nurient data
       let total: number = 0;
+      console.log(result)
       if(result.dqis?.length > 0) {
         result.dqis.forEach(res => {
           res.foodCategoryRecList.forEach(dqis => {

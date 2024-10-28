@@ -33,6 +33,8 @@ import {FFQParent} from '../../models/ffqparent';
 import {FFQParentResponse} from '../../models/ffqparent-response';
 import {ParentService} from '../../services/parent/parent-service';
 import {take} from 'rxjs/operators';
+import { DQISService } from 'src/app/services/dqis-service/dqis.service';
+import { FFQDQIS } from 'src/app/models/ffqdqis';
 
 
 @Component({
@@ -66,8 +68,8 @@ export class ResearchHistoryComponent implements OnInit {
     private nutrientsRecommendationsService: NutrientsRecommendationsService,
     private participantService: ResearcherParentService,
     private exportService: ExportService,
-    private parentService: ParentService
-
+    private parentService: ParentService,
+    public dqisService: DQISService
   ) {}
 
   toggle(index) {
@@ -178,14 +180,21 @@ export class ResearchHistoryComponent implements OnInit {
     this.results.forEach(result => {
 
       let recommendedFood: FFQFoodRecommendations[] = [];
+      const dqisScore: FFQDQIS[] = [];
 
       this.foodRecommendationsService.getFoodRecommendationsByQuestionnaireId(result.questionnaireId).subscribe(
         data => {
           recommendedFood.push(data);
         },
       );
+      this.dqisService.getDQISByQuestionnaireId(result.questionnaireId).subscribe(
+        data => {
+          dqisScore.push(data);
+        },
+      );
 
       result.foodRecList = recommendedFood;
+      result.dqis = dqisScore;
 
     });
 
