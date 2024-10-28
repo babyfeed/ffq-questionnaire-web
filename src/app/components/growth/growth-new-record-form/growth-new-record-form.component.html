@@ -52,60 +52,67 @@
       </ng-container>
     </mat-form-field>
 
-    <div class="input-group">
-      <mat-form-field appearance="fill" class="form-field-80">
-        <mat-label
-          >{{ "Weight in" | translate }} ({{ weightUnitOptions == 'kg' ? 'kg' : lbWeightUnitOptions == 'pounds' ? 'lb' : 'oz' }})</mat-label
-        >
-        <input
-          name="weightControl"
-          #weightControl="ngModel"
-          [(ngModel)]="weight"
-          required
-          matInput
-          type="number"
-          step="0.1"
-          placeholder="Ex. 20"
-          [min]="MIN_WEIGHT"
-          [max]="MAX_WEIGHT"
-        />
-        <ng-container *ngIf="weightControl.invalid && weightControl.touched">
-          <mat-error
-            *ngIf="weightControl.errors.required"
-            class="error-container"
-          >
-            {{ "You must enter a weight in" | translate }} ({{ weightUnitOptions == 'kg' ? 'kg' : lbWeightUnitOptions == 'pounds' ? 'lb' : 'oz' }})</mat-error
-          >
-        </ng-container>
-      </mat-form-field>
-      <mat-button-toggle-group
-        #weightUnitOptionsGroup="matButtonToggleGroup"
+    <mat-form-field class="form-field" appearance="fill">
+      <mat-label>{{ "Unit" | translate }}</mat-label>
+      <mat-select
         name="weightUnitOptionsControl"
         (change)="onWeightUnitChange(weightUnitOptionsGroup.value)"
-        class="form-toggle-button"
+        [(ngModel)]="weightUnitOptions"
+        required
       >
-        <mat-button-toggle value="kg" [checked]="weightUnitOptions === 'kg'"
-          >kg</mat-button-toggle
-        >
-        <mat-button-toggle value="lb" [checked]="weightUnitOptions === 'lb'"
-          >lb</mat-button-toggle
-        >
-      </mat-button-toggle-group>
-      <mat-button-toggle-group
-        #lbWeightUnitOptionsGroup="matButtonToggleGroup"
-        name="lbWeightUnitOptionsGroup"
-        (change)="onLbWeightUnitChange(lbWeightUnitOptionsGroup.value)"
-        class="lb-unit-toggle-group"
-        *ngIf="weightUnitOptions === 'lb'"
+        <mat-option value="kg">{{ "kg" | translate }}</mat-option>
+        <mat-option value="lb">{{ "lb" | translate }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label
+        >{{ "Weight in" | translate }} ({{
+          weightUnitOptions == "kg"
+            ? "kg"
+            : "lb"
+        }})</mat-label
       >
-        <mat-button-toggle value="pounds" [checked]="lbWeightUnitOptions === 'pounds'"
-          >Pounds</mat-button-toggle
+      <input
+        name="weightControl"
+        #weightControl="ngModel"
+        [(ngModel)]="weight"
+        required
+        matInput
+        type="number"
+        step="0.1"
+        placeholder="Ex. 20"
+        [min]="MIN_WEIGHT"
+        [max]="MAX_WEIGHT"
+      />
+      <ng-container *ngIf="weightControl.invalid && weightControl.touched">
+        <mat-error
+          *ngIf="weightControl.errors.required"
+          class="error-container"
         >
-        <mat-button-toggle value="ounces" [checked]="lbWeightUnitOptions === 'ounces'"
-          >Ounces</mat-button-toggle
+          {{ "You must enter a weight in" | translate }} ({{
+            weightUnitOptions == "kg"
+              ? "kg"
+              : "lb"
+          }})</mat-error
         >
-      </mat-button-toggle-group>
-    </div>
+      </ng-container>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="weightUnitOptions === 'lb'" appearance="fill" class="form-field">
+      <mat-label>{{ "Ounces" | translate }}</mat-label>
+      <input
+        name="ouncesControl"
+        #ouncesControl="ngModel"
+        [(ngModel)]="ounces"
+        matInput
+        type="number"
+        step="0.1"
+        placeholder="Ex. 8"
+        [min]="0"
+        [max]="15.9"
+      />
+    </mat-form-field>
 
     <div class="input-group">
       <mat-form-field appearance="fill" class="form-field-80">
