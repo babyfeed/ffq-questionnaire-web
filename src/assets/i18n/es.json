@@ -524,7 +524,7 @@
     {
       "description": "Se recomienda lactancia materna exclusiva durante 6 meses, seguido de lactancia materna hasta los 2 años o hasta que ambos lo deseen, y/o se puede proporcionar fórmula infantil hasta el año de edad. Evite agregar cereales o purés infantiles al biberón. Cuando el bebé tenga 1 año, se le puede dar leche entera de vaca o alternativas lácteas fortificadas, como la soja, y después de los 2 años, se puede pasar a leche baja en grasa (2%, al 1% o descremada).",
       "firstBracketIntake": "2 a 3 tazas por día (16 - 24 fl oz / día)",
-      "foodItemGroupName": "Leche",
+      "foodItemGroupName": "Leche/leche materna/fórmula infantil",
       "imageUrl": "/assets/images/Breastmilk.jpg",
       "secondBracketIntake": "1 ¼ a 3 ½ tazas por día (10 a 28 fl oz / día)",
       "thirdBracketIntake": "1 a 2 ¼ tazas por día (8 a 18 fl oz / día)"
