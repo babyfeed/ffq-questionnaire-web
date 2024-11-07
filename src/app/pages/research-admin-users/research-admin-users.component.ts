@@ -35,7 +35,7 @@ export class AdminResearchUsersComponent implements OnInit {
   public filteredResearchInstForParticipantsList: String[] = [];
   public researcherUserNames: string[] =[];
   public participantUserNames: string[] =[];
-  ResearchInstNames: string[] = [];
+  ResearchInstNames: { [id: string]: string  } = {};
   researchInstitutionList: FFQResearchInstitution[];
   researcherList: FFQResearcher[] = [];
   participantsList: FfqParticipant[] = [];
@@ -78,7 +78,9 @@ export class AdminResearchUsersComponent implements OnInit {
     researchInstList.subscribe((data) => {
         this.researchInstitutionList = data;
         data.forEach((researchInst) => {
-        this.ResearchInstNames.push(researchInst.institutionName);
+          if(researchInst.researchInstitutionId) {
+            this.ResearchInstNames[researchInst.researchInstitutionId] = researchInst.institutionName;
+          }
         this.researchInstitutionLength = data.length;
       });
     });
