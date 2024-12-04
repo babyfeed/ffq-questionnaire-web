@@ -104,8 +104,29 @@
         <mat-button-toggle value="ounces" [checked]="lbWeightUnitOptions === 'ounces'"
           >Ounces</mat-button-toggle
         >
+<<<<<<< Updated upstream
       </mat-button-toggle-group>
     </div>
+=======
+      </ng-container>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="weightUnitOptions === 'lb'" appearance="fill" class="form-field">
+      <mat-label>{{ "Ounces *" | translate }}</mat-label>
+      <input
+        name="ouncesControl"
+        #ouncesControl="ngModel"
+        [(ngModel)]="ounces"
+        required
+        matInput
+        type="number"
+        step="0.1"
+        placeholder="Ex. 8"
+        [min]="0"
+        [max]="15.9"
+      />
+    </mat-form-field>
+>>>>>>> Stashed changes
 
     <div class="input-group">
       <mat-form-field appearance="fill" class="form-field-80">
