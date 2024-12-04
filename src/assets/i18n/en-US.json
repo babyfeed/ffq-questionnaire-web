@@ -514,7 +514,7 @@
     {
       "description": "Exclusive breastfeeding is recommended for 6 months followed by continued breastfeeding for at least 2 years or until mutually desired, and/or infant formula can be provided until 1 year of age. Avoid adding infant cereals or purees into a bottle. At 1 year of age, whole cow milk or fortified milk alternatives, such as soy may be provided, and after the age of 2, toddlers can be switched to reduced fat 2%, 1%, or skim milk.",
       "firstBracketIntake": "2 to 3 cups per day (16 - 24 fl oz / day)",
-      "foodItemGroupName": "Milk",
+      "foodItemGroupName": "Milk/breastmilk/formula",
       "imageUrl": "/assets/images/Breastmilk.jpg",
       "secondBracketIntake": "1 ¼ to 3 ½ cups per day (10 – 28 fl oz / day)",
       "thirdBracketIntake": "1 to 2 ¼ cups per day (8 – 18 fl oz / day)"
@@ -615,5 +615,7 @@
   "Food questionnaire": "Food questionnaire",
   "Food recommendations": "Food recommendations",
   "Food tracking": "Food tracking",
-  "Educational Resources from Experts in Nutrition": "Educational Resources from Experts in Nutrition"
+  "Educational Resources from Experts in Nutrition": "Educational Resources from Experts in Nutrition",
+  "Unit": "Unit",
+  "Ounces": "Ounces"
 }

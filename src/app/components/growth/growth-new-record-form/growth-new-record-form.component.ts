@@ -12,11 +12,11 @@ import { GrowthService } from "src/app/services/growth/growth-service";
 export class GrowthNewRecordFormComponent implements OnInit {
   @Input() isParticipant: boolean = false;
   weightUnitOptions: UnitsOfMeasurement = UnitsOfMeasurement.kg;
-  lbWeightUnitOptions: LbUnitsOfMeasurement = LbUnitsOfMeasurement.pounds;
   heightUnitOptions: UnitsOfMeasurement = UnitsOfMeasurement.cm;
   gender: Gender = Gender.NotAssigned;
   height: string = "";
   weight: string = "";
+  ounces: string = "";
   age: string = "";
   // constant to validate the max and min values allowed
   readonly MAX_AGE_MONTHS = 24;
@@ -34,14 +34,9 @@ export class GrowthNewRecordFormComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  getStandardUnitValue(value, unit) {
-    console.log(value, unit);
+  getStandardUnitValue(value, unit, ounces = "0") {
     if (unit === UnitsOfMeasurement.lb) {
-      if(this.lbWeightUnitOptions === LbUnitsOfMeasurement.pounds) {
-        return Math.round((parseFloat(value) / FFQChildren.KG_TO_LB) * 100) / 100;
-      } else {
-        return Math.round((parseFloat(value) / FFQChildren.KG_TO_LB) * 100 / 16) / 100;
-      }
+      return Math.round(((parseFloat(value) + parseFloat(ounces) / 16) / FFQChildren.KG_TO_LB) * 100) / 100;
     }
     if (unit === UnitsOfMeasurement.in)
       return Math.round(parseFloat(value) * FFQChildren.IN_TO_CM * 100) / 100;
@@ -52,8 +47,8 @@ export class GrowthNewRecordFormComponent implements OnInit {
     if (!childInformationForm.valid) return;
     const data = {
       gender: this.gender,
-      weight: this.getStandardUnitValue(this.weight, this.weightUnitOptions),
-      height: this.getStandardUnitValue(this.height, this.heightUnitOptions),
+      weight: this.getStandardUnitValue(this.weight, this.weightUnitOptions, this.ounces),
+      height: this.getStandardUnitValue(this.height, this.heightUnitOptions, this.ounces),
       age: Number(this.age),
       timestamp: new Date(),
     };
@@ -85,17 +80,8 @@ export class GrowthNewRecordFormComponent implements OnInit {
       this.MAX_WEIGHT = 30;
       this.MIN_WEIGHT = 1;
     } else if (newUnit === UnitsOfMeasurement.lb) {
-      this.onLbWeightUnitChange(this.lbWeightUnitOptions);
-    }
-  }
-  onLbWeightUnitChange(newUnit: LbUnitsOfMeasurement): void {
-    this.lbWeightUnitOptions = newUnit;
-    if (newUnit === 'pounds') {
       this.MAX_WEIGHT = Math.round(30 * FFQChildren.KG_TO_LB);
       this.MIN_WEIGHT = Math.round(1 * FFQChildren.KG_TO_LB);
-    } else {
-      this.MAX_WEIGHT = Math.round(30 * FFQChildren.KG_TO_LB * 16);
-      this.MIN_WEIGHT = Math.round(1 * FFQChildren.KG_TO_LB * 16);
     }
   }
   onUnitsChange(): void {
